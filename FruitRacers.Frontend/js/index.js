@@ -21,6 +21,16 @@ function highlightMenuItem() {
     });
 }
 
+function toggleMenu(open) {
+    if (open) {
+        $("#menu-middle").addClass("open");
+        $("body").addClass("no-scroll");
+    } else {
+        $("#menu-middle").removeClass("open");
+        $("body").removeClass("no-scroll");
+    }
+}
+
 new universalParallax().init({
 	speed: 4
 });
@@ -29,19 +39,12 @@ $(document).ready(function() {
 
     // Menu toggle click handling
     $("#menu-toggle").click(function () {
-        if ($("#menu-middle").hasClass("open")) {
-            $("#menu-middle").removeClass("open");
-            $("body").removeClass("no-scroll");
-        } else {
-            $("#menu-middle").addClass("open");
-            $("body").addClass("no-scroll");
-        }
+        toggleMenu(!$("#menu-middle").hasClass("open"))
     });
 
     // Menu shade click handling
     $("#menu-shade").click(function () {
-        $("#menu-middle").removeClass("open");
-        $("body").removeClass("no-scroll");
+        toggleMenu(false);
     });
 
 	// Menu item click handling
@@ -53,7 +56,7 @@ $(document).ready(function() {
         var hash = href[1];
         if (currentPage == targetPage && hash != null) {
             event.preventDefault();
-            $("#menu-middle").removeClass("open");
+            toggleMenu(false);
             scrollToItem("#" + hash);
         }
 	});
