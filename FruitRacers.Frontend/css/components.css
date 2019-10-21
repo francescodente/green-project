@@ -1,0 +1,644 @@
+/************\
+|   COLORS   |
+\************/
+
+:root {
+    --col-text-light: rgba(255, 255, 255, 1);
+    --col-text-sec-light: rgba(255, 255, 255, 0.7);
+    --col-text-dis-light: rgba(255, 255, 255, 0.5);
+
+    --col-text-dark: rgba(0, 0, 0, 0.8);
+    --col-text-sec-dark: rgba(0, 0, 0, 0.54);
+    --col-text-dis-dark: rgba(0, 0, 0, 0.38);
+
+    --col-icon-light: rgba(255, 255, 255, 1);
+    --col-icon-dis-light: rgba(255, 255, 255, 0.5);
+
+    --col-icon-dark: rgba(0, 0, 0, 0.54);
+    --col-icon-dis-dark: rgba(0, 0, 0, 0.38);
+}
+
+/**********\
+|   TEXT   |
+\**********/
+
+p, span, a, h1, h2, h3, h4, h5, h6, label, input, .text-dark {
+    color: var(--col-text-dark);
+}
+
+.text-sec-dark {
+    color: var(--col-text-sec-dark);
+}
+
+.text-light {
+    color: var(--col-text-light);
+}
+
+.text-sec-light {
+    color: var(--col-text-sec-light);
+}
+
+
+a {
+    text-decoration: none;
+    color: var(--col-accent-dark);
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--col-accent-dark);
+}
+
+a.light {
+    color: var(--col-accent);
+}
+
+/***********\
+|   ICONS   |
+\***********/
+
+.mdi {
+    display: inline-block;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.mdi.dark {
+    color: var(--col-icon-dark);
+}
+
+.mdi.light {
+    color: var(--col-icon-light);
+}
+
+/**********************************\
+|   DIVS WITH FIXED ASPECT RATIO   |
+\**********************************/
+
+.fixed-ratio {
+    overflow: hidden;
+    height: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.fixed-ratio > * {
+    position: absolute;
+    top: 0;
+}
+
+.fr-1-1 {
+    padding-top: 100%;
+}
+
+.fr-4-3 {
+    padding-top: 75%;
+}
+
+.fr-16-9 {
+    padding-top: 56.25%;
+}
+
+/*************\
+|   DIVIERS   |
+\*************/
+
+div.divider, div.divider.dark {
+    height: 0px;
+    width: 100%;
+    margin: 4px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+div.divider.light {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+div.divider.vertical, div.divider.vertical.dark {
+    height: 100%;
+    width: 0;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    margin: 0 4px;
+}
+
+div.divider.vertical.light {
+    height: 100%;
+    width: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    margin: 0 4px;
+}
+
+/*************\
+|   BUTTONS   |
+\*************/
+
+.btn {
+    text-decoration: none!important;
+    outline: none!important;
+    box-shadow: none!important;
+    border: none;
+    border-radius: 4px;
+    display: inline-flex;
+}
+
+.btn, .btn:hover, .btn p, .btn:hover p {
+    color: var(--col-text-dark);
+}
+
+.btn.light, .btn.light:hover, .btn.light p, .btn.light:hover p {
+    color: var(--col-text-light);
+}
+
+.btn .mdi {
+    height: 20px;
+    font-size: 20px;
+    line-height: 20px;
+    margin: auto;
+}
+
+.btn .mdi ~ p {
+    margin: 0 0 0 4px;
+}
+
+.btn.transparent, .btn.transparent:disabled:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.btn.transparent.light, .btn.transparent.light:disabled:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn.transparent:hover, .btn.icon:hover, .btn.round:hover {
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.btn.transparent.light:hover, .btn.icon.light:hover, .btn.round.light:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.btn.accent, .btn.fab, .btn.accent:disabled:hover {
+    background-color: var(--col-accent);
+    color: var(--col-text-light);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)!important;
+    transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn.accent:hover, .btn.fab:hover {
+    color: var(--col-text-light);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)!important;
+}
+
+.btn.accent p {
+    color: var(--col-text-light);
+}
+
+.btn.icon {
+    background-color: transparent;
+    padding: 6px;
+    border-radius: 100%;
+}
+
+.btn.icon:disabled:hover, .btn.round:disabled:hover {
+    background-color: transparent;
+}
+
+.btn.icon .mdi {
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    margin: auto;
+}
+
+.btn.round {
+    background-color: transparent;
+    padding: 5px 20px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 360px;
+}
+
+.btn.round.light {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn.round .mdi ~ p {
+    margin: 0 16px;
+}
+
+.btn.round .mdi {
+    position: absolute;
+    top: 8px;
+    left: 6px;
+}
+
+.btn.fab {
+    border-radius: 100%;
+    padding: 12px;
+}
+
+/***********\
+|   RADIO   |
+\***********/
+
+.radio {
+    display: none;
+}
+
+.radio + label {
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+
+.radio.light + label {
+    color: var(--col-text-light);
+}
+
+.radio + label:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: 2px solid var(--col-icon-dark);
+    border-radius: 100%;
+}
+
+.radio.light + label:before {
+    border: 2px solid var(--col-text-sec-light);
+}
+
+.radio:checked + label:before {
+    border: 2px solid var(--col-accent);
+}
+
+.radio + label:after {
+    content: '';
+    height: 12px;
+    width: 12px;
+    background: var(--col-accent);
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+
+.radio:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+
+.radio:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+
+[type="radio"]:disabled + label, [type="checkbox"]:disabled + label {
+    opacity: 0.65;
+    cursor: default;
+}
+
+/****************\
+|   RICH RADIO   |
+\****************/
+
+.rich-radio {
+    display: none;
+}
+
+.rich-radio + label {
+    display: flex;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.rich-radio:not(:disabled):hover + label {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.rich-radio.light:not(:disabled):hover + label {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.rich-radio:checked + label {
+    border: 2px solid var(--col-accent);
+}
+
+/*****************\
+|   CHECK BOXES   |
+\*****************/
+
+.checkbox {
+    display: none;
+}
+
+.checkbox + label {
+    position: relative;
+    padding-left: 32px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+}
+
+[type="checkbox"].light + label {
+    color: var(--col-text-light);
+}
+
+.checkbox + label:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1.25em;
+    width: 1.25em;
+    background: transparent;
+    border: 2px solid var(--col-icon-dark);
+    border-radius: 0.125em;
+    transition: background 0.2s ease-in-out;
+}
+
+.checkbox.light + label:before {
+    border: 2px solid var(--col-text-sec-light);
+}
+
+.checkbox:checked + label:before {
+    background: var(--col-accent);
+    border: none;
+}
+
+.checkbox + label:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.checkbox:checked + label:after {
+    height: 0.375em;
+    width: 0.75em;
+    opacity: 1;
+    border: 0.125em solid #FFF;
+    border-top-style: none;
+    border-right-style: none;
+    transform: translate(0.25em, 0.3365384615em) rotate(-45deg);
+    transition: opacity 0.2s ease-in-out;
+}
+
+/**************\
+|   SWITCHES   |
+\**************/
+
+.switch {
+    display: none;
+}
+
+.switch + label {
+    position: relative;
+    display: inline-block;
+    min-width: 112px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: left;
+    padding-left: 44px;
+}
+
+.switch + label span {
+    color: var(--col-text-dark);
+}
+
+.switch.light + label span {
+    color: var(--col-text-light);
+}
+
+.switch + label:before, .switch + label:after {
+    content: "";
+    position: absolute;
+    margin: 0;
+    outline: 0;
+    top: 50%;
+    -ms-transform: translate(0, -50%);
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.switch + label:before {
+    left: 1px;
+    width: 34px;
+    height: 14px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+.switch.light + label:before {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.switch + label:after {
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #FFF;
+    border-radius: 50%;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098), 0 1px 5px 0 rgba(0, 0, 0, 0.084);
+}
+
+.switch + label .on {
+    display: none;
+}
+
+.switch + label .off {
+    display: inline-block;
+}
+
+.switch:checked + label:before {
+    background-color: var(--col-accent);
+    opacity: 0.54;
+}
+
+.switch:checked + label:after {
+    background-color: var(--col-accent);
+    -ms-transform: translate(80%, -50%);
+    -webkit-transform: translate(80%, -50%);
+    transform: translate(80%, -50%);
+}
+
+.switch:checked + label .on {
+    display: inline-block;
+}
+
+.switch:checked + label .off {
+    display: none;
+}
+
+.switch:disabled + label:after {
+    background-color: #888;
+}
+
+.switch.light:disabled + label:after {
+    background-color: #AAA;
+}
+
+/***********************\
+|   TEXT INPUT & AREA   |
+\***********************/
+
+.text-input, .text-area {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.text-input input {
+    height: 42px;
+    width: 256px;
+    margin: 6px 0;
+    padding: 0 12px;
+    line-height: 50px;
+    background-color: var(--col-primary);
+    border: 1px solid var(--col-text-sec-dark);
+    border-radius: 4px;
+    outline: none;
+    transition: 0.1s;
+}
+
+.text-input input.dark {
+    color: var(--col-text-light);
+    background-color: #303030;
+    border: 1px solid var(--col-text-sec-light);
+}
+
+.text-input input + label, textarea + label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    margin: 0 0 0 10px;
+    background-color: var(--col-primary);
+    color: var(--col-text-sec-dark);
+    transition: all ease-in-out 0.2s, color ease-in-out 0.1s;
+}
+
+.text-input input.dark + label, textarea.dark + label {
+    background-color: #303030;
+    color: var(--col-text-sec-light);
+}
+
+.text-input input:focus, textarea:focus {
+    border: 2px solid var(--col-accent)!important;
+}
+
+.text-input input:focus + label, textarea:focus + label {
+    top: -2px;
+    font-size: 12px;
+    padding: 0 4px;
+    color: var(--col-accent)!important;
+}
+
+.text-input input.has-value + label, textarea.has-value + label {
+    top: -2px;
+    font-size: 12px;
+    padding: 0 4px;
+}
+
+.text-input input.valid {
+    border: 2px solid #43A047;
+}
+
+.text-input input.dark.valid {
+    border: 2px solid #00C853;
+}
+
+.text-input input.valid + label {
+    color: #43A047;
+}
+
+.text-input input.dark.valid + label {
+    color: #00C853;
+}
+
+.text-input input.error {
+    border: 2px solid #B71C1C;
+}
+
+.text-input input.dark.error {
+    border: 2px solid #D50000;
+}
+
+.text-input input.error + label {
+    color: #B71C1C;
+}
+
+.text-input input.dark.error + label {
+    color: #D50000;
+}
+
+.text-input input + label + span {
+    position: relative;
+    top: -2px;
+    font-size: 12px;
+    margin: 0 0 8px 14px;
+    color: var(--col-text-sec-dark);
+}
+
+.text-input input.dark + label + span {
+    color: var(--col-text-sec-light);
+}
+
+.text-input input.error + label + span {
+    color: #B71C1C;
+}
+
+.text-input input.dark.error + label + span {
+    color: #D50000;
+}
+
+.text-input input:disabled,
+.text-input input:disabled + label,
+.text-input input:disabled + label + span,
+textarea:disabled,
+textarea:disabled + label {
+    opacity: 1;
+    color: var(--col-text-dis-dark);
+    border-color: var(--col-text-dis-dark);
+}
+
+.text-input input.dark:disabled,
+.text-input input.dark:disabled + label,
+.text-input input.dark:disabled + label + span,
+textarea.dark:disabled,
+textarea.dark:disabled + label {
+    opacity: 1;
+    color: var(--col-text-dis-light);
+    border-color: var(--col-text-dis-light);
+}
+
+textarea {
+    height: 160px;
+    width: 256px;
+    outline: none;
+    resize: none;
+    margin: 6px 0;
+    padding: 8px 12px;
+    color: var(--col-text-dark);
+    background-color: transparent;
+    border: 1px solid var(--col-text-sec-dark);
+    border-radius: 4px;
+    transition: 0.1s;
+}
+
+textarea.dark {
+    color: var(--col-text-light);
+    border: 1px solid var(--col-text-sec-light);
+}

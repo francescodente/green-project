@@ -1,0 +1,20 @@
+#home a {
+    color: var(--col-text-light);
+}
+
+#home .bottom-links {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+}
+
+#home .bottom-links a {
+    display: inline-block;
+    margin: 8px 16px;
+}
+
+#map {
+    width: calc(100% - 30px);
+    height: 100%;
+    border 0;
+}
