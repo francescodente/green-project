@@ -2,20 +2,20 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Home</title>
+    <title>Fruitracers - Account</title>
 </head>
 <body>
     <div>
 
         <?php include("menu.php"); ?>
 
-        <section id="catalog" class="parallax-container header d-flex justify-content-center align-items-center" data-section="catalog">
+        <section id="account" class="parallax-container header d-flex justify-content-center align-items-center" data-section="account">
             <div class="text-center">
-                <h1 class="text-light">CATALOGO</h1>
+                <h1 class="text-light">ACCOUNT</h1>
             </div>
-            <div class="parallax shade" data-parallax-image="images/catalog.jpg"></div>
+            <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
         </section>
-        <section id="catalog-content" class="container py-4" data-section="catalog">
+        <section id="account-content" class="container py-4" data-section="account">
             <div class="row">
                 <div class="col-9">
                      <p>

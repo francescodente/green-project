@@ -109,13 +109,13 @@
 		</section>
 
 		<!-- Dove trovarci -->
-		<section id="where" class="parallax-container header d-flex justify-content-center align-items-center" data-section="where">
+		<section id="companies" class="parallax-container header d-flex justify-content-center align-items-center" data-section="companies">
 			<div class="text-center">
-				<h1 class="text-light">DOVE TROVARCI</h1>
+				<h1 class="text-light">AZIENDE</h1>
 			</div>
 			<div class="parallax shade" data-parallax-image="images/where.jpg"></div>
 		</section>
-		<section id="where-content" class="container py-4" data-section="where">
+		<section id="companies-content" class="container py-4" data-section="companies">
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-md-8">
