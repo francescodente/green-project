@@ -1,0 +1,57 @@
+.modal-dialog {
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--col-primary);
+    border: none;
+    border-radius: 4px!important;
+    width: auto;
+    overflow: hidden;
+}
+
+.modal-top {
+    background-color: var(--col-primary-dark);
+    position: relative;
+}
+
+.modal-top button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 4px 4px 0 0;
+}
+
+.modal-body {
+    padding: 16px;
+}
+
+.modal-bottom {
+    background-color: var(--col-primary-dark);
+    padding: 12px;
+}
+
+/*****************\
+|   LOGIN MODAL   |
+\*****************/
+
+#modal-login .text-input {
+    margin: 6px 0;
+}
+
+#modal-login .text-input input {
+    width: 300px;
+}
+
+#modal-login .modal-top {
+    display: flex;
+    justify-content: center;
+}
+
+#login-header-icon {
+    margin: 48px;
+    color: var(--col-accent);
+    height: 128px;
+    font-size: 128px;
+    line-height: 128px;
+}

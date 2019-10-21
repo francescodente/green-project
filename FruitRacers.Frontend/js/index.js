@@ -7,7 +7,7 @@ function highlightMenuItem() {
 	$("section").each(function() {
         var targetTop = $(this).offset().top;
         var section = $(this).attr("data-section");
-        // Highlights menu item 64px before it reaches the top of the page
+        // Highlights menu item 64px before its content reaches the top of the page
         if (position >= targetTop - 64) {
             $(".menu-item").removeClass("selected");
             $(".menu-item").each(function() {
@@ -31,6 +31,7 @@ function toggleMenu(open) {
     }
 }
 
+// Init parallax fx
 new universalParallax().init({
 	speed: 4
 });
@@ -66,6 +67,7 @@ $(document).ready(function() {
         $("html, body").animate({ scrollTop: 0 }, 600);
     });
 
+    // Window scroll management
 	$(window).scroll(function() {
 
 		// Highlight current menu item
