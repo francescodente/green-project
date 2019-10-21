@@ -6,11 +6,17 @@ function highlightMenuItem() {
 	var position = $(this).scrollTop();
 	$("section").each(function() {
         var targetTop = $(this).offset().top;
-        var id = $(this).attr("data-section");
-        // Highlights menu item 100px before it reaches the top of the page
+        var section = $(this).attr("data-section");
+        // Highlights menu item 64px before it reaches the top of the page
         if (position >= targetTop - 64) {
             $(".menu-item").removeClass("selected");
-			$(".menu-item[href='#" + id  + "']").addClass("selected");
+            $(".menu-item").each(function() {
+                if ($(this).data("sections").includes(section)) {
+                    $(this).addClass("selected");
+                    return;
+                }
+            });
+            return;
         }
     });
 }
@@ -25,22 +31,30 @@ $(document).ready(function() {
     $("#menu-toggle").click(function () {
         if ($("#menu-middle").hasClass("open")) {
             $("#menu-middle").removeClass("open");
+            $("body").removeClass("no-scroll");
         } else {
             $("#menu-middle").addClass("open");
+            $("body").addClass("no-scroll");
         }
     });
 
     // Menu shade click handling
     $("#menu-shade").click(function () {
         $("#menu-middle").removeClass("open");
+        $("body").removeClass("no-scroll");
     });
 
 	// Menu item click handling
 	$(".menu-item").click(function (event) {
-        if ($(this).attr("href").charAt(0) == "#") {
+        var url = location.href;
+        var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
+        var href = $(this).attr("href").split("#");
+        var targetPage = href[0];
+        var hash = href[1];
+        if (currentPage == targetPage && hash != null) {
             event.preventDefault();
             $("#menu-middle").removeClass("open");
-            scrollToItem($(this).attr("href"));
+            scrollToItem("#" + hash);
         }
 	});
 
