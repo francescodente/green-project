@@ -49,9 +49,15 @@
 }
 
 #login-header-icon {
-    margin: 48px;
+    margin: 36px 48px;
     color: var(--col-accent);
     height: 128px;
     font-size: 128px;
     line-height: 128px;
+}
+
+#submit-login {
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }

@@ -5,4 +5,5 @@
     <script src="js/universal-parallax.js"></script>
     <script src="js/ripple.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/text-input.js"></script>
 </div>
