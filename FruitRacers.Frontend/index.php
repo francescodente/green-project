@@ -151,5 +151,7 @@
 
 	<?php include("modal-login.php"); ?>
 
+	<?php include("cookie.php"); ?>
+
 </body>
 </html>
