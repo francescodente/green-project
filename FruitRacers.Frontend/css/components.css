@@ -30,12 +30,20 @@ p, span, a, h1, h2, h3, h4, h5, h6, label, input, .text-dark {
     color: var(--col-text-sec-dark);
 }
 
+.text-dis-dark {
+    color: var(--col-text-dis-dark);
+}
+
 .text-light {
     color: var(--col-text-light);
 }
 
 .text-sec-light {
     color: var(--col-text-sec-light);
+}
+
+.text-dis-light {
+    color: var(--col-text-dis-light);
 }
 
 
