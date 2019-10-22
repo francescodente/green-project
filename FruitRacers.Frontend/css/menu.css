@@ -83,7 +83,7 @@
 /* MD */
 @media (max-width: 991px) {
 
-    .no-scroll {
+    .menu-no-scroll {
         overflow-y: hidden;
     }
 

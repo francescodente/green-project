@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="bottom-links mb-4">
-				<button class="btn round light ripple">Accedi o registrati</button>
+				<button class="btn round light ripple" data-toggle="modal" data-target="#modal-login">Accedi o registrati</button>
 			</div>
 			<div class="parallax shade" data-parallax-image="images/home.jpg"></div>
 		</section>
@@ -148,6 +148,8 @@
 
 	<?php include("scripts.php"); ?>
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> -->
+
+	<?php include("modal-login.php"); ?>
 
 </body>
 </html>

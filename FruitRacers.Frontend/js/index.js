@@ -24,10 +24,10 @@ function highlightMenuItem() {
 function toggleMenu(open) {
     if (open) {
         $("#menu-middle").addClass("open");
-        $("body").addClass("no-scroll");
+        $("body").addClass("menu-no-scroll");
     } else {
         $("#menu-middle").removeClass("open");
-        $("body").removeClass("no-scroll");
+        $("body").removeClass("menu-no-scroll");
     }
 }
 
@@ -80,6 +80,14 @@ $(document).ready(function() {
 	    	$("#menu.filled").removeClass("filled");
 	    }
 	});
+
+    // Lock scrolling when a modal is shown
+    $(".modal").on("show.bs.modal", function() {
+        $("body").addClass("modal-no-scroll");
+    });
+    $(".modal").on("hide.bs.modal", function() {
+        $("body").removeClass("modal-no-scroll");
+    });
 
     setTimeout(highlightMenuItem, 200);
 
