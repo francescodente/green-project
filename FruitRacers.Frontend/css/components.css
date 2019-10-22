@@ -101,6 +101,10 @@ a.light {
     padding-top: 56.25%;
 }
 
+.fr-2-1 {
+    padding-top: 50%;
+}
+
 /*************\
 |   DIVIERS   |
 \*************/
@@ -641,4 +645,48 @@ textarea {
 textarea.dark {
     color: var(--col-text-light);
     border: 1px solid var(--col-text-sec-light);
+}
+
+/****************\
+|   PAGINATION   |
+\****************/
+
+.pagination {
+    margin: 6px 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.pagination li {
+    padding: 0 3px;
+}
+
+.pagination li:not(:first-child):not(:last-child) a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    height: 28px;
+    width: 28px;
+    color: var(--col-text-sec-dark);
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.pagination.light li:not(:first-child):not(:last-child) a {
+    color: var(--col-text-sec-light);
+}
+
+.pagination li:not(:first-child):not(:last-child):hover a {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.pagination.light li:not(:first-child):not(:last-child):hover a {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.pagination li:not(:first-child):not(:last-child) a.selected {
+    color: var(--col-text-light)!important;
+    background-color: var(--col-accent)!important;
 }

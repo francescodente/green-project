@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Home</title>
+    <title>Fruitracers - Componenti</title>
 </head>
 <body style="background-color: #FAFAFA">
 
@@ -234,6 +234,20 @@
                     </div>
                 </label>
 
+                <!--  -->
+                <h4><br>pagination</h4>
+                <!--  -->
+
+                <ul class="pagination">
+                    <li><a href="#" class="btn icon ripple disabled"><i class="mdi dark mdi-chevron-left"></i></a></li>
+                    <li><a href="#" class="selected">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#" class="btn icon ripple"><i class="mdi dark mdi-chevron-right"></i></a></li>
+                </ul>
+
                 <br><br><br>
 
             </div>
@@ -463,12 +477,25 @@
                     </div>
                 </label>
 
+                <!--  -->
+                <h4 class="text-light"><br>pagination</h4>
+                <!--  -->
+
+                <ul class="pagination light">
+                    <li><a href="#" class="btn icon light ripple disabled"><i class="mdi light mdi-chevron-left"></i></a></li>
+                    <li><a href="#" class="selected">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#" class="btn icon light ripple"><i class="mdi light mdi-chevron-right"></i></a></li>
+                </ul>
+
             </div>
         </div>
     </div>
 
     <?php include("scripts.php"); ?>
-    <script src="js/text-input.js"></script>
 
 </body>
 </html>
