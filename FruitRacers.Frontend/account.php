@@ -13,7 +13,7 @@
             <div class="text-center">
                 <h1 class="text-light">ACCOUNT</h1>
             </div>
-            <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
+            <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
         </section>
         <section id="account-content" class="container py-4" data-section="account">
             <div class="row">

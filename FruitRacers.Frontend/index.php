@@ -45,7 +45,7 @@
 								</div>
 								<div class="product-price d-flex justify-content-between align-items-center mt-2">
 									<span class="text-sec-dark">€00,00 / kg</span>
-									<button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart"></i></button>
+									<button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart-plus" title="Aggiungi al carrello"></i></button>
 								</div>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 			<div class="text-center">
 				<h1 class="text-light">AZIENDE</h1>
 			</div>
-			<div class="parallax shade" data-parallax-image="images/where.jpg"></div>
+			<div class="parallax shade" data-parallax-image="images/companies.jpg"></div>
 		</section>
 		<section id="companies-content" class="container py-4" data-section="companies">
 			<div class="container">

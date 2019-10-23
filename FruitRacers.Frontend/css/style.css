@@ -1,4 +1,4 @@
-* {
+*, html, body, p, span, a, label, input {
     font-family: 'Lato', sans-serif;
 }
 
@@ -16,6 +16,12 @@ body {
 
 .modal-no-scroll {
     overflow-y: hidden;
+}
+
+#map {
+    width: calc(100% - 30px);
+    height: 100%;
+    border 0;
 }
 
 /************\
@@ -47,6 +53,12 @@ body {
 
 .parallax-container.header {
 	height: 40vh;
+}
+
+.bottom-links {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
 }
 
 /************\
@@ -105,11 +117,13 @@ body {
 |   SPECIFIC CARDS   |
 \********************/
 
-.card.product .card-image div {
+.card.product .card-image div,
+.card.category .card-image div {
     transition: transform 0.5s ease-in-out;
 }
 
-.card.product:hover .card-image div {
+.card.product:hover .card-image div,
+.card.category:hover .card-image div {
     transform: scale(1.2);
 }
 
@@ -118,6 +132,10 @@ body {
 }
 
 .card.category:hover {
+    text-decoration: none;
+}
+
+.parent-category:hover {
     text-decoration: none;
 }
 

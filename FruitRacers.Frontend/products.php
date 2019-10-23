@@ -90,7 +90,7 @@
                                         </div>
                                         <div class="product-price d-flex justify-content-between align-items-center mt-2">
                                             <span class="text-sec-dark">€00,00 / kg</span>
-                                            <button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart"></i></button>
+                                            <button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart-plus" title="Aggiungi al carrello"></i></button>
                                         </div>
                                     </div>
                                 </div>
