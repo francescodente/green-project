@@ -3,23 +3,25 @@ $(document).ready(function() {
     // Filter toggle click handling
     $(".toggle-filters").click(function() {
         if ($("#filters-col").hasClass("d-none")) {
+            // Show filters
             $(this).find(".mdi").removeClass("mdi-filter");
-            $(this).find(".mdi").addClass("mdi-chevron-left");
+            $(this).find(".mdi.d-lg-block").addClass("mdi-chevron-left");
+            $(this).find(".mdi.d-lg-none").addClass("mdi-chevron-up");
             $(this).attr("title", "Nascondi filtri");
+            $(".toggle-filters-label").html("Nascondi filtri");
             $("#filters-col").removeClass("d-none");
-            $("#results-col").removeClass("col-12");
-            $("#results-col").addClass("col-9");
-            $(".product-card").parent().removeClass("col-md-4 col-lg-3");
-            $(".product-card").parent().addClass("col-lg-4");
+            $("#results-col").addClass("col-lg-9");
+            $(".product-card").parent().removeClass("col-lg-3");
         } else {
-            $(this).find(".mdi").removeClass("mdi-chevron-left");
+            // Hide filters
+            $(this).find(".mdi.d-lg-block").removeClass("mdi-chevron-left");
+            $(this).find(".mdi.d-lg-none").removeClass("mdi-chevron-up");
             $(this).find(".mdi").addClass("mdi-filter");
             $(this).attr("title", "Mostra filtri");
+            $(".toggle-filters-label").html("Mostra filtri");
             $("#filters-col").addClass("d-none");
-            $("#results-col").removeClass("col-9");
-            $("#results-col").addClass("col-12");
-            $(".product-card").parent().removeClass("col-lg-4");
-            $(".product-card").parent().addClass("col-md-4 col-lg-3");
+            $("#results-col").removeClass("col-lg-9");
+            $(".product-card").parent().addClass("col-lg-3");
         }
     });
 
