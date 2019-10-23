@@ -21,16 +21,16 @@
                 for ($i = 0; $i < 8; $i++) {
                     ?>
                     <div class="col-12 col-md-6">
-                        <div class="company-card d-flex flex-column mb-4">
-                            <div class="compnay-header p-3">
+                        <div class="card company d-flex flex-column mb-4">
+                            <div class="company-header p-3">
                                 <h5 class="company-name font-weight-bold text-center my-2">Company name</h5>
                             </div>
-                            <div class="company-image">
+                            <div class="card-image">
                                 <a href="#">
                                     <div class="fixed-ratio fr-4-3" style="background-image: url('#');"></div>
                                 </a>
                             </div>
-                            <div class="company-content p-3">
+                            <div class="card-content p-3">
                                 <a href="#" class="company-address text-sec-dark">Viale della Via 123, Cesena (FC)</a>
                                 <p class="company-description mt-3">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
