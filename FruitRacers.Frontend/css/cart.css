@@ -1,0 +1,80 @@
+#cart-content .summary-additions * {
+    color: var(--col-text-sec-dark);
+}
+
+#cart-content .manage-addresses {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#cart-content .manage-addresses:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#cart-content .manage-addresses .thumb,
+#cart-content [name="delivery-address"] + label .thumb,
+#cart-content [name="payment-method"] + label .thumb {
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border-radius: 4px;
+    margin: 8px 16px 8px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#cart-content [name="delivery-address"] + label .thumb {
+    border: 2px solid #EEE;
+}
+
+#cart-content [name="delivery-address"] + label .thumb .mdi {
+    color: #707070;
+}
+
+#cart-content .product {
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#cart-content .product:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#cart-content .product-image {
+    object-fit: cover;
+    height: 76px;
+    width: 76px;
+    border-radius: 4px;
+    margin: 8px 16px 8px 8px;
+}
+
+#cart-content .delete-cart-product {
+    margin-right: 16px;
+}
+
+#cart-content .product-quantity {
+    text-align: right;
+    height: 36px;
+    width: 64px;
+    margin: 0 6px;
+    background-color: transparent;
+}
+
+.inc-quantity, .dec-quantity {
+    height: 28px;
+    width: 28px;
+}
+
+.inc-quantity .mdi, .dec-quantity .mdi {
+    height: 16px!important;
+    line-height: 16px!important;
+    font-size: 16px!important;
+}
