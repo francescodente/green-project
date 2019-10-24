@@ -13,9 +13,11 @@
 .modal-top {
     background-color: var(--col-primary-dark);
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
-.modal-top button {
+.modal-top [data-dismiss="modal"] {
     position: absolute;
     top: 0;
     right: 0;
@@ -35,20 +37,17 @@
 |   LOGIN MODAL   |
 \*****************/
 
-#modal-login .text-input {
+#modal-login .text-input,
+#modal-sign-up .text-input {
     margin: 6px 0;
 }
 
-#modal-login .text-input input {
+#modal-login .text-input input,
+#modal-sign-up .text-input input {
     width: 300px;
 }
 
-#modal-login .modal-top {
-    display: flex;
-    justify-content: center;
-}
-
-#login-header-icon {
+.login-header-icon {
     margin: 36px 48px;
     color: var(--col-accent);
     height: 128px;
@@ -56,8 +55,26 @@
     line-height: 128px;
 }
 
-#submit-login {
+#submit-login,
+#submit-sign-up {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+/*******************\
+|   SIGN-UP MODAL   |
+\*******************/
+
+
+#back-to-login {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 4px 0 0 4px;
+}
+
+
+#marketing-consent + label {
+    max-width: 300px;
 }
