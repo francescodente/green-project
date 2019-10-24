@@ -16,7 +16,7 @@
             <div class="parallax shade" data-parallax-image="images/cart.jpg"></div>
         </section>
         <section id="cart-content" class="container py-4" data-section="cart">
-            <div class="row">
+            <form class="row">
                 <div class="col-12 col-lg-8">
 
                     <!-- PRODUCTS -->
@@ -32,14 +32,14 @@
                         </div>
                         <div class="product-quantity-section d-flex align-items-center">
                             <span>€<span class="product-unitary-price">0,00</span> × </span>
-                            <div class="d-flex flex-column align-items-center">
-                                <button class="inc-quantity btn icon ripple"><i class="mdi dark mdi-plus"></i></button>
+                            <div class="product-quantity-col d-flex flex-column align-items-center">
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="dec-quantity btn icon ripple"><i class="mdi dark mdi-minus"></i></button>
+                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
-                            <span> / <span class="product-unit">Kg</span></span>
+                            <span> <span class="product-unit">Kg</span></span>
                         </div>
                         <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
@@ -53,14 +53,36 @@
                         </div>
                         <div class="product-quantity-section d-flex align-items-center">
                             <span>€<span class="product-unitary-price">0,00</span> × </span>
-                            <div class="d-flex flex-column align-items-center">
-                                <button class="inc-quantity btn icon ripple"><i class="mdi dark mdi-plus"></i></button>
+                            <div class="product-quantity-col d-flex flex-column align-items-center">
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="dec-quantity btn icon ripple"><i class="mdi dark mdi-minus"></i></button>
+                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
-                            <span> / <span class="product-unit">Kg</span></span>
+                            <span> <span class="product-unit">Kg</span></span>
+                        </div>
+                        <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
+                    </div>
+                    <h5 class="company-name mt-3">Azienda</h5>
+                    <div class="product d-flex align-items-center justify-content-between mb-2">
+                        <div class="d-flex align-items-center">
+                            <img class="product-image" src="images/example_product.jpg"/>
+                            <p class="m-0">
+                                <span class="product-name">Product name</span><br>
+                                <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
+                            </p>
+                        </div>
+                        <div class="product-quantity-section d-flex align-items-center">
+                            <span>€<span class="product-unitary-price">0,00</span> × </span>
+                            <div class="product-quantity-col d-flex flex-column align-items-center">
+                                <div class="text-input">
+                                    <input class="product-quantity" type="text" value="1"/>
+                                </div>
+                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                            </div>
+                            <span> <span class="product-unit">Kg</span></span>
                         </div>
                         <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
@@ -131,6 +153,7 @@
                     <div class="divider dark d-lg-none"></div>
                 </div>
                 <div class="col-12 col-lg-4">
+
                     <!-- ORDER SUMMARY -->
                     <h4 class="mt-5 mt-lg-0 mb-4">Riepilogo</h4>
                     <div class="summary-products">
@@ -166,8 +189,9 @@
                         </div>
                     </div>
                     <button class="btn accent ripple w-100 d-flex justify-content-center mt-4">Acquista</button>
+
                 </div>
-            </div>
+            </form>
         </section>
 
     </div>

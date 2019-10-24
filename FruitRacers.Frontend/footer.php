@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div id="footer-left" class="col-12 col-md-4 my-2 text-center text-md-left">
-                <a href="#" class="logo-small"><img src="images/logo/fruitracers_logo_muted.png"></a>
+                <a href="index.php" class="logo-small"><img src="images/logo/fruitracers_logo_muted.png"></a>
                 <br>
                 <br>
                 <h5>Seguici sui social</h5>

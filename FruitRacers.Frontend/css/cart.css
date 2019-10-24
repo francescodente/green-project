@@ -50,8 +50,8 @@
 
 #cart-content .product-image {
     object-fit: cover;
-    height: 76px;
-    width: 76px;
+    height: 56px;
+    width: 56px;
     border-radius: 4px;
     margin: 8px 16px 8px 8px;
 }
@@ -60,17 +60,30 @@
     margin-right: 16px;
 }
 
+#cart-content .product-quantity-col {
+    position: relative;
+}
+
 #cart-content .product-quantity {
-    text-align: right;
-    height: 36px;
-    width: 64px;
+    width: 72px;
     margin: 0 6px;
     background-color: transparent;
 }
 
 .inc-quantity, .dec-quantity {
-    height: 28px;
-    width: 28px;
+    padding: 1px!important;
+    height: 18px;
+    width: 18px;
+    position: absolute;
+    right: 8px;
+}
+
+.inc-quantity {
+    top: 2px;
+}
+
+.dec-quantity {
+    bottom: 2px;
 }
 
 .inc-quantity .mdi, .dec-quantity .mdi {

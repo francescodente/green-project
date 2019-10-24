@@ -193,6 +193,12 @@
                 </div>
 
                 <!--  -->
+                <!-- <h4><br>file input</h4> -->
+                <!--  -->
+
+                <!-- <input type="file"/> -->
+
+                <!--  -->
                 <h4><br>rich radio</h4>
                 <!--  -->
 

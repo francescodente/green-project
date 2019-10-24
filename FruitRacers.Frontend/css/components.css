@@ -46,6 +46,21 @@ p, span, a, h1, h2, h3, h4, h5, h6, label, input, .text-dark {
     color: var(--col-text-dis-light);
 }
 
+.text-valid-dark {
+    color: #43A047;
+}
+
+.text-valid-light {
+    color: #00C853;
+}
+
+.text-error-dark {
+    color: #B71C1C;
+}
+
+.text-error-light {
+    color: #D50000;
+}
 
 a {
     text-decoration: none;
