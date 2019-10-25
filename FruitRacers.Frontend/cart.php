@@ -129,7 +129,7 @@
                             <p class="m-0">Altra Via 999, 47522 - Cesena (FC)</p>
                         </div>
                     </label>
-                    <button class="manage-addresses ripple d-flex align-items-center">
+                    <button type="button" class="manage-addresses ripple d-flex align-items-center" data-toggle="modal" data-target="#modal-address-management">
                         <div class="thumb">
                             <i class="mdi dark mdi-map-marker-plus"></i>
                         </div>
@@ -199,6 +199,8 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
+
+    <?php include("modal-address-management.php"); ?>
 
 </body>
 </html>

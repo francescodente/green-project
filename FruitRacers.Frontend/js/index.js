@@ -21,6 +21,14 @@ function highlightMenuItem() {
     });
 }
 
+function checkMenuOpacity() {
+    if($(this).scrollTop() > 56) {
+        $("#menu:not(.filled)").addClass("filled");
+    } else {
+        $("#menu.filled").removeClass("filled");
+    }
+}
+
 function toggleMenu(open) {
     if (open) {
         $("#menu-middle").addClass("open");
@@ -74,11 +82,7 @@ $(document).ready(function() {
 	    highlightMenuItem();
 
 	    // Remove menu transparency
-	    if($(this).scrollTop() > 56) {
-	    	$("#menu:not(.filled)").addClass("filled");
-	    } else {
-	    	$("#menu.filled").removeClass("filled");
-	    }
+	    checkMenuOpacity()
 	});
 
     // Lock scrolling when a modal is shown
@@ -90,5 +94,6 @@ $(document).ready(function() {
     });
 
     setTimeout(highlightMenuItem, 200);
+    setTimeout(checkMenuOpacity, 200);
 
 });

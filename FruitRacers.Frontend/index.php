@@ -149,7 +149,10 @@
 	<?php include("scripts.php"); ?>
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> -->
 
-	<?php include("modal-login.php"); ?>
+	<?php include("modals-authentication.php"); ?>
+	<?php include("modal-pwd-change.php"); ?>
+	<?php include("modal-generic.php"); ?>
+	<?php include("modal-address-management.php"); ?>
 
 	<?php include("cookie.php"); ?>
 

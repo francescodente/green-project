@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content d-flex flex-column">
             <div class="modal-top">
-                <i class="login-header-icon mdi mdi-account-circle"></i>
+                <i class="modal-header-icon mdi mdi-account-circle"></i>
                 <button class="btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form class="modal-body">
@@ -29,10 +29,10 @@
                     <input id="keep-login" type="checkbox" class="checkbox" name="keep-login" value="1"/>
                     <label for="keep-login" class="my-2">Ricordami</label><br>
 
-                    <a href="#" class="text-sec-dark">Password dimenticata?</a>
+                    <a id="pwd-recovery-link" href="#" class="text-sec-dark">Password dimenticata?</a>
                 </div>
 
-                <button id="submit-login" class="btn accent ripple my-3">Accedi</button>
+                <button id="submit-login" type="submit" class="btn accent ripple my-3">Accedi</button>
 
                 <p class="text-center text-sec-dark m-0">Non hai un account? <a id="sign-up-link" href="#">Registrati ora</a></p>
 
@@ -46,8 +46,8 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content d-flex flex-column">
             <div class="modal-top">
-                <i class="login-header-icon mdi mdi-account-circle"></i>
-                <button id="back-to-login" class="btn icon ripple" title="Indietro"><i class="mdi dark mdi-arrow-left"></i></button>
+                <i class="modal-header-icon mdi mdi-account-circle"></i>
+                <button class="back-to-login modal-back btn icon ripple" title="Indietro"><i class="mdi dark mdi-arrow-left"></i></button>
                 <button class="btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form class="modal-body">
@@ -83,11 +83,41 @@
                 <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
                 <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br>
 
-                <button id="submit-sign-up" class="btn accent ripple mt-3">Registrati</button>
+                <button id="submit-sign-up" type="submit" class="btn accent ripple mt-3">Registrati</button>
 
             </form>
         </div>
     </div>
 </div>
 
-<script src="js/modal-login.js"></script>
+<!-- PASSWORD RECOVERY -->
+<div id="modal-pwd-recovery" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content d-flex flex-column">
+            <div class="modal-top">
+                <i class="modal-header-icon mdi mdi-key-variant"></i>
+                <button class="back-to-login modal-back btn icon ripple" title="Indietro"><i class="mdi dark mdi-arrow-left"></i></button>
+                <button class="btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+            </div>
+            <form class="modal-body">
+
+                <h4 class="text-center my-3">Recupero password</h4>
+
+                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> della pagina <b>Account</b>.</p>
+
+                <!-- E-MAIL -->
+                <div class="text-input">
+                    <input id="recovery-email" type="email" name="email"/>
+                    <label for="recovery-email">E-mail</label>
+                </div>
+
+                <span class="text-error-dark mb-2 d-none">Error message</span>
+
+                <button id="submit-reset-password" type="submit" class="btn accent ripple mt-3">Invia</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="js/modals-authentication.js"></script>
