@@ -213,6 +213,12 @@ namespace FruitRacers.Backend.DataAccess.Sql
 
                 entity.Property(e => e.Value).HasColumnType("money");
 
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Prices)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Prices_Products");
+
                 entity.HasOne(d => d.UnitNameNavigation)
                     .WithMany(p => p.Prices)
                     .HasForeignKey(d => d.UnitName)

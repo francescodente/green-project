@@ -12,6 +12,7 @@ namespace FruitRacers.Backend.Core.Entities
         public string UnitName { get; set; }
         public int ProductId { get; set; }
 
+        public virtual Product Product { get; set; }
         public virtual MeasurementUnit UnitNameNavigation { get; set; }
     }
 }

@@ -7,5 +7,6 @@
     [UnitName] NVARCHAR(5) NOT NULL, 
     [ProductID] INT NOT NULL, 
     CONSTRAINT [FK_Prices_MeasurementUnits] FOREIGN KEY ([UnitName]) REFERENCES [MeasurementUnits]([UnitName]), 
-    CONSTRAINT [PK_Prices] PRIMARY KEY ([Type], [ProductID]) 
+    CONSTRAINT [PK_Prices] PRIMARY KEY ([Type], [ProductID]), 
+    CONSTRAINT [FK_Prices_Products] FOREIGN KEY ([ProductID]) REFERENCES [Products]([ProductID]) 
 )

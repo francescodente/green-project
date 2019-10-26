@@ -9,6 +9,7 @@ namespace FruitRacers.Backend.Core.Entities
         {
             Images = new HashSet<Image>();
             OrderDetails = new HashSet<OrderDetail>();
+            Prices = new HashSet<Price>();
             ProductCategories = new HashSet<ProductCategory>();
         }
 
@@ -23,6 +24,7 @@ namespace FruitRacers.Backend.Core.Entities
         public virtual UserBusinessSupplier Supplier { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<Price> Prices { get; set; }
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
     }
 }
