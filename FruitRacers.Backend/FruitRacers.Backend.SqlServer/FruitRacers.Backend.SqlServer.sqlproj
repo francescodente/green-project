@@ -57,6 +57,7 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Tables" />
+    <Folder Include="PublishLocations" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Users.sql" />
@@ -81,5 +82,8 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FruitRacers.Backend.SqlServer.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PublishLocations\FruitRacers.Backend.SqlServer.publish.xml" />
   </ItemGroup>
 </Project>
