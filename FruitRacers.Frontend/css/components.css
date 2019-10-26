@@ -30,6 +30,10 @@ p, span, a, h1, h2, h3, h4, h5, h6, label, input, .text-dark {
     color: var(--col-text-sec-dark);
 }
 
+.text-dis-dark {
+    color: var(--col-text-dis-dark);
+}
+
 .text-light {
     color: var(--col-text-light);
 }
@@ -38,6 +42,25 @@ p, span, a, h1, h2, h3, h4, h5, h6, label, input, .text-dark {
     color: var(--col-text-sec-light);
 }
 
+.text-dis-light {
+    color: var(--col-text-dis-light);
+}
+
+.text-valid-dark {
+    color: #43A047;
+}
+
+.text-valid-light {
+    color: #00C853;
+}
+
+.text-error-dark {
+    color: #B71C1C;
+}
+
+.text-error-light {
+    color: #D50000;
+}
 
 a {
     text-decoration: none;
@@ -588,7 +611,8 @@ div.divider.vertical.light {
     color: #D50000;
 }
 
-.text-input input + label + span {
+.text-input input + label + span,
+textarea + label + span {
     position: relative;
     top: -2px;
     font-size: 12px;
@@ -596,15 +620,18 @@ div.divider.vertical.light {
     color: var(--col-text-sec-dark);
 }
 
-.text-input input.dark + label + span {
+.text-input input.dark + label + span,
+textarea.dark + label + span {
     color: var(--col-text-sec-light);
 }
 
-.text-input input.error + label + span {
+.text-input input.error + label + span,
+textarea.error + label + span {
     color: #B71C1C;
 }
 
-.text-input input.dark.error + label + span {
+.text-input input.dark.error + label + span,
+textarea.dark.error + label + span {
     color: #D50000;
 }
 
@@ -612,7 +639,8 @@ div.divider.vertical.light {
 .text-input input:disabled + label,
 .text-input input:disabled + label + span,
 textarea:disabled,
-textarea:disabled + label {
+textarea:disabled + label,
+textarea:disabled + label + span {
     opacity: 1;
     color: var(--col-text-dis-dark);
     border-color: var(--col-text-dis-dark);
@@ -622,7 +650,8 @@ textarea:disabled + label {
 .text-input input.dark:disabled + label,
 .text-input input.dark:disabled + label + span,
 textarea.dark:disabled,
-textarea.dark:disabled + label {
+textarea.dark:disabled + label,
+textarea.dark:disabled + label + span {
     opacity: 1;
     color: var(--col-text-dis-light);
     border-color: var(--col-text-dis-light);

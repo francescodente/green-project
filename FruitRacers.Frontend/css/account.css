@@ -1,0 +1,40 @@
+.account-tab {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none!important;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.account-tab:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.account-tab:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.account-tab.selected * {
+    color: var(--col-accent-dark);
+}
+
+.account-tab .mdi:first-child {
+    margin-right: 24px;
+}
+
+.account-tab .mdi-chevron-right {
+    margin-left: auto;
+}
+
+/* LG */
+@media (min-width: 992px) {
+
+
+
+}
+
+/* SM, MD */
+@media (max-width: 991px) {
+
+
+}

@@ -1,4 +1,4 @@
-* {
+*, html, body, p, span, a, label, input {
     font-family: 'Lato', sans-serif;
 }
 
@@ -16,6 +16,12 @@ body {
 
 .modal-no-scroll {
     overflow-y: hidden;
+}
+
+#map {
+    width: calc(100% - 30px);
+    height: 100%;
+    border 0;
 }
 
 /************\
@@ -49,6 +55,12 @@ body {
 	height: 40vh;
 }
 
+.bottom-links {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+}
+
 /************\
 |   IMAGES   |
 \************/
@@ -70,58 +82,102 @@ body {
 	transform: scale(1.2);
 }
 
-/******************\
-|   PRODUCT CARD   |
-\******************/
+/**********\
+|   CARD   |
+\**********/
 
-.product-card, .company-card {
+.card {
+    border: 0;
     border-radius: 4px;
     overflow: hidden;
+    background-color: var(--col-primary);
     transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1), background-color 0.2s ease-in-out;
 }
 
-.product-card:hover, .company-card:hover {
+.card:hover {
     background-color: #FFF;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.product-image, .company-image {
+.card-image {
     position: relative;
     overflow: hidden;
 }
 
-.product-image div, .company-image div {
+.card-image div {
     border-radius: 4px;
-    transition: transform 0.5s ease-in-out;
-}
-
-.product-card:hover .product-image div {
-    border-radius: 0;
-    transform: scale(1.2);
-}
-
-.product-content, .product-content * {
-    cursor: pointer;
-}
-
-/* STICKY CONTENT */
-
-.sticky {
-    position: sticky;
-    position: -webkit-sticky;
-    width: 100%;
-    height: 1px;
-    top: 80px;
-}
-
-/******************\
-|   COMPANY CARD   |
-\******************/
-
-.company-image div {
     background-color: var(--col-primary-dark);
 }
 
-.company-card:hover .company-image div {
+.card:hover .card-image div {
     border-radius: 0;
+}
+
+/********************\
+|   SPECIFIC CARDS   |
+\********************/
+
+.card.product .card-image div,
+.card.category .card-image div {
+    transition: transform 0.5s ease-in-out;
+}
+
+.card.product:hover .card-image div,
+.card.category:hover .card-image div {
+    transform: scale(1.2);
+}
+
+.card.product .card-content, .card.product .card-content * {
+    cursor: pointer;
+}
+
+.card.category:hover {
+    text-decoration: none;
+}
+
+.parent-category:hover {
+    text-decoration: none;
+}
+
+/******************\
+|   COOKIE ALERT   |
+\******************/
+
+.alert {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.alert-content {
+    display: flex;
+    align-items: center;
+    max-width: 1110px;
+    margin: 0;
+    z-index: 80;
+    background-color: var(--col-primary-dark);
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.24);
+}
+
+.alert .content {
+    padding: 12px 12px 12px 16px;
+}
+
+.alert .actions {
+    display: flex;
+}
+
+.alert .actions .btn {
+    background-color: transparent;
+}
+
+.alert .actions .btn:hover {
+    background-color: rgba(0, 0, 0, 0.08);
 }

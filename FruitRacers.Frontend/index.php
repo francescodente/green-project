@@ -32,20 +32,20 @@
 				for ($i = 0; $i < 8; $i++) {
 					?>
 					<div class="col-6 col-md-4 col-lg-3">
-						<div class="product-card mb-4">
-							<div class="product-image">
+						<div class="card product mb-4">
+							<div class="card-image">
 								<a href="#">
 									<div class="fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
 								</a>
 							</div>
-							<div class="product-content p-3">
+							<div class="card-content p-3">
 								<div class="product-info">
 									<h6 class="product-name font-weight-bold mb-1">Product name</h6>
 									<a href="#" class="company-name">Company name</a>
 								</div>
 								<div class="product-price d-flex justify-content-between align-items-center mt-2">
 									<span class="text-sec-dark">€00,00 / kg</span>
-									<button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart"></i></button>
+									<button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart-plus" title="Aggiungi al carrello"></i></button>
 								</div>
 							</div>
 						</div>
@@ -113,7 +113,7 @@
 			<div class="text-center">
 				<h1 class="text-light">AZIENDE</h1>
 			</div>
-			<div class="parallax shade" data-parallax-image="images/where.jpg"></div>
+			<div class="parallax shade" data-parallax-image="images/companies.jpg"></div>
 		</section>
 		<section id="companies-content" class="container py-4" data-section="companies">
 			<div class="container">
@@ -149,7 +149,12 @@
 	<?php include("scripts.php"); ?>
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> -->
 
-	<?php include("modal-login.php"); ?>
+	<?php include("modals-authentication.php"); ?>
+	<?php include("modal-pwd-change.php"); ?>
+	<?php include("modal-generic.php"); ?>
+	<?php include("modal-address-management.php"); ?>
+
+	<?php include("cookie.php"); ?>
 
 </body>
 </html>

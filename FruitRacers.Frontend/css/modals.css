@@ -13,9 +13,11 @@
 .modal-top {
     background-color: var(--col-primary-dark);
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
-.modal-top button {
+.modal-top [data-dismiss="modal"] {
     position: absolute;
     top: 0;
     right: 0;
@@ -31,24 +33,25 @@
     padding: 12px;
 }
 
-/*****************\
-|   LOGIN MODAL   |
-\*****************/
-
-#modal-login .text-input {
-    margin: 6px 0;
+.modal-bottom *:not(:last-child) {
+    margin-right: 6px;
 }
 
-#modal-login .text-input input {
-    width: 300px;
-}
-
-#modal-login .modal-top {
+.modal [type="submit"] {
+    width: 100%;
     display: flex;
     justify-content: center;
 }
 
-#login-header-icon {
+.modal .text-input {
+    margin: 6px 0;
+}
+
+.modal .text-input input {
+    width: 300px;
+}
+
+.modal-header-icon {
     margin: 36px 48px;
     color: var(--col-accent);
     height: 128px;
@@ -56,8 +59,72 @@
     line-height: 128px;
 }
 
-#submit-login {
+.modal-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 4px 0 0 4px;
+}
+
+/*******************\
+|   SIGN-UP MODAL   |
+\*******************/
+
+#marketing-consent + label {
+    max-width: 300px;
+}
+
+/************************\
+|   PWD RECOVERY MODAL   |
+\************************/
+
+#modal-pwd-recovery p {
+    max-width: 300px;
+}
+
+/******************************\
+|   ADDRESS MANAGEMENT MODAL   |
+\******************************/
+
+#modal-address-management .modal-content {
     width: 100%;
+}
+
+#modal-address-management .address {
+    /*width: 468px;*/
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#modal-address-management .address:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+#modal-address-management .address:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#modal-address-management .address .thumb {
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border-radius: 4px;
+    margin: 8px 16px 8px 8px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 2px solid #EEE;
+}
+
+#modal-address-management .address .thumb .mdi {
+    color: #707070;
+}
+
+#modal-address-management p {
+    flex-grow: 1;
+}
+
+#modal-address-management .delete-address {
+    margin-right: 14px;
 }

@@ -118,9 +118,11 @@
                 <!--  -->
 
                 <h6>Title</h6>
-                <input id="c1" type="checkbox" class="checkbox" name="checkbox-example" value="1" checked/>
+                <input id="c-toggle" type="checkbox" class="checkbox toggle-all" data-toggle="ce"/>
+                <label for="c-toggle">All</label><br>
+                <input id="c1" type="checkbox" class="checkbox" name="checkbox-example" value="1" data-toggled-by="ce" checked/>
                 <label for="c1">First option</label><br>
-                <input id="c2" type="checkbox" class="checkbox" name="checkbox-example" value="2"/>
+                <input id="c2" type="checkbox" class="checkbox" name="checkbox-example" value="2" data-toggled-by="ce"/>
                 <label for="c2">Second option</label><br>
                 <input id="c3" type="checkbox" class="checkbox" name="checkbox-example" value="3" disabled/>
                 <label for="c3">Third option (disabled)</label>
@@ -189,6 +191,12 @@
                     <textarea id="textarea" disabled></textarea>
                     <label for="textarea">Disabled Text area</label>
                 </div>
+
+                <!--  -->
+                <!-- <h4><br>file input</h4> -->
+                <!--  -->
+
+                <!-- <input type="file"/> -->
 
                 <!--  -->
                 <h4><br>rich radio</h4>
@@ -361,9 +369,11 @@
                 <!--  -->
 
                 <h6 class="text-light">Title</h6>
-                <input id="cd1" type="checkbox" class="checkbox light" name="checkbox-example2" value="1" checked/>
+                <input id="cd-toggle" type="checkbox" class="checkbox light toggle-all" data-toggle="ce2"/>
+                <label for="cd-toggle">All</label><br>
+                <input id="cd1" type="checkbox" class="checkbox light" name="checkbox-example2" value="1" data-toggled-by="ce2" checked/>
                 <label for="cd1">First option</label><br>
-                <input id="cd2" type="checkbox" class="checkbox light" name="checkbox-example2" value="2"/>
+                <input id="cd2" type="checkbox" class="checkbox light" name="checkbox-example2" value="2"data-toggled-by="ce2"/>
                 <label for="cd2">Second option</label><br>
                 <input id="cd3" type="checkbox" class="checkbox light" name="checkbox-example2" value="3" disabled/>
                 <label for="cd3">Third option (disabled)</label>
@@ -388,13 +398,13 @@
                 <!--  -->
 
                 <div class="text-input">
-                    <input id="email" type="email" class="dark" value="prova"/>
-                    <label for="email">Email</label>
+                    <input id="emaild" type="email" class="dark" value="prova"/>
+                    <label for="emaild">Email</label>
                 </div>
 
                 <div class="text-input">
-                    <input id="password" type="password" class="dark"/>
-                    <label for="password">Password</label>
+                    <input id="passwordd" type="password" class="dark"/>
+                    <label for="passwordd">Password</label>
                 </div>
 
                 <div class="text-input">

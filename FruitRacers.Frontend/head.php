@@ -19,4 +19,5 @@
 <link rel="stylesheet" type="text/css" href="css/menu.css"/>
 <link rel="stylesheet" type="text/css" href="css/footer.css"/>
 <link rel="stylesheet" type="text/css" href="css/modals.css"/>
-<link rel="stylesheet" type="text/css" href="css/home.css"/>
+<link rel="stylesheet" type="text/css" href="css/cart.css"/>
+<link rel="stylesheet" type="text/css" href="css/account.css"/>
