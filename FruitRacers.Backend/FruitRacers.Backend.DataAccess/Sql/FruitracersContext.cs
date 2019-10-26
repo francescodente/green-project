@@ -1,8 +1,9 @@
 ﻿using System;
+using FruitRacers.Backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace FruitRacers.Backend.Core.Entities
+namespace FruitRacers.Backend.DataAccess.Sql
 {
     public partial class FruitracersContext : DbContext
     {
