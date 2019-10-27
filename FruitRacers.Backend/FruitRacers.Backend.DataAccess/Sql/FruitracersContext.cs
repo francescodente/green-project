@@ -404,6 +404,12 @@ namespace FruitRacers.Backend.DataAccess.Sql
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Description).HasMaxLength(1000);
+
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.UserBusinessSupplier)
+                    .HasForeignKey<UserBusinessSupplier>(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserBusinessSuppliers_UserBusinesses");
             });
 
             modelBuilder.Entity<UserDeliveryCompany>(entity =>

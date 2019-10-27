@@ -15,5 +15,6 @@ namespace FruitRacers.Backend.Core.Entities
 
         public virtual User User { get; set; }
         public virtual UserBusinessCustomer UserBusinessCustomer { get; set; }
+        public virtual UserBusinessSupplier UserBusinessSupplier { get; set; }
     }
 }
