@@ -72,7 +72,6 @@
     <Build Include="Tables\Products.sql" />
     <Build Include="Tables\ProductCategories.sql" />
     <Build Include="Tables\Prices.sql" />
-    <Build Include="Tables\MeasurementUnits.sql" />
     <Build Include="Tables\Addresses.sql" />
     <Build Include="Tables\TimeSlots.sql" />
     <Build Include="Tables\TimeSlotOverrides.sql" />
