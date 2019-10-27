@@ -19,7 +19,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Image> Images { get; set; }
-        public virtual DbSet<MeasurementUnit> MeasurementUnits { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderState> OrderStates { get; set; }
@@ -103,16 +102,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
                     .HasConstraintName("FK_Images_Suppliers");
             });
 
-            modelBuilder.Entity<MeasurementUnit>(entity =>
-            {
-                entity.HasKey(e => e.UnitName)
-                    .HasName("PK__Measurem__B5EE667996DCF8DD");
-
-                entity.Property(e => e.UnitName)
-                    .HasMaxLength(5)
-                    .ValueGeneratedNever();
-            });
-
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
@@ -181,11 +170,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetails_Products");
-
-                entity.HasOne(d => d.UnitNameNavigation)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.UnitName)
-                    .HasConstraintName("FK_OrderDetails_MeasurementUnits");
             });
 
             modelBuilder.Entity<OrderState>(entity =>
@@ -218,12 +202,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Prices_Products");
-
-                entity.HasOne(d => d.UnitNameNavigation)
-                    .WithMany(p => p.Prices)
-                    .HasForeignKey(d => d.UnitName)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Prices_MeasurementUnits");
             });
 
             modelBuilder.Entity<Product>(entity =>
