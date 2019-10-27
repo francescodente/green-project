@@ -32,11 +32,9 @@
 				for ($i = 0; $i < 8; $i++) {
 					?>
 					<div class="col-6 col-md-4 col-lg-3">
-						<div class="card product mb-4">
+						<div class="card product mb-4" data-toggle="modal" data-target="#modal-product">
 							<div class="card-image">
-								<a href="#">
-									<div class="fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
-								</a>
+								<div class="product-image fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
 							</div>
 							<div class="card-content p-3">
 								<div class="product-info">
@@ -153,6 +151,8 @@
 	<?php include("modal-pwd-change.php"); ?>
 	<?php include("modal-generic.php"); ?>
 	<?php include("modal-address-management.php"); ?>
+	<?php include("modal-product.php"); ?>
+	<?php include("modal-time-slot.php"); ?>
 
 	<?php include("cookie.php"); ?>
 

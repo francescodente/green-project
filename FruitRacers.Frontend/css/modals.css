@@ -91,7 +91,6 @@
 }
 
 #modal-address-management .address {
-    /*width: 468px;*/
     border-radius: 4px;
     transition: background-color 0.2s ease-in-out;
 }
@@ -127,4 +126,79 @@
 
 #modal-address-management .delete-address {
     margin-right: 14px;
+}
+
+/*******************\
+|   PRODUCT MODAL   |
+\*******************/
+
+#modal-product .product-image {
+    width: 100%;
+}
+
+#modal-product .product-categories {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.category-chip {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px;
+    padding: 6px 16px;
+    border-radius: 360px;
+    background-color: var(--col-primary-dark);
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none!important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.category-chip:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+/*********************\
+|   TIME SLOT MODAL   |
+\*********************/
+
+#modal-time-slot .modal-content {
+    width: 100%;
+}
+
+.time-slots, .time-slot {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.time-slots {
+    width: 100%;
+}
+
+.time-slot {
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.time-slot:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.time-slot.disabled, .time-slot.full {
+    cursor: default;
+    background-color: var(--col-primary-dark);
+}
+
+.time-slot.disabled {
+    color: transparent;
+    background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), rgba(0, 0, 0, 0.12), transparent calc(50% + 1px));
+}
+
+.time-slot.selected {
+    cursor: default;
+    color: var(--col-text-light);
+    background-color: var(--col-accent);
 }

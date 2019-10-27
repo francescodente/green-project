@@ -77,11 +77,9 @@
                         for ($i = 0; $i < 24; $i++) {
                             ?>
                             <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card product mb-4">
+                                <div class="card product mb-4" data-toggle="modal" data-target="#modal-product">
                                     <div class="card-image">
-                                        <a href="#">
-                                            <div class="fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
-                                        </a>
+                                        <div class="product-image fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
                                     </div>
                                     <div class="card-content p-3">
                                         <div class="product-info">
@@ -121,6 +119,8 @@
 
     <?php include("scripts.php"); ?>
     <script src="js/filter.js"></script>
+
+    <?php include("modal-product.php"); ?>
 
 </body>
 </html>

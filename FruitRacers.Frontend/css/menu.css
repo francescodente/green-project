@@ -44,10 +44,6 @@
     color: var(--col-text-dark);
 }
 
-.submenu {
-    display: none;
-}
-
 /* LG */
 @media (min-width: 992px) {
 

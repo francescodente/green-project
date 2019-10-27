@@ -127,7 +127,7 @@ body {
     transform: scale(1.2);
 }
 
-.card.product .card-content, .card.product .card-content * {
+.card.product .card-content, .card.product * {
     cursor: pointer;
 }
 
