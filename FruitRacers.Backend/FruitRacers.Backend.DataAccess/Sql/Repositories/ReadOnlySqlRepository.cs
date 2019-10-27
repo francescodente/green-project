@@ -15,9 +15,15 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         protected DbSet<T> Set => this.Context.Set<T>();
         private Func<IQueryable<T>, IQueryable<T>> queryModifier;
 
-        public ReadOnlySqlRepository(FruitracersContext context) : base(context)
+        public ReadOnlySqlRepository(FruitracersContext context)
+            : this(context, q => q)
         {
-            this.queryModifier = q => q;
+        }
+
+        public ReadOnlySqlRepository(FruitracersContext context, Func<IQueryable<T>, IQueryable<T>> initialModifier)
+            : base(context)
+        {
+            this.queryModifier = initialModifier;
         }
 
         public async Task<IEnumerable<T>> GetAll()

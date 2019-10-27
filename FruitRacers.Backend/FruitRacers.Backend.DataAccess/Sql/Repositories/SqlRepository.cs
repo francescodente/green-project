@@ -1,13 +1,21 @@
 ﻿using FruitRacers.Backend.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 {
     public class SqlRepository<T> : ReadOnlySqlRepository<T>, IRepository<T> where T : class
     {
-        public SqlRepository(FruitracersContext context) : base(context)
+        public SqlRepository(FruitracersContext context)
+            : base(context)
+        {
+
+        }
+
+        public SqlRepository(FruitracersContext context, Func<IQueryable<T>, IQueryable<T>> initialModifier)
+            : base(context, initialModifier)
         {
 
         }

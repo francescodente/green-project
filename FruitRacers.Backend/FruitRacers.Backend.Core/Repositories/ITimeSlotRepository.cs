@@ -2,12 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Repositories
 {
-    public interface IProductsRepository : IRepository<Product>
+    public interface ITimeSlotRepository : IReadOnlyRepository<TimeSlot>
     {
-        IProductsRepository IncludingPrices();
+        void InsertOverride(TimeSlotOverride timeSlotOverride);
     }
 }
