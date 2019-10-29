@@ -9,6 +9,8 @@ namespace FruitRacers.Backend.Core.Repositories
 {
     public interface IReadOnlyRepository<T> where T : class
     {
+        Task<T> FindOne(Expression<Func<T, bool>> predicate);
+
         Task<IEnumerable<T>> Where(Expression<Func<T, bool>> predicate);
 
         Task<IEnumerable<T>> GetAll();

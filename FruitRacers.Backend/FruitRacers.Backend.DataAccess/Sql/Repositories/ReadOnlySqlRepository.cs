@@ -46,5 +46,10 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
             Func<IQueryable<T>, IQueryable<T>> current = this.queryModifier;
             this.queryModifier = q => modifier(current(q));
         }
+
+        public async Task<T> FindOne(Expression<Func<T, bool>> predicate)
+        {
+            return await this.AsQueryable().Where(predicate).SingleAsync();
+        }
     }
 }
