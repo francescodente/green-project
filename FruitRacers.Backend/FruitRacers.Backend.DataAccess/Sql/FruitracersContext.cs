@@ -21,7 +21,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<OrderState> OrderStates { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
@@ -112,8 +111,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
 
                 entity.Property(e => e.Notes).HasMaxLength(1000);
 
-                entity.Property(e => e.OrderStateId).HasColumnName("OrderStateID");
-
                 entity.Property(e => e.TimeSlotId).HasColumnName("TimeSlotID");
 
                 entity.Property(e => e.Timestamp).IsRowVersion();
@@ -124,12 +121,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.AddressId)
                     .HasConstraintName("FK_Orders_Addresses");
-
-                entity.HasOne(d => d.OrderState)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.OrderStateId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_OrderStates");
 
                 entity.HasOne(d => d.TimeSlot)
                     .WithMany(p => p.Orders)
@@ -170,15 +161,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
                     .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetails_Products");
-            });
-
-            modelBuilder.Entity<OrderState>(entity =>
-            {
-                entity.Property(e => e.OrderStateId).HasColumnName("OrderStateID");
-
-                entity.Property(e => e.StateName)
-                    .IsRequired()
-                    .HasMaxLength(30);
             });
 
             modelBuilder.Entity<Price>(entity =>
