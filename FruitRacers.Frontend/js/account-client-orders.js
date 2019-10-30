@@ -1,10 +1,10 @@
 function checkCollapse() {
     if ($(window).width() >= 992) {
-        $(".collapse").addClass("uncollapse");
-        $(".collapse").removeClass("collapse");
+        $("#client-orders .collapse").addClass("uncollapse");
+        $("#client-orders .collapse").removeClass("collapse");
     } else {
-        $(".uncollapse").addClass("collapse");
-        $(".uncollapse").removeClass("uncollapse");
+        $("#client-orders .uncollapse").addClass("collapse");
+        $("#client-orders .uncollapse").removeClass("uncollapse");
     }
 }
 
