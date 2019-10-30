@@ -36,7 +36,7 @@ $page = basename($_SERVER['PHP_SELF']);
                 <i class="mdi mdi-cart"></i>
                 <span>Carrello</span>
             </a>
-            <a href="account.php" class="menu-item ripple d-lg-none" data-sections="['account']">
+            <a href="account-tabs.php" class="menu-item ripple d-lg-none" data-sections="['account']">
                 <i class="mdi mdi-account"></i>
                 <span>Account</span>
             </a>
@@ -44,7 +44,7 @@ $page = basename($_SERVER['PHP_SELF']);
         <div id="menu-shade" class="d-lg-none"></div>
         <div id="menu-right">
             <a href="cart.php" class="btn icon ripple" title="Carrello"><i class="mdi mdi-cart"></i></a>
-            <a href="account.php" class="btn icon ripple" title="Account"><i class="mdi mdi-account"></i></a>
+            <a href="account-tabs.php" class="btn icon ripple" title="Account"><i class="mdi mdi-account"></i></a>
         </div>
     </div>
 </nav>

@@ -103,18 +103,39 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.card-image {
+.card-image, .card-header {
     position: relative;
     overflow: hidden;
+    border: none;
 }
 
-.card-image div {
+.card-image div, .card-header div {
     border-radius: 4px;
     background-color: var(--col-primary-dark);
 }
 
-.card:hover .card-image div {
+.card:hover .card-image div,
+.card:hover .card-header div {
     border-radius: 0;
+}
+
+.card-header .header-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header .header-icon {
+    margin: 36px 48px;
+    color: var(--col-accent);
+    height: 128px;
+    font-size: 128px;
+    line-height: 128px;
 }
 
 /********************\
@@ -145,6 +166,10 @@ body {
 
 .parent-category:hover {
     text-decoration: none;
+}
+
+.card.account-tab {
+    text-decoration: none!important;
 }
 
 /******************\

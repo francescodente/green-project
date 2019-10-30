@@ -93,6 +93,20 @@ $(document).ready(function() {
         $("body").removeClass("modal-no-scroll");
     });
 
+    // Handle collapse buttons
+    $("[data-toggle='collapse']").click(function() {
+        var icon = $(this).find(".mdi");
+        if (icon.hasClass("mdi-chevron-up")) {
+            icon.removeClass("mdi-chevron-up");
+            icon.addClass("mdi-chevron-down");
+            $(this).attr("title", "Mostra");
+        } else {
+            icon.removeClass("mdi-chevron-down");
+            icon.addClass("mdi-chevron-up");
+            $(this).attr("title", "Nascondi");
+        }
+    });
+
     setTimeout(highlightMenuItem, 200);
     setTimeout(checkMenuOpacity, 200);
 
