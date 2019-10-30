@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
 
@@ -37,6 +38,11 @@ namespace FruitRacers.Backend.Core
         public void Dispose()
         {
             this.session.Dispose();
+        }
+
+        public async Task SaveChanges()
+        {
+            await this.session.SaveChanges();
         }
     }
 }
