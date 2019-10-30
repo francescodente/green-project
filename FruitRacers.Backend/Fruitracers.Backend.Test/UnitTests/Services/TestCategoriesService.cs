@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fruitracers.Backend.Test
+namespace Fruitracers.Backend.Test.UnitTests.Services
 {
     public class TestCategoriesService
     {
