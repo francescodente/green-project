@@ -60,6 +60,8 @@
                     <input id="co4" type="checkbox" class="checkbox" name="companies" value="co4" checked/>
                     <label for="co4" class="mt-2">Azienda 4</label><br>
                     <br>
+                    <button class="apply-filter btn accent ripple w-100 d-flex justify-content-center">Applica</button>
+                    <br>
                 </div>
                 <div id="results-col" class="col-12 container">
                     <div class="row">
@@ -102,13 +104,13 @@
             <div class="divider dark mb-4"></div>
             <div class="row justify-content-center">
                 <ul class="pagination">
-                    <li><a href="#" class="btn icon ripple disabled"><i class="mdi dark mdi-chevron-left"></i></a></li>
+                    <li><a href="#" class="btn icon ripple disabled" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
                     <li><a href="#" class="selected">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
-                    <li><a href="#" class="btn icon ripple"><i class="mdi dark mdi-chevron-right"></i></a></li>
+                    <li><a href="#" class="btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
                 </ul>
             </div>
         </section>
@@ -128,7 +130,7 @@
     <?php include("scripts.php"); ?>
     <script src="js/filter.js"></script>
 
-    <?php include("components/product-card.php"); ?>
+    <!-- <?php include("components/product-card.php"); ?> -->
     <!-- <script>
         product = new ProductCard();
         product.id = "100";

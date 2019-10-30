@@ -42,7 +42,6 @@
                                 <div class="card-image">
                                     <div class="fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
                                 </div>
-
                             </a>
                         </div>
                         <?php
