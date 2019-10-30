@@ -24,7 +24,9 @@
                     <h5 class="company-name mt-3">Azienda</h5>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
-                            <img class="product-image" src="images/example_product.jpg"/>
+                            <a href="#" data-toggle="modal" data-target="#modal-product">
+                                <img class="product-image" src="images/example_product.jpg"/>
+                            </a>
                             <p class="m-0">
                                 <span class="product-name">Product name</span><br>
                                 <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
@@ -45,7 +47,9 @@
                     </div>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
-                            <img class="product-image" src="images/example_product.jpg"/>
+                            <a href="#" data-toggle="modal" data-target="#modal-product">
+                                <img class="product-image" src="images/example_product.jpg"/>
+                            </a>
                             <p class="m-0">
                                 <span class="product-name">Product name</span><br>
                                 <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
@@ -67,7 +71,9 @@
                     <h5 class="company-name mt-3">Azienda</h5>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
-                            <img class="product-image" src="images/example_product.jpg"/>
+                            <a href="#" data-toggle="modal" data-target="#modal-product">
+                                <img class="product-image" src="images/example_product.jpg"/>
+                            </a>
                             <p class="m-0">
                                 <span class="product-name">Product name</span><br>
                                 <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
@@ -205,6 +211,7 @@
 
     <?php include("modal-address-management.php"); ?>
     <?php include("modal-time-slot.php"); ?>
+    <?php include("modal-product.php"); ?>
 
 </body>
 </html>
