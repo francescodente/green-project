@@ -21,7 +21,7 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "user-data";
         </section>
         <section id="account-content" class="container py-4" data-section="account">
             <div class="row">
-                <div id="account-tabs-col" class="col-12 col-lg-3">
+                <div id="account-tabs-col" class="d-none d-lg-block col-lg-3">
                     <a id="user-data-tab" href="account.php?tab=user-data" class="account-tab <?php echo $tab == 'user-data' ? 'selected' : '' ?>">
                         <i class="mdi dark mdi-account-circle"></i>
                         <p class="m-0">I miei dati</p>
@@ -65,9 +65,11 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "user-data";
 
     <?php include("scripts.php"); ?>
     <script src="js/account-user-data.js"></script>
+    <script src="js/account-client-orders.js"></script>
 
     <?php include("modal-pwd-change.php"); ?>
     <?php include("modal-address-management.php"); ?>
+    <?php include("modal-product.php"); ?>
 
 </body>
 </html>
