@@ -1,6 +1,6 @@
 $(document).on('click', '.ripple', function(e) {
-	
-	var rippleElement = $('<span class="ripple-effect"/>');
+
+	var rippleElement = $('<span class="ripple-effect"></span>');
 	var buttonElement = $(this);
 	var btnOffset = buttonElement.offset();
 	var xPos = e.pageX - btnOffset.left;
