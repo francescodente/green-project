@@ -727,3 +727,27 @@ textarea.dark {
     color: var(--col-text-light)!important;
     background-color: var(--col-accent)!important;
 }
+
+/****************\
+|   BREADCRUMB   |
+\****************/
+
+.breadcrumb {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.breadcrumb.light {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.breadcrumb-item.active,
+.breadcrumb-item:before {
+    color: var(--col-text-sec-dark)!important;
+}
+
+.breadcrumb.light .breadcrumb-item.active,
+.breadcrumb.light .breadcrumb-item:before {
+    color: var(--col-text-sec-light)!important;
+}
