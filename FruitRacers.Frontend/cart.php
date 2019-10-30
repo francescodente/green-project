@@ -36,12 +36,12 @@
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
                             <span> <span class="product-unit">Kg</span></span>
                         </div>
-                        <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
+                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
@@ -57,12 +57,12 @@
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
                             <span> <span class="product-unit">Kg</span></span>
                         </div>
-                        <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
+                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
                     <h5 class="company-name mt-3">Azienda</h5>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
@@ -79,12 +79,12 @@
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
                             <span> <span class="product-unit">Kg</span></span>
                         </div>
-                        <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
+                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
 
 
@@ -140,7 +140,10 @@
 
                     <!-- DATE & TIME SLOT -->
                     <h4 class="mt-5 mb-4">Fascia oraria</h4>
-                    <p>TODO</p>
+                    <div class="d-flex align-items-center mb-2">
+                        <p class="m-0"><span class="date">1 Gennaio 2020</span>, <span class="selected-time-slot">14:00 - 14:30</span></p>
+                        <button type="button" class="btn icon ripple ml-3" title="Modifica" data-toggle="modal" data-target="#modal-time-slot"><i class="mdi dark mdi-calendar-edit"></i></button>
+                    </div>
 
                     <!-- OTHER FIELDS -->
                     <h4 class="mt-5 mb-4">Altro</h4>
@@ -201,6 +204,7 @@
     <?php include("scripts.php"); ?>
 
     <?php include("modal-address-management.php"); ?>
+    <?php include("modal-time-slot.php"); ?>
 
 </body>
 </html>
