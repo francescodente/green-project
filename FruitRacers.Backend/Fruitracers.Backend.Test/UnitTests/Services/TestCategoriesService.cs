@@ -1,4 +1,5 @@
-﻿using FruitRacers.Backend.Core;
+﻿using Fruitracers.Backend.Test.UnitTests.Mocking;
+using FruitRacers.Backend.Core;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Services.Categories;
@@ -30,11 +31,8 @@ namespace Fruitracers.Backend.Test.UnitTests.Services
                 new Category { CategoryId = 8, ParentCategoryId = 2 }
             };
 
-            IReadOnlyRepository<Category> categoriesRepo = Substitute.For<IReadOnlyRepository<Category>>();
-            categoriesRepo.GetAll().Returns(Task.FromResult(categories));
-
             IDataSession session = Substitute.For<IDataSession>();
-            session.Categories.Returns(categoriesRepo);
+            session.Categories.Returns(MockingUtils.CreateMockReadOnlyRepository(categories));
 
             ICategoriesService categoriesService = new CategoriesService(session);
 
