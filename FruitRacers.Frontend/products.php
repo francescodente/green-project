@@ -113,12 +113,33 @@
             </div>
         </section>
 
+        <div class="container">
+            <div class="row">
+                <div class="product-test col-6 col-md-4 col-lg-3">
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
     <script src="js/filter.js"></script>
+
+    <?php include("components/product-card.php"); ?>
+    <!-- <script>
+        product = new ProductCard();
+        product.id = "100";
+        product.name = "Prodotto di prova";
+        product.companyId = "10";
+        product.companyName = "Green Project";
+        product.price = "1,35";
+        product.unit = "500g";
+        product.image = "images/example_product.jpg";
+        $(".product-test").html(product.html);
+    </script> -->
 
     <?php include("modal-product.php"); ?>
 

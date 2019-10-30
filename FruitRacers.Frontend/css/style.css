@@ -14,6 +14,10 @@ body {
     min-height: 100vh;
 }
 
+.template {
+    display: none!important;
+}
+
 .modal-no-scroll {
     overflow-y: hidden;
 }
@@ -129,6 +133,10 @@ body {
 
 .card.product .card-content, .card.product * {
     cursor: pointer;
+}
+
+.card.product .product-price-row span {
+    color: var(--col-text-sec-dark);
 }
 
 .card.category:hover {
