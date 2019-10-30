@@ -148,11 +148,8 @@
 	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> -->
 
 	<?php include("modals-authentication.php"); ?>
-	<?php include("modal-pwd-change.php"); ?>
 	<?php include("modal-generic.php"); ?>
-	<?php include("modal-address-management.php"); ?>
 	<?php include("modal-product.php"); ?>
-	<?php include("modal-time-slot.php"); ?>
 
 	<?php include("cookie.php"); ?>
 

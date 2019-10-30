@@ -64,6 +64,10 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "user-data";
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
+    <script src="js/account-user-data.js"></script>
+
+    <?php include("modal-pwd-change.php"); ?>
+    <?php include("modal-address-management.php"); ?>
 
 </body>
 </html>

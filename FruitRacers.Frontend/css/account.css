@@ -26,15 +26,63 @@
     margin-left: auto;
 }
 
-/* LG */
-@media (min-width: 992px) {
+#account-content-col .text-input input,
+#account-content-col .text-area textarea {
+    width: 100%;
+}
+
+#account-content-col .text-input input:disabled,
+#account-content-col .text-area textarea:disabled {
+    color: var(--col-text-dark);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#account-content-col .text-input button,
+#account-content-col .text-area button {
+    position: absolute;
+    right: 3px;
+    top: 9px;
+}
+
+#account-content-col .address {
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#account-content-col .address:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+#account-content-col .address:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#account-content-col .address .thumb {
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border-radius: 4px;
+    margin: 8px 16px 8px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 2px solid #EEE;
+}
+
+#account-content-col .address .thumb .mdi {
+    color: #707070;
+}
+
+/* MD and up */
+@media (min-width: 768px) {
 
 
 
 }
 
-/* SM, MD */
-@media (max-width: 991px) {
+/* SM and down */
+@media (max-width: 767px) {
 
 
 }
