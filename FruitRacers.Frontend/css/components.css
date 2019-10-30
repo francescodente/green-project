@@ -185,8 +185,16 @@ div.divider.vertical.light {
     margin: auto;
 }
 
+.btn p {
+    margin: 0;
+}
+
 .btn .mdi ~ p {
-    margin: 0 0 0 4px;
+    margin: 0 0 0 8px;
+}
+
+.btn p ~ .mdi {
+    margin: auto 0 auto 8px;
 }
 
 .btn.transparent, .btn.transparent:disabled:hover {
