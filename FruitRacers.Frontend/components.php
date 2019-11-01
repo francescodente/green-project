@@ -153,7 +153,10 @@
 
                 <div class="text-input">
                     <input id="password" type="password"/>
-                    <label for="password">Password</label>
+                    <label for="password">
+                        <i class="mdi dark mdi-key"></i>
+                        <span>Password</span>
+                    </label>
                 </div>
 
                 <div class="text-input">
@@ -191,12 +194,6 @@
                     <textarea id="textarea" disabled></textarea>
                     <label for="textarea">Disabled Text area</label>
                 </div>
-
-                <!--  -->
-                <!-- <h4><br>file input</h4> -->
-                <!--  -->
-
-                <!-- <input type="file"/> -->
 
                 <!--  -->
                 <h4><br>rich radio</h4>
@@ -264,6 +261,24 @@
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Library</li>
                 </ol>
+
+                <!--  -->
+                <h4><br>file input</h4>
+                <!--  -->
+
+                <label class="file-input ripple">
+                    <input type="file"/>
+                    <i class="mdi mdi-upload"></i>
+                    <p>File input</p>
+                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                </label>
+
+                <label class="file-input ripple">
+                    <input type="file" multiple/>
+                    <i class="mdi dark mdi-upload"></i>
+                    <p>Multiple file input</p>
+                    <span class="count d-none">1</span>
+                </label>
 
                 <br><br><br>
 
@@ -413,7 +428,10 @@
 
                 <div class="text-input">
                     <input id="passwordd" type="password" class="dark"/>
-                    <label for="passwordd">Password</label>
+                    <label for="password">
+                        <i class="mdi light mdi-key"></i>
+                        <span>Password</span>
+                    </label>
                 </div>
 
                 <div class="text-input">

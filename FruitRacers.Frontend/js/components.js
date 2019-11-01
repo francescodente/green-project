@@ -47,4 +47,19 @@ $(document).ready(function() {
         checkboxToggleCheck($(this).data("toggled-by"));
     });
 
+    /****************\
+    |   FILE INPUT   |
+    \****************/
+
+    $("[type=file]").change(function() {
+        var fileCount = $(this).prop("files").length;
+        if (fileCount > 0) {
+            var countItem = $(this).parent().find(".count")
+            countItem.removeClass("d-none");
+            if ($(this).attr("multiple") !== undefined) {
+                countItem.html(fileCount);
+            }
+        }
+    });
+
 });
