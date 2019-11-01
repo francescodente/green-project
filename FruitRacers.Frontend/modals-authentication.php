@@ -119,5 +119,3 @@
         </div>
     </div>
 </div>
-
-<script src="js/modals-authentication.js"></script>

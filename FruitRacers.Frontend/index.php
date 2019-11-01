@@ -39,7 +39,7 @@
 							<div class="card-content p-3">
 								<div class="product-info">
 									<h6 class="product-name font-weight-bold mb-1">Product name</h6>
-									<a href="products.php" class="company-name">Company name</a>
+									<a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Company name</a>
 								</div>
 								<div class="product-price d-flex justify-content-between align-items-center mt-2">
 									<span class="text-sec-dark">€00,00 / kg</span>
@@ -149,7 +149,7 @@
 
 	<?php include("modals-authentication.php"); ?>
 	<?php include("modal-generic.php"); ?>
-	<?php include("modal-product.php"); ?>
+	<?php include("modals-product-company.php"); ?>
 
 	<?php include("cookie.php"); ?>
 

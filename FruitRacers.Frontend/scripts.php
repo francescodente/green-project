@@ -6,4 +6,5 @@
     <script src="js/ripple.js"></script>
     <script src="js/components.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/modals.js"></script>
 </div>

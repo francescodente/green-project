@@ -21,7 +21,7 @@
 
                     <!-- PRODUCTS -->
                     <h4>Prodotti</h4>
-                    <h5 class="company-name mt-3">Azienda</h5>
+                    <h5 class="mt-3"><a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Azienda</a></h5>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
                             <a href="#" data-toggle="modal" data-target="#modal-product">
@@ -68,7 +68,7 @@
                         </div>
                         <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
-                    <h5 class="company-name mt-3">Azienda</h5>
+                    <h5 class="mt-3"><a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Azienda</a></h5>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
                             <a href="#" data-toggle="modal" data-target="#modal-product">
@@ -211,7 +211,7 @@
 
     <?php include("modal-address-management.php"); ?>
     <?php include("modal-time-slot.php"); ?>
-    <?php include("modal-product.php"); ?>
+    <?php include("modals-product-company.php"); ?>
 
 </body>
 </html>

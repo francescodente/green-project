@@ -19,4 +19,10 @@ $(document).ready(function() {
         $("#modal-login").modal("show");
     });
 
+    $("#modal-product .company-name").click(function() {
+        event.preventDefault();
+        $(this).closest(".modal").modal("hide");
+        $("#modal-company").modal("show");
+    });
+
 });

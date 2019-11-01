@@ -69,7 +69,7 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "user-data";
 
     <?php include("modal-pwd-change.php"); ?>
     <?php include("modal-address-management.php"); ?>
-    <?php include("modal-product.php"); ?>
+    <?php include("modals-product-company.php"); ?>
 
 </body>
 </html>

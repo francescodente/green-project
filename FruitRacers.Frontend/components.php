@@ -537,6 +537,24 @@
                     <li class="breadcrumb-item active">Library</li>
                 </ol>
 
+                <!--  -->
+                <h4 class="text-light"><br>file input</h4>
+                <!--  -->
+
+                <label class="file-input ripple">
+                    <input type="file"/>
+                    <i class="mdi mdi-upload"></i>
+                    <p>File input</p>
+                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                </label>
+
+                <label class="file-input ripple">
+                    <input type="file" multiple/>
+                    <i class="mdi dark mdi-upload"></i>
+                    <p>Multiple file input</p>
+                    <span class="count d-none">1</span>
+                </label>
+
             </div>
         </div>
     </div>
