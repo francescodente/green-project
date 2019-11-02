@@ -63,7 +63,7 @@
                     <button class="apply-filter btn accent ripple w-100 d-flex justify-content-center">Applica</button>
                     <br>
                 </div>
-                <div id="results-col" class="col-12 container">
+                <div id="results-col" class="col-12 container" data-children-class="col-6 col-md-4 col-lg-3">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between align-items-center mb-4">
                             <div class="d-flex align-items-center">
@@ -75,29 +75,6 @@
                             </div>
                             <p class="text-dis-dark m-0">0 risultati</p>
                         </div>
-                        <?php
-                        for ($i = 0; $i < 24; $i++) {
-                            ?>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card product mb-4" data-toggle="modal" data-target="#modal-product">
-                                    <div class="card-image">
-                                        <div class="product-image fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
-                                    </div>
-                                    <div class="card-content p-3">
-                                        <div class="product-info">
-                                            <h6 class="product-name font-weight-bold mb-1">Product name</h6>
-                                            <a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Company name</a>
-                                        </div>
-                                        <div class="product-price d-flex justify-content-between align-items-center mt-2">
-                                            <span class="text-sec-dark">€00,00 / kg</span>
-                                            <button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart-plus" title="Aggiungi al carrello"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
                     </div>
                 </div>
             </div>
@@ -115,33 +92,16 @@
             </div>
         </section>
 
-        <div class="container">
-            <div class="row">
-                <div class="product-test col-6 col-md-4 col-lg-3">
-
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
-    <script src="js/filter.js"></script>
 
-    <!-- <?php include("components/product-card.php"); ?> -->
-    <!-- <script>
-        product = new ProductCard();
-        product.id = "100";
-        product.name = "Prodotto di prova";
-        product.companyId = "10";
-        product.companyName = "Green Project";
-        product.price = "1,35";
-        product.unit = "500g";
-        product.image = "images/example_product.jpg";
-        $(".product-test").html(product.html);
-    </script> -->
+    <?php include("components/objects.php") ?>
+
+    <script src="js/filter.js"></script>
+    <script src="js/products.js"></script>
 
     <?php include("modals-product-company.php"); ?>
 

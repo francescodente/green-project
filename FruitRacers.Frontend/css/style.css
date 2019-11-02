@@ -156,10 +156,6 @@ body {
     cursor: pointer;
 }
 
-.card.product .product-price-row span {
-    color: var(--col-text-sec-dark);
-}
-
 .card.category:hover {
     text-decoration: none;
 }
