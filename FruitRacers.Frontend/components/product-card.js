@@ -1,89 +1,82 @@
-class ProductCard {
+class ProductCard extends Product {
 
-    constructor() {
-        // Create self variable to use inside JQuery functions
-        var self = this;
+    constructor(
+        id = 0,
+        name = "Product name",
+        description = "",
+        categories = [],
+        manufacturer = null,
+        price = 0,
+        unit = "ND",
+        minQuantity = 0,
+        image = ""
+    ) {
+        super(id, name, description, categories, manufacturer, price, unit, minQuantity, image);
+
         // Clone template into this object
-        this._html = $("[data-class='ProductCard']").clone();
-        $(this.html).removeAttr("data-class");
+        this._html = getTemplate("ProductCard");
+
+        // Set attributes again to fill HTML
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.categories = categories;
+        this.manufacturer = manufacturer;
+        this.price = price;
+        this.unit = unit;
+        this.minQuantity = minQuantity;
+        this.image = image;
+
+        var self = this;
+
         // Handle click event
         $(this.html).click(function() {
             console.log("click");
             $("#modal-product .product-name").html(self.name);
         });
+
         // Handle cart button click event
         $(this.html).on("click", ".add-to-cart", function(event) {
             event.stopPropagation();
             console.log("cart-add " + self.id);
         });
+
         // Stop event propagation when opening company link
         $(this.html).on("click", ".company-name", function(event) {
             event.stopPropagation();
+            $("#modal-company").modal();
         });
     }
 
-    get html() {
-        return this._html;
-    }
-
-    get id() {
-        return this._id;
-    }
-
-    set id(value) {
-        this._id = value;
-    }
-
-    get name() {
-        return this._name;
-    }
+    get html() { return this._html; }
 
     set name(value) {
-        this._name = value;
+        super.name = value;
         $(this.html).find(".product-name").html(this.name);
     }
 
-    get companyId() {
-        return this._companyId;
+    set categories(value) {
+        super.categories = value;
+        // TODO
     }
 
-    set companyId(value) {
-        this._companyId = value;
-    }
-
-    get companyName() {
-        return this._companyName;
-    }
-
-    set companyName(value) {
-        this._companyName = value;
-        $(this.html).find(".company-name").html(this.companyName);
-    }
-
-    get price() {
-        return this._price;
+    set manufacturer(value) {
+        super.manufacturer = value;
+        //$(this.html).find(".company-name").html(this.companyName);
     }
 
     set price(value) {
-        this._price = value;
+        super.price = value;
         $(this.html).find(".product-price").html(this.price);
     }
 
-    get unit() {
-        return this._unit;
-    }
-
     set unit(value) {
-        this._unit = value;
+        super.unit = value;
         $(this.html).find(".product-unit").html(this.unit);
     }
 
-    get image() {
-        return this._image;
-    }
-
     set image(value) {
-        this._image = value;
-        $(this.html).find(".product-image").css("background-image", "url(" +  this.image + ")")
+        super.image = value;
+        //$(this.html).find(".product-image").css("background-image", "url(" +  this.image + ")")
     }
 }
