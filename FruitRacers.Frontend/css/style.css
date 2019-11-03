@@ -14,10 +14,6 @@ body {
     min-height: 100vh;
 }
 
-.template {
-    display: none!important;
-}
-
 .modal-no-scroll {
     overflow-y: hidden;
 }
@@ -69,8 +65,12 @@ body {
 |   IMAGES   |
 \************/
 
-.logo-small img {
+.menu-logo img {
     height: 48px;
+}
+
+.footer-logo img {
+    height: 64px;
 }
 
 .img-hover-zoom {
