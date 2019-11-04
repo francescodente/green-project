@@ -280,6 +280,33 @@
                     <span class="count d-none">1</span>
                 </label>
 
+                <!--  -->
+                <h4><br>search bar</h4>
+                <!--  -->
+
+                <div class="search-bar">
+                    <button class="search btn icon ripple" title="Cerca"><i class="mdi dark mdi-magnify"></i></button>
+                    <input type="text" placeholder="Cerca..."/>
+                    <button class="clear btn icon ripple" title="Cancella" disabled><i class="mdi dark mdi-close"></i></button>
+                </div>
+
+                <!--  -->
+                <h4><br>collapse</h4>
+                <!--  -->
+
+                <button class="btn icon ripple" data-toggle="collapse" data-target="#collapse-example" aria-expanded="false" title="Mostra">
+                    <i class="mdi dark mdi-chevron-down"></i>
+                </button>
+                <div id="collapse-example" class="collapse">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+
+                <!--  -->
+                <h4><br>loading</h4>
+                <!--  -->
+
                 <br><br><br>
 
             </div>
@@ -554,6 +581,33 @@
                     <p>Multiple file input</p>
                     <span class="count d-none">1</span>
                 </label>
+
+                <!--  -->
+                <h4 class="text-light"><br>search bar</h4>
+                <!--  -->
+
+                <div class="search-bar dark">
+                    <button class="search btn icon ripple" title="Cerca"><i class="mdi dark mdi-magnify"></i></button>
+                    <input type="text" placeholder="Cerca..."/>
+                    <button class="clear btn icon ripple" title="Cancella" disabled><i class="mdi dark mdi-close"></i></button>
+                </div>
+
+                <!--  -->
+                <h4 class="text-light"><br>collapse</h4>
+                <!--  -->
+
+                <button class="btn icon light ripple" data-toggle="collapse" data-target="#collapse-example" aria-expanded="false" title="Mostra">
+                    <i class="mdi light mdi-chevron-down"></i>
+                </button>
+                <div id="collapse-example" class="collapse">
+                    <p class="text-light">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+
+                <!--  -->
+                <h4 class="text-light"><br>loading</h4>
+                <!--  -->
 
             </div>
         </div>

@@ -116,6 +116,10 @@ a.light {
     padding-top: 100%;
 }
 
+.fr-5-4 {
+    padding-top: 80%;
+}
+
 .fr-4-3 {
     padding-top: 75%;
 }
@@ -833,3 +837,61 @@ textarea.dark {
     line-height: 18px;
     color: var(--col-accent)!important;
 }
+
+/****************\
+|   SEARCH BAR   |
+\****************/
+
+.search-bar {
+    margin: 6px 0;
+    padding: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 360px;
+    display: inline-flex;
+    align-items: center;
+    transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1), background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+
+.search-bar.dark {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.search-bar.dark * {
+    color: var(--col-text-light);
+}
+
+.search-bar:hover, .search-bar.focus {
+    background-color: #FFF;
+    border: 1px solid #FFF;
+    box-shadow: 0 0 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.search-bar.dark:hover, .search-bar.dark.focus {
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid transparent;
+}
+
+.search-bar [type="text"] {
+    height: 36px;
+    width: 300px;
+    border: none!important;
+    outline: none!important;
+    background-color: transparent;
+}
+
+.search-bar .btn:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.search-bar *:not(:last-child) {
+    margin-right: 8px;
+}
+
+/**************\
+|   COLLAPSE   |
+\**************/
+
+/*************\
+|   LOADING   |
+\*************/

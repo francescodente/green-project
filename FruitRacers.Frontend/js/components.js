@@ -62,4 +62,55 @@ $(document).ready(function() {
         }
     });
 
+    /****************\
+    |   SEARCH BAR   |
+    \****************/
+
+    // Clear button click handling
+    $(".search-bar .clear.btn").click(function() {
+        var textInput = $(this).parent().find("[type='text']")
+        textInput.val("");
+        textInput.focus();
+        $(this).prop("disabled", true);
+    });
+    // Enable / disable clear button on page load
+    $(".search-bar [type='text']").filter(function() {
+        return this.value.length > 0;
+    }).parent().find(".clear.btn").prop("disabled", false);
+    // Enable / disable clear button on value changed
+    $(".search-bar [type='text']").on("change paste keyup", function() {
+        if(!$(this).val()) {
+            $(this).parent().find(".clear.btn").prop("disabled", true);
+        } else {
+            $(this).parent().find(".clear.btn").prop("disabled", false);
+        }
+    });
+
+    // Highlight search bar on text focus
+    $(".search-bar [type='text']").focus(function() {
+        console.log("focus");
+        $(this).parent().addClass("focus");
+    });
+    $(".search-bar [type='text']").blur(function() {
+        console.log("blur");
+        $(this).parent().removeClass("focus");
+    });
+
+    /**************\
+    |   COLLAPSE   |
+    \**************/
+
+    $("[data-toggle='collapse']").click(function() {
+        var icon = $(this).find(".mdi");
+        if (icon.hasClass("mdi-chevron-up")) {
+            icon.removeClass("mdi-chevron-up");
+            icon.addClass("mdi-chevron-down");
+            $(this).attr("title", "Mostra");
+        } else {
+            icon.removeClass("mdi-chevron-down");
+            icon.addClass("mdi-chevron-up");
+            $(this).attr("title", "Nascondi");
+        }
+    });
+
 });
