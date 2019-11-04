@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     // Filter toggle click handling
-    $(".toggle-filters").click(function() {
+    $("#products-content").on("click", ".toggle-filters", function() {
         if ($("#filters-col").hasClass("d-none")) {
             // Show filters
             $(this).find(".mdi").removeClass("mdi-filter");

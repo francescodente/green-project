@@ -47,17 +47,17 @@ new universalParallax().init({
 $(document).ready(function() {
 
     // Menu toggle click handling
-    $("#menu-toggle").click(function () {
+    $("#menu").on("click", "#menu-toggle", function () {
         toggleMenu(!$("#menu-middle").hasClass("open"))
     });
 
     // Menu shade click handling
-    $("#menu-shade").click(function () {
+    $("#menu").on("click", "#menu-shade", function () {
         toggleMenu(false);
     });
 
     // Menu item click handling
-    $(".menu-item").click(function (event) {
+    $("#menu").on("click", ".menu-item", function (event) {
         var url = location.href;
         var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
         var href = $(this).attr("href").split("#");
@@ -71,7 +71,7 @@ $(document).ready(function() {
     });
 
     // Back to top button click handling
-    $("#go-top-btn").click(function (event) {
+    $(document).on("click", "#go-top-btn", function (event) {
         $("html, body").animate({ scrollTop: 0 }, 600);
     });
 

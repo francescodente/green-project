@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $(".edit-field.btn").click(function() {
+    $("#user-data").on("click", ".edit-field.btn", function() {
         var icon = $(this).find(".mdi");
         if (icon.hasClass("mdi-pencil")) {
             // Switch to edit mode
@@ -20,7 +20,7 @@ $(document).ready(function() {
         }
     });
 
-    $(".edit-form.btn").click(function() {
+    $("#user-data").on("click", ".edit-form.btn", function() {
         var icon = $(this).find(".mdi");
         if (icon.hasClass("mdi-pencil")) {
             // Switch to edit mode

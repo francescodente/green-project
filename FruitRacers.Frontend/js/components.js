@@ -8,7 +8,7 @@ $(document).ready(function() {
     $(".text-input input, textarea").filter(function() {
         return this.value.length > 0;
     }).addClass("has-value");
-    $(".text-input input, textarea").blur(function() {
+    $(document).on("blur", ".text-input input, textarea", function() {
         if(!this.value) {
             $(this).removeClass("has-value");
         } else {
@@ -21,7 +21,7 @@ $(document).ready(function() {
     \**************/
 
     // Checkbox toggle all click
-    $(".checkbox.toggle-all").click(function() {
+    $(document).on("click", ".checkbox.toggle-all", function() {
         if ($(this).is(":checked")) {
             $('[data-toggled-by="' + $(this).attr("data-toggle") + '"]').prop('checked', true);
         } else {
@@ -37,21 +37,21 @@ $(document).ready(function() {
             $('.checkbox[data-toggle="' + toggle + '"]').prop('checked', false);
         }
     }
-    // On checkbox click
-    $(".checkbox:not(.toggle-all)").click(function() {
-        toggle = $(this).data("toggled-by");
-        checkboxToggleCheck(toggle);
-    });
     // On page load
     $(".checkbox[data-toggled-by]").each(function() {
         checkboxToggleCheck($(this).data("toggled-by"));
+    });
+    // On checkbox click
+    $(document).on("click", ".checkbox:not(.toggle-all)", function() {
+        toggle = $(this).data("toggled-by");
+        checkboxToggleCheck(toggle);
     });
 
     /****************\
     |   FILE INPUT   |
     \****************/
 
-    $("[type=file]").change(function() {
+    $(document).on("change", "[type=file]", function() {
         var fileCount = $(this).prop("files").length;
         if (fileCount > 0) {
             var countItem = $(this).parent().find(".count")
@@ -67,7 +67,7 @@ $(document).ready(function() {
     \****************/
 
     // Clear button click handling
-    $(".search-bar .clear.btn").click(function() {
+    $(document).on("click", ".search-bar .clear.btn", function() {
         var textInput = $(this).parent().find("[type='text']")
         textInput.val("");
         textInput.focus();
@@ -78,7 +78,7 @@ $(document).ready(function() {
         return this.value.length > 0;
     }).parent().find(".clear.btn").prop("disabled", false);
     // Enable / disable clear button on value changed
-    $(".search-bar [type='text']").on("change paste keyup", function() {
+    $(document).on("change paste keyup", ".search-bar [type='text']", function() {
         if(!$(this).val()) {
             $(this).parent().find(".clear.btn").prop("disabled", true);
         } else {
@@ -87,12 +87,10 @@ $(document).ready(function() {
     });
 
     // Highlight search bar on text focus
-    $(".search-bar [type='text']").focus(function() {
-        console.log("focus");
+    $(document).on("focus", ".search-bar [type='text']", function() {
         $(this).parent().addClass("focus");
     });
-    $(".search-bar [type='text']").blur(function() {
-        console.log("blur");
+    $(document).on("blur", ".search-bar [type='text']", function() {
         $(this).parent().removeClass("focus");
     });
 
@@ -100,7 +98,7 @@ $(document).ready(function() {
     |   COLLAPSE   |
     \**************/
 
-    $("[data-toggle='collapse']").click(function() {
+    $(document).on("click", "[data-toggle='collapse']", function() {
         var icon = $(this).find(".mdi");
         if (icon.hasClass("mdi-chevron-up")) {
             icon.removeClass("mdi-chevron-up");

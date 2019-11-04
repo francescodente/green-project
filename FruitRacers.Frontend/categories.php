@@ -13,7 +13,7 @@
             <div class="text-center">
                 <h1 class="text-light">PRODOTTI</h1>
             </div>
-            <div class="bottom-links mb-4">
+            <div class="bottom-content mb-4">
                 <a href="products.php" class="btn round ripple light">Visualizza tutti i prodotti</a>
             </div>
             <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
