@@ -31,6 +31,10 @@
     background-color: rgba(0, 0, 0, 0.08);
 }
 
+#cart-content .manage-addresses .thumb {
+    margin: 10px 16px 10px 10px;
+}
+
 #cart-content [name="delivery-address"] + label .thumb {
     border: 2px solid #EEE;
 }

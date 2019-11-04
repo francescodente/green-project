@@ -10,7 +10,7 @@
         <?php include("menu.php"); ?>
 
         <section id="cart" class="parallax-container header d-flex justify-content-center align-items-center" data-section="cart">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">CARRELLO</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/cart.jpg"></div>
@@ -137,10 +137,10 @@
                     </label>
                     <button type="button" class="manage-addresses ripple d-flex align-items-center" data-toggle="modal" data-target="#modal-address-management">
                         <div class="thumb">
-                            <i class="mdi dark mdi-map-marker-plus"></i>
+                            <i class="mdi dark mdi-map-marker"></i>
                         </div>
                         <div>
-                            <p class="m-0">Aggiungi un nuovo indirizzo</p>
+                            <p class="m-0">Gestisci indirizzi</p>
                         </div>
                     </button>
 
@@ -212,6 +212,7 @@
     <?php include("modal-address-management.php"); ?>
     <?php include("modal-time-slot.php"); ?>
     <?php include("modals-product-company.php"); ?>
+    <?php include("modal-generic.php"); ?>
 
 </body>
 </html>

@@ -5,7 +5,7 @@
         <li class="breadcrumb-item active">I miei dati</li>
     </ol>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center pb-1">
         <h4 class="m-0">Generali</h4>
         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" title="Nascondi">
             <i class="mdi dark mdi-chevron-up"></i>
@@ -13,6 +13,7 @@
     </div>
 
     <div id="user-data-general" class="collapse show">
+        <div class="pt-3"></div>
 
         <h6>E-mail *</h6>
         <div class="text-input mb-3">
@@ -44,7 +45,7 @@
 
     <div class="divider dark my-4"></div>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center pb-1">
         <h4 class="m-0">Dati personali</h4>
         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="false" title="Mostra">
             <i class="mdi dark mdi-chevron-down"></i>
@@ -52,6 +53,7 @@
     </div>
 
     <form id="user-data-personal" class="collapse">
+        <div class="pt-3"></div>
 
         <h6>Codice fiscale **</h6>
         <div class="text-input mb-3">
@@ -94,7 +96,7 @@
 
     <div class="divider dark my-4"></div>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center pb-1">
         <h4 class="m-0">Indirizzi</h4>
         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-addresses" aria-expanded="false" title="Mostra">
             <i class="mdi dark mdi-chevron-down"></i>
@@ -102,6 +104,7 @@
     </div>
 
     <div id="user-data-addresses" class="collapse">
+        <div class="pt-3"></div>
 
         <div class="address d-flex align-items-center">
             <div class="thumb" style="background-image: url('images/map-thumb.png');">
@@ -128,7 +131,7 @@
 
     <div class="divider dark my-4"></div>
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex justify-content-between align-items-center pb-1">
         <h4 class="m-0">Dati aziendali</h4>
         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-company" aria-expanded="false" title="Mostra">
             <i class="mdi dark mdi-chevron-down"></i>
@@ -136,6 +139,7 @@
     </div>
 
     <form id="user-data-company" class="collapse">
+        <div class="pt-3"></div>
 
         <h6>Numero di partita IVA</h6>
         <div class="text-input mb-3">

@@ -14,7 +14,7 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "user-data";
         <?php include("menu.php"); ?>
 
         <section id="account" class="parallax-container header d-flex justify-content-center align-items-center" data-section="account">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">ACCOUNT</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
@@ -70,6 +70,7 @@ $tab = isset($_GET["tab"]) ? $_GET["tab"] : "user-data";
     <?php include("modal-pwd-change.php"); ?>
     <?php include("modal-address-management.php"); ?>
     <?php include("modals-product-company.php"); ?>
+    <?php include("modal-generic.php"); ?>
 
 </body>
 </html>

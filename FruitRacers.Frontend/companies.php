@@ -10,7 +10,7 @@
         <?php include("menu.php"); ?>
 
         <section id="companies" class="parallax-container header d-flex justify-content-center align-items-center" data-section="companies">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">AZIENDE</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/companies.jpg"></div>
