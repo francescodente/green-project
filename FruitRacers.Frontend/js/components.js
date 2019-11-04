@@ -111,4 +111,45 @@ $(document).ready(function() {
         }
     });
 
+    /**************\
+    |   DROPDOWN   |
+    \**************/
+
+    $(document).click(function() {
+        $(".dropdown").removeClass("active");
+    });
+
+    $(".dropdown ul li").each(function() {
+        var delay = $(this).index() * 50 + "ms";
+        $(this).css({
+            "-webkit-transition-delay": delay,
+            "-moz-transition-delay": delay,
+            "-o-transition-delay": delay,
+            "transition-delay": delay
+        });
+    });
+
+    $("[data-toggle='dropdown']").click(function(event) {
+        event.stopPropagation();
+        var target = $($(this).data("target"));
+        var x = $(this).offset().left + $(this).outerWidth() - target.width();
+        var y = $(this).offset().top + $(this).outerHeight();
+        console.log("offset left" + $(this).offset().left);
+        console.log("offset top" + $(this).offset().top);
+        console.log("width" + $(this).outerWidth());
+        console.log("height" + $(this).outerHeight());
+        console.log("target width" + target.width());
+        console.log(x);
+        console.log(y);
+        target.css({
+            "top": y,
+            "left": x
+        });
+        target.toggleClass("active");
+    });
+
+    $(".dropdown").click(function(event) {
+        event.stopPropagation();
+    });
+
 });

@@ -771,6 +771,10 @@ textarea.dark {
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
+.breadcrumb.light a {
+    color: var(--col-accent);
+}
+
 .breadcrumb-item.active,
 .breadcrumb-item:before {
     color: var(--col-text-sec-dark)!important;
@@ -886,6 +890,61 @@ textarea.dark {
 
 .search-bar *:not(:last-child) {
     margin-right: 8px;
+}
+
+/**************\
+|   DROPDOWN   |
+\**************/
+
+.dropdown {
+    position: absolute;
+    z-index: 100;
+    background-color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    opacity: 0;
+    -webkit-transition: all 0.2s ease;
+    -webkit-transform-origin: right top 0px;
+    -webkit-transform: scale(0);
+}
+
+.dropdown.active {
+    opacity: 1;
+    -webkit-transform-origin: right top 0px;
+    -webkit-transform: scale(1);
+}
+
+.dropdown ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+}
+
+.dropdown li {
+    padding: 10px 16px;
+    opacity: 0;
+    -webkit-transition: background-color 0.2s ease-in-out, all 0.3s ease;
+    transform: translateY(-30%);
+}
+
+.dropdown.active li {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.dropdown li:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.dropdown li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none!important;
+}
+
+.dropdown li a .mdi {
+    margin-right: 16px;
 }
 
 /*************\

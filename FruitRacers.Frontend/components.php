@@ -20,9 +20,10 @@
                 <a href="#">Link</a><br>
                 <i class="mdi dark mdi-content-save"></i>
 
-                <!--  -->
-                <h4><br>btn transparent</h4>
-                <!--  -->
+                <!------------------------->
+                <!--   BTN TRANSPARENT   -->
+                <!------------------------->
+                <h1 class="mt-5 mb-3">btn transparent</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn transparent ripple">Button</a>
@@ -42,9 +43,10 @@
                     <p>Disabled</p>
                 </button>
 
-                <!--  -->
-                <h4><br>btn accent</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   BTN ACCENT   -->
+                <!-------------------->
+                <h1 class="mt-5 mb-3">btn accent</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn accent ripple">Button</a>
@@ -64,17 +66,19 @@
                     <p>Disabled</p>
                 </button>
 
-                <!--  -->
-                <h4><br>btn icon</h4>
-                <!--  -->
+                <!------------------>
+                <!--   BTN ICON   -->
+                <!------------------>
+                <h1 class="mt-5 mb-3">btn icon</h1>
 
                 <a href="#" class="btn icon ripple"><i class="mdi dark mdi-content-save"></i></a>
                 <button class="btn icon ripple"><i class="mdi dark mdi-content-save"></i></button>
                 <button class="btn icon ripple" disabled><i class="mdi dark mdi-content-save"></i></button>
 
-                <!--  -->
-                <h4><br>btn round</h4>
-                <!--  -->
+                <!------------------->
+                <!--   BTN ROUND   -->
+                <!------------------->
+                <h1 class="mt-5 mb-3">btn round</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn round ripple">Button</a>
@@ -94,16 +98,37 @@
                     <p>Disabled</p>
                 </button>
 
-                <!--  -->
-                <h4><br>btn fab</h4>
-                <!--  -->
+                <!----------------->
+                <!--   BTN FAB   -->
+                <!----------------->
+                <h1 class="mt-5 mb-3">btn fab</h1>
 
                 <a href="#" class="btn fab ripple"><i class="mdi light mdi-content-save"></i></a>
                 <button class="btn fab ripple"><i class="mdi light mdi-content-save"></i></button>
 
-                <!--  -->
-                <h4><br>radio</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   FILE INPUT   -->
+                <!-------------------->
+                <h1 class="mt-5 mb-3">file input</h1>
+
+                <label class="file-input ripple">
+                    <input type="file"/>
+                    <i class="mdi mdi-upload"></i>
+                    <p>File input</p>
+                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                </label>
+
+                <label class="file-input ripple">
+                    <input type="file" multiple/>
+                    <i class="mdi dark mdi-upload"></i>
+                    <p>Multiple file input</p>
+                    <span class="count d-none">1</span>
+                </label>
+
+                <!--------------->
+                <!--   RADIO   -->
+                <!--------------->
+                <h1 class="mt-5 mb-3">radio</h1>
 
                 <h6>Title</h6>
                 <input id="r1" type="radio" class="radio" name="radio-example" value="1" checked/>
@@ -113,9 +138,10 @@
                 <input id="r3" type="radio" class="radio" name="radio-example" value="3" disabled/>
                 <label for="r3">Third option (disabled)</label>
 
-                <!--  -->
-                <h4><br>check</h4>
-                <!--  -->
+                <!--------------->
+                <!--   CHECK   -->
+                <!--------------->
+                <h1 class="mt-5 mb-3">check</h1>
 
                 <h6>Title</h6>
                 <input id="c-toggle" type="checkbox" class="checkbox toggle-all" data-toggle="ce"/>
@@ -127,77 +153,20 @@
                 <input id="c3" type="checkbox" class="checkbox" name="checkbox-example" value="3" disabled/>
                 <label for="c3">Third option (disabled)</label>
 
-                <!--  -->
-                <h4><br>switch</h4>
-                <!--  -->
+                <!---------------->
+                <!--   SWITCH   -->
+                <!---------------->
+                <h1 class="mt-5 mb-3">switch</h1>
 
                 <input id="s1" type="checkbox" class="switch" name="switch-example" checked>
                 <label for="s1">Switch <span class="on">On</span><span class="off">Off</span></label><br>
                 <input id="s2" type="checkbox" class="switch" name="switch-example" disabled>
                 <label for="s2">Switch <span class="on">On</span><span class="off">Off</span> (disabled)</label>
 
-                <!--  -->
-                <h4><br>divider</h4>
-                <!--  -->
-
-                <div class="divider dark"></div>
-
-                <!--  -->
-                <h4><br>text field</h4>
-                <!--  -->
-
-                <div class="text-input">
-                    <input id="email" type="email" value="prova"/>
-                    <label for="email">Email</label>
-                </div>
-
-                <div class="text-input">
-                    <input id="password" type="password"/>
-                    <label for="password">
-                        <i class="mdi dark mdi-key"></i>
-                        <span>Password</span>
-                    </label>
-                </div>
-
-                <div class="text-input">
-                    <input id="text1" type="text"/>
-                    <label for="text1">Text</label>
-                    <span>Hint message</span>
-                </div>
-
-                <div class="text-input">
-                    <input id="text2" type="text" class="valid" value="value"/>
-                    <label for="text2">Valid</label>
-                </div>
-
-                <div class="text-input">
-                    <input id="text3" type="text" class="error" value="value"/>
-                    <label for="text3">Error</label>
-                    <span>Error message</span>
-                </div>
-
-                <div class="text-input">
-                    <input id="text4" type="text" disabled/>
-                    <label for="text4">Disabled</label>
-                </div>
-
-                <!--  -->
-                <h4><br>text area</h4>
-                <!--  -->
-
-                <div class="text-area">
-                    <textarea id="textarea"></textarea>
-                    <label for="textarea">Text area</label>
-                </div>
-
-                <div class="text-area">
-                    <textarea id="textarea" disabled></textarea>
-                    <label for="textarea">Disabled Text area</label>
-                </div>
-
-                <!--  -->
-                <h4><br>rich radio</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   RICH RADIO   -->
+                <!-------------------->
+                <h1 class="mt-5 mb-3">rich radio</h1>
 
                 <input id="rr1" type="radio" class="rich-radio" name="rich-radio-example" value="1" checked/>
                 <label for="rr1" class="container-fluid px-0 py-2">
@@ -239,9 +208,72 @@
                     </div>
                 </label>
 
-                <!--  -->
-                <h4><br>pagination</h4>
-                <!--  -->
+                <!----------------->
+                <!--   DIVIDER   -->
+                <!----------------->
+                <h1 class="mt-5 mb-3">divider</h1>
+
+                <div class="divider dark"></div>
+
+                <!-------------------->
+                <!--   TEXT FIELD   -->
+                <!-------------------->
+                <h1 class="mt-5 mb-3">text field</h1>
+
+                <div class="text-input">
+                    <input id="email" type="email" value="prova"/>
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="text-input">
+                    <input id="password" type="password"/>
+                    <label for="password">
+                        <i class="mdi dark mdi-key"></i>
+                        <span>Password</span>
+                    </label>
+                </div>
+
+                <div class="text-input">
+                    <input id="text1" type="text"/>
+                    <label for="text1">Text</label>
+                    <span>Hint message</span>
+                </div>
+
+                <div class="text-input">
+                    <input id="text2" type="text" class="valid" value="value"/>
+                    <label for="text2">Valid</label>
+                </div>
+
+                <div class="text-input">
+                    <input id="text3" type="text" class="error" value="value"/>
+                    <label for="text3">Error</label>
+                    <span>Error message</span>
+                </div>
+
+                <div class="text-input">
+                    <input id="text4" type="text" disabled/>
+                    <label for="text4">Disabled</label>
+                </div>
+
+                <!------------------->
+                <!--   TEXT AREA   -->
+                <!------------------->
+                <h1 class="mt-5 mb-3">text area</h1>
+
+                <div class="text-area">
+                    <textarea id="textarea"></textarea>
+                    <label for="textarea">Text area</label>
+                </div>
+
+                <div class="text-area">
+                    <textarea id="textarea" disabled></textarea>
+                    <label for="textarea">Disabled Text area</label>
+                </div>
+
+                <!-------------------->
+                <!--   PAGINATION   -->
+                <!-------------------->
+                <h1 class="mt-5 mb-3">pagination</h1>
 
                 <ul class="pagination">
                     <li><a href="#" class="btn icon ripple disabled" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
@@ -253,36 +285,20 @@
                     <li><a href="#" class="btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
                 </ul>
 
-                <!--  -->
-                <h4><br>breadcrumb</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   BREADCRUMB   -->
+                <!-------------------->
+                <h1 class="mt-5 mb-3">breadcrumb</h1>
 
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Library</li>
                 </ol>
 
-                <!--  -->
-                <h4><br>file input</h4>
-                <!--  -->
-
-                <label class="file-input ripple">
-                    <input type="file"/>
-                    <i class="mdi mdi-upload"></i>
-                    <p>File input</p>
-                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
-                </label>
-
-                <label class="file-input ripple">
-                    <input type="file" multiple/>
-                    <i class="mdi dark mdi-upload"></i>
-                    <p>Multiple file input</p>
-                    <span class="count d-none">1</span>
-                </label>
-
-                <!--  -->
-                <h4><br>search bar</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   SEARCH BAR   -->
+                <!-------------------->
+                <h1 class="mt-5 mb-3">search bar</h1>
 
                 <div class="search-bar">
                     <button class="search btn icon ripple" title="Cerca"><i class="mdi dark mdi-magnify"></i></button>
@@ -290,9 +306,10 @@
                     <button class="clear btn icon ripple" title="Cancella" disabled><i class="mdi dark mdi-close"></i></button>
                 </div>
 
-                <!--  -->
-                <h4><br>collapse</h4>
-                <!--  -->
+                <!------------------>
+                <!--   COLLAPSE   -->
+                <!------------------>
+                <h1 class="mt-5 mb-3">collapse</h1>
 
                 <button class="btn icon ripple" data-toggle="collapse" data-target="#collapse-example" aria-expanded="false" title="Mostra">
                     <i class="mdi dark mdi-chevron-down"></i>
@@ -303,9 +320,35 @@
                     </p>
                 </div>
 
-                <!--  -->
-                <h4><br>loading</h4>
-                <!--  -->
+                <!------------------>
+                <!--   DROPDOWN   -->
+                <!------------------>
+                <h1 class="mt-5 mb-3">dropdown</h1>
+
+                <button class="btn icon ripple" data-toggle="dropdown" data-target="#dropdown-example" style="float: right">
+                    <i class="mdi dark mdi-dots-vertical"></i>
+                </button>
+                <div id="dropdown-example" class="dropdown">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-account-box"></i><span>Dropdown item 1</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-bell-outline"></i><span>Dropdown item 2</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-headphones"></i><span>Dropdown item 3</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-settings"></i><span>Dropdown item 4</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!----------------->
+                <!--   LOADING   -->
+                <!----------------->
+                <h1 class="mt-5 mb-3">loading</h1>
 
                 <div class="loader">
                     <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
@@ -321,7 +364,7 @@
                     </svg>
                 </div>
 
-                <br><br><br>
+                <br><br><br><br><br><br>
 
             </div>
             <div class="col-12 col-md-6" style="background-color: #303030">
@@ -336,9 +379,10 @@
                 <a href="#" class="light">Link</a><br>
                 <i class="mdi light mdi-content-save"></i>
 
-                <!--  -->
-                <h4 class="text-light"><br>btn transparent</h4>
-                <!--  -->
+                <!------------------------->
+                <!--   BTN TRANSPARENT   -->
+                <!------------------------->
+                <h1 class="text-light mt-5 mb-3">btn transparent</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn transparent ripple light">Button</a>
@@ -358,9 +402,10 @@
                     <p>Disabled</p>
                 </button>
 
-                <!--  -->
-                <h4 class="text-light"><br>btn accent</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   BTN ACCENT   -->
+                <!-------------------->
+                <h1 class="text-light mt-5 mb-3">btn accent</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn accent ripple">Button</a>
@@ -380,17 +425,19 @@
                     <p>Disabled</p>
                 </button>
 
-                <!--  -->
-                <h4 class="text-light"><br>btn icon</h4>
-                <!--  -->
+                <!------------------>
+                <!--   BTN ICON   -->
+                <!------------------>
+                <h1 class="text-light mt-5 mb-3">btn icon</h1>
 
                 <a href="#" class="btn icon ripple light"><i class="mdi light mdi-content-save"></i></a>
                 <button class="btn icon ripple light"><i class="mdi light mdi-content-save"></i></button>
                 <button class="btn icon ripple light" disabled><i class="mdi light mdi-content-save"></i></button>
 
-                <!--  -->
-                <h4 class="text-light"><br>btn round</h4>
-                <!--  -->
+                <!------------------->
+                <!--   BTN ROUND   -->
+                <!------------------->
+                <h1 class="text-light mt-5 mb-3">btn round</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn round ripple light">Button</a>
@@ -410,16 +457,37 @@
                     <p>Disabled</p>
                 </button>
 
-                <!--  -->
-                <h4 class="text-light"><br>btn fab</h4>
-                <!--  -->
+                <!----------------->
+                <!--   BTN FAB   -->
+                <!----------------->
+                <h1 class="text-light mt-5 mb-3">btn fab</h1>
 
                 <a href="#" class="btn fab ripple"><i class="mdi light mdi-content-save"></i></a>
                 <button class="btn fab ripple"><i class="mdi light mdi-content-save"></i></button>
 
-                <!--  -->
-                <h4 class="text-light"><br>radio</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   FILE INPUT   -->
+                <!-------------------->
+                <h1 class="text-light mt-5 mb-3">file input</h1>
+
+                <label class="file-input ripple">
+                    <input type="file"/>
+                    <i class="mdi mdi-upload"></i>
+                    <p>File input</p>
+                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                </label>
+
+                <label class="file-input ripple">
+                    <input type="file" multiple/>
+                    <i class="mdi dark mdi-upload"></i>
+                    <p>Multiple file input</p>
+                    <span class="count d-none">1</span>
+                </label>
+
+                <!--------------->
+                <!--   RADIO   -->
+                <!--------------->
+                <h1 class="text-light mt-5 mb-3">radio</h1>
 
                 <h6 class="text-light">Title</h6>
                 <input id="rd1" type="radio" class="radio light" name="radio-example2" value="1" checked/>
@@ -429,9 +497,10 @@
                 <input id="rd3" type="radio" class="radio light" name="radio-example2" value="3" disabled/>
                 <label for="rd3">Third option (disabled)</label>
 
-                <!--  -->
-                <h4 class="text-light"><br>check</h4>
-                <!--  -->
+                <!--------------->
+                <!--   CHECK   -->
+                <!--------------->
+                <h1 class="text-light mt-5 mb-3">check</h1>
 
                 <h6 class="text-light">Title</h6>
                 <input id="cd-toggle" type="checkbox" class="checkbox light toggle-all" data-toggle="ce2"/>
@@ -443,77 +512,20 @@
                 <input id="cd3" type="checkbox" class="checkbox light" name="checkbox-example2" value="3" disabled/>
                 <label for="cd3">Third option (disabled)</label>
 
-                <!--  -->
-                <h4 class="text-light"><br>switch</h4>
-                <!--  -->
+                <!---------------->
+                <!--   SWITCH   -->
+                <!---------------->
+                <h1 class="text-light mt-5 mb-3">switch</h1>
 
                 <input id="sd1" type="checkbox" class="switch light" name="switch-example2" checked>
                 <label for="sd1">Switch <span class="on">On</span><span class="off">Off</span></label><br>
                 <input id="sd2" type="checkbox" class="switch light" name="switch-example2" disabled>
                 <label for="sd2">Switch <span class="on">On</span><span class="off">Off</span> (disabled)</label>
 
-                <!--  -->
-                <h4 class="text-light"><br>divider</h4>
-                <!--  -->
-
-                <div class="divider light"></div>
-
-                <!--  -->
-                <h4 class="text-light"><br>text field</h4>
-                <!--  -->
-
-                <div class="text-input">
-                    <input id="emaild" type="email" class="dark" value="prova"/>
-                    <label for="emaild">Email</label>
-                </div>
-
-                <div class="text-input">
-                    <input id="passwordd" type="password" class="dark"/>
-                    <label for="password">
-                        <i class="mdi light mdi-key"></i>
-                        <span>Password</span>
-                    </label>
-                </div>
-
-                <div class="text-input">
-                    <input id="textd1" type="text" class="dark"/>
-                    <label for="textd1">Text</label>
-                    <span>Hint message</span>
-                </div>
-
-                <div class="text-input">
-                    <input id="textd2" type="text" class="input dark valid" value="value"/>
-                    <label for="textd2">Valid</label>
-                </div>
-
-                <div class="text-input">
-                    <input id="textd3" type="text" class="input dark error" value="value"/>
-                    <label for="textd3">Error</label>
-                    <span>Error message</span>
-                </div>
-
-                <div class="text-input">
-                    <input id="textd4" type="text" class="dark" disabled/>
-                    <label for="textd4">Disabled</label>
-                </div>
-
-                <!--  -->
-                <h4 class="text-light"><br>text area</h4>
-                <!--  -->
-
-                <div class="text-area">
-                    <textarea id="textarea" class="dark"></textarea>
-                    <label for="textarea">Text area</label>
-                </div>
-
-                <div class="text-area">
-                    <textarea id="textarea" class="dark" disabled></textarea>
-                    <label for="textarea">Disabled Text area</label>
-                </div>
-
-                <!--  -->
-                <h4 class="text-light"><br>rich radio</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   RICH RADIO   -->
+                <!-------------------->
+                <h1 class="text-light mt-5 mb-3">rich radio</h1>
 
                 <input id="rrd1" type="radio" class="rich-radio light" name="rich-radio-example2" value="1" checked/>
                 <label for="rrd1" class="container-fluid px-0 py-2 text-light">
@@ -555,9 +567,72 @@
                     </div>
                 </label>
 
-                <!--  -->
-                <h4 class="text-light"><br>pagination</h4>
-                <!--  -->
+                <!----------------->
+                <!--   DIVIDER   -->
+                <!----------------->
+                <h1 class="text-light mt-5 mb-3">divider</h1>
+
+                <div class="divider light"></div>
+
+                <!-------------------->
+                <!--   TEXT FIELD   -->
+                <!-------------------->
+                <h1 class="text-light mt-5 mb-3">text field</h1>
+
+                <div class="text-input">
+                    <input id="emaild" type="email" class="dark" value="prova"/>
+                    <label for="emaild">Email</label>
+                </div>
+
+                <div class="text-input">
+                    <input id="passwordd" type="password" class="dark"/>
+                    <label for="password">
+                        <i class="mdi light mdi-key"></i>
+                        <span>Password</span>
+                    </label>
+                </div>
+
+                <div class="text-input">
+                    <input id="textd1" type="text" class="dark"/>
+                    <label for="textd1">Text</label>
+                    <span>Hint message</span>
+                </div>
+
+                <div class="text-input">
+                    <input id="textd2" type="text" class="input dark valid" value="value"/>
+                    <label for="textd2">Valid</label>
+                </div>
+
+                <div class="text-input">
+                    <input id="textd3" type="text" class="input dark error" value="value"/>
+                    <label for="textd3">Error</label>
+                    <span>Error message</span>
+                </div>
+
+                <div class="text-input">
+                    <input id="textd4" type="text" class="dark" disabled/>
+                    <label for="textd4">Disabled</label>
+                </div>
+
+                <!------------------->
+                <!--   TEXT AREA   -->
+                <!------------------->
+                <h1 class="text-light mt-5 mb-3">text area</h1>
+
+                <div class="text-area">
+                    <textarea id="textarea" class="dark"></textarea>
+                    <label for="textarea">Text area</label>
+                </div>
+
+                <div class="text-area">
+                    <textarea id="textarea" class="dark" disabled></textarea>
+                    <label for="textarea">Disabled Text area</label>
+                </div>
+
+                <!-------------------->
+                <!--   PAGINATION   -->
+                <!-------------------->
+                <h1 class="text-light mt-5 mb-3">pagination</h1>
 
                 <ul class="pagination light">
                     <li><a href="#" class="btn icon light ripple disabled" title="Pagina precedente"><i class="mdi light mdi-chevron-left"></i></a></li>
@@ -569,36 +644,20 @@
                     <li><a href="#" class="btn icon light ripple" title="Pagina successiva"><i class="mdi light mdi-chevron-right"></i></a></li>
                 </ul>
 
-                <!--  -->
-                <h4 class="text-light"><br>breadcrumb</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   BREADCRUMB   -->
+                <!-------------------->
+                <h1 class="text-light mt-5 mb-3">breadcrumb</h1>
 
                 <ol class="breadcrumb light">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active">Library</li>
                 </ol>
 
-                <!--  -->
-                <h4 class="text-light"><br>file input</h4>
-                <!--  -->
-
-                <label class="file-input ripple">
-                    <input type="file"/>
-                    <i class="mdi mdi-upload"></i>
-                    <p>File input</p>
-                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
-                </label>
-
-                <label class="file-input ripple">
-                    <input type="file" multiple/>
-                    <i class="mdi dark mdi-upload"></i>
-                    <p>Multiple file input</p>
-                    <span class="count d-none">1</span>
-                </label>
-
-                <!--  -->
-                <h4 class="text-light"><br>search bar</h4>
-                <!--  -->
+                <!-------------------->
+                <!--   SEARCH BAR   -->
+                <!-------------------->
+                <h1 class="text-light mt-5 mb-3">search bar</h1>
 
                 <div class="search-bar dark">
                     <button class="search btn icon ripple" title="Cerca"><i class="mdi dark mdi-magnify"></i></button>
@@ -606,9 +665,10 @@
                     <button class="clear btn icon ripple" title="Cancella" disabled><i class="mdi dark mdi-close"></i></button>
                 </div>
 
-                <!--  -->
-                <h4 class="text-light"><br>collapse</h4>
-                <!--  -->
+                <!------------------>
+                <!--   COLLAPSE   -->
+                <!------------------>
+                <h1 class="text-light mt-5 mb-3">collapse</h1>
 
                 <button class="btn icon light ripple" data-toggle="collapse" data-target="#collapse-example2" aria-expanded="false" title="Mostra">
                     <i class="mdi light mdi-chevron-down"></i>
@@ -619,9 +679,35 @@
                     </p>
                 </div>
 
-                <!--  -->
-                <h4 class="text-light"><br>loading</h4>
-                <!--  -->
+                <!------------------>
+                <!--   DROPDOWN   -->
+                <!------------------>
+                <h1 class="text-light mt-5 mb-3">dropdown</h1>
+
+                <button class="btn icon light dar ripple" data-toggle="dropdown" data-target="#dropdown-example2" style="float: right">
+                    <i class="mdi light mdi-dots-vertical"></i>
+                </button>
+                <div id="dropdown-example2" class="dropdown">
+                    <ul>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-account-box"></i><span>Dropdown item 1</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-bell-outline"></i><span>Dropdown item 2</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-headphones"></i><span>Dropdown item 3</span></a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="mdi dark mdi-settings"></i><span>Dropdown item 4</span></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!----------------->
+                <!--   LOADING   -->
+                <!----------------->
+                <h1 class="text-light mt-5 mb-3">loading</h1>
 
                 <div class="loader light">
                     <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
