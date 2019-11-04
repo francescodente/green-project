@@ -10,7 +10,7 @@
         <?php include("menu.php"); ?>
 
         <section id="account" class="parallax-container header d-flex justify-content-center align-items-center" data-section="account">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">INFORMATIVA SULLA PRIVACY</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/privacy.jpg"></div>
