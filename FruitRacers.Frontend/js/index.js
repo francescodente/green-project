@@ -1,10 +1,10 @@
 function scrollToItem(id) {
-	$("html, body").animate({ scrollTop: $(id).offset().top }, 600);
+    $("html, body").animate({ scrollTop: $(id).offset().top }, 600);
 }
 
 function highlightMenuItem() {
-	var position = $(this).scrollTop();
-	$("section").each(function() {
+    var position = $(this).scrollTop();
+    $("section").each(function() {
         var targetTop = $(this).offset().top;
         var section = $(this).attr("data-section");
         // Highlights menu item 64px before its content reaches the top of the page
@@ -41,7 +41,7 @@ function toggleMenu(open) {
 
 // Init parallax fx
 new universalParallax().init({
-	speed: 4
+    speed: 4
 });
 
 $(document).ready(function() {
@@ -56,8 +56,8 @@ $(document).ready(function() {
         toggleMenu(false);
     });
 
-	// Menu item click handling
-	$(".menu-item").click(function (event) {
+    // Menu item click handling
+    $(".menu-item").click(function (event) {
         var url = location.href;
         var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
         var href = $(this).attr("href").split("#");
@@ -68,7 +68,7 @@ $(document).ready(function() {
             toggleMenu(false);
             scrollToItem("#" + hash);
         }
-	});
+    });
 
     // Back to top button click handling
     $("#go-top-btn").click(function (event) {
@@ -76,14 +76,14 @@ $(document).ready(function() {
     });
 
     // Window scroll management
-	$(window).scroll(function() {
+    $(window).scroll(function() {
 
-		// Highlight current menu item
-	    highlightMenuItem();
+        // Highlight current menu item
+        highlightMenuItem();
 
-	    // Remove menu transparency
-	    checkMenuOpacity()
-	});
+        // Remove menu transparency
+        checkMenuOpacity()
+    });
 
     // Lock scrolling when a modal is shown
     $(".modal").on("show.bs.modal", function() {
@@ -91,20 +91,6 @@ $(document).ready(function() {
     });
     $(".modal").on("hide.bs.modal", function() {
         $("body").removeClass("modal-no-scroll");
-    });
-
-    // Handle collapse buttons
-    $("[data-toggle='collapse']").click(function() {
-        var icon = $(this).find(".mdi");
-        if (icon.hasClass("mdi-chevron-up")) {
-            icon.removeClass("mdi-chevron-up");
-            icon.addClass("mdi-chevron-down");
-            $(this).attr("title", "Mostra");
-        } else {
-            icon.removeClass("mdi-chevron-down");
-            icon.addClass("mdi-chevron-up");
-            $(this).attr("title", "Nascondi");
-        }
     });
 
     setTimeout(highlightMenuItem, 200);

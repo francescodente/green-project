@@ -1,13 +1,13 @@
 <footer id="footer">
     <div class="container text-center mb-4">
         <div class="row">
-            <div class="col-12 text-center mt-4 mb-3">
+            <div class="col-12 mt-4 mb-3">
                 <button id="go-top-btn" class="btn round ripple">
                     <i class="mdi dark mdi-chevron-up"></i>
                     <p>Torna su</p>
                 </button>
             </div>
-            <div class="col-12 text-center mt-3 mb-4">
+            <div class="col-12 mt-3 mb-4">
                 <a href="index.php" class="footer-logo d-block"><img src="images/logo/fruitracers_logo_muted.png"></a>
             </div>
         </div>
