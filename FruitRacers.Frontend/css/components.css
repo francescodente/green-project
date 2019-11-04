@@ -888,10 +888,16 @@ textarea.dark {
     margin-right: 8px;
 }
 
-/**************\
-|   COLLAPSE   |
-\**************/
-
 /*************\
 |   LOADING   |
 \*************/
+
+.loader svg path, .loader svg rect,
+.loader.dark svg path, .loader.dark svg rect {
+    fill: var(--col-accent-dark);
+}
+
+.loader svg path, .loader svg rect,
+.loader.light svg path, .loader.light svg rect {
+    fill: var(--col-accent);
+}
