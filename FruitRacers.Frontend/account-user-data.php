@@ -17,7 +17,7 @@
         <h6>E-mail *</h6>
         <div class="text-input mb-3">
             <input id="email" type="email" name="email" value="user@domain.com" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
+            <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Password *</h6>
@@ -31,7 +31,7 @@
         <h6>Telefono</h6>
         <div class="text-input mb-3">
             <input id="telephone" type="text" name="telephone" value="123 456 7890" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
+            <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Consensi</h6>
@@ -51,24 +51,21 @@
         </button>
     </div>
 
-    <div id="user-data-personal" class="collapse">
+    <form id="user-data-personal" class="collapse">
 
         <h6>Codice fiscale **</h6>
         <div class="text-input mb-3">
             <input id="cf" type="text" name="cf" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Nome **</h6>
         <div class="text-input mb-3">
             <input id="first-name" type="text" name="first-name" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Cognome **</h6>
         <div class="text-input mb-3">
             <input id="last-name" type="text" name="last-name" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Data di nascita</h6>
@@ -76,18 +73,24 @@
             <input id="birth-date" type="text" name="birth-date" disabled/>
             <label></label>
             <span>gg/mm/aaaa</span>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Sesso</h6>
-        <input id="r1" type="radio" class="radio" name="gender" value="male" checked/>
+        <input id="r1" type="radio" class="radio" name="gender" value="male" disabled checked/>
         <label for="r1">Maschio</label><br>
-        <input id="r2" type="radio" class="radio" name="gender" value="female"/>
+        <input id="r2" type="radio" class="radio" name="gender" value="female" disabled/>
         <label for="r2">Femmina</label><br>
-        <input id="r3" type="radio" class="radio" name="gender" value="other"/>
+        <input id="r3" type="radio" class="radio" name="gender" value="other" disabled/>
         <label for="r3" class="mb-2">Altro</label>
 
-    </div>
+        <div class="text-right mt-4">
+            <button type="button" class="edit-form btn accent ripple">
+                <p>Modifica</p>
+                <i class="mdi light mdi-pencil"></i>
+            </button>
+        </div>
+
+    </form>
 
     <div class="divider dark my-4"></div>
 
@@ -132,45 +135,46 @@
         </button>
     </div>
 
-    <div id="user-data-company" class="collapse">
+    <form id="user-data-company" class="collapse">
 
         <h6>Numero di partita IVA</h6>
         <div class="text-input mb-3">
             <input id="vat-number" type="text" name="vat-number" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Nome della società</h6>
         <div class="text-input mb-3">
             <input id="company-name" type="text" name="company-name" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>SDI</h6>
         <div class="text-input mb-3">
             <input id="sdi" type="text" name="sdi" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Indirizzo PEC</h6>
         <div class="text-input mb-3">
             <input id="pec" type="text" name="pec" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Forma legale</h6>
         <div class="text-input mb-3">
             <input id="legal-form" type="text" name="legal-form" disabled/>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
         <h6>Descrizione</h6>
         <div class="text-area">
             <textarea id="description" disabled></textarea>
-            <button type="button" class="edit btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
         </div>
 
-    </div>
+        <div class="text-right mt-4">
+            <button type="button" class="edit-form btn accent ripple">
+                <p>Modifica</p>
+                <i class="mdi light mdi-pencil"></i>
+            </button>
+        </div>
+
+    </form>
 
     <div class="divider dark my-4"></div>
 
