@@ -14,14 +14,22 @@
                         <i class="mdi mdi-map-marker"></i>
                     </div>
                     <p class="m-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                    <button class="delete-address btn icon ripple" title="Elimina"><i class="mdi dark mdi-delete"></i></button>
+                    <button class="delete-address btn icon ripple" title="Elimina" data-switch-to="#modal-generic"><i class="mdi dark mdi-delete"></i></button>
                 </div>
                 <div class="address d-flex align-items-center">
                     <div class="thumb" style="background-image: url('images/map-thumb.png');">
                         <i class="mdi mdi-map-marker"></i>
                     </div>
                     <p class="m-0">Altra Via 999, 47522 - Cesena (FC)</p>
-                    <button class="delete-address btn icon ripple" title="Elimina"><i class="mdi dark mdi-delete"></i></button>
+                    <button class="delete-address btn icon ripple" title="Elimina" data-switch-to="#modal-generic"><i class="mdi dark mdi-delete"></i></button>
+                </div>
+
+                <div class="new address d-flex align-items-center">
+                    <button class="thumb ripple">
+                        <i class="mdi mdi-map-marker-plus"></i>
+                    </button>
+                    <input type="text" class="address-input" name="address" placeholder="Inserisci un nuovo indirizzo"/>
+                    <button class="create-address btn icon ripple" title="Conferma"><i class="mdi dark mdi-check"></i></button>
                 </div>
 
             </div>

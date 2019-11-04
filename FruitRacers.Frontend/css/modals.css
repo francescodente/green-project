@@ -99,7 +99,8 @@
     margin-bottom: 8px;
 }
 
-#modal-address-management .address:hover {
+#modal-address-management .address:hover,
+#modal-address-management .new.address.focus {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
@@ -114,6 +115,12 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.08);
     border: 2px solid #EEE;
+    outline: none;
+}
+
+#modal-address-management .new.address .thumb {
+    border: 2px solid transparent;
+    cursor: pointer;
 }
 
 #modal-address-management .address .thumb .mdi {
@@ -124,8 +131,18 @@
     flex-grow: 1;
 }
 
-#modal-address-management .delete-address {
+#modal-address-management .delete-address,
+#modal-address-management .create-address {
     margin-right: 14px;
+}
+
+#modal-address-management .address-input {
+    height: 64px;
+    flex-grow: 1;
+    margin-right: 16px;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
 
 /*******************\

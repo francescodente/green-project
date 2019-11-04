@@ -5,9 +5,20 @@ function switchModal(currentModal, nextModal) {
 
 $(document).ready(function() {
 
+    // Handle modal switching
     $(document).on("click", "[data-switch-to]", function() {
         event.preventDefault();
         switchModal($(this).closest(".modal"), $(this).data("switch-to"));
+    });
+
+    // modal-address-management: highlight address item on text focus
+    $(document).on("focus", ".new.address [type='text']", function() {
+        console.log("focus");
+        $(this).parent().addClass("focus");
+    });
+    $(document).on("blur", ".new.address [type='text']", function() {
+        console.log("blur");
+        $(this).parent().removeClass("focus");
     });
 
 });
