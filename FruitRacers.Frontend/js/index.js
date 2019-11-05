@@ -9,8 +9,8 @@ function highlightMenuItem() {
         var section = $(this).attr("data-section");
         // Highlights menu item 64px before its content reaches the top of the page
         if (position >= targetTop - 64) {
-            $(".menu-item").removeClass("selected");
-            $(".menu-item").each(function() {
+            $(".menu-item, #dropdown-menu a").removeClass("selected");
+            $(".menu-item, #dropdown-menu a").each(function() {
                 if ($(this).data("sections").includes(section)) {
                     $(this).addClass("selected");
                     return;
