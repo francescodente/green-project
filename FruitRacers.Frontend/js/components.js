@@ -115,7 +115,7 @@ $(document).ready(function() {
     |   DROPDOWN   |
     \**************/
 
-    $(document).click(function() {
+    $(window).on("click scroll resize", function() {
         $(".dropdown").removeClass("active");
     });
 
@@ -131,20 +131,20 @@ $(document).ready(function() {
 
     $("[data-toggle='dropdown']").click(function(event) {
         event.stopPropagation();
+        $(".dropdown").removeClass("active");
         var target = $($(this).data("target"));
-        var x = $(this).offset().left + $(this).outerWidth() - target.width();
-        var y = $(this).offset().top + $(this).outerHeight();
-        console.log("offset left" + $(this).offset().left);
-        console.log("offset top" + $(this).offset().top);
-        console.log("width" + $(this).outerWidth());
-        console.log("height" + $(this).outerHeight());
-        console.log("target width" + target.width());
-        console.log(x);
-        console.log(y);
-        target.css({
-            "top": y,
-            "left": x
-        });
+        if (target.hasClass("fixed")) {
+            // Get offset relative to viewport
+            var offsetX = $(this)[0].getBoundingClientRect().x;
+            var offsetY = $(this)[0].getBoundingClientRect().y;
+        } else {
+            // Get offset relative to document
+            var offsetX = $(this).offset().left;
+            var offsetY = $(this).offset().top;
+        }
+        var x = offsetX + $(this).outerWidth() - target.width();
+        var y = offsetY + $(this).outerHeight();
+        target.css({ "top": y, "left": x });
         target.toggleClass("active");
     });
 

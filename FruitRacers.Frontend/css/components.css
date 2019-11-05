@@ -898,6 +898,7 @@ textarea.dark {
 
 .dropdown {
     position: absolute;
+    overflow: hidden;
     z-index: 100;
     background-color: #FFF;
     border-radius: 4px;
@@ -906,6 +907,10 @@ textarea.dark {
     -webkit-transition: all 0.2s ease;
     -webkit-transform-origin: right top 0px;
     -webkit-transform: scale(0);
+}
+
+.dropdown.fixed {
+    position: fixed;
 }
 
 .dropdown.active {
@@ -922,7 +927,6 @@ textarea.dark {
 }
 
 .dropdown li {
-    padding: 10px 16px;
     opacity: 0;
     -webkit-transition: background-color 0.2s ease-in-out, all 0.3s ease;
     transform: translateY(-30%);
@@ -938,6 +942,7 @@ textarea.dark {
 }
 
 .dropdown li a {
+    padding: 10px 16px;
     display: flex;
     align-items: center;
     text-decoration: none!important;
