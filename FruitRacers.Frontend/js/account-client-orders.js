@@ -1,5 +1,5 @@
 function checkCollapse() {
-    if ($(window).width() >= 992) {
+    if ($(window).outerWidth() >= 992) {
         $("#client-orders .collapse").addClass("uncollapse");
         $("#client-orders .collapse").removeClass("collapse");
     } else {
