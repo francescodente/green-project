@@ -106,9 +106,9 @@
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-/*****************\
-|   USER ORDERS   |
-\*****************/
+/******************\
+|   CLIENT ORDERS   |
+\******************/
 
 #client-orders .order {
     border: 1px solid rgba(0, 0, 0, 0.12);

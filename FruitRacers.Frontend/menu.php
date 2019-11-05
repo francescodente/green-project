@@ -32,15 +32,37 @@ $page = basename($_SERVER['PHP_SELF']);
                 <span>Prodotti</span>
             </a>
             <div class="divider dark d-lg-none"></div>
+            <h6 class="d-lg-none">Account</h6>
             <a href="cart.php" class="menu-item ripple d-lg-none" data-sections="['cart']">
                 <i class="mdi mdi-cart"></i>
                 <span>Carrello</span>
             </a>
-            <a href="account-tabs.php" class="menu-item ripple d-lg-none" data-sections="['account']">
-                <i class="mdi mdi-account"></i>
-                <span>Account</span>
+            <a href="account-user-data.php" class="menu-item ripple d-lg-none" data-sections="['account-user-data']">
+                <i class="mdi mdi-account-circle"></i>
+                <span>I miei dati</span>
+            </a>
+            <a href="account-client-orders.php" class="menu-item ripple d-lg-none" data-sections="['account-client-orders']">
+                <i class="mdi mdi-book-open"></i>
+                <span>Ordini</span>
+            </a>
+            <a href="account-business-orders.php" class="menu-item ripple d-lg-none" data-sections="['account-business-orders']">
+                <i class="mdi mdi-book-open"></i>
+                <span>Ordini</span>
+            </a>
+            <a href="account-delivery-orders.php" class="menu-item ripple d-lg-none" data-sections="['account-delivery-orders']">
+                <i class="mdi mdi-book-open"></i>
+                <span>Ordini</span>
+            </a>
+            <a href="account-business-products.php" class="menu-item ripple d-lg-none" data-sections="['account-business-products']">
+                <i class="mdi mdi-food-apple"></i>
+                <span>Prodotti</span>
+            </a>
+            <a href="account-admin-management.php" class="menu-item ripple d-lg-none" data-sections="['account-admin-management']">
+                <i class="mdi mdi-pound-box"></i>
+                <span>Gestione</span>
             </a>
             <div class="divider dark d-lg-none"></div>
+            <h6 class="d-lg-none">Altro</h6>
             <a href="faq.php" class="menu-item ripple d-lg-none" data-sections="['faq']">
                 <i class="mdi mdi-help-circle"></i>
                 <span>Aiuto</span>
@@ -53,7 +75,6 @@ $page = basename($_SERVER['PHP_SELF']);
         <div id="menu-shade" class="d-lg-none"></div>
         <div id="menu-right">
             <a href="cart.php" class="btn icon ripple" title="Carrello"><i class="mdi mdi-cart"></i></a>
-            <a href="account-tabs.php" class="btn icon ripple d-flex d-lg-none" title="Account"><i class="mdi mdi-account"></i></a>
             <button class="btn icon ripple d-none d-lg-flex" title="Account" data-toggle="dropdown" data-target="#dropdown-account">
                 <i class="mdi mdi-account-settings"></i>
             </button>
@@ -75,38 +96,35 @@ $page = basename($_SERVER['PHP_SELF']);
     </ul>
 </div>
 
-<?php
-$accountTab = isset($_GET["tab"]) ? $_GET["tab"] : "";
-?>
 <div id="dropdown-account" class="dropdown menu fixed d-none d-lg-block">
     <ul>
         <li>
-            <a href="account.php?tab=user-data" <?php echo $accountTab == "user-data" ? "class='selected'" : "" ?>>
+            <a href="account-user-data.php" data-sections="['account-user-data']">
                 <i class="mdi dark mdi-account-circle"></i><span>I miei dati</span>
             </a>
         </li>
         <li>
-            <a href="account.php?tab=client-orders" <?php echo $accountTab == "client-orders" ? "class='selected'" : "" ?>>
+            <a href="account-client-orders.php" data-sections="['account-client-orders']">
                 <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
             </a>
         </li>
         <li>
-            <a href="account.php?tab=business-orders" <?php echo $accountTab == "business-orders" ? "class='selected'" : "" ?>>
+            <a href="account-business-orders.php" data-sections="['account-business-orders']">
                 <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
             </a>
         </li>
         <li>
-            <a href="account.php?tab=delivery-orders" <?php echo $accountTab == "delivery-orders" ? "class='selected'" : "" ?>>
+            <a href="account-delivery-orders.php" data-sections="['account-delivery-orders']">
                 <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
             </a>
         </li>
         <li>
-            <a href="account.php?tab=business-products" <?php echo $accountTab == "business-products" ? "class='selected'" : "" ?>>
+            <a href="account-business-products.php" data-sections="['account-business-products']">
                 <i class="mdi dark mdi-food-apple"></i><span>Prodotti</span>
             </a>
         </li>
         <li>
-            <a href="account.php?tab=admin-management" <?php echo $accountTab == "admin-management" ? "class='selected'" : "" ?>>
+            <a href="account-admin-management.php" data-sections="['account-admin-management']">
                 <i class="mdi dark mdi-pound-box"></i><span>Gestione</span>
             </a>
         </li>
