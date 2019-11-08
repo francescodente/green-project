@@ -1,4 +1,5 @@
 ﻿using FruitRacers.Backend.Core.Repositories;
+using FruitRacers.Backend.Shared.Utils;
 using NSubstitute;
 using System;
 using System.Collections.Generic;
@@ -18,15 +19,19 @@ namespace Fruitracers.Backend.Test.UnitTests.Mocking
 
             repository
                 .GetAll()
-                .Returns(items);
+                .Returns(_ => items);
 
             repository
                 .Where(Arg.Any<Expression<Func<T, bool>>>())
                 .Returns(p => items.Where(p.ArgAt<Expression<Func<T, bool>>>(0).Compile()));
 
             repository
+                .FindOne()
+                .Returns(_ => items.SingleOptional());
+
+            repository
                 .FindOne(Arg.Any<Expression<Func<T, bool>>>())
-                .Returns(p => items.Single(p.ArgAt<Expression<Func<T, bool>>>(0).Compile()));
+                .Returns(p => items.SingleOptional(p.ArgAt<Expression<Func<T, bool>>>(0).Compile()));
 
             return repository;
         }

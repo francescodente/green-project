@@ -7,12 +7,12 @@ namespace FruitRacers.Backend.Core.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
-        IOrderRepository IncludingProducts();
+        IOrderRepository IncludingDetails();
+
+        IOrderRepository IncludingDetailsAndProducts();
 
         IOrderRepository CartOnly();
 
         IOrderRepository BelongingTo(int userID);
-
-        IOrderRepository DirectedTo(int userID);
     }
 }

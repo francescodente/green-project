@@ -23,17 +23,18 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 
         public IOrderRepository CartOnly()
         {
-            this.ChainQueryModification(q => q.Where(o => o.OrderStateId == 0));
+            this.ChainQueryModification(q => q.Where(o => o.OrderState == (int) OrderState.Cart));
             return this;
         }
 
-        public IOrderRepository DirectedTo(int userID)
+        public IOrderRepository IncludingDetails()
         {
-            // TODO: Select only products that belong to <userID>.
+            this.ChainQueryModification(q => q
+                .Include(o => o.OrderDetails));
             return this;
         }
 
-        public IOrderRepository IncludingProducts()
+        public IOrderRepository IncludingDetailsAndProducts()
         {
             this.ChainQueryModification(q => q
                 .Include(o => o.OrderDetails)
