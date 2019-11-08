@@ -31,6 +31,8 @@ namespace FruitRacers.Backend.DataAccess
 
         public IRepository<Address> Addresses => new SqlRepository<Address>(this.context);
 
+        public IRepository<OrderDetail> OrderDetails => new SqlRepository<OrderDetail>(this.context);
+
         public void Dispose()
         {
             this.context.Dispose();
