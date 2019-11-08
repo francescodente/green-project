@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Shared.Utils
 {
@@ -59,6 +60,44 @@ namespace FruitRacers.Backend.Shared.Utils
         public static IOptional<T> Empty<T>()
         {
             return new EmptyOptional<T>();
+        }
+
+        public static IOptional<T> TryCatch<T>(Func<T> supplier, Action<Exception> exceptionHandler = null)
+        {
+            return TryCatch<T, Exception>(supplier, exceptionHandler);
+        }
+
+        public static IOptional<TResult> TryCatch<TResult, TException>(Func<TResult> supplier, Action<TException> exceptionHandler = null)
+            where TException : Exception
+        {
+            try
+            {
+                return Of(supplier());
+            }
+            catch (TException ex)
+            {
+                exceptionHandler?.Invoke(ex);
+                return Empty<TResult>();
+            }
+        }
+
+        public static async Task<IOptional<T>> TryCatchAsync<T>(Func<Task<T>> supplier, Action<Exception> exceptionHandler = null)
+        {
+            return await TryCatchAsync<T, Exception>(supplier, exceptionHandler);
+        }
+
+        public static async Task<IOptional<TResult>> TryCatchAsync<TResult, TException>(Func<Task<TResult>> supplier, Action<TException> exceptionHandler = null)
+            where TException : Exception
+        {
+            try
+            {
+                return Of(await supplier());
+            }
+            catch (TException ex)
+            {
+                exceptionHandler?.Invoke(ex);
+                return Empty<TResult>();
+            }
         }
 
         public static void IfPresent<T>(this IOptional<T> optional, Action<T> action)
