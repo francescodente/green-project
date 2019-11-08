@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace FruitRacers.Backend.Shared.Utils
@@ -12,6 +13,26 @@ namespace FruitRacers.Backend.Shared.Utils
             {
                 action(item);
             }
+        }
+
+        public static IOptional<T> SingleOptional<T>(this IEnumerable<T> sequence)
+        {
+            IEnumerator<T> enumerator = sequence.GetEnumerator();
+            if (!enumerator.MoveNext())
+            {
+                return Optional.Empty<T>();
+            }
+            T itemToReturn = enumerator.Current;
+            if (enumerator.MoveNext())
+            {
+                return Optional.Empty<T>();
+            }
+            return Optional.Of(itemToReturn);
+        }
+
+        public static IOptional<T> SingleOptional<T>(this IEnumerable<T> sequence, Func<T, bool> predicate)
+        {
+            return sequence.Where(predicate).SingleOptional();
         }
     }
 }
