@@ -112,15 +112,14 @@ namespace FruitRacers.Backend.Core.Services.Cart
             await this.Session.SaveChanges();
         }
 
-        public async Task UpdateCartItemForUser(int userID, CartItemDto cartItem)
+        public async Task UpdateCartItemForUser(int userID, CartInsertionDto cartItem)
         {
             int orderID = await this.RequireCart(userID)
                 .Then(c => c.OrderId);
             OrderDetail item = await this.Session
                 .OrderDetails
-                .FindOne(d => d.OrderId == orderID && d.ProductId == cartItem.Product.ProductID)
+                .FindOne(d => d.OrderId == orderID && d.ProductId == cartItem.ProductID)
                 .Then(d => d.Value);
-            item.ProductId = cartItem.Product.ProductID;
             item.Quantity = cartItem.Quantity;
             this.Session.OrderDetails.Update(item);
             await this.Session.SaveChanges();

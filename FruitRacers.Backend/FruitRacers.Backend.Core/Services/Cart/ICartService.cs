@@ -13,7 +13,7 @@ namespace FruitRacers.Backend.Core.Services.Cart
 
         Task InsertCartItemForUser(int userID, CartInsertionDto insertion);
 
-        Task UpdateCartItemForUser(int userID, CartItemDto cartItem);
+        Task UpdateCartItemForUser(int userID, CartInsertionDto insertion);
 
         Task DeleteCartItemForUser(int userID, int productID);
 
