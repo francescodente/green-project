@@ -1,8 +1,10 @@
-﻿using Fruitracers.Backend.Test.UnitTests.Mocking;
+﻿using AutoMapper;
+using Fruitracers.Backend.Test.UnitTests.Mocking;
 using FruitRacers.Backend.Core;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Services.Categories;
+using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Shared.Utils;
 using NSubstitute;
 using NUnit.Framework;
@@ -34,7 +36,7 @@ namespace Fruitracers.Backend.Test.UnitTests.Services
             IDataSession session = Substitute.For<IDataSession>();
             session.Categories.Returns(MockingUtils.CreateMockReadOnlyRepository(categories));
 
-            ICategoriesService categoriesService = new CategoriesService(session);
+            ICategoriesService categoriesService = new CategoriesService(session, MappingUtils.CreateDefaultMapper());
 
             CategoryTreeDto actual = categoriesService.GetAllCategories().Result;
 
