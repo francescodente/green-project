@@ -13,11 +13,9 @@ $(document).ready(function() {
 
     // modal-address-management: highlight address item on text focus
     $(document).on("focus", ".new.address [type='text']", function() {
-        console.log("focus");
         $(this).parent().addClass("focus");
     });
     $(document).on("blur", ".new.address [type='text']", function() {
-        console.log("blur");
         $(this).parent().removeClass("focus");
     });
 

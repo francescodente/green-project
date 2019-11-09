@@ -103,7 +103,7 @@
 
                 <h4 class="text-center my-3">Recupero password</h4>
 
-                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> della pagina <b>Account</b>.</p>
+                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> del tuo account.</p>
 
                 <!-- E-MAIL -->
                 <div class="text-input">

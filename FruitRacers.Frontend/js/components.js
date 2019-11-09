@@ -47,6 +47,30 @@ $(document).ready(function() {
         checkboxToggleCheck(toggle);
     });
 
+    /************\
+    |   SELECT   |
+    \************/
+
+    $(".select-input").each(function() {
+        var option = $(this).find("ul li.active");
+        var button = $(this).find("label button");
+        button.text(option.text());
+        button.val(option.val());
+    });
+
+    $(".select-input").on("click", function () {
+        $(this).toggleClass("active");
+    });
+
+    $(".select-input ul li").on("click", function () {
+        $(this).parent().find("li").removeClass("active");
+        $(this).addClass("active");
+        var button = $(this).closest(".select-input").find("label button");
+        button.text($(this).text());
+        button.val($(this).val());
+        console.log($("#select-example"));
+    });
+
     /****************\
     |   FILE INPUT   |
     \****************/
@@ -115,18 +139,8 @@ $(document).ready(function() {
     |   DROPDOWN   |
     \**************/
 
-    $(window).on("click scroll resize", function() {
+    $(window).on("click resize", function() {
         $(".dropdown").removeClass("active");
-    });
-
-    $(".dropdown ul li").each(function() {
-        var delay = $(this).index() * 50 + "ms";
-        $(this).css({
-            "-webkit-transition-delay": delay,
-            "-moz-transition-delay": delay,
-            "-o-transition-delay": delay,
-            "transition-delay": delay
-        });
     });
 
     $("[data-toggle='dropdown']").click(function(event) {
@@ -138,9 +152,9 @@ $(document).ready(function() {
             var offsetX = $(this)[0].getBoundingClientRect().x;
             var offsetY = $(this)[0].getBoundingClientRect().y;
         } else {
-            // Get offset relative to document
-            var offsetX = $(this).offset().left;
-            var offsetY = $(this).offset().top;
+            // Get offset relative to parent
+            var offsetX = $(this)[0].offsetLeft;
+            var offsetY = $(this)[0].offsetTop;
         }
         var x = offsetX + $(this).outerWidth() - target.width();
         var y = offsetY + $(this).outerHeight();

@@ -27,6 +27,8 @@ body {
     --col-accent-dark: #C85A54;
     --col-primary: #FAFAFA;
     --col-primary-dark: #F0F0F0;
+    --col-dark-primary: #303030;
+    --col-dark-primary-dark: #202020;
 }
 
 /**************\

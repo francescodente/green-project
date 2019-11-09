@@ -163,6 +163,29 @@
                 <input id="s2" type="checkbox" class="switch" name="switch-example" disabled>
                 <label for="s2">Switch <span class="on">On</span><span class="off">Off</span> (disabled)</label>
 
+                <!---------------->
+                <!--   SELECT   -->
+                <!---------------->
+                <h1 class="mt-5 mb-3">select</h1>
+
+                <div class="select-input">
+                    <label for="select-example">
+                        <button type="button"></button>
+                        <i class="mdi dark mdi-menu-swap"></i>
+                    </label>
+                    <ul id="select-example" role="listbox" name="select-example">
+                        <li id="s1" value="s1" role="option" tabindex="-1" aria-selected="true" class="active">Option 1</li>
+                        <li id="s2" value="s2" role="option" tabindex="-1" aria-selected="false">Option 2</li>
+                        <li id="s3" value="s3" role="option" tabindex="-1" aria-selected="false">Option 3</li>
+                        <li id="s4" value="s4" role="option" tabindex="-1" aria-selected="false">Option 4</li>
+                        <li id="s5" value="s5" role="option" tabindex="-1" aria-selected="false">Option 5</li>
+                        <li id="s6" value="s6" role="option" tabindex="-1" aria-selected="false">Option 6</li>
+                        <li id="s7" value="s7" role="option" tabindex="-1" aria-selected="false">Option 7</li>
+                        <li id="s8" value="s8" role="option" tabindex="-1" aria-selected="false">Option 8</li>
+                        <li id="s9" value="s9" role="option" tabindex="-1" aria-selected="false">Option 9</li>
+                    </ul>
+                </div>
+
                 <!-------------------->
                 <!--   RICH RADIO   -->
                 <!-------------------->
@@ -364,10 +387,41 @@
                     </svg>
                 </div>
 
+                <!------------------>
+                <!--   CAROUSEL   -->
+                <!------------------>
+                <h1 class="mt-5 mb-3">carousel</h1>
+
+                <div id="carousel-example" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example" data-slide-to="1"></li>
+                        <li data-target="#carousel-example" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="images/alt1.jpg" alt="First">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="images/alt2.jpg" alt="Second">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="images/alt3.jpg" alt="Third">
+                        </div>
+                        <div class="image-shade"></div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev" title="Indietro">
+                        <i class="mdi light mdi-chevron-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-example" role="button" data-slide="next" title="Avanti">
+                        <i class="mdi mdi-chevron-right"></i>
+                    </a>
+                </div>
+
                 <br><br><br><br><br><br>
 
             </div>
-            <div class="col-12 col-md-6" style="background-color: #303030">
+            <div class="col-12 col-md-6" style="background-color: var(--col-dark-primary)">
 
                 <h1 class="text-light">Heading 1</h1>
                 <h2 class="text-light">Heading 2</h2>
@@ -521,6 +575,29 @@
                 <label for="sd1">Switch <span class="on">On</span><span class="off">Off</span></label><br>
                 <input id="sd2" type="checkbox" class="switch light" name="switch-example2" disabled>
                 <label for="sd2">Switch <span class="on">On</span><span class="off">Off</span> (disabled)</label>
+
+                <!---------------->
+                <!--   SELECT   -->
+                <!---------------->
+                <h1 class="text-light mt-5 mb-3">select</h1>
+
+                <div class="select-input dark">
+                    <label for="select-example">
+                        <button type="button"></button>
+                        <i class="mdi light mdi-menu-swap"></i>
+                    </label>
+                    <ul id="select-example" role="listbox" name="select-example">
+                        <li id="s1" value="s1" role="option" tabindex="-1" aria-selected="true" class="active">Option 1</li>
+                        <li id="s2" value="s2" role="option" tabindex="-1" aria-selected="false">Option 2</li>
+                        <li id="s3" value="s3" role="option" tabindex="-1" aria-selected="false">Option 3</li>
+                        <li id="s4" value="s4" role="option" tabindex="-1" aria-selected="false">Option 4</li>
+                        <li id="s5" value="s5" role="option" tabindex="-1" aria-selected="false">Option 5</li>
+                        <li id="s6" value="s6" role="option" tabindex="-1" aria-selected="false">Option 6</li>
+                        <li id="s7" value="s7" role="option" tabindex="-1" aria-selected="false">Option 7</li>
+                        <li id="s8" value="s8" role="option" tabindex="-1" aria-selected="false">Option 8</li>
+                        <li id="s9" value="s9" role="option" tabindex="-1" aria-selected="false">Option 9</li>
+                    </ul>
+                </div>
 
                 <!-------------------->
                 <!--   RICH RADIO   -->
@@ -721,6 +798,37 @@
                                           repeatCount="indefinite"/>
                         </path>
                     </svg>
+                </div>
+
+                <!------------------>
+                <!--   CAROUSEL   -->
+                <!------------------>
+                <h1 class="text-light mt-5 mb-3">carousel</h1>
+
+                <div id="carousel-example2" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example2" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example2" data-slide-to="1"></li>
+                        <li data-target="#carousel-example2" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="images/alt1.jpg" alt="First">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="images/alt2.jpg" alt="Second">
+                        </div>
+                        <div class="carousel-item">
+                            <img class="d-block w-100" src="images/alt3.jpg" alt="Third">
+                        </div>
+                        <div class="image-shade"></div>
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel-example2" role="button" data-slide="prev" title="Indietro">
+                        <i class="mdi light mdi-chevron-left"></i>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel-example2" role="button" data-slide="next" title="Avanti">
+                        <i class="mdi light mdi-chevron-right"></i>
+                    </a>
                 </div>
 
             </div>
