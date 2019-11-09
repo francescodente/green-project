@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using FruitRacers.Backend.Core.Dto;
 
-namespace FruitRacers.Backend.Core.Services.Categories
+namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class CategoriesService : AbstractService, ICategoriesService
     {

@@ -1,4 +1,4 @@
-﻿namespace FruitRacers.Backend.Core.Services.Addresses
+﻿namespace FruitRacers.Backend.Core.Dto
 {
     public class AddressDto
     {

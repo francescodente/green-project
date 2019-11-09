@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Services.Utils;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FruitRacers.Backend.Core.Services.Addresses
+namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class AddressesService : AbstractService, IAddressesService
     {

@@ -1,4 +1,4 @@
-﻿namespace FruitRacers.Backend.Core.Services.Products
+﻿namespace FruitRacers.Backend.Core.Dto
 {
     public class ProductPricesDto
     {

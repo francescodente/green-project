@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace FruitRacers.Backend.Core.Services.Products
+﻿namespace FruitRacers.Backend.Core.Dto
 {
     public class ProductWithPricesDto<T> : ProductDto<T>
     {

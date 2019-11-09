@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace FruitRacers.Backend.Core.Services.Products
+namespace FruitRacers.Backend.Core.Dto
 {
-    public class ProductDto<T>
+    public abstract class ProductDto<T>
     {
         public int ProductID { get; set; }
         public string Name { get; set; }

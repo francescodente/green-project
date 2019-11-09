@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FruitRacers.Backend.Core.Services.TimeSlots
+namespace FruitRacers.Backend.Core.Dto
 {
     public class TimeSlotDto
     {

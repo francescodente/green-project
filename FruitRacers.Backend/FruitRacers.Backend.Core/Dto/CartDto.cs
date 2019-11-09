@@ -1,9 +1,6 @@
-﻿using FruitRacers.Backend.Core.Services.Addresses;
-using FruitRacers.Backend.Core.Services.TimeSlots;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace FruitRacers.Backend.Core.Services.Cart
+namespace FruitRacers.Backend.Core.Dto
 {
     public class CartDto
     {

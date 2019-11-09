@@ -1,9 +1,7 @@
-﻿using FruitRacers.Backend.Core.Services.Cart;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace FruitRacers.Backend.Core.Services.Suppliers
+namespace FruitRacers.Backend.Core.Dto
 {
     public class OrderDto
     {

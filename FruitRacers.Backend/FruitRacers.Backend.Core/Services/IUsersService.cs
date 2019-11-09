@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FruitRacers.Backend.Core.Services.Users
+namespace FruitRacers.Backend.Core.Services
 {
     public interface IUsersService<T> where T : class
     {

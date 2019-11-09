@@ -1,4 +1,4 @@
-﻿namespace FruitRacers.Backend.Core.Services.Authentication
+﻿namespace FruitRacers.Backend.Core.Dto
 {
     public class CredentialsDto
     {

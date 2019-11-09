@@ -1,9 +1,9 @@
-﻿using AutoMapper;
-using Fruitracers.Backend.Test.UnitTests.Mocking;
+﻿using Fruitracers.Backend.Test.UnitTests.Mocking;
 using FruitRacers.Backend.Core;
+using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Entities;
-using FruitRacers.Backend.Core.Repositories;
-using FruitRacers.Backend.Core.Services.Categories;
+using FruitRacers.Backend.Core.Services;
+using FruitRacers.Backend.Core.Services.Impl;
 using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Shared.Utils;
 using NSubstitute;
@@ -11,8 +11,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fruitracers.Backend.Test.UnitTests.Services
 {

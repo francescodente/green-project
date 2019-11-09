@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Repositories;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FruitRacers.Backend.Core.Services.Cart
+namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class CartService : AbstractService, ICartService
     {
