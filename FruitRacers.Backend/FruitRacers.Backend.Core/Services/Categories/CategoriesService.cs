@@ -4,22 +4,23 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace FruitRacers.Backend.Core.Services.Categories
 {
-    public class CategoriesService : ICategoriesService
+    public class CategoriesService : AbstractService, ICategoriesService
     {
         private const string ROOT_CATEGORY_NAME = "<root>";
-        private readonly IDataSession session;
 
-        public CategoriesService(IDataSession session)
+        public CategoriesService(IDataSession session, IMapper mapper)
+            : base(session, mapper)
         {
-            this.session = session;
+
         }
 
         public async Task<CategoryTreeDto> GetAllCategories()
         {
-            IList<Category> allCategories = (await this.session.Categories.GetAll()).ToList();
+            IList<Category> allCategories = (await this.Session.Categories.GetAll()).ToList();
             IEnumerable<CategoryTreeDto> roots = allCategories
                 .Where(c => c.ParentCategoryId == null)
                 .Select(c => CreateSubTree(c, allCategories)).ToArray();
@@ -39,20 +40,11 @@ namespace FruitRacers.Backend.Core.Services.Categories
             //categories.Remove(root);
             return new CategoryTreeDto
             {
-                Category = CategoryEntityToDto(root),
+                Category = this.Mapper.Map<Category, CategoryDto>(root),
                 Children = categories
                     .Where(c => c.ParentCategoryId == root.CategoryId)
                     .Select(c => CreateSubTree(c, categories))
                     .ToArray()
-            };
-        }
-
-        private CategoryDto CategoryEntityToDto(Category category)
-        {
-            return new CategoryDto
-            {
-                CategoryID = category.CategoryId,
-                Name = category.Name
             };
         }
     }
