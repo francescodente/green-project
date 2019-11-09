@@ -10,10 +10,10 @@
         <?php include("menu.php"); ?>
 
         <section id="categories" class="parallax-container header d-flex justify-content-center align-items-center" data-section="categories">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">PRODOTTI</h1>
             </div>
-            <div class="bottom-links mb-4">
+            <div class="bottom-content mb-4">
                 <a href="products.php" class="btn round ripple light">Visualizza tutti i prodotti</a>
             </div>
             <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
@@ -34,7 +34,7 @@
                     <?php
                     for ($j = 0; $j < 6; $j++) {
                         ?>
-                        <div class="col-12 col-md-6 col-lg-4">
+                        <div class="col-6 col-lg-4">
                             <a href="products.php" class="card category d-flex flex-column mb-4">
                                 <div class="category-header p-3">
                                     <h5 class="category-name font-weight-bold text-center my-2">Subcategory</h5>
@@ -42,7 +42,6 @@
                                 <div class="card-image">
                                     <div class="fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
                                 </div>
-
                             </a>
                         </div>
                         <?php

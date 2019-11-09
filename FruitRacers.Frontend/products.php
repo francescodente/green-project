@@ -10,7 +10,7 @@
         <?php include("menu.php"); ?>
 
         <section id="products" class="parallax-container header d-flex justify-content-center align-items-center" data-section="products">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">PRODOTTI</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
@@ -60,8 +60,10 @@
                     <input id="co4" type="checkbox" class="checkbox" name="companies" value="co4" checked/>
                     <label for="co4" class="mt-2">Azienda 4</label><br>
                     <br>
+                    <button class="apply-filter btn accent ripple w-100 d-flex justify-content-center">Applica</button>
+                    <br>
                 </div>
-                <div id="results-col" class="col-12 container">
+                <div id="results-col" class="col-12 container" data-children-class="col-6 col-md-4 col-lg-3">
                     <div class="row">
                         <div class="col-12 d-flex justify-content-between align-items-center mb-4">
                             <div class="d-flex align-items-center">
@@ -73,44 +75,19 @@
                             </div>
                             <p class="text-dis-dark m-0">0 risultati</p>
                         </div>
-                        <?php
-                        for ($i = 0; $i < 24; $i++) {
-                            ?>
-                            <div class="col-6 col-md-4 col-lg-3">
-                                <div class="card product mb-4">
-                                    <div class="card-image">
-                                        <a href="#">
-                                            <div class="fixed-ratio fr-1-1" style="background-image: url('images/example_product.jpg');"></div>
-                                        </a>
-                                    </div>
-                                    <div class="card-content p-3">
-                                        <div class="product-info">
-                                            <h6 class="product-name font-weight-bold mb-1">Product name</h6>
-                                            <a href="#" class="company-name">Company name</a>
-                                        </div>
-                                        <div class="product-price d-flex justify-content-between align-items-center mt-2">
-                                            <span class="text-sec-dark">€00,00 / kg</span>
-                                            <button class="add-to-cart btn icon ripple"><i class="mdi dark mdi-cart-plus" title="Aggiungi al carrello"></i></button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
                     </div>
                 </div>
             </div>
             <div class="divider dark mb-4"></div>
             <div class="row justify-content-center">
                 <ul class="pagination">
-                    <li><a href="#" class="btn icon ripple disabled"><i class="mdi dark mdi-chevron-left"></i></a></li>
+                    <li><a href="#" class="btn icon ripple disabled" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
                     <li><a href="#" class="selected">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
-                    <li><a href="#" class="btn icon ripple"><i class="mdi dark mdi-chevron-right"></i></a></li>
+                    <li><a href="#" class="btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
                 </ul>
             </div>
         </section>
@@ -120,7 +97,13 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
+
+    <?php include("components/objects.php") ?>
+
     <script src="js/filter.js"></script>
+    <script src="js/products.js"></script>
+
+    <?php include("modals-product-company.php"); ?>
 
 </body>
 </html>

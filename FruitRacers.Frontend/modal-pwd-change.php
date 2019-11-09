@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content d-flex flex-column">
             <div class="modal-top">
-                <i class="login-header-icon mdi mdi-key-variant"></i>
+                <i class="modal-header-icon mdi mdi-key-variant"></i>
                 <button class="btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form class="modal-body">

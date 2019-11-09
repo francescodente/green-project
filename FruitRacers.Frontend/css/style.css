@@ -7,7 +7,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-	background-color: var(--col-primary);
+    background-color: var(--col-primary);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -16,12 +16,6 @@ body {
 
 .modal-no-scroll {
     overflow-y: hidden;
-}
-
-#map {
-    width: calc(100% - 30px);
-    height: 100%;
-    border 0;
 }
 
 /************\
@@ -33,6 +27,8 @@ body {
     --col-accent-dark: #C85A54;
     --col-primary: #FAFAFA;
     --col-primary-dark: #F0F0F0;
+    --col-dark-primary: #303030;
+    --col-dark-primary-dark: #202020;
 }
 
 /**************\
@@ -40,22 +36,22 @@ body {
 \**************/
 
 .parallax-container {
-	height: 100vh;
+    height: 100vh;
 }
 
 .parallax.shade::after {
-	content: '';
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	background-color: rgba(0, 0, 0, 0.5);
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .parallax-container.header {
-	height: 40vh;
+    height: 40vh;
 }
 
-.bottom-links {
+.bottom-content {
     position: absolute;
     bottom: 0;
     margin: 0 auto;
@@ -65,21 +61,25 @@ body {
 |   IMAGES   |
 \************/
 
-.logo-small img {
+.menu-logo img {
     height: 48px;
+}
+
+.footer-logo img {
+    height: 64px;
 }
 
 .img-hover-zoom {
     position: relative;
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .img-hover-zoom img, .img-hover-zoom div {
-	transition: transform .5s ease-in-out;
+    transition: transform .5s ease-in-out;
 }
 
 .img-hover-zoom:hover img, .img-hover-zoom:hover div {
-	transform: scale(1.2);
+    transform: scale(1.2);
 }
 
 /**********\
@@ -99,18 +99,39 @@ body {
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.card-image {
+.card-image, .card-header {
     position: relative;
     overflow: hidden;
+    border: none;
 }
 
-.card-image div {
+.card-image div, .card-header div {
     border-radius: 4px;
     background-color: var(--col-primary-dark);
 }
 
-.card:hover .card-image div {
+.card:hover .card-image div,
+.card:hover .card-header div {
     border-radius: 0;
+}
+
+.card-header .header-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header .header-icon {
+    margin: 36px 48px;
+    color: var(--col-accent);
+    height: 128px;
+    font-size: 128px;
+    line-height: 128px;
 }
 
 /********************\
@@ -127,7 +148,7 @@ body {
     transform: scale(1.2);
 }
 
-.card.product .card-content, .card.product .card-content * {
+.card.product .card-content, .card.product * {
     cursor: pointer;
 }
 
@@ -137,6 +158,10 @@ body {
 
 .parent-category:hover {
     text-decoration: none;
+}
+
+.card.account-tab {
+    text-decoration: none!important;
 }
 
 /******************\

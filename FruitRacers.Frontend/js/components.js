@@ -8,7 +8,7 @@ $(document).ready(function() {
     $(".text-input input, textarea").filter(function() {
         return this.value.length > 0;
     }).addClass("has-value");
-    $(".text-input input, textarea").blur(function() {
+    $(document).on("blur", ".text-input input, textarea", function() {
         if(!this.value) {
             $(this).removeClass("has-value");
         } else {
@@ -21,7 +21,7 @@ $(document).ready(function() {
     \**************/
 
     // Checkbox toggle all click
-    $(".checkbox.toggle-all").click(function() {
+    $(document).on("click", ".checkbox.toggle-all", function() {
         if ($(this).is(":checked")) {
             $('[data-toggled-by="' + $(this).attr("data-toggle") + '"]').prop('checked', true);
         } else {
@@ -37,14 +37,133 @@ $(document).ready(function() {
             $('.checkbox[data-toggle="' + toggle + '"]').prop('checked', false);
         }
     }
-    // On checkbox click
-    $(".checkbox:not(.toggle-all)").click(function() {
-        toggle = $(this).data("toggled-by");
-        checkboxToggleCheck(toggle);
-    });
     // On page load
     $(".checkbox[data-toggled-by]").each(function() {
         checkboxToggleCheck($(this).data("toggled-by"));
+    });
+    // On checkbox click
+    $(document).on("click", ".checkbox:not(.toggle-all)", function() {
+        toggle = $(this).data("toggled-by");
+        checkboxToggleCheck(toggle);
+    });
+
+    /************\
+    |   SELECT   |
+    \************/
+
+    $(".select-input").each(function() {
+        var option = $(this).find("ul li.active");
+        var button = $(this).find("label button");
+        button.text(option.text());
+        button.val(option.val());
+    });
+
+    $(".select-input").on("click", function () {
+        $(this).toggleClass("active");
+    });
+
+    $(".select-input ul li").on("click", function () {
+        $(this).parent().find("li").removeClass("active");
+        $(this).addClass("active");
+        var button = $(this).closest(".select-input").find("label button");
+        button.text($(this).text());
+        button.val($(this).val());
+        console.log($("#select-example"));
+    });
+
+    /****************\
+    |   FILE INPUT   |
+    \****************/
+
+    $(document).on("change", "[type=file]", function() {
+        var fileCount = $(this).prop("files").length;
+        if (fileCount > 0) {
+            var countItem = $(this).parent().find(".count")
+            countItem.removeClass("d-none");
+            if ($(this).attr("multiple") !== undefined) {
+                countItem.html(fileCount);
+            }
+        }
+    });
+
+    /****************\
+    |   SEARCH BAR   |
+    \****************/
+
+    // Clear button click handling
+    $(document).on("click", ".search-bar .clear.btn", function() {
+        var textInput = $(this).parent().find("[type='text']")
+        textInput.val("");
+        textInput.focus();
+        $(this).prop("disabled", true);
+    });
+    // Enable / disable clear button on page load
+    $(".search-bar [type='text']").filter(function() {
+        return this.value.length > 0;
+    }).parent().find(".clear.btn").prop("disabled", false);
+    // Enable / disable clear button on value changed
+    $(document).on("change paste keyup", ".search-bar [type='text']", function() {
+        if(!$(this).val()) {
+            $(this).parent().find(".clear.btn").prop("disabled", true);
+        } else {
+            $(this).parent().find(".clear.btn").prop("disabled", false);
+        }
+    });
+
+    // Highlight search bar on text focus
+    $(document).on("focus", ".search-bar [type='text']", function() {
+        $(this).parent().addClass("focus");
+    });
+    $(document).on("blur", ".search-bar [type='text']", function() {
+        $(this).parent().removeClass("focus");
+    });
+
+    /**************\
+    |   COLLAPSE   |
+    \**************/
+
+    $(document).on("click", "[data-toggle='collapse']", function() {
+        var icon = $(this).find(".mdi");
+        if (icon.hasClass("mdi-chevron-up")) {
+            icon.removeClass("mdi-chevron-up");
+            icon.addClass("mdi-chevron-down");
+            $(this).attr("title", "Mostra");
+        } else {
+            icon.removeClass("mdi-chevron-down");
+            icon.addClass("mdi-chevron-up");
+            $(this).attr("title", "Nascondi");
+        }
+    });
+
+    /**************\
+    |   DROPDOWN   |
+    \**************/
+
+    $(window).on("click resize", function() {
+        $(".dropdown").removeClass("active");
+    });
+
+    $("[data-toggle='dropdown']").click(function(event) {
+        event.stopPropagation();
+        $(".dropdown").removeClass("active");
+        var target = $($(this).data("target"));
+        if (target.hasClass("fixed")) {
+            // Get offset relative to viewport
+            var offsetX = $(this)[0].getBoundingClientRect().x;
+            var offsetY = $(this)[0].getBoundingClientRect().y;
+        } else {
+            // Get offset relative to parent
+            var offsetX = $(this)[0].offsetLeft;
+            var offsetY = $(this)[0].offsetTop;
+        }
+        var x = offsetX + $(this).outerWidth() - target.width();
+        var y = offsetY + $(this).outerHeight();
+        target.css({ "top": y, "left": x });
+        target.toggleClass("active");
+    });
+
+    $(".dropdown").click(function(event) {
+        event.stopPropagation();
     });
 
 });

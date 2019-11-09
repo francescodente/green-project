@@ -28,7 +28,7 @@
     justify-content: flex-end;
 }
 
-#menu-right a:first-child {
+#menu-right .btn:not(:last-child) {
     margin-right: 8px;
 }
 
@@ -42,10 +42,6 @@
 
 #menu.filled * {
     color: var(--col-text-dark);
-}
-
-.submenu {
-    display: none;
 }
 
 /* LG */
@@ -62,16 +58,20 @@
         margin: 0 2px;
     }
 
-    #menu .menu-item:hover, #menu .menu-item.selected, #menu-right a:hover {
+    #menu .menu-item:hover, #menu .menu-item.selected, #menu-right .btn:hover {
         background-color: rgba(255, 255, 255, 0.12);
     }
 
-    #menu.filled .menu-item:hover, #menu.filled .menu-item.selected, #menu.filled #menu-right a:hover {
+    #menu.filled .menu-item:hover, #menu.filled .menu-item.selected, #menu.filled #menu-right .btn:hover {
         background-color: rgba(0, 0, 0, 0.12);
     }
 
     #menu .menu-item.selected span {
         color: var(--col-accent)!important;
+    }
+
+    .dropdown a.selected * {
+        color: var(--col-accent-dark)!important;
     }
 
     #menu.filled .menu-item.selected span {
@@ -95,9 +95,9 @@
         background-color: var(--col-primary);
         position: fixed;
         top: 0;
-        left: -40vw;
+        left: -350px;
         height: 100vh;
-        width: 40vw;
+        width: 350px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -141,6 +141,10 @@
         width: 100%;
     }
 
+    #menu-middle>*:last-child {
+        margin-bottom: 16px;
+    }
+
     .menu-item {
         display: flex;
         flex-shrink: 0;
@@ -168,24 +172,14 @@
     .menu-item.selected span, .menu-item.selected i {
         color: var(--col-accent-dark)!important;
     }
-}
 
-/* SM */
-@media (max-width: 767px) {
-
-    #menu-middle {
-        left: -60vw;
-        width: 60vw;
+    #menu-middle h6 {
+        color: var(--col-accent-dark)!important;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin: 3px 6px;
+        padding: 12px 12px 4px 12px;
     }
-
-}
-
-/* X-SM */
-@media (max-width: 575px) {
-
-    #menu-middle {
-        left: -70vw;
-        width: 70vw;
-    }
-
 }

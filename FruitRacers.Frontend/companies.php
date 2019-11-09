@@ -10,7 +10,7 @@
         <?php include("menu.php"); ?>
 
         <section id="companies" class="parallax-container header d-flex justify-content-center align-items-center" data-section="companies">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">AZIENDE</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/companies.jpg"></div>
@@ -26,9 +26,7 @@
                                 <h5 class="company-name font-weight-bold text-center my-2">Company name</h5>
                             </div>
                             <div class="card-image">
-                                <a href="#">
-                                    <div class="fixed-ratio fr-4-3" style="background-image: url('#');"></div>
-                                </a>
+                                <div class="fixed-ratio fr-4-3" style="background-image: url('#');"></div>
                             </div>
                             <div class="card-content p-3">
                                 <a href="#" class="company-address text-sec-dark">Viale della Via 123, Cesena (FC)</a>
@@ -48,13 +46,13 @@
             <div class="divider dark mb-4"></div>
             <div class="row justify-content-center">
                 <ul class="pagination">
-                    <li><a href="#" class="btn icon ripple disabled"><i class="mdi dark mdi-chevron-left"></i></a></li>
+                    <li><a href="#" class="btn icon ripple disabled" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
                     <li><a href="#" class="selected">1</a></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
-                    <li><a href="#" class="btn icon ripple"><i class="mdi dark mdi-chevron-right"></i></a></li>
+                    <li><a href="#" class="btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
                 </ul>
             </div>
         </section>

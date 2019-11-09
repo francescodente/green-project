@@ -2,30 +2,38 @@
     background-color: var(--col-primary-dark);
 }
 
-ul {
-    padding: 0 8px;
+#footer h6 {
+    color: var(--col-accent-dark);
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
-li {
-    list-style-type: none;
-}
-
-#footer h5, #footer p, #footer a, #footer li {
+#footer p, #footer a, #footer li {
     color: var(--col-text-sec-dark);
 }
 
-#footer .social {
-    margin-bottom: 16px;
+#footer ul {
+    margin: 0;
+    padding: 0;
 }
 
-@media (min-width: 768px) {
-    #footer-left, #footer-middle {
-        border-right: 1px solid rgba(0, 0, 0, 0.12);
-    }
+#footer li {
+    list-style-type: none;
 }
 
-@media (max-width: 767px) {
-    #footer-left, #footer-middle {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    }
+#footer .timetable li span {
+    display: inline-block;
+    color: var(--col-text-sec-dark);
+}
+
+#footer .timetable li span:first-child {
+    width: 48px;
+    text-align: left;
+}
+
+#footer .timetable li span:last-child {
+    width: 100px;
+    text-align: center;
 }

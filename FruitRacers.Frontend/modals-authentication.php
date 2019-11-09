@@ -29,12 +29,12 @@
                     <input id="keep-login" type="checkbox" class="checkbox" name="keep-login" value="1"/>
                     <label for="keep-login" class="my-2">Ricordami</label><br>
 
-                    <a id="pwd-recovery-link" href="#" class="text-sec-dark">Password dimenticata?</a>
+                    <a href="#" class="text-sec-dark" data-switch-to="#modal-pwd-recovery">Password dimenticata?</a>
                 </div>
 
                 <button id="submit-login" type="submit" class="btn accent ripple my-3">Accedi</button>
 
-                <p class="text-center text-sec-dark m-0">Non hai un account? <a id="sign-up-link" href="#">Registrati ora</a></p>
+                <p class="text-center text-sec-dark m-0">Non hai un account? <a href="#" data-switch-to="#modal-sign-up">Registrati ora</a></p>
 
             </form>
         </div>
@@ -47,7 +47,7 @@
         <div class="modal-content d-flex flex-column">
             <div class="modal-top">
                 <i class="modal-header-icon mdi mdi-account-circle"></i>
-                <button class="back-to-login modal-back btn icon ripple" title="Indietro"><i class="mdi dark mdi-arrow-left"></i></button>
+                <button class="modal-back btn icon ripple" title="Indietro" data-switch-to="#modal-login"><i class="mdi dark mdi-arrow-left"></i></button>
                 <button class="btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form class="modal-body">
@@ -96,14 +96,14 @@
         <div class="modal-content d-flex flex-column">
             <div class="modal-top">
                 <i class="modal-header-icon mdi mdi-key-variant"></i>
-                <button class="back-to-login modal-back btn icon ripple" title="Indietro"><i class="mdi dark mdi-arrow-left"></i></button>
+                <button class="modal-back btn icon ripple" title="Indietro" data-switch-to="#modal-login"><i class="mdi dark mdi-arrow-left"></i></button>
                 <button class="btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form class="modal-body">
 
                 <h4 class="text-center my-3">Recupero password</h4>
 
-                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> della pagina <b>Account</b>.</p>
+                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> del tuo account.</p>
 
                 <!-- E-MAIL -->
                 <div class="text-input">
@@ -119,5 +119,3 @@
         </div>
     </div>
 </div>
-
-<script src="js/modals-authentication.js"></script>

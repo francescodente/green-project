@@ -10,7 +10,7 @@
         <?php include("menu.php"); ?>
 
         <section id="cart" class="parallax-container header d-flex justify-content-center align-items-center" data-section="cart">
-            <div class="text-center">
+            <div class="container text-center">
                 <h1 class="text-light">CARRELLO</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/cart.jpg"></div>
@@ -21,10 +21,12 @@
 
                     <!-- PRODUCTS -->
                     <h4>Prodotti</h4>
-                    <h5 class="company-name mt-3">Azienda</h5>
+                    <h5 class="mt-3"><a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Azienda</a></h5>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
-                            <img class="product-image" src="images/example_product.jpg"/>
+                            <a href="#" data-toggle="modal" data-target="#modal-product">
+                                <img class="product-image" src="images/example_product.jpg"/>
+                            </a>
                             <p class="m-0">
                                 <span class="product-name">Product name</span><br>
                                 <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
@@ -36,16 +38,18 @@
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
                             <span> <span class="product-unit">Kg</span></span>
                         </div>
-                        <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
+                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
-                            <img class="product-image" src="images/example_product.jpg"/>
+                            <a href="#" data-toggle="modal" data-target="#modal-product">
+                                <img class="product-image" src="images/example_product.jpg"/>
+                            </a>
                             <p class="m-0">
                                 <span class="product-name">Product name</span><br>
                                 <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
@@ -57,17 +61,19 @@
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
                             <span> <span class="product-unit">Kg</span></span>
                         </div>
-                        <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
+                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
-                    <h5 class="company-name mt-3">Azienda</h5>
+                    <h5 class="mt-3"><a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Azienda</a></h5>
                     <div class="product d-flex align-items-center justify-content-between mb-2">
                         <div class="d-flex align-items-center">
-                            <img class="product-image" src="images/example_product.jpg"/>
+                            <a href="#" data-toggle="modal" data-target="#modal-product">
+                                <img class="product-image" src="images/example_product.jpg"/>
+                            </a>
                             <p class="m-0">
                                 <span class="product-name">Product name</span><br>
                                 <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
@@ -79,12 +85,12 @@
                                 <div class="text-input">
                                     <input class="product-quantity" type="text" value="1"/>
                                 </div>
-                                <button class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
+                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                             </div>
                             <span> <span class="product-unit">Kg</span></span>
                         </div>
-                        <button class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
+                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
 
 
@@ -131,16 +137,19 @@
                     </label>
                     <button type="button" class="manage-addresses ripple d-flex align-items-center" data-toggle="modal" data-target="#modal-address-management">
                         <div class="thumb">
-                            <i class="mdi dark mdi-map-marker-plus"></i>
+                            <i class="mdi dark mdi-map-marker"></i>
                         </div>
                         <div>
-                            <p class="m-0">Aggiungi un nuovo indirizzo</p>
+                            <p class="m-0">Gestisci indirizzi</p>
                         </div>
                     </button>
 
                     <!-- DATE & TIME SLOT -->
                     <h4 class="mt-5 mb-4">Fascia oraria</h4>
-                    <p>TODO</p>
+                    <div class="d-flex align-items-center mb-2">
+                        <p class="m-0"><span class="date">1 Gennaio 2020</span>, <span class="selected-time-slot">14:00 - 14:30</span></p>
+                        <button type="button" class="btn icon ripple ml-3" title="Modifica" data-toggle="modal" data-target="#modal-time-slot"><i class="mdi dark mdi-calendar-edit"></i></button>
+                    </div>
 
                     <!-- OTHER FIELDS -->
                     <h4 class="mt-5 mb-4">Altro</h4>
@@ -201,6 +210,9 @@
     <?php include("scripts.php"); ?>
 
     <?php include("modal-address-management.php"); ?>
+    <?php include("modal-time-slot.php"); ?>
+    <?php include("modals-product-company.php"); ?>
+    <?php include("modal-generic.php"); ?>
 
 </body>
 </html>

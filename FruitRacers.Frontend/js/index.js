@@ -1,16 +1,16 @@
 function scrollToItem(id) {
-	$("html, body").animate({ scrollTop: $(id).offset().top }, 600);
+    $("html, body").animate({ scrollTop: $(id).offset().top }, 600);
 }
 
 function highlightMenuItem() {
-	var position = $(this).scrollTop();
-	$("section").each(function() {
+    var position = $(this).scrollTop();
+    $("section").each(function() {
         var targetTop = $(this).offset().top;
         var section = $(this).attr("data-section");
         // Highlights menu item 64px before its content reaches the top of the page
         if (position >= targetTop - 64) {
-            $(".menu-item").removeClass("selected");
-            $(".menu-item").each(function() {
+            $(".menu-item, .dropdown.menu a").removeClass("selected");
+            $(".menu-item, .dropdown.menu a").each(function() {
                 if ($(this).data("sections").includes(section)) {
                     $(this).addClass("selected");
                     return;
@@ -41,23 +41,23 @@ function toggleMenu(open) {
 
 // Init parallax fx
 new universalParallax().init({
-	speed: 4
+    speed: 4
 });
 
 $(document).ready(function() {
 
     // Menu toggle click handling
-    $("#menu-toggle").click(function () {
+    $("#menu").on("click", "#menu-toggle", function () {
         toggleMenu(!$("#menu-middle").hasClass("open"))
     });
 
     // Menu shade click handling
-    $("#menu-shade").click(function () {
+    $("#menu").on("click", "#menu-shade", function () {
         toggleMenu(false);
     });
 
-	// Menu item click handling
-	$(".menu-item").click(function (event) {
+    // Menu item click handling
+    $("#menu").on("click", ".menu-item", function (event) {
         var url = location.href;
         var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
         var href = $(this).attr("href").split("#");
@@ -68,22 +68,22 @@ $(document).ready(function() {
             toggleMenu(false);
             scrollToItem("#" + hash);
         }
-	});
+    });
 
     // Back to top button click handling
-    $("#go-top-btn").click(function (event) {
+    $(document).on("click", "#go-top-btn", function (event) {
         $("html, body").animate({ scrollTop: 0 }, 600);
     });
 
     // Window scroll management
-	$(window).scroll(function() {
+    $(window).scroll(function() {
 
-		// Highlight current menu item
-	    highlightMenuItem();
+        // Highlight current menu item
+        highlightMenuItem();
 
-	    // Remove menu transparency
-	    checkMenuOpacity()
-	});
+        // Remove menu transparency
+        checkMenuOpacity()
+    });
 
     // Lock scrolling when a modal is shown
     $(".modal").on("show.bs.modal", function() {

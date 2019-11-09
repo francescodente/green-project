@@ -9,13 +9,13 @@
 
         <?php include("menu.php"); ?>
 
-        <section id="account" class="parallax-container header d-flex justify-content-center align-items-center" data-section="account">
-            <div class="text-center">
+        <section id="privacy" class="parallax-container header d-flex justify-content-center align-items-center" data-section="privacy">
+            <div class="container text-center">
                 <h1 class="text-light">INFORMATIVA SULLA PRIVACY</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/privacy.jpg"></div>
         </section>
-        <section id="account-content" class="container py-4" data-section="account">
+        <section id="privacy-content" class="container py-4" data-section="privacy">
             <div class="row">
                 <div class="col-12">
                     <p>

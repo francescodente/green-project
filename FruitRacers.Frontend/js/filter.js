@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     // Filter toggle click handling
-    $(".toggle-filters").click(function() {
+    $("#products-content").on("click", ".toggle-filters", function() {
         if ($("#filters-col").hasClass("d-none")) {
             // Show filters
             $(this).find(".mdi").removeClass("mdi-filter");
@@ -11,7 +11,7 @@ $(document).ready(function() {
             $(".toggle-filters-label").html("Nascondi filtri");
             $("#filters-col").removeClass("d-none");
             $("#results-col").addClass("col-lg-9");
-            $(".card.product").parent().removeClass("col-lg-3");
+            $(".card.product:not([data-class])").parent().removeClass("col-lg-3");
         } else {
             // Hide filters
             $(this).find(".mdi.d-lg-block").removeClass("mdi-chevron-left");
@@ -21,7 +21,7 @@ $(document).ready(function() {
             $(".toggle-filters-label").html("Mostra filtri");
             $("#filters-col").addClass("d-none");
             $("#results-col").removeClass("col-lg-9");
-            $(".card.product").parent().addClass("col-lg-3");
+            $(".card.product:not([data-class])").parent().addClass("col-lg-3");
         }
     });
 

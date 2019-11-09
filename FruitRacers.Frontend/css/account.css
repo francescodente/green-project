@@ -1,4 +1,4 @@
-.account-tab {
+#account-content .account-tab {
     display: flex;
     align-items: center;
     padding: 12px;
@@ -6,35 +6,155 @@
     transition: background-color 0.2s ease-in-out;
 }
 
-.account-tab:not(:last-child) {
+#account-content .account-tab:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
-.account-tab:hover {
+#account-content .account-tab:hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-.account-tab.selected * {
+#account-content .account-tab.selected * {
     color: var(--col-accent-dark);
 }
 
-.account-tab .mdi:first-child {
+#account-content .account-tab .mdi:first-child {
     margin-right: 24px;
 }
 
-.account-tab .mdi-chevron-right {
+#account-content .account-tab .mdi-chevron-right {
     margin-left: auto;
 }
 
-/* LG */
+/***************\
+|   USER DATA   |
+\***************/
+
+#user-data .text-input input,
+#user-data .text-area textarea {
+    width: 100%;
+}
+
+#user-data .text-input input:disabled,
+#user-data .text-area textarea:disabled {
+    color: var(--col-text-dark);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#user-data [type="radio"]:disabled + label {
+    opacity: 1;
+}
+
+#user-data [type="radio"]:disabled + label:before,
+#user-data [type="radio"]:disabled + label:after {
+    opacity: 0.65;
+}
+
+#user-data .text-input button,
+#user-data .text-area button {
+    position: absolute;
+    right: 3px;
+    top: 9px;
+}
+
+#user-data .address {
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#user-data .address:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+#user-data .address:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#user-data .address .thumb,
+#user-data .manage-addresses .thumb {
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border-radius: 4px;
+    margin: 8px 16px 8px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+#user-data .address .thumb {
+    border: 2px solid #EEE;
+}
+
+#user-data .address .thumb .mdi {
+    color: #707070;
+}
+
+#user-data .manage-addresses {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    border-radius: 4px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#user-data .manage-addresses:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/******************\
+|   CLIENT ORDERS   |
+\******************/
+
+#client-orders .order {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+
+#client-orders .product {
+    border-radius: 4px;
+}
+
+#client-orders .product-image {
+    object-fit: cover;
+    height: 56px;
+    width: 56px;
+    border-radius: 4px;
+    margin: 8px 16px 8px 8px;
+}
+
+#client-orders .text-sec-dark span {
+    color: var(--col-text-sec-dark);
+}
+
+#client-orders .order-header {
+    background-color: var(--col-primary-dark);
+}
+
+#client-orders h6 .mdi {
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
+}
+
+/* LG and up */
 @media (min-width: 992px) {
 
-
+    #client-orders .products-col {
+        border-right: 1px solid rgba(0, 0, 0, 0.12);
+    }
 
 }
 
-/* SM, MD */
+/* MD and down */
 @media (max-width: 991px) {
 
+    #client-orders .products-col {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    }
 
 }
