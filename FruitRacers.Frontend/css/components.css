@@ -644,7 +644,7 @@ div.divider.vertical.light {
     background-color: transparent;
     display: block;
     text-align: left;
-    border: 1px solid var(--col-text-dark);
+    border: 1px solid var(--col-text-sec-dark);
     border-radius: 4px;
 }
 

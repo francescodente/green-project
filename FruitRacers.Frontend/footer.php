@@ -27,11 +27,11 @@
             <div class="col-12 col-md-4 mb-3 mb-md-0 order-md-3">
                 <h6>Orari di consegna</h6>
                 <ul class="timetable">
-                    <li><span>LUN</span><span>8:00-13:00, 15:00-18:00</span></li>
-                    <li><span>MAR</span><span>8:00-13:00, 15:00-18:00</span></li>
-                    <li><span>MER</span><span>8:00-13:00, 15:00-18:00</span></li>
-                    <li><span>GIO</span><span>8:00-13:00, 15:00-18:00</span></li>
-                    <li><span>VEN</span><span>8:00-13:00, 15:00-18:00</span></li>
+                    <li><span>LUN</span><span>8-13, 15-18</span></li>
+                    <li><span>MAR</span><span>8-13, 15-18</span></li>
+                    <li><span>MER</span><span>8-13, 15-18</span></li>
+                    <li><span>GIO</span><span>8-13, 15-18</span></li>
+                    <li><span>VEN</span><span>8-13, 15-18</span></li>
                     <li><span>SAB</span><span>-</span></li>
                     <li><span>DOM</span><span>-</span></li>
                 </ul>

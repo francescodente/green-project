@@ -89,19 +89,71 @@
         </section>
         <section id="contacts-content" class="container py-4" data-section="contacts">
             <div class="row">
-                <div class="col">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <div class="col-12 col-md-6 mb-4 mb-md-0">
+                    <h4 class="mb-3">Modulo di contatto</h4>
+                    <p class="text-sec-dark">
+                        Vuoi diventare un fornitore? Hai bisogno d'aiuto per un ordine?
+                        Per qualsiasi necessità puoi contattarci compilando il modulo sottostante. Ti risponderemo alla e-mail indicata nel più breve tempo possibile.
                     </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <form>
+
+                        <div class="text-input mb-2">
+                            <input id="email" type="email"/>
+                            <label for="email">Email</label>
+                        </div>
+
+                        <div class="select-input mb-2">
+                            <label for="select-example">
+                                <button type="button"></button>
+                                <i class="mdi dark mdi-menu-swap"></i>
+                            </label>
+                            <ul id="select-example" role="listbox" name="select-example">
+                                <li id="s1" value="s1" role="option" tabindex="-1" aria-selected="true" class="active">Motivo</li>
+                                <li id="s2" value="s2" role="option" tabindex="-1" aria-selected="false">Option 2</li>
+                                <li id="s3" value="s3" role="option" tabindex="-1" aria-selected="false">Option 3</li>
+                                <li id="s4" value="s4" role="option" tabindex="-1" aria-selected="false">Option 4</li>
+                                <li id="s5" value="s5" role="option" tabindex="-1" aria-selected="false">Option 5</li>
+                                <li id="s6" value="s6" role="option" tabindex="-1" aria-selected="false">Option 6</li>
+                                <li id="s7" value="s7" role="option" tabindex="-1" aria-selected="false">Option 7</li>
+                                <li id="s8" value="s8" role="option" tabindex="-1" aria-selected="false">Option 8</li>
+                                <li id="s9" value="s9" role="option" tabindex="-1" aria-selected="false">Option 9</li>
+                            </ul>
+                        </div>
+
+                        <div class="text-area mb-2">
+                            <textarea id="textarea"></textarea>
+                            <label for="textarea">Testo</label>
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn accent ripple">
+                                <p>Invia</p>
+                                <i class="mdi light mdi-send"></i>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4 class="mb-3">Altri contatti</h4>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="mdi dark mdi-email mr-2"></i>
+                        <h5 class="m-0">E-mail</h5>
+                    </div>
+                    <p class="text-dark mb-3">
+                        <a href="mailto:info@fruitracers.com" target="_top">info@fruitracers.com</a><br>
+                        <a href="mailto:support@fruitracers.com" target="_top">support@fruitracers.com</a>
                     </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="mdi dark mdi-email-check mr-2"></i>
+                        <h5 class="m-0">PEC</h5>
+                    </div>
+                    <p class="text-dark mb-3"><a href="mailto:pec@fruitracers.com" target="_top">pec@fruitracers.com</a></p>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="mdi dark mdi-phone mr-2"></i>
+                        <h5 class="m-0">Telefono</h5>
+                    </div>
+                    <p>+39 123 456 7890</p>
                 </div>
             </div>
         </section>
