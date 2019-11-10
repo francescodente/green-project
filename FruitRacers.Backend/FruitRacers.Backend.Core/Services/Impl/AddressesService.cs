@@ -57,7 +57,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task UpdateAddressForUser(int userID, AddressDto address)
         {
-            Address addressEntity = await this.RequireAddressWithOwnership(userID, address.AddressID);
+            Address addressEntity = await this.RequireAddressWithOwnership(userID, address.AddressId);
             this.Mapper.Map(address, addressEntity);
             this.Session.Addresses.Update(addressEntity);
             await this.Session.SaveChanges();

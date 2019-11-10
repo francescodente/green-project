@@ -29,7 +29,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             {
                 Category = new CategoryDto
                 {
-                    CategoryID = 0,
+                    CategoryId = 0,
                     Name = ROOT_CATEGORY_NAME
                 },
                 Children = roots

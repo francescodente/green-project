@@ -75,7 +75,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             this.Session.OrderDetails.Insert(new OrderDetail
             {
                 OrderId = cart.OrderId,
-                ProductId = insertion.ProductID,
+                ProductId = insertion.ProductId,
                 Quantity = insertion.Quantity
             });
             await this.Session.SaveChanges();
@@ -89,7 +89,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             {
                 Address address = await this.Session
                     .Addresses
-                    .FindOne(a => a.AddressId == deliveryInfo.Address.AddressID)
+                    .FindOne(a => a.AddressId == deliveryInfo.Address.AddressId)
                     .ContinueWith(t => t.Result.Value);
 
                 ServiceUtils.EnsureOwnership(address.UserId, userID);
@@ -97,15 +97,15 @@ namespace FruitRacers.Backend.Core.Services.Impl
             
             if (deliveryInfo.TimeSlot != null && deliveryInfo.Date != null)
             {
-                int timeSlotCapacity = await this.Session.TimeSlots.GetActualCapacity(deliveryInfo.TimeSlot.TimeSlotID, deliveryInfo.Date.Value);
+                int timeSlotCapacity = await this.Session.TimeSlots.GetActualCapacity(deliveryInfo.TimeSlot.TimeSlotId, deliveryInfo.Date.Value);
                 if (timeSlotCapacity <= 0)
                 {
                     throw new TimeSlotFullException();
                 }
             }
             
-            cart.TimeSlotId = deliveryInfo.TimeSlot?.TimeSlotID;
-            cart.AddressId = deliveryInfo.Address?.AddressID;
+            cart.TimeSlotId = deliveryInfo.TimeSlot?.TimeSlotId;
+            cart.AddressId = deliveryInfo.Address?.AddressId;
             cart.Notes = deliveryInfo.Notes;
             cart.DeliveryDate = deliveryInfo.Date;
 
@@ -119,7 +119,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(c => c.OrderId);
             OrderDetail item = await this.Session
                 .OrderDetails
-                .FindOne(d => d.OrderId == orderID && d.ProductId == cartItem.ProductID)
+                .FindOne(d => d.OrderId == orderID && d.ProductId == cartItem.ProductId)
                 .Then(d => d.Value);
             item.Quantity = cartItem.Quantity;
             this.Session.OrderDetails.Update(item);

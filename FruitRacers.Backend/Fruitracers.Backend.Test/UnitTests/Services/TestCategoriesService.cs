@@ -45,11 +45,11 @@ namespace Fruitracers.Backend.Test.UnitTests.Services
 
         private void AssertTreeEquals(CategoryTreeDto expected, CategoryTreeDto actual)
         {
-            Assert.AreEqual(expected.Category.CategoryID, actual.Category.CategoryID);
+            Assert.AreEqual(expected.Category.CategoryId, actual.Category.CategoryId);
             Assert.AreEqual(expected.Children.Count(), actual.Children.Count());
             Enumerable.Zip(
-                expected.Children.OrderBy(c => c.Category.CategoryID),
-                actual.Children.OrderBy(c => c.Category.CategoryID)
+                expected.Children.OrderBy(c => c.Category.CategoryId),
+                actual.Children.OrderBy(c => c.Category.CategoryId)
             ).ForEach(p => AssertTreeEquals(p.First, p.Second));
         }
 
@@ -67,7 +67,7 @@ namespace Fruitracers.Backend.Test.UnitTests.Services
             IList<CategoryTreeDto> subTrees = new List<CategoryTreeDto>();
             CategoryTreeDto root = new CategoryTreeDto
             {
-                Category = new CategoryDto { CategoryID = int.Parse(characters.Current.ToString()) },
+                Category = new CategoryDto { CategoryId = int.Parse(characters.Current.ToString()) },
                 Children = subTrees
             };
             CategoryTreeDto curr = ParseTree(characters);
