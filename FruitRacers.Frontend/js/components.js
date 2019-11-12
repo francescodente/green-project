@@ -51,6 +51,10 @@ $(document).ready(function() {
     |   SELECT   |
     \************/
 
+    $(window).on("click resize", function() {
+        $(".select-input").removeClass("active");
+    });
+
     $(".select-input").each(function() {
         var option = $(this).find("ul li.active");
         var button = $(this).find("label button");
@@ -58,7 +62,8 @@ $(document).ready(function() {
         button.val(option.val());
     });
 
-    $(".select-input").on("click", function () {
+    $(".select-input").on("click", function (event) {
+        event.stopPropagation();
         $(this).toggleClass("active");
     });
 
@@ -68,7 +73,6 @@ $(document).ready(function() {
         var button = $(this).closest(".select-input").find("label button");
         button.text($(this).text());
         button.val($(this).val());
-        console.log($("#select-example"));
     });
 
     /****************\
@@ -145,8 +149,12 @@ $(document).ready(function() {
 
     $("[data-toggle='dropdown']").click(function(event) {
         event.stopPropagation();
-        $(".dropdown").removeClass("active");
         var target = $($(this).data("target"));
+        if (target.hasClass("active")) {
+            target.removeClass("active");
+            return;
+        }
+        $(".dropdown").removeClass("active");
         if (target.hasClass("fixed")) {
             // Get offset relative to viewport
             var offsetX = $(this)[0].getBoundingClientRect().x;
@@ -159,7 +167,7 @@ $(document).ready(function() {
         var x = offsetX + $(this).outerWidth() - target.width();
         var y = offsetY + $(this).outerHeight();
         target.css({ "top": y, "left": x });
-        target.toggleClass("active");
+        target.addClass("active");
     });
 
     $(".dropdown").click(function(event) {

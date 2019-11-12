@@ -1,6 +1,24 @@
+#tutorial .step {
+    color: var(--col-text-light);
+    background-color: var(--col-accent);
+    line-height: 36px;
+    height: 36px;
+    width: 36px;
+    border-radius: 100%;
+}
+
+#tutorial .step-thumb {
+    background-color: var(--col-primary-dark);
+    border-radius: 4px;
+}
+
 #contacts-content .text-input input,
 #contacts-content textarea {
     width: 100%;
+}
+
+#contacts-content textarea {
+    height: 256px;
 }
 
 #companies-summary #map-parent {
