@@ -44,6 +44,10 @@
     color: var(--col-text-dark);
 }
 
+.menu-item {
+    transition: background-color 0.2s ease-in-out;
+}
+
 /* LG */
 @media (min-width: 992px) {
 
@@ -152,7 +156,6 @@
         padding: 12px;
         margin: 3px 6px;
         border-radius: 4px;
-        transition: background-color 0.2s ease-in-out;
     }
 
     .menu-item:hover, .menu-item.selected {

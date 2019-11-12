@@ -71,6 +71,10 @@ $page = basename($_SERVER['PHP_SELF']);
                 <i class="mdi mdi-lock"></i>
                 <span>Privacy</span>
             </a>
+            <a href="use-terms.php" class="menu-item ripple d-lg-none" data-sections="['use-terms']">
+                <i class="mdi mdi-checkbook"></i>
+                <span>Termini d'uso</span>
+            </a>
         </div>
         <div id="menu-shade" class="d-lg-none"></div>
         <div id="menu-right">
@@ -92,6 +96,9 @@ $page = basename($_SERVER['PHP_SELF']);
         </li>
         <li>
             <a href="privacy.php" data-sections="['privacy']"><i class="mdi dark mdi-lock"></i><span>Privacy</span></a>
+        </li>
+        <li>
+            <a href="use-terms.php" data-sections="['use-terms']"><i class="mdi dark mdi-checkbook"></i><span>Termini d'uso</span></a>
         </li>
     </ul>
 </div>
