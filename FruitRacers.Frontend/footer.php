@@ -45,7 +45,7 @@
                 <h6>Privacy</h6>
                 <a href="privacy.php" class="d-block mb-3">Informativa</a>
                 <h6>Copyright</h6>
-                <p class="m-0">&copy; <?php echo date("Y"); ?> Fruitracers</p>
+                <p class="m-0">&copy; <?php echo date("Y"); ?> Fruitracers™</p>
             </div>
         </div>
     </div>
