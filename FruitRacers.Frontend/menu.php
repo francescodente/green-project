@@ -6,10 +6,10 @@ $page = basename($_SERVER['PHP_SELF']);
     <div class="container">
         <div id="menu-left">
             <button id="menu-toggle" class="btn icon ripple d-lg-none" title="Menu"><i class="mdi mdi-menu"></i></button>
-            <a href="index.php" class="menu-logo"><img src="images/logo/fruitracers_logo_small.png"></a>
+            <a href="index.php" class="menu-logo"><img src="images/logo/fruitracers_logo_small_shadow.png"></a>
         </div>
         <div id="menu-middle">
-            <a href="index.php" id="menu-logo" class="d-lg-none"><img src="images/logo/fruitracers_logo_muted.png"></a>
+            <a href="index.php" id="menu-logo" class="d-lg-none"><img src="images/logo/fruitracers_logo_small.png"></a>
             <a href="index.php#home" class="menu-item ripple" data-sections="['home']">
                 <i class="mdi mdi-home d-lg-none"></i>
                 <span>Home</span>

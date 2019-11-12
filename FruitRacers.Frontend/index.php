@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-0 col-lg-3"></div>
                     <div class="col-12 col-lg-6">
-                        <a href="index.php"><img class="img-fluid" src="images/logo/fruitracers_logo_muted_shadow.png"></a>
+                        <a href="index.php"><img class="img-fluid" src="images/logo/fruitracers_logo_shadow.png"></a>
                     </div>
                     <div class="col-0 col-lg-3"></div>
                 </div>
@@ -29,17 +29,17 @@
             <div class="row px-4 px-md-0">
                 <div class="col-12 col-md-4 text-center">
                     <div class="d-flex justify-content-center"><p class="step mb-3">1</p></div>
-                    <div class="step-thumb fixed-ratio fr-1-1"></div>
+                    <div class="step-thumb fixed-ratio fr-1-1" style="background-image: url('images/tutorial_step_1.png')"></div>
                     <p class="text-sec-dark mt-2 mb-0">Scegli i prodotti da acquistare</p>
                 </div>
                 <div class="col-12 col-md-4 text-center mt-4 mt-md-0">
                     <div class="d-flex justify-content-center"><p class="step mb-3">2</p></div>
-                    <div class="step-thumb fixed-ratio fr-1-1"></div>
+                    <div class="step-thumb fixed-ratio fr-1-1" style="background-image: url('images/tutorial_step_2.png')"></div>
                     <p class="text-sec-dark mt-2 mb-0">Completa l'ordine inserendo luogo, data e fascia oraria di consegna</p>
                 </div>
                 <div class="col-12 col-md-4 text-center mt-4 mt-md-0">
                     <div class="d-flex justify-content-center"><p class="step mb-3">3</p></div>
-                    <div class="step-thumb fixed-ratio fr-1-1"></div>
+                    <div class="step-thumb fixed-ratio fr-1-1" style="background-image: url('images/tutorial_step_3.png')"></div>
                     <p class="text-sec-dark mt-2 mb-0">Attendi la consegna dei tuoi prodotti</p>
                 </div>
             </div>

@@ -1,6 +1,0 @@
-offset x	0
-offset y	6
-widening	4
-blur		8
-opacity		60
-color		black
