@@ -6,6 +6,7 @@ using FruitRacers.Backend.DataAccess.Sql.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.DataAccess
 {
@@ -30,9 +31,16 @@ namespace FruitRacers.Backend.DataAccess
 
         public IRepository<Address> Addresses => new SqlRepository<Address>(this.context);
 
+        public IRepository<OrderDetail> OrderDetails => new SqlRepository<OrderDetail>(this.context);
+
         public void Dispose()
         {
             this.context.Dispose();
+        }
+
+        public async Task SaveChanges()
+        {
+            await this.context.SaveChangesAsync();
         }
     }
 }

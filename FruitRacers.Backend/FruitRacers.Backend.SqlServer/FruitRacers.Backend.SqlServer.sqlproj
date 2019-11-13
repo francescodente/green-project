@@ -75,7 +75,6 @@
     <Build Include="Tables\Addresses.sql" />
     <Build Include="Tables\TimeSlots.sql" />
     <Build Include="Tables\TimeSlotOverrides.sql" />
-    <Build Include="Tables\OrderStates.sql" />
     <Build Include="Tables\Orders.sql" />
     <Build Include="Tables\OrderDetails.sql" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using FruitRacers.Backend.Core.Repositories;
+using FruitRacers.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,12 +29,15 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            return await this.AsQueryable().ToArrayAsync();
+            return await this.AsQueryable()
+                .ToArrayAsync();
         }
 
         public async Task<IEnumerable<T>> Where(Expression<Func<T, bool>> predicate)
         {
-            return await this.AsQueryable().Where(predicate).ToArrayAsync();
+            return await this.AsQueryable()
+                .Where(predicate)
+                .ToArrayAsync();
         }
 
         protected IQueryable<T> AsQueryable()
@@ -45,6 +49,16 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
             Func<IQueryable<T>, IQueryable<T>> current = this.queryModifier;
             this.queryModifier = q => modifier(current(q));
+        }
+
+        public async Task<IOptional<T>> FindOne()
+        {
+            return await Optional.TryCatchAsync(() => this.AsQueryable().SingleAsync());
+        }
+
+        public async Task<IOptional<T>> FindOne(Expression<Func<T, bool>> predicate)
+        {
+            return await Optional.TryCatchAsync(() => this.AsQueryable().SingleAsync(predicate));
         }
     }
 }

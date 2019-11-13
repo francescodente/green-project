@@ -3,16 +3,13 @@ using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public partial class OrderState
+    public enum OrderState
     {
-        public OrderState()
-        {
-            Orders = new HashSet<Order>();
-        }
-
-        public int OrderStateId { get; set; }
-        public string StateName { get; set; }
-
-        public virtual ICollection<Order> Orders { get; set; }
+        Cart = 0,
+        Confirmed = 10,
+        Accepted = 20,
+        Rejected = 30,
+        Sent = 40,
+        Delivered = 50
     }
 }
