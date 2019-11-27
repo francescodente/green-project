@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-0 col-lg-3"></div>
                     <div class="col-12 col-lg-6">
-                        <a href="index.php"><img class="img-fluid" src="images/logo/fruitracers_logo_muted_shadow.png"></a>
+                        <a href="index.php"><img class="img-fluid" src="images/logo/fruitracers_logo_shadow.png"></a>
                     </div>
                     <div class="col-0 col-lg-3"></div>
                 </div>
@@ -25,7 +25,26 @@
             </div>
             <div class="parallax shade" data-parallax-image="images/home.jpg"></div>
         </section>
-        <section id="highlights" class="container py-4" data-section="home">
+        <section id="tutorial" class="container py-4" data-section="home">
+            <div class="row px-4 px-md-0">
+                <div class="col-12 col-md-4 text-center">
+                    <div class="d-flex justify-content-center"><p class="step mb-3">1</p></div>
+                    <div class="step-thumb fixed-ratio fr-1-1" style="background-image: url('images/tutorial_step_1.png')"></div>
+                    <p class="text-sec-dark mt-2 mb-0">Scegli i prodotti da acquistare</p>
+                </div>
+                <div class="col-12 col-md-4 text-center mt-4 mt-md-0">
+                    <div class="d-flex justify-content-center"><p class="step mb-3">2</p></div>
+                    <div class="step-thumb fixed-ratio fr-1-1" style="background-image: url('images/tutorial_step_2.png')"></div>
+                    <p class="text-sec-dark mt-2 mb-0">Completa l'ordine inserendo luogo, data e fascia oraria di consegna</p>
+                </div>
+                <div class="col-12 col-md-4 text-center mt-4 mt-md-0">
+                    <div class="d-flex justify-content-center"><p class="step mb-3">3</p></div>
+                    <div class="step-thumb fixed-ratio fr-1-1" style="background-image: url('images/tutorial_step_3.png')"></div>
+                    <p class="text-sec-dark mt-2 mb-0">Attendi la consegna dei tuoi prodotti</p>
+                </div>
+            </div>
+        </section>
+        <!-- <section id="highlights" class="container py-4" data-section="home">
             <h2 class="text-center m-0 mb-4">PRODOTTI IN EVIDENZA</h2>
             <div class="row">
                 <?php
@@ -52,7 +71,7 @@
                 }
                 ?>
             </div>
-        </section>
+        </section> -->
 
         <!-- Chi siamo -->
         <section id="who" class="parallax-container header d-flex justify-content-center align-items-center" data-section="who">
@@ -89,7 +108,7 @@
         </section>
         <section id="contacts-content" class="container py-4" data-section="contacts">
             <div class="row">
-                <div class="col-12 col-md-6 mb-4 mb-md-0">
+                <div class="col-12 col-md-7 col-lg-8 mb-4 mb-md-0">
                     <h4 class="mb-3">Modulo di contatto</h4>
                     <p class="text-sec-dark">
                         Vuoi diventare un fornitore? Hai bisogno d'aiuto per un ordine?
@@ -134,7 +153,7 @@
 
                     </form>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-5 col-lg-4">
                     <h4 class="mb-3">Altri contatti</h4>
                     <div class="d-flex align-items-center mb-2">
                         <i class="mdi dark mdi-email mr-2"></i>

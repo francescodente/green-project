@@ -6,10 +6,10 @@ $page = basename($_SERVER['PHP_SELF']);
     <div class="container">
         <div id="menu-left">
             <button id="menu-toggle" class="btn icon ripple d-lg-none" title="Menu"><i class="mdi mdi-menu"></i></button>
-            <a href="index.php" class="menu-logo"><img src="images/logo/fruitracers_logo_small.png"></a>
+            <a href="index.php" class="menu-logo"><img src="images/logo/fruitracers_logo_small_shadow.png"></a>
         </div>
         <div id="menu-middle">
-            <a href="index.php" id="menu-logo" class="d-lg-none"><img src="images/logo/fruitracers_logo_muted.png"></a>
+            <a href="index.php" id="menu-logo" class="d-lg-none"><img src="images/logo/fruitracers_logo_small.png"></a>
             <a href="index.php#home" class="menu-item ripple" data-sections="['home']">
                 <i class="mdi mdi-home d-lg-none"></i>
                 <span>Home</span>
@@ -71,6 +71,10 @@ $page = basename($_SERVER['PHP_SELF']);
                 <i class="mdi mdi-lock"></i>
                 <span>Privacy</span>
             </a>
+            <a href="use-terms.php" class="menu-item ripple d-lg-none" data-sections="['use-terms']">
+                <i class="mdi mdi-checkbook"></i>
+                <span>Termini d'uso</span>
+            </a>
         </div>
         <div id="menu-shade" class="d-lg-none"></div>
         <div id="menu-right">
@@ -92,6 +96,9 @@ $page = basename($_SERVER['PHP_SELF']);
         </li>
         <li>
             <a href="privacy.php" data-sections="['privacy']"><i class="mdi dark mdi-lock"></i><span>Privacy</span></a>
+        </li>
+        <li>
+            <a href="use-terms.php" data-sections="['use-terms']"><i class="mdi dark mdi-checkbook"></i><span>Termini d'uso</span></a>
         </li>
     </ul>
 </div>

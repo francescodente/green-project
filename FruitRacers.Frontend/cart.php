@@ -159,7 +159,7 @@
                         <span>Inserisci qui il tuo buono sconto!</span>
                     </div>
 
-                    <div class="divider dark d-lg-none"></div>
+                    <div class="divider dark d-lg-none mt-4"></div>
                 </div>
                 <div class="col-12 col-lg-4">
 

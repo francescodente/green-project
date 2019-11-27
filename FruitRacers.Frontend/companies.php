@@ -26,7 +26,7 @@
                                 <h5 class="company-name font-weight-bold text-center my-2">Company name</h5>
                             </div>
                             <div class="card-image">
-                                <div class="fixed-ratio fr-4-3" style="background-image: url('#');"></div>
+                                <div class="fixed-ratio fr-4-3" style="background-image: url('images/default_company.png');"></div>
                             </div>
                             <div class="card-content p-3">
                                 <a href="#" class="company-address text-sec-dark">Viale della Via 123, Cesena (FC)</a>

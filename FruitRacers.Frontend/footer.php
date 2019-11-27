@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="col-12 mt-3 mb-4">
-                <a href="index.php" class="footer-logo d-block"><img src="images/logo/fruitracers_logo_muted.png"></a>
+                <a href="index.php" class="footer-logo d-block"><img src="images/logo/fruitracers_logo_small.png"></a>
             </div>
         </div>
         <div class="row">
@@ -45,7 +45,7 @@
                 <h6>Privacy</h6>
                 <a href="privacy.php" class="d-block mb-3">Informativa</a>
                 <h6>Copyright</h6>
-                <p class="m-0">&copy; <?php echo date("Y"); ?> Fruitracers</p>
+                <p class="m-0">&copy; <?php echo date("Y"); ?> Fruitracers™</p>
             </div>
         </div>
     </div>
