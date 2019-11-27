@@ -22,7 +22,10 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         private async Task<Address> RequireAddress(int addressID)
         {
-            return await this.Session.Addresses.FindOne(a => a.AddressId == addressID).Then(a => a.Value);
+            return await this.Session
+                .Addresses
+                .FindOne(a => a.AddressId == addressID)
+                .Then(a => a.Value);
         }
 
         private async Task<Address> RequireAddressWithOwnership(int userID, int addressID)
@@ -35,7 +38,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task<int> AddAddressForUser(int userID, AddressDto address)
         {
             Address addressEntity = this.Mapper.Map(address, new Address { UserId = userID });
-            this.Session.Addresses.Insert(addressEntity);
+            await this.Session.Addresses.Insert(addressEntity);
             await this.Session.SaveChanges();
             return addressEntity.AddressId;
         }
@@ -43,7 +46,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task DeleteAddressForUser(int userID, int addressID)
         {
             Address address = await this.RequireAddressWithOwnership(userID, addressID);
-            this.Session.Addresses.Delete(address);
+            await this.Session.Addresses.Delete(address);
             await this.Session.SaveChanges();
         }
 
@@ -59,7 +62,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             Address addressEntity = await this.RequireAddressWithOwnership(userID, address.AddressId);
             this.Mapper.Map(address, addressEntity);
-            this.Session.Addresses.Update(addressEntity);
+            await this.Session.Addresses.Update(addressEntity);
             await this.Session.SaveChanges();
         }
     }

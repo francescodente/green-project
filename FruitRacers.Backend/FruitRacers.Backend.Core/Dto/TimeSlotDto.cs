@@ -7,7 +7,7 @@ namespace FruitRacers.Backend.Core.Dto
         public int TimeSlotId { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan FinishTime { get; set; }
-        public DayOfWeek DayOfWeek { get; set; }
+        public DateTime Date { get; set; }
         public int SlotCapacity { get; set; }
     }
 }

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Core.Entities;
 
 namespace FruitRacers.Backend.Core.Services.Utils
 {
@@ -11,9 +13,73 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             MapperConfiguration config = new MapperConfiguration(c =>
             {
-
+                c.AddProfile<AddressMapping>();
+                c.AddProfile<OrderMapping>();
+                c.AddProfile<TimeSlotMapping>();
+                c.AddProfile<UserMapping>();
+                c.AddProfile<ProductMapping>();
+                c.AddProfile<CategoriesMapping>();
             });
             return config.CreateMapper();
+        }
+
+        private class AddressMapping : Profile
+        {
+            public AddressMapping()
+            {
+                this.CreateMap<Address, AddressDto>();
+            }
+        }
+
+        private class OrderMapping : Profile
+        {
+            public OrderMapping()
+            {
+                this.CreateMap<Order, DeliveryInfoDto>();
+
+                this.CreateMap<OrderDetail, CartItemDto>();
+
+                this.CreateMap<Order, CartDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+
+                this.CreateMap<OrderDetail, OrderDetailDto>();
+
+                this.CreateMap<Order, OrderDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+            }
+        }
+
+        private class TimeSlotMapping : Profile
+        {
+            public TimeSlotMapping()
+            {
+                this.CreateMap<TimeSlot, TimeSlotDto>();
+            }
+        }
+
+        private class ProductMapping : Profile
+        {
+            public ProductMapping()
+            {
+                this.CreateMap<Product, SimpleProductDto<CategoryDto>>();
+            }
+        }
+
+        private class UserMapping : Profile
+        {
+            public UserMapping()
+            {
+                
+            }
+        }
+
+        private class CategoriesMapping : Profile
+        {
+            public CategoriesMapping()
+            {
+                this.CreateMap<Category, CategoryDto>()
+                    .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
+            }
         }
     }
 }

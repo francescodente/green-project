@@ -2,7 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using FruitRacers.Backend.Shared.Utils;
 
 namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 {
@@ -20,19 +24,34 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 
         }
 
-        public virtual void Delete(T entity)
+        public Task Delete(T entity)
         {
             this.Set.Remove(entity);
+            return Task.CompletedTask;
         }
 
-        public virtual void Insert(T entity)
+        public Task Insert(T entity)
         {
             this.Set.Add(entity);
+            return Task.CompletedTask;
         }
 
-        public virtual void Update(T entity)
+        public Task Update(T entity)
         {
             this.Set.Update(entity);
+            return Task.CompletedTask;
+        }
+
+        public async Task DeleteWhere(Expression<Func<T, bool>> predicate)
+        {
+            IEnumerable<T> entitiesToDelete = await this.Where(predicate);
+            this.Set.RemoveRange(entitiesToDelete);
+        }
+
+        public async Task UpdateWhere(Expression<Func<T, bool>> predicate, Action<T> updateAction)
+        {
+            IEnumerable<T> entitiesToUpdate = await this.Where(predicate);
+            entitiesToUpdate.ForEach(updateAction);
         }
     }
 }

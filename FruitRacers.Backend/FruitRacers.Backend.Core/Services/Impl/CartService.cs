@@ -28,16 +28,34 @@ namespace FruitRacers.Backend.Core.Services.Impl
             {
                 repository = includeProducts ? repository.IncludingDetailsAndProducts() : repository.IncludingDetails();
             }
-            return await repository.CartOnly().BelongingTo(userID).FindOne().Then(c => c.Value);
+            return await repository
+                .CartOnly()
+                .BelongingTo(userID)
+                .FindOne()
+                .Then(c => c.Value);
         }
 
         public async Task<int> ConfirmCartForUser(int userID)
         {
             Order cart = await this.RequireCart(userID);
 
-            cart.OrderState = (int) OrderState.Confirmed;
+            if (cart.DeliveryDate == null)
+            {
+                throw new MissingDeliveryInfoException();
+            }
+            if (cart.TimeSlotId == null)
+            {
+                throw new MissingDeliveryInfoException();
+            }
+            if (cart.AddressId == null)
+            {
+                throw new MissingDeliveryInfoException();
+            }
 
-            this.Session.Orders.Update(cart);
+            cart.OrderState = (int)OrderState.Confirmed;
+            cart.Timestamp = DateTime.Now;
+
+            await this.Session.Orders.Update(cart);
             await this.Session.SaveChanges();
 
             return cart.OrderId;
@@ -50,7 +68,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .OrderDetails
                 .FindOne(d => d.ProductId == productID && d.OrderId == orderID)
                 .Then(d => d.Value);
-            this.Session.OrderDetails.Delete(detail);
+            await this.Session.OrderDetails.Delete(detail);
             await this.Session.SaveChanges();
         }
 
@@ -62,17 +80,27 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task InsertCartItemForUser(int userID, CartInsertionDto insertion)
         {
-            Order cart = (await this.Session.Orders.CartOnly().BelongingTo(userID).GetAll()).SingleOrDefault();
-            if (cart == null)
-            {
-                cart = new Order
+            Order cart = await this.Session
+                .Orders
+                .CartOnly()
+                .BelongingTo(userID)
+                .FindOne()
+                .Then(async c =>
                 {
-                    OrderState = (int)OrderState.Cart,
-                    UserId = userID
-                };
-                this.Session.Orders.Insert(cart);
-            }
-            this.Session.OrderDetails.Insert(new OrderDetail
+                    if (c.IsAbsent())
+                    {
+                        Order newCart = new Order
+                        {
+                            OrderState = (int)OrderState.Cart,
+                            UserId = userID
+                        };
+                        await this.Session.Orders.Insert(newCart);
+                        return newCart;
+                    }
+                    return c.Value;
+                });
+
+            await this.Session.OrderDetails.Insert(new OrderDetail
             {
                 OrderId = cart.OrderId,
                 ProductId = insertion.ProductId,
@@ -95,9 +123,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 ServiceUtils.EnsureOwnership(address.UserId, userID);
             }
             
-            if (deliveryInfo.TimeSlot != null && deliveryInfo.Date != null)
+            if (deliveryInfo.TimeSlot != null)
             {
-                int timeSlotCapacity = await this.Session.TimeSlots.GetActualCapacity(deliveryInfo.TimeSlot.TimeSlotId, deliveryInfo.Date.Value);
+                int timeSlotCapacity = await this.Session
+                    .TimeSlots
+                    .GetActualCapacity(deliveryInfo.TimeSlot.TimeSlotId, deliveryInfo.TimeSlot.Date);
                 if (timeSlotCapacity <= 0)
                 {
                     throw new TimeSlotFullException();
@@ -107,9 +137,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
             cart.TimeSlotId = deliveryInfo.TimeSlot?.TimeSlotId;
             cart.AddressId = deliveryInfo.Address?.AddressId;
             cart.Notes = deliveryInfo.Notes;
-            cart.DeliveryDate = deliveryInfo.Date;
+            cart.DeliveryDate = deliveryInfo.TimeSlot?.Date;
 
-            this.Session.Orders.Update(cart);
+            await this.Session.Orders.Update(cart);
             await this.Session.SaveChanges();
         }
 
@@ -122,7 +152,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .FindOne(d => d.OrderId == orderID && d.ProductId == cartItem.ProductId)
                 .Then(d => d.Value);
             item.Quantity = cartItem.Quantity;
-            this.Session.OrderDetails.Update(item);
+            await this.Session.OrderDetails.Update(item);
             await this.Session.SaveChanges();
         }
     }

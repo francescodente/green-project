@@ -77,6 +77,8 @@
     <Build Include="Tables\TimeSlotOverrides.sql" />
     <Build Include="Tables\Orders.sql" />
     <Build Include="Tables\OrderDetails.sql" />
+    <Build Include="Tables\ProductImages.sql" />
+    <Build Include="Tables\SupplierImages.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FruitRacers.Backend.SqlServer.refactorlog" />

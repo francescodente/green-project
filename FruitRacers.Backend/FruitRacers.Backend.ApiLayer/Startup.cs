@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FruitRacers.Backend.ApiLayer.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,6 +26,17 @@ namespace FruitRacers.Backend.ApiLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services
+                .AddSqlServerConnection(this.Configuration)
+                .AddDataSession()
+                .AddDataServices();
+
+            services
+                .AddAuthenticationHandler()
+                .AddJwtVerification(this.Configuration);
+
+            services.AddDtoMappers();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

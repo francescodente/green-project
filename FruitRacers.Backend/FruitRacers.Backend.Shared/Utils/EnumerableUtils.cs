@@ -7,6 +7,24 @@ namespace FruitRacers.Backend.Shared.Utils
 {
     public static class EnumerableUtils
     {
+        public static IEnumerable<T> Iterate<T>(T seed, Func<T, T> next)
+        {
+            T curr = seed;
+            while (true)
+            {
+                yield return curr;
+                curr = next(curr);
+            }
+        }
+
+        public static IEnumerable<T> Generate<T>(Func<T> supplier)
+        {
+            while (true)
+            {
+                yield return supplier();
+            }
+        }
+
         public static void ForEach<T>(this IEnumerable<T> sequence, Action<T> action)
         {
             foreach (T item in sequence)

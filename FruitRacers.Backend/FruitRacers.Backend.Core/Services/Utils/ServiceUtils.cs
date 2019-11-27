@@ -1,4 +1,5 @@
-﻿using FruitRacers.Backend.Core.Exceptions;
+﻿using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;

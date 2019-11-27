@@ -7,12 +7,6 @@ namespace FruitRacers.Backend.Core.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
-        IUserRepository PeopleOnly();
-
-        IUserRepository SupplierBusinessesOnly();
-
-        IUserRepository CustomerBusinessesOnly();
-
         IUserRepository IncludingRoles();
     }
 }

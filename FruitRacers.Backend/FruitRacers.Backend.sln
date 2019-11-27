@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FruitRacers.Backend.DataAcc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FruitRacers.Backend.Shared", "FruitRacers.Backend.Shared\FruitRacers.Backend.Shared.csproj", "{E2319B8D-980F-423F-A0E3-FE6127462E99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fruitracers.Backend.Test", "Fruitracers.Backend.Test\Fruitracers.Backend.Test.csproj", "{ED7946D0-E39B-4015-BB67-6653E4FD3362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FruitRacers.Backend.Test", "Fruitracers.Backend.Test\FruitRacers.Backend.Test.csproj", "{ED7946D0-E39B-4015-BB67-6653E4FD3362}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

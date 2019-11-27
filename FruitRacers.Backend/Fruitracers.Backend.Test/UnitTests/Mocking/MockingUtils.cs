@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fruitracers.Backend.Test.UnitTests.Mocking
+namespace FruitRacers.Backend.Test.UnitTests.Mocking
 {
     public static class MockingUtils
     {

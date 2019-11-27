@@ -8,6 +8,6 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface ICategoriesService
     {
-        Task<CategoryTreeDto> GetAllCategories();
+        Task<CategoryTreeDto> GetCategoryTree();
     }
 }

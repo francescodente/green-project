@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>41b26655-7a2e-4933-9e8f-6fd8ecae9940</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,10 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\FruitRacers.Backend.Core\FruitRacers.Backend.Core.csproj" />
     <ProjectReference Include="..\FruitRacers.Backend.DataAccess\FruitRacers.Backend.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

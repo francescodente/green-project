@@ -9,10 +9,14 @@ namespace FruitRacers.Backend.Core.Repositories
 {
     public interface IRepository<T> : IReadOnlyRepository<T> where T : class
     {
-        void Insert(T entity);
+        Task Insert(T entity);
 
-        void Update(T entity);
+        Task Delete(T entity);
 
-        void Delete(T entity);
+        Task DeleteWhere(Expression<Func<T, bool>> predicate);
+
+        Task Update(T entity);
+
+        Task UpdateWhere(Expression<Func<T, bool>> predicate, Action<T> updateAction);
     }
 }

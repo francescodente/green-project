@@ -13,7 +13,7 @@ namespace FruitRacers.Backend.Core.Entities
         public int OrderId { get; set; }
         public string Notes { get; set; }
         public DateTime? DeliveryDate { get; set; }
-        public byte[] Timestamp { get; set; }
+        public DateTime? Timestamp { get; set; }
         public int OrderState { get; set; }
         public int? TimeSlotId { get; set; }
         public int UserId { get; set; }

@@ -329,7 +329,7 @@ Auth
 
 ## Products
 
-### GET - /suppliers/{id}/products
+### GET - /products/supplier/{id}
 
 *Returns the list of all products for the given supplier.*
 
@@ -545,17 +545,11 @@ Auth
 
 ***
 
-## Measurements Units
-
-### GET - /units
-
-***
-
 ## Time Slots
 
 ### GET - /timeslots
 
-### POST - /timeslot/override
+### POST - /timeslots/override
 
 ***
 

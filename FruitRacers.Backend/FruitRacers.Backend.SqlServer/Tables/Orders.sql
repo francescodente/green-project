@@ -3,7 +3,7 @@
 	[OrderID] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Notes] NVARCHAR(1000) NULL, 
     [DeliveryDate] DATE NULL, 
-    [Timestamp] TIMESTAMP NULL, 
+    [Timestamp] DATETIME NULL, 
     [OrderState] INT NOT NULL, 
     [TimeSlotID] INT NULL, 
     [UserID] INT NOT NULL, 

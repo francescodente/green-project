@@ -16,5 +16,10 @@ namespace FruitRacers.Backend.Shared.Utils
         {
             return task.ContinueWith(t => mapper(t.Result));
         }
+
+        public static Task<TResult> Then<TSource, TResult>(this Task<TSource> task, Func<TSource, Task<TResult>> taskContinuation)
+        {
+            return task.Then(taskContinuation);
+        }
     }
 }

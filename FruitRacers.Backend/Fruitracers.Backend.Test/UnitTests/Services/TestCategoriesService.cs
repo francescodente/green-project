@@ -1,4 +1,4 @@
-﻿using Fruitracers.Backend.Test.UnitTests.Mocking;
+﻿using FruitRacers.Backend.Test.UnitTests.Mocking;
 using FruitRacers.Backend.Core;
 using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Entities;
@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fruitracers.Backend.Test.UnitTests.Services
+namespace FruitRacers.Backend.Test.UnitTests.Services
 {
     public class TestCategoriesService
     {
@@ -36,7 +36,7 @@ namespace Fruitracers.Backend.Test.UnitTests.Services
 
             ICategoriesService categoriesService = new CategoriesService(session, MappingUtils.CreateDefaultMapper());
 
-            CategoryTreeDto actual = categoriesService.GetAllCategories().Result;
+            CategoryTreeDto actual = categoriesService.GetCategoryTree().Result;
 
             CategoryTreeDto expected = ParseTree("0137$$4$$265$$8$$$");
 

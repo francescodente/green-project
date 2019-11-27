@@ -11,5 +11,7 @@ namespace FruitRacers.Backend.Core.Repositories
         void InsertOverride(TimeSlotOverride timeSlotOverride);
 
         Task<int> GetActualCapacity(int timeSlotID, DateTime date);
+
+        Task<IEnumerable<(DateTime Date, TimeSlot Slot, int Capacity)>> GetAllWithActualCapacities(DateTime start, int daysCount);
     }
 }

@@ -19,7 +19,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         }
 
-        public async Task<CategoryTreeDto> GetAllCategories()
+        public async Task<CategoryTreeDto> GetCategoryTree()
         {
             IList<Category> allCategories = (await this.Session.Categories.GetAll()).ToList();
             IEnumerable<CategoryTreeDto> roots = allCategories
@@ -38,7 +38,6 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         private CategoryTreeDto CreateSubTree(Category root, IList<Category> categories)
         {
-            //categories.Remove(root);
             return new CategoryTreeDto
             {
                 Category = this.Mapper.Map<Category, CategoryDto>(root),
