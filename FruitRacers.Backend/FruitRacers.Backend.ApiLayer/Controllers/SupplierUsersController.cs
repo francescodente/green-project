@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FruitRacers.Backend.ApiLayer.Session;
 using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Http;
@@ -14,8 +13,8 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
     [ApiController]
     public class SupplierUsersController : UsersController<SupplierDto>
     {
-        public SupplierUsersController(IUsersService<SupplierDto> usersService, IRequestSession requestSession)
-            : base(usersService, requestSession)
+        public SupplierUsersController(IUsersService<SupplierDto> usersService)
+            : base(usersService)
         {
         }
     }

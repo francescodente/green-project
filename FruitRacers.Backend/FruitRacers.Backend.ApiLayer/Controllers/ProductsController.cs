@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FruitRacers.Backend.ApiLayer.Session;
 using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Http;
@@ -12,15 +11,13 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    public class ProductsController : ControllerBase
+    public class ProductsController : AbstractController
     {
         private readonly IProductsService productsService;
-        private readonly IRequestSession requestSession;
 
-        public ProductsController(IProductsService productsService, IRequestSession requestSession)
+        public ProductsController(IProductsService productsService)
         {
             this.productsService = productsService;
-            this.requestSession = requestSession;
         }
 
         [HttpGet("supplier/{supplierId}")]
@@ -38,21 +35,21 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertProduct([FromBody] ProductWithPricesDto<int> product)
         {
-            int productId = await this.productsService.InsertProductForSupplier(this.requestSession.UserId, product);
+            int productId = await this.productsService.InsertProductForSupplier(this.UserId, product);
             return CreatedAtAction(nameof(GetProductData), new { ProductId = productId });
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateProduct([FromBody] ProductWithPricesDto<int> product)
         {
-            await this.productsService.UpdateProductForSupplier(this.requestSession.UserId, product);
+            await this.productsService.UpdateProductForSupplier(this.UserId, product);
             return NoContent();
         }
 
         [HttpDelete("productId")]
         public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
-            await this.productsService.DeleteProductForSupplier(this.requestSession.UserId, productId);
+            await this.productsService.DeleteProductForSupplier(this.UserId, productId);
             return NoContent();
         }
     }

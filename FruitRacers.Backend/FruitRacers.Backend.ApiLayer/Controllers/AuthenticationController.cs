@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FruitRacers.Backend.ApiLayer.Filters;
-using FruitRacers.Backend.ApiLayer.Session;
 using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Http;
@@ -13,15 +12,13 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class AuthenticationController : AbstractController
     {
         private readonly IAuthenticationService authenticationService;
-        private readonly IRequestSession requestSession;
 
-        public AuthenticationController(IAuthenticationService authenticationService, IRequestSession requestSession)
+        public AuthenticationController(IAuthenticationService authenticationService)
         {
             this.authenticationService = authenticationService;
-            this.requestSession = requestSession;
         }
 
         [HttpPost("token")]
@@ -34,14 +31,14 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [RequireLogin]
         public async Task<IActionResult> RenewToken()
         {
-            return Ok(await this.authenticationService.RenewToken(this.requestSession.UserId));
+            return Ok(await this.authenticationService.RenewToken(this.UserId));
         }
 
         [HttpGet("logout")]
         [RequireLogin]
         public async Task<IActionResult> Logout()
         {
-            await this.authenticationService.Logout(this.requestSession.UserId);
+            await this.authenticationService.Logout(this.UserId);
             return NoContent();
         }
 
@@ -49,7 +46,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [RequireLogin]
         public async Task<IActionResult> ChangePassword([FromBody] PasswordChangeRequestDto request)
         {
-            await this.authenticationService.ChangePassword(this.requestSession.UserId, request);
+            await this.authenticationService.ChangePassword(this.UserId, request);
             return NoContent();
         }
     }
