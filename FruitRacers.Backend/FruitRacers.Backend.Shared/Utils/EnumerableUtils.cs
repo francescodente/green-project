@@ -52,5 +52,24 @@ namespace FruitRacers.Backend.Shared.Utils
         {
             return sequence.Where(predicate).SingleOptional();
         }
+
+        public static string ConcatStrings<T>(this IEnumerable<T> sequence)
+        {
+            return sequence.ConcatStrings(string.Empty);
+        }
+
+        public static string ConcatStrings<T>(this IEnumerable<T> sequence, string separator)
+        {
+            return sequence.ConcatStrings(separator, string.Empty, string.Empty);
+        }
+
+        public static string ConcatStrings<T>(this IEnumerable<T> sequence, string separator, string prefix, string suffix)
+        {
+            return new StringBuilder()
+                .Append(prefix)
+                .AppendJoin(separator, sequence)
+                .Append(suffix)
+                .ToString();
+        }
     }
 }
