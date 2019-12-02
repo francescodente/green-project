@@ -9,7 +9,10 @@ namespace FruitRacers.Backend.ApiLayer.Filters
         public RequireLoginAttribute(params UserRole[] roles)
             : base()
         {
-            this.Roles = roles.ConcatStrings(",");
+            if (roles.Length > 0)
+            {
+                this.Roles = roles.ConcatStrings(",");
+            }
         }
 
         public RequireLoginAttribute(string policy, params UserRole[] roles)
