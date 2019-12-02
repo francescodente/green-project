@@ -36,28 +36,28 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost("details")]
         public async Task<IActionResult> InsertCartItem([FromBody] CartInsertionDto insertion)
         {
             await this.cartService.InsertCartItemForUser(this.UserId, insertion);
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("details")]
         public async Task<IActionResult> UpdateCartItem([FromBody] CartInsertionDto insertion)
         {
             await this.cartService.UpdateCartItemForUser(this.UserId, insertion);
             return NoContent();
         }
 
-        [HttpDelete("{productId}")]
+        [HttpDelete("details/{productId}")]
         public async Task<IActionResult> DeleteCartItem([FromServices] int productId)
         {
             await this.cartService.DeleteCartItemForUser(this.UserId, productId);
             return NoContent();
         }
 
-        [HttpPut]
+        [HttpPut("confirm")]
         public async Task<IActionResult> ConfirmCart()
         {
             int orderId = await this.cartService.ConfirmCartForUser(this.UserId);
