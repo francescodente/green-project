@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    public class AbstractController : ControllerBase
+    public abstract class AbstractController : ControllerBase
     {
         protected int UserId => int.Parse(this.User.FindFirst(ClaimTypes.NameIdentifier).Value);
     }
