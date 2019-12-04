@@ -2,11 +2,11 @@
 
 namespace FruitRacers.Backend.Core.Dto
 {
-    public class PersonDto : AccountDto
+    public class PersonDto : RoleDto
     {
-        public string CF { get; set; }
+        public string Cf { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime BirthDate { get; set; }
     }
 }

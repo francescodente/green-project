@@ -12,14 +12,35 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class CustomerBusinessUsersService : AbstractUsersService<CustomerBusinessDto, UserBusinessCustomer>
     {
-        public CustomerBusinessUsersService(IDataSession session, IMapper mapper, IAuthenticationHandler authenticationHandler)
-            : base(session, mapper, authenticationHandler)
+        public CustomerBusinessUsersService(IDataSession session, IMapper mapper, IAuthenticationHandler auth)
+            : base(session, mapper, auth)
         {
         }
 
-        protected override void ApplyChangesToEntity(CustomerBusinessDto dto, UserBusinessCustomer entity)
+        protected override void ApplyRoleChangesToEntity(CustomerBusinessDto role, UserBusinessCustomer entity)
         {
-            throw new NotImplementedException();
+            entity.User.BusinessName = role.BusinessName;
+            entity.User.LegalForm = role.LegalForm;
+            entity.User.Pec = role.Pec;
+            entity.User.Sdi = role.Sdi;
+            entity.User.VatNumber = role.VatNumber;
+        }
+
+        protected override UserBusinessCustomer CreateEntity(CustomerBusinessDto role, User userEntity)
+        {
+            return new UserBusinessCustomer
+            {
+                User = new UserBusiness
+                {
+                    BusinessName = role.BusinessName,
+                    LegalForm = role.LegalForm,
+                    Pec = role.Pec,
+                    Sdi = role.Sdi,
+                    VatNumber = role.VatNumber,
+                    IsValid = true,
+                    User = userEntity
+                }
+            };
         }
 
         protected override User ExtractUser(UserBusinessCustomer entity)

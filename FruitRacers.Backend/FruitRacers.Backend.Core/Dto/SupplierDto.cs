@@ -3,5 +3,6 @@
     public class SupplierDto : BusinessDto
     {
         public string Description { get; set; }
+        public AddressDto Address { get; set; }
     }
 }

@@ -26,6 +26,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             return await this.Session
                 .Users
+                .IncludingRoles()
                 .FindOne(predicate)
                 .Then(u => u.OrElseThrow(() => new UserNotFoundException()));
         }

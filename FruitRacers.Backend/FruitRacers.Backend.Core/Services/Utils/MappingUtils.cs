@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Entities;
+using System.Linq;
 
 namespace FruitRacers.Backend.Core.Services.Utils
 {
@@ -69,7 +70,28 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public UserMapping()
             {
-                
+                this.CreateMap<User, SimpleUserDto>();
+
+                this.CreateMap<User, LoggedInUserDto>()
+                    .ForMember(dst => dst.IsAdmin, o => o.MapFrom(src => src.UserAdministrator != null))
+                    .ForMember(dst => dst.IsDeliveryCompany, o => o.MapFrom(src => src.UserDeliveryCompany != null));
+
+                this.CreateMap<UserPerson, PersonDto>();
+
+                this.CreateMap<UserBusinessCustomer, CustomerBusinessDto>()
+                    .ForMember(dst => dst.LegalForm, o => o.MapFrom(src => src.User.LegalForm))
+                    .ForMember(dst => dst.BusinessName, o => o.MapFrom(src => src.User.BusinessName))
+                    .ForMember(dst => dst.Pec, o => o.MapFrom(src => src.User.Pec))
+                    .ForMember(dst => dst.Sdi, o => o.MapFrom(src => src.User.Sdi))
+                    .ForMember(dst => dst.VatNumber, o => o.MapFrom(src => src.User.VatNumber));
+
+                this.CreateMap<UserBusinessSupplier, SupplierDto>()
+                    .ForMember(dst => dst.Address, o => o.MapFrom(src => src.User.User.Addresses.SingleOrDefault()))
+                    .ForMember(dst => dst.LegalForm, o => o.MapFrom(src => src.User.LegalForm))
+                    .ForMember(dst => dst.BusinessName, o => o.MapFrom(src => src.User.BusinessName))
+                    .ForMember(dst => dst.Pec, o => o.MapFrom(src => src.User.Pec))
+                    .ForMember(dst => dst.Sdi, o => o.MapFrom(src => src.User.Sdi))
+                    .ForMember(dst => dst.VatNumber, o => o.MapFrom(src => src.User.VatNumber));
             }
         }
 

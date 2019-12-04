@@ -4,10 +4,10 @@ using System.Text;
 
 namespace FruitRacers.Backend.Core.Dto
 {
-    public class RegistrationDto<T>
-        where T : AccountDto
+    public class RegistrationDto<TRole>
+        where TRole : RoleDto
     {
-        public T Account { get; set; }
+        public AccountDto<SimpleUserDto, TRole> Account { get; set; }
         public string Password { get; set; }
     }
 }

@@ -102,7 +102,7 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
             );
         }
 
-        public IEnumerable<UserRole> GetUserRoles(User user)
+        private IEnumerable<UserRole> GetUserRoles(User user)
         {
             if (user.UserPerson != null)
             {

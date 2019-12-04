@@ -10,12 +10,12 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    public abstract class UsersController<T> : AbstractController
-        where T : AccountDto
+    public abstract class UsersController<TRole> : AbstractController
+        where TRole : RoleDto
     {
-        private readonly IUsersService<T> usersService;
+        private readonly IUsersService<TRole> usersService;
 
-        public UsersController(IUsersService<T> usersService)
+        public UsersController(IUsersService<TRole> usersService)
         {
             this.usersService = usersService;
         }
@@ -28,16 +28,16 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegistrationDto<T> registration)
+        public async Task<IActionResult> Register([FromBody] RegistrationDto<TRole> registration)
         {
             int id = await this.usersService.Register(registration);
             return Ok(new { UserId = id });
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser([FromBody] T user)
+        public async Task<IActionResult> UpdateUser([FromBody] AccountDto<LoggedInUserDto, TRole> account)
         {
-            await this.usersService.UpdateUser(user);
+            await this.usersService.UpdateUser(account);
             return NoContent();
         }
 

@@ -12,14 +12,29 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class PeopleUsersService : AbstractUsersService<PersonDto, UserPerson>
     {
-        public PeopleUsersService(IDataSession session, IMapper mapper, IAuthenticationHandler authenticationHandler)
-            : base(session, mapper, authenticationHandler)
+        public PeopleUsersService(IDataSession session, IMapper mapper, IAuthenticationHandler auth)
+            : base(session, mapper, auth)
         {
         }
 
-        protected override void ApplyChangesToEntity(PersonDto dto, UserPerson entity)
+        protected override void ApplyRoleChangesToEntity(PersonDto role, UserPerson entity)
         {
-            throw new NotImplementedException();
+            entity.Cf = role.Cf;
+            entity.BirthDate = role.BirthDate;
+            entity.FirstName = role.FirstName;
+            entity.LastName = role.LastName;
+        }
+
+        protected override UserPerson CreateEntity(PersonDto role, User userEntity)
+        {
+            return new UserPerson
+            {
+                BirthDate = role.BirthDate,
+                Cf = role.Cf,
+                FirstName = role.FirstName,
+                LastName = role.LastName,
+                User = userEntity
+            };
         }
 
         protected override User ExtractUser(UserPerson entity)

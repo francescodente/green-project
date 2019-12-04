@@ -31,22 +31,11 @@ namespace FruitRacers.Backend.ApiLayer
             services
                 .AddSqlServerConnection(this.Configuration)
                 .AddDataSession()
-                .AddDataServices();
-
-            services
+                .AddDataServices()
                 .AddAuthenticationHandler()
-                .AddJwtVerification(this.Configuration);
-
-            services.AddDtoMappers();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info
-                {
-                    Title = "Fruitracers API",
-                    Version = "v1"
-                });
-            });
+                .AddJwtVerification(this.Configuration)
+                .AddDtoMappers()
+                .AddSwagger();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -62,8 +51,6 @@ namespace FruitRacers.Backend.ApiLayer
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
-
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "swagger/{documentName}/swagger.json";
@@ -72,6 +59,8 @@ namespace FruitRacers.Backend.ApiLayer
             {
                 c.SwaggerEndpoint("v1/swagger.json", "Fruitracers API");
             });
+
+            app.UseAuthentication();
 
             app.UseMvc();
         }
