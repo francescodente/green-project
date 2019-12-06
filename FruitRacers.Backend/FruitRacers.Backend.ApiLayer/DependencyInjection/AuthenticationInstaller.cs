@@ -12,10 +12,16 @@ using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {
-    public static class AuthenticationExtensions
+    public class AuthenticationInstaller : IServiceInstaller
     {
-        public static IServiceCollection AddJwtVerification(this IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config)
         {
+            services
+                .AddSingleton<IHashCalculator, Pbkdf2Hashing>()
+                .AddSingleton<ISaltGenerator, CspSaltGenerator>()
+                .AddSingleton<IStringEncoding, HexEncoding>()
+                .AddScoped<IAuthenticationHandler, JwtAuthentication>();
+
             IConfigurationSection appSettingsSection = config.GetSection(nameof(AuthenticationSettings));
             services.Configure<AuthenticationSettings>(appSettingsSection);
             AuthenticationSettings authSettings = appSettingsSection.Get<AuthenticationSettings>();
@@ -37,16 +43,6 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                     ClockSkew = TimeSpan.FromMinutes(1)
                 };
             });
-            return services;
-        }
-
-        public static IServiceCollection AddAuthenticationHandler(this IServiceCollection services)
-        {
-            return services
-                .AddSingleton<IHashCalculator, Pbkdf2Hashing>()
-                .AddSingleton<ISaltGenerator, CspSaltGenerator>()
-                .AddSingleton<IStringEncoding, HexEncoding>()
-                .AddScoped<IAuthenticationHandler, JwtAuthentication>();
         }
     }
 }

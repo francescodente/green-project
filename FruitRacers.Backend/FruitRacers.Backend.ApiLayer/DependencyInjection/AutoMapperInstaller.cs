@@ -5,14 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FruitRacers.Backend.Core.Services.Utils;
+using Microsoft.Extensions.Configuration;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {
-    public static class AutoMapperExtensions
+    public class AutoMapperInstaller : IServiceInstaller
     {
-        public static IServiceCollection AddDtoMappers(this IServiceCollection services)
+        public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            return services.AddSingleton(MappingUtils.CreateDefaultMapper());
+            services.AddSingleton(MappingUtils.CreateDefaultMapper());
         }
     }
 }

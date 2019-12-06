@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FruitRacers.Backend.ApiLayer.DependencyInjection;
+﻿using FruitRacers.Backend.ApiLayer.DependencyInjection;
+using FruitRacers.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Linq;
 
 namespace FruitRacers.Backend.ApiLayer
 {
@@ -26,16 +20,13 @@ namespace FruitRacers.Backend.ApiLayer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services
-                .AddSqlServerConnection(this.Configuration)
-                .AddDataSession()
-                .AddDataServices()
-                .AddAuthenticationHandler()
-                .AddJwtVerification(this.Configuration)
-                .AddDtoMappers()
-                .AddSwagger();
+            typeof(Startup).Assembly
+                .GetTypes()
+                .Where(t => typeof(IServiceInstaller).IsAssignableFrom(t))
+                .Where(t => !(t.IsAbstract || t.IsInterface))
+                .Select(Activator.CreateInstance)
+                .Cast<IServiceInstaller>()
+                .ForEach(installer => installer.InstallServices(services, this.Configuration));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

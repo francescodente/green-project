@@ -9,26 +9,22 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {
-    public static class DataAccessExtensions
+    public class DataAccessInstaller : IServiceInstaller
     {
         private const string CONNECTION_STRING_KEY = "FruitracersDb";
 
-        public static IServiceCollection AddDataSession(this IServiceCollection services)
+        public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            return services.AddScoped<IDataSession, SqlDataSession>();
-        }
-
-        public static IServiceCollection AddSqlServerConnection(this IServiceCollection services, IConfiguration configuration)
-        {
-            return services.AddDbContext<FruitracersContext>(options =>
+            services.AddDbContext<FruitracersContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString(CONNECTION_STRING_KEY));
+                options.UseSqlServer(config.GetConnectionString(CONNECTION_STRING_KEY));
             });
-        }
 
-        public static IServiceCollection AddDataServices(this IServiceCollection services)
-        {
-            return services
+            services.AddScoped<IDataSession>(p => new LazyLoadedDataSession(
+                new SqlDataSession(p.GetRequiredService<FruitracersContext>())
+            ));
+
+            services
                 .AddScoped<IAddressesService, AddressesService>()
                 .AddScoped<IAuthenticationService, AuthenticationService>()
                 .AddScoped<ICartService, CartService>()

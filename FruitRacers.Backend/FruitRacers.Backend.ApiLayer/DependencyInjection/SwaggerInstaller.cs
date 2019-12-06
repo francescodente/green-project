@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {
-    public static class SwaggerExtensions
+    public class SwaggerInstaller : IServiceInstaller
     {
-        public static IServiceCollection AddSwagger(this IServiceCollection services)
+        public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            return services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                 {
