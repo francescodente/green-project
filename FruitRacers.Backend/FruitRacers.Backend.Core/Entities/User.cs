@@ -21,10 +21,11 @@ namespace FruitRacers.Backend.Core.Entities
         public bool? IsEnabled { get; set; }
         public bool IsDeleted { get; set; }
 
-        public virtual UserAdministrator UserAdministrator { get; set; }
-        public virtual UserBusiness UserBusiness { get; set; }
-        public virtual UserDeliveryCompany UserDeliveryCompany { get; set; }
-        public virtual UserPerson UserPerson { get; set; }
+        public virtual Administrator Administrator { get; set; }
+        public virtual CustomerBusiness CustomerBusiness { get; set; }
+        public virtual DeliveryCompany DeliveryCompany { get; set; }
+        public virtual Person Person { get; set; }
+        public virtual Supplier Supplier { get; set; }
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }

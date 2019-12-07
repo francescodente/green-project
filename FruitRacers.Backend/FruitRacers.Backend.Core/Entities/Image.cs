@@ -8,15 +8,15 @@ namespace FruitRacers.Backend.Core.Entities
         public Image()
         {
             Categories = new HashSet<Category>();
+            ProductImages = new HashSet<ProductImage>();
+            SupplierImages = new HashSet<SupplierImage>();
         }
 
         public int ImageId { get; set; }
         public string Path { get; set; }
-        public int? SupplierId { get; set; }
-        public int? ProductId { get; set; }
 
-        public virtual Product Product { get; set; }
-        public virtual UserBusinessSupplier Supplier { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual ICollection<SupplierImage> SupplierImages { get; set; }
     }
 }

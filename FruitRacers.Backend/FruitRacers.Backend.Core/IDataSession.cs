@@ -16,9 +16,9 @@ namespace FruitRacers.Backend.Core
         IReadOnlyRepository<Category> Categories { get; }
         IRepository<Address> Addresses { get; }
         IRepository<OrderDetail> OrderDetails { get; }
-        IRepository<UserPerson> People { get; }
-        IRepository<UserBusinessCustomer> CustomerBusinesses { get; }
-        IRepository<UserBusinessSupplier> Suppliers { get; }
+        IRepository<Person> People { get; }
+        IRepository<CustomerBusiness> CustomerBusinesses { get; }
+        IRepository<Supplier> Suppliers { get; }
 
         Task SaveChanges();
     }

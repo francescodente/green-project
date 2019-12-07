@@ -3,9 +3,16 @@ using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public partial class UserBusiness
+    public partial class Supplier
     {
+        public Supplier()
+        {
+            Products = new HashSet<Product>();
+            SupplierImages = new HashSet<SupplierImage>();
+        }
+
         public int UserId { get; set; }
+        public string Description { get; set; }
         public string VatNumber { get; set; }
         public string BusinessName { get; set; }
         public string Sdi { get; set; }
@@ -14,7 +21,7 @@ namespace FruitRacers.Backend.Core.Entities
         public bool IsValid { get; set; }
 
         public virtual User User { get; set; }
-        public virtual UserBusinessCustomer UserBusinessCustomer { get; set; }
-        public virtual UserBusinessSupplier UserBusinessSupplier { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<SupplierImage> SupplierImages { get; set; }
     }
 }

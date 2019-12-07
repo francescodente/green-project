@@ -20,12 +20,7 @@ namespace FruitRacers.Backend.ApiLayer
 
         public void ConfigureServices(IServiceCollection services)
         {
-            typeof(Startup).Assembly
-                .GetTypes()
-                .Where(t => typeof(IServiceInstaller).IsAssignableFrom(t))
-                .Where(t => !(t.IsAbstract || t.IsInterface))
-                .Select(Activator.CreateInstance)
-                .Cast<IServiceInstaller>()
+            ReflectionUtils.InstancesOfSubtypes<IServiceInstaller>(typeof(Startup).Assembly)
                 .ForEach(installer => installer.InstallServices(services, this.Configuration));
         }
 

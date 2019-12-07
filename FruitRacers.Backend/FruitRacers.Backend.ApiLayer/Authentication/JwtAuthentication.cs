@@ -104,25 +104,25 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
 
         private IEnumerable<UserRole> GetUserRoles(User user)
         {
-            if (user.UserPerson != null)
+            if (user.Person != null)
             {
                 yield return UserRole.Person;
                 yield return UserRole.Customer;
             }
-            if (user.UserBusiness?.UserBusinessCustomer != null)
+            if (user.CustomerBusiness != null)
             {
                 yield return UserRole.CustomerBusiness;
                 yield return UserRole.Customer;
             }
-            if (user.UserBusiness?.UserBusinessSupplier != null)
+            if (user.Supplier != null)
             {
                 yield return UserRole.Supplier;
             }
-            if (user.UserAdministrator != null)
+            if (user.Administrator != null)
             {
                 yield return UserRole.Administrator;
             }
-            if (user.UserDeliveryCompany != null)
+            if (user.DeliveryCompany != null)
             {
                 yield return UserRole.DeliveryCompany;
             }

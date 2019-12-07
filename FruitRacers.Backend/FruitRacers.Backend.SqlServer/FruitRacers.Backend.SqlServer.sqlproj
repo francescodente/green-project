@@ -58,15 +58,9 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="PublishLocations" />
+    <Folder Include="Tables\Roles" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Tables\Users.sql" />
-    <Build Include="Tables\UserBusinesses.sql" />
-    <Build Include="Tables\UserPeople.sql" />
-    <Build Include="Tables\UserAdministrators.sql" />
-    <Build Include="Tables\UserDeliveryCompanies.sql" />
-    <Build Include="Tables\UserBusinessCustomers.sql" />
-    <Build Include="Tables\UserBusinessSuppliers.sql" />
     <Build Include="Tables\Images.sql" />
     <Build Include="Tables\Categories.sql" />
     <Build Include="Tables\Products.sql" />
@@ -79,6 +73,12 @@
     <Build Include="Tables\OrderDetails.sql" />
     <Build Include="Tables\ProductImages.sql" />
     <Build Include="Tables\SupplierImages.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\Roles\Administrators.sql" />
+    <Build Include="Tables\Roles\People.sql" />
+    <Build Include="Tables\Roles\Suppliers.sql" />
+    <Build Include="Tables\Roles\CustomerBusinesses.sql" />
+    <Build Include="Tables\Roles\DeliveryCompanies.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="FruitRacers.Backend.SqlServer.refactorlog" />

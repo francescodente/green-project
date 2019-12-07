@@ -18,11 +18,11 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         public IUserRepository IncludingRoles()
         {
             this.ChainQueryModification(q => q
-                .Include(user => user.UserPerson)
-                .Include(user => user.UserBusiness)
-                    .ThenInclude(business => business.UserBusinessCustomer)
-                .Include(user => user.UserBusiness)
-                    .ThenInclude(business => business.UserBusinessSupplier));
+                .Include(user => user.Person)
+                .Include(user => user.CustomerBusiness)
+                .Include(user => user.Supplier)
+                .Include(user => user.Administrator)
+                .Include(user => user.DeliveryCompany));
             return this;
         }
     }

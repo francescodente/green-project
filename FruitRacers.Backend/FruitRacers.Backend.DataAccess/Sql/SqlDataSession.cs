@@ -34,11 +34,11 @@ namespace FruitRacers.Backend.DataAccess.Sql
 
         public IRepository<OrderDetail> OrderDetails => new SqlRepository<OrderDetail>(this.context);
 
-        public IRepository<UserPerson> People => new SqlRepository<UserPerson>(this.context, q => q.Include(p => p.User));
+        public IRepository<Person> People => new SqlRepository<Person>(this.context, q => q.Include(p => p.User));
 
-        public IRepository<UserBusinessCustomer> CustomerBusinesses => new SqlRepository<UserBusinessCustomer>(this.context);
+        public IRepository<CustomerBusiness> CustomerBusinesses => new SqlRepository<CustomerBusiness>(this.context);
 
-        public IRepository<UserBusinessSupplier> Suppliers => new SqlRepository<UserBusinessSupplier>(this.context);
+        public IRepository<Supplier> Suppliers => new SqlRepository<Supplier>(this.context);
 
         public void Dispose()
         {

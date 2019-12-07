@@ -10,52 +10,58 @@ using System.Text;
 
 namespace FruitRacers.Backend.Core.Services.Impl
 {
-    public class SuppliersUsersService : AbstractUsersService<SupplierDto, UserBusinessSupplier>
+    public class SuppliersUsersService : AbstractUsersService<SupplierDto, Supplier>
     {
         public SuppliersUsersService(IDataSession session, IMapper mapper, IAuthenticationHandler auth)
             : base(session, mapper, auth)
         {
         }
 
-        protected override void ApplyRoleChangesToEntity(SupplierDto role, UserBusinessSupplier entity)
+        protected override void ApplyRoleChangesToEntity(SupplierDto role, Supplier entity)
         {
             entity.Description = role.Description;
-            entity.User.BusinessName = role.BusinessName;
-            entity.User.LegalForm = role.LegalForm;
-            entity.User.Pec = role.Pec;
-            entity.User.Sdi = role.Sdi;
-            entity.User.VatNumber = role.VatNumber;
+            entity.BusinessName = role.BusinessName;
+            entity.LegalForm = role.LegalForm;
+            entity.Pec = role.Pec;
+            entity.Sdi = role.Sdi;
+            entity.VatNumber = role.VatNumber;
         }
 
-        protected override UserBusinessSupplier CreateEntity(SupplierDto role, User userEntity)
+        protected override Supplier CreateEntity(SupplierDto role, User userEntity)
         {
-            return new UserBusinessSupplier
+            if (role.Address != null)
+            {
+                userEntity.Addresses.Add(new Address
+                {
+                    Description = role.Address.Description,
+                    Latitude = role.Address.Latitude,
+                    Longitude = role.Address.Longitude
+                });
+            }
+            return new Supplier
             {
                 Description = role.Description,
-                User = new UserBusiness
-                {
-                    BusinessName = role.BusinessName,
-                    LegalForm = role.LegalForm,
-                    Pec = role.Pec,
-                    Sdi = role.Sdi,
-                    VatNumber = role.VatNumber,
-                    IsValid = true,
-                    User = userEntity
-                }
+                BusinessName = role.BusinessName,
+                LegalForm = role.LegalForm,
+                Pec = role.Pec,
+                Sdi = role.Sdi,
+                VatNumber = role.VatNumber,
+                IsValid = true,
+                User = userEntity
             };
         }
 
-        protected override User ExtractUser(UserBusinessSupplier entity)
+        protected override User ExtractUser(Supplier entity)
         {
-            return entity.User.User;
+            return entity.User;
         }
 
-        protected override IRepository<UserBusinessSupplier> GetRepository()
+        protected override IRepository<Supplier> GetRepository()
         {
             return this.Session.Suppliers;
         }
 
-        protected override Expression<Func<UserBusinessSupplier, bool>> UserIdIsEqualTo(int userId)
+        protected override Expression<Func<Supplier, bool>> UserIdIsEqualTo(int userId)
         {
             return u => u.UserId == userId;
         }

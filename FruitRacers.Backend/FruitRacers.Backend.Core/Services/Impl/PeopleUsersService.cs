@@ -10,14 +10,14 @@ using System.Text;
 
 namespace FruitRacers.Backend.Core.Services.Impl
 {
-    public class PeopleUsersService : AbstractUsersService<PersonDto, UserPerson>
+    public class PeopleUsersService : AbstractUsersService<PersonDto, Person>
     {
         public PeopleUsersService(IDataSession session, IMapper mapper, IAuthenticationHandler auth)
             : base(session, mapper, auth)
         {
         }
 
-        protected override void ApplyRoleChangesToEntity(PersonDto role, UserPerson entity)
+        protected override void ApplyRoleChangesToEntity(PersonDto role, Person entity)
         {
             entity.Cf = role.Cf;
             entity.BirthDate = role.BirthDate;
@@ -25,9 +25,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
             entity.LastName = role.LastName;
         }
 
-        protected override UserPerson CreateEntity(PersonDto role, User userEntity)
+        protected override Person CreateEntity(PersonDto role, User userEntity)
         {
-            return new UserPerson
+            return new Person
             {
                 BirthDate = role.BirthDate,
                 Cf = role.Cf,
@@ -37,17 +37,17 @@ namespace FruitRacers.Backend.Core.Services.Impl
             };
         }
 
-        protected override User ExtractUser(UserPerson entity)
+        protected override User ExtractUser(Person entity)
         {
             return entity.User;
         }
 
-        protected override IRepository<UserPerson> GetRepository()
+        protected override IRepository<Person> GetRepository()
         {
             return this.Session.People;
         }
 
-        protected override Expression<Func<UserPerson, bool>> UserIdIsEqualTo(int userId)
+        protected override Expression<Func<Person, bool>> UserIdIsEqualTo(int userId)
         {
             return u => u.UserId == userId;
         }
