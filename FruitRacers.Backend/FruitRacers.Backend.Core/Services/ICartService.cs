@@ -1,23 +1,20 @@
-﻿using FruitRacers.Backend.Core.Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FruitRacers.Backend.Contracts.Orders;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services
 {
     public interface ICartService
     {
-        Task<CartDto> GetCartDetailsForUser(int userID);
+        Task<CartOutputDto> GetCartDetailsForUser(int userId);
 
-        Task UpdateCartDeliveryInfoForUser(int userID, DeliveryInfoDto deliveryInfo);
+        Task UpdateCartDeliveryInfoForUser(int userId, DeliveryInfoInputDto deliveryInfo);
 
-        Task InsertCartItemForUser(int userID, CartInsertionDto insertion);
+        Task InsertCartItemForUser(int userId, CartItemInputDto insertion);
 
-        Task UpdateCartItemForUser(int userID, CartInsertionDto insertion);
+        Task UpdateCartItemForUser(int userId, CartItemInputDto insertion);
 
-        Task DeleteCartItemForUser(int userID, int productID);
+        Task DeleteCartItemForUser(int userId, int productId);
 
-        Task<int> ConfirmCartForUser(int userID);
+        Task<int> ConfirmCartForUser(int userId);
     }
 }

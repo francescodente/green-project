@@ -1,12 +1,11 @@
-﻿using System;
+﻿using FruitRacers.Backend.Core.Entities.Abstractions;
+using System;
 using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public partial class DeliveryCompany
+    public class DeliveryCompany : AbstractRole
     {
-        public int UserId { get; set; }
 
-        public virtual User User { get; set; }
     }
 }

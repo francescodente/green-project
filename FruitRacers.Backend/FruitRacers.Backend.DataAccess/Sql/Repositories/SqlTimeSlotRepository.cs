@@ -82,7 +82,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
             return await this.Context
                 .Orders
-                .Where(o => o.OrderState == (int)OrderState.Confirmed)
+                .Where(o => o.OrderState == OrderState.Confirmed)
                 .Where(o => o.DeliveryDate >= start && o.DeliveryDate <= finish)
                 .GroupBy(
                     o => new { o.DeliveryDate, o.TimeSlotId },

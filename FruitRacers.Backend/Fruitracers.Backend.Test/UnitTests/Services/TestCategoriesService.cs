@@ -1,6 +1,5 @@
 ﻿using FruitRacers.Backend.Test.UnitTests.Mocking;
 using FruitRacers.Backend.Core;
-using FruitRacers.Backend.Core.Dto;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
@@ -11,6 +10,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FruitRacers.Backend.Contracts.Categories;
 
 namespace FruitRacers.Backend.Test.UnitTests.Services
 {

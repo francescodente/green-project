@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
-using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Shared.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -52,7 +49,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 throw new MissingDeliveryInfoException();
             }
 
-            cart.OrderState = (int)OrderState.Confirmed;
+            cart.OrderState = OrderState.Confirmed;
             cart.Timestamp = DateTime.Now;
 
             await this.Session.Orders.Update(cart);
@@ -72,13 +69,13 @@ namespace FruitRacers.Backend.Core.Services.Impl
             await this.Session.SaveChanges();
         }
 
-        public async Task<CartDto> GetCartDetailsForUser(int userID)
+        public async Task<CartOutputDto> GetCartDetailsForUser(int userID)
         {
             return await this.RequireCart(userID, true, true)
-                .Then(this.Mapper.Map<Order, CartDto>);
+                .Then(this.Mapper.Map<Order, CartOutputDto>);
         }
 
-        public async Task InsertCartItemForUser(int userID, CartInsertionDto insertion)
+        public async Task InsertCartItemForUser(int userID, CartItemInputDto item)
         {
             Order cart = await this.Session
                 .Orders
@@ -103,49 +100,49 @@ namespace FruitRacers.Backend.Core.Services.Impl
             await this.Session.OrderDetails.Insert(new OrderDetail
             {
                 OrderId = cart.OrderId,
-                ProductId = insertion.ProductId,
-                Quantity = insertion.Quantity
+                ProductId = item.ProductId,
+                Quantity = item.Quantity
             });
             await this.Session.SaveChanges();
         }
 
-        public async Task UpdateCartDeliveryInfoForUser(int userID, DeliveryInfoDto deliveryInfo)
+        public async Task UpdateCartDeliveryInfoForUser(int userId, DeliveryInfoInputDto deliveryInfo)
         {
-            Order cart = await this.RequireCart(userID);
+            Order cart = await this.RequireCart(userId);
 
-            if (deliveryInfo.Address != null)
+            if (deliveryInfo.AddressId.HasValue)
             {
                 Address address = await this.Session
                     .Addresses
-                    .FindOne(a => a.AddressId == deliveryInfo.Address.AddressId)
+                    .FindOne(a => a.AddressId == deliveryInfo.AddressId)
                     .ContinueWith(t => t.Result.Value);
 
-                ServiceUtils.EnsureOwnership(address.UserId, userID);
+                ServiceUtils.EnsureOwnership(address.UserId, userId);
             }
             
-            if (deliveryInfo.TimeSlot != null)
+            if (deliveryInfo.TimeSlotId.HasValue && deliveryInfo.Date.HasValue)
             {
                 int timeSlotCapacity = await this.Session
                     .TimeSlots
-                    .GetActualCapacity(deliveryInfo.TimeSlot.TimeSlotId, deliveryInfo.TimeSlot.Date);
+                    .GetActualCapacity(deliveryInfo.TimeSlotId.Value, deliveryInfo.Date.Value);
                 if (timeSlotCapacity <= 0)
                 {
                     throw new TimeSlotFullException();
                 }
             }
             
-            cart.TimeSlotId = deliveryInfo.TimeSlot?.TimeSlotId;
-            cart.AddressId = deliveryInfo.Address?.AddressId;
+            cart.TimeSlotId = deliveryInfo.TimeSlotId;
+            cart.AddressId = deliveryInfo.AddressId;
             cart.Notes = deliveryInfo.Notes;
-            cart.DeliveryDate = deliveryInfo.TimeSlot?.Date;
+            cart.DeliveryDate = deliveryInfo.Date;
 
             await this.Session.Orders.Update(cart);
             await this.Session.SaveChanges();
         }
 
-        public async Task UpdateCartItemForUser(int userID, CartInsertionDto cartItem)
+        public async Task UpdateCartItemForUser(int userId, CartItemInputDto cartItem)
         {
-            int orderID = await this.RequireCart(userID)
+            int orderID = await this.RequireCart(userId)
                 .Then(c => c.OrderId);
             OrderDetail item = await this.Session
                 .OrderDetails

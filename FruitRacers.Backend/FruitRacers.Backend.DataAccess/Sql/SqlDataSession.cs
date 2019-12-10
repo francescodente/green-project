@@ -20,25 +20,35 @@ namespace FruitRacers.Backend.DataAccess.Sql
             this.context = context;
         }
 
-        public IUserRepository Users => new SqlUserRepository(this.context);
+        public IUserRepository Users =>
+            new SqlUserRepository(this.context);
 
-        public IOrderRepository Orders => new SqlOrderRepository(this.context);
+        public IOrderRepository Orders =>
+            new SqlOrderRepository(this.context);
 
-        public IProductRepository Products => new SqlProductRepository(this.context);
+        public IProductRepository Products =>
+            new SqlProductRepository(this.context);
 
-        public ITimeSlotRepository TimeSlots => new SqlTimeSlotRepository(this.context);
+        public ITimeSlotRepository TimeSlots =>
+            new SqlTimeSlotRepository(this.context);
 
-        public IReadOnlyRepository<Category> Categories => new ReadOnlySqlRepository<Category>(this.context, q => q.Include(c => c.Image));
+        public IReadOnlyRepository<Category> Categories =>
+            new ReadOnlySqlRepository<Category>(this.context, q => q.Include(c => c.Image));
 
-        public IRepository<Address> Addresses => new SqlRepository<Address>(this.context);
+        public IRepository<Address> Addresses =>
+            new SqlRepository<Address>(this.context);
 
-        public IRepository<OrderDetail> OrderDetails => new SqlRepository<OrderDetail>(this.context);
+        public IRepository<OrderDetail> OrderDetails =>
+            new SqlRepository<OrderDetail>(this.context);
 
-        public IRepository<Person> People => new SqlRepository<Person>(this.context, q => q.Include(p => p.User));
+        public IRepository<Person> People =>
+            new SqlRepository<Person>(this.context, q => q.Include(p => p.User));
 
-        public IRepository<CustomerBusiness> CustomerBusinesses => new SqlRepository<CustomerBusiness>(this.context);
+        public IRepository<CustomerBusiness> CustomerBusinesses =>
+            new SqlRepository<CustomerBusiness>(this.context, q => q.Include(p => p.User));
 
-        public IRepository<Supplier> Suppliers => new SqlRepository<Supplier>(this.context);
+        public IRepository<Supplier> Suppliers =>
+            new SqlRepository<Supplier>(this.context, q => q.Include(p => p.User).ThenInclude(u => u.Addresses));
 
         public void Dispose()
         {

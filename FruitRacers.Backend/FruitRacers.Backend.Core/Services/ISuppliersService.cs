@@ -1,7 +1,5 @@
-﻿using FruitRacers.Backend.Core.Dto;
-using System;
+﻿using FruitRacers.Backend.Contracts.Users.Roles;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services

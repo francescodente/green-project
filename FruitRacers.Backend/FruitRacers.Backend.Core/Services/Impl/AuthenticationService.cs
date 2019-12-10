@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Utils;
@@ -48,22 +46,22 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return await this.handler.OnUserAuthenticated(user);
         }
 
-        public async Task ChangePassword(int userID, PasswordChangeRequestDto request)
+        public async Task ChangePassword(int userId, PasswordChangeRequestDto request)
         {
-            User user = await this.FindUserById(userID);
+            User user = await this.FindUserById(userId);
             this.EnsurePasswordIsCorrect(user, request.OldPassword);
             this.handler.AssignPassword(user, request.NewPassword);
             await this.Session.SaveChanges();
         }
 
-        public async Task Logout(int userID)
+        public async Task Logout(int userId)
         {
-            await this.handler.OnUserLoggedOut(await this.FindUserById(userID));
+            await this.handler.OnUserLoggedOut(await this.FindUserById(userId));
         }
 
-        public async Task<AuthenticationResultDto> RenewToken(int userID)
+        public async Task<AuthenticationResultDto> RenewToken(int userId)
         {
-            return await this.handler.OnUserAuthenticated(await this.FindUserById(userID));
+            return await this.handler.OnUserAuthenticated(await this.FindUserById(userId));
         }
 
         private void EnsurePasswordIsCorrect(User user, string password)

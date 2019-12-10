@@ -1,4 +1,4 @@
-﻿using FruitRacers.Backend.Core.Dto;
+﻿using FruitRacers.Backend.Contracts.Products;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,14 +6,14 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IProductsService
     {
-        Task<IEnumerable<ProductWithPricesDto<CategoryDto>>> GetProductsForSupplier(int supplierID);
+        Task<IEnumerable<ProductOutputDto>> GetProductsForSupplier(int supplierId);
 
-        Task<ProductWithPricesDto<CategoryDto>> GetProductData(int productID);
+        Task<ProductOutputDto> GetProductData(int productId);
 
-        Task<int> InsertProductForSupplier(int supplierID, ProductWithPricesDto<int> product);
+        Task<int> InsertProductForSupplier(int supplierId, ProductInputDto product);
 
-        Task UpdateProductForSupplier(int supplierID, ProductWithPricesDto<int> product);
+        Task UpdateProductForSupplier(int supplierId, int productId, ProductInputDto product);
 
-        Task DeleteProductForSupplier(int supplierID, int productID);
+        Task DeleteProductForSupplier(int supplierId, int productId);
     }
 }

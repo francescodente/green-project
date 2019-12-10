@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
-using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Utils;
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
 namespace FruitRacers.Backend.Core.Services.Impl
 {

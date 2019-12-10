@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FruitRacers.Backend.Contracts\FruitRacers.Backend.Contracts.csproj" />
     <ProjectReference Include="..\FruitRacers.Backend.Shared\FruitRacers.Backend.Shared.csproj" />
   </ItemGroup>
 

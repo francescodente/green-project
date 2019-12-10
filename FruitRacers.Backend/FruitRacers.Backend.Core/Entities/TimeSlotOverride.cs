@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public partial class TimeSlotOverride
+    public class TimeSlotOverride
     {
         public DateTime Date { get; set; }
         public int TimeSlotId { get; set; }

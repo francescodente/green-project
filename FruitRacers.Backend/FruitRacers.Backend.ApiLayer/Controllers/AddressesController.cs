@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FruitRacers.Backend.ApiLayer.Filters;
-using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
@@ -30,20 +26,20 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertAddress([FromBody] AddressDto address)
+        public async Task<IActionResult> InsertAddress([FromBody] AddressInputDto address)
         {
             int addressId = await this.addressesService.AddAddressForUser(this.UserId, address);
             return Ok(new { AddressId = addressId });
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateAddress([FromBody] AddressDto address)
+        [HttpPut("{addressId}")]
+        public async Task<IActionResult> UpdateAddress([FromQuery] int addressId, [FromBody] AddressInputDto address)
         {
-            await this.addressesService.UpdateAddressForUser(this.UserId, address);
+            await this.addressesService.UpdateAddressForUser(this.UserId, addressId, address);
             return NoContent();
         }
 
-        [HttpDelete("{productId}")]
+        [HttpDelete("{addressId}")]
         public async Task<IActionResult> DeleteAddress([FromRoute] int addressId)
         {
             await this.addressesService.DeleteAddressForUser(this.UserId, addressId);

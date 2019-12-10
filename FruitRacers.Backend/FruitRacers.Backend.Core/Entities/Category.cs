@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public partial class Category
+    public class Category
     {
         public Category()
         {

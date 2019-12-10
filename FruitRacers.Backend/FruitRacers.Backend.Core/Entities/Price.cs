@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public partial class Price
+    public class Price
     {
         public string Type { get; set; }
         public decimal Value { get; set; }

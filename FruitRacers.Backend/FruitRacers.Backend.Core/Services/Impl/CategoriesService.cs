@@ -1,11 +1,9 @@
 ﻿using FruitRacers.Backend.Core.Entities;
-using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Contracts.Categories;
 
 namespace FruitRacers.Backend.Core.Services.Impl
 {

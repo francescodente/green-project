@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FruitRacers.Backend.Core.Dto;
+﻿using System.Threading.Tasks;
+using FruitRacers.Backend.Contracts.Authentication;
+using FruitRacers.Backend.Contracts.Users;
+using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
@@ -35,9 +33,9 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser([FromBody] AccountDto<LoggedInUserDto, TRole> account)
+        public async Task<IActionResult> UpdateUser([FromBody] AccountInputDto<TRole> account)
         {
-            await this.usersService.UpdateUser(account);
+            await this.usersService.UpdateUser(this.UserId, account);
             return NoContent();
         }
 

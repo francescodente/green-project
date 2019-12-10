@@ -1,19 +1,17 @@
-﻿using FruitRacers.Backend.Core.Dto;
-using System;
+﻿using FruitRacers.Backend.Contracts.Addresses;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services
 {
     public interface IAddressesService
     {
-        Task<IEnumerable<AddressDto>> GetAddressesForUser(int userID);
+        Task<IEnumerable<AddressOutputDto>> GetAddressesForUser(int userId);
 
-        Task<int> AddAddressForUser(int userID, AddressDto address);
+        Task<int> AddAddressForUser(int userId, AddressInputDto address);
 
-        Task UpdateAddressForUser(int userID, AddressDto address);
+        Task UpdateAddressForUser(int userId, int addressId, AddressInputDto address);
 
-        Task DeleteAddressForUser(int userID, int addressID);
+        Task DeleteAddressForUser(int userId, int addressId);
     }
 }

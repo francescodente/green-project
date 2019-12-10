@@ -1,7 +1,4 @@
-﻿using FruitRacers.Backend.Core.Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FruitRacers.Backend.Contracts.Authentication;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services
@@ -10,10 +7,10 @@ namespace FruitRacers.Backend.Core.Services
     {
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 
-        Task<AuthenticationResultDto> RenewToken(int userID);
+        Task<AuthenticationResultDto> RenewToken(int userId);
 
-        Task Logout(int userID);
+        Task Logout(int userId);
 
-        Task ChangePassword(int userID, PasswordChangeRequestDto request);
+        Task ChangePassword(int userId, PasswordChangeRequestDto request);
     }
 }

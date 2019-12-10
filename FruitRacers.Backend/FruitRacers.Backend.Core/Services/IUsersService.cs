@@ -1,7 +1,6 @@
-﻿using FruitRacers.Backend.Core.Dto;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FruitRacers.Backend.Contracts.Authentication;
+using FruitRacers.Backend.Contracts.Users;
+using FruitRacers.Backend.Contracts.Users.Roles;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services
@@ -11,10 +10,10 @@ namespace FruitRacers.Backend.Core.Services
     {
         Task<int> Register(RegistrationDto<TRole> registration);
 
-        Task<AccountDto<LoggedInUserDto, TRole>> GetUserData(int userID);
+        Task<AccountOutputDto<TRole>> GetUserData(int userId);
 
-        Task UpdateUser(AccountDto<LoggedInUserDto, TRole> account);
+        Task UpdateUser(int userId, AccountInputDto<TRole> account);
 
-        Task DeleteUser(int userID);
+        Task DeleteUser(int userId);
     }
 }

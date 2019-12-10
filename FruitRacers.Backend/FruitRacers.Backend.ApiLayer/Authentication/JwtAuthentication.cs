@@ -1,8 +1,6 @@
-﻿using FruitRacers.Backend.Core.Dto;
+﻿using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Core.Entities;
-using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Core.Utils;
-using FruitRacers.Backend.Shared.Utils;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -107,12 +105,10 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
             if (user.Person != null)
             {
                 yield return UserRole.Person;
-                yield return UserRole.Customer;
             }
             if (user.CustomerBusiness != null)
             {
                 yield return UserRole.CustomerBusiness;
-                yield return UserRole.Customer;
             }
             if (user.Supplier != null)
             {

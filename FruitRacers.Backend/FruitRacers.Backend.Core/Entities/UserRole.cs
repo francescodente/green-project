@@ -6,7 +6,6 @@
         Supplier,
         CustomerBusiness,
         DeliveryCompany,
-        Administrator,
-        Customer
+        Administrator
     }
 }

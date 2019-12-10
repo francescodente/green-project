@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FruitRacers.Backend.Core.Dto;
+﻿using System.Threading.Tasks;
+using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
@@ -33,20 +29,20 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertProduct([FromBody] ProductWithPricesDto<int> product)
+        public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {
             int productId = await this.productsService.InsertProductForSupplier(this.UserId, product);
             return CreatedAtAction(nameof(GetProductData), new { ProductId = productId });
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateProduct([FromBody] ProductWithPricesDto<int> product)
+        [HttpPut("{productId}")]
+        public async Task<IActionResult> UpdateProduct([FromQuery] int productId, [FromBody] ProductInputDto product)
         {
-            await this.productsService.UpdateProductForSupplier(this.UserId, product);
+            await this.productsService.UpdateProductForSupplier(this.UserId, productId, product);
             return NoContent();
         }
 
-        [HttpDelete("productId")]
+        [HttpDelete("{productId}")]
         public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
             await this.productsService.DeleteProductForSupplier(this.UserId, productId);

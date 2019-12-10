@@ -1,5 +1,5 @@
-﻿using FruitRacers.Backend.Core;
-using FruitRacers.Backend.Core.Dto;
+﻿using FruitRacers.Backend.Contracts.Users.Roles;
+using FruitRacers.Backend.Core;
 using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
 using FruitRacers.Backend.DataAccess.Sql;

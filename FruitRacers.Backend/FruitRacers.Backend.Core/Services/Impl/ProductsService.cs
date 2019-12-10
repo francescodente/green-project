@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Services.Utils;
@@ -27,45 +25,46 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(p => p.OrElseThrow(() => new ProductNotFoundException()));
         }
 
-        public async Task DeleteProductForSupplier(int supplierID, int productID)
+        public async Task DeleteProductForSupplier(int supplierId, int productId)
         {
-            Product product = await this.RequireProduct(productID);
+            Product product = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(supplierID, product.SupplierId);
+            ServiceUtils.EnsureOwnership(supplierId, product.SupplierId);
 
             product.IsDeleted = true;
             await this.Session.Products.Update(product);
             await this.Session.SaveChanges();
         }
 
-        public async Task<ProductWithPricesDto<CategoryDto>> GetProductData(int productID)
+        public async Task<ProductOutputDto> GetProductData(int productId)
         {
-            Product product = await this.RequireProduct(productID);
-            return this.Mapper.Map<ProductWithPricesDto<CategoryDto>>(product);
+            Product product = await this.RequireProduct(productId);
+            return this.Mapper.Map<ProductOutputDto>(product);
         }
 
-        public async Task<IEnumerable<ProductWithPricesDto<CategoryDto>>> GetProductsForSupplier(int supplierID)
+        public async Task<IEnumerable<ProductOutputDto>> GetProductsForSupplier(int supplierId)
         {
             return await this.Session
                 .Products
-                .BelongingTo(supplierID)
+                .BelongingTo(supplierId)
                 .GetAll()
-                .Then(p => p.Select(this.Mapper.Map<ProductWithPricesDto<CategoryDto>>));
+                .Then(p => p.Select(this.Mapper.Map<ProductOutputDto>));
         }
 
-        public async Task<int> InsertProductForSupplier(int supplierID, ProductWithPricesDto<int> product)
+        public async Task<int> InsertProductForSupplier(int supplierId, ProductInputDto product)
         {
             Product productEntity = this.Mapper.Map<Product>(product);
+            productEntity.SupplierId = supplierId;
             await this.Session.Products.Insert(productEntity);
             await this.Session.SaveChanges();
             return productEntity.ProductId;
         }
 
-        public async Task UpdateProductForSupplier(int supplierID, ProductWithPricesDto<int> product)
+        public async Task UpdateProductForSupplier(int supplierId, int productId, ProductInputDto product)
         {
-            Product productEntity = await this.RequireProduct(product.ProductId);
+            Product productEntity = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(supplierID, productEntity.SupplierId);
+            ServiceUtils.EnsureOwnership(supplierId, productEntity.SupplierId);
 
             this.Mapper.Map(product, productEntity);
             await this.Session.Products.Update(productEntity);

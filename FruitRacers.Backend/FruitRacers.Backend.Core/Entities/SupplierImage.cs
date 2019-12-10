@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public partial class SupplierImage
+    public class SupplierImage
     {
         public int SupplierId { get; set; }
         public int ImageId { get; set; }

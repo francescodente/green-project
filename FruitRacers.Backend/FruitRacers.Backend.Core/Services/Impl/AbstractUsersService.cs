@@ -1,13 +1,15 @@
 ﻿using AutoMapper;
-using FruitRacers.Backend.Core.Dto;
+using FruitRacers.Backend.Contracts.Authentication;
+using FruitRacers.Backend.Contracts.Users;
+using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Utils;
 using FruitRacers.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -33,26 +35,53 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return this.ExtractUser(entity).UserId;
         }
 
-        public async Task DeleteUser(int userID)
+        public async Task DeleteUser(int userId)
         {
-            await this.GetRepository().DeleteWhere(UserIdIsEqualTo(userID));
+            await this.GetRepository().DeleteWhere(UserIdIsEqualTo(userId));
             await this.Session.SaveChanges();
         }
 
-        public async Task<AccountDto<LoggedInUserDto, TRole>> GetUserData(int userID)
+        public async Task<AccountOutputDto<TRole>> GetUserData(int userID)
         {
             TEntity entity = await this.RequireAccount(userID);
-            return new AccountDto<LoggedInUserDto, TRole>
+            User userEntity = this.ExtractUser(entity);
+            TRole role = this.Mapper.Map<TRole>(entity);
+            return new AccountOutputDto<TRole>
             {
-                User = this.Mapper.Map<LoggedInUserDto>(this.ExtractUser(entity)),
-                Role = this.Mapper.Map<TRole>(entity)
+                User = this.Mapper.Map<UserOutputDto>(userEntity),
+                PrimaryRole = role,
+                OtherRoles = this.GetRoleDtos(userEntity).Where(r => r.RoleType != role.RoleType)
             };
         }
 
-        public async Task UpdateUser(AccountDto<LoggedInUserDto, TRole> account)
+        private IEnumerable<RoleDto> GetRoleDtos(User user)
+        {
+            if (user.Administrator != null)
+            {
+                yield return this.Mapper.Map<AdministratorDto>(user.Administrator);
+            }
+            if (user.DeliveryCompany != null)
+            {
+                yield return this.Mapper.Map<DeliveryCompanyDto>(user.DeliveryCompany);
+            }
+            if (user.Person != null)
+            {
+                yield return this.Mapper.Map<PersonDto>(user.Person);
+            }
+            if (user.CustomerBusiness != null)
+            {
+                yield return this.Mapper.Map<CustomerBusinessDto>(user.CustomerBusiness);
+            }
+            if (user.Supplier != null)
+            {
+                yield return this.Mapper.Map<SupplierDto>(user.Supplier);
+            }
+        }
+
+        public async Task UpdateUser(int userId, AccountInputDto<TRole> account)
         {
             await this.GetRepository().UpdateWhere(
-                UserIdIsEqualTo(account.User.UserId),
+                UserIdIsEqualTo(userId),
                 entity => this.ApplyChangesToEntity(account, entity));
             await this.Session.SaveChanges();
         }
@@ -64,7 +93,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(u => u.Value);
         }
 
-        private void ApplyChangesToEntity(AccountDto<LoggedInUserDto, TRole> account, TEntity entity)
+        private void ApplyChangesToEntity(AccountInputDto<TRole> account, TEntity entity)
         {
             User userEntity = this.ExtractUser(entity);
             userEntity.MarketingConsent = account.User.MarketingConsent;
@@ -74,7 +103,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             this.ApplyRoleChangesToEntity(account.Role, entity);
         }
 
-        private TEntity CreateEntityFromAccount(AccountDto<SimpleUserDto, TRole> account)
+        private TEntity CreateEntityFromAccount(AccountInputDto<TRole> account)
         {
             User userEntity = new User
             {
