@@ -2,6 +2,6 @@
 {
     public abstract class RoleDto
     {
-        public abstract RoleTypeDto RoleType { get; }
+
     }
 }

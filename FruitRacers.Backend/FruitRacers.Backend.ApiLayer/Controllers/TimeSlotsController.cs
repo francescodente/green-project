@@ -27,7 +27,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpPost("overrides")]
-        [RequireLogin(UserRole.DeliveryCompany)]
+        [RequireLogin(RoleType.DeliveryCompany)]
         public async Task<IActionResult> InsertOverride([FromBody] TimeSlotOverrideDto timeSlotOverride)
         {
             await this.timeSlotsService.AddTimeSlotOverride(timeSlotOverride);

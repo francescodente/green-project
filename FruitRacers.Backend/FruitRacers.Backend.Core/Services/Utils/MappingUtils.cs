@@ -6,6 +6,8 @@ using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Entities.Extensions;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FruitRacers.Backend.Core.Services.Utils
@@ -63,8 +65,6 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public UserMapping()
             {
-                this.CreateMap<User, UserOutputDto>();
-
                 this.CreateMap<Person, PersonDto>();
 
                 this.CreateMap<CustomerBusiness, CustomerBusinessDto>();
@@ -75,6 +75,37 @@ namespace FruitRacers.Backend.Core.Services.Utils
                 this.CreateMap<Administrator, AdministratorDto>();
 
                 this.CreateMap<DeliveryCompany, DeliveryCompanyDto>();
+
+                this.CreateMap<User, UserOutputDto>()
+                    .ForMember(dst => dst.RoleNames, o => o.MapFrom(src => src.GetRoleTypes()))
+                    .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, _, context) => this.CreateRoleDictionary(src, context)));
+            }
+
+            private IDictionary<RoleTypeDto, RoleDto> CreateRoleDictionary(User source, ResolutionContext context)
+            {
+                IMapper mapper = context.Mapper;
+                IDictionary<RoleTypeDto, RoleDto> roles = new Dictionary<RoleTypeDto, RoleDto>();
+                if (source.Administrator != null)
+                {
+                    roles.Add(RoleTypeDto.Administrator, mapper.Map<AdministratorDto>(source.Administrator));
+                }
+                if (source.DeliveryCompany != null)
+                {
+                    roles.Add(RoleTypeDto.DeliveryCompany, mapper.Map<DeliveryCompanyDto>(source.DeliveryCompany));
+                }
+                if (source.Person != null)
+                {
+                    roles.Add(RoleTypeDto.Person, mapper.Map<PersonDto>(source.Person));
+                }
+                if (source.Supplier != null)
+                {
+                    roles.Add(RoleTypeDto.Supplier, mapper.Map<SupplierDto>(source.Supplier));
+                }
+                if (source.CustomerBusiness != null)
+                {
+                    roles.Add(RoleTypeDto.CustomerBusiness, mapper.Map<CustomerBusinessDto>(source.CustomerBusiness));
+                }
+                return roles;
             }
         }
 

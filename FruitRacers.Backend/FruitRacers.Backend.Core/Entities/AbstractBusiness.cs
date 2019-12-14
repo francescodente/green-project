@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FruitRacers.Backend.Core.Entities.Abstractions
+﻿namespace FruitRacers.Backend.Core.Entities
 {
-    public class AbstractBusiness : AbstractRole
+    public class AbstractBusiness : Role
     {
         public string VatNumber { get; set; }
         public string BusinessName { get; set; }

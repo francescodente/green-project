@@ -5,14 +5,9 @@ using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services
 {
-    public interface IUsersService<TRole>
-        where TRole : RoleDto
+    public interface IUsersService
     {
-        Task<int> Register(RegistrationDto<TRole> registration);
-
-        Task<AccountOutputDto<TRole>> GetUserData(int userId);
-
-        Task UpdateUser(int userId, AccountInputDto<TRole> account);
+        Task<UserOutputDto> GetUserData(int userId);
 
         Task DeleteUser(int userId);
     }

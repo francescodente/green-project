@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FruitRacers.Backend.Core
+namespace FruitRacers.Backend.Core.Session
 {
     public interface IDataSession : IDisposable
     {
@@ -16,9 +16,6 @@ namespace FruitRacers.Backend.Core
         IReadOnlyRepository<Category> Categories { get; }
         IRepository<Address> Addresses { get; }
         IRepository<OrderDetail> OrderDetails { get; }
-        IRepository<Person> People { get; }
-        IRepository<CustomerBusiness> CustomerBusinesses { get; }
-        IRepository<Supplier> Suppliers { get; }
 
         Task SaveChanges();
     }

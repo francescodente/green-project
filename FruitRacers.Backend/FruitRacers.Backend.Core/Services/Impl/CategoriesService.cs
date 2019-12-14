@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using FruitRacers.Backend.Contracts.Categories;
+using FruitRacers.Backend.Core.Session;
 
 namespace FruitRacers.Backend.Core.Services.Impl
 {

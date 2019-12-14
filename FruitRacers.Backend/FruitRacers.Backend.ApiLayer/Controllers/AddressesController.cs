@@ -9,8 +9,8 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 {
     [Route("api/addresses")]
     [ApiController]
-    [RequireLogin(UserRole.Person, UserRole.Supplier)]
-    public class AddressesController : AbstractController
+    [RequireLogin(RoleType.Person, RoleType.Supplier)]
+    public class AddressesController : ControllerBase
     {
         private readonly IAddressesService addressesService;
 
@@ -22,27 +22,27 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAddresses()
         {
-            return Ok(await this.addressesService.GetAddressesForUser(this.UserId));
+            return Ok(await this.addressesService.GetAddressesForUser(this.GetUserId()));
         }
 
         [HttpPost]
         public async Task<IActionResult> InsertAddress([FromBody] AddressInputDto address)
         {
-            int addressId = await this.addressesService.AddAddressForUser(this.UserId, address);
+            int addressId = await this.addressesService.AddAddressForUser(this.GetUserId(), address);
             return Ok(new { AddressId = addressId });
         }
 
         [HttpPut("{addressId}")]
         public async Task<IActionResult> UpdateAddress([FromQuery] int addressId, [FromBody] AddressInputDto address)
         {
-            await this.addressesService.UpdateAddressForUser(this.UserId, addressId, address);
+            await this.addressesService.UpdateAddressForUser(this.GetUserId(), addressId, address);
             return NoContent();
         }
 
         [HttpDelete("{addressId}")]
         public async Task<IActionResult> DeleteAddress([FromRoute] int addressId)
         {
-            await this.addressesService.DeleteAddressForUser(this.UserId, addressId);
+            await this.addressesService.DeleteAddressForUser(this.GetUserId(), addressId);
             return NoContent();
         }
     }

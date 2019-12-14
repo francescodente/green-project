@@ -6,7 +6,7 @@ namespace FruitRacers.Backend.ApiLayer.Filters
 {
     public class RequireLoginAttribute : AuthorizeAttribute
     {
-        public RequireLoginAttribute(params UserRole[] roles)
+        public RequireLoginAttribute(params RoleType[] roles)
             : base()
         {
             if (roles.Length > 0)
@@ -15,7 +15,7 @@ namespace FruitRacers.Backend.ApiLayer.Filters
             }
         }
 
-        public RequireLoginAttribute(string policy, params UserRole[] roles)
+        public RequireLoginAttribute(string policy, params RoleType[] roles)
             : this(roles)
         {
             this.Policy = policy;

@@ -1,7 +1,6 @@
-﻿using FruitRacers.Backend.Contracts.Users.Roles;
-using FruitRacers.Backend.Core;
-using FruitRacers.Backend.Core.Services;
+﻿using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
+using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,9 +31,8 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                 .AddScoped<IProductsService, ProductsService>()
                 .AddScoped<ISuppliersService, SuppliersService>()
                 .AddScoped<ITimeSlotsService, TimeSlotsService>()
-                .AddScoped<IUsersService<PersonDto>, PeopleUsersService>()
-                .AddScoped<IUsersService<SupplierDto>, SuppliersUsersService>()
-                .AddScoped<IUsersService<CustomerBusinessDto>, CustomerBusinessUsersService>();
+                .AddScoped<IUsersService, UsersService>()
+                .AddScoped<IRegistrationService, RegistrationService>();
         }
     }
 }

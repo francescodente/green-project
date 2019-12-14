@@ -22,4 +22,8 @@
     <ProjectReference Include="..\FruitRacers.Backend.Shared\FruitRacers.Backend.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validation\" />
+  </ItemGroup>
+
 </Project>

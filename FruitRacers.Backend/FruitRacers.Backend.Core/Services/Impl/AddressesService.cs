@@ -2,6 +2,7 @@
 using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Services.Utils;
+using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 using System.Collections.Generic;
 using System.Linq;

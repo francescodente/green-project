@@ -1,6 +1,7 @@
 ﻿using FruitRacers.Backend.Core;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
+using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.DataAccess.Sql;
 using FruitRacers.Backend.DataAccess.Sql.Repositories;
 using Microsoft.EntityFrameworkCore;

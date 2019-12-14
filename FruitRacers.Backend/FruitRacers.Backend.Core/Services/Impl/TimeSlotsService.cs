@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 
 namespace FruitRacers.Backend.Core.Services.Impl

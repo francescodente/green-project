@@ -5,6 +5,7 @@ using AutoMapper;
 using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
+using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Core.Utils;
 using FruitRacers.Backend.Shared.Utils;
 

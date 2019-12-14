@@ -8,7 +8,5 @@ namespace FruitRacers.Backend.Contracts.Users.Roles
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-
-        public override RoleTypeDto RoleType => RoleTypeDto.Person;
     }
 }

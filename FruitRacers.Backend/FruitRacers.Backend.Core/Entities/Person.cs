@@ -1,10 +1,8 @@
-﻿using FruitRacers.Backend.Core.Entities.Abstractions;
-using System;
-using System.Collections.Generic;
+﻿using System;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public class Person : AbstractRole
+    public class Person : Role
     {
         public string Cf { get; set; }
         public string FirstName { get; set; }

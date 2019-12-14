@@ -100,31 +100,31 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
             );
         }
 
-        private IEnumerable<UserRole> GetUserRoles(User user)
+        private IEnumerable<RoleType> GetUserRoles(User user)
         {
             if (user.Person != null)
             {
-                yield return UserRole.Person;
+                yield return RoleType.Person;
             }
             if (user.CustomerBusiness != null)
             {
-                yield return UserRole.CustomerBusiness;
+                yield return RoleType.CustomerBusiness;
             }
             if (user.Supplier != null)
             {
-                yield return UserRole.Supplier;
+                yield return RoleType.Supplier;
             }
             if (user.Administrator != null)
             {
-                yield return UserRole.Administrator;
+                yield return RoleType.Administrator;
             }
             if (user.DeliveryCompany != null)
             {
-                yield return UserRole.DeliveryCompany;
+                yield return RoleType.DeliveryCompany;
             }
         }
 
-        private Claim CreateRoleClaim(UserRole role)
+        private Claim CreateRoleClaim(RoleType role)
         {
             return new Claim(ClaimTypes.Role, role.ToString());
         }

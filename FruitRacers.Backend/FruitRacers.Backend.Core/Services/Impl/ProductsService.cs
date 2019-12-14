@@ -6,6 +6,7 @@ using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Services.Utils;
+using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 
 namespace FruitRacers.Backend.Core.Services.Impl

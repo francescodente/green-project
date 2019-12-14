@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Converters;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {
@@ -12,7 +9,12 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
     {
         public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
     }
 }

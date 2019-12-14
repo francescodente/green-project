@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using FruitRacers.Backend.Contracts.Users.Roles;
+using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -17,7 +18,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task<IEnumerable<SupplierDto>> GetAllSuppliers()
         {
             return await this.Session
-                .Suppliers
+                .Users
                 .GetAll()
                 .Then(s => s.Select(this.Mapper.Map<SupplierDto>));
         }

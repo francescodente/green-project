@@ -7,7 +7,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    public class ProductsController : AbstractController
+    public class ProductsController : ControllerBase
     {
         private readonly IProductsService productsService;
 
@@ -31,21 +31,21 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {
-            int productId = await this.productsService.InsertProductForSupplier(this.UserId, product);
+            int productId = await this.productsService.InsertProductForSupplier(this.GetUserId(), product);
             return CreatedAtAction(nameof(GetProductData), new { ProductId = productId });
         }
 
         [HttpPut("{productId}")]
         public async Task<IActionResult> UpdateProduct([FromQuery] int productId, [FromBody] ProductInputDto product)
         {
-            await this.productsService.UpdateProductForSupplier(this.UserId, productId, product);
+            await this.productsService.UpdateProductForSupplier(this.GetUserId(), productId, product);
             return NoContent();
         }
 
         [HttpDelete("{productId}")]
         public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
-            await this.productsService.DeleteProductForSupplier(this.UserId, productId);
+            await this.productsService.DeleteProductForSupplier(this.GetUserId(), productId);
             return NoContent();
         }
     }

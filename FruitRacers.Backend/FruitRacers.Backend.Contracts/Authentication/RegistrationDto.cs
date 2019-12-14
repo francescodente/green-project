@@ -6,7 +6,7 @@ namespace FruitRacers.Backend.Contracts.Authentication
     public class RegistrationDto<TRole>
         where TRole : RoleDto
     {
-        public AccountInputDto<TRole> Account { get; set; }
+        public UserInputDto<TRole> User { get; set; }
         public string Password { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
 
-namespace FruitRacers.Backend.Core
+namespace FruitRacers.Backend.Core.Session
 {
     public class LazyLoadedDataSession : IDataSession
     {
@@ -18,9 +18,6 @@ namespace FruitRacers.Backend.Core
         private IReadOnlyRepository<Category> categories;
         private IRepository<Address> addresses;
         private IRepository<OrderDetail> orderDetails;
-        private IRepository<Person> people;
-        private IRepository<CustomerBusiness> customerBusinesses;
-        private IRepository<Supplier> suppliers;
 
         public LazyLoadedDataSession(IDataSession session)
         {
@@ -40,12 +37,6 @@ namespace FruitRacers.Backend.Core
         public IRepository<Address> Addresses => this.addresses ?? (this.addresses = this.session.Addresses);
 
         public IRepository<OrderDetail> OrderDetails => this.orderDetails ?? (this.orderDetails = this.session.OrderDetails);
-
-        public IRepository<Person> People => this.people ?? (this.people = this.session.People);
-
-        public IRepository<CustomerBusiness> CustomerBusinesses => this.customerBusinesses ?? (this.customerBusinesses = this.session.CustomerBusinesses);
-
-        public IRepository<Supplier> Suppliers => this.suppliers ?? (this.suppliers = this.session.Suppliers);
 
         public void Dispose()
         {

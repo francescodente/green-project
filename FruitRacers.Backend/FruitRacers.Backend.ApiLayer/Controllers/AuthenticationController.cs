@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using FruitRacers.Backend.ApiLayer.Filters;
 using FruitRacers.Backend.Contracts.Authentication;
+using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +10,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 {
     [Route("api/auth")]
     [ApiController]
-    public class AuthenticationController : AbstractController
+    public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService authenticationService;
 
@@ -27,14 +29,14 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [RequireLogin]
         public async Task<IActionResult> RenewToken()
         {
-            return Ok(await this.authenticationService.RenewToken(this.UserId));
+            return Ok(await this.authenticationService.RenewToken(this.GetUserId()));
         }
 
         [HttpGet("logout")]
         [RequireLogin]
         public async Task<IActionResult> Logout()
         {
-            await this.authenticationService.Logout(this.UserId);
+            await this.authenticationService.Logout(this.GetUserId());
             return NoContent();
         }
 
@@ -42,7 +44,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [RequireLogin]
         public async Task<IActionResult> ChangePassword([FromBody] PasswordChangeRequestDto request)
         {
-            await this.authenticationService.ChangePassword(this.UserId, request);
+            await this.authenticationService.ChangePassword(this.GetUserId(), request);
             return NoContent();
         }
     }

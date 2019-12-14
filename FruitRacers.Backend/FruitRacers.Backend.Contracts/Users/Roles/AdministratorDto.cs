@@ -2,6 +2,6 @@
 {
     public class AdministratorDto : RoleDto
     {
-        public override RoleTypeDto RoleType => RoleTypeDto.Administrator;
+
     }
 }

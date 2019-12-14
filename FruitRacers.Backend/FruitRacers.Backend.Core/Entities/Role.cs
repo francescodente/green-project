@@ -1,6 +1,6 @@
-﻿namespace FruitRacers.Backend.Core.Entities.Abstractions
+﻿namespace FruitRacers.Backend.Core.Entities
 {
-    public abstract class AbstractRole
+    public abstract class Role
     {
         public int UserId { get; set; }
 

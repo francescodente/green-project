@@ -6,7 +6,5 @@ namespace FruitRacers.Backend.Contracts.Users.Roles
     {
         public string Description { get; set; }
         public AbstractAddressDto Address { get; set; }
-
-        public override RoleTypeDto RoleType => RoleTypeDto.Supplier;
     }
 }
