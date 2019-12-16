@@ -11,19 +11,21 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
     public class SqlOrderRepository : SqlRepository<Order>, IOrderRepository
     {
         public SqlOrderRepository(FruitracersContext context)
-            : base(context, q => q.Include(o => new { o.OrderState, o.Address, o.TimeSlot }))
+            : base(context, q => q
+                .Include(o => o.Address)
+                .Include(o => o.TimeSlot))
         {
         }
 
-        public IOrderRepository BelongingTo(int userID)
+        public IOrderRepository BelongingTo(int userId)
         {
-            this.ChainQueryModification(q => q.Where(o => o.UserId == userID));
+            this.ChainQueryModification(q => q.Where(o => o.UserId == userId));
             return this;
         }
 
         public IOrderRepository CartOnly()
         {
-            this.ChainQueryModification(q => q.Where(o => o.OrderState == (int) OrderState.Cart));
+            this.ChainQueryModification(q => q.Where(o => o.OrderState == OrderState.Cart));
             return this;
         }
 
@@ -39,7 +41,14 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
             this.ChainQueryModification(q => q
                 .Include(o => o.OrderDetails)
                     .ThenInclude(d => d.Product)
-                        .ThenInclude(p => new { p.ProductCategories, p.Prices }));
+                        .ThenInclude(p => p.ProductCategories)
+                            .ThenInclude(c => c.Category)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(d => d.Product)
+                        .ThenInclude(p => p.Supplier)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(d => d.Product)
+                        .ThenInclude(p => p.Prices));
             return this;
         }
     }

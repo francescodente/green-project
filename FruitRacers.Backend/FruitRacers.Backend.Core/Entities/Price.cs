@@ -5,7 +5,7 @@ namespace FruitRacers.Backend.Core.Entities
 {
     public class Price
     {
-        public string Type { get; set; }
+        public CustomerType Type { get; set; }
         public decimal Value { get; set; }
         public decimal UnitMultiplier { get; set; }
         public int Minimum { get; set; }

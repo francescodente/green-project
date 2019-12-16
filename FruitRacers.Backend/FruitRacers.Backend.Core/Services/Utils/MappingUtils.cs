@@ -2,11 +2,12 @@
 using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Contracts.Orders;
-using FruitRacers.Backend.Contracts.TimeSlots;
+using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Entities.Extensions;
+using FruitRacers.Backend.Shared.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,17 +40,25 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public OrderMapping()
             {
+                this.CreateMap<Order, CartOutputDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom((src, dst, m, context) => context.Mapper.Map<DeliveryInfoOutputDto>(src)))
+                    .ForMember(dst => dst.Details, o => o.MapFrom((src, dst, m, context) => this.CreateCartDetailsList(src, context)));
+
                 this.CreateMap<Order, DeliveryInfoOutputDto>();
 
                 this.CreateMap<OrderDetail, CartItemOutputDto>();
+            }
 
-                this.CreateMap<Order, CartOutputDto>()
-                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
-
-                this.CreateMap<OrderDetail, OrderDetailDto>();
-
-                this.CreateMap<Order, OrderDto>()
-                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+            private IEnumerable<SupplierOrderSectionDto<CartItemOutputDto>> CreateCartDetailsList(Order cart, IMapper mapper)
+            {
+                return cart.OrderDetails
+                    .GroupBy(
+                        d => d.Product.SupplierId,
+                        (_, details) => new SupplierOrderSectionDto<CartItemOutputDto>
+                        {
+                            Items = details.Select(mapper.Map<CartItemOutputDto>),
+                            Supplier = mapper.Map<SupplierDto>(details.First().Product.Supplier) // TODO: change to different type (e.g. SupplierInfoDto)
+                        });
             }
         }
 
@@ -57,7 +66,17 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public ProductMapping()
             {
-                
+                this.CreateMap<Price, PriceDto>();
+
+                this.CreateMap<Product, ProductOutputDto>()
+                    .ForMember(dst => dst.Categories, o => o.MapFrom(src => src.ProductCategories.Select(c => c.Category)))
+                    .ForMember(dst => dst.Prices, o => o.MapFrom((src, dst, m, context) => this.CreatePriceDictionary(src, context)));
+            }
+
+            private IDictionary<CustomerTypeDto, PriceDto> CreatePriceDictionary(Product product, IMapper mapper)
+            {
+                return product.Prices
+                    .ToDictionary(p => (CustomerTypeDto)p.Type, mapper.Map<PriceDto>);
             }
         }
 
@@ -78,12 +97,11 @@ namespace FruitRacers.Backend.Core.Services.Utils
 
                 this.CreateMap<User, UserOutputDto>()
                     .ForMember(dst => dst.RoleNames, o => o.MapFrom(src => src.GetRoleTypes()))
-                    .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, _, context) => this.CreateRoleDictionary(src, context)));
+                    .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => this.CreateRoleDictionary(src, context)));
             }
 
-            private IDictionary<RoleTypeDto, RoleDto> CreateRoleDictionary(User source, ResolutionContext context)
+            private IDictionary<RoleTypeDto, RoleDto> CreateRoleDictionary(User source, IMapper mapper)
             {
-                IMapper mapper = context.Mapper;
                 IDictionary<RoleTypeDto, RoleDto> roles = new Dictionary<RoleTypeDto, RoleDto>();
                 if (source.Administrator != null)
                 {

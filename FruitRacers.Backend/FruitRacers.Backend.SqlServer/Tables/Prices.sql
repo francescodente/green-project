@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Prices]
 (
-	[Type] NCHAR NOT NULL, 
+	[Type] NVARCHAR(10) NOT NULL, 
     [Value] MONEY NOT NULL, 
     [UnitMultiplier] DECIMAL(8, 4) NOT NULL, 
     [Minimum] INT NOT NULL DEFAULT 0, 

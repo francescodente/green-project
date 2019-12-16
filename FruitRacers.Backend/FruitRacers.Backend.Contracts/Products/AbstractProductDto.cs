@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Contracts.Products
 {
@@ -9,6 +7,6 @@ namespace FruitRacers.Backend.Contracts.Products
         public string Name { get; set; }
         public string Description { get; set; }
         public IEnumerable<TCategory> Categories { get; set; }
-        public ProductPricesDto Prices { get; set; }
+        public IDictionary<CustomerTypeDto, PriceDto> Prices { get; set; }
     }
 }

@@ -32,11 +32,11 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {
             int productId = await this.productsService.InsertProductForSupplier(this.GetUserId(), product);
-            return CreatedAtAction(nameof(GetProductData), new { ProductId = productId });
+            return Ok(new { ProductId = productId });
         }
 
         [HttpPut("{productId}")]
-        public async Task<IActionResult> UpdateProduct([FromQuery] int productId, [FromBody] ProductInputDto product)
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductInputDto product)
         {
             await this.productsService.UpdateProductForSupplier(this.GetUserId(), productId, product);
             return NoContent();

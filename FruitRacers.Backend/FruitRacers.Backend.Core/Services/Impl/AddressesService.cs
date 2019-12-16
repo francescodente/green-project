@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
@@ -23,7 +24,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return await this.Session
                 .Addresses
                 .FindOne(a => a.AddressId == addressID)
-                .Then(a => a.Value);
+                .Then(a => a.OrElseThrow(() => new AddressNotFoundException());
         }
 
         private async Task<Address> RequireAddressWithOwnership(int userId, int addressId)
@@ -35,7 +36,13 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task<int> AddAddressForUser(int userId, AddressInputDto address)
         {
-            Address addressEntity = this.Mapper.Map(address, new Address { UserId = userId });
+            Address addressEntity = new Address
+            {
+                UserId = userId,
+                Description = address.Description,
+                Latitude = address.Latitude,
+                Longitude = address.Longitude
+            };
             await this.Session.Addresses.Insert(addressEntity);
             await this.Session.SaveChanges();
             return addressEntity.AddressId;
@@ -59,7 +66,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task UpdateAddressForUser(int userId, int addressId, AddressInputDto address)
         {
             Address addressEntity = await this.RequireAddressWithOwnership(userId, addressId);
-            this.Mapper.Map(address, addressEntity);
+
+            addressEntity.Description = address.Description;
+            addressEntity.Latitude = address.Latitude;
+            addressEntity.Longitude = address.Longitude;
+
             await this.Session.Addresses.Update(addressEntity);
             await this.Session.SaveChanges();
         }

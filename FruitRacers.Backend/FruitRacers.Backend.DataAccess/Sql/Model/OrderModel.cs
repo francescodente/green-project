@@ -18,8 +18,6 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
 
                 entity.Property(e => e.Timestamp).HasColumnType("datetime");
 
-                entity.Property(e => e.OrderState).HasColumnType("int");
-
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.AddressId)

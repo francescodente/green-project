@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FruitRacers.Backend.Core.Exceptions
 {
-    public class MissingDeliveryInfoException : DomainException
+    public class CartItemNotFoundException : DomainException
     {
     }
 }

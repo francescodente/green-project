@@ -33,6 +33,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             ServiceUtils.EnsureOwnership(supplierId, product.SupplierId);
 
             product.IsDeleted = true;
+
             await this.Session.Products.Update(product);
             await this.Session.SaveChanges();
         }
@@ -54,11 +55,39 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task<int> InsertProductForSupplier(int supplierId, ProductInputDto product)
         {
-            Product productEntity = this.Mapper.Map<Product>(product);
-            productEntity.SupplierId = supplierId;
+            Product productEntity = new Product
+            {
+                SupplierId = supplierId,
+                Description = product.Description,
+                Name = product.Name,
+                IsDeleted = false,
+                IsEnabled = true,
+                IsLegal = true
+            };
+
+            product.Categories
+                .Select(id => new ProductCategory { CategoryId = id })
+                .ForEach(productEntity.ProductCategories.Add);
+
+            product.Prices
+                .Select(p => this.CreatePriceFromDto(p.Value, p.Key))
+                .ForEach(productEntity.Prices.Add);
+
             await this.Session.Products.Insert(productEntity);
             await this.Session.SaveChanges();
             return productEntity.ProductId;
+        }
+
+        private Price CreatePriceFromDto(PriceDto dto, CustomerTypeDto customerType)
+        {
+            return new Price
+            {
+                Type = (CustomerType)customerType,
+                UnitName = dto.UnitName,
+                UnitMultiplier = dto.UnitMultiplier,
+                Value = dto.Value,
+                Minimum = dto.Minimum
+            };
         }
 
         public async Task UpdateProductForSupplier(int supplierId, int productId, ProductInputDto product)
@@ -67,7 +96,32 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             ServiceUtils.EnsureOwnership(supplierId, productEntity.SupplierId);
 
-            this.Mapper.Map(product, productEntity);
+            productEntity.Name = product.Name;
+            productEntity.Description = product.Description;
+
+            IList<ProductCategory> categoriesToAdd = product.Categories
+                .Except(productEntity.ProductCategories.Select(c => c.CategoryId))
+                .Select(id => new ProductCategory { CategoryId = id })
+                .ToList();
+
+            IList<ProductCategory> categoriesToRemove = productEntity.ProductCategories
+                .Where(c => !product.Categories.Contains(c.CategoryId))
+                .ToList();
+
+            categoriesToAdd.ForEach(c => productEntity.ProductCategories.Add(c));
+            categoriesToRemove.ForEach(c => productEntity.ProductCategories.Remove(c));
+
+            IList<Price> pricesToAdd = product.Prices
+                .Where(p => !productEntity.Prices.Select(e => e.Type).Contains((CustomerType)p.Key))
+                .Select(p => this.CreatePriceFromDto(p.Value, p.Key))
+                .ToList();
+
+            IList<Price> pricesToRemove = productEntity.Prices
+                .Where(p => !product.Prices.ContainsKey((CustomerTypeDto)p.Type))
+                .ToList();
+
+            // TODO: Actually update prices.
+
             await this.Session.Products.Update(productEntity);
             await this.Session.SaveChanges();
         }

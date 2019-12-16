@@ -143,6 +143,11 @@ namespace FruitRacers.Backend.Shared.Utils
             return optional.IsPresent() ? mapper(optional.Value) : Empty<TResult>();
         }
 
+        public static IOptional<T> Flatten<T>(this IOptional<IOptional<T>> optional)
+        {
+            return optional.FlatMap(o => o);
+        }
+
         public static T OrElse<T>(this IOptional<T> optional, T defaultValue)
         {
             return optional.IsPresent() ? optional.Value : defaultValue;
@@ -155,7 +160,14 @@ namespace FruitRacers.Backend.Shared.Utils
         
         public static T OrElseThrow<T>(this IOptional<T> optional, Func<Exception> exceptionSupplier)
         {
-            return optional.IsPresent() ? optional.Value : throw exceptionSupplier();
+            if (optional.IsPresent())
+            {
+                return optional.Value;
+            }
+            else
+            {
+                throw exceptionSupplier();
+            }
         }
     }
 }

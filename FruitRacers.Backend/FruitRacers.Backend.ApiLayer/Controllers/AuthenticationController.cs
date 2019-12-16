@@ -32,14 +32,6 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
             return Ok(await this.authenticationService.RenewToken(this.GetUserId()));
         }
 
-        [HttpGet("logout")]
-        [RequireLogin]
-        public async Task<IActionResult> Logout()
-        {
-            await this.authenticationService.Logout(this.GetUserId());
-            return NoContent();
-        }
-
         [HttpPost("changepsw")]
         [RequireLogin]
         public async Task<IActionResult> ChangePassword([FromBody] PasswordChangeRequestDto request)

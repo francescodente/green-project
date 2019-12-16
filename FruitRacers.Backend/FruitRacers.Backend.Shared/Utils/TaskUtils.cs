@@ -7,19 +7,14 @@ namespace FruitRacers.Backend.Shared.Utils
 {
     public static class TaskUtils
     {
-        public static Task<T> Then<T>(this Task task, Func<T> supplier)
+        public static async Task<TResult> Then<TSource, TResult>(this Task<TSource> task, Func<TSource, TResult> mapper)
         {
-            return task.ContinueWith(t => supplier());
+            return mapper(await task);
         }
 
-        public static Task<TResult> Then<TSource, TResult>(this Task<TSource> task, Func<TSource, TResult> mapper)
+        public static async Task<TResult> Then<TSource, TResult>(this Task<TSource> task, Func<TSource, Task<TResult>> taskContinuation)
         {
-            return task.ContinueWith(t => mapper(t.Result));
-        }
-
-        public static Task<TResult> Then<TSource, TResult>(this Task<TSource> task, Func<TSource, Task<TResult>> taskContinuation)
-        {
-            return task.Then(taskContinuation);
+            return await taskContinuation(await task);
         }
     }
 }

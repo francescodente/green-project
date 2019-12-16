@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="8.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
@@ -20,10 +21,6 @@
     <ProjectReference Include="..\FruitRacers.Backend.Core\FruitRacers.Backend.Core.csproj" />
     <ProjectReference Include="..\FruitRacers.Backend.DataAccess\FruitRacers.Backend.DataAccess.csproj" />
     <ProjectReference Include="..\FruitRacers.Backend.Shared\FruitRacers.Backend.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Validation\" />
   </ItemGroup>
 
 </Project>

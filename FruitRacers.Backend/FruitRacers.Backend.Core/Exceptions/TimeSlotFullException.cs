@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FruitRacers.Backend.Core.Exceptions
 {
-    public class TimeSlotFullException : Exception
+    public class TimeSlotFullException : DomainException
     {
     }
 }

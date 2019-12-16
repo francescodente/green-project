@@ -14,7 +14,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
             {
                 entity.HasKey(e => new { e.Type, e.ProductId });
 
-                entity.Property(e => e.Type).HasMaxLength(1);
+                entity.Property(e => e.Type).HasColumnType("nvarchar(10)");
 
                 entity.Property(e => e.UnitMultiplier).HasColumnType("decimal(8, 4)");
 

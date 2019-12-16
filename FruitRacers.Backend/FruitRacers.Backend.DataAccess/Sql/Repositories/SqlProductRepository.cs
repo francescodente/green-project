@@ -11,7 +11,10 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
     public class SqlProductRepository : SqlRepository<Product>, IProductRepository
     {
         public SqlProductRepository(FruitracersContext context)
-            : base(context, q => q.Include(p => p.ProductCategories))
+            : base(context, q => q
+                .Include(p => p.Prices)
+                .Include(p => p.ProductCategories)
+                    .ThenInclude(c => c.Category))
         {
         }
 

@@ -1,7 +1,9 @@
 ﻿using FruitRacers.Backend.ApiLayer.DependencyInjection;
+using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -28,7 +30,7 @@ namespace FruitRacers.Backend.ApiLayer
         {
             if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
             }
             else
             {

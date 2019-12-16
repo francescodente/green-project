@@ -33,7 +33,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpPut("{addressId}")]
-        public async Task<IActionResult> UpdateAddress([FromQuery] int addressId, [FromBody] AddressInputDto address)
+        public async Task<IActionResult> UpdateAddress([FromRoute] int addressId, [FromBody] AddressInputDto address)
         {
             await this.addressesService.UpdateAddressForUser(this.GetUserId(), addressId, address);
             return NoContent();

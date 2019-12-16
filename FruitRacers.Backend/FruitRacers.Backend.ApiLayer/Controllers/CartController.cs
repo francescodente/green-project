@@ -47,7 +47,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpDelete("details/{productId}")]
-        public async Task<IActionResult> DeleteCartItem([FromServices] int productId)
+        public async Task<IActionResult> DeleteCartItem([FromRoute] int productId)
         {
             await this.cartService.DeleteCartItemForUser(this.GetUserId(), productId);
             return NoContent();
