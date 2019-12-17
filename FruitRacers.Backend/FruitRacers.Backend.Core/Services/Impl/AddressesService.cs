@@ -19,12 +19,12 @@ namespace FruitRacers.Backend.Core.Services.Impl
             
         }
 
-        private async Task<Address> RequireAddress(int addressID)
+        private async Task<Address> RequireAddress(int addressId)
         {
             return await this.Session
                 .Addresses
-                .FindOne(a => a.AddressId == addressID)
-                .Then(a => a.OrElseThrow(() => new AddressNotFoundException());
+                .FindOne(a => a.AddressId == addressId)
+                .Then(a => a.OrElseThrow(() => new AddressNotFoundException(addressId)));
         }
 
         private async Task<Address> RequireAddressWithOwnership(int userId, int addressId)

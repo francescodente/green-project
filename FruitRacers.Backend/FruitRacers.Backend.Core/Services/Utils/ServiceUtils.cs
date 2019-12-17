@@ -8,11 +8,11 @@ namespace FruitRacers.Backend.Core.Services.Utils
 {
     public static class ServiceUtils
     {
-        public static void EnsureOwnership(int expectedId, int actualId)
+        public static void EnsureOwnership(int resourceOwnerId, int userId)
         {
-            if (expectedId != actualId)
+            if (resourceOwnerId != userId)
             {
-                throw new UnauthorizedUserAccessException(expectedId, actualId);
+                throw new UnauthorizedUserAccessException(userId);
             }
         }
     }

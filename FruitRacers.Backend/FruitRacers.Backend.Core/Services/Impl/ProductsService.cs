@@ -23,14 +23,14 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return await this.Session
                 .Products
                 .FindOne(p => p.ProductId == productId)
-                .Then(p => p.OrElseThrow(() => new ProductNotFoundException()));
+                .Then(p => p.OrElseThrow(() => new ProductNotFoundException(productId)));
         }
 
         public async Task DeleteProductForSupplier(int supplierId, int productId)
         {
             Product product = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(supplierId, product.SupplierId);
+            ServiceUtils.EnsureOwnership(product.SupplierId, supplierId);
 
             product.IsDeleted = true;
 
@@ -94,7 +94,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             Product productEntity = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(supplierId, productEntity.SupplierId);
+            ServiceUtils.EnsureOwnership(productEntity.SupplierId, supplierId);
 
             productEntity.Name = product.Name;
             productEntity.Description = product.Description;

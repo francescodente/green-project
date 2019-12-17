@@ -21,23 +21,23 @@ namespace FruitRacers.Backend.Core.Services.Impl
             this.handler = handler;
         }
 
-        private async Task<User> FindUser(Expression<Func<User, bool>> predicate)
+        private async Task<User> FindUser(Expression<Func<User, bool>> predicate, Func<Exception> exceptionSupplier)
         {
             return await this.Session
                 .Users
                 .IncludingRoles()
                 .FindOne(predicate)
-                .Then(u => u.OrElseThrow(() => new UserNotFoundException()));
+                .Then(u => u.OrElseThrow(exceptionSupplier));
         }
 
         private async Task<User> FindUserById(int userId)
         {
-            return await this.FindUser(u => u.UserId == userId);
+            return await this.FindUser(u => u.UserId == userId, () => UserNotFoundException.WithId(userId));
         }
 
         private async Task<User> FindUserByEmail(string email)
         {
-            return await this.FindUser(u => u.Email == email);
+            return await this.FindUser(u => u.Email == email, () => UserNotFoundException.WithEmail(email));
         }
 
         public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)

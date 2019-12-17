@@ -18,11 +18,10 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
         }
 
-        public async Task<int> GetActualCapacity(int timeSlotID, DateTime date)
+        public async Task<(TimeSlot Slot, int ActualCapacity)> GetActualCapacity(int timeSlotID, DateTime date)
         {
-            Task<int> defaultCapacityTask = this.AsQueryable()
+            Task<TimeSlot> timeSlotTask = this.AsQueryable()
                 .Where(s => s.TimeSlotId == timeSlotID)
-                .Select(s => s.SlotCapacity)
                 .SingleAsync();
             Task<int> ordersCountTask = this.Context
                 .Orders
@@ -33,7 +32,11 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
                 .Where(o => o.Date == date && o.TimeSlotId == timeSlotID)
                 .SumAsync(o => o.Offset);
 
-            return (await defaultCapacityTask) + (await overridesTask) - (await ordersCountTask);
+            TimeSlot slot = await timeSlotTask;
+
+            int actualCapacity = slot.SlotCapacity + (await overridesTask) - (await ordersCountTask);
+
+            return (slot, actualCapacity);
         }
 
         public async Task<IEnumerable<(DateTime Date, TimeSlot Slot, int Capacity)>> GetAllWithActualCapacities(DateTime start, int daysCount)

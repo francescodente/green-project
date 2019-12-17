@@ -8,6 +8,5 @@ namespace FruitRacers.Backend.Contracts.Orders
     {
         public AddressOutputDto Address { get; set; }
         public TimeSlotDto TimeSlot { get; set; }
-        public DateTime? DeliveryDate { get; set; }
     }
 }

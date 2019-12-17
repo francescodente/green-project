@@ -7,5 +7,6 @@ namespace FruitRacers.Backend.Contracts.Orders
     public abstract class AbstractDeliveryInfoDto
     {
         public string Notes { get; set; }
+        public DateTime? DeliveryDate { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Users
                 .IncludingRoles()
                 .FindOne(u => u.UserId == userId)
-                .Then(u => u.OrElseThrow(() => new UserNotFoundException()));
+                .Then(u => u.OrElseThrow(() => UserNotFoundException.WithId(userId)));
             return this.Mapper.Map<UserOutputDto>(userEntity);
         }
     }

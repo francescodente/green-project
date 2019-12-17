@@ -8,6 +8,5 @@ namespace FruitRacers.Backend.Contracts.Orders
     {
         public int? AddressId { get; set; }
         public int? TimeSlotId { get; set; }
-        public DateTime? Date { get; set; }
     }
 }
