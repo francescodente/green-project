@@ -6,7 +6,7 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface ITimeSlotsService
     {
-        Task<IEnumerable<TimeSlotWithCapacityDto>> GetNextTimeSlots(int daysAhead);
+        Task<IEnumerable<DailyTimeTable>> GetNextTimeSlots(int daysAhead);
 
         Task AddTimeSlotOverride(TimeSlotOverrideDto timeSlotOverride);
     }

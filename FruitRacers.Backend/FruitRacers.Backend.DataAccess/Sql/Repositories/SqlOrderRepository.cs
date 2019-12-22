@@ -17,15 +17,21 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
         }
 
-        public IOrderRepository BelongingTo(int userId)
+        public IOrderRepository AfterDate(DateTime date)
         {
-            this.ChainQueryModification(q => q.Where(o => o.UserId == userId));
+            this.ChainQueryModification(q => q.Where(o => o.DeliveryDate >= date));
             return this;
         }
 
-        public IOrderRepository CartOnly()
+        public IOrderRepository BeforeDate(DateTime date)
         {
-            this.ChainQueryModification(q => q.Where(o => o.OrderState == OrderState.Cart));
+            this.ChainQueryModification(q => q.Where(o => o.DeliveryDate <= date));
+            return this;
+        }
+
+        public IOrderRepository BelongingTo(int userId)
+        {
+            this.ChainQueryModification(q => q.Where(o => o.UserId == userId));
             return this;
         }
 
@@ -49,6 +55,12 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
                 .Include(o => o.OrderDetails)
                     .ThenInclude(d => d.Product)
                         .ThenInclude(p => p.Prices));
+            return this;
+        }
+
+        public IOrderRepository WithState(OrderState state)
+        {
+            this.ChainQueryModification(q => q.Where(o => o.OrderState == state));
             return this;
         }
     }

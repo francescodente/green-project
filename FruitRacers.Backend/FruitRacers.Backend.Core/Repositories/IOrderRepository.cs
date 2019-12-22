@@ -11,7 +11,11 @@ namespace FruitRacers.Backend.Core.Repositories
 
         IOrderRepository IncludingDetailsAndProducts();
 
-        IOrderRepository CartOnly();
+        IOrderRepository AfterDate(DateTime date);
+
+        IOrderRepository BeforeDate(DateTime date);
+
+        IOrderRepository WithState(OrderState state);
 
         IOrderRepository BelongingTo(int userID);
     }

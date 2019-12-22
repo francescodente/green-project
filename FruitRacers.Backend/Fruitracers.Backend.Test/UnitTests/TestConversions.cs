@@ -35,7 +35,7 @@ namespace FruitRacers.Backend.Test.UnitTests
                 TimeSlot = new TimeSlot
                 {
                     TimeSlotId = 1,
-                    Weekday = (int)date.DayOfWeek,
+                    Weekday = date.DayOfWeek,
                     StartTime = start,
                     FinishTime = start.Add(TimeSpan.FromMinutes(30)),
                     SlotCapacity = 10

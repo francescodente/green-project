@@ -24,7 +24,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             return this.Session
                 .Orders
-                .CartOnly()
+                .WithState(OrderState.Cart)
                 .BelongingTo(userId);
         }
 
@@ -101,10 +101,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task InsertCartItemForUser(int userId, CartItemInputDto item)
         {
-            Order cart = await this.Session
-                .Orders
-                .CartOnly()
-                .BelongingTo(userId)
+            Order cart = await this.FilterCartForUser(userId)
                 .FindOne()
                 .Then(oc => this.CreateCartIfAbsent(oc, userId));
 
@@ -150,13 +147,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             
             if (deliveryInfo.TimeSlotId.HasValue && deliveryInfo.DeliveryDate.HasValue)
             {
-                (TimeSlot timeSlot, int timeSlotCapacity) = await this.Session
-                    .TimeSlots
-                    .GetActualCapacity(deliveryInfo.TimeSlotId.Value, deliveryInfo.DeliveryDate.Value);
-                if (timeSlotCapacity <= 0)
-                {
-                    throw new TimeSlotFullException(timeSlot, deliveryInfo.DeliveryDate.Value);
-                }
+                await this.EnsureTimeSlotIsValid(deliveryInfo.TimeSlotId.Value, deliveryInfo.DeliveryDate.Value);
             }
             
             cart.TimeSlotId = deliveryInfo.TimeSlotId;
@@ -166,6 +157,20 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             await this.Session.Orders.Update(cart);
             await this.Session.SaveChanges();
+        }
+
+        private async Task EnsureTimeSlotIsValid(int timeSlotId, DateTime date)
+        {
+            (TimeSlot timeSlot, int capacity) = await ServiceUtils.FindTimeSlotWithActualCapacity(this.Session, timeSlotId, date);
+
+            if (timeSlot.Weekday != date.DayOfWeek)
+            {
+                throw new Exception(); // TODO: change to domain exception
+            }
+            if (capacity <= 0)
+            {
+                throw new TimeSlotFullException(timeSlot, date);
+            }
         }
 
         public async Task UpdateCartItemForUser(int userId, CartItemInputDto cartItem)

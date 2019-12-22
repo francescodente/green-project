@@ -3,6 +3,7 @@ using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Contracts.Products;
+using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
@@ -24,6 +25,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
                 c.AddProfile<UserMapping>();
                 c.AddProfile<ProductMapping>();
                 c.AddProfile<CategoriesMapping>();
+                c.AddProfile<TimeSlotMapping>();
             });
             return config.CreateMapper();
         }
@@ -96,7 +98,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
                 this.CreateMap<DeliveryCompany, DeliveryCompanyDto>();
 
                 this.CreateMap<User, UserOutputDto>()
-                    .ForMember(dst => dst.RoleNames, o => o.MapFrom(src => src.GetRoleTypes()))
+                    .ForMember(dst => dst.Roles, o => o.MapFrom(src => src.GetRoleTypes()))
                     .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => this.CreateRoleDictionary(src, context)));
             }
 
@@ -133,6 +135,16 @@ namespace FruitRacers.Backend.Core.Services.Utils
             {
                 this.CreateMap<Category, CategoryDto>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
+            }
+        }
+
+        private class TimeSlotMapping : Profile
+        {
+            public TimeSlotMapping()
+            {
+                this.CreateMap<TimeSlot, TimeSlotDto>();
+
+                this.CreateMap<TimeSlot, TimeSlotWithCapacityDto>();
             }
         }
     }

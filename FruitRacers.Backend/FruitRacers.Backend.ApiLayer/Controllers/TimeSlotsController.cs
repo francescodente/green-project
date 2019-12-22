@@ -20,7 +20,6 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [RequireLogin]
         public async Task<IActionResult> GetNextAvailableTimeSlots([FromQuery] int? daysCount = null)
         {
             return Ok(await this.timeSlotsService.GetNextTimeSlots(daysCount.GetValueOrDefault(DEFAULT_DAYS_COUNT)));

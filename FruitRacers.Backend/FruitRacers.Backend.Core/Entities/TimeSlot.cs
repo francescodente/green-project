@@ -12,7 +12,7 @@ namespace FruitRacers.Backend.Core.Entities
         }
 
         public int TimeSlotId { get; set; }
-        public int Weekday { get; set; }
+        public DayOfWeek Weekday { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan FinishTime { get; set; }
         public int SlotCapacity { get; set; }

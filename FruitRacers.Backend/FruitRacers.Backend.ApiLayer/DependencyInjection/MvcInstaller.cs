@@ -20,6 +20,7 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                 .AddFluentValidation(options =>
                 {
                     options.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    options.ImplicitlyValidateChildProperties = true;
                 })
                 .AddJsonOptions(options =>
                 {

@@ -13,8 +13,7 @@ namespace FruitRacers.Backend.ApiLayer.Validation
         {
             RuleFor(x => x.Password)
                 .NotEmpty()
-                .Length(passwordOptions.Value.MinimumLength, passwordOptions.Value.MaximumLength)
-                .Matches(passwordOptions.Value.Regex);
+                .Length(passwordOptions.Value.MinimumLength, passwordOptions.Value.MaximumLength);
         }
     }
 

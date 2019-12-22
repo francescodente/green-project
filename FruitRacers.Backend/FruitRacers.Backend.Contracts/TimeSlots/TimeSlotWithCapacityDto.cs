@@ -2,9 +2,11 @@
 
 namespace FruitRacers.Backend.Contracts.TimeSlots
 {
-    public class TimeSlotWithCapacityDto
+    public class TimeSlotWithCapacityDto : AbstractTimeSlotDto
     {
-        public int SlotCapacity { get; set; }
-        public DateTime Date { get; set; }
+        public int ActualCapacity { get; set; }
+        public int DefaultCapacity { get; set; }
+        public int OrdersCount { get; set; }
+        public int Overrides { get; set; }
     }
 }

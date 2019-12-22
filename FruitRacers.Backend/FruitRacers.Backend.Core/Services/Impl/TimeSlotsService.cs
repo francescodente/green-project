@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using AutoMapper;
 using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Exceptions;
+using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 
@@ -19,22 +21,68 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task AddTimeSlotOverride(TimeSlotOverrideDto timeSlotOverride)
         {
-            this.Session.TimeSlots.InsertOverride(this.Mapper.Map<TimeSlotOverride>(timeSlotOverride));
+            (TimeSlot timeSlot, int capacity) = await ServiceUtils.FindTimeSlotWithActualCapacity(
+                this.Session, timeSlotOverride.TimeSlotId, timeSlotOverride.Date);
+
+            if (capacity + timeSlotOverride.Offset < 0)
+            {
+                throw new IllegalTimeSlotOverrideException();
+            }
+
+            timeSlot.TimeSlotOverrides
+                .SingleOptional()
+                .IfElse(
+                    o => o.Offset += timeSlotOverride.Offset,
+                    () => timeSlot.TimeSlotOverrides.Add(new TimeSlotOverride
+                    {
+                        Date = timeSlotOverride.Date,
+                        Offset = timeSlotOverride.Offset
+                    }));
+
             await this.Session.SaveChanges();
         }
 
-        public async Task<IEnumerable<TimeSlotWithCapacityDto>> GetNextTimeSlots(int daysAhead)
+        public async Task<IEnumerable<DailyTimeTable>> GetNextTimeSlots(int daysAhead)
         {
-            return await this.Session
+            DateTime startDate = DateTime.Today.AddDays(1);
+            DateTime finishDate = startDate.AddDays(daysAhead - 1);
+
+            IEnumerable<TimeSlot> timeSlots = await this.Session
                 .TimeSlots
-                .GetAllWithActualCapacities(DateTime.Today, daysAhead)
-                .Then(ts => ts.Select(t => this.CreateTimeSlotDto(t.Slot, t.Capacity, t.Date)));
+                .IncludingOverrides(startDate, finishDate)
+                .GetAll();
+
+            IEnumerable<Order> orders = await this.Session
+                .Orders
+                .AfterDate(startDate)
+                .BeforeDate(finishDate)
+                .WithState(OrderState.Confirmed)
+                .GetAll();
+
+            IDictionary<(int, DateTime), int> orderCounts = orders
+                .GroupBy(o => (o.TimeSlotId.Value, o.DeliveryDate.Value), (td, os) => new { DateAndTimeSlot = td, Count = os.Count() })
+                .ToDictionary(x => x.DateAndTimeSlot, x => x.Count);
+
+            IEnumerable<DateTime> dates = EnumerableUtils.Iterate(startDate, d => d.AddDays(1)).Take(daysAhead);
+
+            return dates.GroupJoin(timeSlots, d => d.DayOfWeek, s => s.Weekday, (date, slots) => new DailyTimeTable
+            {
+                Date = date,
+                TimeSlots = slots.Select(s => this.CreateTimeSlotDtoWithCapacity(
+                        s,
+                        s.TimeSlotOverrides.Where(o => o.Date.Equals(date)).Select(o => o.Offset).SingleOptional().OrElse(0),
+                        orderCounts.GetValueAsOptional((s.TimeSlotId, date)).OrElse(0)))
+                    .OrderBy(s => s.StartTime)
+            });
         }
 
-        private TimeSlotWithCapacityDto CreateTimeSlotDto(TimeSlot slot, int actualCapacity, DateTime date)
+        private TimeSlotWithCapacityDto CreateTimeSlotDtoWithCapacity(TimeSlot slot, int overrides, int orders)
         {
-            TimeSlotWithCapacityDto timeSlotDto = this.Mapper.Map(slot, new TimeSlotWithCapacityDto { Date = date });
-            timeSlotDto.SlotCapacity = actualCapacity;
+            TimeSlotWithCapacityDto timeSlotDto = this.Mapper.Map<TimeSlotWithCapacityDto>(slot);
+            timeSlotDto.ActualCapacity = slot.SlotCapacity + overrides - orders;
+            timeSlotDto.Overrides = overrides;
+            timeSlotDto.OrdersCount = orders;
+            timeSlotDto.DefaultCapacity = slot.SlotCapacity;
             return timeSlotDto;
         }
     }
