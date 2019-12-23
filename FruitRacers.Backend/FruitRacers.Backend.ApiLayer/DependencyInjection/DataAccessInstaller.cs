@@ -1,4 +1,5 @@
-﻿using FruitRacers.Backend.Core.Services;
+﻿using FruitRacers.Backend.ApiLayer.Utils;
+using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.DataAccess.Sql;
@@ -22,6 +23,10 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
             services.AddScoped<IDataSession>(p => new LazyLoadedDataSession(
                 new SqlDataSession(p.GetRequiredService<FruitracersContext>())
             ));
+
+            services.AddScoped<IUserSession, UserSession>();
+
+            services.AddScoped<IRequestSession, RequestSession>();
 
             services
                 .AddScoped<IAddressesService, AddressesService>()
