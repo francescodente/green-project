@@ -82,7 +82,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             return new Price
             {
-                Type = (CustomerType)customerType,
+                Type = (CustomerType) customerType,
                 UnitName = dto.UnitName,
                 UnitMultiplier = dto.UnitMultiplier,
                 Value = dto.Value,
@@ -112,15 +112,16 @@ namespace FruitRacers.Backend.Core.Services.Impl
             categoriesToRemove.ForEach(c => productEntity.ProductCategories.Remove(c));
 
             IList<Price> pricesToAdd = product.Prices
-                .Where(p => !productEntity.Prices.Select(e => e.Type).Contains((CustomerType)p.Key))
+                .Where(p => !productEntity.Prices.Select(e => e.Type).Contains((CustomerType) p.Key))
                 .Select(p => this.CreatePriceFromDto(p.Value, p.Key))
                 .ToList();
 
             IList<Price> pricesToRemove = productEntity.Prices
-                .Where(p => !product.Prices.ContainsKey((CustomerTypeDto)p.Type))
+                .Where(p => !product.Prices.ContainsKey((CustomerTypeDto) p.Type))
                 .ToList();
 
-            // TODO: Actually update prices.
+            pricesToAdd.ForEach(p => productEntity.Prices.Add(p));
+            pricesToRemove.ForEach(p => productEntity.Prices.Remove(p));
 
             await this.Session.Products.Update(productEntity);
             await this.Session.SaveChanges();
