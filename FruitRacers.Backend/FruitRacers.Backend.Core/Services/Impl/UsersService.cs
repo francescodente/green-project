@@ -1,36 +1,34 @@
 ﻿using AutoMapper;
 using FruitRacers.Backend.Contracts.Users;
-using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class UsersService : AbstractService, IUsersService
     {
-        public UsersService(IDataSession session, IMapper mapper)
-            : base(session, mapper)
+        public UsersService(IRequestSession request, IMapper mapper)
+            : base(request, mapper)
         {
 
         }
 
-        public async Task DeleteUser(int userId)
+        public async Task DeleteUser()
         {
-            await this.Session.Users.DeleteWhere(u => u.UserId == userId);
+            await this.Session.Users.DeleteWhere(u => u.UserId == this.RequestingUser.UserId);
             await this.Session.SaveChanges();
         }
 
-        public async Task<UserOutputDto> GetUserData(int userId)
+        public async Task<UserOutputDto> GetUserData()
         {
             User userEntity = await this.Session
                 .Users
                 .IncludingRoles()
-                .FindOne(u => u.UserId == userId)
-                .Then(u => u.OrElseThrow(() => UserNotFoundException.WithId(userId)));
+                .FindOne(u => u.UserId == this.RequestingUser.UserId)
+                .Then(u => u.OrElseThrow(() => UserNotFoundException.WithId(this.RequestingUser.UserId)));
             return this.Mapper.Map<UserOutputDto>(userEntity);
         }
     }

@@ -29,14 +29,14 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [RequireLogin]
         public async Task<IActionResult> RenewToken()
         {
-            return Ok(await this.authenticationService.RenewToken(this.GetUserId()));
+            return Ok(await this.authenticationService.RenewToken());
         }
 
         [HttpPost("changepsw")]
         [RequireLogin]
         public async Task<IActionResult> ChangePassword([FromBody] PasswordChangeRequestDto request)
         {
-            await this.authenticationService.ChangePassword(this.GetUserId(), request);
+            await this.authenticationService.ChangePassword(request);
             return NoContent();
         }
 

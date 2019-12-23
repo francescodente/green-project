@@ -9,8 +9,8 @@ namespace FruitRacers.Backend.Core.Services
 
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 
-        Task<AuthenticationResultDto> RenewToken(int userId);
+        Task<AuthenticationResultDto> RenewToken();
 
-        Task ChangePassword(int userId, PasswordChangeRequestDto request);
+        Task ChangePassword(PasswordChangeRequestDto request);
     }
 }

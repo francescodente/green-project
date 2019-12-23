@@ -10,8 +10,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class SuppliersService : AbstractService, ISuppliersService
     {
-        public SuppliersService(IDataSession session, IMapper mapper)
-            : base(session, mapper)
+        public SuppliersService(IRequestSession request, IMapper mapper)
+            : base(request, mapper)
         {
         }
 

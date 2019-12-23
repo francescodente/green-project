@@ -12,8 +12,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
     {
         private const string ROOT_CATEGORY_NAME = "<root>";
 
-        public CategoriesService(IDataSession session, IMapper mapper)
-            : base(session, mapper)
+        public CategoriesService(IRequestSession request, IMapper mapper)
+            : base(request, mapper)
         {
 
         }

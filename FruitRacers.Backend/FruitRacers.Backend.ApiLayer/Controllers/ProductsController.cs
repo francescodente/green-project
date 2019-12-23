@@ -31,21 +31,21 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {
-            int productId = await this.productsService.InsertProductForSupplier(this.GetUserId(), product);
+            int productId = await this.productsService.InsertProduct(product);
             return Ok(new { ProductId = productId });
         }
 
         [HttpPut("{productId}")]
         public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductInputDto product)
         {
-            await this.productsService.UpdateProductForSupplier(this.GetUserId(), productId, product);
+            await this.productsService.UpdateProduct(productId, product);
             return NoContent();
         }
 
         [HttpDelete("{productId}")]
         public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
-            await this.productsService.DeleteProductForSupplier(this.GetUserId(), productId);
+            await this.productsService.DeleteProduct(productId);
             return NoContent();
         }
     }

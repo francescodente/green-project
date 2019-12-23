@@ -18,13 +18,13 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUserData()
         {
-            return Ok(await this.usersService.GetUserData(this.GetUserId()));
+            return Ok(await this.usersService.GetUserData());
         }
 
         [HttpDelete]
         public async Task<IActionResult> DeleteUser()
         {
-            await this.usersService.DeleteUser(this.GetUserId());
+            await this.usersService.DeleteUser();
             return NoContent();
         }
     }

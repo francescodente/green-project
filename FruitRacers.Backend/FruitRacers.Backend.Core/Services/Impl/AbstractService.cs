@@ -8,12 +8,15 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public abstract class AbstractService
     {
-        protected IDataSession Session { get; private set; }
+        protected IRequestSession Request { get; private set; }
         protected IMapper Mapper { get; private set; }
 
-        public AbstractService(IDataSession session, IMapper mapper)
+        protected IDataSession Session => this.Request.Data;
+        protected IUserSession RequestingUser => this.Request.User;
+
+        public AbstractService(IRequestSession request, IMapper mapper)
         {
-            this.Session = session;
+            this.Request = request;
             this.Mapper = mapper;
         }
     }

@@ -16,8 +16,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
     {
         private readonly IAuthenticationHandler handler;
 
-        public AuthenticationService(IDataSession session, IMapper mapper, IAuthenticationHandler handler)
-            : base(session, mapper)
+        public AuthenticationService(IRequestSession request, IMapper mapper, IAuthenticationHandler handler)
+            : base(request, mapper)
         {
             this.handler = handler;
         }
@@ -48,17 +48,17 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return await this.handler.OnUserAuthenticated(user);
         }
 
-        public async Task ChangePassword(int userId, PasswordChangeRequestDto request)
+        public async Task ChangePassword(PasswordChangeRequestDto request)
         {
-            User user = await this.FindUserById(userId);
+            User user = await this.FindUserById(this.RequestingUser.UserId);
             this.EnsurePasswordIsCorrect(user, request.OldPassword);
             this.handler.AssignPassword(user, request.NewPassword);
             await this.Session.SaveChanges();
         }
 
-        public async Task<AuthenticationResultDto> RenewToken(int userId)
+        public async Task<AuthenticationResultDto> RenewToken()
         {
-            return await this.handler.OnUserAuthenticated(await this.FindUserById(userId));
+            return await this.handler.OnUserAuthenticated(await this.FindUserById(this.RequestingUser.UserId));
         }
 
         private void EnsurePasswordIsCorrect(User user, string password)

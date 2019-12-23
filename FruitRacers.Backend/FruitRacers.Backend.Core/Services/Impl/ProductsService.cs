@@ -13,8 +13,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class ProductsService : AbstractService, IProductsService
     {
-        public ProductsService(IDataSession session, IMapper mapper)
-            : base(session, mapper)
+        public ProductsService(IRequestSession request, IMapper mapper)
+            : base(request, mapper)
         {
         }
 
@@ -26,11 +26,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(p => p.OrElseThrow(() => new ProductNotFoundException(productId)));
         }
 
-        public async Task DeleteProductForSupplier(int supplierId, int productId)
+        public async Task DeleteProduct(int productId)
         {
             Product product = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(product.SupplierId, supplierId);
+            ServiceUtils.EnsureOwnership(product.SupplierId, this.RequestingUser.UserId);
 
             product.IsDeleted = true;
 
@@ -53,11 +53,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(p => p.Select(this.Mapper.Map<ProductOutputDto>));
         }
 
-        public async Task<int> InsertProductForSupplier(int supplierId, ProductInputDto product)
+        public async Task<int> InsertProduct(ProductInputDto product)
         {
             Product productEntity = new Product
             {
-                SupplierId = supplierId,
+                SupplierId = this.RequestingUser.UserId,
                 Description = product.Description,
                 Name = product.Name,
                 IsDeleted = false,
@@ -90,11 +90,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
             };
         }
 
-        public async Task UpdateProductForSupplier(int supplierId, int productId, ProductInputDto product)
+        public async Task UpdateProduct(int productId, ProductInputDto product)
         {
             Product productEntity = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(productEntity.SupplierId, supplierId);
+            ServiceUtils.EnsureOwnership(productEntity.SupplierId, this.RequestingUser.UserId);
 
             productEntity.Name = product.Name;
             productEntity.Description = product.Description;

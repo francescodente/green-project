@@ -13,8 +13,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class AddressesService : AbstractService, IAddressesService
     {
-        public AddressesService(IDataSession session, IMapper mapper)
-            : base(session, mapper)
+        public AddressesService(IRequestSession request, IMapper mapper)
+            : base(request, mapper)
         {
             
         }
@@ -34,11 +34,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return address;
         }
 
-        public async Task<int> AddAddressForUser(int userId, AddressInputDto address)
+        public async Task<int> AddAddress(AddressInputDto address)
         {
             Address addressEntity = new Address
             {
-                UserId = userId,
+                UserId = this.RequestingUser.UserId,
                 Description = address.Description,
                 Latitude = address.Latitude,
                 Longitude = address.Longitude
@@ -48,24 +48,24 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return addressEntity.AddressId;
         }
 
-        public async Task DeleteAddressForUser(int userId, int addressId)
+        public async Task DeleteAddress(int addressId)
         {
-            Address address = await this.RequireAddressWithOwnership(userId, addressId);
+            Address address = await this.RequireAddressWithOwnership(this.RequestingUser.UserId, addressId);
             await this.Session.Addresses.Delete(address);
             await this.Session.SaveChanges();
         }
 
-        public async Task<IEnumerable<AddressOutputDto>> GetAddressesForUser(int userId)
+        public async Task<IEnumerable<AddressOutputDto>> GetAddresses()
         {
             return await this.Session
                 .Addresses
-                .Where(a => a.UserId == userId)
+                .Where(a => a.UserId == this.RequestingUser.UserId)
                 .Then(x => x.Select(this.Mapper.Map<Address, AddressOutputDto>));
         }
 
-        public async Task UpdateAddressForUser(int userId, int addressId, AddressInputDto address)
+        public async Task UpdateAddress(int addressId, AddressInputDto address)
         {
-            Address addressEntity = await this.RequireAddressWithOwnership(userId, addressId);
+            Address addressEntity = await this.RequireAddressWithOwnership(this.RequestingUser.UserId, addressId);
 
             addressEntity.Description = address.Description;
             addressEntity.Latitude = address.Latitude;

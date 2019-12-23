@@ -6,12 +6,12 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IAddressesService
     {
-        Task<IEnumerable<AddressOutputDto>> GetAddressesForUser(int userId);
+        Task<IEnumerable<AddressOutputDto>> GetAddresses();
 
-        Task<int> AddAddressForUser(int userId, AddressInputDto address);
+        Task<int> AddAddress(AddressInputDto address);
 
-        Task UpdateAddressForUser(int userId, int addressId, AddressInputDto address);
+        Task UpdateAddress(int addressId, AddressInputDto address);
 
-        Task DeleteAddressForUser(int userId, int addressId);
+        Task DeleteAddress(int addressId);
     }
 }

@@ -22,27 +22,27 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAddresses()
         {
-            return Ok(await this.addressesService.GetAddressesForUser(this.GetUserId()));
+            return Ok(await this.addressesService.GetAddresses());
         }
 
         [HttpPost]
         public async Task<IActionResult> InsertAddress([FromBody] AddressInputDto address)
         {
-            int addressId = await this.addressesService.AddAddressForUser(this.GetUserId(), address);
+            int addressId = await this.addressesService.AddAddress(address);
             return Ok(new { AddressId = addressId });
         }
 
         [HttpPut("{addressId}")]
         public async Task<IActionResult> UpdateAddress([FromRoute] int addressId, [FromBody] AddressInputDto address)
         {
-            await this.addressesService.UpdateAddressForUser(this.GetUserId(), addressId, address);
+            await this.addressesService.UpdateAddress(addressId, address);
             return NoContent();
         }
 
         [HttpDelete("{addressId}")]
         public async Task<IActionResult> DeleteAddress([FromRoute] int addressId)
         {
-            await this.addressesService.DeleteAddressForUser(this.GetUserId(), addressId);
+            await this.addressesService.DeleteAddress(addressId);
             return NoContent();
         }
     }

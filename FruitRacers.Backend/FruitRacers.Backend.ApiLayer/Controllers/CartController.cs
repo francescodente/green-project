@@ -22,41 +22,41 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCart()
         {
-            return Ok(await this.cartService.GetCartDetailsForUser(this.GetUserId()));
+            return Ok(await this.cartService.GetCartDetails());
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateCartDeliveryInfo([FromBody] DeliveryInfoInputDto deliveryInfo)
         {
-            await this.cartService.UpdateCartDeliveryInfoForUser(this.GetUserId(), deliveryInfo);
+            await this.cartService.UpdateCartDeliveryInfo(deliveryInfo);
             return NoContent();
         }
 
         [HttpPost("details")]
         public async Task<IActionResult> InsertCartItem([FromBody] CartItemInputDto insertion)
         {
-            await this.cartService.InsertCartItemForUser(this.GetUserId(), insertion);
+            await this.cartService.InsertCartItem(insertion);
             return NoContent();
         }
 
         [HttpPut("details")]
         public async Task<IActionResult> UpdateCartItem([FromBody] CartItemInputDto insertion)
         {
-            await this.cartService.UpdateCartItemForUser(this.GetUserId(), insertion);
+            await this.cartService.UpdateCartItem(insertion);
             return NoContent();
         }
 
         [HttpDelete("details/{productId}")]
         public async Task<IActionResult> DeleteCartItem([FromRoute] int productId)
         {
-            await this.cartService.DeleteCartItemForUser(this.GetUserId(), productId);
+            await this.cartService.DeleteCartItem(productId);
             return NoContent();
         }
 
         [HttpPut("confirm")]
         public async Task<IActionResult> ConfirmCart()
         {
-            int orderId = await this.cartService.ConfirmCartForUser(this.GetUserId());
+            int orderId = await this.cartService.ConfirmCart();
             return Ok(new { OrderId = orderId });
         }
     }

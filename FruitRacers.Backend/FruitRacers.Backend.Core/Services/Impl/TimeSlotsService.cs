@@ -14,8 +14,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class TimeSlotsService : AbstractService, ITimeSlotsService
     {
-        public TimeSlotsService(IDataSession session, IMapper mapper)
-            : base(session, mapper)
+        public TimeSlotsService(IRequestSession request, IMapper mapper)
+            : base(request, mapper)
         {
         }
 
