@@ -90,14 +90,9 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
 
         private IEnumerable<Claim> CreateClaimsList(User user)
         {
-            return Enumerable.Concat(
-                new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Email),
-                    new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
-                },
-                this.GetUserRoles(user).Select(CreateRoleClaim)
-            );
+            return this.GetUserRoles(user)
+                .Select(CreateRoleClaim)
+                .Append(new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()));
         }
 
         private IEnumerable<RoleType> GetUserRoles(User user)
