@@ -17,14 +17,12 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.ProductImages)
                     .HasForeignKey(d => d.ImageId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProductImages_Images");
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.ProductImages)
                     .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ProductImages_Products");
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

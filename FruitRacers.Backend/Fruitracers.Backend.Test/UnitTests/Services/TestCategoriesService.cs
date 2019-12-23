@@ -32,10 +32,17 @@ namespace FruitRacers.Backend.Test.UnitTests.Services
                 new Category { CategoryId = 8, ParentCategoryId = 2 }
             };
 
-            IDataSession session = Substitute.For<IDataSession>();
-            session.Categories.Returns(MockingUtils.CreateMockReadOnlyRepository(categories));
+            IDataSession data = Substitute.For<IDataSession>();
+            data.Categories.Returns(MockingUtils.CreateMockReadOnlyRepository(categories));
 
-            ICategoriesService categoriesService = new CategoriesService(session, MappingUtils.CreateDefaultMapper());
+            IUserSession user = Substitute.For<IUserSession>();
+            user.IsLoggedIn.Returns(false);
+
+            IRequestSession request = Substitute.For<IRequestSession>();
+            request.User.Returns(user);
+            request.Data.Returns(data);
+
+            ICategoriesService categoriesService = new CategoriesService(request, MappingUtils.CreateDefaultMapper());
 
             CategoryTreeDto actual = categoriesService.GetCategoryTree().Result;
 

@@ -19,8 +19,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                 entity.HasOne(d => d.TimeSlot)
                     .WithMany(p => p.TimeSlotOverrides)
                     .HasForeignKey(d => d.TimeSlotId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TimeSlotOverrides_TimeSlots");
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

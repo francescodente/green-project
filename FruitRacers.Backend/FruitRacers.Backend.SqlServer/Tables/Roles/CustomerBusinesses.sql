@@ -2,7 +2,7 @@
 (
 	[UserId] INT NOT NULL PRIMARY KEY, 
 	[VatNumber] NVARCHAR(16) NOT NULL UNIQUE, 
-    [BusinessName] VARCHAR(100) NOT NULL, 
+    [BusinessName] NVARCHAR(100) NOT NULL, 
     [Sdi] NCHAR(7) NULL, 
     [Pec] NVARCHAR(60) NULL, 
     [LegalForm] NVARCHAR(10) NOT NULL, 

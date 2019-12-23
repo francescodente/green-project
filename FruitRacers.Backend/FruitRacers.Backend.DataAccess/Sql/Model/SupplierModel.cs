@@ -12,19 +12,16 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
         {
             modelBuilder.Entity<Supplier>(entity =>
             {
-                entity.HasKey(e => e.UserId)
-                    .HasName("PK__Supplier__1788CC4C3BDD7660");
+                entity.HasKey(e => e.UserId);
 
                 entity.HasIndex(e => e.VatNumber)
-                    .HasName("UQ__Supplier__654B40BA5D10A839")
                     .IsUnique();
 
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
                 entity.Property(e => e.BusinessName)
                     .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.Description).HasMaxLength(1000);
 
@@ -43,8 +40,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Supplier)
                     .HasForeignKey<Supplier>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Suppliers_Users");
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

@@ -12,16 +12,14 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
         {
             modelBuilder.Entity<Administrator>(entity =>
             {
-                entity.HasKey(e => e.UserId)
-                    .HasName("PK__Administ__1788CC4CABFC5AC4");
+                entity.HasKey(e => e.UserId);
 
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Administrator)
                     .HasForeignKey<Administrator>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserAdministrators_Users");
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

@@ -20,19 +20,16 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
 
                 entity.HasOne(d => d.Address)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.AddressId)
-                    .HasConstraintName("FK_Orders_Addresses");
+                    .HasForeignKey(d => d.AddressId);
 
                 entity.HasOne(d => d.TimeSlot)
                     .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.TimeSlotId)
-                    .HasConstraintName("FK_Orders_TimeSlots");
+                    .HasForeignKey(d => d.TimeSlotId);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Orders_Users");
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

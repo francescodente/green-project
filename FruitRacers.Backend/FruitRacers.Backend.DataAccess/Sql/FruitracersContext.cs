@@ -26,7 +26,7 @@ namespace FruitRacers.Backend.DataAccess.Sql
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-        public virtual DbSet<Person> Peoples { get; set; }
+        public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
@@ -41,8 +41,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
         {
             ReflectionUtils.InstancesOfSubtypes<IModelCreator>(typeof(FruitracersContext).Assembly)
                 .ForEach(m => m.UpdateModel(modelBuilder));
-
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
         }
     }
 }

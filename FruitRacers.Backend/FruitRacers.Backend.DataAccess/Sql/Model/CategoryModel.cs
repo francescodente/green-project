@@ -18,13 +18,11 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
 
                 entity.HasOne(d => d.Image)
                     .WithMany(p => p.Categories)
-                    .HasForeignKey(d => d.ImageId)
-                    .HasConstraintName("FK_Categories_Images");
+                    .HasForeignKey(d => d.ImageId);
 
                 entity.HasOne(d => d.ParentCategory)
-                    .WithMany(p => p.InverseParentCategory)
-                    .HasForeignKey(d => d.ParentCategoryId)
-                    .HasConstraintName("FK_Categories_Categories");
+                    .WithMany(p => p.ChildCategories)
+                    .HasForeignKey(d => d.ParentCategoryId);
             });
         }
     }

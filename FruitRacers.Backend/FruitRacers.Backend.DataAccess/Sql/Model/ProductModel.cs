@@ -29,8 +29,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                 entity.HasOne(d => d.Supplier)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.SupplierId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Products_Suppliers");
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }

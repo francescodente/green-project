@@ -13,7 +13,6 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasIndex(e => e.Email)
-                    .HasName("UQ__Users__A9D10534898CE797")
                     .IsUnique();
 
                 entity.Property(e => e.Email)

@@ -12,10 +12,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
         {
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.HasKey(e => e.UserId)
-                    .HasName("PK__UserPeop__1788CC4CFCB3A631");
-
-                entity.ToTable("People");
+                entity.HasKey(e => e.UserId);
 
                 entity.Property(e => e.UserId).ValueGeneratedNever();
 
@@ -32,8 +29,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Person)
                     .HasForeignKey<Person>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserPeople_Users");
+                    .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
