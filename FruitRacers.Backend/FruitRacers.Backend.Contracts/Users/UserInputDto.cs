@@ -2,9 +2,8 @@
 
 namespace FruitRacers.Backend.Contracts.Users
 {
-    public class UserInputDto<TRole> : AbstractUserDto
-        where TRole : RoleDto
+    public class UserInputDto : AbstractUserDto
     {
-        public TRole Role { get; set; }
+
     }
 }

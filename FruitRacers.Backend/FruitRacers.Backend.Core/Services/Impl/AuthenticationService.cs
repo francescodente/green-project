@@ -3,6 +3,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
 using FruitRacers.Backend.Contracts.Authentication;
+using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
@@ -55,11 +56,6 @@ namespace FruitRacers.Backend.Core.Services.Impl
             await this.Session.SaveChanges();
         }
 
-        public async Task Logout(int userId)
-        {
-            await this.handler.OnUserLoggedOut(await this.FindUserById(userId));
-        }
-
         public async Task<AuthenticationResultDto> RenewToken(int userId)
         {
             return await this.handler.OnUserAuthenticated(await this.FindUserById(userId));
@@ -71,6 +67,24 @@ namespace FruitRacers.Backend.Core.Services.Impl
             {
                 throw new IncorrectPasswordException();
             }
+        }
+
+        public async Task<int> Register(RegistrationDto registration)
+        {
+            UserInputDto userDto = registration.User;
+            User userEntity = new User
+            {
+                Email = userDto.Email,
+                Telephone = userDto.Telephone,
+                IsDeleted = false,
+                IsEnabled = true,
+                MarketingConsent = userDto.MarketingConsent,
+                CookieConsent = userDto.CookieConsent
+            };
+            this.handler.AssignPassword(userEntity, registration.Password);
+            await this.Session.Users.Insert(userEntity);
+            await this.Session.SaveChanges();
+            return userEntity.UserId;
         }
     }
 }

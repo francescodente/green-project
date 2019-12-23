@@ -39,5 +39,12 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
             await this.authenticationService.ChangePassword(this.GetUserId(), request);
             return NoContent();
         }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegistrationDto registration)
+        {
+            int id = await this.authenticationService.Register(registration);
+            return Ok(new { UserId = id });
+        }
     }
 }

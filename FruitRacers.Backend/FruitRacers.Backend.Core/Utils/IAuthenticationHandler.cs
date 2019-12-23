@@ -8,8 +8,6 @@ namespace FruitRacers.Backend.Core.Utils
     {
         Task<AuthenticationResultDto> OnUserAuthenticated(User user);
 
-        Task OnUserLoggedOut(User user);
-
         void AssignPassword(User user, string password);
 
         bool IsPasswordCorrect(User user, string password);

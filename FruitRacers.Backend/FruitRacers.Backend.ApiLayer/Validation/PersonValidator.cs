@@ -8,9 +8,6 @@ namespace FruitRacers.Backend.ApiLayer.Validation
     {
         public PersonValidator()
         {
-            RuleFor(x => x.Cf)
-                .Matches("[A-Z]{6}");
-
             RuleFor(x => x.BirthDate)
                 .LessThan(_ => DateTime.Today);
         }

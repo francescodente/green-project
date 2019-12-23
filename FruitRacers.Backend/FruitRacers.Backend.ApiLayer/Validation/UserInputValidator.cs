@@ -4,8 +4,7 @@ using FruitRacers.Backend.Contracts.Users.Roles;
 
 namespace FruitRacers.Backend.ApiLayer.Validation
 {
-    public abstract class UserInputValidator<T> : AbstractValidator<UserInputDto<T>>
-        where T : RoleDto
+    public class UserInputValidator : AbstractValidator<UserInputDto>
     {
         public UserInputValidator()
         {
@@ -13,20 +12,5 @@ namespace FruitRacers.Backend.ApiLayer.Validation
                 .NotEmpty()
                 .EmailAddress();
         }
-    }
-
-    public class PersonUserInputValidator : UserInputValidator<PersonDto>
-    {
-
-    }
-
-    public class SupplierUserInputValidator : UserInputValidator<SupplierDto>
-    {
-
-    }
-
-    public class CustomerBusinessUserInputValidator : UserInputValidator<CustomerBusinessDto>
-    {
-
     }
 }
