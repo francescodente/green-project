@@ -65,15 +65,19 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             IEnumerable<DateTime> dates = EnumerableUtils.Iterate(startDate, d => d.AddDays(1)).Take(daysAhead);
 
-            return dates.GroupJoin(timeSlots, d => d.DayOfWeek, s => s.Weekday, (date, slots) => new DailyTimeTable
-            {
-                Date = date,
-                TimeSlots = slots.Select(s => this.CreateTimeSlotDtoWithCapacity(
-                        s,
-                        s.TimeSlotOverrides.Where(o => o.Date.Equals(date)).Select(o => o.Offset).SingleOptional().OrElse(0),
-                        orderCounts.GetValueAsOptional((s.TimeSlotId, date)).OrElse(0)))
-                    .OrderBy(s => s.StartTime)
-            });
+            return dates.GroupJoin(
+                timeSlots,
+                d => d.DayOfWeek,
+                s => s.Weekday,
+                (date, slots) => new DailyTimeTable
+                {
+                    Date = date,
+                    TimeSlots = slots.Select(s => this.CreateTimeSlotDtoWithCapacity(
+                            s,
+                            s.TimeSlotOverrides.Where(o => o.Date.Equals(date)).Select(o => o.Offset).SingleOptional().OrElse(0),
+                            orderCounts.GetValueAsOptional((s.TimeSlotId, date)).OrElse(0)))
+                        .OrderBy(s => s.StartTime)
+                });
         }
 
         private TimeSlotWithCapacityDto CreateTimeSlotDtoWithCapacity(TimeSlot slot, int overrides, int orders)

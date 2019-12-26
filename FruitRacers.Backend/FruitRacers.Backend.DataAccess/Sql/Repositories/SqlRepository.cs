@@ -30,28 +30,22 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
             return Task.CompletedTask;
         }
 
+        public Task DeleteRange(IEnumerable<T> entities)
+        {
+            this.Set.RemoveRange(entities);
+            return Task.CompletedTask;
+        }
+
         public Task Insert(T entity)
         {
             this.Set.Add(entity);
             return Task.CompletedTask;
         }
 
-        public Task Update(T entity)
+        public Task InsertRange(IEnumerable<T> entities)
         {
-            this.Set.Update(entity);
+            this.Set.AddRange(entities);
             return Task.CompletedTask;
-        }
-
-        public async Task DeleteWhere(Expression<Func<T, bool>> predicate)
-        {
-            IEnumerable<T> entitiesToDelete = await this.Where(predicate);
-            this.Set.RemoveRange(entitiesToDelete);
-        }
-
-        public async Task UpdateWhere(Expression<Func<T, bool>> predicate, Action<T> updateAction)
-        {
-            IEnumerable<T> entitiesToUpdate = await this.Where(predicate);
-            entitiesToUpdate.ForEach(updateAction);
         }
     }
 }

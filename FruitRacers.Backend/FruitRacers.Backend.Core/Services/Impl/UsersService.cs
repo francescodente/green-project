@@ -18,7 +18,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task DeleteUser()
         {
-            await this.Session.Users.DeleteWhere(u => u.UserId == this.RequestingUser.UserId);
+            User userEntity = await this.Session
+                .Users
+                .FindOne(u => u.UserId == this.RequestingUser.UserId)
+                .Then(u => u.OrElseThrow(() => UserNotFoundException.WithId(this.RequestingUser.UserId)));
+            userEntity.IsDeleted = true;
             await this.Session.SaveChanges();
         }
 

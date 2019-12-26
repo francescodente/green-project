@@ -71,7 +71,6 @@ namespace FruitRacers.Backend.Core.Services.Impl
             addressEntity.Latitude = address.Latitude;
             addressEntity.Longitude = address.Longitude;
 
-            await this.Session.Addresses.Update(addressEntity);
             await this.Session.SaveChanges();
         }
     }

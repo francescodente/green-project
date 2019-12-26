@@ -34,7 +34,6 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             product.IsDeleted = true;
 
-            await this.Session.Products.Update(product);
             await this.Session.SaveChanges();
         }
 
@@ -123,7 +122,6 @@ namespace FruitRacers.Backend.Core.Services.Impl
             pricesToAdd.ForEach(p => productEntity.Prices.Add(p));
             pricesToRemove.ForEach(p => productEntity.Prices.Remove(p));
 
-            await this.Session.Products.Update(productEntity);
             await this.Session.SaveChanges();
         }
     }

@@ -53,9 +53,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
             cart.OrderState = OrderState.Confirmed;
             cart.Timestamp = DateTime.Now;
 
-            cart.OrderDetails.ForEach(d => this.AssignCurrentPriceToOrderDetail(d, CustomerType.Person)); // TODO: use correct role
+            CustomerType customerType = ServiceUtils.GetCustomerType(this.RequestingUser)
+                .OrElseThrow(() => new UnauthorizedPurchaseException());
 
-            await this.Session.Orders.Update(cart);
+            cart.OrderDetails.ForEach(d => this.AssignCurrentPriceToOrderDetail(d, customerType));
+
             await this.Session.SaveChanges();
 
             return cart.OrderId;
@@ -155,7 +157,6 @@ namespace FruitRacers.Backend.Core.Services.Impl
             cart.Notes = deliveryInfo.Notes;
             cart.DeliveryDate = deliveryInfo.DeliveryDate;
 
-            await this.Session.Orders.Update(cart);
             await this.Session.SaveChanges();
         }
 
@@ -175,17 +176,18 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task UpdateCartItem(CartItemInputDto cartItem)
         {
-            int orderID = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order order = await this.FilterCartForUser(this.RequestingUser.UserId)
+                .IncludingDetails()
                 .FindOne()
-                .Then(oc => oc.Map(c => c.OrderId).OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
+                .Then(oc => oc.OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
 
-            OrderDetail item = await this.Session
+            OrderDetail item = order
                 .OrderDetails
-                .FindOne(d => d.OrderId == orderID && d.ProductId == cartItem.ProductId)
-                .Then(d => d.OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
+                .SingleOptional(d => d.ProductId == cartItem.ProductId)
+                .OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId));
 
             item.Quantity = cartItem.Quantity;
-            await this.Session.OrderDetails.Update(item);
+
             await this.Session.SaveChanges();
         }
     }
