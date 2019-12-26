@@ -3,6 +3,7 @@ using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Contracts.Products;
+using FruitRacers.Backend.Contracts.Suppliers;
 using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Contracts.Users.Roles;
@@ -59,7 +60,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
                         (_, details) => new SupplierOrderSectionDto<CartItemOutputDto>
                         {
                             Items = details.Select(mapper.Map<CartItemOutputDto>),
-                            Supplier = mapper.Map<SupplierDto>(details.First().Product.Supplier) // TODO: change to different type (e.g. SupplierInfoDto)
+                            Supplier = mapper.Map<SupplierInfoDto>(details.First().Product.Supplier)
                         });
             }
         }
