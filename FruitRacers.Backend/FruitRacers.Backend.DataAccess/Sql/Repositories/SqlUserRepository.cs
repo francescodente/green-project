@@ -15,15 +15,24 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
         }
 
+        private SqlUserRepository(FruitracersContext context, Func<IQueryable<User>, IQueryable<User>> initialModifier)
+            : base(context, initialModifier)
+        {
+        }
+
+        private IUserRepository WrapRepository(Func<IQueryable<User>, IQueryable<User>> modifier)
+        {
+            return new SqlUserRepository(this.Context, this.WrapQuery(modifier));
+        }
+
         public IUserRepository IncludingRoles()
         {
-            this.ChainQueryModification(q => q
+            return this.WrapRepository(q => q
                 .Include(user => user.Person)
                 .Include(user => user.CustomerBusiness)
                 .Include(user => user.Supplier)
                 .Include(user => user.Administrator)
                 .Include(user => user.DeliveryCompany));
-            return this;
         }
     }
 }

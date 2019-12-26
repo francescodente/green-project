@@ -13,12 +13,21 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
         }
 
+        private SqlTimeSlotRepository(FruitracersContext context, Func<IQueryable<TimeSlot>, IQueryable<TimeSlot>> initialModifier)
+            : base(context, initialModifier)
+        {
+        }
+
+        private ITimeSlotRepository WrapRepository(Func<IQueryable<TimeSlot>, IQueryable<TimeSlot>> modifier)
+        {
+            return new SqlTimeSlotRepository(this.Context, this.WrapQuery(modifier));
+        }
+
         public ITimeSlotRepository IncludingOverrides(DateTime startDate, DateTime finishDate)
         {
-            this.ChainQueryModification(q => q.IncludeFilter(t => t
+            return this.WrapRepository(q => q.IncludeFilter(t => t
                 .TimeSlotOverrides
                 .Where(o => o.Date >= startDate && o.Date <= finishDate)));
-            return this;
         }
     }
 }

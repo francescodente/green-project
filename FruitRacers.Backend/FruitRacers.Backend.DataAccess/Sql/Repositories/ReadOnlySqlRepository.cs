@@ -45,10 +45,9 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
             return this.queryModifier(this.Set);
         }
 
-        protected void ChainQueryModification(Func<IQueryable<T>, IQueryable<T>> modifier)
+        protected Func<IQueryable<T>, IQueryable<T>> WrapQuery(Func<IQueryable<T>, IQueryable<T>> modifier)
         {
-            Func<IQueryable<T>, IQueryable<T>> current = this.queryModifier;
-            this.queryModifier = q => modifier(current(q));
+            return q => modifier(this.queryModifier(q));
         }
 
         public async Task<IOptional<T>> FindOne()
