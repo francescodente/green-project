@@ -9,7 +9,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 {
     [Route("api/addresses")]
     [ApiController]
-    [RequireLogin(RoleType.Person, RoleType.Supplier)]
+    [RequireLogin(RoleType.Person, RoleType.CustomerBusiness)]
     public class AddressesController : ControllerBase
     {
         private readonly IAddressesService addressesService;
