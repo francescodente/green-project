@@ -17,7 +17,6 @@ namespace FruitRacers.Backend.Core.Session
         private ITimeSlotRepository timeSlots;
         private IReadOnlyRepository<Category> categories;
         private IRepository<Address> addresses;
-        private IRepository<OrderDetail> orderDetails;
 
         public LazyLoadedDataSession(IDataSession session)
         {
@@ -35,8 +34,6 @@ namespace FruitRacers.Backend.Core.Session
         public IReadOnlyRepository<Category> Categories => this.categories ?? (this.categories = this.session.Categories);
 
         public IRepository<Address> Addresses => this.addresses ?? (this.addresses = this.session.Addresses);
-
-        public IRepository<OrderDetail> OrderDetails => this.orderDetails ?? (this.orderDetails = this.session.OrderDetails);
 
         public void Dispose()
         {

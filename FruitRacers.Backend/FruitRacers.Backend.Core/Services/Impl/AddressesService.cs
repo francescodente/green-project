@@ -21,7 +21,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         private async Task<Address> RequireAddress(int addressId)
         {
-            return await this.Session
+            return await this.Data
                 .Addresses
                 .FindOne(a => a.AddressId == addressId)
                 .Then(a => a.OrElseThrow(() => new AddressNotFoundException(addressId)));
@@ -43,21 +43,21 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 Latitude = address.Latitude,
                 Longitude = address.Longitude
             };
-            await this.Session.Addresses.Insert(addressEntity);
-            await this.Session.SaveChanges();
+            await this.Data.Addresses.Insert(addressEntity);
+            await this.Data.SaveChanges();
             return addressEntity.AddressId;
         }
 
         public async Task DeleteAddress(int addressId)
         {
             Address address = await this.RequireAddressWithOwnership(this.RequestingUser.UserId, addressId);
-            await this.Session.Addresses.Delete(address);
-            await this.Session.SaveChanges();
+            await this.Data.Addresses.Delete(address);
+            await this.Data.SaveChanges();
         }
 
         public async Task<IEnumerable<AddressOutputDto>> GetAddresses()
         {
-            return await this.Session
+            return await this.Data
                 .Addresses
                 .Where(a => a.UserId == this.RequestingUser.UserId)
                 .Then(x => x.Select(this.Mapper.Map<Address, AddressOutputDto>));
@@ -71,7 +71,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             addressEntity.Latitude = address.Latitude;
             addressEntity.Longitude = address.Longitude;
 
-            await this.Session.SaveChanges();
+            await this.Data.SaveChanges();
         }
     }
 }

@@ -25,6 +25,7 @@ namespace FruitRacers.Backend.DataAccess.Sql
         public virtual DbSet<DeliveryCompany> DeliveryCompanies { get; set; }
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderSection> OrderSections { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Person> People { get; set; }
         public virtual DbSet<Price> Prices { get; set; }

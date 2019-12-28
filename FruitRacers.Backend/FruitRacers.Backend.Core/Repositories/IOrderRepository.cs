@@ -17,6 +17,6 @@ namespace FruitRacers.Backend.Core.Repositories
 
         IOrderRepository WithState(OrderState state);
 
-        IOrderRepository BelongingTo(int userID);
+        IOrderRepository BelongingTo(int userId);
     }
 }

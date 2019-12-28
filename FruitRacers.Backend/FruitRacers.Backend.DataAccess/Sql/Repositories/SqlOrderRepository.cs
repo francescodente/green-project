@@ -44,22 +44,23 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 
         public IOrderRepository IncludingDetails()
         {
-            return this.WrapRepository(q => q.Include(o => o.OrderDetails));
+            return this.WrapRepository(q => q.Include(o => o.Sections).ThenInclude(o => o.Details));
         }
 
         public IOrderRepository IncludingDetailsAndProducts()
         {
             return this.WrapRepository(q => q
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(d => d.Product)
-                        .ThenInclude(p => p.ProductCategories)
-                            .ThenInclude(c => c.Category)
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(d => d.Product)
-                        .ThenInclude(p => p.Supplier)
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(d => d.Product)
-                        .ThenInclude(p => p.Prices));
+                .Include(o => o.Sections)
+                    .ThenInclude(o => o.Supplier)
+                .Include(o => o.Sections)
+                    .ThenInclude(o => o.Details)
+                        .ThenInclude(d => d.Product)
+                            .ThenInclude(p => p.ProductCategories)
+                                .ThenInclude(c => c.Category)
+                .Include(o => o.Sections)
+                    .ThenInclude(o => o.Details)
+                        .ThenInclude(d => d.Product)
+                            .ThenInclude(p => p.Prices));
         }
 
         public IOrderRepository WithState(OrderState state)

@@ -11,7 +11,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         protected IRequestSession Request { get; private set; }
         protected IMapper Mapper { get; private set; }
 
-        protected IDataSession Session => this.Request.Data;
+        protected IDataSession Data => this.Request.Data;
         protected IUserSession RequestingUser => this.Request.User;
 
         public AbstractService(IRequestSession request, IMapper mapper)

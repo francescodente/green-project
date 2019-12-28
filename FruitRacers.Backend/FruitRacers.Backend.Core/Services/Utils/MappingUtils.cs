@@ -44,24 +44,14 @@ namespace FruitRacers.Backend.Core.Services.Utils
             public OrderMapping()
             {
                 this.CreateMap<Order, CartOutputDto>()
-                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom((src, dst, m, context) => context.Mapper.Map<DeliveryInfoOutputDto>(src)))
-                    .ForMember(dst => dst.Details, o => o.MapFrom((src, dst, m, context) => this.CreateCartDetailsList(src, context)));
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+
+                this.CreateMap<OrderSection, SupplierOrderSectionDto<CartItemOutputDto>>()
+                    .ForMember(dst => dst.Items, o => o.MapFrom(src => src.Details));
 
                 this.CreateMap<Order, DeliveryInfoOutputDto>();
 
                 this.CreateMap<OrderDetail, CartItemOutputDto>();
-            }
-
-            private IEnumerable<SupplierOrderSectionDto<CartItemOutputDto>> CreateCartDetailsList(Order cart, IMapper mapper)
-            {
-                return cart.OrderDetails
-                    .GroupBy(
-                        d => d.Product.SupplierId,
-                        (_, details) => new SupplierOrderSectionDto<CartItemOutputDto>
-                        {
-                            Items = details.Select(mapper.Map<CartItemOutputDto>),
-                            Supplier = mapper.Map<SupplierInfoDto>(details.First().Product.Supplier)
-                        });
             }
         }
 

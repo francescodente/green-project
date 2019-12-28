@@ -20,7 +20,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         private async Task<Product> RequireProduct(int productId)
         {
-            return await this.Session
+            return await this.Data
                 .Products
                 .FindOne(p => p.ProductId == productId)
                 .Then(p => p.OrElseThrow(() => new ProductNotFoundException(productId)));
@@ -34,7 +34,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             product.IsDeleted = true;
 
-            await this.Session.SaveChanges();
+            await this.Data.SaveChanges();
         }
 
         public async Task<ProductOutputDto> GetProductData(int productId)
@@ -45,7 +45,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task<IEnumerable<ProductOutputDto>> GetProductsForSupplier(int supplierId)
         {
-            return await this.Session
+            return await this.Data
                 .Products
                 .BelongingTo(supplierId)
                 .GetAll()
@@ -72,8 +72,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Select(p => this.CreatePriceFromDto(p.Value, p.Key))
                 .ForEach(productEntity.Prices.Add);
 
-            await this.Session.Products.Insert(productEntity);
-            await this.Session.SaveChanges();
+            await this.Data.Products.Insert(productEntity);
+            await this.Data.SaveChanges();
             return productEntity.ProductId;
         }
 
@@ -122,7 +122,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             pricesToAdd.ForEach(p => productEntity.Prices.Add(p));
             pricesToRemove.ForEach(p => productEntity.Prices.Remove(p));
 
-            await this.Session.SaveChanges();
+            await this.Data.SaveChanges();
         }
     }
 }

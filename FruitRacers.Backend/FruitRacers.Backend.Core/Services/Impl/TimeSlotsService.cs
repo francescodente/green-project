@@ -22,7 +22,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task AddTimeSlotOverride(TimeSlotOverrideDto timeSlotOverride)
         {
             (TimeSlot timeSlot, int capacity) = await ServiceUtils.FindTimeSlotWithActualCapacity(
-                this.Session, timeSlotOverride.TimeSlotId, timeSlotOverride.Date);
+                this.Data, timeSlotOverride.TimeSlotId, timeSlotOverride.Date);
 
             if (capacity + timeSlotOverride.Offset < 0)
             {
@@ -39,7 +39,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                         Offset = timeSlotOverride.Offset
                     }));
 
-            await this.Session.SaveChanges();
+            await this.Data.SaveChanges();
         }
 
         public async Task<IEnumerable<DailyTimeTable>> GetNextTimeSlots(int daysAhead)
@@ -47,12 +47,12 @@ namespace FruitRacers.Backend.Core.Services.Impl
             DateTime startDate = DateTime.Today.AddDays(1);
             DateTime finishDate = startDate.AddDays(daysAhead - 1);
 
-            IEnumerable<TimeSlot> timeSlots = await this.Session
+            IEnumerable<TimeSlot> timeSlots = await this.Data
                 .TimeSlots
                 .IncludingOverrides(startDate, finishDate)
                 .GetAll();
 
-            IEnumerable<Order> orders = await this.Session
+            IEnumerable<Order> orders = await this.Data
                 .Orders
                 .AfterDate(startDate)
                 .BeforeDate(finishDate)
