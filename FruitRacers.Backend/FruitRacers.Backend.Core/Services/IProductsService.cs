@@ -10,9 +10,9 @@ namespace FruitRacers.Backend.Core.Services
 
         Task<ProductOutputDto> GetProductData(int productId);
 
-        Task<int> InsertProduct(ProductInputDto product);
+        Task<ProductOutputDto> InsertProduct(ProductInputDto product);
 
-        Task UpdateProduct(int productId, ProductInputDto product);
+        Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product);
 
         Task DeleteProduct(int productId);
     }

@@ -31,15 +31,13 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {
-            int productId = await this.productsService.InsertProduct(product);
-            return Ok(new { ProductId = productId });
+            return Ok(await this.productsService.InsertProduct(product));
         }
 
         [HttpPut("{productId}")]
         public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductInputDto product)
         {
-            await this.productsService.UpdateProduct(productId, product);
-            return NoContent();
+            return Ok(await this.productsService.UpdateProduct(productId, product));
         }
 
         [HttpDelete("{productId}")]

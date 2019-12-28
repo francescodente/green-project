@@ -1,11 +1,12 @@
 ﻿using FruitRacers.Backend.Contracts.Authentication;
+using FruitRacers.Backend.Contracts.Users;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services
 {
     public interface IAuthenticationService
     {
-        Task<int> Register(RegistrationDto registration);
+        Task<UserOutputDto> Register(RegistrationDto registration);
 
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 

@@ -69,7 +69,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             }
         }
 
-        public async Task<int> Register(RegistrationDto registration)
+        public async Task<UserOutputDto> Register(RegistrationDto registration)
         {
             UserInputDto userDto = registration.User;
             User userEntity = new User
@@ -84,7 +84,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             this.handler.AssignPassword(userEntity, registration.Password);
             await this.Data.Users.Insert(userEntity);
             await this.Data.SaveChanges();
-            return userEntity.UserId;
+            return this.Mapper.Map<UserOutputDto>(userEntity);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .BelongingTo(userId);
         }
 
-        public async Task<int> ConfirmCart()
+        public async Task<OrderDto> ConfirmCart()
         {
             Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
                 .IncludingDetailsAndProducts()
@@ -62,7 +62,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             await this.Data.SaveChanges();
 
-            return cart.OrderId;
+            return this.Mapper.Map<OrderDto>(cart);
         }
 
         private void AssignCurrentPriceToOrderDetail(OrderDetail detail, CustomerType customerType)
@@ -155,7 +155,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return newCart;
         }
 
-        public async Task UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo)
+        public async Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo)
         {
             Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
                 .FindOne()
@@ -182,6 +182,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             cart.DeliveryDate = deliveryInfo.DeliveryDate;
 
             await this.Data.SaveChanges();
+            return this.Mapper.Map<DeliveryInfoOutputDto>(cart);
         }
 
         private async Task EnsureTimeSlotIsValid(int timeSlotId, DateTime date)

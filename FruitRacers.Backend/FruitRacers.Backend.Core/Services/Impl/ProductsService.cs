@@ -52,7 +52,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(p => p.Select(this.Mapper.Map<ProductOutputDto>));
         }
 
-        public async Task<int> InsertProduct(ProductInputDto product)
+        public async Task<ProductOutputDto> InsertProduct(ProductInputDto product)
         {
             Product productEntity = new Product
             {
@@ -74,7 +74,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             await this.Data.Products.Insert(productEntity);
             await this.Data.SaveChanges();
-            return productEntity.ProductId;
+            return this.Mapper.Map<ProductOutputDto>(productEntity);
         }
 
         private Price CreatePriceFromDto(PriceDto dto, CustomerTypeDto customerType)
@@ -89,7 +89,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             };
         }
 
-        public async Task UpdateProduct(int productId, ProductInputDto product)
+        public async Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product)
         {
             Product productEntity = await this.RequireProduct(productId);
 
@@ -123,6 +123,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
             pricesToRemove.ForEach(p => productEntity.Prices.Remove(p));
 
             await this.Data.SaveChanges();
+
+            return this.Mapper.Map<ProductOutputDto>(product);
         }
     }
 }

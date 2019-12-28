@@ -34,7 +34,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return address;
         }
 
-        public async Task<int> AddAddress(AddressInputDto address)
+        public async Task<AddressOutputDto> AddAddress(AddressInputDto address)
         {
             Address addressEntity = new Address
             {
@@ -45,7 +45,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             };
             await this.Data.Addresses.Insert(addressEntity);
             await this.Data.SaveChanges();
-            return addressEntity.AddressId;
+            return this.Mapper.Map<AddressOutputDto>(addressEntity);
         }
 
         public async Task DeleteAddress(int addressId)
@@ -63,7 +63,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(x => x.Select(this.Mapper.Map<Address, AddressOutputDto>));
         }
 
-        public async Task UpdateAddress(int addressId, AddressInputDto address)
+        public async Task<AddressOutputDto> UpdateAddress(int addressId, AddressInputDto address)
         {
             Address addressEntity = await this.RequireAddressWithOwnership(this.RequestingUser.UserId, addressId);
 
@@ -72,6 +72,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
             addressEntity.Longitude = address.Longitude;
 
             await this.Data.SaveChanges();
+
+            return this.Mapper.Map<AddressOutputDto>(addressEntity);
         }
     }
 }
