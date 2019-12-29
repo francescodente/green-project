@@ -11,7 +11,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
     public class SqlUserRepository : SqlRepository<User>, IUserRepository
     {
         public SqlUserRepository(FruitracersContext context)
-            : base(context)
+            : base(context, q => q.Include(u => u.Addresses))
         {
         }
 

@@ -36,7 +36,8 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                 .AddScoped<IProductsService, ProductsService>()
                 .AddScoped<ISuppliersService, SuppliersService>()
                 .AddScoped<ITimeSlotsService, TimeSlotsService>()
-                .AddScoped<IUsersService, UsersService>();
+                .AddScoped<IUsersService, UsersService>()
+                .AddScoped<IRolesService, RolesService>();
         }
     }
 }
