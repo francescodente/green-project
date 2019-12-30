@@ -8,8 +8,6 @@ namespace FruitRacers.Backend.Core.Services
     {
         Task<IEnumerable<ProductOutputDto>> GetProductsForSupplier(int supplierId);
 
-        Task<ProductOutputDto> GetProductData(int productId);
-
         Task<ProductOutputDto> InsertProduct(ProductInputDto product);
 
         Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product);

@@ -22,12 +22,6 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
             return Ok(await this.productsService.GetProductsForSupplier(supplierId));
         }
 
-        [HttpGet("{productId}")]
-        public async Task<IActionResult> GetProductData([FromRoute] int productId)
-        {
-            return Ok(await this.productsService.GetProductData(productId));
-        }
-
         [HttpPost]
         public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {

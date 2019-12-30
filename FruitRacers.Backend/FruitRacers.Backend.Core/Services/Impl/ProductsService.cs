@@ -37,12 +37,6 @@ namespace FruitRacers.Backend.Core.Services.Impl
             await this.Data.SaveChanges();
         }
 
-        public async Task<ProductOutputDto> GetProductData(int productId)
-        {
-            Product product = await this.RequireProduct(productId);
-            return this.Mapper.Map<ProductOutputDto>(product);
-        }
-
         public async Task<IEnumerable<ProductOutputDto>> GetProductsForSupplier(int supplierId)
         {
             return await this.Data
