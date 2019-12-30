@@ -1,4 +1,5 @@
-﻿using FruitRacers.Backend.Contracts.Products;
+﻿using FruitRacers.Backend.Contracts.Filters;
+using FruitRacers.Backend.Contracts.Products;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,7 +7,7 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IProductsService
     {
-        Task<IEnumerable<ProductOutputDto>> GetProductsForSupplier(int supplierId);
+        Task<IEnumerable<ProductOutputDto>> GetProducts(PaginationFilter pagination, ProductsFilters filters);
 
         Task<ProductOutputDto> InsertProduct(ProductInputDto product);
 

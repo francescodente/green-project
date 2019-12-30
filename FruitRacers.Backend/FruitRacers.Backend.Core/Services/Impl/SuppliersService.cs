@@ -20,7 +20,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             // TODO: Select correct suppliers
             return await this.Data
                 .Users
-                .GetAll()
+                .AsEnumerable()
                 .Then(s => s.Select(this.Mapper.Map<SupplierInfoDto>));
         }
     }

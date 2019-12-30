@@ -59,7 +59,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             return await this.Data
                 .Addresses
-                .Where(a => a.UserId == this.RequestingUser.UserId)
+                .AsEnumerable(a => a.UserId == this.RequestingUser.UserId)
                 .Then(x => x.Select(this.Mapper.Map<Address, AddressOutputDto>));
         }
 

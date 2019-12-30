@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FruitRacers.Backend.Contracts.Filters;
 using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
+using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
@@ -37,13 +39,14 @@ namespace FruitRacers.Backend.Core.Services.Impl
             await this.Data.SaveChanges();
         }
 
-        public async Task<IEnumerable<ProductOutputDto>> GetProductsForSupplier(int supplierId)
+        public async Task<IEnumerable<ProductOutputDto>> GetProducts(PaginationFilter pagination, ProductsFilters filters)
         {
-            return await this.Data
-                .Products
-                .BelongingTo(supplierId)
-                .GetAll()
-                .Then(p => p.Select(this.Mapper.Map<ProductOutputDto>));
+            IProductRepository products = this.Data.Products;
+            products = filters.SupplierId != null ? products.BelongingTo(filters.SupplierId.Value) : products;
+            products = filters.Categories.Any() ? products.WithCategories(filters.Categories) : products;
+            return await products
+                .AsPagedEnumerable(pagination.PageNumber, pagination.PageSize)
+                .Then(p => this.Mapper.Map<IEnumerable<ProductOutputDto>>(p));
         }
 
         public async Task<ProductOutputDto> InsertProduct(ProductInputDto product)

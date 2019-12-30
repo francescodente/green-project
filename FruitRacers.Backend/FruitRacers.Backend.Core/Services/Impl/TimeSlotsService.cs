@@ -50,14 +50,14 @@ namespace FruitRacers.Backend.Core.Services.Impl
             IEnumerable<TimeSlot> timeSlots = await this.Data
                 .TimeSlots
                 .IncludingOverrides(startDate, finishDate)
-                .GetAll();
+                .AsEnumerable();
 
             IEnumerable<Order> orders = await this.Data
                 .Orders
                 .AfterDate(startDate)
                 .BeforeDate(finishDate)
                 .WithState(OrderState.Confirmed)
-                .GetAll();
+                .AsEnumerable();
 
             IDictionary<(int, DateTime), int> orderCounts = orders
                 .GroupBy(o => (o.TimeSlotId.Value, o.DeliveryDate.Value), (td, os) => new { DateAndTimeSlot = td, Count = os.Count() })

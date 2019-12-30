@@ -33,7 +33,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
                 .WithState(OrderState.Confirmed)
                 .AfterDate(date)
                 .BeforeDate(date)
-                .Where(o => o.TimeSlotId == timeSlotId)
+                .AsEnumerable(o => o.TimeSlotId == timeSlotId)
                 .Then(o => o.Count());
 
             int capacityOverride = timeSlot

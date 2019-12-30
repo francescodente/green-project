@@ -36,5 +36,14 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
             return this.WrapRepository(q => q.Include(p => p.Prices));
         }
+
+        public IProductRepository WithCategories(IEnumerable<int> categoryIds)
+        {
+            return this.WrapRepository(q => q.Join(
+                categoryIds,
+                p => p.CategoryId,
+                c => c,
+                (p, c) => p));
+        }
     }
 }

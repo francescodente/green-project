@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using FruitRacers.Backend.Contracts.Filters;
 using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,10 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
             this.productsService = productsService;
         }
 
-        [HttpGet("supplier/{supplierId}")]
-        public async Task<IActionResult> GetProductsForSupplier([FromRoute] int supplierId)
+        [HttpGet]
+        public async Task<IActionResult> GetProducts([FromQuery] PaginationFilter pagination, [FromQuery] ProductsFilters filters)
         {
-            return Ok(await this.productsService.GetProductsForSupplier(supplierId));
+            return Ok(await this.productsService.GetProducts(pagination, filters));
         }
 
         [HttpPost]

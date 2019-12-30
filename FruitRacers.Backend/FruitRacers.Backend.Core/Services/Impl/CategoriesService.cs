@@ -20,7 +20,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task<CategoryTreeDto> GetCategoryTree()
         {
-            IList<Category> allCategories = (await this.Data.Categories.GetAll()).ToList();
+            IList<Category> allCategories = (await this.Data.Categories.AsEnumerable()).ToList();
             IEnumerable<CategoryTreeDto> roots = allCategories
                 .Where(c => c.ParentCategoryId == null)
                 .Select(c => CreateSubTree(c, allCategories)).ToArray();

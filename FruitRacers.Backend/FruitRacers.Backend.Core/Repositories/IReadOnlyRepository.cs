@@ -10,12 +10,12 @@ namespace FruitRacers.Backend.Core.Repositories
 {
     public interface IReadOnlyRepository<T> where T : class
     {
-        Task<IOptional<T>> FindOne();
+        Task<IOptional<T>> FindOne(Expression<Func<T, bool>> predicate = null);
 
-        Task<IOptional<T>> FindOne(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> AsEnumerable(Expression<Func<T, bool>> predicate = null);
 
-        Task<IEnumerable<T>> Where(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> AsPagedEnumerable(int pageNumber, int pageSize, Expression<Func<T, bool>> predicate = null);
 
-        Task<IEnumerable<T>> GetAll();
+        Task<int> Count(Expression<Func<T, bool>> predicate = null);
     }
 }
