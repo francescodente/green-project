@@ -3,6 +3,7 @@ using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.DataAccess.Sql;
+using FruitRacers.Backend.Infrastructure.Session;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
