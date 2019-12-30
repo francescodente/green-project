@@ -20,11 +20,16 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
 
                 entity.Property(e => e.Cf)
                     .HasColumnName("CF")
+                    .IsRequired()
                     .HasMaxLength(16);
 
-                entity.Property(e => e.FirstName).HasMaxLength(50);
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
-                entity.Property(e => e.LastName).HasMaxLength(50);
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.HasOne(d => d.User)
                     .WithOne(p => p.Person)

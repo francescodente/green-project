@@ -22,7 +22,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task AddTimeSlotOverride(TimeSlotOverrideDto timeSlotOverride)
         {
             (TimeSlot timeSlot, int capacity) = await ServiceUtils.FindTimeSlotWithActualCapacity(
-                this.Session, timeSlotOverride.TimeSlotId, timeSlotOverride.Date);
+                this.Data, timeSlotOverride.TimeSlotId, timeSlotOverride.Date);
 
             if (capacity + timeSlotOverride.Offset < 0)
             {
@@ -39,7 +39,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                         Offset = timeSlotOverride.Offset
                     }));
 
-            await this.Session.SaveChanges();
+            await this.Data.SaveChanges();
         }
 
         public async Task<IEnumerable<DailyTimeTable>> GetNextTimeSlots(int daysAhead)
@@ -47,17 +47,17 @@ namespace FruitRacers.Backend.Core.Services.Impl
             DateTime startDate = DateTime.Today.AddDays(1);
             DateTime finishDate = startDate.AddDays(daysAhead - 1);
 
-            IEnumerable<TimeSlot> timeSlots = await this.Session
+            IEnumerable<TimeSlot> timeSlots = await this.Data
                 .TimeSlots
                 .IncludingOverrides(startDate, finishDate)
-                .GetAll();
+                .AsEnumerable();
 
-            IEnumerable<Order> orders = await this.Session
+            IEnumerable<Order> orders = await this.Data
                 .Orders
                 .AfterDate(startDate)
                 .BeforeDate(finishDate)
                 .WithState(OrderState.Confirmed)
-                .GetAll();
+                .AsEnumerable();
 
             IDictionary<(int, DateTime), int> orderCounts = orders
                 .GroupBy(o => (o.TimeSlotId.Value, o.DeliveryDate.Value), (td, os) => new { DateAndTimeSlot = td, Count = os.Count() })
@@ -65,15 +65,19 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             IEnumerable<DateTime> dates = EnumerableUtils.Iterate(startDate, d => d.AddDays(1)).Take(daysAhead);
 
-            return dates.GroupJoin(timeSlots, d => d.DayOfWeek, s => s.Weekday, (date, slots) => new DailyTimeTable
-            {
-                Date = date,
-                TimeSlots = slots.Select(s => this.CreateTimeSlotDtoWithCapacity(
-                        s,
-                        s.TimeSlotOverrides.Where(o => o.Date.Equals(date)).Select(o => o.Offset).SingleOptional().OrElse(0),
-                        orderCounts.GetValueAsOptional((s.TimeSlotId, date)).OrElse(0)))
-                    .OrderBy(s => s.StartTime)
-            });
+            return dates.GroupJoin(
+                timeSlots,
+                d => d.DayOfWeek,
+                s => s.Weekday,
+                (date, slots) => new DailyTimeTable
+                {
+                    Date = date,
+                    TimeSlots = slots.Select(s => this.CreateTimeSlotDtoWithCapacity(
+                            s,
+                            s.TimeSlotOverrides.Where(o => o.Date.Equals(date)).Select(o => o.Offset).SingleOptional().OrElse(0),
+                            orderCounts.GetValueAsOptional((s.TimeSlotId, date)).OrElse(0)))
+                        .OrderBy(s => s.StartTime)
+                });
         }
 
         private TimeSlotWithCapacityDto CreateTimeSlotDtoWithCapacity(TimeSlot slot, int overrides, int orders)

@@ -18,11 +18,11 @@ namespace FruitRacers.Backend.Test.UnitTests.Mocking
             IReadOnlyRepository<T> repository = Substitute.For<IReadOnlyRepository<T>>();
 
             repository
-                .GetAll()
+                .AsEnumerable()
                 .Returns(_ => items);
 
             repository
-                .Where(Arg.Any<Expression<Func<T, bool>>>())
+                .AsEnumerable(Arg.Any<Expression<Func<T, bool>>>())
                 .Returns(p => items.Where(p.ArgAt<Expression<Func<T, bool>>>(0).Compile()));
 
             repository

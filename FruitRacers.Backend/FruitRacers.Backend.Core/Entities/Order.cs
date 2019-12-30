@@ -7,7 +7,7 @@ namespace FruitRacers.Backend.Core.Entities
     {
         public Order()
         {
-            OrderDetails = new HashSet<OrderDetail>();
+            Sections = new HashSet<OrderSection>();
         }
 
         public int OrderId { get; set; }
@@ -22,6 +22,6 @@ namespace FruitRacers.Backend.Core.Entities
         public virtual Address Address { get; set; }
         public virtual TimeSlot TimeSlot { get; set; }
         public virtual User User { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<OrderSection> Sections { get; set; }
     }
 }

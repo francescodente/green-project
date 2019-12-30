@@ -11,23 +11,39 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
     public class SqlProductRepository : SqlRepository<Product>, IProductRepository
     {
         public SqlProductRepository(FruitracersContext context)
-            : base(context, q => q
+            : this(context, q => q
                 .Include(p => p.Prices)
-                .Include(p => p.ProductCategories)
-                    .ThenInclude(c => c.Category))
+                .Include(p => p.Category))
         {
+        }
+
+        private SqlProductRepository(FruitracersContext context, Func<IQueryable<Product>, IQueryable<Product>> initialModifier)
+            : base(context, initialModifier)
+        {
+        }
+
+        private IProductRepository WrapRepository(Func<IQueryable<Product>, IQueryable<Product>> modifier)
+        {
+            return new SqlProductRepository(this.Context, this.WrapQuery(modifier));
         }
 
         public IProductRepository BelongingTo(int supplierID)
         {
-            this.ChainQueryModification(q => q.Where(p => p.SupplierId == supplierID));
-            return this;
+            return this.WrapRepository(q => q.Where(p => p.SupplierId == supplierID));
         }
 
         public IProductRepository IncludingPrices()
         {
-            this.ChainQueryModification(q => q.Include(p => p.Prices));
-            return this;
+            return this.WrapRepository(q => q.Include(p => p.Prices));
+        }
+
+        public IProductRepository WithCategories(IEnumerable<int> categoryIds)
+        {
+            return this.WrapRepository(q => q.Join(
+                categoryIds,
+                p => p.CategoryId,
+                c => c,
+                (p, c) => p));
         }
     }
 }

@@ -33,7 +33,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
                 .WithState(OrderState.Confirmed)
                 .AfterDate(date)
                 .BeforeDate(date)
-                .Where(o => o.TimeSlotId == timeSlotId)
+                .AsEnumerable(o => o.TimeSlotId == timeSlotId)
                 .Then(o => o.Count());
 
             int capacityOverride = timeSlot
@@ -45,6 +45,19 @@ namespace FruitRacers.Backend.Core.Services.Utils
             int capacity = timeSlot.SlotCapacity + capacityOverride - ordersInsideSelectedTimeSlot;
 
             return (timeSlot, capacity);
+        }
+
+        public static IOptional<CustomerType> GetCustomerType(IUserSession user)
+        {
+            if (user.HasRole(RoleType.CustomerBusiness))
+            {
+                return Optional.Of(CustomerType.Business);
+            }
+            if (user.HasRole(RoleType.Person))
+            {
+                return Optional.Of(CustomerType.Person);
+            }
+            return Optional.Empty<CustomerType>();
         }
     }
 }

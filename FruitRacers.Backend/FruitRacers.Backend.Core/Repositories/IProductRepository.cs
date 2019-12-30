@@ -11,5 +11,7 @@ namespace FruitRacers.Backend.Core.Repositories
         IProductRepository IncludingPrices();
 
         IProductRepository BelongingTo(int supplierID);
+
+        IProductRepository WithCategories(IEnumerable<int> categoryIds);
     }
 }

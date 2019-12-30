@@ -24,7 +24,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         private async Task<User> FindUser(Expression<Func<User, bool>> predicate, Func<Exception> exceptionSupplier)
         {
-            return await this.Session
+            return await this.Data
                 .Users
                 .IncludingRoles()
                 .FindOne(predicate)
@@ -53,7 +53,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             User user = await this.FindUserById(this.RequestingUser.UserId);
             this.EnsurePasswordIsCorrect(user, request.OldPassword);
             this.handler.AssignPassword(user, request.NewPassword);
-            await this.Session.SaveChanges();
+            await this.Data.SaveChanges();
         }
 
         public async Task<AuthenticationResultDto> RenewToken()
@@ -69,7 +69,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             }
         }
 
-        public async Task<int> Register(RegistrationDto registration)
+        public async Task<UserOutputDto> Register(RegistrationDto registration)
         {
             UserInputDto userDto = registration.User;
             User userEntity = new User
@@ -82,9 +82,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 CookieConsent = userDto.CookieConsent
             };
             this.handler.AssignPassword(userEntity, registration.Password);
-            await this.Session.Users.Insert(userEntity);
-            await this.Session.SaveChanges();
-            return userEntity.UserId;
+            await this.Data.Users.Insert(userEntity);
+            await this.Data.SaveChanges();
+            return this.Mapper.Map<UserOutputDto>(userEntity);
         }
     }
 }

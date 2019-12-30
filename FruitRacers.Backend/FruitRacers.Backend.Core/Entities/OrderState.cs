@@ -6,9 +6,9 @@ namespace FruitRacers.Backend.Core.Entities
     public enum OrderState
     {
         Cart = 0,
-        Confirmed = 10,
-        Rejected = 30,
-        Sent = 40,
-        Delivered = 50
+        Pending = 10,
+        Confirmed = 20,
+        Canceled = 30,
+        Completed = 40
     }
 }

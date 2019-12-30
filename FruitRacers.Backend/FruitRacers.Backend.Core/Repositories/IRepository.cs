@@ -11,12 +11,10 @@ namespace FruitRacers.Backend.Core.Repositories
     {
         Task Insert(T entity);
 
+        Task InsertRange(IEnumerable<T> entities);
+
         Task Delete(T entity);
 
-        Task DeleteWhere(Expression<Func<T, bool>> predicate);
-
-        Task Update(T entity);
-
-        Task UpdateWhere(Expression<Func<T, bool>> predicate, Action<T> updateAction);
+        Task DeleteRange(IEnumerable<T> entities);
     }
 }

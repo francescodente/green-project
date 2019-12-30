@@ -8,9 +8,9 @@ namespace FruitRacers.Backend.Core.Services
     {
         Task<IEnumerable<AddressOutputDto>> GetAddresses();
 
-        Task<int> AddAddress(AddressInputDto address);
+        Task<AddressOutputDto> AddAddress(AddressInputDto address);
 
-        Task UpdateAddress(int addressId, AddressInputDto address);
+        Task<AddressOutputDto> UpdateAddress(int addressId, AddressInputDto address);
 
         Task DeleteAddress(int addressId);
     }

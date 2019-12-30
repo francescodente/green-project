@@ -1,5 +1,0 @@
-﻿CREATE TABLE [dbo].[Images]
-(
-	[ImageId] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Path] NVARCHAR(100) NOT NULL
-)

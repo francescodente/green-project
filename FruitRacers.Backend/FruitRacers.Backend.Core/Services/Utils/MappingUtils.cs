@@ -3,12 +3,12 @@ using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Contracts.Products;
+using FruitRacers.Backend.Contracts.Suppliers;
 using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Entities.Extensions;
-using FruitRacers.Backend.Shared.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +21,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
             MapperConfiguration config = new MapperConfiguration(c =>
             {
                 c.AddProfile<AddressMapping>();
+                c.AddProfile<SupplierMapping>();
                 c.AddProfile<OrderMapping>();
                 c.AddProfile<UserMapping>();
                 c.AddProfile<ProductMapping>();
@@ -38,29 +39,31 @@ namespace FruitRacers.Backend.Core.Services.Utils
             }
         }
 
+        private class SupplierMapping : Profile
+        {
+            public SupplierMapping()
+            {
+                this.CreateMap<Supplier, SupplierInfoDto>()
+                    .ForMember(dst => dst.Name, o => o.MapFrom(src => src.BusinessName))
+                    .ForMember(dst => dst.SupplierId, o => o.MapFrom(src => src.UserId))
+                    .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.SupplierImages.Select(i => i.Image.Path).FirstOrDefault()))
+                    .ForMember(dst => dst.Address, o => o.MapFrom(src => src.User.Addresses.Single()));
+            }
+        }
+
         private class OrderMapping : Profile
         {
             public OrderMapping()
             {
                 this.CreateMap<Order, CartOutputDto>()
-                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom((src, dst, m, context) => context.Mapper.Map<DeliveryInfoOutputDto>(src)))
-                    .ForMember(dst => dst.Details, o => o.MapFrom((src, dst, m, context) => this.CreateCartDetailsList(src, context)));
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+
+                this.CreateMap<OrderSection, SupplierOrderSectionDto<CartItemOutputDto>>()
+                    .ForMember(dst => dst.Items, o => o.MapFrom(src => src.Details));
 
                 this.CreateMap<Order, DeliveryInfoOutputDto>();
 
                 this.CreateMap<OrderDetail, CartItemOutputDto>();
-            }
-
-            private IEnumerable<SupplierOrderSectionDto<CartItemOutputDto>> CreateCartDetailsList(Order cart, IMapper mapper)
-            {
-                return cart.OrderDetails
-                    .GroupBy(
-                        d => d.Product.SupplierId,
-                        (_, details) => new SupplierOrderSectionDto<CartItemOutputDto>
-                        {
-                            Items = details.Select(mapper.Map<CartItemOutputDto>),
-                            Supplier = mapper.Map<SupplierDto>(details.First().Product.Supplier) // TODO: change to different type (e.g. SupplierInfoDto)
-                        });
             }
         }
 
@@ -71,7 +74,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
                 this.CreateMap<Price, PriceDto>();
 
                 this.CreateMap<Product, ProductOutputDto>()
-                    .ForMember(dst => dst.Categories, o => o.MapFrom(src => src.ProductCategories.Select(c => c.Category)))
+                    .ForMember(dst => dst.Categories, o => o.MapFrom(src => Enumerable.Repeat(src.Category, 1)))
                     .ForMember(dst => dst.Prices, o => o.MapFrom((src, dst, m, context) => this.CreatePriceDictionary(src, context)));
             }
 

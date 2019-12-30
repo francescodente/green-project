@@ -22,19 +22,19 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         private IOrderRepository FilterCartForUser(int userId)
         {
-            return this.Session
+            return this.Data
                 .Orders
                 .WithState(OrderState.Cart)
                 .BelongingTo(userId);
         }
 
-        public async Task<int> ConfirmCart()
+        public async Task<OrderDto> ConfirmCart()
         {
             Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
                 .IncludingDetailsAndProducts()
                 .FindOne()
                 .Then(oc => oc
-                    .Filter(c => c.OrderDetails.Count > 0)
+                    .Filter(c => c.Sections.SelectMany(s => s.Details).Count() > 0)
                     .OrElseThrow(() => new CartEmptyException()));
 
             if (cart.DeliveryDate == null)
@@ -53,12 +53,16 @@ namespace FruitRacers.Backend.Core.Services.Impl
             cart.OrderState = OrderState.Confirmed;
             cart.Timestamp = DateTime.Now;
 
-            cart.OrderDetails.ForEach(d => this.AssignCurrentPriceToOrderDetail(d, CustomerType.Person)); // TODO: use correct role
+            CustomerType customerType = ServiceUtils.GetCustomerType(this.RequestingUser)
+                .OrElseThrow(() => new UnauthorizedPurchaseException());
 
-            await this.Session.Orders.Update(cart);
-            await this.Session.SaveChanges();
+            cart.Sections
+                .SelectMany(s => s.Details)
+                .ForEach(d => this.AssignCurrentPriceToOrderDetail(d, customerType));
 
-            return cart.OrderId;
+            await this.Data.SaveChanges();
+
+            return this.Mapper.Map<OrderDto>(cart);
         }
 
         private void AssignCurrentPriceToOrderDetail(OrderDetail detail, CustomerType customerType)
@@ -76,17 +80,25 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task DeleteCartItem(int productId)
         {
-            int orderId = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
+                .IncludingDetails()
                 .FindOne()
-                .Then(oc => oc.Map(o => o.OrderId).OrElseThrow(() => new CartItemNotFoundException(productId)));
+                .Then(oc => oc.OrElseThrow(() => new CartItemNotFoundException(productId)));
 
-            OrderDetail cartItem = await this.Session
-                .OrderDetails
-                .FindOne(d => d.OrderId == orderId && d.ProductId == productId)
-                .Then(od => od.OrElseThrow(() => new CartItemNotFoundException(productId)));
+            OrderDetail detail = cart.Sections
+                .SelectMany(s => s.Details)
+                .SingleOptional(d => d.ProductId == productId)
+                .OrElseThrow(() => new CartItemNotFoundException(productId));
 
-            await this.Session.OrderDetails.Delete(cartItem);
-            await this.Session.SaveChanges();
+            OrderSection section = detail.OrderSection;
+            section.Details.Remove(detail);
+
+            if (section.Details.Count == 0)
+            {
+                cart.Sections.Remove(section);
+            }
+
+            await this.Data.SaveChanges();
         }
 
         public async Task<CartOutputDto> GetCartDetails()
@@ -101,43 +113,57 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task InsertCartItem(CartItemInputDto item)
         {
+            Product product = await this.Data
+                .Products
+                .FindOne(p => p.ProductId == item.ProductId)
+                .Then(p => p.OrElseThrow(() => new ProductNotFoundException(item.ProductId)));
+
             Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
                 .FindOne()
-                .Then(oc => this.CreateCartIfAbsent(oc, this.RequestingUser.UserId));
+                .Then(oc => oc
+                    .Map(Task.FromResult)
+                    .OrElseGet(() => this.CreateCart(this.RequestingUser.UserId)));
 
-            await this.Session.OrderDetails.Insert(new OrderDetail
-            {
-                OrderId = cart.OrderId,
-                ProductId = item.ProductId,
-                Quantity = item.Quantity
-            });
-            await this.Session.SaveChanges();
+            IOptional<OrderSection> optionalSection = cart.Sections
+                .SingleOptional(s => s.SupplierId == product.SupplierId);
+
+            // TODO: check if the number of sections exceeds a max value
+
+            OrderSection section = optionalSection
+                .OrElseGet(() => this.CreateCartSection(cart, product.SupplierId));
+
+            section.Details.Add(new OrderDetail { ProductId = item.ProductId, OrderId = cart.OrderId });
+
+            await this.Data.SaveChanges();
         }
 
-        private async Task<Order> CreateCartIfAbsent(IOptional<Order> currentCart, int userId)
+        private OrderSection CreateCartSection(Order cart, int supplierId)
         {
-            if (currentCart.IsAbsent())
-            {
-                Order newCart = new Order
-                {
-                    OrderState = (int)OrderState.Cart,
-                    UserId = userId
-                };
-                await this.Session.Orders.Insert(newCart);
-                return newCart;
-            }
-            return currentCart.Value;
+            OrderSection section = new OrderSection { SupplierId = supplierId, State = OrderSectionState.Pending };
+            cart.Sections.Add(section);
+            return section;
         }
 
-        public async Task UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo)
+        private async Task<Order> CreateCart(int userId)
+        {
+            Order newCart = new Order
+            {
+                OrderState = OrderState.Cart,
+                UserId = userId
+            };
+            await this.Data.Orders.Insert(newCart);
+            return newCart;
+        }
+
+        public async Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo)
         {
             Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
                 .FindOne()
-                .Then(oc => this.CreateCartIfAbsent(oc, this.RequestingUser.UserId));
+                .Then(oc => this.CreateCart(this.RequestingUser.UserId));
 
             if (deliveryInfo.AddressId.HasValue)
             {
-                Address address = await this.Session
+                Address address = await this.Data
                     .Addresses
                     .FindOne(a => a.AddressId == deliveryInfo.AddressId)
                     .Then(t => t.OrElseThrow(() => new AddressNotFoundException(deliveryInfo.AddressId.Value)));
@@ -155,17 +181,17 @@ namespace FruitRacers.Backend.Core.Services.Impl
             cart.Notes = deliveryInfo.Notes;
             cart.DeliveryDate = deliveryInfo.DeliveryDate;
 
-            await this.Session.Orders.Update(cart);
-            await this.Session.SaveChanges();
+            await this.Data.SaveChanges();
+            return this.Mapper.Map<DeliveryInfoOutputDto>(cart);
         }
 
         private async Task EnsureTimeSlotIsValid(int timeSlotId, DateTime date)
         {
-            (TimeSlot timeSlot, int capacity) = await ServiceUtils.FindTimeSlotWithActualCapacity(this.Session, timeSlotId, date);
+            (TimeSlot timeSlot, int capacity) = await ServiceUtils.FindTimeSlotWithActualCapacity(this.Data, timeSlotId, date);
 
             if (timeSlot.Weekday != date.DayOfWeek)
             {
-                throw new Exception(); // TODO: change to domain exception
+                throw new TimeSlotMismatchException(timeSlot, date);
             }
             if (capacity <= 0)
             {
@@ -175,18 +201,20 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task UpdateCartItem(CartItemInputDto cartItem)
         {
-            int orderID = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order order = await this.FilterCartForUser(this.RequestingUser.UserId)
+                .IncludingDetails()
                 .FindOne()
-                .Then(oc => oc.Map(c => c.OrderId).OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
+                .Then(oc => oc.OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
 
-            OrderDetail item = await this.Session
-                .OrderDetails
-                .FindOne(d => d.OrderId == orderID && d.ProductId == cartItem.ProductId)
-                .Then(d => d.OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
+            OrderDetail item = order
+                .Sections
+                .SelectMany(s => s.Details)
+                .SingleOptional(d => d.ProductId == cartItem.ProductId)
+                .OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId));
 
             item.Quantity = cartItem.Quantity;
-            await this.Session.OrderDetails.Update(item);
-            await this.Session.SaveChanges();
+
+            await this.Data.SaveChanges();
         }
     }
 }

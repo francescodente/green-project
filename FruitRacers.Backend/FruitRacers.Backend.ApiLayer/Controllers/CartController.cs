@@ -28,8 +28,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateCartDeliveryInfo([FromBody] DeliveryInfoInputDto deliveryInfo)
         {
-            await this.cartService.UpdateCartDeliveryInfo(deliveryInfo);
-            return NoContent();
+            return Ok(await this.cartService.UpdateCartDeliveryInfo(deliveryInfo));
         }
 
         [HttpPost("details")]
@@ -56,8 +55,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpPut("confirm")]
         public async Task<IActionResult> ConfirmCart()
         {
-            int orderId = await this.cartService.ConfirmCart();
-            return Ok(new { OrderId = orderId });
+            return Ok(await this.cartService.ConfirmCart());
         }
     }
 }

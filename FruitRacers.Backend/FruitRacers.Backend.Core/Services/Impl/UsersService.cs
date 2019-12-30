@@ -18,17 +18,14 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task DeleteUser()
         {
-            await this.Session.Users.DeleteWhere(u => u.UserId == this.RequestingUser.UserId);
-            await this.Session.SaveChanges();
+            User userEntity = await this.FindRequestingUser();
+            userEntity.IsDeleted = true;
+            await this.Data.SaveChanges();
         }
 
         public async Task<UserOutputDto> GetUserData()
         {
-            User userEntity = await this.Session
-                .Users
-                .IncludingRoles()
-                .FindOne(u => u.UserId == this.RequestingUser.UserId)
-                .Then(u => u.OrElseThrow(() => UserNotFoundException.WithId(this.RequestingUser.UserId)));
+            User userEntity = await this.FindRequestingUser(r => r.IncludingRoles());
             return this.Mapper.Map<UserOutputDto>(userEntity);
         }
     }

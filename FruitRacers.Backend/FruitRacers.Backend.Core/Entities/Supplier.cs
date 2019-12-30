@@ -13,5 +13,6 @@ namespace FruitRacers.Backend.Core.Entities
         public string Description { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<SupplierImage> SupplierImages { get; set; }
+        public virtual ICollection<OrderSection> ReceivedOrders { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
 {
     [Route("api/addresses")]
     [ApiController]
-    [RequireLogin(RoleType.Person, RoleType.Supplier)]
+    [RequireLogin(RoleType.Person, RoleType.CustomerBusiness)]
     public class AddressesController : ControllerBase
     {
         private readonly IAddressesService addressesService;
@@ -28,15 +28,13 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         [HttpPost]
         public async Task<IActionResult> InsertAddress([FromBody] AddressInputDto address)
         {
-            int addressId = await this.addressesService.AddAddress(address);
-            return Ok(new { AddressId = addressId });
+            return Ok(await this.addressesService.AddAddress(address));
         }
 
         [HttpPut("{addressId}")]
         public async Task<IActionResult> UpdateAddress([FromRoute] int addressId, [FromBody] AddressInputDto address)
         {
-            await this.addressesService.UpdateAddress(addressId, address);
-            return NoContent();
+            return Ok(await this.addressesService.UpdateAddress(addressId, address));
         }
 
         [HttpDelete("{addressId}")]

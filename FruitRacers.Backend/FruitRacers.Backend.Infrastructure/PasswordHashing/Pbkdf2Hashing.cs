@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FruitRacers.Backend.Core.Utils;
 using System.Security.Cryptography;
-using System.Text;
 
-namespace FruitRacers.Backend.Core.Utils
+namespace FruitRacers.Backend.Infrastructure.PasswordHashing
 {
     public class Pbkdf2Hashing : IHashCalculator
     {

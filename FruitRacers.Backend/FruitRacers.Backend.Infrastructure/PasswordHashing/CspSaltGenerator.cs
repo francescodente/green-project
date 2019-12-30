@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FruitRacers.Backend.Core.Utils;
+using System;
 using System.Security.Cryptography;
-using System.Text;
 
-namespace FruitRacers.Backend.Core.Utils
+namespace FruitRacers.Backend.Infrastructure.PasswordHashing
 {
     public class CspSaltGenerator : ISaltGenerator, IDisposable
     {
@@ -12,18 +11,18 @@ namespace FruitRacers.Backend.Core.Utils
 
         public CspSaltGenerator()
         {
-            this.csp = new RNGCryptoServiceProvider();
+            csp = new RNGCryptoServiceProvider();
         }
 
         public void Dispose()
         {
-            this.csp.Dispose();
+            csp.Dispose();
         }
 
         public byte[] NewSalt()
         {
             byte[] salt = new byte[SALT_LENGTH];
-            this.csp.GetNonZeroBytes(salt);
+            csp.GetNonZeroBytes(salt);
             return salt;
         }
     }

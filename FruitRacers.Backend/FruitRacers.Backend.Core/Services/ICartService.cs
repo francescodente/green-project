@@ -7,7 +7,7 @@ namespace FruitRacers.Backend.Core.Services
     {
         Task<CartOutputDto> GetCartDetails();
 
-        Task UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo);
+        Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo);
 
         Task InsertCartItem(CartItemInputDto item);
 
@@ -15,6 +15,6 @@ namespace FruitRacers.Backend.Core.Services
 
         Task DeleteCartItem(int productId);
 
-        Task<int> ConfirmCart();
+        Task<OrderDto> ConfirmCart();
     }
 }

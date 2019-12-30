@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using FruitRacers.Backend.Contracts.Filters;
 using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -16,30 +17,22 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
             this.productsService = productsService;
         }
 
-        [HttpGet("supplier/{supplierId}")]
-        public async Task<IActionResult> GetProductsForSupplier([FromRoute] int supplierId)
+        [HttpGet]
+        public async Task<IActionResult> GetProducts([FromQuery] PaginationFilter pagination, [FromQuery] ProductsFilters filters)
         {
-            return Ok(await this.productsService.GetProductsForSupplier(supplierId));
-        }
-
-        [HttpGet("{productId}")]
-        public async Task<IActionResult> GetProductData([FromRoute] int productId)
-        {
-            return Ok(await this.productsService.GetProductData(productId));
+            return Ok(await this.productsService.GetProducts(pagination, filters));
         }
 
         [HttpPost]
         public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {
-            int productId = await this.productsService.InsertProduct(product);
-            return Ok(new { ProductId = productId });
+            return Ok(await this.productsService.InsertProduct(product));
         }
 
         [HttpPut("{productId}")]
         public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductInputDto product)
         {
-            await this.productsService.UpdateProduct(productId, product);
-            return NoContent();
+            return Ok(await this.productsService.UpdateProduct(productId, product));
         }
 
         [HttpDelete("{productId}")]

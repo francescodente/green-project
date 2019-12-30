@@ -17,51 +17,62 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
         }
 
+        private SqlOrderRepository(FruitracersContext context, Func<IQueryable<Order>, IQueryable<Order>> initialModifier)
+            : base(context, initialModifier)
+        {
+        }
+
+        private IOrderRepository WrapRepository(Func<IQueryable<Order>, IQueryable<Order>> modifier)
+        {
+            return new SqlOrderRepository(this.Context, this.WrapQuery(modifier));
+        }
+
         public IOrderRepository AfterDate(DateTime date)
         {
-            this.ChainQueryModification(q => q.Where(o => o.DeliveryDate >= date));
-            return this;
+            return this.WrapRepository(q => q.Where(o => o.DeliveryDate >= date));
         }
 
         public IOrderRepository BeforeDate(DateTime date)
         {
-            this.ChainQueryModification(q => q.Where(o => o.DeliveryDate <= date));
-            return this;
+            return this.WrapRepository(q => q.Where(o => o.DeliveryDate <= date));
         }
 
         public IOrderRepository BelongingTo(int userId)
         {
-            this.ChainQueryModification(q => q.Where(o => o.UserId == userId));
-            return this;
+            return this.WrapRepository(q => q.Where(o => o.UserId == userId));
         }
 
         public IOrderRepository IncludingDetails()
         {
-            this.ChainQueryModification(q => q
-                .Include(o => o.OrderDetails));
-            return this;
+            return this.WrapRepository(q => q
+                .Include(o => o.Sections)
+                    .ThenInclude(s => s.Supplier)
+                        .ThenInclude(s => s.User)
+                            .ThenInclude(u => u.Addresses)
+                .Include(o => o.Sections)
+                    .ThenInclude(o => o.Details));
         }
 
         public IOrderRepository IncludingDetailsAndProducts()
         {
-            this.ChainQueryModification(q => q
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(d => d.Product)
-                        .ThenInclude(p => p.ProductCategories)
-                            .ThenInclude(c => c.Category)
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(d => d.Product)
-                        .ThenInclude(p => p.Supplier)
-                .Include(o => o.OrderDetails)
-                    .ThenInclude(d => d.Product)
-                        .ThenInclude(p => p.Prices));
-            return this;
+            return this.WrapRepository(q => q
+                .Include(o => o.Sections)
+                    .ThenInclude(s => s.Supplier)
+                        .ThenInclude(s => s.User)
+                            .ThenInclude(u => u.Addresses)
+                .Include(o => o.Sections)
+                    .ThenInclude(o => o.Details)
+                        .ThenInclude(d => d.Product)
+                            .ThenInclude(p => p.Category)
+                .Include(o => o.Sections)
+                    .ThenInclude(o => o.Details)
+                        .ThenInclude(d => d.Product)
+                            .ThenInclude(p => p.Prices));
         }
 
         public IOrderRepository WithState(OrderState state)
         {
-            this.ChainQueryModification(q => q.Where(o => o.OrderState == state));
-            return this;
+            return this.WrapRepository(q => q.Where(o => o.OrderState == state));
         }
     }
 }

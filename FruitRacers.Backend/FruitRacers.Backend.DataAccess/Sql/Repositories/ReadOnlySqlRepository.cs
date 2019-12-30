@@ -27,38 +27,43 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
             this.queryModifier = initialModifier;
         }
 
-        public async Task<IEnumerable<T>> GetAll()
-        {
-            return await this.AsQueryable()
-                .ToArrayAsync();
-        }
-
-        public async Task<IEnumerable<T>> Where(Expression<Func<T, bool>> predicate)
-        {
-            return await this.AsQueryable()
-                .Where(predicate)
-                .ToArrayAsync();
-        }
-
         protected IQueryable<T> AsQueryable()
         {
             return this.queryModifier(this.Set);
         }
 
-        protected void ChainQueryModification(Func<IQueryable<T>, IQueryable<T>> modifier)
+        protected Func<IQueryable<T>, IQueryable<T>> WrapQuery(Func<IQueryable<T>, IQueryable<T>> modifier)
         {
-            Func<IQueryable<T>, IQueryable<T>> current = this.queryModifier;
-            this.queryModifier = q => modifier(current(q));
+            return q => modifier(this.queryModifier(q));
         }
 
-        public async Task<IOptional<T>> FindOne()
+        private IQueryable<T> AsFilteredQueryable(Expression<Func<T, bool>> predicate)
         {
-            return await Optional.TryCatchAsync(() => this.AsQueryable().SingleAsync());
+            IQueryable<T> query = this.AsQueryable();
+            return predicate != null ? query.Where(predicate) : query;
         }
 
-        public async Task<IOptional<T>> FindOne(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> AsEnumerable(Expression<Func<T, bool>> predicate = null)
         {
-            return await Optional.TryCatchAsync(() => this.AsQueryable().SingleAsync(predicate));
+            return await this.AsFilteredQueryable(predicate).ToArrayAsync();
+        }
+
+        public async Task<IOptional<T>> FindOne(Expression<Func<T, bool>> predicate = null)
+        {
+            return await Optional.TryCatchAsync(() => this.AsFilteredQueryable(predicate).SingleAsync());
+        }
+
+        public async Task<IEnumerable<T>> AsPagedEnumerable(int pageNumber, int pageSize, Expression<Func<T, bool>> predicate = null)
+        {
+            return await this.AsFilteredQueryable(predicate)
+                .Skip(pageNumber * pageSize)
+                .Take(pageSize)
+                .ToArrayAsync();
+        }
+
+        public async Task<int> Count(Expression<Func<T, bool>> predicate = null)
+        {
+            return await this.AsFilteredQueryable(predicate).CountAsync();
         }
     }
 }

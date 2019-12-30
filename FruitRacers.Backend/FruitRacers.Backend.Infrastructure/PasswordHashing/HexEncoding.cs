@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using FruitRacers.Backend.Core.Utils;
+using System;
 using System.Linq;
 using System.Text;
 
-namespace FruitRacers.Backend.Core.Utils
+namespace FruitRacers.Backend.Infrastructure.PasswordHashing
 {
     public class HexEncoding : IStringEncoding
     {

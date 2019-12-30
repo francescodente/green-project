@@ -22,15 +22,15 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
 
                 entity.Property(e => e.UnitName).HasMaxLength(5);
 
-                entity.HasOne(d => d.Order)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.OrderId)
+                entity.HasOne(d => d.OrderSection)
+                    .WithMany(p => p.Details)
+                    .HasForeignKey(d => new { d.OrderId, d.SupplierId })
                     .OnDelete(DeleteBehavior.Cascade);
 
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }
