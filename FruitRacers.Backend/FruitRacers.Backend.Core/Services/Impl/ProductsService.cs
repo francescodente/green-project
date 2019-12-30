@@ -59,14 +59,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 SupplierId = this.RequestingUser.UserId,
                 Description = product.Description,
                 Name = product.Name,
+                CategoryId = product.CategoryId,
                 IsDeleted = false,
                 IsEnabled = true,
                 IsLegal = true
             };
-
-            product.Categories
-                .Select(id => new ProductCategory { CategoryId = id })
-                .ForEach(productEntity.ProductCategories.Add);
 
             product.Prices
                 .Select(p => this.CreatePriceFromDto(p.Value, p.Key))
@@ -97,18 +94,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             productEntity.Name = product.Name;
             productEntity.Description = product.Description;
-
-            IList<ProductCategory> categoriesToAdd = product.Categories
-                .Except(productEntity.ProductCategories.Select(c => c.CategoryId))
-                .Select(id => new ProductCategory { CategoryId = id })
-                .ToList();
-
-            IList<ProductCategory> categoriesToRemove = productEntity.ProductCategories
-                .Where(c => !product.Categories.Contains(c.CategoryId))
-                .ToList();
-
-            categoriesToAdd.ForEach(c => productEntity.ProductCategories.Add(c));
-            categoriesToRemove.ForEach(c => productEntity.ProductCategories.Remove(c));
+            productEntity.CategoryId = product.CategoryId;
 
             IList<Price> pricesToAdd = product.Prices
                 .Where(p => !productEntity.Prices.Select(e => e.Type).Contains((CustomerType) p.Key))

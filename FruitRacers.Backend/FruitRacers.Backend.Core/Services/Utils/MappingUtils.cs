@@ -9,7 +9,6 @@ using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Entities.Extensions;
-using FruitRacers.Backend.Shared.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +21,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
             MapperConfiguration config = new MapperConfiguration(c =>
             {
                 c.AddProfile<AddressMapping>();
+                c.AddProfile<SupplierMapping>();
                 c.AddProfile<OrderMapping>();
                 c.AddProfile<UserMapping>();
                 c.AddProfile<ProductMapping>();
@@ -36,6 +36,18 @@ namespace FruitRacers.Backend.Core.Services.Utils
             public AddressMapping()
             {
                 this.CreateMap<Address, AddressOutputDto>();
+            }
+        }
+
+        private class SupplierMapping : Profile
+        {
+            public SupplierMapping()
+            {
+                this.CreateMap<Supplier, SupplierInfoDto>()
+                    .ForMember(dst => dst.Name, o => o.MapFrom(src => src.BusinessName))
+                    .ForMember(dst => dst.SupplierId, o => o.MapFrom(src => src.UserId))
+                    .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.SupplierImages.Select(i => i.Image.Path).FirstOrDefault()))
+                    .ForMember(dst => dst.Address, o => o.MapFrom(src => src.User.Addresses.Single()));
             }
         }
 
@@ -62,7 +74,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
                 this.CreateMap<Price, PriceDto>();
 
                 this.CreateMap<Product, ProductOutputDto>()
-                    .ForMember(dst => dst.Categories, o => o.MapFrom(src => src.ProductCategories.Select(c => c.Category)))
+                    .ForMember(dst => dst.Categories, o => o.MapFrom(src => Enumerable.Repeat(src.Category, 1)))
                     .ForMember(dst => dst.Prices, o => o.MapFrom((src, dst, m, context) => this.CreatePriceDictionary(src, context)));
             }
 

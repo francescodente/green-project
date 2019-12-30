@@ -44,19 +44,26 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 
         public IOrderRepository IncludingDetails()
         {
-            return this.WrapRepository(q => q.Include(o => o.Sections).ThenInclude(o => o.Details));
+            return this.WrapRepository(q => q
+                .Include(o => o.Sections)
+                    .ThenInclude(s => s.Supplier)
+                        .ThenInclude(s => s.User)
+                            .ThenInclude(u => u.Addresses)
+                .Include(o => o.Sections)
+                    .ThenInclude(o => o.Details));
         }
 
         public IOrderRepository IncludingDetailsAndProducts()
         {
             return this.WrapRepository(q => q
                 .Include(o => o.Sections)
-                    .ThenInclude(o => o.Supplier)
+                    .ThenInclude(s => s.Supplier)
+                        .ThenInclude(s => s.User)
+                            .ThenInclude(u => u.Addresses)
                 .Include(o => o.Sections)
                     .ThenInclude(o => o.Details)
                         .ThenInclude(d => d.Product)
-                            .ThenInclude(p => p.ProductCategories)
-                                .ThenInclude(c => c.Category)
+                            .ThenInclude(p => p.Category)
                 .Include(o => o.Sections)
                     .ThenInclude(o => o.Details)
                         .ThenInclude(d => d.Product)

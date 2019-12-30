@@ -8,7 +8,7 @@ namespace FruitRacers.Backend.Core.Entities
         public Category()
         {
             ChildCategories = new HashSet<Category>();
-            ProductCategories = new HashSet<ProductCategory>();
+            Products = new HashSet<Product>();
         }
 
         public int CategoryId { get; set; }
@@ -19,6 +19,6 @@ namespace FruitRacers.Backend.Core.Entities
         public virtual Image Image { get; set; }
         public virtual Category ParentCategory { get; set; }
         public virtual ICollection<Category> ChildCategories { get; set; }
-        public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }
