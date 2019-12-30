@@ -1,85 +1,26 @@
-.modal-dialog {
-    justify-content: center;
+/***************************\
+|   AUTHENTICATION MODALS   |
+\***************************/
+
+#modal-login .modal-content,
+#modal-sign-up .modal-content,
+#modal-pwd-recovery .modal-content,
+#modal-pwd-change .modal-content {
+    width: 360px;
 }
 
-.modal-content {
-    background-color: var(--col-primary);
-    border: none;
-    border-radius: 4px!important;
-    width: auto;
-    overflow: hidden;
+#modal-login [type="submit"],
+#modal-sign-up [type="submit"],
+#modal-pwd-recovery [type="submit"],
+#modal-pwd-change [type="submit"] {
+    width: 200px;
 }
 
-.modal-top {
-    background-color: var(--col-primary-dark);
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.modal-top [data-dismiss="modal"] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 4px 4px 0 0;
-}
-
-.modal-body {
-    padding: 16px;
-}
-
-.modal-bottom {
-    background-color: var(--col-primary-dark);
-    padding: 12px;
-}
-
-.modal-bottom *:not(:last-child) {
-    margin-right: 6px;
-}
-
-.modal [type="submit"] {
+#modal-login .text-input>input,
+#modal-sign-up .text-input>input,
+#modal-pwd-recovery .text-input>input,
+#modal-pwd-change .text-input>input {
     width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.modal .text-input {
-    margin: 6px 0;
-}
-
-.modal .text-input input {
-    width: 300px;
-}
-
-.modal-header-icon {
-    margin: 36px 48px;
-    color: var(--col-accent);
-    height: 128px;
-    font-size: 128px;
-    line-height: 128px;
-}
-
-.modal-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 4px 0 0 4px;
-}
-
-/*******************\
-|   SIGN-UP MODAL   |
-\*******************/
-
-#marketing-consent + label {
-    max-width: 300px;
-}
-
-/************************\
-|   PWD RECOVERY MODAL   |
-\************************/
-
-#modal-pwd-recovery p {
-    max-width: 300px;
 }
 
 /******************************\
@@ -149,38 +90,8 @@
 |   PRODUCT MODAL   |
 \*******************/
 
-#modal-product .product-image {
-    width: 100%;
-}
-
-#modal-product .product-image .image-shade {
-    height: 100%;
-    width: 100%;
-    box-shadow: inset 0 128px 100px -100px rgba(0, 0, 0, 0.54);
-}
-
-#modal-product .product-categories {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.category-chip {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 3px;
-    padding: 6px 16px;
-    border-radius: 360px;
-    background-color: var(--col-primary-dark);
-    font-size: 12px;
-    font-weight: bold;
-    text-decoration: none!important;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: box-shadow 0.2s ease-in-out;
-}
-
-.category-chip:hover {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+#modal-product .modal-content {
+    width: 360px;
 }
 
 /*******************\

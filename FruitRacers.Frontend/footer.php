@@ -1,8 +1,8 @@
-<footer id="footer">
+<footer class="footer">
     <div class="container text-center mb-4">
         <div class="row">
             <div class="col-12 mt-4 mb-3">
-                <button id="go-top-btn" class="btn round ripple">
+                <button id="go-top-btn" class="btn round outline ripple text-center">
                     <i class="mdi dark mdi-chevron-up"></i>
                     <p>Torna su</p>
                 </button>
@@ -16,12 +16,9 @@
                 <h6>Mappa del sito</h6>
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="index.php#who">Chi siamo</a></li>
+                    <li><a href="index.php#about">Chi siamo</a></li>
                     <li><a href="index.php#contacts">Contatti</a></li>
-                    <li><a href="companies.php">Aziende</a></li>
-                    <li><a href="categories.php">Prodotti</a></li>
-                    <li><a href="cart.php">Carrello</a></li>
-                    <li><a href="account-tabs.php">Account</a></li>
+                    <li><a href="companies.php">Partner</a></li>
                 </ul>
             </div>
             <div class="col-12 col-md-4 mb-3 mb-md-0 order-md-3">

@@ -3,6 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="theme-color" content="#000000">
 
+<!-- Website icon -->
 <link type="image/x-icon" rel="shortcut icon" href="#" />
 
 <!-- Fonts -->
@@ -14,8 +15,10 @@
 <link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
 <link rel="stylesheet" type="text/css" href="css/universal-parallax.css"/>
 <link rel="stylesheet" type="text/css" href="css/ripple.css"/>
+<link rel="stylesheet" type="text/css" href="css/colors-typography.css"/>
 <link rel="stylesheet" type="text/css" href="css/components.css"/>
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/ui.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="css/style.css"/> -->
 <link rel="stylesheet" type="text/css" href="css/menu.css"/>
 <link rel="stylesheet" type="text/css" href="css/footer.css"/>
 <link rel="stylesheet" type="text/css" href="css/modals.css"/>

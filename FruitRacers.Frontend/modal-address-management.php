@@ -1,9 +1,9 @@
 <div id="modal-address-management" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content d-flex flex-column">
-            <div class="modal-top">
-                <i class="modal-header-icon mdi mdi-map-marker-multiple"></i>
-                <button class="btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+        <div class="modal-content">
+            <div class="modal-top d-flex justify-content-center">
+                <i class="modal-top-icon mdi mdi-map-marker-multiple"></i>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <div class="modal-body">
 

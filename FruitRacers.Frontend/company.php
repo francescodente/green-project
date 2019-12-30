@@ -5,11 +5,12 @@
     <title>Fruitracers - Prodotti</title>
 </head>
 <body>
-    <div>
 
-        <?php include("menu.php"); ?>
+    <?php include("menu.php"); ?>
 
-        <section id="categories" class="parallax-container header d-flex justify-content-center align-items-center" data-section="categories">
+    <div class="content">
+
+        <section id="categories" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">PRODOTTI</h1>
             </div>
@@ -18,7 +19,7 @@
             </div>
             <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
         </section>
-        <section id="categories-content" class="container py-4" data-section="categories">
+        <section id="categories-content" class="container py-4">
             <?php
             for ($i = 0; $i < 2; $i++) {
                 ?>

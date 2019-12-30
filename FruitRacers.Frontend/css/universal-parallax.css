@@ -1,24 +1,61 @@
 .parallax__container {
-    clip: rect(0, auto, auto, 0);
-    height: 100%;
-    left: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: -100;
+	clip: rect(0, auto, auto, 0);
+	height: 100%;
+	left: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: -100;
 }
 .parallax__container .parallax {
-    /* can be put in a seperate class for better control */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* --------------------------- */
-    position: fixed;
-    top: 0;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: fixed;
+	top: 0;
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	width: 100%;
+}
+
+/* Cover scroll bar padding with parallax background*/
+@media (min-width: 768px) {
+
+    .parallax__container {
+        left: calc((100% - 100vw) / 2);
+        width: calc(100vw - ((100vw - 100%) / 2));
+    }
+}
+
+/*********************************\
+|   ADDITIONAL PARALLAX OPTIONS   |
+\*********************************/
+
+.parallax-container {
+    height: 100vh;
+}
+
+.parallax.shade::after {
+    content: '';
+    position: absolute;
+    height: 100%;
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.parallax-container.header {
+    height: 40vh;
+}
+
+.parallax-container.header>.parallax-container {
+    height: 40vh;
+}
+
+.bottom-content {
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
 }

@@ -1,121 +1,9 @@
-/************\
-|   COLORS   |
-\************/
-
-:root {
-    --col-text-light: rgba(255, 255, 255, 1);
-    --col-text-sec-light: rgba(255, 255, 255, 0.7);
-    --col-text-dis-light: rgba(255, 255, 255, 0.5);
-
-    --col-text-dark: rgba(0, 0, 0, 0.8);
-    --col-text-sec-dark: rgba(0, 0, 0, 0.54);
-    --col-text-dis-dark: rgba(0, 0, 0, 0.38);
-
-    --col-icon-light: rgba(255, 255, 255, 1);
-    --col-icon-dis-light: rgba(255, 255, 255, 0.5);
-
-    --col-icon-dark: rgba(0, 0, 0, 0.54);
-    --col-icon-dis-dark: rgba(0, 0, 0, 0.38);
-}
-
-/**********\
-|   TEXT   |
-\**********/
-
-p, span, a, h1, h2, h3, h4, h5, h6, label, input, .text-dark, .text-dark * {
-    color: var(--col-text-dark);
-}
-
-.text-sec-dark, .text-sec-dark * {
-    color: var(--col-text-sec-dark);
-}
-
-.text-dis-dark, .text-dis-dark * {
-    color: var(--col-text-dis-dark);
-}
-
-.text-light, .text-light * {
-    color: var(--col-text-light);
-}
-
-.text-sec-light, .text-sec-light * {
-    color: var(--col-text-sec-light);
-}
-
-.text-dis-light, .text-dis-light * {
-    color: var(--col-text-dis-light);
-}
-
-.text-accent {
-    color: var(--col-accent);
-}
-
-.text-accent-dark {
-    color: var(--col-accent-dark);
-}
-
-.text-valid-dark {
-    color: #43A047;
-}
-
-.text-valid-light {
-    color: #00C853;
-}
-
-.text-error-dark {
-    color: #B71C1C;
-}
-
-.text-error-light {
-    color: #D50000;
-}
-
-a {
-    text-decoration: none;
-    color: var(--col-accent-dark);
-}
-
-a:hover {
-    text-decoration: underline;
-    color: var(--col-accent-dark);
-}
-
-a.light {
-    color: var(--col-accent);
-}
-
-/***********\
-|   ICONS   |
-\***********/
-
-.mdi {
-    display: inline-block;
-    height: 24px;
-    font-size: 24px;
-    line-height: 24px;
-}
-
-.mdi.dark {
-    color: var(--col-icon-dark);
-}
-
-.mdi.light {
-    color: var(--col-icon-light);
-}
-
-.mdi.accent {
-    color: var(--col-accent);
-}
-
-.mdi.accent-dark {
-    color: var(--col-accent-dark);
-}
-
 /**********************************\
 |   DIVS WITH FIXED ASPECT RATIO   |
 \**********************************/
 
 .fixed-ratio {
+    position: relative;
     overflow: hidden;
     height: 0;
     background-position: center;
@@ -146,6 +34,60 @@ a.light {
 
 .fr-2-1 {
     padding-top: 50%;
+}
+
+/************\
+|   IMAGES   |
+\************/
+
+.img-hover-zoom {
+    position: relative;
+    overflow: hidden;
+}
+
+.img-hover-zoom img, .img-hover-zoom .zoomable {
+    transition: transform 0.5s ease-in-out;
+}
+
+.img-hover-zoom:hover img, .img-hover-zoom:hover .zoomable {
+    transform: scale(1.2);
+}
+
+.img-click-zoom {
+    cursor: zoom-in;
+}
+
+.img-fullscreen {
+    cursor: zoom-out;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    opacity: 0;
+    background-color: #222;
+    z-index: 200;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.img-fullscreen img {
+    max-height: 0%;
+    max-width: 0%;
+    transition: 0.5s ease-in-out;
+}
+
+.img-fullscreen.active {
+    opacity: 1;
+    top: 0;
+    bottom: 0;
+}
+
+.img-fullscreen.active img {
+    max-height: 100%;
+    max-width: 100%;
 }
 
 /*************\
@@ -198,6 +140,22 @@ div.divider.vertical.light {
     color: var(--col-text-light);
 }
 
+.btn.text-center {
+    display: inline-flex;
+    justify-content: center;
+}
+
+.btn.text-center .mdi ~ p {
+    margin: 0 16px;
+}
+
+.btn.text-center .mdi {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 8px;
+}
+
 .btn .mdi {
     height: 20px;
     font-size: 20px;
@@ -217,35 +175,47 @@ div.divider.vertical.light {
     margin: auto 0 auto 8px;
 }
 
-.btn.transparent, .btn.transparent:disabled:hover {
-    background-color: rgba(0, 0, 0, 0.08);
+.btn.transparent {
+    background-color: transparent;
 }
 
-.btn.transparent.light, .btn.transparent.light:disabled:hover {
-    background-color: rgba(255, 255, 255, 0.08);
+.btn.transparent.light {
+    background-color: transparent;
 }
 
-.btn.transparent:hover, .btn.icon:hover, .btn.round:hover {
+.btn.transparent:not(:disabled):hover, .btn.outline:not(:disabled):hover, .btn.icon:not(:disabled):hover,
+.btn.transparent:not(:disabled):focus, .btn.outline:not(:disabled):focus, .btn.icon:not(:disabled):focus {
     background-color: rgba(0, 0, 0, 0.12);
 }
 
-.btn.transparent.light:hover, .btn.icon.light:hover, .btn.round.light:hover {
+.btn.transparent.light:not(:disabled):hover, .btn.outline.light:not(:disabled):hover, .btn.icon.light:not(:disabled):hover,
+.btn.transparent.light:not(:disabled):focus, .btn.outline.light:not(:disabled):focus, .btn.icon.light:not(:disabled):focus {
     background-color: rgba(255, 255, 255, 0.12);
 }
 
-.btn.accent, .btn.fab, .btn.accent:disabled:hover {
+.btn.outline {
+    background-color: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.btn.outline.light {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn.accent, .btn.fab {
     background-color: var(--col-accent);
     color: var(--col-text-light);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)!important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225)!important;
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.btn.accent:hover, .btn.fab:hover {
+.btn.accent:not(:disabled):hover, .btn.fab:not(:disabled):hover, .file-input:hover,
+.btn.accent:not(:disabled):focus, .btn.fab:not(:disabled):focus, .file-input:focus-within {
     color: var(--col-text-light);
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)!important;
+    box-shadow: 0 4px 10px 0px rgba(0, 0, 0, 0.225)!important;
 }
 
-.btn.accent:after {
+.btn.accent:after, .btn.fab:after, .file-input:after, .btn.fab:after {
     content: '';
     position: absolute;
     top: 0;
@@ -256,7 +226,8 @@ div.divider.vertical.light {
     transition: background-color 0.2s ease-in-out;
 }
 
-.btn.accent:not(:disabled):hover:after {
+.btn.accent:not(:disabled):hover:after, .btn.fab:not(:disabled):hover:after, .file-input:hover:after,
+.btn.accent:not(:disabled):focus:after, .btn.fab:not(:disabled):focus:after, .file-input:focus-within:after {
     background-color: rgba(255, 255, 255, 0.12);
 }
 
@@ -264,14 +235,15 @@ div.divider.vertical.light {
     color: var(--col-text-light);
 }
 
+.btn.round {
+    padding: 5px 16px;
+    border-radius: 360px;
+}
+
 .btn.icon {
     background-color: transparent;
     padding: 6px;
     border-radius: 100%;
-}
-
-.btn.icon:disabled:hover, .btn.round:disabled:hover {
-    background-color: transparent;
 }
 
 .btn.icon .mdi {
@@ -281,35 +253,14 @@ div.divider.vertical.light {
     margin: auto;
 }
 
-.btn.round {
-    background-color: transparent;
-    padding: 5px 20px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    border-radius: 360px;
-}
-
-.btn.round.light {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.btn.round .mdi ~ p {
-    margin: 0 16px;
-}
-
-.btn.round .mdi {
-    position: absolute;
-    top: 8px;
-    left: 6px;
-}
-
 .btn.fab {
     border-radius: 100%;
     padding: 12px;
 }
 
-/****************\
-|   FILE INPUT   |
-\****************/
+/*****************\
+|   FILE INPUTS   |
+\*****************/
 
 .file-input {
     display: inline-flex;
@@ -319,12 +270,8 @@ div.divider.vertical.light {
     padding: 6px 12px;
     background-color: var(--col-accent);
     cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)!important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225)!important;
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.file-input:hover {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)!important;
 }
 
 .file-input * {
@@ -332,7 +279,9 @@ div.divider.vertical.light {
 }
 
 .file-input [type="file"] {
-    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
 }
 
 .file-input i {
@@ -364,12 +313,14 @@ div.divider.vertical.light {
     color: var(--col-accent)!important;
 }
 
-/***********\
-|   RADIO   |
-\***********/
+/*******************\
+|   RADIO BUTTONS   |
+\*******************/
 
 .radio {
-    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
 }
 
 .radio + label {
@@ -393,10 +344,19 @@ div.divider.vertical.light {
     width: 20px;
     border: 2px solid var(--col-icon-dark);
     border-radius: 100%;
+    transition: color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .radio.light + label:before {
     border: 2px solid var(--col-text-sec-light);
+}
+
+.radio:focus + label:before {
+    box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.08);
+}
+
+.radio.light:focus + label:before {
+    box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.12);
 }
 
 .radio:checked + label:before {
@@ -412,19 +372,16 @@ div.divider.vertical.light {
     top: 4px;
     left: 4px;
     border-radius: 100%;
-    -webkit-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out;
 }
 
 .radio:not(:checked) + label:after {
     opacity: 0;
-    -webkit-transform: scale(0);
     transform: scale(0);
 }
 
 .radio:checked + label:after {
     opacity: 1;
-    -webkit-transform: scale(1);
     transform: scale(1);
 }
 
@@ -433,12 +390,14 @@ div.divider.vertical.light {
     cursor: default;
 }
 
-/****************\
-|   RICH RADIO   |
-\****************/
+/************************\
+|   RICH RADIO BUTTONS   |
+\************************/
 
 .rich-radio {
-    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
 }
 
 .rich-radio + label {
@@ -449,11 +408,13 @@ div.divider.vertical.light {
     transition: background-color 0.2s ease-in-out;
 }
 
-.rich-radio:not(:disabled):hover + label {
+.rich-radio:not(:disabled):hover + label,
+.rich-radio:not(:disabled):focus + label {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-.rich-radio.light:not(:disabled):hover + label {
+.rich-radio.light:not(:disabled):hover + label,
+.rich-radio.light:not(:disabled):focus + label {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -466,7 +427,9 @@ div.divider.vertical.light {
 \*****************/
 
 .checkbox {
-    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
 }
 
 .checkbox + label {
@@ -491,11 +454,19 @@ div.divider.vertical.light {
     background: transparent;
     border: 2px solid var(--col-icon-dark);
     border-radius: 0.125em;
-    transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .checkbox.light + label:before {
     border: 2px solid var(--col-text-sec-light);
+}
+
+.checkbox:focus + label:before {
+    box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.08);
+}
+
+.checkbox.light:focus + label:before {
+    box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.12);
 }
 
 .checkbox:checked + label:before {
@@ -515,11 +486,17 @@ div.divider.vertical.light {
     height: 0.375em;
     width: 0.75em;
     opacity: 1;
-    border: 0.125em solid #FFF;
+    border: 0.125em solid var(--col-primary);
     border-top-style: none;
     border-right-style: none;
     transform: translate(0.25em, 0.3365384615em) rotate(-45deg);
     transition: opacity 0.2s ease-in-out;
+}
+
+.checkbox.light:checked + label:after {
+    border: 0.125em solid var(--col-dark-primary);
+    border-top-style: none;
+    border-right-style: none;
 }
 
 /**************\
@@ -527,7 +504,9 @@ div.divider.vertical.light {
 \**************/
 
 .switch {
-    display: none;
+    position: absolute;
+    height: 0;
+    width: 0;
 }
 
 .switch + label {
@@ -554,10 +533,7 @@ div.divider.vertical.light {
     margin: 0;
     outline: 0;
     top: 50%;
-    -ms-transform: translate(0, -50%);
-    -webkit-transform: translate(0, -50%);
     transform: translate(0, -50%);
-    -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
 
@@ -582,6 +558,14 @@ div.divider.vertical.light {
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098), 0 1px 5px 0 rgba(0, 0, 0, 0.084);
 }
 
+.switch:focus + label:after {
+    box-shadow: 0px 0px 0px 4px rgba(0, 0, 0, 0.08);
+}
+
+.switch.light:focus + label:after {
+    box-shadow: 0px 0px 0px 4px rgba(255, 255, 255, 0.12);
+}
+
 .switch + label .on {
     display: none;
 }
@@ -597,8 +581,6 @@ div.divider.vertical.light {
 
 .switch:checked + label:after {
     background-color: var(--col-accent);
-    -ms-transform: translate(80%, -50%);
-    -webkit-transform: translate(80%, -50%);
     transform: translate(80%, -50%);
 }
 
@@ -618,9 +600,9 @@ div.divider.vertical.light {
     background-color: #AAA;
 }
 
-/************\
-|   SELECT   |
-\************/
+/*************\
+|   SELECTS   |
+\*************/
 
 .select-input {
     display: block;
@@ -635,46 +617,45 @@ div.divider.vertical.light {
 
 .select-input button {
     cursor: pointer;
+    color: var(--col-text-dark);
+    background-color: transparent;
+    border: 1px solid var(--col-text-sec-dark);
+    border-radius: 4px;
     height: 42px;
     width: 100%;
     margin: 6px 0;
-    padding: 0 39px 0 12px;
+    padding: 0 12px;
     outline: none;
-    color: var(--col-text-dark);
-    background-color: transparent;
-    display: block;
-    text-align: left;
-    border: 1px solid var(--col-text-sec-dark);
-    border-radius: 4px;
-}
-
-.select-input.dark button {
-    color: var(--col-text-light);
-    border: 1px solid var(--col-text-sec-light);
-}
-
-.select-input button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     transition: background-color 0.2s ease-in-out;
 }
 
-.select-input button:hover {
+.select-input.dark button {
+    border: 1px solid var(--col-text-sec-light);
+}
+
+.select-input button:hover, .select-input button:focus {
     background: rgba(0, 0, 0, 0.08);
 }
 
-.select-input.dark button:hover {
+.select-input.dark button:hover, .select-input.dark button:focus {
     background: rgba(255, 255, 255, 0.08);
 }
 
-.select-input .mdi {
-    position: absolute;
-    top: 15px;
-    right: 4px;
-    pointer-events: none;
+.select-input button p {
+    color: var(--col-text-dark);
+    margin: 0;
+}
+
+.select-input.dark button p {
+    color: var(--col-text-light);
 }
 
 .select-input ul {
     color: var(--col-text-dark);
-    background-color: #FFF;
+    background-color: var(--col-primary-light);
     cursor: pointer;
     list-style: none;
     max-height: 0;
@@ -686,13 +667,12 @@ div.divider.vertical.light {
     border-radius: 4px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     transition: all 0.15s cubic-bezier(0.35, 0, 0.25, 1);
-    -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
 
 .select-input.dark ul {
     color: var(--col-text-light);
-    background-color: #404040;
+    background-color: var(--col-dark-primary-light);
 }
 
 .select-input.active ul {
@@ -709,17 +689,47 @@ div.divider.vertical.light {
     transition: background-color 0.2s ease-in-out;
 }
 
-.select-input ul li:hover, .select-input ul li.active {
+.select-input ul li:hover, .select-input ul li.selected, .select-input ul li:focus {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-.select-input.dark ul li:hover, .select-input.dark ul li.active {
+.select-input.dark ul li:hover, .select-input.dark ul li.selected, .select-input.dark ul li:focus {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
-/***********************\
-|   TEXT INPUT & AREA   |
-\***********************/
+/**************************\
+|   RATING RADIO BUTTONS   |
+\**************************/
+
+.review-stars label {
+    cursor: pointer;
+}
+
+.review-stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.review-stars [type="radio"],
+.review-stars [type="radio"]:not(:checked) + label .checked,
+.review-stars [type="radio"]:hover ~ label .unchecked,
+.review-stars [type="radio"]:checked ~ label .unchecked {
+    display: none;
+}
+
+.review-stars [type="radio"]:hover ~ label .checked,
+.review-stars [type="radio"]:checked ~ label .checked {
+    display: initial;
+}
+
+.review-stars [type="radio"]:hover + label .checked {
+    color: var(--col-accent);
+}
+
+/*************************\
+|   TEXT INPUTS & AREAS   |
+\*************************/
 
 .text-input, .text-area {
     position: relative;
@@ -916,6 +926,7 @@ textarea.dark {
 }
 
 .pagination li:not(:first-child):not(:last-child) a {
+    outline: none!important;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -931,11 +942,13 @@ textarea.dark {
     color: var(--col-text-sec-light);
 }
 
-.pagination li:not(:first-child):not(:last-child):hover a {
+.pagination li:not(:first-child):not(:last-child):hover a,
+.pagination li:not(:first-child):not(:last-child) a:focus {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-.pagination.light li:not(:first-child):not(:last-child):hover a {
+.pagination.light li:not(:first-child):not(:last-child):hover a,
+.pagination.light li:not(:first-child):not(:last-child) a:focus {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -972,9 +985,9 @@ textarea.dark {
     color: var(--col-text-sec-light)!important;
 }
 
-/****************\
-|   SEARCH BAR   |
-\****************/
+/*****************\
+|   SEARCH BARS   |
+\*****************/
 
 .search-bar {
     margin: 6px 0;
@@ -995,8 +1008,8 @@ textarea.dark {
 }
 
 .search-bar:hover, .search-bar.focus {
-    background-color: #FFF;
-    border: 1px solid #FFF;
+    background-color: var(--col-primary-light);
+    border: 1px solid var(--col-primary-light);
     box-shadow: 0 0 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 
@@ -1023,20 +1036,36 @@ textarea.dark {
 }
 
 /**************\
-|   DROPDOWN   |
+|   COLLAPSE   |
 \**************/
+
+[data-toggle="collapse"] .mdi:before {
+    transition: transform 0.3s ease;
+}
+
+[data-toggle="collapse"][aria-expanded="true"] .mdi:before {
+    transform: rotate(180deg);
+}
+
+/***************\
+|   DROPDOWNS   |
+\***************/
 
 .dropdown {
     position: absolute;
     overflow: hidden;
     z-index: 100;
-    background-color: #FFF;
+    background-color: var(--col-primary-light);
     border-radius: 4px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
     opacity: 0;
-    -webkit-transition: all 0.2s ease;
-    -webkit-transform-origin: right top 0px;
-    -webkit-transform: scale(0);
+    transition: all 0.2s ease;
+    transform-origin: right top 0px;
+    transform: scale(0);
+}
+
+.dropdown.dark {
+    background-color: var(--col-dark-primary-light);
 }
 
 .dropdown.fixed {
@@ -1045,8 +1074,8 @@ textarea.dark {
 
 .dropdown.active {
     opacity: 1;
-    -webkit-transform-origin: right top 0px;
-    -webkit-transform: scale(1);
+    transform-origin: right top 0px;
+    transform: scale(1);
 }
 
 .dropdown ul {
@@ -1058,7 +1087,7 @@ textarea.dark {
 
 .dropdown li {
     opacity: 0;
-    -webkit-transition: background-color 0.2s ease-in-out, all 0.3s ease;
+    transition: background-color 0.2s ease-in-out, all 0.3s ease;
     transform: translateY(-30%);
 }
 
@@ -1071,6 +1100,10 @@ textarea.dark {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
+.dropdown.dark li:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
 .dropdown li a {
     padding: 10px 16px;
     display: flex;
@@ -1080,6 +1113,10 @@ textarea.dark {
 
 .dropdown li a .mdi {
     margin-right: 16px;
+}
+
+.dropdown.dark li a .mdi {
+    color: var(--col-icon-light);
 }
 
 .dropdown li a .mdi + span {
@@ -1149,4 +1186,167 @@ textarea.dark {
     height: 36px;
     font-size: 36px;
     line-height: 36px;
+}
+
+.carousel-full-screen-toggle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.carousel.full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 200;
+    background-color: #222;
+}
+
+.carousel.full-screen .carousel-inner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel.full-screen img {
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
+    max-height: 100vh;
+    max-width: 100vw;
+}
+
+.carousel-no-scroll {
+    overflow-y: hidden;
+}
+
+/*************************\
+|   POPOVERS & TOOLTIPS   |
+\*************************/
+
+.popover .arrow,
+.tooltip .arrow {
+    display: none!important;
+    overflow: hidden;
+}
+
+.popover {
+    opacity: 0.9;
+    background-color: #404040;
+    border: none;
+    box-shadow: none!important;
+}
+
+.popover-header {
+    font-weight: bold;
+    color: var(--col-text-light);
+    background-color: #404040;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px 4px 0 0;
+}
+
+.popover-header:before {
+    display: none!important;
+}
+
+.popover-body {
+    color: var(--col-text-light);
+    border-radius: 0 0 4px 4px;
+}
+
+.tooltip-inner {
+    background-color: #404040;
+    border-radius: 4px;
+}
+
+/***********\
+|   CHIPS   |
+\***********/
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    border-radius: 360px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.chip.light {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.chip:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.chip.light:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.chip p {
+    cursor: default;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 2px 8px;
+}
+
+.chip.light p {
+    color: var(--col-text-light);
+}
+
+.chip img {
+    object-fit: cover;
+    height: 24px;
+    width: 24px;
+    border-radius: 360px;
+}
+
+.chip-dismiss {
+    height: 20px;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 2px 2px 2px 0;
+    cursor: pointer;
+    color: var(--col-text-dis-dark)!important;
+    transition: color 0.2s ease-in-out;
+}
+
+.chip.light .chip-dismiss {
+    color: var(--col-text-dis-light)!important;
+}
+
+.chip-dismiss:hover {
+    color: var(--col-icon-dark)!important;
+}
+
+.chip.light .chip-dismiss:hover {
+    color: var(--col-icon-light)!important;
+}
+
+/*******************\
+|   PROGRESS BARS   |
+\*******************/
+
+.progress {
+    height: 4px;
+    border-radius: 360px;
+    background-color: rgba(0, 0, 0, 0.12);
+}
+
+.progress.dark {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.progress-bar {
+    border-radius: 360px;
+    background-color: var(--col-accent-dark);
+}
+
+.progress.dark .progress-bar {
+    background-color: var(--col-accent);
 }

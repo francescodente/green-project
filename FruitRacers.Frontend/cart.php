@@ -5,17 +5,18 @@
     <title>Fruitracers - Carrello</title>
 </head>
 <body>
-    <div>
 
-        <?php include("menu.php"); ?>
+    <?php include("menu.php"); ?>
 
-        <section id="cart" class="parallax-container header d-flex justify-content-center align-items-center" data-section="cart">
+    <div class="content">
+
+        <section id="cart" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">CARRELLO</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/cart.jpg"></div>
         </section>
-        <section id="cart-content" class="container py-4" data-section="cart">
+        <section id="cart-content" class="container py-4">
             <form class="row">
                 <div class="col-12 col-lg-8">
 
@@ -212,7 +213,6 @@
     <?php include("modal-address-management.php"); ?>
     <?php include("modal-time-slot.php"); ?>
     <?php include("modals-product-company.php"); ?>
-    <?php include("modal-generic.php"); ?>
 
 </body>
 </html>
