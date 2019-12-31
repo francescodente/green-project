@@ -4,8 +4,8 @@ using System.Text;
 
 namespace FruitRacers.Backend.Core.Utils.Email
 {
-    public interface IEmailService
+    public enum MailContext
     {
-
+        Test
     }
 }

@@ -20,9 +20,10 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                 .AddSingleton<IStringEncoding, HexEncoding>()
                 .AddScoped<IAuthenticationHandler, JwtAuthentication>();
 
-            IConfiguration authenticationSettings = config.GetSection(nameof(AuthenticationSettings));
-            services.Configure<AuthenticationSettings>(authenticationSettings);
-            AuthenticationSettings authSettings = authenticationSettings.Get<AuthenticationSettings>();
+            IConfiguration authSection = config.GetSection(nameof(AuthenticationSettings));
+            AuthenticationSettings authSettings = authSection.Get<AuthenticationSettings>();
+            services.AddSingleton(authSettings);
+
             byte[] key = Encoding.ASCII.GetBytes(authSettings.SecretKey);
             services.AddAuthentication(options =>
             {
