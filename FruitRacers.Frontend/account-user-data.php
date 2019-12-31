@@ -106,7 +106,11 @@
                         <label for="r3" class="mb-2">Altro</label>
 
                         <div class="text-right mt-4">
-                            <button type="button" class="edit-form btn accent ripple">
+                            <button type="button" class="delete-form btn outline ripple d-inline-flex justify-content-center" style="width: 120px">
+                                <p>Cancella</p>
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
+                            <button type="button" class="edit-form btn accent ripple d-inline-flex justify-content-center" style="width: 120px">
                                 <p>Modifica</p>
                                 <i class="mdi light mdi-pencil"></i>
                             </button>
@@ -176,7 +180,12 @@
                             <input id="sdi" type="text" name="sdi" disabled/>
                         </div>
 
-                        <h6>Indirizzo PEC</h6>
+                        <h6>Indirizzo</h6>
+                        <div class="text-input mb-3">
+                            <input id="address" type="text" name="address" disabled/>
+                        </div>
+
+                        <h6>PEC</h6>
                         <div class="text-input mb-3">
                             <input id="pec" type="text" name="pec" disabled/>
                         </div>
@@ -192,7 +201,11 @@
                         </div>
 
                         <div class="text-right mt-4">
-                            <button type="button" class="edit-form btn accent ripple">
+                            <button type="button" class="delete-form btn outline ripple d-inline-flex justify-content-center" style="width: 120px">
+                                <p>Cancella</p>
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
+                            <button type="button" class="edit-form btn accent ripple d-inline-flex justify-content-center" style="width: 120px">
                                 <p>Modifica</p>
                                 <i class="mdi light mdi-pencil"></i>
                             </button>
