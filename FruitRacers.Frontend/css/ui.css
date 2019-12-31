@@ -1,0 +1,249 @@
+/* Prevent content from shifting when scroll bar is removed */
+@media (min-width: 768px) {
+
+    .top-bar, .menu, .content, .footer {
+        padding-left: calc(100vw - 100%);
+    }
+}
+
+body {
+    background-color: var(--col-primary);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+/************\
+|   FOOTER   |
+\************/
+
+/***********\
+|   CARDS   |
+\***********/
+
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--col-primary-light);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.card.dark {
+    background-color: var(--col-dark-primary-light);
+}
+
+.card.flat {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: var(--col-primary);
+    box-shadow: none;
+}
+
+.card.flat.dark {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background-color: var(--col-dark-primary);
+}
+
+.card.hover-shadow {
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.card.hover-shadow:hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.card-bg {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.card-image-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 16px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+    padding: 12px 16px;
+    background-color: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card.dark .card-header {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-footer {
+    padding: 12px;
+    background-color: transparent;
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card.dark .card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.card-header * {
+    margin: 0;
+}
+
+.card-footer>*:not(:first-child) {
+    margin-left: 2px;
+}
+
+.card-footer>*:not(:last-child) {
+    margin-right: 2px;
+}
+
+/************\
+|   MODALS   |
+\************/
+
+/* Apply to body to lock scrolling when a modal is shown */
+.modal-no-scroll {
+    overflow-y: hidden;
+}
+
+.modal-dialog {
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--col-primary);
+    border: none;
+    border-radius: 4px!important;
+    width: auto;
+    overflow: hidden;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.modal-top {
+    background-color: var(--col-primary-dark);
+    position: relative;
+    padding: 16px 16px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+
+.modal-body {
+    padding: 16px;
+}
+
+.modal-bottom {
+    background-color: var(--col-primary-dark);
+    padding: 12px;
+}
+
+.modal-bottom *:not(:last-child) {
+    margin-right: 6px;
+}
+
+.modal-back {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+.modal-top-icon {
+    margin: 36px 48px;
+    color: var(--col-accent);
+    height: 128px;
+    font-size: 128px;
+    line-height: 128px;
+}
+
+.modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 56px);
+}
+
+.modal-dialog-scrollable .modal-body {
+    overflow-y: auto;
+}
+
+.image-shade-top {
+    height: 100%;
+    width: 100%;
+    box-shadow: inset 0 128px 100px -100px rgba(0, 0, 0, 0.5);
+}
+
+.image-shade-bottom {
+    height: 100%;
+    width: 100%;
+    box-shadow: inset 0 -128px 100px -100px rgba(0, 0, 0, 0.5);
+}
+
+/************\
+|   TOASTS   |
+\************/
+
+.toast {
+    position: fixed;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    bottom: 16px;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border-radius: 4px;
+    background-color: var(--col-dark-primary-light);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225)!important;
+}
+
+.toast p {
+    margin: 0!important;
+    padding: 6px 16px 6px 10px;
+}
+
+.toast-close {
+    color: var(--col-accent)!important;
+}
+
+/**********\
+|   TABS   |
+\**********/
+
+.nav-tabs {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.nav-item {
+    color: var(--col-text-sec-dark)!important;
+    border-radius: 4px 4px 0 0;
+    border: none!important;
+    transition: border 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.nav-item.active {
+    font-weight: bold;
+    color: var(--col-accent-dark)!important;
+    background-color: transparent!important;
+    border-bottom: 2px solid var(--col-accent)!important;
+}
+
+.nav-item:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}

@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-    /**************************\
-    |   TEXT INPUT, TEXTAREA   |
-    \**************************/
+    /****************************\
+    |   TEXT INPUTS, TEXTAREAS   |
+    \****************************/
 
     // Label management
     $(".text-input input, textarea").filter(function() {
@@ -16,9 +16,9 @@ $(document).ready(function() {
         }
     });
 
-    /**************\
-    |   CHECKBOX   |
-    \**************/
+    /****************\
+    |   CHECKBOXES   |
+    \****************/
 
     // Checkbox toggle all click
     $(document).on("click", ".checkbox.toggle-all", function() {
@@ -47,37 +47,68 @@ $(document).ready(function() {
         checkboxToggleCheck(toggle);
     });
 
-    /************\
-    |   SELECT   |
-    \************/
+    /*************\
+    |   SELECTS   |
+    \*************/
 
+    // Select action functions
+    function openSelectInput(selectInput) {
+        selectInput.find("ul li.selected").focus();
+        selectInput.addClass("active");
+    }
+    function closeSelectInput(selectInput) {
+        selectInput.removeClass("active");
+        selectInput.find("button").focus();
+    }
+    function selectInputValue(selectInput, selectedOption) {
+        selectInput.find("ul li").removeClass("selected").attr("aria-selected", "false");
+        selectedOption.addClass("selected").attr("aria-selected", "true");
+        var button = selectInput.find("button");
+        button.val(selectedOption.attr("value"));
+        button.find("p").text(selectedOption.text());
+    }
+
+    // Close select when resizing window or clicking away from it
     $(window).on("click resize", function() {
         $(".select-input").removeClass("active");
     });
-
+    // Prep all select inputs on page load
     $(".select-input").each(function() {
-        var option = $(this).find("ul li.active");
-        var button = $(this).find("label button");
-        button.text(option.text());
-        button.val(option.val());
+        selectInputValue($(this), $(this).find("ul li.selected"));
     });
-
-    $(".select-input").on("click", function (event) {
+    // Click on button to open select
+    $(document).on("click", ".select-input button", function(event) {
         event.stopPropagation();
-        $(this).toggleClass("active");
+        $(".select-input").removeClass("active");
+        openSelectInput($(this).closest(".select-input"));
+    });
+    // Click on element to select it
+    $(document).on("click", ".select-input ul li", function() {
+        selectInputValue($(this).closest(".select-input"), $(this));
+    });
+    // Key bindings handling
+    $(document).on("keyup", ".select-input.active", function(event) {
+        // TODO add tab, fix enter to open
+        var escapeKey = 27;
+        var enterKey = 13;
+        var upKey = 38;
+        var downKey = 40;
+        event.preventDefault();
+        if (event.which == enterKey) {
+            selectInputValue($(this), $(this).find("ul li:focus"));
+            closeSelectInput($(this));
+        } else if (event.which == escapeKey) {
+            closeSelectInput($(this));
+        } else if (event.which == upKey) {
+            $(this).find("ul li:focus").prev().focus();
+        } else if (event.which == downKey) {
+            $(this).find("ul li:focus").next().focus();
+        }
     });
 
-    $(".select-input ul li").on("click", function () {
-        $(this).parent().find("li").removeClass("active");
-        $(this).addClass("active");
-        var button = $(this).closest(".select-input").find("label button");
-        button.text($(this).text());
-        button.val($(this).val());
-    });
-
-    /****************\
-    |   FILE INPUT   |
-    \****************/
+    /*****************\
+    |   FILE INPUTS   |
+    \*****************/
 
     $(document).on("change", "[type=file]", function() {
         var fileCount = $(this).prop("files").length;
@@ -90,9 +121,9 @@ $(document).ready(function() {
         }
     });
 
-    /****************\
-    |   SEARCH BAR   |
-    \****************/
+    /*****************\
+    |   SEARCH BARS   |
+    \*****************/
 
     // Clear button click handling
     $(document).on("click", ".search-bar .clear.btn", function() {
@@ -127,21 +158,12 @@ $(document).ready(function() {
     \**************/
 
     $(document).on("click", "[data-toggle='collapse']", function() {
-        var icon = $(this).find(".mdi");
-        if (icon.hasClass("mdi-chevron-up")) {
-            icon.removeClass("mdi-chevron-up");
-            icon.addClass("mdi-chevron-down");
-            $(this).attr("title", "Mostra");
-        } else {
-            icon.removeClass("mdi-chevron-down");
-            icon.addClass("mdi-chevron-up");
-            $(this).attr("title", "Nascondi");
-        }
+        $(this).attr("title", $(this).attr("aria-expanded") != "true" ? "Mostra" : "Nascondi");
     });
 
-    /**************\
-    |   DROPDOWN   |
-    \**************/
+    /***************\
+    |   DROPDOWNS   |
+    \***************/
 
     $(window).on("click resize", function() {
         $(".dropdown").removeClass("active");
@@ -170,8 +192,50 @@ $(document).ready(function() {
         target.addClass("active");
     });
 
-    $(".dropdown").click(function(event) {
-        event.stopPropagation();
+    /*************************\
+    |   POPOVERS & TOOLTIPS   |
+    \*************************/
+
+    $('[data-toggle="popover"]').popover();
+    $('[data-toggle="tooltip"]').tooltip();
+
+    /*********************************\
+    |   CAROUSEL FULL SCREEN TOGGLE   |
+    \*********************************/
+
+    $(document).on("click", ".carousel-full-screen-toggle", function(event) {
+        event.preventDefault();
+        var icon = $(this).find(".mdi")
+        if ($($(this).attr("href")).hasClass("full-screen")) {
+            // Toggle OFF full screen
+            $($(this).attr("href")).removeClass("full-screen");
+            $("body").removeClass("carousel-no-scroll");
+            icon.removeClass("mdi-fullscreen-exit");
+            icon.addClass("mdi-fullscreen");
+            $(this).attr("title", "Visualizza a schermo intero");
+        } else {
+            // Toggle ON full screen
+            $($(this).attr("href")).addClass("full-screen");
+            $("body").addClass("carousel-no-scroll");
+            icon.removeClass("mdi-fullscreen");
+            icon.addClass("mdi-fullscreen-exit");
+            $(this).attr("title", "Riduci");
+        }
+    });
+
+    /************************\
+    |   FULL SCREEN IMAGES   |
+    \************************/
+
+    $(document).on("click", ".img-click-zoom", function() {
+        var image = $("<div class='img-fullscreen'><img src='" + $(this).attr("src") + "'/></div>");
+        image.appendTo("body");
+        setTimeout(function() {
+            image.addClass("active");
+        }, 20);
+    });
+    $(document).on("click", ".img-fullscreen", function() {
+        $(this).remove();
     });
 
 });

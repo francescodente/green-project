@@ -5,11 +5,12 @@
     <title>Fruitracers - Account</title>
 </head>
 <body>
-    <div>
 
-        <?php include("menu.php"); ?>
+    <?php include("menu.php"); ?>
 
-        <section id="account" class="parallax-container header d-flex justify-content-center align-items-center" data-section="account-user-data">
+    <div class="content">
+
+        <section id="account" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">ACCOUNT</h1>
                 <br>
@@ -17,7 +18,7 @@
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
         </section>
-        <section id="account-content" class="container py-4" data-section="account-user-data">
+        <section id="account-content" class="container py-4">
             <div id="user-data" class="row">
 
                 <div id="account-tabs-col" class="d-none d-lg-block col-lg-3">
@@ -27,7 +28,7 @@
                     <div class="d-flex justify-content-between align-items-center pb-1">
                         <h4 class="m-0">Generali</h4>
                         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" title="Nascondi">
-                            <i class="mdi dark mdi-chevron-up"></i>
+                            <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
 
@@ -219,7 +220,6 @@
 
     <?php include("modal-pwd-change.php"); ?>
     <?php include("modal-address-management.php"); ?>
-    <?php include("modal-generic.php"); ?>
 
 </body>
 </html>

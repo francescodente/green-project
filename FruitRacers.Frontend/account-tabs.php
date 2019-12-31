@@ -12,7 +12,7 @@ $page = basename($_SERVER['PHP_SELF']);
     <p class="m-0">Ordini</p>
     <i class="mdi dark mdi-chevron-right"></i>
 </a>
-<a id="business-orders-tab" href="account-business-orders.php" class="account-tab <?php echo $page == 'account-business-orders.php' ? 'selected' : '' ?>">
+<a id="business-orders-tab" href="account-company-orders.php" class="account-tab <?php echo $page == 'account-company-orders.php' ? 'selected' : '' ?>">
     <i class="mdi dark mdi-book-open"></i>
     <p class="m-0">Ordini</p>
     <i class="mdi dark mdi-chevron-right"></i>
@@ -22,7 +22,7 @@ $page = basename($_SERVER['PHP_SELF']);
     <p class="m-0">Ordini</p>
     <i class="mdi dark mdi-chevron-right"></i>
 </a>
-<a id="business-products-tab" href="account-business-products.php" class="account-tab <?php echo $page == 'account-business-products.php' ? 'selected' : '' ?>">
+<a id="business-products-tab" href="account-company-products.php" class="account-tab <?php echo $page == 'account-company-products.php' ? 'selected' : '' ?>">
     <i class="mdi dark mdi-food-apple"></i>
     <p class="m-0">Prodotti</p>
     <i class="mdi dark mdi-chevron-right"></i>

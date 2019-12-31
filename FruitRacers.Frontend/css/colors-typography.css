@@ -1,0 +1,198 @@
+/*****************\
+|   MAIN COLORS   |
+\*****************/
+
+:root {
+
+    --col-accent: #FF8A80;
+    --col-accent-dark: #C85A54;
+    --col-primary: #FAFAFA;
+    --col-primary-dark: #F0F0F0;
+    --col-primary-light: #FFFFFF;
+    --col-dark-primary: #303030;
+    --col-dark-primary-dark: #202020;
+    --col-dark-primary-light: #404040;
+
+    --col-text-light: rgba(255, 255, 255, 1);
+    --col-text-sec-light: rgba(255, 255, 255, 0.7);
+    --col-text-dis-light: rgba(255, 255, 255, 0.5);
+
+    --col-text-dark: rgba(0, 0, 0, 0.8);
+    --col-text-sec-dark: rgba(0, 0, 0, 0.54);
+    --col-text-dis-dark: rgba(0, 0, 0, 0.38);
+
+    --col-icon-light: rgba(255, 255, 255, 1);
+    --col-icon-dis-light: rgba(255, 255, 255, 0.5);
+
+    --col-icon-dark: rgba(0, 0, 0, 0.54);
+    --col-icon-dis-dark: rgba(0, 0, 0, 0.38);
+
+    --col-valid-light: #00C853;
+    --col-valid-dark: #43A047;
+    --col-error-light: #D50000;
+    --col-error-dark: #B71C1C;
+    --col-warning-light: #FFD600;
+    --col-warning-dark: #FBC02D;
+}
+
+/***********\
+|   FONTS   |
+\***********/
+
+*, html, body, p, span, a, label, input {
+    font-family: 'Lato', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/**********\
+|   TEXT   |
+\**********/
+
+.h-variant {
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, label, input,
+.text-dark, .text-dark p, .text-dark span, .text-dark label, .text-dark input,
+.text-dark h1, .text-dark h2, .text-dark h3, .text-dark h4, .text-dark h5, .text-dark h6 {
+    color: var(--col-text-dark);
+}
+
+.text-sec-dark, .text-sec-dark p, .text-sec-dark span, .text-sec-dark label, .text-sec-dark input,
+.text-sec-dark h1, .text-sec-dark h2, .text-sec-dark h3, .text-sec-dark h4, .text-sec-dark h5, .text-sec-dark h6 {
+    color: var(--col-text-sec-dark);
+}
+
+.text-dis-dark, .text-dis-dark p, .text-dis-dark span, .text-dis-dark label, .text-dis-dark input,
+.text-dis-dark h1, .text-dis-dark h2, .text-dis-dark h3, .text-dis-dark h4, .text-dis-dark h5, .text-dis-dark h6 {
+    color: var(--col-text-dis-dark);
+}
+
+.text-light, .text-light p, .text-light span, .text-light label, .text-light input,
+.text-light h1, .text-light h2, .text-light h3, .text-light h4, .text-light h5, .text-light h6 {
+    color: var(--col-text-light);
+}
+
+.text-sec-light, .text-sec-light p, .text-sec-light span, .text-sec-light label, .text-sec-light input,
+.text-sec-light h1, .text-sec-light h2, .text-sec-light h3, .text-sec-light h4, .text-sec-light h5, .text-sec-light h6 {
+    color: var(--col-text-sec-light);
+}
+
+.text-dis-light, .text-dis-light p, .text-dis-light span, .text-dis-light label, .text-dis-light input,
+.text-dis-light h1, .text-dis-light h2, .text-dis-light h3, .text-dis-light h4, .text-dis-light h5, .text-dis-light h6 {
+    color: var(--col-text-dis-light);
+}
+
+.text-accent, .text-accent p, .text-accent span, .text-accent label, .text-accent input,
+.text-accent h1, .text-accent h2, .text-accent h3, .text-accent h4, .text-accent h5, .text-accent h6 {
+    color: var(--col-accent);
+}
+
+.text-accent-dark, .text-accent-dark p, .text-accent-dark span, .text-accent-dark label, .text-accent-dark input,
+.text-accent-dark h1, .text-accent-dark h2, .text-accent-dark h3, .text-accent-dark h4, .text-accent-dark h5, .text-accent-dark h6 {
+    color: var(--col-accent-dark);
+}
+
+.text-valid-dark, .text-valid-dark p, .text-valid-dark span, .text-valid-dark label, .text-valid-dark input,
+.text-valid-dark h1, .text-valid-dark h2, .text-valid-dark h3, .text-valid-dark h4, .text-valid-dark h5, .text-valid-dark h6 {
+    color: var(--col-valid-dark)!important;
+}
+
+.text-valid-light, .text-valid-light p, .text-valid-light span, .text-valid-light label, .text-valid-light input,
+.text-valid-light h1, .text-valid-light h2, .text-valid-light h3, .text-valid-light h4, .text-valid-light h5, .text-valid-light h6 {
+    color: var(--col-valid-light)!important;
+}
+
+.text-error-dark, .text-error-dark p, .text-error-dark span, .text-error-dark label, .text-error-dark input,
+.text-error-dark h1, .text-error-dark h2, .text-error-dark h3, .text-error-dark h4, .text-error-dark h5, .text-error-dark h6 {
+    color: var(--col-error-dark)!important;
+}
+
+.text-error-light, .text-error-light p, .text-error-light span, .text-error-light label, .text-error-light input,
+.text-error-light h1, .text-error-light h2, .text-error-light h3, .text-error-light h4, .text-error-light h5, .text-error-light h6 {
+    color: var(--col-error-light)!important;
+}
+
+.text-warning-dark, .text-warning-dark p, .text-warning-dark span, .text-warning-dark label, .text-warning-dark input,
+.text-warning-dark h1, .text-warning-dark h2, .text-warning-dark h3, .text-warning-dark h4, .text-warning-dark h5, .text-warning-dark h6 {
+    color: var(--col-warning-dark)!important;
+}
+
+.text-warning-light, .text-warning-light p, .text-warning-light span, .text-warning-light label, .text-warning-light input,
+.text-warning-light h1, .text-warning-light h2, .text-warning-light h3, .text-warning-light h4, .text-warning-light h5, .text-warning-light h6 {
+    color: var(--col-warning-light)!important;
+}
+
+a {
+    text-decoration: none;
+    color: var(--col-accent-dark);
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--col-accent-dark);
+}
+
+a.light, a.light:hover {
+    color: var(--col-accent);
+}
+
+/***********\
+|   ICONS   |
+\***********/
+
+.mdi {
+    display: inline-block;
+    height: 24px;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.mdi.dark {
+    color: var(--col-icon-dark);
+}
+
+.mdi.light {
+    color: var(--col-icon-light);
+}
+
+.mdi.accent {
+    color: var(--col-accent);
+}
+
+.mdi.accent-dark {
+    color: var(--col-accent-dark);
+}
+
+/****************\
+|   BACKGROUND   |
+\****************/
+
+.bg-primary {
+    background-color: var(--col-primary)!important;
+}
+
+.bg-primary-dark {
+    background-color: var(--col-primary-dark)!important;
+}
+
+.bg-dark-primary {
+    background-color: var(--col-dark-primary)!important;
+}
+
+.bg-dark-primary-dark {
+    background-color: var(--col-dark-primary-dark)!important;
+}
+
+.bg-accent {
+    background-color: var(--col-accent)!important;
+}
+
+.bg-accent-dark {
+    background-color: var(--col-accent-dark)!important;
+}

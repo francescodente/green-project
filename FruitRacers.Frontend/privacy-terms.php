@@ -2,20 +2,21 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Termini d'uso</title>
+    <title>Fruitracers - Privacy e termini d'uso</title>
 </head>
 <body>
-    <div>
 
-        <?php include("menu.php"); ?>
+    <?php include("menu.php"); ?>
 
-        <section id="use-terms" class="parallax-container header d-flex justify-content-center align-items-center" data-section="use-terms">
+    <div class="content">
+
+        <section id="privacy" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
-                <h1 class="text-light">TERMINI D'USO</h1>
+                <h1 class="text-light">PRIVACY E TERMINI D'USO</h1>
             </div>
-            <div class="parallax shade" data-parallax-image="images/use-terms.jpg"></div>
+            <div class="parallax shade" data-parallax-image="images/privacy.jpg"></div>
         </section>
-        <section id="use-terms-content" class="container py-4" data-section="use-terms">
+        <section id="privacy-content" class="container py-4">
             <div class="row">
                 <div class="col-12">
                     <p>

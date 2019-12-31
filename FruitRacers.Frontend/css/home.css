@@ -12,6 +12,14 @@
     border-radius: 4px;
 }
 
+#about-content .member-image {
+    border-radius: 100%;
+    height: 78px;
+    width: 78px;
+    object-fit: cover;
+    border: 4px solid rgba(0, 0, 0, 0.02);
+}
+
 #contacts-content .text-input input,
 #contacts-content textarea {
     width: 100%;
@@ -21,39 +29,20 @@
     height: 256px;
 }
 
-#companies-summary #map-parent {
-    position: relative;
+#contacts-content .contact-icon {
+    border-radius: 100%;
+    height: 78px;
+    width: 78px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.04);
+    border: 4px solid rgba(0, 0, 0, 0.02);
 }
 
-#companies-summary #map {
-    width: calc(100% - 32px);
-    height: 100%;
-    border-radius: 4px;
-}
-
-#companies-summary #companies-list {
-    max-height: 460px;
-    overflow-y: auto;
-}
-
-#companies-summary .company {
-    text-decoration: none!important;
-    border-radius: 4px;
-    transition: background-color 0.2s ease-in-out;
-}
-
-#companies-summary .company:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
-#companies-summary .company-image {
-    object-fit: cover;
-    height: 56px;
-    width: 56px;
-    border-radius: 4px;
-    margin: 8px 16px 8px 8px;
-}
-
-#companies-summary .company-address {
-    font-size: 14px;
+#contacts-content .contact-icon .mdi {
+    height: 36px;
+    font-size: 36px;
+    line-height: 36px;
+    color: var(--col-accent);
 }
