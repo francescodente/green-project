@@ -65,37 +65,43 @@
                 <div class="col-6 col-md-4 text-center text-md-right">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-sec-dark mb-5">Gianni Tumedei</p>
+                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
+                        <p class="text-sec-dark mb-5">Ruolo</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-sec-dark mb-5">Gianni Tumedei</p>
+                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
+                        <p class="text-sec-dark mb-5">Ruolo</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center text-md-left">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-sec-dark mb-5">Gianni Tumedei</p>
+                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
+                        <p class="text-sec-dark mb-5">Ruolo</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center text-md-right">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-sec-dark mb-5">Gianni Tumedei</p>
+                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
+                        <p class="text-sec-dark mb-5">Ruolo</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-sec-dark mb-5">Gianni Tumedei</p>
+                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
+                        <p class="text-sec-dark mb-5">Ruolo</p>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center text-md-left">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-sec-dark mb-5">Gianni Tumedei</p>
+                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
+                        <p class="text-sec-dark mb-5">Ruolo</p>
                     </div>
                 </div>
                 <div class="col-12">

@@ -99,8 +99,8 @@ $(document).ready(function() {
         checkMenuScroll()
     });
 
-    setTimeout(highlightMenuItem, 200);
-    setTimeout(checkMenuScroll, 200);
+    setTimeout(highlightMenuItem, 100);
+    setTimeout(checkMenuScroll, 100);
 
     /************\
     |   MODALS   |

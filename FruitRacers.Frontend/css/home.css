@@ -1,6 +1,7 @@
 #tutorial .step {
     color: var(--col-text-light);
     background-color: var(--col-accent);
+    font-weight: bold;
     line-height: 36px;
     height: 36px;
     width: 36px;
