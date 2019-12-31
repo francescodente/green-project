@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using FruitRacers.Backend.Core.Services.Utils;
 using Microsoft.Extensions.Configuration;
+using FruitRacers.Backend.Infrastructure.Mapping;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {

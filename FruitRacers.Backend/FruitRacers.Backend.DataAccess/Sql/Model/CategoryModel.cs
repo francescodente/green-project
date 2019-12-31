@@ -17,8 +17,8 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                     .HasMaxLength(30);
 
                 entity.HasOne(d => d.Image)
-                    .WithMany(p => p.Categories)
-                    .HasForeignKey(d => d.ImageId);
+                    .WithOne(p => p.Category)
+                    .HasForeignKey<Category>(d => d.ImageId);
 
                 entity.HasOne(d => d.ParentCategory)
                     .WithMany(p => p.ChildCategories)

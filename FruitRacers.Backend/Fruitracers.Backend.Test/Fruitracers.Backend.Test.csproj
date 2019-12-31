@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FruitRacers.Backend.Core\FruitRacers.Backend.Core.csproj" />
+    <ProjectReference Include="..\FruitRacers.Backend.Infrastructure\FruitRacers.Backend.Infrastructure.csproj" />
     <ProjectReference Include="..\FruitRacers.Backend.Shared\FruitRacers.Backend.Shared.csproj" />
   </ItemGroup>
 

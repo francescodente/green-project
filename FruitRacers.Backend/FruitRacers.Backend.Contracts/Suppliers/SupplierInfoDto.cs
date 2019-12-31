@@ -8,6 +8,7 @@ namespace FruitRacers.Backend.Contracts.Suppliers
         public AddressOutputDto Address { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
+        public string LogoImageUrl { get; set; }
+        public string BackgroundImageUrl { get; set; }
     }
 }

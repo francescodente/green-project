@@ -12,7 +12,7 @@ using FruitRacers.Backend.Core.Entities.Extensions;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FruitRacers.Backend.Core.Services.Utils
+namespace FruitRacers.Backend.Infrastructure.Mapping
 {
     public static class MappingUtils
     {
@@ -35,7 +35,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public AddressMapping()
             {
-                this.CreateMap<Address, AddressOutputDto>();
+                CreateMap<Address, AddressOutputDto>();
             }
         }
 
@@ -43,10 +43,11 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public SupplierMapping()
             {
-                this.CreateMap<Supplier, SupplierInfoDto>()
+                CreateMap<Supplier, SupplierInfoDto>()
                     .ForMember(dst => dst.Name, o => o.MapFrom(src => src.BusinessName))
                     .ForMember(dst => dst.SupplierId, o => o.MapFrom(src => src.UserId))
-                    .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.SupplierImages.Select(i => i.Image.Path).FirstOrDefault()))
+                    .ForMember(dst => dst.LogoImageUrl, o => o.MapFrom(src => src.LogoImage.Path))
+                    .ForMember(dst => dst.BackgroundImageUrl, o => o.MapFrom(src => src.BackgroundImage.Path))
                     .ForMember(dst => dst.Address, o => o.MapFrom(src => src.User.Addresses.Single()));
             }
         }
@@ -55,15 +56,15 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public OrderMapping()
             {
-                this.CreateMap<Order, CartOutputDto>()
+                CreateMap<Order, CartOutputDto>()
                     .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
 
-                this.CreateMap<OrderSection, SupplierOrderSectionDto<CartItemOutputDto>>()
+                CreateMap<OrderSection, SupplierOrderSectionDto<CartItemOutputDto>>()
                     .ForMember(dst => dst.Items, o => o.MapFrom(src => src.Details));
 
-                this.CreateMap<Order, DeliveryInfoOutputDto>();
+                CreateMap<Order, DeliveryInfoOutputDto>();
 
-                this.CreateMap<OrderDetail, CartItemOutputDto>();
+                CreateMap<OrderDetail, CartItemOutputDto>();
             }
         }
 
@@ -71,11 +72,11 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public ProductMapping()
             {
-                this.CreateMap<Price, PriceDto>();
+                CreateMap<Price, PriceDto>();
 
-                this.CreateMap<Product, ProductOutputDto>()
-                    .ForMember(dst => dst.Categories, o => o.MapFrom(src => Enumerable.Repeat(src.Category, 1)))
-                    .ForMember(dst => dst.Prices, o => o.MapFrom((src, dst, m, context) => this.CreatePriceDictionary(src, context)));
+                CreateMap<Product, ProductOutputDto>()
+                    .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path))
+                    .ForMember(dst => dst.Prices, o => o.MapFrom((src, dst, m, context) => CreatePriceDictionary(src, context)));
             }
 
             private IDictionary<CustomerTypeDto, PriceDto> CreatePriceDictionary(Product product, IMapper mapper)
@@ -89,20 +90,20 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public UserMapping()
             {
-                this.CreateMap<Person, PersonDto>();
+                CreateMap<Person, PersonDto>();
 
-                this.CreateMap<CustomerBusiness, CustomerBusinessDto>();
+                CreateMap<CustomerBusiness, CustomerBusinessDto>();
 
-                this.CreateMap<Supplier, SupplierDto>()
+                CreateMap<Supplier, SupplierDto>()
                     .ForMember(dst => dst.Address, o => o.MapFrom(src => src.User.Addresses.SingleOrDefault()));
 
-                this.CreateMap<Administrator, AdministratorDto>();
+                CreateMap<Administrator, AdministratorDto>();
 
-                this.CreateMap<DeliveryCompany, DeliveryCompanyDto>();
+                CreateMap<DeliveryCompany, DeliveryCompanyDto>();
 
-                this.CreateMap<User, UserOutputDto>()
+                CreateMap<User, UserOutputDto>()
                     .ForMember(dst => dst.Roles, o => o.MapFrom(src => src.GetRoleTypes()))
-                    .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => this.CreateRoleDictionary(src, context)));
+                    .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => CreateRoleDictionary(src, context)));
             }
 
             private IDictionary<RoleTypeDto, RoleDto> CreateRoleDictionary(User source, IMapper mapper)
@@ -136,7 +137,7 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public CategoriesMapping()
             {
-                this.CreateMap<Category, CategoryDto>()
+                CreateMap<Category, CategoryDto>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
             }
         }
@@ -145,9 +146,9 @@ namespace FruitRacers.Backend.Core.Services.Utils
         {
             public TimeSlotMapping()
             {
-                this.CreateMap<TimeSlot, TimeSlotDto>();
+                CreateMap<TimeSlot, TimeSlotDto>();
 
-                this.CreateMap<TimeSlot, TimeSlotWithCapacityDto>();
+                CreateMap<TimeSlot, TimeSlotWithCapacityDto>();
             }
         }
     }

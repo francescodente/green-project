@@ -35,6 +35,10 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
                     .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(d => d.Image)
+                    .WithOne(p => p.Product)
+                    .HasForeignKey<Product>(d => d.ImageId);
             });
         }
     }

@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20191227163721_InitialDatabaseSchema.Designer.cs" />
     <Compile Remove="Migrations\20191227164852_InitialDatabaseSchema.cs" />
     <Compile Remove="Migrations\20191227164852_InitialDatabaseSchema.Designer.cs" />
+    <Compile Remove="Migrations\20191231142232_RefactorImages.cs" />
+    <Compile Remove="Migrations\20191231142232_RefactorImages.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

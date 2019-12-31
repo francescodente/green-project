@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Core.Session;
+using FruitRacers.Backend.Infrastructure.Mapping;
 
 namespace FruitRacers.Backend.Test.UnitTests.Services
 {
