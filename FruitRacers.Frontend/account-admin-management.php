@@ -39,7 +39,7 @@
     <?php include("scripts.php"); ?>
     <script src="js/account-client-orders.js"></script>
 
-    <?php include("modals-product-company.php"); ?>
+    <?php include("modals-product.php"); ?>
 
 </body>
 </html>

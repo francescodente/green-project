@@ -26,11 +26,6 @@
                 </div>
                 <div id="account-content-col" class="col-12 col-lg-9">
 
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h4 class="m-0">Ordini</h4>
-                        <button class="btn icon ripple" disabled><i class="mdi"></i></button>
-                    </div>
-
                     <div class="orders">
 
                         <div class="order mb-4">
@@ -151,7 +146,7 @@
     <?php include("scripts.php"); ?>
     <script src="js/account-client-orders.js"></script>
 
-    <?php include("modals-product-company.php"); ?>
+    <?php include("modals-product.php"); ?>
 
 </body>
 </html>
