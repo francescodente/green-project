@@ -79,7 +79,7 @@
 
                 <!-- PRIVACY CONSENT -->
                 <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1"/>
-                <label for="privacy-consent" class="my-2">Ho letto l'<a href="privacy.php" target="_blank">informativa sulla privacy</a></label><br>
+                <label for="privacy-consent" class="my-2">Ho letto <a href="privacy-terms.php" target="_blank">privacy e termini</a></label><br>
 
                 <!-- MARKETING CONSENT -->
                 <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>

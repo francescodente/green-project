@@ -21,19 +21,19 @@
                 <?php
                 for ($i = 0; $i < 8; $i++) {
                     ?>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-lg-6">
                         <div class="card mb-4">
                             <div class="fixed-ratio fr-2-1">
                                 <img class="card-bg company-image" src="images/example_product.jpg"/>
                             </div>
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-3" style="padding: 16px;">
+                                    <div class="col-3 col-md-2 col-lg-3" style="padding: 16px;">
                                         <div class="fixed-ratio fr-1-1">
                                             <img class="card-bg company-logo" src="images/default_company.png"/>
                                         </div>
                                     </div>
-                                    <div class="col-9 card-body d-flex flex-column">
+                                    <div class="col-9 col-md-10 col-lg-9 card-body d-flex flex-column justify-content-center">
                                         <h3 class="company-name">Company name</h3>
                                         <a href="#" class="company-address text-sec-dark">Viale della Via 123, Cesena (FC)</a>
                                     </div>

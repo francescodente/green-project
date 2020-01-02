@@ -98,11 +98,6 @@
         padding: 0 15px;
     }
 
-    .top-bar .search-bar, .top-bar .search-bar [type="text"] {
-        flex-grow: 1;
-        max-width: 556px;
-    }
-
     .menu {
         display: flex;
         justify-content: center;
@@ -127,7 +122,6 @@
 
     .top-bar-center>.menu-item {
         text-transform: uppercase;
-        flex-basis: 0px;
         flex-grow: 1;
         margin: 4px 2px;
         padding: 8px 16px;

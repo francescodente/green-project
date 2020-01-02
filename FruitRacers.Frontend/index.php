@@ -215,7 +215,7 @@
     <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script> -->
 
     <?php include("modals-authentication.php"); ?>
-    <?php include("modals-product-company.php"); ?>
+    <?php include("modals-product.php"); ?>
 
     <?php include("cookie.php"); ?>
 

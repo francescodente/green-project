@@ -17,51 +17,27 @@
             <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
         </section>
         <section id="products-content" class="container py-4">
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="companies.php">Partner</a></li>
+                <li class="breadcrumb-item"><a href="company.php">Company name</a></li>
+                <li class="breadcrumb-item active">Category</li>
+            </ol>
             <div class="row">
                 <div id="filters-col" class="col-12 col-lg-3 d-none">
-                    <h5>Categorie</h5>
                     <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle="c1"/>
-                    <label for="c1" class="mt-2">Categoria 1</label><br>
+                    <label for="c1" class="mt-2">Category</label><br>
                     <div class="pl-4">
                         <input id="sc1" type="checkbox" class="checkbox" name="categories" value="sc1" data-toggled-by="c1" checked/>
-                        <label for="sc1">Sottocategoria 1</label><br>
+                        <label for="sc1">Subcategory 1</label><br>
                         <input id="sc2" type="checkbox" class="checkbox" name="categories" value="sc2" data-toggled-by="c1" checked/>
-                        <label for="sc2">Sottocategoria 2</label><br>
+                        <label for="sc2">Subcategory 2</label><br>
                         <input id="sc3" type="checkbox" class="checkbox" name="categories" value="sc3" data-toggled-by="c1" checked/>
-                        <label for="sc3">Sottocategoria 3</label><br>
+                        <label for="sc3">Subcategory 3</label><br>
                         <input id="sc4" type="checkbox" class="checkbox" name="categories" value="sc4" data-toggled-by="c1" checked/>
-                        <label for="sc4">Sottocategoria 4</label><br>
-                    </div>
-                    <input id="c2" type="checkbox" class="checkbox toggle-all" data-toggle="c2"/>
-                    <label for="c2" class="mt-2">Categoria 2</label><br>
-                    <div class="pl-4">
-                        <input id="sc5" type="checkbox" class="checkbox" name="categories" value="sc5" data-toggled-by="c2" checked/>
-                        <label for="sc5">Sottocategoria 5</label><br>
-                    </div>
-                    <input id="c3" type="checkbox" class="checkbox toggle-all" data-toggle="c3"/>
-                    <label for="c3" class="mt-2">Categoria 3</label><br>
-                    <div class="pl-4">
-                        <input id="sc6" type="checkbox" class="checkbox" name="categories" value="sc6" data-toggled-by="c3" checked/>
-                        <label for="sc6">Sottocategoria 6</label><br>
-                        <input id="sc7" type="checkbox" class="checkbox" name="categories" value="sc7" data-toggled-by="c3"/>
-                        <label for="sc7">Sottocategoria 7</label><br>
-                        <input id="sc8" type="checkbox" class="checkbox" name="categories" value="sc8" data-toggled-by="c3"/>
-                        <label for="sc8">Sottocategoria 8</label><br>
+                        <label for="sc4">Subcategory 4</label><br>
                     </div>
                     <br>
-                    <div class="divider dark"></div>
-                    <br>
-                    <h5>Aziende</h5>
-                    <input id="co1" type="checkbox" class="checkbox" name="companies" value="co1" checked/>
-                    <label for="co1" class="mt-2">Azienda 1</label><br>
-                    <input id="co2" type="checkbox" class="checkbox" name="companies" value="co2" checked/>
-                    <label for="co2" class="mt-2">Azienda 2</label><br>
-                    <input id="co3" type="checkbox" class="checkbox" name="companies" value="co3" checked/>
-                    <label for="co3" class="mt-2">Azienda 3</label><br>
-                    <input id="co4" type="checkbox" class="checkbox" name="companies" value="co4" checked/>
-                    <label for="co4" class="mt-2">Azienda 4</label><br>
-                    <br>
-                    <button class="apply-filter btn accent ripple w-100 d-flex justify-content-center">Applica</button>
+                    <button class="apply-filter btn accent ripple w-100 text-center mb-3 mb-lg-0">Applica</button>
                     <br>
                 </div>
                 <div id="results-col" class="col-12 container" data-children-class="col-6 col-md-4 col-lg-3">
@@ -104,7 +80,7 @@
     <script src="js/filter.js"></script>
     <script src="js/products.js"></script>
 
-    <?php include("modals-product-company.php"); ?>
+    <?php include("modals-product.php"); ?>
 
 </body>
 </html>

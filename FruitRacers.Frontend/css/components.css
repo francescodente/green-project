@@ -268,10 +268,17 @@ div.divider.vertical.light {
     align-items: center;
     border-radius: 4px;
     padding: 6px 12px;
+    margin: 0;
     background-color: var(--col-accent);
     cursor: pointer;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225)!important;
     transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.file-input.disabled {
+    opacity: 0.65;
+    cursor: default;
+    pointer-events: none;
 }
 
 .file-input * {

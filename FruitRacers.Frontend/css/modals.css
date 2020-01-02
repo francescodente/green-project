@@ -94,16 +94,15 @@
     width: 360px;
 }
 
-/*******************\
-|   COMPANY MODAL   |
-\*******************/
+/********************\
+|   CART ADD MODAL   |
+\********************/
 
-#modal-company .modal-top {
-    background-color: var(--col-primary);
-}
-
-#modal-company .card-image div {
-    border-radius: 0;
+#modal-cart-add .text-input span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 12px;
 }
 
 /*********************\

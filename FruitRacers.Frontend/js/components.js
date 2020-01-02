@@ -111,6 +111,8 @@ $(document).ready(function() {
     \*****************/
 
     $(document).on("change", "[type=file]", function() {
+        alert("change");
+        // Update file counter
         var fileCount = $(this).prop("files").length;
         if (fileCount > 0) {
             var countItem = $(this).parent().find(".count")
