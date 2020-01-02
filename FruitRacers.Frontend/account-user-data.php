@@ -215,6 +215,55 @@
 
                     <div class="divider dark my-4"></div>
 
+                    <div class="d-flex justify-content-between align-items-center pb-1">
+                        <h4 class="m-0">Immagini</h4>
+                        <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-images" aria-expanded="false" title="Mostra">
+                            <i class="mdi dark mdi-chevron-down"></i>
+                        </button>
+                    </div>
+
+                    <form id="user-data-images" class="collapse">
+                        <div class="pt-3"></div>
+
+                        <p class="text-sec-dark">
+                            Carica un'immagine per vedere in'anteprima come sarà visualizzata all'interno del sito.
+                        </p>
+
+                        <h6 class="mb-3">Logo aziendale</h6>
+                        <img class="company-logo mb-3" src="images/default_company.png"/>
+                        <label for="logo" class="file-input ripple disabled mb-3">
+                            <input id="logo" type="file" disabled/>
+                            <i class="mdi mdi-upload"></i>
+                            <p>Seleziona</p>
+                            <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                        </label>
+
+                        <h6 class="mb-3">Immagine di sfondo</h6>
+                        <div class="fixed-ratio fr-2-1 mb-3">
+                            <img class="company-image" src="images/example_product.jpg"/>
+                        </div>
+                        <label for="background" class="file-input ripple disabled mb-3">
+                            <input id="background" type="file" disabled/>
+                            <i class="mdi mdi-upload"></i>
+                            <p>Seleziona</p>
+                            <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                        </label>
+
+                        <div class="text-right mt-4">
+                            <button type="button" class="delete-form btn outline ripple d-inline-flex justify-content-center" style="width: 120px">
+                                <p>Cancella</p>
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
+                            <button type="button" class="edit-form btn accent ripple d-inline-flex justify-content-center" style="width: 120px">
+                                <p>Modifica</p>
+                                <i class="mdi light mdi-pencil"></i>
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="divider dark my-4"></div>
+
                     <p class="text-sec-dark">
                         I campi contrassegnati da * sono obbligatori.<br>
                         I campi contrassegnati da ** sono necessari per effettuare acquisti.
