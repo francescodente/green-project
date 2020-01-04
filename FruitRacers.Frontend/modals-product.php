@@ -10,7 +10,7 @@
             <div class="card-body">
                 <div class="product-info">
                     <h4 class="product-name mb-1">Product name</h4>
-                    <a href="#" class="company-name d-inline-block mb-2" data-switch-to="#modal-company">Company name</a>
+                    <a href="company.php" class="company-name d-inline-block mb-2">Company name</a>
                     <p class="product-description m-0">
                         Some quick example text to build on the component and make up the bulk of the component's content.
                     </p>
@@ -18,7 +18,7 @@
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
                 <p class="product-price text-sec-dark m-0">€00,00 / kg</p>
-                <button class="add-to-cart btn icon ripple" data-toggle="modal" data-target="#modal-cart-add" title="Aggiungi al carrello">
+                <button class="add-to-cart btn icon ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-cart-add" title="Aggiungi al carrello">
                     <i class="mdi dark mdi-cart-plus"></i>
                 </button>
             </div>
