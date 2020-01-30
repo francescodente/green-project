@@ -1,12 +1,10 @@
 ﻿using FruitRacers.Backend.ApiLayer.DependencyInjection;
-using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.Extensions.Hosting;
 using System.Linq;
 
 namespace FruitRacers.Backend.ApiLayer
@@ -26,7 +24,7 @@ namespace FruitRacers.Backend.ApiLayer
                 .ForEach(installer => installer.InstallServices(services, this.Configuration));
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -39,6 +37,8 @@ namespace FruitRacers.Backend.ApiLayer
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "swagger/{documentName}/swagger.json";
@@ -50,7 +50,10 @@ namespace FruitRacers.Backend.ApiLayer
 
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }

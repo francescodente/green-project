@@ -3,7 +3,6 @@ using FruitRacers.Backend.Core;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
-using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Shared.Utils;
 using NSubstitute;
 using NUnit.Framework;

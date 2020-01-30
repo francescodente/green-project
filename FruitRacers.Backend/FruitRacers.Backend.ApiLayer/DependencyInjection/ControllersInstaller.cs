@@ -1,19 +1,19 @@
 ﻿using FluentValidation.AspNetCore;
 using FruitRacers.Backend.ApiLayer.Filters;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {
-    public class MvcInstaller : IServiceInstaller
+    public class ControllersInstaller : IServiceInstaller
     {
         public void InstallServices(IServiceCollection services, IConfiguration config)
         {
             services
-                .AddMvc(options =>
+                .AddControllers(options =>
                 {
+                    options.EnableEndpointRouting = false;
                     options.Filters.Add<ValidationFilter>();
                     options.Filters.Add<DomainExceptionFilter>();
                 })
@@ -24,9 +24,8 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                 })
                 .AddJsonOptions(options =>
                 {
-                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                });
         }
     }
 }
