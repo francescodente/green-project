@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using FruitRacers.Backend.ApiLayer.Routes;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    [Route("api/categories")]
+    [Route(ApiRoutes.BASE_ROUTE + "/categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {

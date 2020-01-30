@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using FruitRacers.Backend.ApiLayer.Filters;
+using FruitRacers.Backend.ApiLayer.Routes;
 using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Services;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    [Route("api/cart")]
+    [Route(ApiRoutes.BASE_ROUTE + "/cart")]
     [ApiController]
     [RequireLogin(RoleType.CustomerBusiness, RoleType.Person)]
     public class CartController : ControllerBase
