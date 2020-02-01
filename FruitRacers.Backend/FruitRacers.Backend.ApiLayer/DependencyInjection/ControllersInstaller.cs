@@ -2,6 +2,7 @@
 using FruitRacers.Backend.ApiLayer.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Converters;
 using System.Text.Json.Serialization;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
@@ -22,9 +23,9 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                     options.RegisterValidatorsFromAssemblyContaining<Startup>();
                     options.ImplicitlyValidateChildProperties = true;
                 })
-                .AddJsonOptions(options =>
+                .AddNewtonsoftJson(options =>
                 {
-                    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                    options.SerializerSettings.Converters.Add(new StringEnumConverter());
                 });
         }
     }
