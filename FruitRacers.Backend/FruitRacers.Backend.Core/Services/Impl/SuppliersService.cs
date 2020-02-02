@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FruitRacers.Backend.Contracts.Filters;
 using FruitRacers.Backend.Contracts.Suppliers;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
@@ -15,11 +16,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
         }
 
-        public async Task<IEnumerable<SupplierInfoDto>> GetAllSuppliers()
+        public async Task<IEnumerable<SupplierInfoDto>> GetAllSuppliers(PaginationFilter pagination)
         {
             return await this.Data
                 .Suppliers
-                .AsEnumerable()
+                .AsPagedEnumerable(pagination.PageNumber, pagination.PageSize)
                 .Then(s => s.Select(this.Mapper.Map<SupplierInfoDto>));
         }
     }
