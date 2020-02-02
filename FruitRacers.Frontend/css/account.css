@@ -115,6 +115,10 @@
         border-right: 1px solid rgba(0, 0, 0, 0.12);
     }
 
+    #client-orders .collapse {
+        display: block!important;
+    }
+
 }
 
 /* MD and down */
