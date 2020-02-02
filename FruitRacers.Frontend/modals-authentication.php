@@ -12,13 +12,13 @@
 
                 <!-- E-MAIL -->
                 <div class="text-input">
-                    <input id="login-email" type="email" name="email"/>
+                    <input id="login-email" type="email" name="email" placeholder=" "/>
                     <label for="login-email">E-mail</label>
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="text-input">
-                    <input id="login-password" type="password" name="password"/>
+                    <input id="login-password" type="password" name="password" placeholder=" "/>
                     <label for="login-password">Password</label>
                 </div>
 
@@ -29,14 +29,14 @@
                     <input id="keep-login" type="checkbox" class="checkbox" name="keep-login" value="1"/>
                     <label for="keep-login" class="my-2">Ricordami</label><br>
 
-                    <a href="#" class="text-sec-dark" data-switch-to="#modal-pwd-recovery">Password dimenticata?</a>
+                    <a href="#" class="text-sec-dark" data-toggle="modal" data-target="#modal-pwd-recovery" data-dismiss="modal">Password dimenticata?</a>
                 </div>
 
                 <div class="text-center">
-                    <button id="submit-login" type="submit" class="btn accent ripple text-center my-3">Accedi</button>
+                    <button id="submit-login" type="submit" class="btn accent ripple my-3">Accedi</button>
                 </div>
 
-                <p class="text-center text-sec-dark m-0">Non hai un account? <a href="#" data-switch-to="#modal-sign-up">Registrati ora</a></p>
+                <p class="text-center text-sec-dark m-0">Non hai un account? <a href="#" data-toggle="modal" data-target="#modal-sign-up" data-dismiss="modal">Registrati ora</a></p>
 
             </form>
         </div>
@@ -58,21 +58,21 @@
 
                 <!-- E-MAIL -->
                 <div class="text-input">
-                    <input id="sign-up-email" type="email" name="email"/>
+                    <input id="sign-up-email" type="email" name="email" placeholder=" "/>
                     <label for="sign-up-email">E-mail</label>
                     <span class="email-error d-none">Error message</span>
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="text-input">
-                    <input id="sign-up-password" type="password" name="password"/>
+                    <input id="sign-up-password" type="password" name="password" placeholder=" "/>
                     <label for="sign-up-password">Password</label>
                     <span class="password-error d-none">Error message</span>
                 </div>
 
                 <!-- CONFIRM PASSWORD -->
                 <div class="text-input">
-                    <input id="confirm-password" type="password" name="confirm-password"/>
+                    <input id="confirm-password" type="password" name="confirm-password" placeholder=" "/>
                     <label for="confirm-password">Conferma password</label>
                     <span class="confirm-password-error d-none">Error message</span>
                 </div>
@@ -86,7 +86,7 @@
                 <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br>
 
                 <div class="text-center">
-                    <button id="submit-sign-up" type="submit" class="btn accent ripple text-center mt-3">Registrati</button>
+                    <button id="submit-sign-up" type="submit" class="btn accent ripple mt-3">Registrati</button>
                 </div>
 
             </form>
@@ -111,14 +111,14 @@
 
                 <!-- E-MAIL -->
                 <div class="text-input">
-                    <input id="recovery-email" type="email" name="email"/>
+                    <input id="recovery-email" type="email" name="email" placeholder=" "/>
                     <label for="recovery-email">E-mail</label>
                 </div>
 
                 <span class="text-error-dark mb-2 d-none">Error message</span>
 
                 <div class="text-center">
-                    <button id="submit-reset-password" type="submit" class="btn accent ripple text-center mt-3">Invia</button>
+                    <button id="submit-reset-password" type="submit" class="btn accent ripple mt-3">Invia</button>
                 </div>
 
             </form>

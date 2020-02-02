@@ -1,3 +1,51 @@
+:root {
+
+    --col-accent: #FF8A80!important;
+    --col-accent-dark: #C85A54!important;
+
+    --font-heading: 'Montserrat', sans-serif!important;
+    --font-normal: 'Lato', sans-serif!important;
+}
+
+/***********************\
+|   ADDRESS SELECTION   |
+\***********************/
+
+.address-selection {
+    display: flex;
+    align-items: center;
+    border-radius: 360px;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.address-selection .address-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 100%;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.address-selection .address-user {
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.btn-find-companies {
+    height: 54px;
+    width: 54px;
+}
+
+.btn-find-companies .mdi {
+    height: 30px;
+    font-size: 30px;
+    line-height: 30px;
+}
+
 /*************\
 |   COMPANY   |
 \*************/
@@ -82,4 +130,66 @@
     object-fit: contain;
     border-radius: 100%;
     border: 4px solid rgba(0, 0, 0, 0.12);
+}
+
+/************************\
+|   ADDRESS MANAGEMENT   |
+\************************/
+
+.address-management .address {
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.address-management .address.selected {
+    border: 2px solid var(--col-accent);
+}
+
+.address-management .new.address:hover,
+.address-management .new.address:focus-within {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.address-management .address .thumb {
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border-radius: 4px;
+    margin: 8px 16px 8px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 2px solid #EEE;
+    outline: none;
+}
+
+.address-management .new.address .thumb {
+    border: 2px solid transparent;
+}
+
+.address-management .address .thumb .mdi {
+    color: #707070;
+}
+
+.address-management p {
+    flex-grow: 1;
+}
+
+.address-management *:not(p) {
+    flex-shrink: 0;
+}
+
+.address-management .delete-address,
+.address-management .create-address {
+    margin-right: 14px;
+}
+
+.address-management .address-input {
+    height: 64px;
+    flex-grow: 1;
+    margin-right: 16px;
+    border: none;
+    outline: none;
+    background-color: transparent;
 }

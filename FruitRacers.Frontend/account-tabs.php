@@ -3,7 +3,7 @@ $page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <a id="user-data-tab" href="account-user-data.php" class="account-tab <?php echo $page == 'account-user-data.php' ? 'selected' : '' ?>">
-    <i class="mdi dark mdi-account-circle"></i>
+    <i class="mdi dark mdi-card-text"></i>
     <p class="m-0">I miei dati</p>
     <i class="mdi dark mdi-chevron-right"></i>
 </a>

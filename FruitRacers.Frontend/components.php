@@ -2,46 +2,39 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Componenti</title>
+    <title>Framework - Componenti</title>
 </head>
 <body>
 
+    <?php include("menu.php"); ?>
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 col-md-6 bg-primary">
-
-                <h1>Heading 1</h1>
-                <h2>Heading 2</h2>
-                <h3>Heading 3</h3>
-                <h4>Heading 4</h4>
-                <h5>Heading 5</h5>
-                <h6>Heading 6</h6>
-                <h4 class="h-variant">Heading variant</h4>
-                <p>Paragraph</p>
-                <a href="#">Link</a><br>
-                <i class="mdi dark mdi-content-save"></i>
+            <div class="col-12 col-md-6 bg-primary py-4">
 
                 <!------------------------->
                 <!--   BTN TRANSPARENT   -->
                 <!------------------------->
-                <h1 class="mt-5 mb-3">btn transparent</h1>
+                <h1 class="mb-3">btn transparent</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn transparent ripple">Button</a>
-                <button class="btn transparent ripple">Button</button>
+                <button class="btn transparent ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn transparent ripple">
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-sec-dark">Button</span>
                 </a>
-                <button class="btn transparent ripple">
-                    <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn transparent ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn transparent ripple" disabled>
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-sec-dark">Disabled</span>
                 </button>
 
                 <!--------------------->
@@ -51,20 +44,22 @@
 
                 <!-- Text only -->
                 <a href="#" class="btn outline ripple">Button</a>
-                <button class="btn outline ripple">Button</button>
+                <button class="btn outline ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn outline ripple">
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-sec-dark">Button</span>
                 </a>
-                <button class="btn outline ripple">
-                    <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn outline ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn outline ripple" disabled>
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-sec-dark">Disabled</span>
                 </button>
 
                 <!-------------------->
@@ -79,15 +74,17 @@
                 <!-- Text + icon -->
                 <a href="#" class="btn accent ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
                 <button class="btn accent ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn accent ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!------------------------------->
@@ -97,20 +94,22 @@
 
                 <!-- Text only -->
                 <a href="#" class="btn round transparent ripple">Button</a>
-                <button class="btn round transparent ripple">Button</button>
+                <button class="btn round transparent ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn round transparent ripple">
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-sec-dark">Button</span>
                 </a>
-                <button class="btn round transparent ripple">
-                    <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn round transparent ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn round transparent ripple" disabled>
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-sec-dark">Disabled</span>
                 </button>
 
                 <!--------------------------->
@@ -120,20 +119,22 @@
 
                 <!-- Text only -->
                 <a href="#" class="btn round outline ripple">Button</a>
-                <button class="btn round outline ripple">Button</button>
+                <button class="btn round outline ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn round outline ripple">
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-sec-dark">Button</span>
                 </a>
-                <button class="btn round outline ripple">
-                    <i class="mdi dark mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn round outline ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn round outline ripple" disabled>
                     <i class="mdi dark mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-sec-dark">Disabled</span>
                 </button>
 
                 <!-------------------------->
@@ -148,15 +149,17 @@
                 <!-- Text + icon -->
                 <a href="#" class="btn round accent ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
                 <button class="btn round accent ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn round accent ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!------------------>
@@ -185,15 +188,22 @@
                 <label class="file-input ripple">
                     <input type="file"/>
                     <i class="mdi mdi-upload"></i>
-                    <p>File input</p>
+                    <span>File input</span>
                     <span class="count d-none"><i class="mdi mdi-check"></i></span>
                 </label>
 
                 <label class="file-input ripple">
                     <input type="file" multiple/>
                     <i class="mdi dark mdi-upload"></i>
-                    <p>Multiple file input</p>
+                    <span>Multiple file input</span>
                     <span class="count d-none">1</span>
+                </label>
+
+                <label class="file-input ripple disabled">
+                    <input type="file" disabled/>
+                    <i class="mdi mdi-upload"></i>
+                    <span>Disabled file input</span>
+                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
                 </label>
 
                 <!--------------->
@@ -215,13 +225,13 @@
                 <h1 class="mt-5 mb-3">check</h1>
 
                 <h6>Title</h6>
-                <input id="c-toggle" type="checkbox" class="checkbox toggle-all" data-toggle="ce"/>
+                <input id="c-toggle" type="checkbox" class="checkbox toggle-all" data-toggle-all="checkbox-example"/>
                 <label for="c-toggle">All</label><br>
-                <input id="c1" type="checkbox" class="checkbox" name="checkbox-example" value="1" data-toggled-by="ce" checked/>
+                <input id="c1" type="checkbox" class="checkbox" name="checkbox-example" value="1" checked/>
                 <label for="c1">First option</label><br>
-                <input id="c2" type="checkbox" class="checkbox" name="checkbox-example" value="2" data-toggled-by="ce"/>
+                <input id="c2" type="checkbox" class="checkbox" name="checkbox-example" value="2"/>
                 <label for="c2">Second option</label><br>
-                <input id="c3" type="checkbox" class="checkbox" name="checkbox-example" value="3" disabled/>
+                <input id="c3" type="checkbox" class="checkbox" name="checkbox-example-dis" value="3" disabled/>
                 <label for="c3">Third option (disabled)</label>
 
                 <!---------------->
@@ -239,21 +249,56 @@
                 <!---------------->
                 <h1 class="mt-5 mb-3">select</h1>
 
-                <div class="select-input">
-                    <label for="select-example">
-                        <button type="button"><p>Seleziona</p><i class="mdi dark mdi-menu-swap"></i></button>
-                    </label>
-                    <ul id="select-example" role="listbox" name="select-example">
-                        <li id="s1" value="s1" role="option" tabindex="-1" aria-selected="true" class="selected">Option 1</li>
-                        <li id="s2" value="s2" role="option" tabindex="-1" aria-selected="false">Option 2</li>
-                        <li id="s3" value="s3" role="option" tabindex="-1" aria-selected="false">Option 3</li>
-                        <li id="s4" value="s4" role="option" tabindex="-1" aria-selected="false">Option 4</li>
-                        <li id="s5" value="s5" role="option" tabindex="-1" aria-selected="false">Option 5</li>
-                        <li id="s6" value="s6" role="option" tabindex="-1" aria-selected="false">Option 6</li>
-                        <li id="s7" value="s7" role="option" tabindex="-1" aria-selected="false">Option 7</li>
-                        <li id="s8" value="s8" role="option" tabindex="-1" aria-selected="false">Option 8</li>
-                        <li id="s9" value="s9" role="option" tabindex="-1" aria-selected="false">Option 9</li>
-                    </ul>
+                <div class="dropdown select" style="width: 300px;">
+                    <div class="text-input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
+                        <input id="select-toggle" type="text" placeholder=" " readonly/>
+                        <label for="select-toggle">Select</label>
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="select-toggle">
+                        <input id="sel1" type="radio" class="radio" name="select-example" value="1"/>
+                        <label for="sel1">First option</label>
+                        <input id="sel2" type="radio" class="radio" name="select-example" value="2"/>
+                        <label for="sel2">Second option</label>
+                        <input id="sel3" type="radio" class="radio" name="select-example" value="3"/>
+                        <label for="sel3">Third option</label>
+                        <input id="sel4" type="radio" class="radio" name="select-example" value="4"/>
+                        <label for="sel4">Fourth option</label>
+                        <input id="sel5" type="radio" class="radio" name="select-example" value="5"/>
+                        <label for="sel5">Fifth option</label>
+                    </div>
+                </div>
+
+                <div class="dropdown select" style="width: 300px;">
+                    <div class="text-input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
+                        <input id="multi-select-toggle" type="text" placeholder=" " readonly/>
+                        <label for="multi-select-toggle">Multiple select</label>
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="multi-select-toggle">
+                        <input id="msel1" type="checkbox" class="checkbox" name="multi-select-example" value="1"/>
+                        <label for="msel1">First option</label>
+                        <input id="msel2" type="checkbox" class="checkbox" name="multi-select-example" value="2"/>
+                        <label for="msel2">Second option</label>
+                        <input id="msel3" type="checkbox" class="checkbox" name="multi-select-example" value="3"/>
+                        <label for="msel3">Third option</label>
+                        <input id="msel4" type="checkbox" class="checkbox" name="multi-select-example" value="4"/>
+                        <label for="msel4">Fourth option</label>
+                        <input id="msel5" type="checkbox" class="checkbox" name="multi-select-example" value="5"/>
+                        <label for="msel5">Fifth option</label>
+                    </div>
+                </div>
+
+                <div class="dropdown select" style="width: 300px;">
+                    <div class="text-input disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
+                        <input id="select-toggle-dis" type="text" placeholder=" " readonly disabled/>
+                        <label for="select-toggle-dis">Disabled select</label>
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="select-toggle-dis">
+                        <input id="dsel1" type="radio" class="radio" name="select-example-dis" value="1" disabled/>
+                        <label for="dsel1">First option</label>
+                    </div>
                 </div>
 
                 <!-------------------->
@@ -301,6 +346,20 @@
                     </div>
                 </label>
 
+                <!--------------------->
+                <!--   RICH SWITCH   -->
+                <!--------------------->
+                <h1 class="mt-5 mb-3">rich switch</h1>
+
+                <div class="rich-switch-container">
+                    <input id="rs1" type="radio" class="rich-switch" name="rich-switch-example" value="1" checked/>
+                    <label for="rs1" class="ripple">First option</label><br>
+                    <input id="rs2" type="radio" class="rich-switch" name="rich-switch-example" value="2"/>
+                    <label for="rs2" class="ripple">Second option</label><br>
+                    <input id="rs3" type="radio" class="rich-switch" name="rich-switch-example" value="3"/>
+                    <label for="rs3" class="ripple">Third option</label><br>
+                </div>
+
                 <!---------------------->
                 <!--   REVIEW STARS   -->
                 <!---------------------->
@@ -308,27 +367,27 @@
 
                 <div class="review-stars">
                     <input type ="radio" id="star5" name="rating" value="5"/>
-                    <label for="star5" title="5 stelle">
+                    <label for="star5" title="5 stelle" class="ripple">
                         <i class="unchecked mdi dark mdi-star-outline"></i>
                         <i class="checked mdi dark mdi-star"></i>
                     </label>
                     <input type ="radio" id="star4" name="rating" value="4"/>
-                    <label for="star4" title="4 stelle">
+                    <label for="star4" title="4 stelle" class="ripple">
                         <i class="unchecked mdi dark mdi-star-outline"></i>
                         <i class="checked mdi dark mdi-star"></i>
                     </label>
                     <input type ="radio" id="star3" name="rating" value="3"/>
-                    <label for="star3" title="3 stelle">
+                    <label for="star3" title="3 stelle" class="ripple">
                         <i class="unchecked mdi dark mdi-star-outline"></i>
                         <i class="checked mdi dark mdi-star"></i>
                     </label>
                     <input type ="radio" id="star2" name="rating" value="2"/>
-                    <label for="star2" title="2 stelle">
+                    <label for="star2" title="2 stelle" class="ripple">
                         <i class="unchecked mdi dark mdi-star-outline"></i>
                         <i class="checked mdi dark mdi-star"></i>
                     </label>
                     <input type ="radio" id="star1" name="rating" value="1" checked/>
-                    <label for="star1" title="1 stella">
+                    <label for="star1" title="1 stella" class="ripple">
                         <i class="unchecked mdi dark mdi-star-outline"></i>
                         <i class="checked mdi dark mdi-star"></i>
                     </label>
@@ -346,39 +405,43 @@
                 <!-------------------->
                 <h1 class="mt-5 mb-3">text field</h1>
 
-                <div class="text-input">
-                    <input id="email" type="email" value="prova"/>
-                    <label for="email">Email</label>
-                </div>
+                <div style="width: 300px;">
 
-                <div class="text-input">
-                    <input id="password" type="password"/>
-                    <label for="password">
-                        <i class="mdi dark mdi-key"></i>
-                        <span>Password</span>
-                    </label>
-                </div>
+                    <div class="text-input">
+                        <input id="email" type="email" value="prova" placeholder=" "/>
+                        <label for="email">Email</label>
+                    </div>
 
-                <div class="text-input">
-                    <input id="text1" type="text"/>
-                    <label for="text1">Text</label>
-                    <span>Hint message</span>
-                </div>
+                    <div class="text-input">
+                        <i class="leading-icon mdi dark mdi-key"></i>
+                        <i class="trailing-icon mdi dark mdi-eye"></i>
+                        <input id="password" type="password" placeholder=" "/>
+                        <label for="password">Password</label>
+                    </div>
 
-                <div class="text-input">
-                    <input id="text2" type="text" class="valid" value="value"/>
-                    <label for="text2">Valid</label>
-                </div>
+                    <div class="text-input">
+                        <input id="text1" type="text" placeholder=" " maxlength="20"/>
+                        <label for="text1">Text</label>
+                        <span>Hint message</span>
+                        <span class="counter">0 / 20</span>
+                    </div>
 
-                <div class="text-input">
-                    <input id="text3" type="text" class="error" value="value"/>
-                    <label for="text3">Error</label>
-                    <span>Error message</span>
-                </div>
+                    <div class="text-input">
+                        <input id="text2" type="text" class="valid" value="value" placeholder=" "/>
+                        <label for="text2">Valid</label>
+                    </div>
 
-                <div class="text-input">
-                    <input id="text4" type="text" disabled/>
-                    <label for="text4">Disabled</label>
+                    <div class="text-input">
+                        <input id="text3" type="text" class="error" value="value" placeholder=" "/>
+                        <label for="text3">Error</label>
+                        <span>Error message</span>
+                    </div>
+
+                    <div class="text-input">
+                        <input id="text4" type="text"  placeholder=" " disabled/>
+                        <label for="text4">Disabled</label>
+                    </div>
+
                 </div>
 
                 <!------------------->
@@ -386,14 +449,18 @@
                 <!------------------->
                 <h1 class="mt-5 mb-3">text area</h1>
 
-                <div class="text-area">
-                    <textarea id="textarea"></textarea>
-                    <label for="textarea">Text area</label>
-                </div>
+                <div style="width: 300px;">
 
-                <div class="text-area">
-                    <textarea id="textarea" disabled></textarea>
-                    <label for="textarea">Disabled Text area</label>
+                    <div class="text-area">
+                        <textarea id="textarea" placeholder=" "></textarea>
+                        <label for="textarea">Text area</label>
+                    </div>
+
+                    <div class="text-area">
+                        <textarea id="textarea" placeholder=" " disabled></textarea>
+                        <label for="textarea">Disabled Text area</label>
+                    </div>
+
                 </div>
 
                 <!-------------------->
@@ -402,6 +469,7 @@
                 <h1 class="mt-5 mb-3">pagination</h1>
 
                 <ul class="pagination">
+                    <li><a href="#" class="btn icon ripple disabled" title="Prima pagina"><i class="mdi dark mdi-page-first"></i></a></li>
                     <li><a href="#" class="btn icon ripple disabled" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
                     <li><a href="#" class="selected">1</a></li>
                     <li><a href="#">2</a></li>
@@ -409,6 +477,7 @@
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
                     <li><a href="#" class="btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
+                    <li><a href="#" class="btn icon ripple" title="Ultima pagina"><i class="mdi dark mdi-page-last"></i></a></li>
                 </ul>
 
                 <!-------------------->
@@ -426,10 +495,10 @@
                 <!-------------------->
                 <h1 class="mt-5 mb-3">search bar</h1>
 
-                <div class="search-bar">
+                <div class="search-bar" style="width: 360px;">
                     <button class="search btn icon ripple" title="Cerca"><i class="mdi dark mdi-magnify"></i></button>
                     <input type="text" placeholder="Cerca..."/>
-                    <button class="clear btn icon ripple" title="Cancella" disabled><i class="mdi dark mdi-close"></i></button>
+                    <button class="clear btn icon ripple" title="Cancella"><i class="mdi dark mdi-close"></i></button>
                 </div>
 
                 <!------------------>
@@ -451,24 +520,62 @@
                 <!------------------>
                 <h1 class="mt-5 mb-3">dropdown</h1>
 
-                <button class="btn icon ripple" data-toggle="dropdown" data-target="#dropdown-example" style="float: right">
-                    <i class="mdi dark mdi-dots-vertical"></i>
-                </button>
-                <div id="dropdown-example" class="dropdown">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-account-box"></i><span>Dropdown item 1</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-bell-outline"></i><span>Dropdown item 2</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-headphones"></i><span>Dropdown item 3</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-settings"></i><span>Dropdown item 4</span></a>
-                        </li>
-                    </ul>
+                <div class="dropdown">
+                    <button class="btn outline ripple" id="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-sec-dark">Dropdown</span>
+                        <i class="arrow mdi dark mdi-menu-down"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-toggle">
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item">Another action</a>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                        <a href="#" class="dropdown-item">
+                            <i class="mdi dark mdi-content-save"></i>
+                            <span>Icon to the left</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <span>Icon to the right</span>
+                            <i class="mdi dark mdi-content-save"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropright">
+                    <button class="btn outline" id="dropdown-toggle2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-sec-dark">Dropright</span>
+                        <i class="arrow mdi dark mdi-menu-right"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-toggle2">
+                        <h6 class="h-variant text-sec-dark">Header</h6>
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item">Another action</a>
+                        <div class="divider dark"></div>
+                        <h6 class="h-variant text-sec-dark">Another header</h6>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                    </div>
+                </div>
+                <div class="dropleft">
+                    <button class="btn outline" id="dropdown-toggle3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="arrow mdi dark mdi-menu-left"></i>
+                        <span class="text-sec-dark">Dropleft</span>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-toggle3">
+                        <a href="#" class="dropdown-item disabled" tab-index="-1" aria-disabled="true">Disabled action</a>
+                        <a href="#" class="dropdown-item disabled" tab-index="-1" aria-disabled="true">
+                            <i class="mdi dark mdi-content-save"></i>
+                            <span>Disabled action with icon</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropup">
+                    <button class="btn outline" id="dropdown-toggle4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-sec-dark">Dropup</span>
+                        <i class="arrow mdi dark mdi-menu-up"></i>
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdown-toggle4">
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item active">Another action</a>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                    </div>
                 </div>
 
                 <!----------------->
@@ -490,46 +597,18 @@
                     </svg>
                 </div>
 
-                <!------------------>
-                <!--   CAROUSEL   -->
-                <!------------------>
-                <h1 class="mt-5 mb-3">carousel</h1>
+                <!--------------------->
+                <!--   EMPTY STATE   -->
+                <!--------------------->
+                <h1 class="mt-5 mb-3">empty-state</h1>
 
-                <div id="carousel-example" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example" data-slide-to="1"></li>
-                        <li data-target="#carousel-example" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="images/example1.jpg" alt="First">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="images/example2.jpg" alt="Second">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="images/example3.jpg" alt="Third">
-                        </div>
-                        <div class="image-shade"></div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carousel-example" role="button" data-slide="prev" title="Indietro">
-                        <i class="mdi light mdi-chevron-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#carousel-example" role="button" data-slide="next" title="Avanti">
-                        <i class="mdi mdi-chevron-right"></i>
-                    </a>
-                    <a class="carousel-full-screen-toggle btn icon light ripple" href="#carousel-example" title="Visualizza a schermo intero">
-                        <i class="mdi light mdi-fullscreen"></i>
-                    </a>
-                </div>
-
-                <!------------------------>
-                <!--   IMG-CLICK-ZOOM   -->
-                <!------------------------>
-                <h1 class="mt-5 mb-3">img-click-zoom</h1>
-                <div class="card image fixed-ratio fr-16-9">
-                    <img class="card-bg img-click-zoom" src="images/example2.jpg"/>
+                <div class="empty-state m-5">
+                    <!-- <img src="images/empty.png"/> -->
+                    <i class="mdi mdi-feature-search-outline"></i>
+                    <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">No results</h6>
+                    <p class="text-center text-dis-dark m-0">
+                        Some quick example text to build on the component and make up the bulk of the component's content.
+                    </p>
                 </div>
 
                 <!----------------->
@@ -537,19 +616,19 @@
                 <!----------------->
                 <h1 class="mt-5 mb-3">popover</h1>
 
-                <button class="btn transparent ripple" data-toggle="popover" data-theme="dark" data-placement="top"
+                <button class="btn outline ripple" data-toggle="popover" data-placement="top"
                         title="Popover title" data-content="Popover content here">
                     Top popover
                 </button>
-                <button class="btn transparent ripple" data-toggle="popover" data-theme="dark" data-placement="bottom"
+                <button class="btn outline ripple" data-toggle="popover" data-placement="bottom"
                         title="Popover title" data-content="Popover content here">
                     Bottom popover
                 </button>
-                <button class="btn transparent ripple" data-toggle="popover" data-theme="dark" data-placement="left"
+                <button class="btn outline ripple" data-toggle="popover" data-placement="left"
                         title="Popover title" data-content="Popover content here">
                     Left popover
                 </button>
-                <button class="btn transparent ripple" data-toggle="popover" data-theme="dark" data-placement="right"
+                <button class="btn outline ripple" data-toggle="popover" data-placement="right"
                         title="Popover title" data-content="Popover content here">
                     Right popover
                 </button>
@@ -559,19 +638,19 @@
                 <!----------------->
                 <h1 class="mt-5 mb-3">tooltip</h1>
 
-                <button class="btn transparent ripple" data-toggle="tooltip" data-theme="dark" data-placement="top"
+                <button class="btn outline ripple" data-toggle="tooltip" data-placement="top"
                         title="Tooltip">
                     Top tooltip
                 </button>
-                <button class="btn transparent ripple" data-toggle="tooltip" data-theme="dark" data-placement="bottom"
+                <button class="btn outline ripple" data-toggle="tooltip" data-placement="bottom"
                         title="Tooltip">
                     Bottom tooltip
                 </button>
-                <button class="btn transparent ripple" data-toggle="tooltip" data-theme="dark" data-placement="left"
+                <button class="btn outline ripple" data-toggle="tooltip" data-placement="left"
                         title="Tooltip">
                     Left tooltip
                 </button>
-                <button class="btn transparent ripple" data-toggle="tooltip" data-theme="dark" data-placement="right"
+                <button class="btn outline ripple" data-toggle="tooltip" data-placement="right"
                         title="Tooltip">
                     Right tooltip
                 </button>
@@ -581,30 +660,39 @@
                 <!-------------->
                 <h1 class="mt-5 mb-3">chip</h1>
 
-                <div class="d-flex">
+                <div class="chip-container d-flex flex-wrap">
                     <div class="chip">
-                        <p>Chip text</p>
+                        <span>Chip text</span>
                     </div>
                     <div class="chip">
-                        <p>Chip text</p>
-                        <i class="chip-dismiss mdi mdi-close-circle"></i>
+                        <span>Chip text</span>
+                        <button class="btn icon ripple"><i class="mdi dark mdi-close"></i></button>
                     </div>
+                    <div class="chip selected">
+                        <i class="mdi dark mdi-check"></i>
+                        <span>Chip text</span>
+                    </div>
+                    <button class="chip">
+                        <img src="images/chip.jpg"/>
+                        <span>Chip text</span>
+                    </button>
                     <div class="chip">
                         <i class="mdi dark mdi-account-circle"></i>
-                        <p>Chip text</p>
-                        <i class="chip-dismiss mdi mdi-close-circle"></i>
+                        <span>Chip text</span>
+                        <button class="btn icon ripple"><i class="mdi dark mdi-close"></i></button>
                     </div>
-                    <div class="chip">
+                    <a href="#" class="chip">
                         <img src="images/chip.jpg"/>
-                        <p>Chip text</p>
-                        <i class="chip-dismiss mdi mdi-close-circle"></i>
-                    </div>
+                        <span>Chip text</span>
+                        <button class="btn icon ripple"><i class="mdi dark mdi-close"></i></button>
+                    </a>
                 </div>
 
                 <!------------------>
                 <!--   PROGRESS   -->
                 <!------------------>
                 <h1 class="mt-5 mb-3">progress</h1>
+
                 <div class="progress mb-3">
                     <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
@@ -621,43 +709,48 @@
                     <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
 
-                <br><br><br><br><br><br>
+                <!---------------->
+                <!--   SLIDER   -->
+                <!---------------->
+                <h1 class="mt-5 mb-3">slider</h1>
+
+                <div class="slider-container">
+                    <input id="slider-example" class="slider" type="range" min="1" max="100" value="50"/>
+                    <span class="slider-progress"></span>
+                    <span class="slider-tooltip">50</span>
+                </div>
+                <div class="slider-container">
+                    <input id="slider-example-dis" class="slider" type="range" min="1" max="100" value="50" disabled/>
+                    <span class="slider-progress"></span>
+                    <span class="slider-tooltip">50</span>
+                </div>
 
             </div>
-            <div class="col-12 col-md-6 bg-dark-primary">
-
-                <h1 class="text-light">Heading 1</h1>
-                <h2 class="text-light">Heading 2</h2>
-                <h3 class="text-light">Heading 3</h3>
-                <h4 class="text-light">Heading 4</h4>
-                <h5 class="text-light">Heading 5</h5>
-                <h6 class="text-light">Heading 6</h6>
-                <h4 class="text-light h-variant">Heading variant</h4>
-                <p class="text-light">Paragraph</p>
-                <a href="#" class="light">Link</a><br>
-                <i class="mdi light mdi-content-save"></i>
+            <div class="col-12 col-md-6 bg-dark-primary py-4">
 
                 <!------------------------->
                 <!--   BTN TRANSPARENT   -->
                 <!------------------------->
-                <h1 class="text-light mt-5 mb-3">btn transparent</h1>
+                <h1 class="text-light mb-3">btn transparent</h1>
 
                 <!-- Text only -->
                 <a href="#" class="btn transparent light ripple">Button</a>
-                <button class="btn transparent light ripple">Button</button>
+                <button class="btn transparent light ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn transparent light ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
-                <button class="btn transparent light ripple">
-                    <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn transparent light ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn transparent light ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!--------------------->
@@ -667,20 +760,22 @@
 
                 <!-- Text only -->
                 <a href="#" class="btn outline light ripple">Button</a>
-                <button class="btn outline light ripple">Button</button>
+                <button class="btn outline light ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn outline light ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
-                <button class="btn outline light ripple">
-                    <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn outline light ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn outline light ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!-------------------->
@@ -689,21 +784,23 @@
                 <h1 class="text-light mt-5 mb-3">btn accent</h1>
 
                 <!-- Text only -->
-                <a href="#" class="btn accent light ripple">Button</a>
+                <a href="#" class="btn accent dark ripple">Button</a>
                 <button class="btn accent light ripple">Button</button>
 
                 <!-- Text + icon -->
-                <a href="#" class="btn accent light ripple">
+                <a href="#" class="btn accent dark ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
-                <button class="btn accent light ripple">
+                <button class="btn accent dark ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </button>
-                <button class="btn accent light ripple" disabled>
+
+                <!-- Disabled -->
+                <button class="btn accent dark ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!------------------------------->
@@ -713,20 +810,22 @@
 
                 <!-- Text only -->
                 <a href="#" class="btn round transparent light ripple">Button</a>
-                <button class="btn round transparent light ripple">Button</button>
+                <button class="btn round transparent light ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn round transparent light ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
-                <button class="btn round transparent light ripple">
-                    <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn round transparent light ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn round transparent light ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!--------------------------->
@@ -736,20 +835,22 @@
 
                 <!-- Text only -->
                 <a href="#" class="btn round outline light ripple">Button</a>
-                <button class="btn round outline light ripple">Button</button>
+                <button class="btn round outline light ripple text-accent ripple-accent">Button</button>
 
                 <!-- Text + icon -->
                 <a href="#" class="btn round outline light ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
-                <button class="btn round outline light ripple">
-                    <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                <button class="btn round outline light ripple ripple-accent">
+                    <i class="mdi accent mdi-content-save"></i>
+                    <span class="text-accent">Button</span>
                 </button>
+
+                <!-- Disabled -->
                 <button class="btn round outline light ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!-------------------------->
@@ -758,21 +859,23 @@
                 <h1 class="text-light mt-5 mb-3">btn round accent</h1>
 
                 <!-- Text only -->
-                <a href="#" class="btn round accent light ripple">Button</a>
-                <button class="btn round accent light ripple">Button</button>
+                <a href="#" class="btn round accent dark ripple">Button</a>
+                <button class="btn round accent ripple">Button</button>
 
                 <!-- Text + icon -->
-                <a href="#" class="btn round accent light ripple">
+                <a href="#" class="btn round accent dark ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </a>
-                <button class="btn round accent light ripple">
+                <button class="btn round accent dark ripple">
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Button</p>
+                    <span class="text-light">Button</span>
                 </button>
-                <button class="btn round accent light ripple" disabled>
+
+                <!-- Disabled -->
+                <button class="btn round accent dark ripple" disabled>
                     <i class="mdi light mdi-content-save"></i>
-                    <p>Disabled</p>
+                    <span class="text-light">Disabled</span>
                 </button>
 
                 <!------------------>
@@ -789,9 +892,9 @@
                 <!----------------->
                 <h1 class="text-light mt-5 mb-3">btn fab</h1>
 
-                <a href="#" class="btn fab ripple"><i class="mdi light mdi-content-save"></i></a>
-                <button class="btn fab ripple"><i class="mdi light mdi-content-save"></i></button>
-                <button class="btn fab ripple" disabled><i class="mdi light mdi-content-save"></i></button>
+                <a href="#" class="btn fab dark ripple"><i class="mdi light mdi-content-save"></i></a>
+                <button class="btn fab dark ripple"><i class="mdi light mdi-content-save"></i></button>
+                <button class="btn fab dark ripple" disabled><i class="mdi light mdi-content-save"></i></button>
 
                 <!-------------------->
                 <!--   FILE INPUT   -->
@@ -801,15 +904,22 @@
                 <label class="file-input ripple">
                     <input type="file"/>
                     <i class="mdi mdi-upload"></i>
-                    <p>File input</p>
+                    <span>File input</span>
                     <span class="count d-none"><i class="mdi mdi-check"></i></span>
                 </label>
 
                 <label class="file-input ripple">
                     <input type="file" multiple/>
                     <i class="mdi dark mdi-upload"></i>
-                    <p>Multiple file input</p>
+                    <span>Multiple file input</span>
                     <span class="count d-none">1</span>
+                </label>
+
+                <label class="file-input ripple dark disabled">
+                    <input type="file" disabled/>
+                    <i class="mdi mdi-upload"></i>
+                    <span>Disabled file input</span>
+                    <span class="count d-none"><i class="mdi mdi-check"></i></span>
                 </label>
 
                 <!--------------->
@@ -831,13 +941,13 @@
                 <h1 class="text-light mt-5 mb-3">check</h1>
 
                 <h6 class="text-light">Title</h6>
-                <input id="cd-toggle" type="checkbox" class="checkbox light toggle-all" data-toggle="ce2"/>
+                <input id="cd-toggle" type="checkbox" class="checkbox light toggle-all" data-toggle-all="checkbox-example2"/>
                 <label for="cd-toggle">All</label><br>
-                <input id="cd1" type="checkbox" class="checkbox light" name="checkbox-example2" value="1" data-toggled-by="ce2" checked/>
+                <input id="cd1" type="checkbox" class="checkbox light" name="checkbox-example2" value="1" checked/>
                 <label for="cd1">First option</label><br>
-                <input id="cd2" type="checkbox" class="checkbox light" name="checkbox-example2" value="2"data-toggled-by="ce2"/>
+                <input id="cd2" type="checkbox" class="checkbox light" name="checkbox-example2" value="2"/>
                 <label for="cd2">Second option</label><br>
-                <input id="cd3" type="checkbox" class="checkbox light" name="checkbox-example2" value="3" disabled/>
+                <input id="cd3" type="checkbox" class="checkbox light" name="checkbox-example2-dis" value="3" disabled/>
                 <label for="cd3">Third option (disabled)</label>
 
                 <!---------------->
@@ -855,21 +965,56 @@
                 <!---------------->
                 <h1 class="text-light mt-5 mb-3">select</h1>
 
-                <div class="select-input dark">
-                    <label for="select-example2">
-                        <button type="button"><p>Seleziona</p><i class="mdi light mdi-menu-swap"></i></button>
-                    </label>
-                    <ul id="select-example2" role="listbox" name="select-example">
-                        <li id="s1" value="s1" role="option" tabindex="-1" aria-selected="true" class="selected">Option 1</li>
-                        <li id="s2" value="s2" role="option" tabindex="-1" aria-selected="false">Option 2</li>
-                        <li id="s3" value="s3" role="option" tabindex="-1" aria-selected="false">Option 3</li>
-                        <li id="s4" value="s4" role="option" tabindex="-1" aria-selected="false">Option 4</li>
-                        <li id="s5" value="s5" role="option" tabindex="-1" aria-selected="false">Option 5</li>
-                        <li id="s6" value="s6" role="option" tabindex="-1" aria-selected="false">Option 6</li>
-                        <li id="s7" value="s7" role="option" tabindex="-1" aria-selected="false">Option 7</li>
-                        <li id="s8" value="s8" role="option" tabindex="-1" aria-selected="false">Option 8</li>
-                        <li id="s9" value="s9" role="option" tabindex="-1" aria-selected="false">Option 9</li>
-                    </ul>
+                <div class="dropdown select" style="width: 300px;">
+                    <div class="text-input dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="trailing-icon arrow mdi light mdi-menu-down"></i>
+                        <input id="select-toggled" type="text" placeholder=" " readonly/>
+                        <label for="select-toggled">Select</label>
+                    </div>
+                    <div class="dropdown-menu dark" aria-labelledby="select-toggle">
+                        <input id="sel1d" type="radio" class="radio light" name="select-exampled" value="1"/>
+                        <label for="sel1d">First option</label>
+                        <input id="sel2d" type="radio" class="radio light" name="select-exampled" value="2"/>
+                        <label for="sel2d">Second option</label>
+                        <input id="sel3d" type="radio" class="radio light" name="select-exampled" value="3"/>
+                        <label for="sel3d">Third option</label>
+                        <input id="sel4d" type="radio" class="radio light" name="select-exampled" value="4"/>
+                        <label for="sel4d">Fourth option</label>
+                        <input id="sel5d" type="radio" class="radio light" name="select-exampled" value="5"/>
+                        <label for="sel5d">Fifth option</label>
+                    </div>
+                </div>
+
+                <div class="dropdown select" style="width: 300px;">
+                    <div class="text-input dark" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="trailing-icon arrow mdi light mdi-menu-down"></i>
+                        <input id="multi-select-toggled" type="text" placeholder=" " readonly/>
+                        <label for="multi-select-toggled">Multiple select</label>
+                    </div>
+                    <div class="dropdown-menu dark" aria-labelledby="multi-select-toggle">
+                        <input id="msel1d" type="checkbox" class="checkbox light" name="multi-select-exampled" value="1"/>
+                        <label for="msel1d">First option</label>
+                        <input id="msel2d" type="checkbox" class="checkbox light" name="multi-select-exampled" value="2"/>
+                        <label for="msel2d">Second option</label>
+                        <input id="msel3d" type="checkbox" class="checkbox light" name="multi-select-exampled" value="3"/>
+                        <label for="msel3d">Third option</label>
+                        <input id="msel4d" type="checkbox" class="checkbox light" name="multi-select-exampled" value="4"/>
+                        <label for="msel4d">Fourth option</label>
+                        <input id="msel5d" type="checkbox" class="checkbox light" name="multi-select-exampled" value="5"/>
+                        <label for="msel5d">Fifth option</label>
+                    </div>
+                </div>
+
+                <div class="dropdown select" style="width: 300px;">
+                    <div class="text-input dark disabled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="trailing-icon arrow mdi light mdi-menu-down"></i>
+                        <input id="select-toggled-dis" type="text" placeholder=" " readonly disabled/>
+                        <label for="select-toggled-dis">Select</label>
+                    </div>
+                    <div class="dropdown-menu dark" aria-labelledby="select-toggle-dis">
+                        <input id="dsel1d" type="radio" class="radio" name="select-exampled-dis" value="1" disabled/>
+                        <label for="dsel1d">First option</label>
+                    </div>
                 </div>
 
                 <!-------------------->
@@ -917,34 +1062,48 @@
                     </div>
                 </label>
 
+                <!--------------------->
+                <!--   RICH SWITCH   -->
+                <!--------------------->
+                <h1 class="text-light mt-5 mb-3">rich switch</h1>
+
+                <div class="rich-switch-container dark">
+                    <input id="rsd1" type="radio" class="rich-switch dark" name="rich-switch-example2" value="1" checked/>
+                    <label for="rsd1" class="ripple">First option</label><br>
+                    <input id="rsd2" type="radio" class="rich-switch dark" name="rich-switch-example2" value="2"/>
+                    <label for="rsd2" class="ripple">Second option</label><br>
+                    <input id="rsd3" type="radio" class="rich-switch dark" name="rich-switch-example2" value="3"/>
+                    <label for="rsd3" class="ripple">Third option</label><br>
+                </div>
+
                 <!---------------------->
                 <!--   REVIEW STARS   -->
                 <!---------------------->
                 <h1 class="text-light mt-5 mb-3">review stars</h1>
 
-                <div class="review-stars">
-                    <input type ="radio" id="stard5" name="rating" value="5"/>
-                    <label for="stard5" title="5 stelle">
+                <div class="review-stars light">
+                    <input type ="radio" id="stard5" name="ratingd" value="5"/>
+                    <label for="stard5" title="5 stelle" class="ripple light">
                         <i class="unchecked mdi light mdi-star-outline"></i>
                         <i class="checked mdi light mdi-star"></i>
                     </label>
-                    <input type ="radio" id="stard4" name="rating" value="4"/>
-                    <label for="stard4" title="4 stelle">
+                    <input type ="radio" id="stard4" name="ratingd" value="4"/>
+                    <label for="stard4" title="4 stelle" class="ripple light">
                         <i class="unchecked mdi light mdi-star-outline"></i>
                         <i class="checked mdi light mdi-star"></i>
                     </label>
-                    <input type ="radio" id="stard3" name="rating" value="3"/>
-                    <label for="stard3" title="3 stelle">
+                    <input type ="radio" id="stard3" name="ratingd" value="3"/>
+                    <label for="stard3" title="3 stelle" class="ripple light">
                         <i class="unchecked mdi light mdi-star-outline"></i>
                         <i class="checked mdi light mdi-star"></i>
                     </label>
-                    <input type ="radio" id="stard2" name="rating" value="2"/>
-                    <label for="stard2" title="2 stelle">
+                    <input type ="radio" id="stard2" name="ratingd" value="2"/>
+                    <label for="stard2" title="2 stelle" class="ripple light">
                         <i class="unchecked mdi light mdi-star-outline"></i>
                         <i class="checked mdi light mdi-star"></i>
                     </label>
-                    <input type ="radio" id="stard1" name="rating" value="1" checked/>
-                    <label for="stard1" title="1 stella">
+                    <input type ="radio" id="stard1" name="ratingd" value="1" checked/>
+                    <label for="stard1" title="1 stella" class="ripple light">
                         <i class="unchecked mdi light mdi-star-outline"></i>
                         <i class="checked mdi light mdi-star"></i>
                     </label>
@@ -962,39 +1121,43 @@
                 <!-------------------->
                 <h1 class="text-light mt-5 mb-3">text field</h1>
 
-                <div class="text-input">
-                    <input id="emaild" type="email" class="dark" value="prova"/>
-                    <label for="emaild">Email</label>
-                </div>
+                <div style="width: 300px;">
 
-                <div class="text-input">
-                    <input id="passwordd" type="password" class="dark"/>
-                    <label for="password">
-                        <i class="mdi light mdi-key"></i>
-                        <span>Password</span>
-                    </label>
-                </div>
+                    <div class="text-input dark">
+                        <input id="emaild" type="email" value="prova" placeholder=" "/>
+                        <label for="emaild">Email</label>
+                    </div>
 
-                <div class="text-input">
-                    <input id="textd1" type="text" class="dark"/>
-                    <label for="textd1">Text</label>
-                    <span>Hint message</span>
-                </div>
+                    <div class="text-input dark">
+                        <i class="leading-icon mdi light mdi-key"></i>
+                        <i class="trailing-icon mdi light mdi-eye"></i>
+                        <input id="passwordd" type="password" placeholder=" "/>
+                        <label for="passwordd">Password</label>
+                    </div>
 
-                <div class="text-input">
-                    <input id="textd2" type="text" class="input dark valid" value="value"/>
-                    <label for="textd2">Valid</label>
-                </div>
+                    <div class="text-input dark">
+                        <input id="textd1" type="text" placeholder=" " maxlength="20" />
+                        <label for="textd1">Text</label>
+                        <span>Hint message</span>
+                        <span class="counter">0 / 20</span>
+                    </div>
 
-                <div class="text-input">
-                    <input id="textd3" type="text" class="input dark error" value="value"/>
-                    <label for="textd3">Error</label>
-                    <span>Error message</span>
-                </div>
+                    <div class="text-input dark">
+                        <input id="textd2" type="text" class="valid" value="value" placeholder=" "/>
+                        <label for="textd2">Valid</label>
+                    </div>
 
-                <div class="text-input">
-                    <input id="textd4" type="text" class="dark" disabled/>
-                    <label for="textd4">Disabled</label>
+                    <div class="text-input dark">
+                        <input id="textd3" type="text" class="error" value="value" placeholder=" "/>
+                        <label for="textd3">Error</label>
+                        <span>Error message</span>
+                    </div>
+
+                    <div class="text-input dark">
+                        <input id="textd4" type="text" placeholder=" " disabled/>
+                        <label for="textd4">Disabled</label>
+                    </div>
+
                 </div>
 
                 <!------------------->
@@ -1002,14 +1165,18 @@
                 <!------------------->
                 <h1 class="text-light mt-5 mb-3">text area</h1>
 
-                <div class="text-area">
-                    <textarea id="textarea" class="dark"></textarea>
-                    <label for="textarea">Text area</label>
-                </div>
+                <div style="width: 300px;">
 
-                <div class="text-area">
-                    <textarea id="textarea" class="dark" disabled></textarea>
-                    <label for="textarea">Disabled Text area</label>
+                    <div class="text-area dark">
+                        <textarea id="textarea" placeholder=" "></textarea>
+                        <label for="textarea">Text area</label>
+                    </div>
+
+                    <div class="text-area dark">
+                        <textarea id="textarea" placeholder=" " disabled></textarea>
+                        <label for="textarea">Disabled Text area</label>
+                    </div>
+
                 </div>
 
                 <!-------------------->
@@ -1018,6 +1185,7 @@
                 <h1 class="text-light mt-5 mb-3">pagination</h1>
 
                 <ul class="pagination light">
+                    <li><a href="#" class="btn icon light ripple disabled" title="Prima pagina"><i class="mdi light mdi-page-first"></i></a></li>
                     <li><a href="#" class="btn icon light ripple disabled" title="Pagina precedente"><i class="mdi light mdi-chevron-left"></i></a></li>
                     <li><a href="#" class="selected">1</a></li>
                     <li><a href="#">2</a></li>
@@ -1025,6 +1193,7 @@
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
                     <li><a href="#" class="btn icon light ripple" title="Pagina successiva"><i class="mdi light mdi-chevron-right"></i></a></li>
+                    <li><a href="#" class="btn icon light ripple" title="Ultima pagina"><i class="mdi light mdi-page-last"></i></a></li>
                 </ul>
 
                 <!-------------------->
@@ -1042,10 +1211,10 @@
                 <!-------------------->
                 <h1 class="text-light mt-5 mb-3">search bar</h1>
 
-                <div class="search-bar dark">
-                    <button class="search btn icon ripple" title="Cerca"><i class="mdi dark mdi-magnify"></i></button>
+                <div class="search-bar dark" style="width: 360px;">
+                    <button class="search btn icon ripple" title="Cerca"><i class="mdi light mdi-magnify"></i></button>
                     <input type="text" placeholder="Cerca..."/>
-                    <button class="clear btn icon ripple" title="Cancella" disabled><i class="mdi dark mdi-close"></i></button>
+                    <button class="clear btn icon ripple" title="Cancella"><i class="mdi light mdi-close"></i></button>
                 </div>
 
                 <!------------------>
@@ -1067,24 +1236,62 @@
                 <!------------------>
                 <h1 class="text-light mt-5 mb-3">dropdown</h1>
 
-                <button class="btn icon light dar ripple" data-toggle="dropdown" data-target="#dropdown-example2" style="float: right">
-                    <i class="mdi light mdi-dots-vertical"></i>
-                </button>
-                <div id="dropdown-example2" class="dropdown dark text-light">
-                    <ul>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-account-box"></i><span>Dropdown item 1</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-bell-outline"></i><span>Dropdown item 2</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-headphones"></i><span>Dropdown item 3</span></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="mdi dark mdi-settings"></i><span>Dropdown item 4</span></a>
-                        </li>
-                    </ul>
+                <div class="dropdown">
+                    <button class="btn outline light" id="dropdown-toggled" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-light">Dropdown</span>
+                        <i class="arrow mdi light mdi-menu-down"></i>
+                    </button>
+                    <div class="dropdown-menu dark" aria-labelledby="dropdown-toggled">
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item">Another action</a>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                        <a href="#" class="dropdown-item">
+                            <i class="mdi light mdi-content-save"></i>
+                            <span>Icon to the left</span>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <span>Icon to the right</span>
+                            <i class="mdi light mdi-content-save"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropright">
+                    <button class="btn outline light" id="dropdown-toggled2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-light">Dropright</span>
+                        <i class="arrow mdi light mdi-menu-right"></i>
+                    </button>
+                    <div class="dropdown-menu dark" aria-labelledby="dropdown-toggled2">
+                        <h6 class="h-variant text-sec-light">Header</h6>
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item">Another action</a>
+                        <div class="divider light"></div>
+                        <h6 class="h-variant text-sec-light">Another header</h6>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                    </div>
+                </div>
+                <div class="dropleft">
+                    <button class="btn outline light" id="dropdown-toggled3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="arrow mdi light mdi-menu-left"></i>
+                        <span class="text-light">Dropleft</span>
+                    </button>
+                    <div class="dropdown-menu dark" aria-labelledby="dropdown-toggled3">
+                        <a href="#" class="dropdown-item disabled" tab-index="-1" aria-disabled="true">Disabled action</a>
+                        <a href="#" class="dropdown-item disabled" tab-index="-1" aria-disabled="true">
+                            <i class="mdi light mdi-content-save"></i>
+                            <span>Disabled action with icon</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="dropup">
+                    <button class="btn outline light" id="dropdown-toggled4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="text-light">Dropup</span>
+                        <i class="arrow mdi light mdi-menu-up"></i>
+                    </button>
+                    <div class="dropdown-menu dark" aria-labelledby="dropdown-toggled4">
+                        <a href="#" class="dropdown-item">Action</a>
+                        <a href="#" class="dropdown-item active">Another action</a>
+                        <a href="#" class="dropdown-item">Something else here</a>
+                    </div>
                 </div>
 
                 <!----------------->
@@ -1106,43 +1313,18 @@
                     </svg>
                 </div>
 
-                <!------------------>
-                <!--   CAROUSEL   -->
-                <!------------------>
-                <h1 class="text-light mt-5 mb-3">carousel</h1>
+                <!--------------------->
+                <!--   EMPTY STATE   -->
+                <!--------------------->
+                <h1 class="text-light mt-5 mb-3">empty-state</h1>
 
-                <div id="carousel-example2" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example2" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example2" data-slide-to="1"></li>
-                        <li data-target="#carousel-example2" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="images/example1.jpg" alt="First">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="images/example2.jpg" alt="Second">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="images/example3.jpg" alt="Third">
-                        </div>
-                        <div class="image-shade"></div>
-                    </div>
-                    <a class="carousel-control-prev" href="#carousel-example2" role="button" data-slide="prev" title="Indietro">
-                        <i class="mdi light mdi-chevron-left"></i>
-                    </a>
-                    <a class="carousel-control-next" href="#carousel-example2" role="button" data-slide="next" title="Avanti">
-                        <i class="mdi light mdi-chevron-right"></i>
-                    </a>
-                </div>
-
-                <!------------------------>
-                <!--   IMG-CLICK-ZOOM   -->
-                <!------------------------>
-                <h1 class="text-light mt-5 mb-3">img-click-zoom</h1>
-                <div class="card image fixed-ratio fr-16-9">
-                    <img class="card-bg img-click-zoom" src="images/example2.jpg"/>
+                <div class="empty-state dark m-5">
+                    <!-- <img src="images/empty.png"/> -->
+                    <i class="mdi mdi-feature-search-outline"></i>
+                    <h6 class="text-center text-sec-light font-weight-bold mt-3 mb-2">No results</h6>
+                    <p class="text-center text-dis-light m-0">
+                        Some quick example text to build on the component and make up the bulk of the component's content.
+                    </p>
                 </div>
 
                 <!----------------->
@@ -1150,19 +1332,19 @@
                 <!----------------->
                 <h1 class="text-light mt-5 mb-3">popover</h1>
 
-                <button class="btn light transparent ripple" data-toggle="popover" data-theme="light" data-placement="top"
+                <button class="btn light outline ripple" data-toggle="popover" data-placement="top"
                         title="Popover title" data-content="Popover content here">
                     Top popover
                 </button>
-                <button class="btn light transparent ripple" data-toggle="popover" data-theme="light" data-placement="bottom"
+                <button class="btn light outline ripple" data-toggle="popover" data-placement="bottom"
                         title="Popover title" data-content="Popover content here">
                     Bottom popover
                 </button>
-                <button class="btn light transparent ripple" data-toggle="popover" data-theme="light" data-placement="left"
+                <button class="btn light outline ripple" data-toggle="popover" data-placement="left"
                         title="Popover title" data-content="Popover content here">
                     Left popover
                 </button>
-                <button class="btn light transparent ripple" data-toggle="popover" data-theme="light" data-placement="right"
+                <button class="btn light outline ripple" data-toggle="popover" data-placement="right"
                         title="Popover title" data-content="Popover content here">
                     Right popover
                 </button>
@@ -1172,19 +1354,19 @@
                 <!----------------->
                 <h1 class="text-light mt-5 mb-3">tooltip</h1>
 
-                <button class="btn light transparent ripple" data-toggle="tooltip" data-theme="light" data-placement="top"
+                <button class="btn light outline ripple" data-toggle="tooltip" data-placement="top"
                         title="Tooltip">
                     Top tooltip
                 </button>
-                <button class="btn light transparent ripple" data-toggle="tooltip" data-theme="light" data-placement="bottom"
+                <button class="btn light outline ripple" data-toggle="tooltip" data-placement="bottom"
                         title="Tooltip">
                     Bottom tooltip
                 </button>
-                <button class="btn light transparent ripple" data-toggle="tooltip" data-theme="light" data-placement="left"
+                <button class="btn light outline ripple" data-toggle="tooltip" data-placement="left"
                         title="Tooltip">
                     Left tooltip
                 </button>
-                <button class="btn light transparent ripple" data-toggle="tooltip" data-theme="light" data-placement="right"
+                <button class="btn light outline ripple" data-toggle="tooltip" data-placement="right"
                         title="Tooltip">
                     Right tooltip
                 </button>
@@ -1194,24 +1376,32 @@
                 <!-------------->
                 <h1 class="text-light mt-5 mb-3">chip</h1>
 
-                <div class="d-flex">
+                <div class="chip-container d-flex flex-wrap">
                     <div class="chip light">
-                        <p>Chip text</p>
+                        <span>Chip text</span>
                     </div>
                     <div class="chip light">
-                        <p>Chip text</p>
-                        <i class="chip-dismiss mdi mdi-close-circle"></i>
+                        <span>Chip text</span>
+                        <button class="btn icon light ripple"><i class="mdi light mdi-close"></i></button>
                     </div>
+                    <div class="chip light selected">
+                        <i class="mdi light mdi-check"></i>
+                        <span>Chip text</span>
+                    </div>
+                    <button class="chip light">
+                        <img src="images/chip.jpg"/>
+                        <span>Chip text</span>
+                    </button>
                     <div class="chip light">
                         <i class="mdi light mdi-account-circle"></i>
-                        <p>Chip text</p>
-                        <i class="chip-dismiss mdi mdi-close-circle"></i>
+                        <span>Chip text</span>
+                        <button class="btn icon light ripple"><i class="mdi light mdi-close"></i></button>
                     </div>
-                    <div class="chip light">
+                    <a href="#" class="chip light">
                         <img src="images/chip.jpg"/>
-                        <p>Chip text</p>
-                        <i class="chip-dismiss mdi mdi-close-circle"></i>
-                    </div>
+                        <span>Chip text</span>
+                        <button class="btn icon light ripple"><i class="mdi light mdi-close"></i></button>
+                    </a>
                 </div>
 
                 <!------------------>
@@ -1234,9 +1424,27 @@
                     <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
 
+                <!---------------->
+                <!--   SLIDER   -->
+                <!---------------->
+                <h1 class="text-light mt-5 mb-3">slider</h1>
+
+                <div class="slider-container">
+                    <input id="slider-example" class="slider dark" type="range" min="1" max="100" value="50"/>
+                    <span class="slider-progress"></span>
+                    <span class="slider-tooltip">50</span>
+                </div>
+                <div class="slider-container">
+                    <input id="slider-example-dis" class="slider dark" type="range" min="1" max="100" value="50" disabled/>
+                    <span class="slider-progress"></span>
+                    <span class="slider-tooltip">50</span>
+                </div>
+
             </div>
         </div>
     </div>
+
+    <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
 

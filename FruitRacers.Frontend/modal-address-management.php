@@ -5,7 +5,7 @@
                 <i class="modal-top-icon mdi mdi-map-marker-multiple"></i>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body address-management">
 
                 <h4 class="text-center mt-3 mb-4">Gestione indirizzi</h4>
 
@@ -48,14 +48,14 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 360px;">
             <div class="modal-top text-center">
-                <i class="modal-top-icon mdi mdi-help-circle-outline"></i>
+                <i class="modal-top-icon mdi mdi-delete-empty"></i>
             </div>
             <div class="modal-body">
                 <p class="m-0">Sei sicuro di voler eliminare questo indirizzo?</p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="modal-cancel btn outline ripple text-center" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-management" style="width: 160px;">Annulla</button>
-                <button class="modal-cancel btn accent ripple text-center" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-management" style="width: 160px;">Ok</button>
+                <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-management" style="width: 100px;">Annulla</button>
+                <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-management" style="width: 100px;">Ok</button>
             </div>
         </div>
     </div>

@@ -37,7 +37,7 @@
                         <label for="sc4">Subcategory 4</label><br>
                     </div>
                     <br>
-                    <button class="apply-filter btn accent ripple w-100 text-center mb-3 mb-lg-0">Applica</button>
+                    <button class="apply-filter btn accent ripple w-100 mb-3 mb-lg-0">Applica</button>
                     <br>
                 </div>
                 <div id="results-col" class="col-12 container" data-children-class="col-6 col-md-4 col-lg-3">

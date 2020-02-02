@@ -28,6 +28,12 @@
 
                     <div class="orders">
 
+                        <!-- <div class="empty-state m-5">
+                            <img src="images/empty.png"/>
+                            <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Non hai effettuato ordini</h6>
+                            <p class="text-center text-dis-dark m-0">Visualizza l'elenco del nostri <a href="companies.php">partner</a> per cominciare con gli acquisti!</p>
+                        </div> -->
+
                         <div class="order mb-4">
                             <div class="order-header p-3">
                                 <p class="m-0">Ordine N° <span class="order-number">201905100001</span> del <span class="order-date">1 Gen 2020</span></p>
@@ -37,7 +43,7 @@
                                     <div class="products-col col-12 col-lg-6 pt-3 pb-4 pb-lg-3">
                                         <h5>Prodotti</h5>
                                         <div class="order-products-list mr-2">
-                                            <div class="product d-flex align-items-center mb-2">
+                                            <div class="product d-flex align-items-center">
                                                 <a href="#" data-toggle="modal" data-target="#modal-product">
                                                     <img class="product-image" src="images/example_product.jpg"/>
                                                 </a>
@@ -49,7 +55,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="product d-flex align-items-center mb-2">
+                                            <div class="product d-flex align-items-center">
                                                 <a href="#" data-toggle="modal" data-target="#modal-product">
                                                     <img class="product-image" src="images/example_product.jpg"/>
                                                 </a>
@@ -61,7 +67,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="product d-flex align-items-center mb-2">
+                                            <div class="product d-flex align-items-center">
                                                 <a href="#" data-toggle="modal" data-target="#modal-product">
                                                     <img class="product-image" src="images/example_product.jpg"/>
                                                 </a>
@@ -95,23 +101,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="details-col col-12 col-lg-6 pt-3 pb-4 pb-lg-3">
+                                    <div class="details-col col-12 col-lg-6 pt-3 pb-4 pb-lg-3 d-flex flex-column">
                                         <div class="d-flex justify-content-between align-items-center mb-2">
                                             <h5 class="m-0">Dettagli</h5>
                                             <button class="btn icon ripple d-lg-none" data-toggle="collapse" data-target="#order-details-1" aria-expanded="false" title="Mostra">
                                                 <i class="mdi dark mdi-chevron-down"></i>
                                             </button>
                                         </div>
-                                        <div id="order-details-1" class="collapse mt-3 mx-2">
-                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-progress-clock"></i> STATO</h6>
+                                        <div id="order-details-1" class="collapse mt-2 mx-2 flex-grow-1">
+                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-progress-clock mr-2"></i>STATO</h6>
                                             <p class="order-state">Completato</p>
-                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-calendar-clock"></i> CONSEGNA</h6>
+                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-calendar-clock mr-2"></i>CONSEGNA</h6>
                                             <p><span class="selected-date">1 Gen 2020</span> alle <span class="selected-time-slot">14:00 - 14:30</span></p>
-                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-map-marker"></i> INDIRIZZO</h6>
+                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-map-marker mr-2"></i>INDIRIZZO</h6>
                                             <p class="address">Viale della Via 123, 47522 Cesena (FC)</p>
-                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-credit-card"></i> PAGAMENTO</h6>
+                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-credit-card mr-2"></i>PAGAMENTO</h6>
                                             <p class="payment-method">Alla consegna</p>
-                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-lead-pencil"></i> NOTE</h6>
+                                            <h6 class="text-sec-dark mb-1"><i class="mdi mdi-lead-pencil mr-2"></i>NOTE</h6>
                                             <p class="notes m-0">-</p>
                                         </div>
                                         <button class="btn accent ripple d-flex justify-content-center w-100 mt-4">ANNULLA ORDINE</button>

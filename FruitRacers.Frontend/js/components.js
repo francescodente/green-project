@@ -1,109 +1,75 @@
 $(document).ready(function() {
 
-    /****************************\
-    |   TEXT INPUTS, TEXTAREAS   |
-    \****************************/
-
-    // Label management
-    $(".text-input input, textarea").filter(function() {
-        return this.value.length > 0;
-    }).addClass("has-value");
-    $(document).on("blur", ".text-input input, textarea", function() {
-        if(!this.value) {
-            $(this).removeClass("has-value");
-        } else {
-            $(this).addClass("has-value");
-        }
-    });
-
     /****************\
     |   CHECKBOXES   |
     \****************/
 
-    // Checkbox toggle all click
-    $(document).on("click", ".checkbox.toggle-all", function() {
-        if ($(this).is(":checked")) {
-            $('[data-toggled-by="' + $(this).attr("data-toggle") + '"]').prop('checked', true);
-        } else {
-            $('[data-toggled-by="' + $(this).attr("data-toggle") + '"]').prop('checked', false);
-        }
-    });
-
-    // Checkbox toggle all check / uncheck
-    function checkboxToggleCheck(toggle) {
-        if ($('.checkbox[data-toggled-by="' + toggle + '"]').not(':checked').length == 0) {
-            $('.checkbox[data-toggle="' + toggle + '"]').prop('checked', true);
-        } else {
-            $('.checkbox[data-toggle="' + toggle + '"]').prop('checked', false);
+    // Checkbox toggle all state management
+    function checkboxToggleCheck(checkboxName) {
+        var toggleAll = $(".checkbox[data-toggle-all='" + checkboxName + "']");
+        switch($("[name='" + checkboxName + "']").not(":checked").length) {
+            case 0:
+                // All checked -> check
+                toggleAll.prop("checked", true);
+                toggleAll.prop("indeterminate", false);
+                break;
+            case $("[name='" + checkboxName + "']").length:
+                // All unchecked -> uncheck
+                toggleAll.prop("checked", false);
+                toggleAll.prop("indeterminate", false);
+                break;
+            default:
+                // Default -> indeterminate
+                toggleAll.prop("checked", false);
+                toggleAll.prop("indeterminate", true);
         }
     }
     // On page load
-    $(".checkbox[data-toggled-by]").each(function() {
-        checkboxToggleCheck($(this).data("toggled-by"));
+    $(".checkbox.toggle-all").each(function() {
+        checkboxToggleCheck($(this).data("toggle-all"));
+    });
+    // On toggle all click
+    $(document).on("click", ".checkbox.toggle-all", function() {
+        var checkboxName = $(this).attr("data-toggle-all");
+        $("[name='" + checkboxName + "']").not(":disabled").prop("checked", $(this).is(":checked"));
+        checkboxToggleCheck(checkboxName);
     });
     // On checkbox click
     $(document).on("click", ".checkbox:not(.toggle-all)", function() {
-        toggle = $(this).data("toggled-by");
-        checkboxToggleCheck(toggle);
+        checkboxToggleCheck($(this).attr("name"));
     });
 
     /*************\
     |   SELECTS   |
     \*************/
 
-    // Select action functions
-    function openSelectInput(selectInput) {
-        selectInput.find("ul li.selected").focus();
-        selectInput.addClass("active");
-    }
-    function closeSelectInput(selectInput) {
-        selectInput.removeClass("active");
-        selectInput.find("button").focus();
-    }
-    function selectInputValue(selectInput, selectedOption) {
-        selectInput.find("ul li").removeClass("selected").attr("aria-selected", "false");
-        selectedOption.addClass("selected").attr("aria-selected", "true");
-        var button = selectInput.find("button");
-        button.val(selectedOption.attr("value"));
-        button.find("p").text(selectedOption.text());
-    }
-
-    // Close select when resizing window or clicking away from it
-    $(window).on("click resize", function() {
-        $(".select-input").removeClass("active");
-    });
-    // Prep all select inputs on page load
-    $(".select-input").each(function() {
-        selectInputValue($(this), $(this).find("ul li.selected"));
-    });
-    // Click on button to open select
-    $(document).on("click", ".select-input button", function(event) {
-        event.stopPropagation();
-        $(".select-input").removeClass("active");
-        openSelectInput($(this).closest(".select-input"));
-    });
-    // Click on element to select it
-    $(document).on("click", ".select-input ul li", function() {
-        selectInputValue($(this).closest(".select-input"), $(this));
-    });
-    // Key bindings handling
-    $(document).on("keyup", ".select-input.active", function(event) {
-        // TODO add tab, fix enter to open
-        var escapeKey = 27;
-        var enterKey = 13;
-        var upKey = 38;
-        var downKey = 40;
-        event.preventDefault();
-        if (event.which == enterKey) {
-            selectInputValue($(this), $(this).find("ul li:focus"));
-            closeSelectInput($(this));
-        } else if (event.which == escapeKey) {
-            closeSelectInput($(this));
-        } else if (event.which == upKey) {
-            $(this).find("ul li:focus").prev().focus();
-        } else if (event.which == downKey) {
-            $(this).find("ul li:focus").next().focus();
+    // Prevent multi-select from closing on click
+    $(document).on("click", ".dropdown-menu label", function(event) {
+        if ($("#" + $(this).attr("for")).is(".checkbox")) {
+            event.stopPropagation();
         }
+    });
+    // Update button text on change
+    $(document).on("change", ".dropdown.select .checkbox, .dropdown.select .radio", function(event) {
+        var val;
+        if ($(this).is(".checkbox")) {
+            val = $(this).parent().find(".checkbox:checked").map(function() {
+                return $("[for='" + $(this).attr("id") + "']").text();
+            }).get().join(", ");
+        } else if ($(this).is(".radio")) {
+            val = $("[for='" + $(this).attr("id") + "']").text()
+        }
+        $(this).closest(".dropdown.select").find(".text-input input").val(val);
+    });
+
+    /*****************\
+    |   TEXT INPUTS   |
+    \*****************/
+
+    // Update character counter
+    $(document).on("change paste keyup", ".text-input, .text-area", function () {
+        var input = $(this).find("input, textarea");
+        $(this).find(".counter").text(input.val().length + " / " + input.attr("maxlength"));
     });
 
     /*****************\
@@ -111,7 +77,6 @@ $(document).ready(function() {
     \*****************/
 
     $(document).on("change", "[type=file]", function() {
-        alert("change");
         // Update file counter
         var fileCount = $(this).prop("files").length;
         if (fileCount > 0) {
@@ -132,27 +97,6 @@ $(document).ready(function() {
         var textInput = $(this).parent().find("[type='text']")
         textInput.val("");
         textInput.focus();
-        $(this).prop("disabled", true);
-    });
-    // Enable / disable clear button on page load
-    $(".search-bar [type='text']").filter(function() {
-        return this.value.length > 0;
-    }).parent().find(".clear.btn").prop("disabled", false);
-    // Enable / disable clear button on value changed
-    $(document).on("change paste keyup", ".search-bar [type='text']", function() {
-        if(!$(this).val()) {
-            $(this).parent().find(".clear.btn").prop("disabled", true);
-        } else {
-            $(this).parent().find(".clear.btn").prop("disabled", false);
-        }
-    });
-
-    // Highlight search bar on text focus
-    $(document).on("focus", ".search-bar [type='text']", function() {
-        $(this).parent().addClass("focus");
-    });
-    $(document).on("blur", ".search-bar [type='text']", function() {
-        $(this).parent().removeClass("focus");
     });
 
     /**************\
@@ -167,31 +111,13 @@ $(document).ready(function() {
     |   DROPDOWNS   |
     \***************/
 
-    $(window).on("click resize", function() {
-        $(".dropdown").removeClass("active");
+    // slideDown animation to expanding dropdown, dropleft and dropright
+    $(".dropdown, .dropleft, .dropright").on("show.bs.dropdown", function() {
+        $(this).find(".dropdown-menu").first().stop(true, true).slideDown(200);
     });
-
-    $("[data-toggle='dropdown']").click(function(event) {
-        event.stopPropagation();
-        var target = $($(this).data("target"));
-        if (target.hasClass("active")) {
-            target.removeClass("active");
-            return;
-        }
-        $(".dropdown").removeClass("active");
-        if (target.hasClass("fixed")) {
-            // Get offset relative to viewport
-            var offsetX = $(this)[0].getBoundingClientRect().x;
-            var offsetY = $(this)[0].getBoundingClientRect().y;
-        } else {
-            // Get offset relative to parent
-            var offsetX = $(this)[0].offsetLeft;
-            var offsetY = $(this)[0].offsetTop;
-        }
-        var x = offsetX + $(this).outerWidth() - target.width();
-        var y = offsetY + $(this).outerHeight();
-        target.css({ "top": y, "left": x });
-        target.addClass("active");
+    // slideUp animation to collapsing dropdown, dropleft and dropright
+    $(".dropdown, .dropleft, .dropright").on("hide.bs.dropdown", function() {
+        $(this).find(".dropdown-menu").first().stop(true, true).slideUp(200);
     });
 
     /*************************\
@@ -238,6 +164,29 @@ $(document).ready(function() {
     });
     $(document).on("click", ".img-fullscreen", function() {
         $(this).remove();
+    });
+
+    /*************\
+    |   SLIDERS   |
+    \*************/
+
+    function adjustProgress(slider) {
+        // Update slider thumb
+        var minValue = slider.attr("min");
+        var range = slider.attr("max") - minValue;
+        var relativeValue = slider.val() - minValue;
+        var progressWidth = relativeValue / range * 100;
+        slider.parent().find(".slider-progress").css("width", progressWidth + "%");
+        // Update slider tooltip
+        var tooltip = slider.parent().find(".slider-tooltip");
+        tooltip.text(slider.val());
+        tooltip.css("left", "calc(" + progressWidth + "% - " + tooltip.width() + "px)");
+    }
+    $(document).on("input", ".slider", function() {
+        adjustProgress($(this));
+    });
+    $(document).ready(function() {
+        $(".slider").each(function() { adjustProgress($(this)) });
     });
 
 });

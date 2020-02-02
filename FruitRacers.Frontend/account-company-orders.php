@@ -37,19 +37,36 @@
                         </a>
                     </div>
                     <div class="tab-content my-4" id="nav-tabContent">
-                        <div class="tab-pane show active" id="nav-open-orders" role="tabpanel" aria-labelledby="nav-open-orders-tab">
+                        <div class="tab-pane fade show active" id="nav-open-orders" role="tabpanel" aria-labelledby="nav-open-orders-tab">
 
                             <div class="empty-state m-5">
                                 <img src="images/empty.png"/>
-                                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">No items here</h6>
-                                <p class="text-center text-dis-dark m-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun ordine attivo</h6>
+                                <p class="text-center text-dis-dark m-0">In questa sezione sono visualizzati i prodotti da consegnare al nostro fattorino.</p>
                             </div>
 
                         </div>
-                        <div class="tab-pane" id="nav-order-history" role="tabpanel" aria-labelledby="nav-order-history-tab">
-                            <p>
-                                Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.
-                            </p>
+                        <div class="tab-pane fade" id="nav-order-history" role="tabpanel" aria-labelledby="nav-order-history-tab">
+
+                            <div class="empty-state m-5">
+                                <img src="images/empty.png"/>
+                                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">La cronologia ordini è vuota</h6>
+                                <p class="text-center text-dis-dark m-0">Gli ordini completati vengono mostrati qui.</p>
+                            </div>
+
+                            <div class="divider dark mb-4"></div>
+                            <div class="d-flex justify-content-center w-100">
+                                <ul class="pagination">
+                                    <li><a href="#" class="btn icon ripple disabled" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
+                                    <li><a href="#" class="selected">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#" class="btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
 

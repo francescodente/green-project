@@ -46,7 +46,7 @@
                 <p class="text-center m-0"><span class="price">0,00</span><span class="currency">€</span></p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="modal-cancel btn accent ripple text-center" data-dismiss="modal" style="width: 160px;">Ok</button>
+                <button class="modal-cancel btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
             </div>
         </div>
     </div>

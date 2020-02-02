@@ -37,15 +37,23 @@
                         </a>
                     </div>
                     <div class="tab-content my-4" id="nav-tabContent">
-                        <div class="tab-pane show active" id="nav-pickup" role="tabpanel" aria-labelledby="nav-pickup-tab">
-                            <p>
-                                Et et consectetur ipsum labore excepteur est proident excepteur ad velit occaecat qui minim occaecat veniam. Fugiat veniam incididunt anim aliqua enim pariatur veniam sunt est aute sit dolor anim. Velit non irure adipisicing aliqua ullamco irure incididunt irure non esse consectetur nostrud minim non minim occaecat. Amet duis do nisi duis veniam non est eiusmod tempor incididunt tempor dolor ipsum in qui sit. Exercitation mollit sit culpa nisi culpa non adipisicing reprehenderit do dolore. Duis reprehenderit occaecat anim ullamco ad duis occaecat ex.
-                            </p>
+                        <div class="tab-pane fade show active" id="nav-pickup" role="tabpanel" aria-labelledby="nav-pickup-tab">
+
+                            <div class="empty-state m-5">
+                                <img src="images/empty.png"/>
+                                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun prodotto da ritirare</h6>
+                                <p class="text-center text-dis-dark m-0">In questa sezione sono visualizzati i fornitori da visitare per il carico di ogni giorno.</p>
+                            </div>
+
                         </div>
-                        <div class="tab-pane" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
-                            <p>
-                                Nulla est ullamco ut irure incididunt nulla Lorem Lorem minim irure officia enim reprehenderit. Magna duis labore cillum sint adipisicing exercitation ipsum. Nostrud ut anim non exercitation velit laboris fugiat cupidatat. Commodo esse dolore fugiat sint velit ullamco magna consequat voluptate minim amet aliquip ipsum aute laboris nisi. Labore labore veniam irure irure ipsum pariatur mollit magna in cupidatat dolore magna irure esse tempor ad mollit. Dolore commodo nulla minim amet ipsum officia consectetur amet ullamco voluptate nisi commodo ea sit eu.
-                            </p>
+                        <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
+
+                            <div class="empty-state m-5">
+                                <img src="images/empty.png"/>
+                                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessuna consegna da effettuare</h6>
+                                <p class="text-center text-dis-dark m-0">Nessun ordine è pronto per la consegna.<br>Continua a caricare!</p>
+                            </div>
+
                         </div>
                     </div>
 

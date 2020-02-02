@@ -17,6 +17,13 @@
             <div class="parallax shade" data-parallax-image="images/cart.jpg"></div>
         </section>
         <section id="cart-content" class="container py-4">
+
+            <!-- <div class="empty-state m-5">
+                <img src="images/empty.png"/>
+                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Il carrello è vuoto</h6>
+                <p class="text-center text-dis-dark m-0">Visualizza l'elenco del nostri <a href="companies.php">partner</a> per cominciare con gli acquisti!</p>
+            </div> -->
+
             <form class="row">
                 <div class="col-12 col-lg-8">
 
@@ -35,7 +42,7 @@
                                 <div>
                                     <p class="product-name m-0">Product name</p>
                                     <p class="text-sec-dark m-0">
-                                        <span class="product-unitary-price">0,00</span><span class="currency">€</span> × <span class="product-quantity">0</span> <span class="product-um">Kg</span> (<span class="product-total-price">0,00</span><span class="currency">€</span>)
+                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between">
@@ -60,7 +67,7 @@
                                 <div>
                                     <p class="product-name m-0">Product name</p>
                                     <p class="text-sec-dark m-0">
-                                        <span class="product-unitary-price">0,00</span><span class="currency">€</span> × <span class="product-quantity">0</span> <span class="product-um">Kg</span> (<span class="product-total-price">0,00</span><span class="currency">€</span>)
+                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between">
@@ -87,7 +94,7 @@
                                 <div>
                                     <p class="product-name m-0">Product name</p>
                                     <p class="text-sec-dark m-0">
-                                        <span class="product-unitary-price">0,00</span><span class="currency">€</span> × <span class="product-quantity">0</span> <span class="product-um">Kg</span> (<span class="product-total-price">0,00</span><span class="currency">€</span>)
+                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between">
@@ -162,7 +169,7 @@
                     <!-- OTHER FIELDS -->
                     <h4 class="mt-5 mb-4">Altro</h4>
                     <div class="text-area">
-                        <textarea id="notes" class="w-100"></textarea>
+                        <textarea id="notes" class="w-100" placeholder=" "></textarea>
                         <label for="textarea">Note per la consegna</label>
                         <span>Inserisci qui il tuo buono sconto!</span>
                     </div>
@@ -231,8 +238,8 @@
                     <p class="m-0">Sei sicuro di voler rimuovere questo prodotto dal carrello?</p>
                 </div>
                 <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple text-center" data-dismiss="modal" style="width: 160px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple text-center" data-dismiss="modal" style="width: 160px;">Rimuovi</button>
+                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
                 </div>
             </div>
         </div>

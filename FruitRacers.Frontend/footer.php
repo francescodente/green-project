@@ -4,7 +4,7 @@
             <div class="col-12 mt-4 mb-3">
                 <button id="go-top-btn" class="btn round outline ripple text-center">
                     <i class="mdi dark mdi-chevron-up"></i>
-                    <p>Torna su</p>
+                    <span class="text-sec-dark">Torna su</span>
                 </button>
             </div>
             <div class="col-12 mt-3 mb-4">

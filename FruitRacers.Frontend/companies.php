@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <a href="company.php" class="btn round accent ripple text-center w-100">Seleziona</a>
+                                <a href="company.php" class="btn round accent ripple w-100">Seleziona</a>
                             </div>
                         </div>
                     </div>

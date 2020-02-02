@@ -31,64 +31,6 @@
     width: 100%;
 }
 
-#modal-address-management .address {
-    border-radius: 4px;
-    transition: background-color 0.2s ease-in-out;
-}
-
-#modal-address-management .address.selected {
-    border: 2px solid var(--col-accent);
-}
-
-#modal-address-management .new.address:hover,
-#modal-address-management .new.address:focus-within {
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
-#modal-address-management .address .thumb {
-    background-size: cover;
-    height: 48px;
-    width: 48px;
-    border-radius: 4px;
-    margin: 8px 16px 8px 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.08);
-    border: 2px solid #EEE;
-    outline: none;
-}
-
-#modal-address-management .new.address .thumb {
-    border: 2px solid transparent;
-}
-
-#modal-address-management .address .thumb .mdi {
-    color: #707070;
-}
-
-#modal-address-management p {
-    flex-grow: 1;
-}
-
-#modal-address-management *:not(p) {
-    flex-shrink: 0;
-}
-
-#modal-address-management .delete-address,
-#modal-address-management .create-address {
-    margin-right: 14px;
-}
-
-#modal-address-management .address-input {
-    height: 64px;
-    flex-grow: 1;
-    margin-right: 16px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-
 /*******************\
 |   PRODUCT MODAL   |
 \*******************/
@@ -106,6 +48,7 @@
     top: 50%;
     transform: translateY(-50%);
     right: 12px;
+    font-size: 16px;
 }
 
 /*********************\
