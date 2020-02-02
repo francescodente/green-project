@@ -39,6 +39,8 @@ namespace FruitRacers.Backend.ApiLayer
 
             app.UseRouting();
 
+            app.UseStaticFiles();
+
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "swagger/{documentName}/swagger.json";

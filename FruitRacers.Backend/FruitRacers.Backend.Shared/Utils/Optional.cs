@@ -69,6 +69,12 @@ namespace FruitRacers.Backend.Shared.Utils
             return OfNullable(value);
         }
 
+        public static IOptional<T> AsOptional<T>(this T value)
+            where T : class
+        {
+            return OfNullable(value);
+        }
+
         public static IOptional<T> Empty<T>()
         {
             return new EmptyOptional<T>();
