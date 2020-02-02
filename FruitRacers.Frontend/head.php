@@ -18,9 +18,9 @@
 <link rel="stylesheet" type="text/css" href="css/colors-typography.css"/>
 <link rel="stylesheet" type="text/css" href="css/components.css"/>
 <link rel="stylesheet" type="text/css" href="css/ui.css"/>
-<!-- <link rel="stylesheet" type="text/css" href="css/style.css"/> -->
 <link rel="stylesheet" type="text/css" href="css/menu.css"/>
 <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
 <link rel="stylesheet" type="text/css" href="css/modals.css"/>
 <link rel="stylesheet" type="text/css" href="css/home.css"/>
 <link rel="stylesheet" type="text/css" href="css/cart.css"/>

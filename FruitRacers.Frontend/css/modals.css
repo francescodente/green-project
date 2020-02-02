@@ -31,61 +31,6 @@
     width: 100%;
 }
 
-#modal-address-management .address {
-    border-radius: 4px;
-    transition: background-color 0.2s ease-in-out;
-}
-
-#modal-address-management .address:not(:last-child) {
-    margin-bottom: 8px;
-}
-
-#modal-address-management .address:hover,
-#modal-address-management .new.address.focus {
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
-#modal-address-management .address .thumb {
-    background-size: cover;
-    height: 48px;
-    width: 48px;
-    border-radius: 4px;
-    margin: 8px 16px 8px 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.08);
-    border: 2px solid #EEE;
-    outline: none;
-}
-
-#modal-address-management .new.address .thumb {
-    border: 2px solid transparent;
-    cursor: pointer;
-}
-
-#modal-address-management .address .thumb .mdi {
-    color: #707070;
-}
-
-#modal-address-management p {
-    flex-grow: 1;
-}
-
-#modal-address-management .delete-address,
-#modal-address-management .create-address {
-    margin-right: 14px;
-}
-
-#modal-address-management .address-input {
-    height: 64px;
-    flex-grow: 1;
-    margin-right: 16px;
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-
 /*******************\
 |   PRODUCT MODAL   |
 \*******************/
@@ -94,16 +39,16 @@
     width: 360px;
 }
 
-/*******************\
-|   COMPANY MODAL   |
-\*******************/
+/********************\
+|   CART ADD MODAL   |
+\********************/
 
-#modal-company .modal-top {
-    background-color: var(--col-primary);
-}
-
-#modal-company .card-image div {
-    border-radius: 0;
+#modal-cart-add .text-input span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 12px;
+    font-size: 16px;
 }
 
 /*********************\
@@ -114,10 +59,6 @@
     width: 100%;
 }
 
-.time-slots, .time-slot {
-    border: 1px solid rgba(0, 0, 0, 0.12);
-}
-
 .time-slots {
     width: 100%;
 }
@@ -126,6 +67,7 @@
     text-align: center;
     padding: 10px 0;
     cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.12);
     transition: background-color 0.2s ease-in-out;
 }
 
@@ -138,17 +80,19 @@
     background-color: var(--col-primary-dark);
 }
 
-.time-slot.full {
-    color: var(--col-text-dis-dark);
+.time-slot.disabled span {
+    display: none;
 }
 
-.time-slot.disabled {
-    color: transparent;
-    background-image: linear-gradient(to bottom right,  transparent calc(50% - 1px), rgba(0, 0, 0, 0.12), transparent calc(50% + 1px));
+.time-slot.full span {
+    color: var(--col-text-dis-dark);
 }
 
 .time-slot.selected {
     cursor: default;
-    color: var(--col-text-light);
     background-color: var(--col-accent);
+}
+
+.time-slot.selected span {
+    color: var(--col-text-light);
 }

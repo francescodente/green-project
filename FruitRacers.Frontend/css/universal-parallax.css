@@ -5,7 +5,7 @@
 	overflow: hidden;
 	position: absolute;
 	top: 0;
-	width: 100%;
+	width: 100vw;
 	z-index: -100;
 }
 .parallax__container .parallax {
@@ -18,7 +18,7 @@
 	transform: translate3d(0, 0, 0);
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
-	width: 100%;
+	width: 100vw;
 }
 
 /* Cover scroll bar padding with parallax background*/
@@ -26,7 +26,6 @@
 
     .parallax__container {
         left: calc((100% - 100vw) / 2);
-        width: calc(100vw - ((100vw - 100%) / 2));
     }
 }
 
@@ -36,6 +35,7 @@
 
 .parallax-container {
     height: 100vh;
+    overflow-x: hidden;
 }
 
 .parallax.shade::after {

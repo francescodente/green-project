@@ -1,11 +1,8 @@
-/*****************\
-|   MAIN COLORS   |
-\*****************/
-
+/* Override these values in another stylesheet with !important */
 :root {
 
-    --col-accent: #FF8A80;
-    --col-accent-dark: #C85A54;
+    --col-accent: #64B5F6;
+    --col-accent-dark: #5AA3DD;
     --col-primary: #FAFAFA;
     --col-primary-dark: #F0F0F0;
     --col-primary-light: #FFFFFF;
@@ -33,6 +30,9 @@
     --col-error-dark: #B71C1C;
     --col-warning-light: #FFD600;
     --col-warning-dark: #FBC02D;
+
+    --font-heading: 'Nunito', sans-serif;
+    --font-normal: 'Nunito Sans', sans-serif;
 }
 
 /***********\
@@ -40,11 +40,11 @@
 \***********/
 
 *, html, body, p, span, a, label, input {
-    font-family: 'Lato', sans-serif;
+    font-family: var(--font-normal);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-heading);
 }
 
 /**********\

@@ -26,14 +26,16 @@ $(document).ready(function() {
             // Switch to edit mode
             icon.removeClass("mdi-pencil");
             icon.addClass("mdi-content-save");
-            $(this).find("p").html("Salva");
+            $(this).find("span").html("Salva");
             $(this).closest("form").find("input, textarea").prop("disabled", false);
+            $(this).closest("form").find(".file-input").removeClass("disabled");
         } else {
             // Save edits
             icon.removeClass("mdi-content-save");
             icon.addClass("mdi-pencil");
-            $(this).find("p").html("Modifica");
+            $(this).find("span").html("Modifica");
             $(this).closest("form").find("input, textarea").prop("disabled", true);
+            $(this).closest("form").find(".file-input").addClass("disabled");
             // TODO submit
         }
     });

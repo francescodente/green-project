@@ -24,6 +24,8 @@
                 <div id="account-tabs-col" class="d-none d-lg-block col-lg-3">
                     <?php include("account-tabs.php"); ?>
                 </div>
+
+                <!-- GENERAL -->
                 <div id="account-content-col" class="col-12 col-lg-9">
                     <div class="d-flex justify-content-between align-items-center pb-1">
                         <h4 class="m-0">Generali</h4>
@@ -65,6 +67,7 @@
 
                     <div class="divider dark my-4"></div>
 
+                    <!-- PERSONAL -->
                     <div class="d-flex justify-content-between align-items-center pb-1">
                         <h4 class="m-0">Dati personali</h4>
                         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="false" title="Mostra">
@@ -106,8 +109,12 @@
                         <label for="r3" class="mb-2">Altro</label>
 
                         <div class="text-right mt-4">
-                            <button type="button" class="edit-form btn accent ripple">
-                                <p>Modifica</p>
+                            <button type="button" class="delete-form btn outline ripple" style="width: 120px">
+                                <span class="text-sec-dark">Cancella</span>
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
+                            <button type="button" class="edit-form btn accent ripple" style="width: 120px">
+                                <span class="text-light">Modifica</span>
                                 <i class="mdi light mdi-pencil"></i>
                             </button>
                         </div>
@@ -116,6 +123,7 @@
 
                     <div class="divider dark my-4"></div>
 
+                    <!-- ADDRESSES -->
                     <div class="d-flex justify-content-between align-items-center pb-1">
                         <h4 class="m-0">Indirizzi</h4>
                         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-addresses" aria-expanded="false" title="Mostra">
@@ -123,34 +131,44 @@
                         </button>
                     </div>
 
-                    <div id="user-data-addresses" class="collapse">
+                    <div id="user-data-addresses" class="collapse address-management">
                         <div class="pt-3"></div>
 
-                        <div class="address d-flex align-items-center">
+                        <div class="address d-flex align-items-center mb-2 selected">
                             <div class="thumb" style="background-image: url('images/map-thumb.png');">
                                 <i class="mdi mdi-map-marker"></i>
                             </div>
                             <p class="m-0">Viale della Via 123, 47522 - Cesena (FC)</p>
+                            <button class="delete-address btn icon ripple" title="Elimina" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-delete">
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
                         </div>
-                        <div class="address d-flex align-items-center">
+                        <div class="address d-flex align-items-center mb-2">
                             <div class="thumb" style="background-image: url('images/map-thumb.png');">
                                 <i class="mdi mdi-map-marker"></i>
                             </div>
                             <p class="m-0">Altra Via 999, 47522 - Cesena (FC)</p>
+                            <button class="set-default-address btn icon ripple mr-2" title="Imposta come predefinito" >
+                                <i class="mdi dark mdi-star-outline"></i>
+                            </button>
+                            <button class="delete-address btn icon ripple" title="Elimina" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-delete">
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
                         </div>
-                        <button type="button" class="manage-addresses ripple d-flex align-items-center" data-toggle="modal" data-target="#modal-address-management">
+
+                        <div class="new address d-flex align-items-center">
                             <div class="thumb">
-                                <i class="mdi dark mdi-map-marker"></i>
+                                <i class="mdi mdi-map-marker-plus"></i>
                             </div>
-                            <div>
-                                <p class="m-0">Gestisci indirizzi</p>
-                            </div>
-                        </button>
+                            <input type="text" class="address-input" name="address" placeholder="Inserisci un nuovo indirizzo"/>
+                            <button class="create-address btn icon ripple" title="Conferma"><i class="mdi dark mdi-check"></i></button>
+                        </div>
 
                     </div>
 
                     <div class="divider dark my-4"></div>
 
+                    <!-- COMPANY -->
                     <div class="d-flex justify-content-between align-items-center pb-1">
                         <h4 class="m-0">Dati aziendali</h4>
                         <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-company" aria-expanded="false" title="Mostra">
@@ -176,7 +194,12 @@
                             <input id="sdi" type="text" name="sdi" disabled/>
                         </div>
 
-                        <h6>Indirizzo PEC</h6>
+                        <h6>Indirizzo</h6>
+                        <div class="text-input mb-3">
+                            <input id="address" type="text" name="address" disabled/>
+                        </div>
+
+                        <h6>PEC</h6>
                         <div class="text-input mb-3">
                             <input id="pec" type="text" name="pec" disabled/>
                         </div>
@@ -192,8 +215,62 @@
                         </div>
 
                         <div class="text-right mt-4">
-                            <button type="button" class="edit-form btn accent ripple">
-                                <p>Modifica</p>
+                            <button type="button" class="delete-form btn outline ripple" style="width: 120px">
+                                <span class="text-sec-dark">Cancella</span>
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
+                            <button type="button" class="edit-form btn accent ripple" style="width: 120px">
+                                <span class="text-light">Modifica</span>
+                                <i class="mdi light mdi-pencil"></i>
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="divider dark my-4"></div>
+
+                    <!-- IMAGES -->
+                    <div class="d-flex justify-content-between align-items-center pb-1">
+                        <h4 class="m-0">Immagini</h4>
+                        <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-images" aria-expanded="false" title="Mostra">
+                            <i class="mdi dark mdi-chevron-down"></i>
+                        </button>
+                    </div>
+
+                    <form id="user-data-images" class="collapse">
+                        <div class="pt-3"></div>
+
+                        <p class="text-sec-dark">
+                            Carica un'immagine per vedere in'anteprima come sarà visualizzata all'interno del sito.
+                        </p>
+
+                        <h6 class="mb-3">Logo aziendale</h6>
+                        <img class="company-logo mb-3" src="images/default_company.png"/>
+                        <label for="logo" class="file-input ripple disabled mb-3">
+                            <input id="logo" type="file" disabled/>
+                            <i class="mdi mdi-upload"></i>
+                            <span>Seleziona</span>
+                            <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                        </label>
+
+                        <h6 class="mb-3">Immagine di sfondo</h6>
+                        <div class="fixed-ratio fr-2-1 mb-3">
+                            <img class="company-image" src="images/example_product.jpg"/>
+                        </div>
+                        <label for="background" class="file-input ripple disabled mb-3">
+                            <input id="background" type="file" disabled/>
+                            <i class="mdi mdi-upload"></i>
+                            <span>Seleziona</span>
+                            <span class="count d-none"><i class="mdi mdi-check"></i></span>
+                        </label>
+
+                        <div class="text-right mt-4">
+                            <button type="button" class="delete-form btn outline ripple" style="width: 120px">
+                                <span class="text-sec-dark">Cancella</span>
+                                <i class="mdi dark mdi-delete"></i>
+                            </button>
+                            <button type="button" class="edit-form btn accent ripple" style="width: 120px">
+                                <span class="text-light">Modifica</span>
                                 <i class="mdi light mdi-pencil"></i>
                             </button>
                         </div>
@@ -219,7 +296,23 @@
     <script src="js/account-user-data.js"></script>
 
     <?php include("modal-pwd-change.php"); ?>
-    <?php include("modal-address-management.php"); ?>
+
+    <div id="modal-address-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-delete-empty"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="m-0">Sei sicuro di voler eliminare questo indirizzo?</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

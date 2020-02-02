@@ -17,83 +17,97 @@
             <div class="parallax shade" data-parallax-image="images/cart.jpg"></div>
         </section>
         <section id="cart-content" class="container py-4">
+
+            <!-- <div class="empty-state m-5">
+                <img src="images/empty.png"/>
+                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Il carrello è vuoto</h6>
+                <p class="text-center text-dis-dark m-0">Visualizza l'elenco del nostri <a href="companies.php">partner</a> per cominciare con gli acquisti!</p>
+            </div> -->
+
             <form class="row">
                 <div class="col-12 col-lg-8">
 
                     <!-- PRODUCTS -->
                     <h4>Prodotti</h4>
-                    <h5 class="mt-3"><a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Azienda</a></h5>
-                    <div class="product d-flex align-items-center justify-content-between mb-2">
+
+                    <h5 class="mt-3"><a href="company.php" class="company-name">Azienda</a></h5>
+                    <div class="product card flat mb-4">
                         <div class="d-flex align-items-center">
-                            <a href="#" data-toggle="modal" data-target="#modal-product">
-                                <img class="product-image" src="images/example_product.jpg"/>
-                            </a>
-                            <p class="m-0">
-                                <span class="product-name">Product name</span><br>
-                                <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
-                            </p>
-                        </div>
-                        <div class="product-quantity-section d-flex align-items-center">
-                            <span>€<span class="product-unitary-price">0,00</span> × </span>
-                            <div class="product-quantity-col d-flex flex-column align-items-center">
-                                <div class="text-input">
-                                    <input class="product-quantity" type="text" value="1"/>
-                                </div>
-                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                            <div style="width: 80px;">
+                                <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
+                                    <img class="card-bg" src="images/example_product.jpg"/>
+                                </a>
                             </div>
-                            <span> <span class="product-unit">Kg</span></span>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
+                                <div>
+                                    <p class="product-name m-0">Product name</p>
+                                    <p class="text-sec-dark m-0">
+                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Cambia quantità">
+                                        <i class="mdi dark mdi-plus-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
+                                        <i class="mdi dark mdi-delete"></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
-                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
-                    <div class="product d-flex align-items-center justify-content-between mb-2">
+                    <div class="product card flat mb-4">
                         <div class="d-flex align-items-center">
-                            <a href="#" data-toggle="modal" data-target="#modal-product">
-                                <img class="product-image" src="images/example_product.jpg"/>
-                            </a>
-                            <p class="m-0">
-                                <span class="product-name">Product name</span><br>
-                                <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
-                            </p>
-                        </div>
-                        <div class="product-quantity-section d-flex align-items-center">
-                            <span>€<span class="product-unitary-price">0,00</span> × </span>
-                            <div class="product-quantity-col d-flex flex-column align-items-center">
-                                <div class="text-input">
-                                    <input class="product-quantity" type="text" value="1"/>
-                                </div>
-                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                            <div style="width: 80px;">
+                                <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
+                                    <img class="card-bg" src="images/example_product.jpg"/>
+                                </a>
                             </div>
-                            <span> <span class="product-unit">Kg</span></span>
-                        </div>
-                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
-                    </div>
-                    <h5 class="mt-3"><a href="#" class="company-name" data-toggle="modal" data-target="#modal-company">Azienda</a></h5>
-                    <div class="product d-flex align-items-center justify-content-between mb-2">
-                        <div class="d-flex align-items-center">
-                            <a href="#" data-toggle="modal" data-target="#modal-product">
-                                <img class="product-image" src="images/example_product.jpg"/>
-                            </a>
-                            <p class="m-0">
-                                <span class="product-name">Product name</span><br>
-                                <span class="text-sec-dark">€<span class="product-total-price text-sec-dark">0,00</span></span>
-                            </p>
-                        </div>
-                        <div class="product-quantity-section d-flex align-items-center">
-                            <span>€<span class="product-unitary-price">0,00</span> × </span>
-                            <div class="product-quantity-col d-flex flex-column align-items-center">
-                                <div class="text-input">
-                                    <input class="product-quantity" type="text" value="1"/>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
+                                <div>
+                                    <p class="product-name m-0">Product name</p>
+                                    <p class="text-sec-dark m-0">
+                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                    </p>
                                 </div>
-                                <button type="button" class="inc-quantity btn icon ripple" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
-                                <button type="button" class="dec-quantity btn icon ripple" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Cambia quantità">
+                                        <i class="mdi dark mdi-plus-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
+                                        <i class="mdi dark mdi-delete"></i>
+                                    </button>
+                                </div>
                             </div>
-                            <span> <span class="product-unit">Kg</span></span>
                         </div>
-                        <button type="button" class="delete-cart-product btn icon ripple" title="Rimuovi"><i class="mdi dark mdi-delete"></i></button>
                     </div>
 
+                    <h5 class="mt-3"><a href="company.php" class="company-name">Azienda</a></h5>
+                    <div class="product card flat mb-4">
+                        <div class="d-flex align-items-center">
+                            <div style="width: 80px;">
+                                <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
+                                    <img class="card-bg" src="images/example_product.jpg"/>
+                                </a>
+                            </div>
+                            <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
+                                <div>
+                                    <p class="product-name m-0">Product name</p>
+                                    <p class="text-sec-dark m-0">
+                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Cambia quantità">
+                                        <i class="mdi dark mdi-plus-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
+                                        <i class="mdi dark mdi-delete"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- PAYMENT METHOD -->
                     <h4 class="mt-5 mb-4">Modalità di pagamento</h4>
@@ -155,7 +169,7 @@
                     <!-- OTHER FIELDS -->
                     <h4 class="mt-5 mb-4">Altro</h4>
                     <div class="text-area">
-                        <textarea id="notes" class="w-100"></textarea>
+                        <textarea id="notes" class="w-100" placeholder=" "></textarea>
                         <label for="textarea">Note per la consegna</label>
                         <span>Inserisci qui il tuo buono sconto!</span>
                     </div>
@@ -212,7 +226,24 @@
 
     <?php include("modal-address-management.php"); ?>
     <?php include("modal-time-slot.php"); ?>
-    <?php include("modals-product-company.php"); ?>
+    <?php include("modals-product.php"); ?>
+
+    <div id="modal-cart-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-delete-empty"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="m-0">Sei sicuro di voler rimuovere questo prodotto dal carrello?</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

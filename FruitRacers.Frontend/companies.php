@@ -12,7 +12,7 @@
 
         <section id="companies" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
-                <h1 class="text-light">AZIENDE</h1>
+                <h1 class="text-light">PARTNER</h1>
             </div>
             <div class="parallax shade" data-parallax-image="images/companies.jpg"></div>
         </section>
@@ -21,22 +21,26 @@
                 <?php
                 for ($i = 0; $i < 8; $i++) {
                     ?>
-                    <div class="col-12 col-md-6">
-                        <div class="card company d-flex flex-column mb-4">
-                            <div class="company-header p-3">
-                                <h5 class="company-name font-weight-bold text-center my-2">Company name</h5>
+                    <div class="col-12 col-lg-6">
+                        <div class="card mb-4">
+                            <div class="fixed-ratio fr-2-1">
+                                <img class="card-bg company-image" src="images/example_product.jpg"/>
                             </div>
-                            <div class="card-image">
-                                <div class="fixed-ratio fr-4-3" style="background-image: url('images/default_company.png');"></div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-3 col-md-2 col-lg-3" style="padding: 16px;">
+                                        <div class="fixed-ratio fr-1-1">
+                                            <img class="card-bg company-logo" src="images/default_company.png"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-9 col-md-10 col-lg-9 card-body d-flex flex-column justify-content-center">
+                                        <h3 class="company-name">Company name</h3>
+                                        <a href="#" class="company-address text-sec-dark">Viale della Via 123, Cesena (FC)</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-content p-3">
-                                <a href="#" class="company-address text-sec-dark">Viale della Via 123, Cesena (FC)</a>
-                                <p class="company-description mt-3">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                </p>
-                            </div>
-                            <div class="company-links d-flex justify-content-center p-3">
-                                <a href="products.php" class="company-products btn accent ripple">Visualizza i prodotti</a>
+                            <div class="card-footer">
+                                <a href="company.php" class="btn round accent ripple w-100">Seleziona</a>
                             </div>
                         </div>
                     </div>

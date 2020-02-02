@@ -1,7 +1,7 @@
 /* Prevent content from shifting when scroll bar is removed */
 @media (min-width: 768px) {
 
-    .top-bar, .menu, .content, .footer {
+    .top-bar, .content, .footer, .toast {
         padding-left: calc(100vw - 100%);
     }
 }
@@ -153,7 +153,7 @@ body {
     padding: 12px;
 }
 
-.modal-bottom *:not(:last-child) {
+.modal-bottom>*:not(:last-child) {
     margin-right: 6px;
 }
 
@@ -197,15 +197,16 @@ body {
 
 .toast {
     position: fixed;
-    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 16px;
     display: flex;
     justify-content: center;
-    left: 0;
-    bottom: 16px;
 }
 
 .toast-content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 6px;
     border-radius: 4px;
@@ -220,6 +221,7 @@ body {
 
 .toast-close {
     color: var(--col-accent)!important;
+    flex-shrink: 0;
 }
 
 /**********\

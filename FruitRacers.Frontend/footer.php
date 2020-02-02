@@ -4,7 +4,7 @@
             <div class="col-12 mt-4 mb-3">
                 <button id="go-top-btn" class="btn round outline ripple text-center">
                     <i class="mdi dark mdi-chevron-up"></i>
-                    <p>Torna su</p>
+                    <span class="text-sec-dark">Torna su</span>
                 </button>
             </div>
             <div class="col-12 mt-3 mb-4">
@@ -40,7 +40,7 @@
                     <a href="https://www.instagram.com" target="_blank" class="btn icon dark ripple" title="Instagram"><i class="mdi dark mdi-instagram"></i></a>
                 </div>
                 <h6>Privacy</h6>
-                <a href="privacy.php" class="d-block mb-3">Informativa</a>
+                <a href="privacy-terms.php" class="d-block mb-3">Informativa</a>
                 <h6>Copyright</h6>
                 <p class="m-0">&copy; <?php echo date("Y"); ?> Fruitracers™</p>
             </div>

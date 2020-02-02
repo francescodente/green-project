@@ -9,7 +9,7 @@
 .ripple-effect {
     position: absolute;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: #000;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -17,11 +17,16 @@
     pointer-events: none;
     padding: 0;
     margin: 0;
-    opacity: 0.6;
+    opacity: 0.12;
     transform: translate3d(-50%, -50%, 0);
     -webkit-transform: translate3d(-50%, -50%, 0);
 }
 
 .ripple.light .ripple-effect {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #FFF;
+}
+
+.ripple-accent .ripple-effect, .ripple-accent.light .ripple-effect {
+    background-color: var(--col-accent);
+    opacity: 0.5;
 }
