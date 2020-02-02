@@ -7,7 +7,6 @@ using FruitRacers.Backend.Contracts.Products;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Repositories;
-using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 
@@ -42,8 +41,15 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task<IEnumerable<ProductOutputDto>> GetProducts(PaginationFilter pagination, ProductsFilters filters)
         {
             IProductRepository products = this.Data.Products;
-            products = filters.SupplierId != null ? products.BelongingTo(filters.SupplierId.Value) : products;
-            products = filters.Categories.Any() ? products.WithCategories(filters.Categories) : products;
+
+            products = filters.SupplierId != null
+                ? products.BelongingTo(filters.SupplierId.Value)
+                : products;
+
+            products = filters.Categories != null && filters.Categories.Any()
+                ? products.WithCategories(filters.Categories)
+                : products;
+
             return await products
                 .AsPagedEnumerable(pagination.PageNumber, pagination.PageSize)
                 .Then(p => this.Mapper.Map<IEnumerable<ProductOutputDto>>(p));

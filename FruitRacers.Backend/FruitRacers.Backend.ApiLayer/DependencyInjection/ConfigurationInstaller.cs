@@ -1,4 +1,5 @@
 ﻿using FruitRacers.Backend.ApiLayer.Validation.Configuration;
+using FruitRacers.Backend.Infrastructure.Email;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,20 +13,20 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
     {
         public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            this.InstallConfiguration<PasswordValidationSettings>(services, config, nameof(PasswordValidationSettings));
+            this.InstallConfiguration<PasswordValidationSettings>(services, config);
+            this.InstallConfiguration<MailSettings>(services, config);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config)
             where T : class
         {
-            InstallConfiguration<T>(services, config, typeof(T).Name);
+            this.InstallConfiguration<T>(services, config, typeof(T).Name);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config, string sectionName)
             where T : class
         {
-            IConfiguration section = config.GetSection(sectionName);
-            services.Configure<T>(section);
+            services.AddSingleton(config.GetSection(sectionName).Get<T>());
         }
     }
 }

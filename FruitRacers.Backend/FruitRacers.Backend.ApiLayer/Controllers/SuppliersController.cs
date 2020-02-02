@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FruitRacers.Backend.ApiLayer.Routes;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    [Route("api/suppliers")]
+    [Route(ApiRoutes.BASE_ROUTE + "/suppliers")]
     [ApiController]
     public class SuppliersController : ControllerBase
     {

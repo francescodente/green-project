@@ -7,12 +7,15 @@ namespace FruitRacers.Backend.Core.Entities
         public Supplier()
         {
             Products = new HashSet<Product>();
-            SupplierImages = new HashSet<SupplierImage>();
         }
 
         public string Description { get; set; }
+        public int? LogoImageId { get; set; }
+        public int? BackgroundImageId { get; set; }
+
         public virtual ICollection<Product> Products { get; set; }
-        public virtual ICollection<SupplierImage> SupplierImages { get; set; }
         public virtual ICollection<OrderSection> ReceivedOrders { get; set; }
+        public virtual Image LogoImage { get; set; }
+        public virtual Image BackgroundImage { get; set; }
     }
 }

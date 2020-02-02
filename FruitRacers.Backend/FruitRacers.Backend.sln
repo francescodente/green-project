@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FruitRacers.Backend.Test", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FruitRacers.Backend.Contracts", "FruitRacers.Backend.Contracts\FruitRacers.Backend.Contracts.csproj", "{DB6926A0-7B95-416E-8268-FCDF780C95A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FruitRacers.Backend.Infrastructure", "FruitRacers.Backend.Infrastructure\FruitRacers.Backend.Infrastructure.csproj", "{5B08F391-BC18-41B9-878C-E123BB90D340}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FruitRacers.Backend.Infrastructure", "FruitRacers.Backend.Infrastructure\FruitRacers.Backend.Infrastructure.csproj", "{5B08F391-BC18-41B9-878C-E123BB90D340}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

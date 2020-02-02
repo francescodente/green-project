@@ -3,7 +3,6 @@ using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Repositories;
-using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 using System;

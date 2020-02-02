@@ -57,6 +57,18 @@ namespace FruitRacers.Backend.Shared.Utils
             return value == null ? Empty<T>() : Of(value);
         }
 
+        public static IOptional<T> OfNullable<T>(T? value)
+            where T : struct
+        {
+            return value == null ? Empty<T>() : Of(value.Value);
+        }
+
+        public static IOptional<T> AsOptional<T>(this T? value)
+            where T : struct
+        {
+            return OfNullable(value);
+        }
+
         public static IOptional<T> Empty<T>()
         {
             return new EmptyOptional<T>();

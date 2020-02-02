@@ -6,6 +6,7 @@ namespace FruitRacers.Backend.Contracts.Products
     public class ProductOutputDto : AbstractProductDto
     {
         public int ProductId { get; set; }
-        public IEnumerable<CategoryDto> Categories { get; set; }
+        public CategoryDto Category { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

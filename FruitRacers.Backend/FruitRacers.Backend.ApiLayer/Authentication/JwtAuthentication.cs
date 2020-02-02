@@ -23,12 +23,12 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
         public JwtAuthentication(IHashCalculator hashCalculator,
                                  ISaltGenerator saltGenerator,
                                  IStringEncoding encoding,
-                                 IOptions<AuthenticationSettings> settings)
+                                 AuthenticationSettings settings)
         {
             this.hashCalculator = hashCalculator;
             this.saltGenerator = saltGenerator;
             this.encoding = encoding;
-            this.settings = settings.Value;
+            this.settings = settings;
         }
 
         public void AssignPassword(User user, string password)

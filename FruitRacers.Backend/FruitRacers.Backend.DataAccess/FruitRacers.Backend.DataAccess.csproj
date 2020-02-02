@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20191227163721_InitialDatabaseSchema.Designer.cs" />
     <Compile Remove="Migrations\20191227164852_InitialDatabaseSchema.cs" />
     <Compile Remove="Migrations\20191227164852_InitialDatabaseSchema.Designer.cs" />
+    <Compile Remove="Migrations\20191231142232_RefactorImages.cs" />
+    <Compile Remove="Migrations\20191231142232_RefactorImages.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -9,7 +9,6 @@ namespace FruitRacers.Backend.Core.Entities
         {
             OrderDetails = new HashSet<OrderDetail>();
             Prices = new HashSet<Price>();
-            ProductImages = new HashSet<ProductImage>();
         }
 
         public int ProductId { get; set; }
@@ -20,11 +19,12 @@ namespace FruitRacers.Backend.Core.Entities
         public bool IsDeleted { get; set; }
         public int SupplierId { get; set; }
         public int CategoryId { get; set; }
+        public int? ImageId { get; set; }
 
         public virtual Supplier Supplier { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         public virtual ICollection<Price> Prices { get; set; }
-        public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual Image Image { get; set; }
     }
 }

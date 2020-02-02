@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using FruitRacers.Backend.ApiLayer.Routes;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    [Route("api/users")]
+    [Route(ApiRoutes.BASE_ROUTE + "/users")]
     [ApiController]
     public class UsersController : ControllerBase
     {

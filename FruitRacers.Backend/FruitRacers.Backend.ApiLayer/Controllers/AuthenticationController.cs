@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using FruitRacers.Backend.ApiLayer.Filters;
+using FruitRacers.Backend.ApiLayer.Routes;
 using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Services;
@@ -8,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    [Route("api/auth")]
+    [Route(ApiRoutes.BASE_ROUTE + "/auth")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {

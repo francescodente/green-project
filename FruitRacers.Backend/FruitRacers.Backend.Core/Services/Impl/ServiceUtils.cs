@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FruitRacers.Backend.Core.Services.Utils
+namespace FruitRacers.Backend.Core.Services.Impl
 {
     public static class ServiceUtils
     {

@@ -6,7 +6,6 @@ using AutoMapper;
 using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
-using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 

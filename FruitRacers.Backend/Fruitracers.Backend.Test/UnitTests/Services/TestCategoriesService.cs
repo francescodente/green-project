@@ -3,7 +3,6 @@ using FruitRacers.Backend.Core;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
-using FruitRacers.Backend.Core.Services.Utils;
 using FruitRacers.Backend.Shared.Utils;
 using NSubstitute;
 using NUnit.Framework;
@@ -12,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Core.Session;
+using FruitRacers.Backend.Infrastructure.Mapping;
 
 namespace FruitRacers.Backend.Test.UnitTests.Services
 {
