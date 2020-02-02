@@ -79,10 +79,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
         private async Task<Supplier> FindSupplier(int supplierId)
         {
             return await this.Data
-                .Users
-                .IncludingRoles()
-                .FindOne(u => u.UserId == supplierId)
-                .Then(ou => ou.FlatMap(u => Optional.OfNullable(u.Supplier)).OrElseThrow(() => new NotFoundException())); // TODO: Use proper exception
+                .Suppliers
+                .FindOne(s => s.UserId == supplierId)
+                .Then(s => s.OrElseThrow(() => UserNotFoundException.WithId(supplierId)));
         }
 
         public async Task<IImageResource> SupplierBackgroundImage(int supplierId)

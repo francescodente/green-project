@@ -21,7 +21,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task SendSupportEmail(SupportRequestDto request)
         {
-            await this.mailService.NewMail()
+            await this.mailService.NewMail() // TODO: Setup real mail contexts and use those instead of the test one
                 .From(MailContext.Test)
                 .To(request.SenderEmail)
                 .Subject(request.Subject)

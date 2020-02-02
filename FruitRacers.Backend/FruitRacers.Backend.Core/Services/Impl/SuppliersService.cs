@@ -17,9 +17,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task<IEnumerable<SupplierInfoDto>> GetAllSuppliers()
         {
-            // TODO: Select correct suppliers
             return await this.Data
-                .Users
+                .Suppliers
                 .AsEnumerable()
                 .Then(s => s.Select(this.Mapper.Map<SupplierInfoDto>));
         }

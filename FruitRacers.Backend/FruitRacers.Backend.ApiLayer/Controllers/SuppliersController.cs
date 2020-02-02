@@ -19,5 +19,11 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         {
             this.suppliersService = suppliersService;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllSuppliers()
+        {
+            return Ok(await this.suppliersService.GetAllSuppliers());
+        }
     }
 }

@@ -39,6 +39,13 @@ namespace FruitRacers.Backend.DataAccess.Sql
         public IRepository<Address> Addresses =>
             new SqlRepository<Address>(this.context);
 
+        public IReadOnlyRepository<Supplier> Suppliers =>
+            new ReadOnlySqlRepository<Supplier>(this.context, q => q
+                .Include(s => s.LogoImage)
+                .Include(s => s.BackgroundImage)
+                .Include(s => s.User)
+                    .ThenInclude(s => s.Addresses));
+
         public void Dispose()
         {
             this.context.Dispose();
