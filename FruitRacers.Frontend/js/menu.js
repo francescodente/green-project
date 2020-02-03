@@ -27,10 +27,10 @@ $(document).ready(function() {
     function checkMenuScroll() {
         if($(this).scrollTop() > 0) {
             $(".top-bar:not(.scroll)").addClass("scroll");
-            $(".top-bar .menu-item, .top-bar .btn.icon").removeClass("light");
+            $(".top-bar-center>.menu-item, .top-bar .btn.icon").removeClass("light");
         } else {
             $(".top-bar.scroll").removeClass("scroll");
-            $(".top-bar .menu-item, .top-bar .btn.icon").addClass("light");
+            $(".top-bar-center>.menu-item, .top-bar .btn.icon").addClass("light");
         }
     }
     $(window).scroll(function() {

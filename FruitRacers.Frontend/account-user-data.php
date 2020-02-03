@@ -241,7 +241,7 @@
                         <div class="pt-3"></div>
 
                         <p class="text-sec-dark">
-                            Carica un'immagine per vedere in'anteprima come sarà visualizzata all'interno del sito.
+                            Carica un'immagine per vedere in anteprima come sarà visualizzata all'interno del sito.
                         </p>
 
                         <h6 class="mb-3">Logo aziendale</h6>

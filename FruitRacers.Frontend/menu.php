@@ -33,22 +33,22 @@ $page = basename($_SERVER['PHP_SELF']);
                     <i class="mdi dark mdi-account-circle"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-account">
-                    <a href="account-user-data.php" class="dropdown-item">
+                    <a href="account-user-data.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-card-text"></i><span>I miei dati</span>
                     </a>
-                    <a href="account-client-orders.php" class="dropdown-item">
+                    <a href="account-client-orders.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
                     </a>
-                    <a href="account-company-orders.php" class="dropdown-item">
+                    <a href="account-company-orders.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
                     </a>
-                    <a href="account-delivery-orders.php" class="dropdown-item">
+                    <a href="account-delivery-orders.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
                     </a>
-                    <a href="account-company-products.php" class="dropdown-item">
+                    <a href="account-company-products.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-food-apple"></i><span>Prodotti</span>
                     </a>
-                    <a href="account-admin-management.php" class="dropdown-item">
+                    <a href="account-admin-management.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-pound-box"></i><span>Gestione</span>
                     </a>
                     <a href="#" class="dropdown-item">
@@ -62,10 +62,10 @@ $page = basename($_SERVER['PHP_SELF']);
                     <i class="mdi dark mdi-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu">
-                    <a href="faq.php" class="dropdown-item">
+                    <a href="faq.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-help-circle"></i><span>Aiuto</span>
                     </a>
-                    <a href="privacy-terms.php" class="dropdown-item">
+                    <a href="privacy-terms.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-checkbook"></i><span>Privacy e termini</span>
                     </a>
                 </div>
