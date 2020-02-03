@@ -1,13 +1,7 @@
-﻿using FruitRacers.Backend.Core;
-using FruitRacers.Backend.Core.Entities;
+﻿using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Session;
-using FruitRacers.Backend.DataAccess.Sql;
 using FruitRacers.Backend.DataAccess.Sql.Repositories;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.DataAccess.Sql
@@ -21,30 +15,19 @@ namespace FruitRacers.Backend.DataAccess.Sql
             this.context = context;
         }
 
-        public IUserRepository Users =>
-            new SqlUserRepository(this.context);
+        public IUserRepository Users => new SqlUserRepository(this.context);
 
-        public IOrderRepository Orders =>
-            new SqlOrderRepository(this.context);
+        public IOrderRepository Orders => new SqlOrderRepository(this.context);
 
-        public IProductRepository Products =>
-            new SqlProductRepository(this.context);
+        public IProductRepository Products => new SqlProductRepository(this.context);
 
-        public ITimeSlotRepository TimeSlots =>
-            new SqlTimeSlotRepository(this.context);
+        public ITimeSlotRepository TimeSlots => new SqlTimeSlotRepository(this.context);
 
-        public IReadOnlyRepository<Category> Categories =>
-            new ReadOnlySqlRepository<Category>(this.context, q => q.Include(c => c.Image));
+        public IReadOnlyRepository<Category> Categories => new SqlCategoryRepository(this.context);
 
-        public IRepository<Address> Addresses =>
-            new SqlRepository<Address>(this.context);
+        public IRepository<Address> Addresses => new SqlAddressRepository(this.context);
 
-        public IReadOnlyRepository<Supplier> Suppliers =>
-            new ReadOnlySqlRepository<Supplier>(this.context, q => q
-                .Include(s => s.LogoImage)
-                .Include(s => s.BackgroundImage)
-                .Include(s => s.User)
-                    .ThenInclude(s => s.Addresses));
+        public IReadOnlyRepository<Supplier> Suppliers => new SqlSupplierRepository(this.context);
 
         public void Dispose()
         {

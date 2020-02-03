@@ -12,6 +12,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
     {
         public SqlProductRepository(FruitracersContext context)
             : this(context, q => q
+                .Where(p => !p.IsDeleted)
                 .Include(p => p.Prices)
                 .Include(p => p.Category)
                 .Include(p => p.Image))
