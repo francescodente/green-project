@@ -26,7 +26,10 @@ $page = basename($_SERVER['PHP_SELF']);
         </div>
 
         <div class="top-bar-right">
-            <a href="cart.php" class="btn icon ripple" title="Carrello"><i class="mdi dark mdi-cart"></i></a>
+            <div style="position: relative">
+                <a href="cart.php" class="btn icon ripple" title="Carrello"><i class="mdi dark mdi-cart"></i></a>
+                <span class="cart-badge badge">3</span>
+            </div>
 
             <div class="dropdown">
                 <button id="dropdown-account" class="btn icon ripple d-none d-lg-flex" title="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -139,6 +142,7 @@ $page = basename($_SERVER['PHP_SELF']);
         <a href="cart.php" class="menu-item ripple">
             <i class="mdi mdi-cart"></i>
             <span>Carrello</span>
+            <span class="cart-badge badge">3</span>
         </a>
 
         <div class="divider dark"></div>

@@ -91,6 +91,19 @@
     transform: rotate(180deg);
 }
 
+span.cart-badge {
+    color: var(--col-text-light)!important;
+    background-color: var(--col-accent);
+    border-radius: 9px;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+}
+
+.cart-badge:empty {
+    display: none;
+}
+
 /* DESKTOP MENU */
 @media (min-width: 992px) {
 
@@ -104,7 +117,7 @@
         justify-content: center;
     }
 
-    .menu-item:hover, .top-bar-center>.menu-item.selected {
+    .menu-item:hover, .top-bar-center>.menu-item.selected, .menu-item.btn.selected {
         background-color: rgba(0, 0, 0, 0.08)!important;
     }
 
@@ -274,6 +287,13 @@
 
     .top-bar .dropdown-menu {
         display: none!important;
+    }
+
+    .menu-item>.cart-badge {
+        top: 50%;
+        transform: translateY(-50%);
+        right: 15px;
+        color: var(--col-text-light)!important;
     }
 }
 
