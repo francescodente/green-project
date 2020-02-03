@@ -45,7 +45,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                     .IfPresent(n => options.SetName(n));
             };
 
-            return new ImageResource(this.storage, storingOptions, imageSupplier, imageSetter, this.Data.SaveChanges);
+            return new ImageResource(this.storage, storingOptions, imageSupplier, imageSetter, this.Data);
         }
 
         public async Task<IImageResource> CategoryImage(int categoryId)
@@ -72,7 +72,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return this.CreateImageResource(
                 () => product.Image,
                 img => product.Image = img,
-                this.settings.Categories,
+                this.settings.Products,
                 productId);
         }
 

@@ -29,6 +29,8 @@ namespace FruitRacers.Backend.DataAccess.Sql
 
         public IReadOnlyRepository<Supplier> Suppliers => new SqlSupplierRepository(this.context);
 
+        public IRepository<Image> Images => new SqlImageRepository(this.context);
+
         public void Dispose()
         {
             this.context.Dispose();
