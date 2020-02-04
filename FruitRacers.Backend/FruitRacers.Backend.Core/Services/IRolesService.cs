@@ -8,12 +8,12 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IRolesService
     {
-        Task<PersonDto> AssignPersonRole(PersonDto person);
+        Task<PersonDto> AssignPersonRole(int userId, PersonDto person);
 
-        Task<CustomerBusinessDto> AssignCustomerBusinessRole(CustomerBusinessDto customerBusiness);
+        Task<CustomerBusinessDto> AssignCustomerBusinessRole(int userId, CustomerBusinessDto customerBusiness);
 
-        Task RemovePersonRole();
+        Task RemovePersonRole(int userId);
 
-        Task RemoveCustomerBusinessRole();
+        Task RemoveCustomerBusinessRole(int userId);
     }
 }

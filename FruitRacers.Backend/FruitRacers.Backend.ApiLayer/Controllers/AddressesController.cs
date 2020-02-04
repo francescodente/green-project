@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/addresses")]
+    [Route(ApiRoutes.BASE_ROUTE + "/customers/{userId}/addresses")]
     [ApiController]
     [RequireLogin(RoleType.Person, RoleType.CustomerBusiness)]
     public class AddressesController : ControllerBase
@@ -21,27 +21,31 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAddresses()
+        [OwnerOnly]
+        public async Task<IActionResult> GetAddresses([FromRoute] int userId)
         {
-            return Ok(await this.addressesService.GetAddresses());
+            return Ok(await this.addressesService.GetAddresses(userId));
         }
 
         [HttpPost]
-        public async Task<IActionResult> InsertAddress([FromBody] AddressInputDto address)
+        [OwnerOnly]
+        public async Task<IActionResult> InsertAddress([FromRoute] int userId, [FromBody] AddressInputDto address)
         {
-            return Ok(await this.addressesService.AddAddress(address));
+            return Ok(await this.addressesService.AddAddress(userId, address));
         }
 
         [HttpPut("{addressId}")]
-        public async Task<IActionResult> UpdateAddress([FromRoute] int addressId, [FromBody] AddressInputDto address)
+        [OwnerOnly]
+        public async Task<IActionResult> UpdateAddress([FromRoute] int userId, [FromRoute] int addressId, [FromBody] AddressInputDto address)
         {
-            return Ok(await this.addressesService.UpdateAddress(addressId, address));
+            return Ok(await this.addressesService.UpdateAddress(userId, addressId, address));
         }
 
         [HttpDelete("{addressId}")]
-        public async Task<IActionResult> DeleteAddress([FromRoute] int addressId)
+        [OwnerOnly]
+        public async Task<IActionResult> DeleteAddress([FromRoute] int userId, [FromRoute] int addressId)
         {
-            await this.addressesService.DeleteAddress(addressId);
+            await this.addressesService.DeleteAddress(userId, addressId);
             return NoContent();
         }
     }

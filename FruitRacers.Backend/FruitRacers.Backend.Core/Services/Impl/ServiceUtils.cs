@@ -16,12 +16,21 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public static class ServiceUtils
     {
-        public static void EnsureOwnership(int resourceOwnerId, int userId)
+        public static void RequireOwnership(int resourceOwnerId, int userId)
         {
             if (resourceOwnerId != userId)
             {
                 throw new UnauthorizedUserAccessException(userId);
             }
+        }
+
+        public static void RequireOwnershipOrAdminRole(int userId, IUserSession session)
+        {
+            if (session.HasRole(RoleType.Administrator))
+            {
+                return;
+            }
+            RequireOwnership(userId, session.UserId);
         }
 
         public static async Task<(TimeSlot, int)> FindTimeSlotWithActualCapacity(IDataSession session, int timeSlotId, DateTime date)

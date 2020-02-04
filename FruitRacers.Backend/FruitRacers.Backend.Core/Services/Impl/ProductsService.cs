@@ -28,24 +28,20 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Then(p => p.OrElseThrow(() => new ProductNotFoundException(productId)));
         }
 
-        public async Task DeleteProduct(int productId)
+        public async Task DeleteProduct(int userId, int productId)
         {
             Product product = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(product.SupplierId, this.RequestingUser.UserId);
+            ServiceUtils.RequireOwnership(product.SupplierId, this.RequestingUser.UserId);
 
             product.IsDeleted = true;
 
             await this.Data.SaveChanges();
         }
 
-        public async Task<PagedCollection<ProductOutputDto>> GetProducts(PaginationFilter pagination, ProductsFilters filters)
+        public async Task<PagedCollection<ProductOutputDto>> GetProducts(int userId, PaginationFilter pagination, ProductsFilters filters)
         {
-            IProductRepository products = this.Data.Products;
-
-            products = filters.SupplierId != null
-                ? products.BelongingTo(filters.SupplierId.Value)
-                : products;
+            IProductRepository products = this.Data.Products.BelongingTo(userId);
 
             products = filters.Categories != null && filters.Categories.Any()
                 ? products.WithCategories(filters.Categories)
@@ -54,7 +50,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return await ServiceUtils.PagedCollectionFromRepository<Product, ProductOutputDto>(products, pagination, this.Mapper);
         }
 
-        public async Task<ProductOutputDto> InsertProduct(ProductInputDto product)
+        public async Task<ProductOutputDto> InsertProduct(int userId, ProductInputDto product)
         {
             Product productEntity = new Product
             {
@@ -88,11 +84,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
             };
         }
 
-        public async Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product)
+        public async Task<ProductOutputDto> UpdateProduct(int userId, int productId, ProductInputDto product)
         {
             Product productEntity = await this.RequireProduct(productId);
 
-            ServiceUtils.EnsureOwnership(productEntity.SupplierId, this.RequestingUser.UserId);
+            ServiceUtils.RequireOwnership(productEntity.SupplierId, this.RequestingUser.UserId);
 
             productEntity.Name = product.Name;
             productEntity.Description = product.Description;

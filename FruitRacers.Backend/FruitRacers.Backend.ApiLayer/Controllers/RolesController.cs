@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using FruitRacers.Backend.ApiLayer.Filters;
 using FruitRacers.Backend.ApiLayer.Routes;
 using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FruitRacers.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/roles")]
+    [Route(ApiRoutes.BASE_ROUTE + "/users/{userId}/roles")]
     [ApiController]
     public class RolesController : ControllerBase
     {
@@ -22,28 +19,32 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
         }
 
         [HttpPut("person")]
-        public async Task<IActionResult> AssignPersonRole([FromBody] PersonDto person)
+        [OwnerOnly]
+        public async Task<IActionResult> AssignPersonRole([FromRoute] int userId, [FromBody] PersonDto person)
         {
-            return Ok(await this.rolesService.AssignPersonRole(person));
+            return Ok(await this.rolesService.AssignPersonRole(userId, person));
         }
 
         [HttpPut("customerbusiness")]
-        public async Task<IActionResult> AssingCustomerBusinessRole([FromBody] CustomerBusinessDto customerBusiness)
+        [OwnerOnly]
+        public async Task<IActionResult> AssingCustomerBusinessRole([FromRoute] int userId, [FromBody] CustomerBusinessDto customerBusiness)
         {
-            return Ok(await this.rolesService.AssignCustomerBusinessRole(customerBusiness));
+            return Ok(await this.rolesService.AssignCustomerBusinessRole(userId, customerBusiness));
         }
 
         [HttpDelete("person")]
-        public async Task<IActionResult> RemovePersonRole()
+        [OwnerOnly]
+        public async Task<IActionResult> RemovePersonRole([FromRoute] int userId)
         {
-            await this.rolesService.RemovePersonRole();
+            await this.rolesService.RemovePersonRole(userId);
             return NoContent();
         }
 
         [HttpDelete("customerbusiness")]
-        public async Task<IActionResult> RemoveCustomerBusinessRole()
+        [OwnerOnly]
+        public async Task<IActionResult> RemoveCustomerBusinessRole([FromRoute] int userId)
         {
-            await this.rolesService.RemoveCustomerBusinessRole();
+            await this.rolesService.RemoveCustomerBusinessRole(userId);
             return NoContent();
         }
     }

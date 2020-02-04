@@ -8,12 +8,12 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IProductsService
     {
-        Task<PagedCollection<ProductOutputDto>> GetProducts(PaginationFilter pagination, ProductsFilters filters);
+        Task<PagedCollection<ProductOutputDto>> GetProducts(int userId, PaginationFilter pagination, ProductsFilters filters);
 
-        Task<ProductOutputDto> InsertProduct(ProductInputDto product);
+        Task<ProductOutputDto> InsertProduct(int userId, ProductInputDto product);
 
-        Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product);
+        Task<ProductOutputDto> UpdateProduct(int productId, int productId1, ProductInputDto product);
 
-        Task DeleteProduct(int productId);
+        Task DeleteProduct(int productId, int productId1);
     }
 }
