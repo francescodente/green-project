@@ -235,3 +235,15 @@
     outline: none;
     background-color: transparent;
 }
+
+/***********************\
+|   EDIT FIELD BUTTON   |
+\***********************/
+
+.text-input .edit-field,
+.text-area .edit-field,
+#user-data [type="password"] + .btn {
+    position: absolute;
+    right: 3px;
+    top: 9px;
+}

@@ -46,7 +46,7 @@
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Cambia quantità">
+                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
                                         <i class="mdi dark mdi-plus-minus"></i>
                                     </button>
                                     <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
@@ -71,7 +71,7 @@
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Cambia quantità">
+                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
                                         <i class="mdi dark mdi-plus-minus"></i>
                                     </button>
                                     <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
@@ -98,7 +98,7 @@
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Cambia quantità">
+                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
                                         <i class="mdi dark mdi-plus-minus"></i>
                                     </button>
                                     <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
@@ -163,15 +163,16 @@
                     <h4 class="mt-5 mb-4">Fascia oraria</h4>
                     <div class="d-flex align-items-center mb-2">
                         <p class="m-0"><span class="date">1 Gennaio 2020</span>, <span class="selected-time-slot">14:00 - 14:30</span></p>
-                        <button type="button" class="btn icon ripple ml-3" title="Modifica" data-toggle="modal" data-target="#modal-time-slot"><i class="mdi dark mdi-calendar-edit"></i></button>
+                        <button type="button" class="btn icon ripple ml-3" title="Seleziona" data-toggle="modal" data-target="#modal-time-slot"><i class="mdi dark mdi-calendar-edit"></i></button>
                     </div>
 
                     <!-- OTHER FIELDS -->
                     <h4 class="mt-5 mb-4">Altro</h4>
                     <div class="text-area">
-                        <textarea id="notes" class="w-100" placeholder=" "></textarea>
+                        <textarea id="notes" class="w-100" placeholder=" " disabled></textarea>
                         <label for="textarea">Note per la consegna</label>
                         <span>Inserisci qui il tuo buono sconto!</span>
+                        <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
                     </div>
 
                     <div class="divider dark d-lg-none mt-4"></div>
@@ -223,6 +224,7 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
+    <script src="js/cart.js"></script>
 
     <?php include("modal-address-management.php"); ?>
     <?php include("modal-time-slot.php"); ?>

@@ -50,13 +50,6 @@
     opacity: 0.65;
 }
 
-#user-data .text-input button,
-#user-data .text-area button {
-    position: absolute;
-    right: 3px;
-    top: 9px;
-}
-
 #user-data .company-logo {
     display: block;
     height: 96px;

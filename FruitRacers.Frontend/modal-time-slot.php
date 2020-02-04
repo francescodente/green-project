@@ -19,34 +19,34 @@
 
                 <table class="time-slots">
                     <tr class="d-none">
-                        <td class="time-slot disabled"><span>00:00 - 00:30</span></td>
-                        <td class="time-slot disabled"><span>00:30 - 01:00</span></td>
-                        <td class="time-slot disabled"><span>01:00 - 01:30</span></td>
-                        <td class="time-slot disabled"><span>01:30 - 02:00</span></td>
+                        <td class="time-slot disabled"><span>0:00 - 0:30</span></td>
+                        <td class="time-slot disabled"><span>0:30 - 1:00</span></td>
+                        <td class="time-slot disabled"><span>1:00 - 1:30</span></td>
+                        <td class="time-slot disabled"><span>1:30 - 2:00</span></td>
                     </tr>
                     <tr class="d-none">
-                        <td class="time-slot disabled"><span>02:00 - 02:30</span></td>
-                        <td class="time-slot disabled"><span>02:30 - 03:00</span></td>
-                        <td class="time-slot disabled"><span>03:00 - 03:30</span></td>
-                        <td class="time-slot disabled"><span>03:30 - 04:00</span></td>
+                        <td class="time-slot disabled"><span>2:00 - 2:30</span></td>
+                        <td class="time-slot disabled"><span>2:30 - 3:00</span></td>
+                        <td class="time-slot disabled"><span>3:00 - 3:30</span></td>
+                        <td class="time-slot disabled"><span>3:30 - 4:00</span></td>
                     </tr>
                     <tr class="d-none">
-                        <td class="time-slot disabled"><span>04:00 - 04:30</span></td>
-                        <td class="time-slot disabled"><span>04:30 - 05:00</span></td>
-                        <td class="time-slot disabled"><span>05:00 - 05:30</span></td>
-                        <td class="time-slot disabled"><span>05:30 - 06:00</span></td>
+                        <td class="time-slot disabled"><span>4:00 - 4:30</span></td>
+                        <td class="time-slot disabled"><span>4:30 - 5:00</span></td>
+                        <td class="time-slot disabled"><span>5:00 - 5:30</span></td>
+                        <td class="time-slot disabled"><span>5:30 - 6:00</span></td>
                     </tr>
                     <tr class="d-none">
-                        <td class="time-slot disabled"><span>06:00 - 06:30</span></td>
-                        <td class="time-slot disabled"><span>06:30 - 07:00</span></td>
-                        <td class="time-slot disabled"><span>07:00 - 07:30</span></td>
-                        <td class="time-slot disabled"><span>07:30 - 08:00</span></td>
+                        <td class="time-slot disabled"><span>6:00 - 6:30</span></td>
+                        <td class="time-slot disabled"><span>6:30 - 7:00</span></td>
+                        <td class="time-slot disabled"><span>7:00 - 7:30</span></td>
+                        <td class="time-slot disabled"><span>7:30 - 8:00</span></td>
                     </tr>
                     <tr>
-                        <td class="time-slot selected"><span>08:00 - 08:30</span></td>
-                        <td class="time-slot"><span>08:30 - 09:00</span></td>
-                        <td class="time-slot"><span>09:00 - 09:30</span></td>
-                        <td class="time-slot"><span>09:30 - 10:00</span></td>
+                        <td class="time-slot selected"><span>8:00 - 8:30</span></td>
+                        <td class="time-slot"><span>8:30 - 9:00</span></td>
+                        <td class="time-slot"><span>9:00 - 9:30</span></td>
+                        <td class="time-slot"><span>9:30 - 10:00</span></td>
                     </tr>
                     <tr>
                         <td class="time-slot full"><span>10:00 - 10:30</span></td>
@@ -88,7 +88,7 @@
                         <td class="time-slot disabled"><span>22:00 - 22:30</span></td>
                         <td class="time-slot disabled"><span>22:30 - 23:00</span></td>
                         <td class="time-slot disabled"><span>23:00 - 23:30</span></td>
-                        <td class="time-slot disabled"><span>23:30 - 00:00</span></td>
+                        <td class="time-slot disabled"><span>23:30 - 0:00</span></td>
                     </tr>
                 </table>
 
