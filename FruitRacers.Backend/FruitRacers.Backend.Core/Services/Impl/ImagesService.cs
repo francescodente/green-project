@@ -62,12 +62,14 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 categoryId);
         }
 
-        public async Task<IImageResource> ProductImage(int productId)
+        public async Task<IImageResource> ProductImage(int productId, int supplierId)
         {
             Product product = await this.Data
                 .Products
                 .FindOne(p => p.ProductId == productId)
                 .Then(p => p.OrElseThrow(() => new ProductNotFoundException(productId)));
+
+            ServiceUtils.RequireOwnership(product.SupplierId, supplierId);
 
             return this.CreateImageResource(
                 () => product.Image,

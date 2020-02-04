@@ -5,7 +5,7 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IImagesService
     {
-        Task<IImageResource> ProductImage(int productId);
+        Task<IImageResource> ProductImage(int productId, int supplierId);
 
         Task<IImageResource> CategoryImage(int categoryId);
 
