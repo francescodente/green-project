@@ -9,6 +9,8 @@ namespace FruitRacers.Backend.Core.Utils.Email
     {
         IMailBuilder To(string address);
 
+        IMailBuilder To(MailContext context);
+
         IMailBuilder From(MailContext context);
 
         IMailBuilder Subject(string subject);

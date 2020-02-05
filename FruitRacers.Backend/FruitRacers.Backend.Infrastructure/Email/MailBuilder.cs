@@ -36,6 +36,13 @@ namespace FruitRacers.Backend.Infrastructure.Email
             return this;
         }
 
+        public IMailBuilder To(MailContext context)
+        {
+            MailAddressInfo info = this.settings.EmailAddresses[context];
+            this.message.To.Add(info.Address);
+            return this;
+        }
+
         public IMailBuilder From(MailContext context)
         {
             MailAddressInfo info = this.settings.EmailAddresses[context];
