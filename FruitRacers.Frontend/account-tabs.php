@@ -27,8 +27,3 @@ $page = basename($_SERVER['PHP_SELF']);
     <p class="m-0">Prodotti</p>
     <i class="mdi dark mdi-chevron-right"></i>
 </a>
-<a id="admin-management-tab" href="account-admin-management.php" class="account-tab <?php echo $page == 'account-admin-management.php' ? 'selected' : '' ?>">
-    <i class="mdi dark mdi-pound-box"></i>
-    <p class="m-0">Gestione</p>
-    <i class="mdi dark mdi-chevron-right"></i>
-</a>
