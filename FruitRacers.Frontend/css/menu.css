@@ -217,6 +217,7 @@ span.cart-badge {
     }
 
     .menu-item {
+        color: var(--col-text-dark)!important;
         display: flex;
         flex-shrink: 0;
         width: calc(100% - 12px);
@@ -256,7 +257,7 @@ span.cart-badge {
         width: 36px;
     }
 
-    .menu-item.selected span, .menu-item.selected .mdi {
+    .menu-item.selected span:not(.badge), .menu-item.selected .mdi {
         color: var(--col-accent-dark)!important;
     }
 

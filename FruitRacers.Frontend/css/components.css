@@ -916,7 +916,8 @@ div.divider.vertical.light {
 /* Change border and prevent text shifting on focus */
 
 .text-input input:focus, textarea:focus,
-.text-input[aria-expanded="true"] input {
+.text-input[aria-expanded="true"] input,
+.text-input:focus-within input {
     padding: 5px 11px;
     border: 2px solid var(--col-accent)!important;
 }
@@ -931,7 +932,8 @@ div.divider.vertical.light {
 
 .text-input input:focus + label, textarea:focus + label,
 .text-input input:not(:placeholder-shown) + label, textarea:not(:placeholder-shown) + label,
-.text-input[aria-expanded="true"] label {
+.text-input[aria-expanded="true"] label,
+.text-input:focus-within label {
     cursor: default;
     top: -2px;
     left: 10px;
@@ -940,7 +942,8 @@ div.divider.vertical.light {
 }
 
 .text-input input:focus + label, textarea:focus + label,
-.text-input[aria-expanded="true"] label {
+.text-input[aria-expanded="true"] label,
+.text-input:focus-within label {
     color: var(--col-accent)!important;
 }
 
@@ -1044,6 +1047,55 @@ textarea {
     position: absolute;
     bottom: 0;
     right: 14px;
+}
+
+/* Number input */
+
+[type="number"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.text-input [type=number] {
+    padding-right: 42px!important;
+}
+
+.text-input [type=number] ~ .btn.icon {
+    position: absolute;
+    right: 1px;
+    height: 20px;
+    width: 36px;
+    padding: 0;
+    opacity: 0;
+    border-radius: 4px;
+    pointer-events: none;
+    transition: background-color 0.2s ease-in-out, opacity 0.2s ease-in-out;
+}
+
+.text-input:hover [type=number] ~ .btn.icon,
+.text-input:focus-within [type=number] ~ .btn.icon {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.text-input [type=number] ~ .inc {
+    top: 7px;
+}
+
+.text-input [type=number] ~ .dec {
+    bottom: 7px;
+}
+
+.text-input [type=number] ~ .btn.icon>.mdi {
+    height: 18px;
+    font-size: 18px;
+    line-height: 18px;
 }
 
 /****************\

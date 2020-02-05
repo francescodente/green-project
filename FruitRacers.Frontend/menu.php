@@ -37,26 +37,34 @@ $page = basename($_SERVER['PHP_SELF']);
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-account">
                     <a href="account-user-data.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-card-text"></i><span>I miei dati</span>
+                        <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
                     </a>
                     <a href="account-client-orders.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
+                        <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
                     </a>
                     <a href="account-company-orders.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
+                        <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
                     </a>
                     <a href="account-delivery-orders.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-book-open"></i><span>Ordini</span>
+                        <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
                     </a>
                     <a href="account-company-products.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-food-apple"></i><span>Prodotti</span>
-                    </a>
-                    <a href="account-admin-management.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-pound-box"></i><span>Gestione</span>
+                        <i class="mdi dark mdi-food-apple"></i><span class="text-dark">Prodotti</span>
                     </a>
                     <a href="#" class="dropdown-item">
                         <i class="mdi dark mdi-logout-variant"></i><span>Esci</span>
                     </a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button id="dropdown-admin" class="btn icon ripple d-none d-lg-flex" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi dark mdi-pound-box"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-admin">
+                    <a href="manage-users.php" class="dropdown-item menu-item">Gestione utenti</a>
+                    <a href="manage-products.php" class="dropdown-item menu-item">Gestione prodotti</a>
+                    <a href="manage-orders.php" class="dropdown-item menu-item">Gestione ordini</a>
                 </div>
             </div>
 
@@ -66,13 +74,14 @@ $page = basename($_SERVER['PHP_SELF']);
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu">
                     <a href="faq.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-help-circle"></i><span>Aiuto</span>
+                        <i class="mdi dark mdi-help-circle"></i><span class="text-dark">Aiuto</span>
                     </a>
                     <a href="privacy-terms.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-checkbook"></i><span>Privacy e termini</span>
+                        <i class="mdi dark mdi-checkbook"></i><span class="text-dark">Privacy e termini</span>
                     </a>
                 </div>
             </div>
+
         </div>
 
     </div>
@@ -104,12 +113,12 @@ $page = basename($_SERVER['PHP_SELF']);
 
         <div class="divider dark"></div>
 
-        <button class="menu-item ripple" data-toggle="submenu" data-target="#components-submenu">
+        <button class="menu-item ripple" data-toggle="submenu" data-target="#account-submenu">
             <i class="mdi mdi-account-circle"></i>
             <span>Account</span>
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
-        <div id="components-submenu" class="submenu">
+        <div id="account-submenu" class="submenu">
             <a href="account-user-data.php" class="menu-item ripple">
                 <i class="mdi mdi-card-text"></i>
                 <span>I miei dati</span>
@@ -144,6 +153,17 @@ $page = basename($_SERVER['PHP_SELF']);
             <span>Carrello</span>
             <span class="cart-badge badge">3</span>
         </a>
+
+        <button class="menu-item ripple" data-toggle="submenu" data-target="#admin-submenu">
+            <i class="mdi mdi-pound-box"></i>
+            <span>Gestione</span>
+            <i class="mdi expand dark mdi-chevron-down"></i>
+        </button>
+        <div id="admin-submenu" class="submenu">
+            <a href="manage-users.php" class="menu-item">Gestione utenti</a>
+            <a href="manage-products.php" class="menu-item">Gestione prodotti</a>
+            <a href="manage-orders.php" class="menu-item">Gestione ordini</a>
+        </div>
 
         <div class="divider dark"></div>
 

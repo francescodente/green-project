@@ -52,6 +52,31 @@
                             </div>
                             <p class="text-dis-dark m-0">0 risultati</p>
                         </div>
+
+                        <?php
+                        for ($i = 0; $i < 24; $i++) {
+                            ?>
+                            <div class="col-6 col-md-4 col-lg-3">
+                                <div class="card product-card mb-4">
+                                    <a href="#" class="fixed-ratio fr-1-1 img-hover-zoom" data-toggle="modal" data-target="#modal-product">
+                                        <img class="card-bg" src="images/example_product.jpg"/>
+                                        <div class="cover"><button class="btn round outline light">Visualizza</button></div>
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="product-name">Product name</h5>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="text-sec-dark">€<span class="product-price">00,00</span> / <span class="product-unit">Kg</span></span>
+                                            <button class="add-to-cart btn icon ripple" data-toggle="modal" data-target="#modal-cart-add" title="Aggiungi al carrello">
+                                                <i class="mdi dark mdi-cart-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>
