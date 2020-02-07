@@ -243,13 +243,12 @@ span.cart-badge {
 
     .menu-item span {
         color: var(--col-text-dark)!important;
+        text-align: left;
+        flex-grow: 1;
     }
 
-    .menu-item>.mdi:last-child, .menu-item>.btn.icon {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        right: 12px;
+    .menu-item .expand {
+        margin-left: 12px;
     }
 
     .menu-item>.btn.icon {
