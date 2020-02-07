@@ -15,6 +15,8 @@ namespace FruitRacers.Backend.Core.Session
         ITimeSlotRepository TimeSlots { get; }
         IReadOnlyRepository<Category> Categories { get; }
         IRepository<Address> Addresses { get; }
+        IReadOnlyRepository<Supplier> Suppliers { get; }
+        IRepository<Image> Images { get; }
 
         Task SaveChanges();
     }

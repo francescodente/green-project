@@ -1,5 +1,9 @@
-﻿using FruitRacers.Backend.Core.Entities;
+﻿using AutoMapper;
+using FruitRacers.Backend.Contracts.Filters;
+using FruitRacers.Backend.Contracts.Pagination;
+using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
+using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
 using System;
@@ -12,12 +16,21 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public static class ServiceUtils
     {
-        public static void EnsureOwnership(int resourceOwnerId, int userId)
+        public static void RequireOwnership(int resourceOwnerId, int userId)
         {
             if (resourceOwnerId != userId)
             {
                 throw new UnauthorizedUserAccessException(userId);
             }
+        }
+
+        public static void RequireOwnershipOrAdminRole(int userId, IUserSession session)
+        {
+            if (session.HasRole(RoleType.Administrator))
+            {
+                return;
+            }
+            RequireOwnership(userId, session.UserId);
         }
 
         public static async Task<(TimeSlot, int)> FindTimeSlotWithActualCapacity(IDataSession session, int timeSlotId, DateTime date)
@@ -58,6 +71,23 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 return Optional.Of(CustomerType.Person);
             }
             return Optional.Empty<CustomerType>();
+        }
+
+        public static async Task<PagedCollection<TDto>> PagedCollectionFromRepository<TEntity, TDto>(IReadOnlyRepository<TEntity> repository, PaginationFilter pagination, IMapper mapper)
+            where TEntity : class
+        {
+            Task<int> countTask = repository.Count();
+            Task<IEnumerable<TDto>> resultsTask = repository
+                .AsPagedEnumerable(pagination.PageNumber, pagination.PageSize)
+                .Then(mapper.Map<IEnumerable<TDto>>);
+
+            return new PagedCollection<TDto>
+            {
+                PageSize = pagination.PageSize,
+                PageNumber = pagination.PageNumber,
+                PageCount = (await countTask + pagination.PageSize - 1) / pagination.PageSize,
+                Results = await resultsTask
+            };
         }
     }
 }

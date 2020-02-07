@@ -5,16 +5,16 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface ICartService
     {
-        Task<CartOutputDto> GetCartDetails();
+        Task<CartOutputDto> GetCartDetails(int userId);
 
-        Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo);
+        Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo);
 
-        Task InsertCartItem(CartItemInputDto item);
+        Task InsertCartItem(int userId, CartItemInputDto item);
 
-        Task UpdateCartItem(CartItemInputDto item);
+        Task UpdateCartItem(int userId, CartItemInputDto item);
 
-        Task DeleteCartItem(int productId);
+        Task DeleteCartItem(int userId, int productId);
 
-        Task<OrderDto> ConfirmCart();
+        Task<OrderDto> ConfirmCart(int userId);
     }
 }

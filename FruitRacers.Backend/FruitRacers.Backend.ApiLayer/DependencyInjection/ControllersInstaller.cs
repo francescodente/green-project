@@ -3,7 +3,6 @@ using FruitRacers.Backend.ApiLayer.Filters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
-using System.Text.Json.Serialization;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {

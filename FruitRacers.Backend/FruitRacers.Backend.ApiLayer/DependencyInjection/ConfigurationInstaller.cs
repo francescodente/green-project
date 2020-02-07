@@ -1,4 +1,5 @@
 ﻿using FruitRacers.Backend.ApiLayer.Validation.Configuration;
+using FruitRacers.Backend.Core.Utils.Uploads;
 using FruitRacers.Backend.Infrastructure.Email;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,6 +16,7 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
         {
             this.InstallConfiguration<PasswordValidationSettings>(services, config);
             this.InstallConfiguration<MailSettings>(services, config);
+            this.InstallConfiguration<ImageUploadSettings>(services, config);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config)

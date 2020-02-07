@@ -7,8 +7,8 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IUsersService
     {
-        Task<UserOutputDto> GetUserData();
+        Task<UserOutputDto> GetUserData(int userId);
 
-        Task DeleteUser();
+        Task DeleteUser(int userId);
     }
 }

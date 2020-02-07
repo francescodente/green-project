@@ -42,6 +42,8 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                     ClockSkew = TimeSpan.FromMinutes(1)
                 };
             });
+
+            services.AddAuthorization();
         }
     }
 }

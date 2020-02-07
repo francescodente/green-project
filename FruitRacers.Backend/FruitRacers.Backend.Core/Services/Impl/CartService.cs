@@ -27,9 +27,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .BelongingTo(userId);
         }
 
-        public async Task<OrderDto> ConfirmCart()
+        public async Task<OrderDto> ConfirmCart(int userId)
         {
-            Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order cart = await this.FilterCartForUser(userId)
                 .IncludingDetailsAndProducts()
                 .FindOne()
                 .Then(oc => oc
@@ -52,7 +52,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             cart.OrderState = OrderState.Confirmed;
             cart.Timestamp = DateTime.Now;
 
-            CustomerType customerType = ServiceUtils.GetCustomerType(this.RequestingUser)
+            CustomerType customerType = ServiceUtils.GetCustomerType(this.RequestingUser) // TODO: use roles of the given user id
                 .OrElseThrow(() => new UnauthorizedPurchaseException());
 
             cart.Sections
@@ -77,9 +77,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
             detail.UnitMultiplier = price.UnitMultiplier;
         }
 
-        public async Task DeleteCartItem(int productId)
+        public async Task DeleteCartItem(int userId, int productId)
         {
-            Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order cart = await this.FilterCartForUser(userId)
                 .IncludingDetails()
                 .FindOne()
                 .Then(oc => oc.OrElseThrow(() => new CartItemNotFoundException(productId)));
@@ -100,9 +100,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
             await this.Data.SaveChanges();
         }
 
-        public async Task<CartOutputDto> GetCartDetails()
+        public async Task<CartOutputDto> GetCartDetails(int userId)
         {
-            return await this.FilterCartForUser(this.RequestingUser.UserId)
+            return await this.FilterCartForUser(userId)
                 .IncludingDetailsAndProducts()
                 .FindOne()
                 .Then(oc => oc
@@ -110,18 +110,18 @@ namespace FruitRacers.Backend.Core.Services.Impl
                     .OrElseGet(() => CartOutputDto.EmptyCart()));
         }
 
-        public async Task InsertCartItem(CartItemInputDto item)
+        public async Task InsertCartItem(int userId, CartItemInputDto item)
         {
             Product product = await this.Data
                 .Products
                 .FindOne(p => p.ProductId == item.ProductId)
                 .Then(p => p.OrElseThrow(() => new ProductNotFoundException(item.ProductId)));
 
-            Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order cart = await this.FilterCartForUser(userId)
                 .FindOne()
                 .Then(oc => oc
                     .Map(Task.FromResult)
-                    .OrElseGet(() => this.CreateCart(this.RequestingUser.UserId)));
+                    .OrElseGet(() => this.CreateCart(userId)));
 
             IOptional<OrderSection> optionalSection = cart.Sections
                 .SingleOptional(s => s.SupplierId == product.SupplierId);
@@ -154,11 +154,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return newCart;
         }
 
-        public async Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(DeliveryInfoInputDto deliveryInfo)
+        public async Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo)
         {
-            Order cart = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order cart = await this.FilterCartForUser(userId)
                 .FindOne()
-                .Then(oc => this.CreateCart(this.RequestingUser.UserId));
+                .Then(oc => this.CreateCart(userId));
 
             if (deliveryInfo.AddressId.HasValue)
             {
@@ -167,7 +167,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                     .FindOne(a => a.AddressId == deliveryInfo.AddressId)
                     .Then(t => t.OrElseThrow(() => new AddressNotFoundException(deliveryInfo.AddressId.Value)));
 
-                ServiceUtils.EnsureOwnership(address.UserId, this.RequestingUser.UserId);
+                ServiceUtils.RequireOwnership(address.UserId, userId);
             }
             
             if (deliveryInfo.TimeSlotId.HasValue && deliveryInfo.DeliveryDate.HasValue)
@@ -198,9 +198,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
             }
         }
 
-        public async Task UpdateCartItem(CartItemInputDto cartItem)
+        public async Task UpdateCartItem(int userId, CartItemInputDto cartItem)
         {
-            Order order = await this.FilterCartForUser(this.RequestingUser.UserId)
+            Order order = await this.FilterCartForUser(userId)
                 .IncludingDetails()
                 .FindOne()
                 .Then(oc => oc.OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));

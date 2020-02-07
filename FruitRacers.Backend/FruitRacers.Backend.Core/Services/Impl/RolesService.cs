@@ -4,9 +4,6 @@ using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -18,9 +15,18 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
         }
 
-        public async Task<CustomerBusinessDto> AssignCustomerBusinessRole(CustomerBusinessDto customerBusiness)
+        private async Task<User> RequireUser(int userId)
         {
-            User user = await this.FindRequestingUser(r => r.IncludingRoles());
+            return await this.Data
+                .Users
+                .IncludingRoles()
+                .FindOne(u => u.UserId == userId)
+                .Then(u => u.OrElseThrow(() => UserNotFoundException.WithId(userId)));
+        }
+
+        public async Task<CustomerBusinessDto> AssignCustomerBusinessRole(int userId, CustomerBusinessDto customerBusiness)
+        {
+            User user = await this.RequireUser(userId);
 
             if (user.CustomerBusiness is null)
             {
@@ -38,9 +44,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return this.Mapper.Map<CustomerBusinessDto>(user.CustomerBusiness);
         }
 
-        public async Task<PersonDto> AssignPersonRole(PersonDto person)
+        public async Task<PersonDto> AssignPersonRole(int userId, PersonDto person)
         {
-            User user = await this.FindRequestingUser(r => r.IncludingRoles());
+            User user = await this.RequireUser(userId);
 
             if (user.Person is null)
             {
@@ -57,18 +63,18 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return this.Mapper.Map<PersonDto>(user.Person);
         }
 
-        public async Task RemoveCustomerBusinessRole()
+        public async Task RemoveCustomerBusinessRole(int userId)
         {
-            User user = await this.FindRequestingUser(r => r.IncludingRoles());
+            User user = await this.RequireUser(userId);
 
             user.CustomerBusiness = null;
 
             await this.Data.SaveChanges();
         }
 
-        public async Task RemovePersonRole()
+        public async Task RemovePersonRole(int userId)
         {
-            User user = await this.FindRequestingUser(r => r.IncludingRoles());
+            User user = await this.RequireUser(userId);
 
             user.Person = null;
 

@@ -37,8 +37,6 @@ namespace FruitRacers.Backend.ApiLayer
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
-
             app.UseSwagger(c =>
             {
                 c.RouteTemplate = "swagger/{documentName}/swagger.json";
@@ -47,6 +45,10 @@ namespace FruitRacers.Backend.ApiLayer
             {
                 c.SwaggerEndpoint("v1/swagger.json", "Fruitracers API");
             });
+
+            app.UseRouting();
+
+            app.UseStaticFiles();
 
             app.UseAuthentication();
             app.UseAuthorization();
