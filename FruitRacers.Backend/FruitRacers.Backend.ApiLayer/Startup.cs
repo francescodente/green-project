@@ -33,9 +33,10 @@ namespace FruitRacers.Backend.ApiLayer
             else
             {
                 app.UseHsts();
+                app.UseHttpsRedirection();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseSwagger(c =>
             {
