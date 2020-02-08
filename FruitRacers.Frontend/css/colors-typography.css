@@ -57,6 +57,10 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 }
 
+h6.h-variant {
+    font-size: 12px;
+}
+
 h1, h2, h3, h4, h5, h6, p, span, label, input,
 .text-dark, .text-dark p, .text-dark span, .text-dark label, .text-dark input,
 .text-dark h1, .text-dark h2, .text-dark h3, .text-dark h4, .text-dark h5, .text-dark h6 {

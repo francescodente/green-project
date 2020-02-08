@@ -47,9 +47,10 @@
                     ?>
                     <div class="col-12 col-lg-6">
                         <div class="card mb-4">
-                            <div class="fixed-ratio fr-2-1">
+                            <a href="company.php" class="fixed-ratio fr-2-1 img-hover-zoom">
                                 <img class="card-bg company-image" src="images/example_product.jpg"/>
-                            </div>
+                                <div class="cover"><button class="btn round outline light">Seleziona</button></div>
+                            </a>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-3 col-md-2 col-lg-3" style="padding: 16px;">

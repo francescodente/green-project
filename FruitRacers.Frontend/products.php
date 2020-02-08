@@ -24,16 +24,16 @@
             </ol>
             <div class="row">
                 <div id="filters-col" class="col-12 col-lg-3 d-none">
-                    <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle="c1"/>
+                    <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle-all="categories"/>
                     <label for="c1" class="mt-2">Category</label><br>
                     <div class="pl-4">
-                        <input id="sc1" type="checkbox" class="checkbox" name="categories" value="sc1" data-toggled-by="c1" checked/>
+                        <input id="sc1" type="checkbox" class="checkbox" name="categories" value="sc1" checked/>
                         <label for="sc1">Subcategory 1</label><br>
-                        <input id="sc2" type="checkbox" class="checkbox" name="categories" value="sc2" data-toggled-by="c1" checked/>
+                        <input id="sc2" type="checkbox" class="checkbox" name="categories" value="sc2" checked/>
                         <label for="sc2">Subcategory 2</label><br>
-                        <input id="sc3" type="checkbox" class="checkbox" name="categories" value="sc3" data-toggled-by="c1" checked/>
+                        <input id="sc3" type="checkbox" class="checkbox" name="categories" value="sc3" checked/>
                         <label for="sc3">Subcategory 3</label><br>
-                        <input id="sc4" type="checkbox" class="checkbox" name="categories" value="sc4" data-toggled-by="c1" checked/>
+                        <input id="sc4" type="checkbox" class="checkbox" name="categories" value="sc4" checked/>
                         <label for="sc4">Subcategory 4</label><br>
                     </div>
                     <br>
@@ -99,10 +99,6 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
-
-    <?php include("components/objects.php") ?>
-
-    <script src="js/filter.js"></script>
     <script src="js/products.js"></script>
 
     <?php include("modals-product.php"); ?>

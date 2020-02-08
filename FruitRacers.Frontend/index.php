@@ -91,43 +91,43 @@
                 <div class="col-6 col-md-4 text-center text-md-right">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
-                        <p class="text-sec-dark mb-5">Ruolo</p>
+                        <p class="text-sec-dark mb-1">Gianni Tumedei</p>
+                        <h6 class="h-variant text-accent mb-5">Ruolo</h6>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
-                        <p class="text-sec-dark mb-5">Ruolo</p>
+                        <p class="text-sec-dark mb-1">Gianni Tumedei</p>
+                        <h6 class="h-variant text-accent mb-5">Ruolo</h6>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center text-md-left">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
-                        <p class="text-sec-dark mb-5">Ruolo</p>
+                        <p class="text-sec-dark mb-1">Gianni Tumedei</p>
+                        <h6 class="h-variant text-accent mb-5">Ruolo</h6>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center text-md-right">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
-                        <p class="text-sec-dark mb-5">Ruolo</p>
+                        <p class="text-sec-dark mb-1">Gianni Tumedei</p>
+                        <h6 class="h-variant text-accent mb-5">Ruolo</h6>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
-                        <p class="text-sec-dark mb-5">Ruolo</p>
+                        <p class="text-sec-dark mb-1">Gianni Tumedei</p>
+                        <h6 class="h-variant text-accent mb-5">Ruolo</h6>
                     </div>
                 </div>
                 <div class="col-6 col-md-4 text-center text-md-left">
                     <div class="d-inline-flex flex-column justify-content-center align-items-center">
                         <img src="images/default_member.png" class="member-image mb-3"/>
-                        <p class="text-dark font-weight-bold mb-1">Gianni Tumedei</p>
-                        <p class="text-sec-dark mb-5">Ruolo</p>
+                        <p class="text-sec-dark mb-1">Gianni Tumedei</p>
+                        <h6 class="h-variant text-accent mb-5">Ruolo</h6>
                     </div>
                 </div>
                 <div class="col-12">
@@ -152,7 +152,7 @@
             <div class="row">
 
                 <!-- CONTACT FORM -->
-                <div class="col-12 col-md-6 mb-4 mb-md-0">
+                <div class="col-12 col-lg-6 mb-4 mb-lg-0">
                     <h4 class="text-center mb-3">Modulo di contatto</h4>
                     <p class="text-sec-dark">
                         Vuoi diventare un fornitore? Hai bisogno d'aiuto per un ordine?
@@ -199,7 +199,7 @@
                 </div>
 
                 <!-- OTHER CONTACTS -->
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-lg-6">
                     <h4 class="text-center mb-3">Altri contatti</h4>
                     <div class="container">
                         <div class="row">
@@ -213,20 +213,38 @@
                                     <a href="mailto:support@fruitracers.com" class="text-dark" target="_top">support@fruitracers.com</a>
                                 </p>
                             </div>
-                            <div class="col-12 col-md-6 text-center mb-3">
-                                <div class="contact-icon my-3">
-                                    <i class="mdi mdi-phone"></i>
-                                </div>
-                                <h6 class="h-variant text-accent mb-3">Telefono</h6>
-                                <p>+39 123 456 7890</p>
-                            </div>
-                            <div class="col-12 col-md-6 text-center mb-3">
+                            <div class="col-6 text-center mb-3">
                                 <div class="contact-icon my-3">
                                     <i class="mdi mdi-email-check"></i>
                                 </div>
                                 <h6 class="h-variant text-accent mb-3">PEC</h6>
                                 <p>
                                     <a href="mailto:pec@fruitracers.com" class="text-dark" target="_top">pec@fruitracers.com</a>
+                                </p>
+                            </div>
+                            <div class="col-6 text-center mb-3">
+                                <div class="contact-icon my-3">
+                                    <i class="mdi mdi-phone"></i>
+                                </div>
+                                <h6 class="h-variant text-accent mb-3">Telefono</h6>
+                                <p>+39 123 456 7890</p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <a href="https://www.facebook.com" target="_blank" class="contact-icon my-3">
+                                    <i class="mdi mdi-facebook-box"></i>
+                                </a>
+                                <h6 class="h-variant text-accent mb-3">Facebook</h6>
+                                <p>
+                                    <a href="https://www.facebook.com" target="_blank" class="text-dark">@fruitracers</a>
+                                </p>
+                            </div>
+                            <div class="col-6 text-center">
+                                <a href="https://www.instagram.com" target="_blank" class="contact-icon my-3">
+                                    <i class="mdi mdi-instagram"></i>
+                                </a>
+                                <h6 class="h-variant text-accent mb-3">Instagram</h6>
+                                <p>
+                                    <a href="https://www.instagram.com" target="_blank" class="text-dark">@fruitracers</a>
                                 </p>
                             </div>
                         </div>

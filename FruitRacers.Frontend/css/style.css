@@ -6,6 +6,23 @@
     --font-normal: 'Lato', sans-serif!important;
 }
 
+.card .cover {
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.card .img-hover-zoom:hover>.cover {
+    opacity: 1;
+}
+
 /***********************\
 |   ADDRESS SELECTION   |
 \***********************/
@@ -110,23 +127,6 @@
 /******************\
 |   PRODUCT CARD   |
 \******************/
-
-.product-card .cover {
-    pointer-events: none;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.product-card .img-hover-zoom:hover>.cover {
-    opacity: 1;
-}
 
 .product-card.disabled .disabled-shade {
     position: absolute;

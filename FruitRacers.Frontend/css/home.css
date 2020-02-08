@@ -21,13 +21,8 @@
     border: 4px solid rgba(0, 0, 0, 0.02);
 }
 
-#contacts-content .text-input input,
 #contacts-content textarea {
-    width: 100%;
-}
-
-#contacts-content textarea {
-    height: 256px;
+    height: 320px;
 }
 
 #contacts-content .contact-icon {
