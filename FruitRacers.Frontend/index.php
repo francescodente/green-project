@@ -21,15 +21,22 @@
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-12 col-lg-8 mt-5">
+                    <div class="col-12 col-lg-8 col-xl-6 mt-5">
                         <div class="container p-0">
                             <div class="row">
-                                <div class="address-selection col mx-3 mx-md-0">
+                                <!-- Address selection for users -->
+                                <div class="address-selection user col mx-3 mx-md-0 my-auto" role="button" data-toggle="modal" data-target="#modal-address-management">
+                                    <div class="address-icon">
+                                        <i class="mdi mdi-map-marker"></i>
+                                    </div>
+                                    <p class="address-user font-weight-bold mx-2 mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
+                                </div>
+                                <!-- Address selection for guests -->
+                                <div class="address-selection guest col mx-3 mx-md-0 my-auto d-none">
                                     <div class="address-icon">
                                         <i class="mdi light mdi-map-marker"></i>
                                     </div>
-                                    <p class="address-user font-weight-bold text-light mx-3 mb-0" data-toggle="modal" data-target="#modal-address-management">Viale della Via 123, 47522 - Cesena (FC)</p>
-                                    <p class="address-guest d-none">Viale della Via 123, 47522 - Cesena (FC)</p>
+                                    <input type="text" class="address-user font-weight-bold mx-2 mb-0" name="address" placeholder="Indirizzo di consegna"/>
                                 </div>
                                 <div class="col-12 col-md-auto text-center mt-3 mt-md-0">
                                     <a href="companies.php" class="btn-find-companies btn fab ripple" title="Trova"><i class="mdi light mdi-magnify"></i></a>

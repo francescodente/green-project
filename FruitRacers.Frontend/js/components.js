@@ -43,23 +43,30 @@ $(document).ready(function() {
     |   SELECTS   |
     \*************/
 
+    function updateSelectButton(selectItem) {
+        var val;
+        if (selectItem.is(".checkbox")) {
+            val = selectItem.parent().find(".checkbox:checked").map(function() {
+                return $("[for='" + $(this).attr("id") + "']").text();
+            }).get().join(", ");
+        } else if (selectItem.is(".radio:checked")) {
+            val = $("[for='" + selectItem.attr("id") + "']").text();
+        }
+        selectItem.closest(".dropdown.select").find(".text-input input").val(val);
+    }
+    // Update button text on change
+    $(document).on("change", ".dropdown.select .checkbox, .dropdown.select .radio", function(event) {
+        updateSelectButton($(this));
+    });
+    // Update button on document load
+    $(".dropdown.select").each(function() {
+        updateSelectButton($(this).find(".checkbox, .radio").first());
+    });
     // Prevent multi-select from closing on click
     $(document).on("click", ".dropdown-menu label", function(event) {
         if ($("#" + $(this).attr("for")).is(".checkbox")) {
             event.stopPropagation();
         }
-    });
-    // Update button text on change
-    $(document).on("change", ".dropdown.select .checkbox, .dropdown.select .radio", function(event) {
-        var val;
-        if ($(this).is(".checkbox")) {
-            val = $(this).parent().find(".checkbox:checked").map(function() {
-                return $("[for='" + $(this).attr("id") + "']").text();
-            }).get().join(", ");
-        } else if ($(this).is(".radio")) {
-            val = $("[for='" + $(this).attr("id") + "']").text()
-        }
-        $(this).closest(".dropdown.select").find(".text-input input").val(val);
     });
 
     /*****************\
@@ -70,6 +77,48 @@ $(document).ready(function() {
     $(document).on("change paste keyup", ".text-input, .text-area", function () {
         var input = $(this).find("input, textarea");
         $(this).find(".counter").text(input.val().length + " / " + input.attr("maxlength"));
+    });
+
+    // Fix decimal for currency inputs
+    $(document).on("blur", "[data-type='currency']", function () {
+        if ($(this).val()) {
+            $(this).val(parseFloat($(this).val()).toFixed(2));
+        }
+    });
+
+    // Increse or decrease number input value
+    function intRoundUp(num, multiple) {
+        return Math.ceil(num / multiple) * multiple;
+    }
+    function intRoundDown(num, multiple) {
+        return Math.floor(num / multiple) * multiple;
+    }
+    function updateNumberInput(input, amount) {
+        var min = input.attr("min") ? parseInt(input.attr("min")) : Number.MIN_SAFE_INTEGER;
+        var max = input.attr("max") ? parseInt(input.attr("max")) : Number.MAX_SAFE_INTEGER;
+        var step = input.attr("step") ? parseInt(input.attr("step")) : 1;
+        var value = input.val();
+        if (value % step != 0) {
+            if (amount == 1) {
+                value = intRoundUp(value, step);
+            } else {
+                value = intRoundDown(value, step);
+            }
+        } else {
+            value = (input.val() ? parseInt(input.val()) : 0) + amount * step;
+        }
+        var incButton = input.parent().find(".inc").prop("disabled", value >= max);
+        var decButton = input.parent().find(".dec").prop("disabled", value <= min);
+        input.val(value);
+        if (value == min || value == max) {
+            input.focus();
+        }
+    }
+    $(document).on("click", ".text-input .inc", function () {
+        updateNumberInput($(this).parent().find("[type='number']"), 1);
+    });
+    $(document).on("click", ".text-input .dec", function () {
+        updateNumberInput($(this).parent().find("[type='number']"), -1);
     });
 
     /*****************\

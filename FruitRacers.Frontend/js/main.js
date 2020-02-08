@@ -21,7 +21,7 @@ function highlightMenuItem() {
         var url = location.href;
         var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
         $(".menu-item").removeClass("selected");
-        $(".menu-item[href*='" + currentPage + "']").addClass("selected");
+        $(".menu-item[href='" + currentPage + "']").addClass("selected");
     }
 }
 

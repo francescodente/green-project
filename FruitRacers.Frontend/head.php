@@ -12,7 +12,7 @@
 
 <!-- CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.materialdesignicons.com/3.3.92/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css"/>
 <link rel="stylesheet" type="text/css" href="css/universal-parallax.css"/>
 <link rel="stylesheet" type="text/css" href="css/ripple.css"/>
 <link rel="stylesheet" type="text/css" href="css/colors-typography.css"/>

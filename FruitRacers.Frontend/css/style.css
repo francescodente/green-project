@@ -1,5 +1,4 @@
 :root {
-
     --col-accent: #FF8A80!important;
     --col-accent-dark: #C85A54!important;
 
@@ -15,9 +14,20 @@
     display: flex;
     align-items: center;
     border-radius: 360px;
-    padding: 8px;
+    padding: 4px;
     background-color: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: box-shadow 0.3s cubic-bezier(.25,.8,.25,1), background-color 0.2s ease-in-out, border 0.2s ease-in-out;
+}
+
+.address-selection.user {
+    cursor: pointer;
+}
+
+.address-selection:hover, .address-selection:focus-within {
+    background-color: var(--col-primary);
+    border: 1px solid var(--col-primary);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
 .address-selection .address-icon {
@@ -26,13 +36,44 @@
     align-items: center;
     height: 36px;
     width: 36px;
-    border-radius: 100%;
+    border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.12);
+    transition: background-color 0.2s ease-in-out;
+}
+
+.address-selection:hover .address-icon, .address-selection:focus-within .address-icon {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.address-icon .mdi {
+    color: var(--col-text-light);
+    transition: color 0.2s ease-in-out;
+}
+
+.address-selection:hover .address-icon .mdi, .address-selection:focus-within .address-icon .mdi {
+    color: var(--col-text-sec-dark);
 }
 
 .address-selection .address-user {
-    cursor: pointer;
     flex-grow: 1;
+    color: var(--col-text-light);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    transition: color 0.2s ease-in-out;
+}
+
+.address-selection:hover .address-user, .address-selection:focus-within .address-user {
+    color: var(--col-text-sec-dark);
+}
+
+.address-selection .address-user::placeholder {
+    color: var(--col-text-sec-light);
+    transition: color 0.2s ease-in-out;
+}
+
+.address-selection:hover .address-user::placeholder, .address-selection:focus-within .address-user::placeholder {
+    color: var(--col-text-dis-dark);
 }
 
 .btn-find-companies {
@@ -64,6 +105,36 @@
     background-color: var(--col-primary-dark);
     border: 4px solid rgba(0, 0, 0, 0.12);
     border-radius: 100%;
+}
+
+/******************\
+|   PRODUCT CARD   |
+\******************/
+
+.product-card .cover {
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.product-card .img-hover-zoom:hover>.cover {
+    opacity: 1;
+}
+
+.product-card.disabled .disabled-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 /******************\
@@ -192,4 +263,59 @@
     border: none;
     outline: none;
     background-color: transparent;
+}
+
+/***********************\
+|   EDIT FIELD BUTTON   |
+\***********************/
+
+.text-input .edit-field,
+.text-area .edit-field,
+#user-data [type="password"] + .btn {
+    position: absolute;
+    right: 3px;
+    top: 9px;
+}
+
+/***********************\
+|   EDIT PRODUCT PAGE   |
+\***********************/
+
+.edit-product-img {
+    position: relative;
+    height: 256px;
+    width: 256px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.edit-product-img div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.edit-product-img:hover div {
+    opacity: 1;
+}
+
+.edit-product-img [type="file"] {
+    position: absolute;
+    height: 0;
+    width: 0;
+}
+
+.edit-product-img label {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
 }

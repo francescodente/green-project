@@ -37,7 +37,6 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
-    <script src="js/account-client-orders.js"></script>
 
     <?php include("modals-product.php"); ?>
 

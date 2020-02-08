@@ -14,6 +14,30 @@
             <div class="container text-center">
                 <h1 class="text-light">PARTNER</h1>
             </div>
+            <div class="bottom-content mb-4 container justify-content-center">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-lg-8 col-xl-6 mt-5">
+                        <div class="container p-0">
+                            <div class="row">
+                                <!-- Address selection for users -->
+                                <div class="address-selection user col mx-3 mx-md-0 my-auto" role="button" data-toggle="modal" data-target="#modal-address-management">
+                                    <div class="address-icon">
+                                        <i class="mdi mdi-map-marker"></i>
+                                    </div>
+                                    <p class="address-user font-weight-bold mx-2 mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
+                                </div>
+                                <!-- Address selection for guests -->
+                                <div class="address-selection guest col mx-3 mx-md-0 my-auto d-none">
+                                    <div class="address-icon">
+                                        <i class="mdi light mdi-map-marker"></i>
+                                    </div>
+                                    <input type="text" class="address-user font-weight-bold mx-2 mb-0" name="address" placeholder="Indirizzo di consegna"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="parallax shade" data-parallax-image="images/companies.jpg"></div>
         </section>
         <section id="companies-content" class="container py-4">
@@ -67,6 +91,8 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
+
+    <?php include("modal-address-management.php"); ?>
 
 </body>
 </html>
