@@ -19,10 +19,6 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                     .IsRequired()
                     .HasMaxLength(60);
 
-                entity.Property(e => e.IsEnabled)
-                    .IsRequired()
-                    .HasDefaultValueSql("((1))");
-
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(256);

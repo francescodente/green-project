@@ -18,8 +18,9 @@ namespace FruitRacers.Backend.Core.Entities
         public string Telephone { get; set; }
         public bool CookieConsent { get; set; }
         public bool MarketingConsent { get; set; }
-        public bool? IsEnabled { get; set; }
+        public bool IsEnabled { get; set; }
         public bool IsDeleted { get; set; }
+        public bool ShouldChangePassword { get; set; }
 
         public virtual Administrator Administrator { get; set; }
         public virtual CustomerBusiness CustomerBusiness { get; set; }
