@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.ApiLayer.Authentication
 {
@@ -9,5 +6,6 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
     {
         public string SecretKey { get; set; }
         public TimeSpan TokenDuration { get; set; }
+        public PasswordGenerationSettings PasswordGeneration { get; set; }
     }
 }

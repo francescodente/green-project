@@ -2,12 +2,14 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using AutoMapper;
+using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Core.Utils;
+using FruitRacers.Backend.Core.Utils.Notifications;
 using FruitRacers.Backend.Shared.Utils;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -15,11 +17,13 @@ namespace FruitRacers.Backend.Core.Services.Impl
     public class AuthenticationService : AbstractService, IAuthenticationService
     {
         private readonly IAuthenticationHandler handler;
+        private readonly INotificationsService notifications;
 
-        public AuthenticationService(IRequestSession request, IMapper mapper, IAuthenticationHandler handler)
+        public AuthenticationService(IRequestSession request, IMapper mapper, IAuthenticationHandler handler, INotificationsService notifications)
             : base(request, mapper)
         {
             this.handler = handler;
+            this.notifications = notifications;
         }
 
         private async Task<User> FindUser(Expression<Func<User, bool>> predicate, Func<Exception> exceptionSupplier)
@@ -69,22 +73,61 @@ namespace FruitRacers.Backend.Core.Services.Impl
             }
         }
 
-        public async Task<UserOutputDto> Register(RegistrationDto registration)
+        public async Task<UserOutputDto> RegisterCustomer(RegistrationDto registration)
         {
-            UserInputDto userDto = registration.User;
-            User userEntity = new User
-            {
-                Email = userDto.Email,
-                Telephone = userDto.Telephone,
-                IsDeleted = false,
-                IsEnabled = true,
-                MarketingConsent = userDto.MarketingConsent,
-                CookieConsent = userDto.CookieConsent
-            };
+            User userEntity = this.CreateUserFromUserDto(registration.User);
             this.handler.AssignPassword(userEntity, registration.Password);
             await this.Data.Users.Insert(userEntity);
             await this.Data.SaveChanges();
+
+            // TODO: Send confirmation email
+
             return this.Mapper.Map<UserOutputDto>(userEntity);
+        }
+
+        public async Task<UserOutputDto> RegisterSupplier(SupplierRegistrationDto registration)
+        {
+            AddressInputDto addressInput = registration.Address;
+            User user = this.CreateUserFromUserDto(registration.UserData);
+            user.ShouldChangePassword = true;
+            user.Supplier = new Supplier
+            {
+                BusinessName = registration.BusinessName,
+                LegalForm = registration.LegalForm,
+                Pec = registration.Pec,
+                Sdi = registration.Sdi,
+                VatNumber = registration.VatNumber,
+                IsValid = true
+            };
+            user.Addresses.Add(new Address
+            {
+                Description = addressInput.Description,
+                Latitude = addressInput.Latitude,
+                Longitude = addressInput.Longitude
+            });
+
+            string generatedPassword = this.handler.GenerateRandomPassword();
+            this.handler.AssignPassword(user, generatedPassword);
+
+            await this.Data.Users.Insert(user);
+            await this.Data.SaveChanges();
+
+            await this.notifications.SupplierRegistered(user, generatedPassword);
+
+            return this.Mapper.Map<UserOutputDto>(user);
+        }
+
+        private User CreateUserFromUserDto(UserInputDto userInput)
+        {
+            return new User
+            {
+                Email = userInput.Email,
+                Telephone = userInput.Telephone,
+                IsDeleted = false,
+                IsEnabled = true,
+                MarketingConsent = userInput.MarketingConsent,
+                CookieConsent = userInput.CookieConsent
+            };
         }
     }
 }

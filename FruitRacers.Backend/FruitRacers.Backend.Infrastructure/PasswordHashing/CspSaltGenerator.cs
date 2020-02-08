@@ -6,7 +6,6 @@ namespace FruitRacers.Backend.Infrastructure.PasswordHashing
 {
     public class CspSaltGenerator : ISaltGenerator, IDisposable
     {
-        private const int SALT_LENGTH = 128;
         private readonly RNGCryptoServiceProvider csp;
 
         public CspSaltGenerator()
@@ -19,9 +18,9 @@ namespace FruitRacers.Backend.Infrastructure.PasswordHashing
             csp.Dispose();
         }
 
-        public byte[] NewSalt()
+        public byte[] NewSalt(int length)
         {
-            byte[] salt = new byte[SALT_LENGTH];
+            byte[] salt = new byte[length];
             csp.GetNonZeroBytes(salt);
             return salt;
         }
