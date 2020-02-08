@@ -57,6 +57,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             User user = await this.FindUserById(this.RequestingUser.UserId);
             this.EnsurePasswordIsCorrect(user, request.OldPassword);
             this.handler.AssignPassword(user, request.NewPassword);
+            user.ShouldChangePassword = false;
             await this.Data.SaveChanges();
         }
 
