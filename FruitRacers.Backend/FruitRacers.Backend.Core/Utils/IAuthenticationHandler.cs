@@ -11,5 +11,7 @@ namespace FruitRacers.Backend.Core.Utils
         void AssignPassword(User user, string password);
 
         bool IsPasswordCorrect(User user, string password);
+
+        string GenerateRandomPassword();
     }
 }

@@ -1,13 +1,14 @@
 ﻿using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Utils;
-using Microsoft.Extensions.Options;
+using FruitRacers.Backend.Shared.Utils;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,8 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
 {
     public class JwtAuthentication : IAuthenticationHandler
     {
+        private const int HASH_LENGTH = 128;
+
         private readonly IHashCalculator hashCalculator;
         private readonly ISaltGenerator saltGenerator;
         private readonly IStringEncoding encoding;
@@ -33,8 +36,8 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
 
         public void AssignPassword(User user, string password)
         {
-            byte[] salt = this.saltGenerator.NewSalt();
-            byte[] passwordHash = this.hashCalculator.Hash(password, salt);
+            byte[] salt = this.saltGenerator.NewSalt(HASH_LENGTH);
+            byte[] passwordHash = this.hashCalculator.Hash(password, salt, HASH_LENGTH);
 
             user.Password = this.encoding.BytesToString(passwordHash);
             user.Salt = this.encoding.BytesToString(salt);
@@ -44,7 +47,7 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
         {
             byte[] salt = this.encoding.StringToBytes(user.Salt);
             byte[] expectedHash = this.encoding.StringToBytes(user.Password);
-            byte[] actualHash = this.hashCalculator.Hash(password, salt);
+            byte[] actualHash = this.hashCalculator.Hash(password, salt, HASH_LENGTH);
 
             return CompareSlow(expectedHash, actualHash);
         }
@@ -127,6 +130,20 @@ namespace FruitRacers.Backend.ApiLayer.Authentication
         public Task OnUserLoggedOut(User user)
         {
             return Task.CompletedTask;
+        }
+
+        public string GenerateRandomPassword()
+        {
+            string chars = this.settings.PasswordGeneration.AllowedCharacters;
+            RandomNumberGenerator crypto = RandomNumberGenerator.Create();
+
+            byte[] data = new byte[this.settings.PasswordGeneration.Length];
+            crypto.GetBytes(data);
+
+            return data
+                .Select(b => b % chars.Length)
+                .Select(b => chars[b])
+                .ConcatStrings();
         }
     }
 }

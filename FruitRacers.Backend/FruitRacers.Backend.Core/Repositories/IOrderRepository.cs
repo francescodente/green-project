@@ -11,6 +11,8 @@ namespace FruitRacers.Backend.Core.Repositories
 
         IOrderRepository IncludingDetailsAndProducts();
 
+        IOrderRepository IncludingCustomerInfo();
+
         IOrderRepository AfterDate(DateTime date);
 
         IOrderRepository BeforeDate(DateTime date);

@@ -16,19 +16,14 @@ namespace FruitRacers.Backend.Core.Utils.Uploads
     {
         public static string GetExtension(this ImageFormat format)
         {
-            switch (format)
+            return format switch
             {
-                case ImageFormat.Png:
-                    return ".png";
-                case ImageFormat.Jpeg:
-                    return ".jpg";
-                case ImageFormat.Bmp:
-                    return ".bmp";
-                case ImageFormat.Gif:
-                    return ".gif";
-                default:
-                    return null;
-            }
+                ImageFormat.Png => ".png",
+                ImageFormat.Jpeg => ".jpg",
+                ImageFormat.Bmp => ".bmp",
+                ImageFormat.Gif => ".gif",
+                _ => null,
+            };
         }
     }
 }

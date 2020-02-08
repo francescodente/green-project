@@ -4,6 +4,7 @@ using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Session;
+using FruitRacers.Backend.Core.Utils.Notifications;
 using FruitRacers.Backend.Shared.Utils;
 using System;
 using System.Linq;
@@ -13,10 +14,12 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class CartService : AbstractService, ICartService
     {
-        public CartService(IRequestSession request, IMapper mapper)
+        private readonly INotificationsService notifications;
+
+        public CartService(IRequestSession request, IMapper mapper, INotificationsService notifications)
             : base(request, mapper)
         {
-
+            this.notifications = notifications;
         }
 
         private IOrderRepository FilterCartForUser(int userId)
@@ -31,6 +34,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             Order cart = await this.FilterCartForUser(userId)
                 .IncludingDetailsAndProducts()
+                .IncludingCustomerInfo()
                 .FindOne()
                 .Then(oc => oc
                     .Filter(c => c.Sections.SelectMany(s => s.Details).Count() > 0)
@@ -60,6 +64,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .ForEach(d => this.AssignCurrentPriceToOrderDetail(d, customerType));
 
             await this.Data.SaveChanges();
+
+            await Task.WhenAll(cart.Sections.Select(this.notifications.OrderReceived));
 
             return this.Mapper.Map<OrderDto>(cart);
         }
@@ -158,7 +164,9 @@ namespace FruitRacers.Backend.Core.Services.Impl
         {
             Order cart = await this.FilterCartForUser(userId)
                 .FindOne()
-                .Then(oc => this.CreateCart(userId));
+                .Then(oc => oc
+                    .Map(Task.FromResult)
+                    .OrElseGet(() => this.CreateCart(userId)));
 
             if (deliveryInfo.AddressId.HasValue)
             {

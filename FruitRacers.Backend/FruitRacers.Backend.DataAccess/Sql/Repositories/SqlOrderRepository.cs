@@ -74,5 +74,14 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         {
             return this.WrapRepository(q => q.Where(o => o.OrderState == state));
         }
+
+        public IOrderRepository IncludingCustomerInfo()
+        {
+            return this.WrapRepository(q => q
+                .Include(o => o.User)
+                    .ThenInclude(u => u.CustomerBusiness)
+                .Include(o => o.User)
+                    .ThenInclude(u => u.Person));
+        }
     }
 }

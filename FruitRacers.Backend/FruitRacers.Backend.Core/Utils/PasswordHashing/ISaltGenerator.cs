@@ -6,6 +6,6 @@ namespace FruitRacers.Backend.Core.Utils
 {
     public interface ISaltGenerator
     {
-        byte[] NewSalt();
+        byte[] NewSalt(int length);
     }
 }

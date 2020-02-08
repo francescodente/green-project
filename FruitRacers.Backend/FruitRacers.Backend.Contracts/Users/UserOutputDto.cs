@@ -8,5 +8,6 @@ namespace FruitRacers.Backend.Contracts.Users
         public int UserId { get; set; }
         public IEnumerable<RoleTypeDto> Roles { get; set; }
         public IDictionary<RoleTypeDto, RoleDto> RolesData { get; set; }
+        public bool ShouldChangePassword { get; set; }
     }
 }

@@ -13,21 +13,15 @@
     {
         public static Role GetFromUser(this RoleType roleType, User user)
         {
-            switch (roleType)
+            return roleType switch
             {
-                case RoleType.Person:
-                    return user.Person;
-                case RoleType.Supplier:
-                    return user.Supplier;
-                case RoleType.CustomerBusiness:
-                    return user.CustomerBusiness;
-                case RoleType.DeliveryCompany:
-                    return user.DeliveryCompany;
-                case RoleType.Administrator:
-                    return user.Administrator;
-                default:
-                    return null;
-            }
+                RoleType.Person => user.Person,
+                RoleType.Supplier => user.Supplier,
+                RoleType.CustomerBusiness => user.CustomerBusiness,
+                RoleType.DeliveryCompany => user.DeliveryCompany,
+                RoleType.Administrator => user.Administrator,
+                _ => null,
+            };
         }
     }
 }

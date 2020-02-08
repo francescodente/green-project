@@ -29,5 +29,18 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
                 yield return RoleType.CustomerBusiness;
             }
         }
+
+        public static string GetCustomerName(this User user)
+        {
+            if (user.CustomerBusiness != null)
+            {
+                return user.CustomerBusiness.BusinessName;
+            }
+            if (user.Person != null)
+            {
+                return string.Format("{0} {1}", user.Person.FirstName, user.Person.LastName);
+            }
+            return null;
+        }
     }
 }

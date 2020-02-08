@@ -6,7 +6,9 @@ namespace FruitRacers.Backend.Core.Services
 {
     public interface IAuthenticationService
     {
-        Task<UserOutputDto> Register(RegistrationDto registration);
+        Task<UserOutputDto> RegisterCustomer(RegistrationDto registration);
+
+        Task<UserOutputDto> RegisterSupplier(SupplierRegistrationDto registration);
 
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 
