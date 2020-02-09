@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FruitRacers.Backend.Contracts;
+using FruitRacers.Backend.Contracts.Support;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Core.Utils.Email;
 using System;

@@ -1,4 +1,4 @@
-﻿using FruitRacers.Backend.Contracts;
+﻿using FruitRacers.Backend.Contracts.Support;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FruitRacers.Backend.ApiLayer.Routes;
-using FruitRacers.Backend.Contracts;
+using FruitRacers.Backend.Contracts.Support;
 using FruitRacers.Backend.Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
