@@ -19,17 +19,33 @@
     list-style-type: none;
 }
 
-.footer .timetable li span {
-    display: inline-block;
-    color: var(--col-text-sec-dark);
+.footer td:first-child {
+    text-align: right;
+    padding-right: 24px;
 }
 
-.footer .timetable li span:first-child {
-    width: 100px;
-    text-align: left;
-}
-
-.footer .timetable li span:last-child {
-    width: 100px;
+.footer td:last-child {
     text-align: center;
+}
+
+.footer .btn.facebook .mdi, .footer .btn.instagram .mdi {
+    transition: color 0.2s ease-in-out;
+}
+
+.footer .btn.facebook:hover {
+    background-color: rgba(25, 118, 210, 0.12);
+}
+
+.footer .btn.facebook:hover .mdi {
+    color: #1976D2;
+    opacity: 0.9;
+}
+
+.footer .btn.instagram:hover {
+    background-color: rgba(236, 64, 122, 0.12);
+}
+
+.footer .btn.instagram:hover .mdi {
+    color: #EC407A;
+    opacity: 0.9;
 }
