@@ -7,13 +7,15 @@ namespace FruitRacers.Backend.Contracts.Orders
     {
         public DeliveryInfoOutputDto DeliveryInfo { get; set; }
         public IEnumerable<SupplierOrderSectionDto<CartItemOutputDto>> Sections { get; set; }
+        public OrderPricesDto Prices { get; set; }
 
         public static CartOutputDto EmptyCart()
         {
             return new CartOutputDto
             {
                 DeliveryInfo = new DeliveryInfoOutputDto(),
-                Sections = Enumerable.Empty<SupplierOrderSectionDto<CartItemOutputDto>>()
+                Sections = Enumerable.Empty<SupplierOrderSectionDto<CartItemOutputDto>>(),
+                Prices = new OrderPricesDto()
             };
         }
     }

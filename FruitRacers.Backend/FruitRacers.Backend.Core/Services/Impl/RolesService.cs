@@ -17,11 +17,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         private async Task<User> RequireUser(int userId)
         {
-            return await this.Data
-                .Users
-                .IncludingRoles()
-                .FindOne(u => u.UserId == userId)
-                .Then(u => u.OrElseThrow(() => UserNotFoundException.WithId(userId)));
+            return await this.RequireUserById(userId, r => r.IncludingRoles());
         }
 
         public async Task<CustomerBusinessDto> AssignCustomerBusinessRole(int userId, CustomerBusinessDto customerBusiness)
