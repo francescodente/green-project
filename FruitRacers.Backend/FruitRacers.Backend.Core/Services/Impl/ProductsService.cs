@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using FruitRacers.Backend.Contracts.Filters;
 using FruitRacers.Backend.Contracts.Pagination;
 using FruitRacers.Backend.Contracts.Products;
@@ -15,8 +14,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class ProductsService : AbstractService, IProductsService
     {
-        public ProductsService(IRequestSession request, IMapper mapper)
-            : base(request, mapper)
+        public ProductsService(IRequestSession request)
+            : base(request)
         {
         }
 

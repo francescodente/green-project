@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FruitRacers.Backend.Core.Entities;
+﻿using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
@@ -9,8 +8,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class AdminService : AbstractService, IAdminService
     {
-        public AdminService(IRequestSession request, IMapper mapper)
-            : base(request, mapper)
+        public AdminService(IRequestSession request)
+            : base(request)
         {
         }
 

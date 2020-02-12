@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using FruitRacers.Backend.Core.Entities;
+﻿using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Core.Utils.Uploads;
 using FruitRacers.Backend.Shared.Utils;
 using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -15,8 +13,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
         private readonly IImageStorage storage;
         private readonly ImageUploadSettings settings;
 
-        public ImagesService(IRequestSession request, IMapper mapper, IImageStorage storage, ImageUploadSettings settings)
-            : base(request, mapper)
+        public ImagesService(IRequestSession request, IImageStorage storage, ImageUploadSettings settings)
+            : base(request)
         {
             this.storage = storage;
             this.settings = settings;

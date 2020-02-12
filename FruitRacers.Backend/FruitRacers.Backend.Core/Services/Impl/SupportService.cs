@@ -1,10 +1,6 @@
-﻿using AutoMapper;
-using FruitRacers.Backend.Contracts.Support;
+﻿using FruitRacers.Backend.Contracts.Support;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Core.Utils.Email;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -13,8 +9,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
     {
         private readonly IMailService mailService;
 
-        public SupportService(IRequestSession request, IMapper mapper, IMailService mailService)
-            : base(request, mapper)
+        public SupportService(IRequestSession request, IMailService mailService)
+            : base(request)
         {
             this.mailService = mailService;
         }

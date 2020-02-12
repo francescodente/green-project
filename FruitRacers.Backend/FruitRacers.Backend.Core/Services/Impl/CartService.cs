@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using FruitRacers.Backend.Contracts.Orders;
+﻿using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Entities.Extensions;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Repositories;
 using FruitRacers.Backend.Core.Session;
-using FruitRacers.Backend.Core.Utils.Notifications;
 using FruitRacers.Backend.Core.Utils.Pricing;
 using FruitRacers.Backend.Shared.Utils;
 using System;
@@ -16,13 +14,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class CartService : AbstractService, ICartService
     {
-        private readonly INotificationsService notifications;
         private readonly IPriceCalculator pricing;
 
-        public CartService(IRequestSession request, IMapper mapper, INotificationsService notifications, IPriceCalculator pricing)
-            : base(request, mapper)
+        public CartService(IRequestSession request, IPriceCalculator pricing)
+            : base(request)
         {
-            this.notifications = notifications;
             this.pricing = pricing;
         }
 
@@ -70,7 +66,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task<OrderDto> ConfirmCart(int userId)
         {
             Order cart = await this.FilterCartForUser(userId)
-                .IncludingDetailsAndProducts()
+                .IncludingSections()
                 .FindOne()
                 .Then(oc => oc
                     .Filter(c => c.Sections.Any())
@@ -81,11 +77,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 throw new MissingDeliveryInfoException();
             }
 
-            cart.Confirm(DateTime.Now);
+            cart.Confirm(this.DateTime.Now);
 
             await this.Data.SaveChanges();
 
-            await Task.WhenAll(cart.Sections.Select(this.notifications.OrderReceived));
+            await Task.WhenAll(cart.Sections.Select(this.Notifications.OrderReceived));
 
             return this.Mapper.Map<OrderDto>(cart);
         }
@@ -125,7 +121,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task<CartOutputDto> GetCartDetails(int userId)
         {
             return await this.FilterCartForUser(userId)
-                .IncludingDetailsAndProducts()
+                .IncludingSections()
                 .FindOne()
                 .Then(oc => oc
                     .Map(this.MapToCartDto)
@@ -135,7 +131,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task DeleteCartItem(int userId, int productId)
         {
             Order cart = await this.FilterCartForUser(userId)
-                .IncludingDetails()
+                .IncludingSections()
                 .FindOne()
                 .Then(oc => oc.OrElseThrow(() => new CartItemNotFoundException(productId)));
 
@@ -165,7 +161,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public async Task UpdateCartItem(int userId, CartItemInputDto cartItem)
         {
             Order order = await this.FilterCartForUser(userId)
-                .IncludingDetails()
+                .IncludingSections()
                 .FindOne()
                 .Then(oc => oc.OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
 

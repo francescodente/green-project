@@ -2,12 +2,9 @@
 using FruitRacers.Backend.Core.Utils.Uploads;
 using FruitRacers.Backend.Infrastructure.Email;
 using FruitRacers.Backend.Infrastructure.Notifications;
+using FruitRacers.Backend.Infrastructure.Pricing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 {
@@ -19,6 +16,7 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
             this.InstallConfiguration<MailSettings>(services, config);
             this.InstallConfiguration<ImageUploadSettings>(services, config);
             this.InstallConfiguration<MailNotificationsSettings>(services, config);
+            this.InstallConfiguration<PricingSettings>(services, config);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config)

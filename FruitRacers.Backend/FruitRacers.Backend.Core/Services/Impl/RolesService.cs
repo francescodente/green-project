@@ -1,17 +1,14 @@
-﻿using AutoMapper;
-using FruitRacers.Backend.Contracts.Users.Roles;
+﻿using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
-using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
-using FruitRacers.Backend.Shared.Utils;
 using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class RolesService : AbstractService, IRolesService
     {
-        public RolesService(IRequestSession request, IMapper mapper)
-            : base(request, mapper)
+        public RolesService(IRequestSession request)
+            : base(request)
         {
         }
 

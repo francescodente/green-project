@@ -7,9 +7,7 @@ namespace FruitRacers.Backend.Core.Repositories
 {
     public interface IOrderRepository : IRepository<Order>
     {
-        IOrderRepository IncludingDetails();
-
-        IOrderRepository IncludingDetailsAndProducts();
+        IOrderRepository IncludingSections();
 
         IOrderRepository IncludingCustomerInfo();
 

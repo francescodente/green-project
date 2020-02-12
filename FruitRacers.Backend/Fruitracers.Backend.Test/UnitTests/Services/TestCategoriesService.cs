@@ -41,8 +41,9 @@ namespace FruitRacers.Backend.Test.UnitTests.Services
             IRequestSession request = Substitute.For<IRequestSession>();
             request.User.Returns(user);
             request.Data.Returns(data);
+            request.Mapper.Returns(MappingUtils.CreateDefaultMapper());
 
-            ICategoriesService categoriesService = new CategoriesService(request, MappingUtils.CreateDefaultMapper());
+            ICategoriesService categoriesService = new CategoriesService(request);
 
             CategoryTreeDto actual = categoriesService.GetCategoryTree().Result;
 

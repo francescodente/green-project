@@ -59,7 +59,9 @@ namespace FruitRacers.Backend.Infrastructure.Mapping
                 CreateMap<Order, CartOutputDto>()
                     .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
 
-                CreateMap<OrderSection, SupplierOrderSectionDto<CartItemOutputDto>>()
+                CreateMap<OrderSection, OrderSectionDto<CartItemOutputDto>>()
+                    .ForMember(dst => dst.Address, o => o.MapFrom(src => src.Supplier.User.Addresses.First()))
+                    .ForMember(dst => dst.SupplierName, o => o.MapFrom(src => src.Supplier.BusinessName))
                     .ForMember(dst => dst.Items, o => o.MapFrom(src => src.Details));
 
                 CreateMap<Order, DeliveryInfoOutputDto>();

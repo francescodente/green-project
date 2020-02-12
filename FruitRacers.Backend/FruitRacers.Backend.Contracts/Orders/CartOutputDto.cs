@@ -6,7 +6,7 @@ namespace FruitRacers.Backend.Contracts.Orders
     public class CartOutputDto
     {
         public DeliveryInfoOutputDto DeliveryInfo { get; set; }
-        public IEnumerable<SupplierOrderSectionDto<CartItemOutputDto>> Sections { get; set; }
+        public IEnumerable<OrderSectionDto<CartItemOutputDto>> Sections { get; set; }
         public OrderPricesDto Prices { get; set; }
 
         public static CartOutputDto EmptyCart()
@@ -14,7 +14,7 @@ namespace FruitRacers.Backend.Contracts.Orders
             return new CartOutputDto
             {
                 DeliveryInfo = new DeliveryInfoOutputDto(),
-                Sections = Enumerable.Empty<SupplierOrderSectionDto<CartItemOutputDto>>(),
+                Sections = Enumerable.Empty<OrderSectionDto<CartItemOutputDto>>(),
                 Prices = new OrderPricesDto()
             };
         }

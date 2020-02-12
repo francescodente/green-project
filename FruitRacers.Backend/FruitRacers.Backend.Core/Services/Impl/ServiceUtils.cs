@@ -76,8 +76,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public static async Task<PagedCollection<TDto>> PagedCollectionFromRepository<TEntity, TDto>(IReadOnlyRepository<TEntity> repository, PaginationFilter pagination, IMapper mapper)
             where TEntity : class
         {
-            Task<int> countTask = repository.Count();
-            Task<IEnumerable<TDto>> resultsTask = repository
+            int count = await repository.Count();
+            IEnumerable<TDto> results = await repository
                 .AsPagedEnumerable(pagination.PageNumber, pagination.PageSize)
                 .Then(mapper.Map<IEnumerable<TDto>>);
 
@@ -85,8 +85,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
             {
                 PageSize = pagination.PageSize,
                 PageNumber = pagination.PageNumber,
-                PageCount = (await countTask + pagination.PageSize - 1) / pagination.PageSize,
-                Results = await resultsTask
+                PageCount = (count + pagination.PageSize - 1) / pagination.PageSize,
+                Results = results
             };
         }
     }
