@@ -36,14 +36,14 @@ namespace FruitRacers.Backend.Core.Services.Impl
         public static async Task<(TimeSlot, int)> FindTimeSlotWithActualCapacity(IDataSession session, int timeSlotId, DateTime date)
         {
             TimeSlot timeSlot = await session
-                    .TimeSlots
-                    .IncludingOverrides(date, date)
-                    .FindOne(t => t.TimeSlotId == timeSlotId)
-                    .Then(ot => ot.OrElseThrow(() => new TimeSlotNotFoundException(timeSlotId)));
+                .TimeSlots
+                .IncludingOverrides(date, date)
+                .FindOne(t => t.TimeSlotId == timeSlotId)
+                .Then(ot => ot.OrElseThrow(() => new TimeSlotNotFoundException(timeSlotId)));
 
             int ordersInsideSelectedTimeSlot = await session
                 .Orders
-                .WithState(OrderState.Confirmed)
+                .WithState(OrderState.Pending)
                 .AfterDate(date)
                 .BeforeDate(date)
                 .AsEnumerable(o => o.TimeSlotId == timeSlotId)
@@ -73,13 +73,25 @@ namespace FruitRacers.Backend.Core.Services.Impl
             return Optional.Empty<CustomerType>();
         }
 
-        public static async Task<PagedCollection<TDto>> PagedCollectionFromRepository<TEntity, TDto>(IReadOnlyRepository<TEntity> repository, PaginationFilter pagination, IMapper mapper)
+        public static async Task<PagedCollection<TDto>> PagedCollectionFromRepository<TEntity, TDto>(
+            IReadOnlyRepository<TEntity> repository,
+            PaginationFilter pagination,
+            IMapper mapper)
+            where TEntity : class
+        {
+            return await PagedCollectionFromRepository(repository, pagination, mapper.Map<TDto>);
+        }
+
+        public static async Task<PagedCollection<TDto>> PagedCollectionFromRepository<TEntity, TDto>(
+            IReadOnlyRepository<TEntity> repository,
+            PaginationFilter pagination,
+            Func<TEntity, TDto> mapper)
             where TEntity : class
         {
             int count = await repository.Count();
             IEnumerable<TDto> results = await repository
                 .AsPagedEnumerable(pagination.PageNumber, pagination.PageSize)
-                .Then(mapper.Map<IEnumerable<TDto>>);
+                .Then(os => os.Select(mapper));
 
             return new PagedCollection<TDto>
             {

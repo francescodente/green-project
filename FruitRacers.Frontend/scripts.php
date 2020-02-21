@@ -8,6 +8,7 @@
     <script src="js/ui.js"></script>
     <script src="js/menu.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
 </div>
 
 <div id="sizer">

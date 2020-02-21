@@ -8,6 +8,6 @@ namespace FruitRacers.Backend.Core.Utils.Pricing
 {
     public interface IPriceCalculator
     {
-        OrderPricesDto Calculate(Order order);
+        OrderPricesDto Calculate(OrderSection order);
     }
 }

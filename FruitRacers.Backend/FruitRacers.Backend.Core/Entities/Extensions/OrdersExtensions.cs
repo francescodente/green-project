@@ -15,7 +15,7 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
 
             order.MaterializePrices(customerType);
 
-            order.OrderState = OrderState.Confirmed;
+            order.OrderState = OrderState.Pending;
             order.Timestamp = timestamp;
         }
 
@@ -30,8 +30,7 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
         {
             Price price = detail
                 .Product
-                .Prices
-                .SingleOptional(p => p.Type == customerType)
+                .GetPrice(customerType)
                 .OrElseThrow(() => new ReservedProductException(detail.ProductId, customerType));
 
             detail.Price = price.Value;
@@ -41,7 +40,11 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
 
         public static OrderSection CreateOrderSection(this Order order, int supplierId)
         {
-            OrderSection section = new OrderSection { SupplierId = supplierId, State = OrderSectionState.Pending };
+            OrderSection section = new OrderSection
+            {
+                SupplierId = supplierId,
+                State = OrderSectionState.Pending
+            };
             order.Sections.Add(section);
             return section;
         }
@@ -72,7 +75,12 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
             OrderSection section = optionalSection
                 .OrElseGet(() => order.CreateOrderSection(product.SupplierId));
 
-            section.Details.Add(new OrderDetail { Product = product, Quantity = quantity });
+            section.Details.Add(new OrderDetail
+            {
+                Product = product,
+                Quantity = quantity,
+                State = OrderDetailState.Available
+            });
         }
     }
 }

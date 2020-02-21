@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FruitRacers.Backend.Contracts.Orders
 {
-    public class OrderDto
+    public abstract class AbstractOrderDto
     {
         public int OrderId { get; set; }
-        public string State { get; set; }
         public DateTime Timestamp { get; set; }
+        public OrderStateDto OrderState { get; set; }
         public DeliveryInfoOutputDto DeliveryInfo { get; set; }
-        public IEnumerable<OrderSectionDto<OrderDetailDto>> Sections { get; set; }
     }
 }

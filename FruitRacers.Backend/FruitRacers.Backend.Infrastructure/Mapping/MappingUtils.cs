@@ -56,17 +56,30 @@ namespace FruitRacers.Backend.Infrastructure.Mapping
         {
             public OrderMapping()
             {
+                CreateMap<Order, DeliveryInfoOutputDto>();
+
                 CreateMap<Order, CartOutputDto>()
                     .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
 
-                CreateMap<OrderSection, OrderSectionDto<CartItemOutputDto>>()
-                    .ForMember(dst => dst.Address, o => o.MapFrom(src => src.Supplier.User.Addresses.First()))
+                CreateMap<OrderSection, CartSectionDto>()
+                    .ForMember(dst => dst.SupplierAddress, o => o.MapFrom(src => src.Supplier.User.Addresses.First()))
                     .ForMember(dst => dst.SupplierName, o => o.MapFrom(src => src.Supplier.BusinessName))
                     .ForMember(dst => dst.Items, o => o.MapFrom(src => src.Details));
 
-                CreateMap<Order, DeliveryInfoOutputDto>();
-
                 CreateMap<OrderDetail, CartItemOutputDto>();
+
+                CreateMap<Order, SupplierOrderDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+
+                CreateMap<Order, CustomerOrderDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+
+                CreateMap<OrderSection, OrderSectionDto>()
+                    .ForMember(dst => dst.SupplierAddress, o => o.MapFrom(src => src.Supplier.User.Addresses.First()))
+                    .ForMember(dst => dst.SupplierName, o => o.MapFrom(src => src.Supplier.BusinessName))
+                    .ForMember(dst => dst.Items, o => o.MapFrom(src => src.Details));
+
+                CreateMap<OrderDetail, OrderDetailDto>();
             }
         }
 

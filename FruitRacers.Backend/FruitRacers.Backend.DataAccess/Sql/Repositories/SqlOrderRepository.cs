@@ -2,9 +2,9 @@
 using FruitRacers.Backend.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Linq.Expressions;
+using Z.EntityFramework.Plus;
 
 namespace FruitRacers.Backend.DataAccess.Sql.Repositories
 {
@@ -47,6 +47,8 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
             return this.WrapRepository(q => q
                 .Include(o => o.Sections)
                     .ThenInclude(s => s.Supplier)
+                        .ThenInclude(s => s.User)
+                            .ThenInclude(u => u.Addresses)
                 .Include(o => o.Sections)
                     .ThenInclude(o => o.Details)
                         .ThenInclude(d => d.Product)
@@ -69,6 +71,21 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
                     .ThenInclude(u => u.CustomerBusiness)
                 .Include(o => o.User)
                     .ThenInclude(u => u.Person));
+        }
+
+        public IOrderRepository DirectedTo(int supplierId)
+        {
+            return this.WrapRepository(q => q.Where(o => o.Sections.Any(s => s.SupplierId == supplierId)));
+        }
+
+        public IOrderRepository WithStates(params OrderState[] states)
+        {
+            return this.WrapRepository(q => q.Where(o => states.Contains(o.OrderState)));
+        }
+
+        public IOrderRepository OrderBy<T>(Expression<Func<Order, T>> property)
+        {
+            return this.WrapRepository(q => q.OrderBy(property));
         }
     }
 }

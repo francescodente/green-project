@@ -4,14 +4,16 @@ using FruitRacers.Backend.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FruitRacers.Backend.DataAccess.Migrations
 {
     [DbContext(typeof(FruitracersContext))]
-    partial class FruitracersContextModelSnapshot : ModelSnapshot
+    [Migration("20200219102720_AddOrderDetailState")]
+    partial class AddOrderDetailState
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -468,9 +470,6 @@ namespace FruitRacers.Backend.DataAccess.Migrations
                     b.Property<bool>("CookieConsent")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("DefaultAddressId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(60)")
@@ -503,10 +502,6 @@ namespace FruitRacers.Backend.DataAccess.Migrations
                         .HasMaxLength(20);
 
                     b.HasKey("UserId");
-
-                    b.HasIndex("DefaultAddressId")
-                        .IsUnique()
-                        .HasFilter("[DefaultAddressId] IS NOT NULL");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -669,14 +664,6 @@ namespace FruitRacers.Backend.DataAccess.Migrations
                         .HasForeignKey("TimeSlotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("FruitRacers.Backend.Core.Entities.User", b =>
-                {
-                    b.HasOne("FruitRacers.Backend.Core.Entities.Address", "DefaultAddress")
-                        .WithOne()
-                        .HasForeignKey("FruitRacers.Backend.Core.Entities.User", "DefaultAddressId")
-                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

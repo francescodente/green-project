@@ -45,7 +45,10 @@ namespace FruitRacers.Backend.Core.Services.Impl
         private CartOutputDto MapToCartDto(Order cart)
         {
             CartOutputDto cartOutput = this.Mapper.Map<CartOutputDto>(cart);
-            cartOutput.Prices = this.pricing.Calculate(cart);
+            Enumerable.Zip(cart.Sections, cartOutput.Sections).ForEach(s =>
+            {
+                s.Second.Prices = this.pricing.Calculate(s.First);
+            });
             return cartOutput;
         }
 
@@ -63,7 +66,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             }
         }
 
-        public async Task<OrderDto> ConfirmCart(int userId)
+        public async Task<CustomerOrderDto> ConfirmCart(int userId)
         {
             Order cart = await this.FilterCartForUser(userId)
                 .IncludingSections()
@@ -83,7 +86,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
             await Task.WhenAll(cart.Sections.Select(this.Notifications.OrderReceived));
 
-            return this.Mapper.Map<OrderDto>(cart);
+            return this.Mapper.Map<CustomerOrderDto>(cart);
         }
 
         public async Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo)

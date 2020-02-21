@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FruitRacers.Backend.Core.Entities
 {
-    public enum OrderState
+    public enum OrderDetailState
     {
-        Cart,
-        Pending,
-        Canceled,
-        Completed
+        Available,
+        Modified,
+        Removed
     }
 }

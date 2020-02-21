@@ -54,7 +54,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Orders
                 .AfterDate(startDate)
                 .BeforeDate(finishDate)
-                .WithState(OrderState.Confirmed)
+                .WithStates(OrderState.Pending, OrderState.Completed)
                 .AsEnumerable();
 
             IDictionary<(int, DateTime), int> orderCounts = orders

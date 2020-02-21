@@ -1,6 +1,7 @@
 ﻿using FruitRacers.Backend.Core.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace FruitRacers.Backend.Core.Repositories
@@ -17,6 +18,12 @@ namespace FruitRacers.Backend.Core.Repositories
 
         IOrderRepository WithState(OrderState state);
 
+        IOrderRepository WithStates(params OrderState[] states);
+
         IOrderRepository BelongingTo(int userId);
+        
+        IOrderRepository DirectedTo(int supplierId);
+
+        IOrderRepository OrderBy<T>(Expression<Func<Order, T>> property);
     }
 }

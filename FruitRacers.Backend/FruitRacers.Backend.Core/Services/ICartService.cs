@@ -15,6 +15,6 @@ namespace FruitRacers.Backend.Core.Services
 
         Task DeleteCartItem(int userId, int productId);
 
-        Task<OrderDto> ConfirmCart(int userId);
+        Task<CustomerOrderDto> ConfirmCart(int userId);
     }
 }
