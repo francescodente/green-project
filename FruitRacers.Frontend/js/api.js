@@ -1,37 +1,38 @@
+var serverAddress = "192.168.1.9:5001";
 var apiVer = "v1";
+var basePath = "https://" + serverAddress + "/api/" + apiVer + "/";
 
-function ajax(type, url, data, success, fail, then) {
-    $.ajax({
-        headers: "authorization" : "bearer TOKEN",
-        type: type,
-        url: url,
+function getBasePath() {
+    return basePath;
+}
+
+function ajax(method, url, data) {
+    return $.ajax({
+        headers: {
+            "authorization" : "bearer TOKEN",
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        method: method,
+        url: getBasePath() + url,
         data: data
-    })
-    .success(function(data) {
-
-    })
-    .fail(function(data) {
-
-    })
-    .then(function(data) {
-
     });
 }
 
-function get(url, data, success, fail, then) {
-    ajax("GET", url, data, success, fail, then);
+function get(url, data) {
+    return ajax("GET", url, data);
 }
 
-function put(url, data, success, fail, then) {
-    ajax("PUT", url, data, success, fail, then);
+function put(url, data) {
+    return ajax("PUT", url, JSON.stringify(data));
 }
 
-function post(url, data, success, fail, then) {
-    ajax("POST", url, data, success, fail, then);
+function post(url, data) {
+    return ajax("POST", url, JSON.stringify(data));
 }
 
-function delete(url, data, success, fail, then) {
-    ajax("DELETE", url, data, success, fail, then);
+function del(url, data) {
+    return ajax("DELETE", url, data);
 }
 
 // Addresses
@@ -50,8 +51,8 @@ function deleteAddress(userId, addressId) {
 
 // Authentication
 
-function authUser() {
-
+function authToken(data) {
+    return post("auth/token", data);
 }
 
 function renewUserAuth() {
@@ -62,7 +63,11 @@ function changePsw() {
 
 }
 
-function registerUser() {
+function registerCustomer(data) {
+    return post("auth/register/customer", data);
+}
+
+function registerSupplier() {
 
 }
 
