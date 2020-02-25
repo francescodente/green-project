@@ -6,7 +6,7 @@
                 <i class="modal-top-icon mdi mdi-account-circle"></i>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
-            <form class="modal-body">
+            <form id="form-login" class="modal-body">
 
                 <h4 class="text-center my-3">Login</h4>
 
@@ -22,7 +22,11 @@
                     <label for="login-password">Password</label>
                 </div>
 
-                <span class="text-error-dark mb-2 d-none">E-mail o password errate</span>
+                <p class="text-error-dark mb-2 d-none">E-mail o password errate</p>
+
+                <div id="login-loader" class="loader text-center my-3">
+                    <?php include("loader.php"); ?>
+                </div>
 
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- KEEP LOGIN -->
@@ -33,7 +37,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button id="submit-login" type="submit" class="btn accent ripple my-3">Accedi</button>
+                    <button type="submit" class="btn accent ripple my-3">Accedi</button>
                 </div>
 
                 <p class="text-center text-sec-dark m-0">Non hai un account? <a href="#" data-toggle="modal" data-target="#modal-sign-up" data-dismiss="modal">Registrati ora</a></p>
@@ -52,7 +56,7 @@
                 <i class="modal-top-icon mdi mdi-account-circle"></i>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
-            <form class="modal-body">
+            <form id="form-sign-up" method="POST" class="modal-body">
 
                 <h4 class="text-center my-3">Registrazione</h4>
 
@@ -86,7 +90,7 @@
                 <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br>
 
                 <div class="text-center">
-                    <button id="submit-sign-up" type="submit" class="btn accent ripple mt-3">Registrati</button>
+                    <button type="submit" class="btn accent ripple mt-3">Registrati</button>
                 </div>
 
             </form>
@@ -103,7 +107,7 @@
                 <i class="modal-top-icon mdi mdi-key-variant"></i>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
-            <form class="modal-body">
+            <form id="form-pwd-recovery" class="modal-body">
 
                 <h4 class="text-center my-3">Recupero password</h4>
 
@@ -118,10 +122,66 @@
                 <span class="text-error-dark mb-2 d-none">Error message</span>
 
                 <div class="text-center">
-                    <button id="submit-reset-password" type="submit" class="btn accent ripple mt-3">Invia</button>
+                    <button type="submit" class="btn accent ripple mt-3">Invia</button>
                 </div>
 
             </form>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+
+        $("#form-sign-up").submit(function(event) {
+            event.preventDefault();
+            console.log("sign-up");
+            registerCustomer({
+                user: {
+                    email: $("#sign-up-email").val(),
+                    cookeConsent: true,
+                    marketingConsent: $("#marketing-consent").is(":checked")
+                },
+                password: $("#sign-up-password").val()
+            }).done(function(data) {
+                console.log("done");
+                console.log(data);
+            }).fail(function(data) {
+                console.log("fail");
+                console.log(data);
+            }).always(function(data) {
+                console.log("always");
+                console.log(data);
+            });
+        });
+
+        $("#form-login").submit(function(event) {
+            event.preventDefault();
+            console.log("login");
+            $("#login-loader").show();
+            authToken({
+                email: $("#login-email").val(),
+                password: $("#login-password").val()
+            }).done(function(data) {
+                sessionStorage.setItem("token", data.token);
+                sessionStorage.setItem("expiration", data.expiration);
+                sessionStorage.setItem("userId", data.userId);
+                location.reload();
+                /*console.log("done");
+                console.log(data);
+                console.log(sessionStorage.getItem("token"));
+                console.log(sessionStorage.getItem("expiration"));
+                console.log(sessionStorage.getItem("userId"));*/
+            }).fail(function(data) {
+                $("#login-email").addClass("error");
+                $("#login-password").addClass("error");
+                $("#form-login").find(".text-error-dark").removeClass("d-none");
+                /*console.log("fail");
+                console.log(data);*/
+            }).always(function(data) {
+                $("#login-loader").hide();
+            });
+        });
+
+    });
+</script>
