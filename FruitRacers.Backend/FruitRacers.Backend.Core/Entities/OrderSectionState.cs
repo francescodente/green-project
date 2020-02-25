@@ -6,9 +6,9 @@ namespace FruitRacers.Backend.Core.Entities
 {
     public enum OrderSectionState
     {
-        Pending = 0,
-        Accepted = 10,
-        Rejected = 20,
-        Loaded = 30
+        Pending,
+        Accepted,
+        Rejected,
+        Loaded
     }
 }

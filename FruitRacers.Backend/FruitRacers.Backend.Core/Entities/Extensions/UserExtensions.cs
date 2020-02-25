@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FruitRacers.Backend.Shared.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -41,6 +42,19 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
                 return string.Format("{0} {1}", user.Person.FirstName, user.Person.LastName);
             }
             return null;
+        }
+
+        public static IOptional<CustomerType> GetCustomerType(this User user)
+        {
+            if (user.CustomerBusiness != null)
+            {
+                return Optional.Of(CustomerType.Business);
+            }
+            if (user.Person != null)
+            {
+                return Optional.Of(CustomerType.Person);
+            }
+            return Optional.Empty<CustomerType>();
         }
     }
 }

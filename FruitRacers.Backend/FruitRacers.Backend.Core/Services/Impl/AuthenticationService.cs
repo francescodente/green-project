@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AutoMapper;
 using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Contracts.Users;
@@ -9,7 +8,6 @@ using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Core.Utils;
-using FruitRacers.Backend.Core.Utils.Notifications;
 using FruitRacers.Backend.Shared.Utils;
 
 namespace FruitRacers.Backend.Core.Services.Impl
@@ -17,13 +15,11 @@ namespace FruitRacers.Backend.Core.Services.Impl
     public class AuthenticationService : AbstractService, IAuthenticationService
     {
         private readonly IAuthenticationHandler handler;
-        private readonly INotificationsService notifications;
 
-        public AuthenticationService(IRequestSession request, IMapper mapper, IAuthenticationHandler handler, INotificationsService notifications)
-            : base(request, mapper)
+        public AuthenticationService(IRequestSession request, IAuthenticationHandler handler)
+            : base(request)
         {
             this.handler = handler;
-            this.notifications = notifications;
         }
 
         private async Task<User> FindUser(Expression<Func<User, bool>> predicate, Func<Exception> exceptionSupplier)
@@ -57,6 +53,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             User user = await this.FindUserById(this.RequestingUser.UserId);
             this.EnsurePasswordIsCorrect(user, request.OldPassword);
             this.handler.AssignPassword(user, request.NewPassword);
+            user.ShouldChangePassword = false;
             await this.Data.SaveChanges();
         }
 
@@ -112,7 +109,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
             await this.Data.Users.Insert(user);
             await this.Data.SaveChanges();
 
-            await this.notifications.SupplierRegistered(user, generatedPassword);
+            await this.Notifications.SupplierRegistered(user, generatedPassword);
 
             return this.Mapper.Map<UserOutputDto>(user);
         }

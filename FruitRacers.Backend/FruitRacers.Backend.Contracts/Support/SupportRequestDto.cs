@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FruitRacers.Backend.Contracts
+namespace FruitRacers.Backend.Contracts.Support
 {
     public class SupportRequestDto
     {

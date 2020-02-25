@@ -2,8 +2,10 @@
 using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Services.Impl;
 using FruitRacers.Backend.Core.Session;
+using FruitRacers.Backend.Core.Utils.Time;
 using FruitRacers.Backend.DataAccess.Sql;
 using FruitRacers.Backend.Infrastructure.Session;
+using FruitRacers.Backend.Infrastructure.Time;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,6 +27,7 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                 new SqlDataSession(p.GetRequiredService<FruitracersContext>())
             ));
 
+            services.AddScoped<IDateTime, MachineDateTime>();
             services.AddScoped<IUserSession, UserSession>();
 
             services.AddScoped<IRequestSession, RequestSession>();
@@ -40,7 +43,8 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
                 .AddScoped<IUsersService, UsersService>()
                 .AddScoped<IRolesService, RolesService>()
                 .AddScoped<ISupportService, SupportService>()
-                .AddScoped<IImagesService, ImagesService>();
+                .AddScoped<IImagesService, ImagesService>()
+                .AddScoped<IOrdersService, OrdersService>();
         }
     }
 }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using FruitRacers.Backend.Contracts.TimeSlots;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
@@ -13,8 +12,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class TimeSlotsService : AbstractService, ITimeSlotsService
     {
-        public TimeSlotsService(IRequestSession request, IMapper mapper)
-            : base(request, mapper)
+        public TimeSlotsService(IRequestSession request)
+            : base(request)
         {
         }
 
@@ -43,7 +42,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task<IEnumerable<DailyTimeTable>> GetNextTimeSlots(int daysAhead)
         {
-            DateTime startDate = DateTime.Today.AddDays(1);
+            DateTime startDate = this.DateTime.Today.AddDays(1);
             DateTime finishDate = startDate.AddDays(daysAhead - 1);
 
             IEnumerable<TimeSlot> timeSlots = await this.Data
@@ -55,7 +54,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
                 .Orders
                 .AfterDate(startDate)
                 .BeforeDate(finishDate)
-                .WithState(OrderState.Confirmed)
+                .WithStates(OrderState.Pending, OrderState.Completed)
                 .AsEnumerable();
 
             IDictionary<(int, DateTime), int> orderCounts = orders

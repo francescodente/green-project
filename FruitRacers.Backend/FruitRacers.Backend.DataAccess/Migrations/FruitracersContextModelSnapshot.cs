@@ -208,6 +208,9 @@ namespace FruitRacers.Backend.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasDefaultValueSql("((1))");
 
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
                     b.Property<int>("SupplierId")
                         .HasColumnType("int");
 
@@ -465,6 +468,9 @@ namespace FruitRacers.Backend.DataAccess.Migrations
                     b.Property<bool>("CookieConsent")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("DefaultAddressId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(60)")
@@ -497,6 +503,10 @@ namespace FruitRacers.Backend.DataAccess.Migrations
                         .HasMaxLength(20);
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("DefaultAddressId")
+                        .IsUnique()
+                        .HasFilter("[DefaultAddressId] IS NOT NULL");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -659,6 +669,14 @@ namespace FruitRacers.Backend.DataAccess.Migrations
                         .HasForeignKey("TimeSlotId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FruitRacers.Backend.Core.Entities.User", b =>
+                {
+                    b.HasOne("FruitRacers.Backend.Core.Entities.Address", "DefaultAddress")
+                        .WithOne()
+                        .HasForeignKey("FruitRacers.Backend.Core.Entities.User", "DefaultAddressId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

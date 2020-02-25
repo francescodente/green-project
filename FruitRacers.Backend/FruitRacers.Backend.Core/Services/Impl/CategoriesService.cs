@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoMapper;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Core.Session;
 
@@ -12,8 +11,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
     {
         private const string ROOT_CATEGORY_NAME = "<root>";
 
-        public CategoriesService(IRequestSession request, IMapper mapper)
-            : base(request, mapper)
+        public CategoriesService(IRequestSession request)
+            : base(request)
         {
 
         }

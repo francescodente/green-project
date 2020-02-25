@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FruitRacers.Backend.Contracts.Addresses;
+﻿using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
@@ -12,8 +11,8 @@ namespace FruitRacers.Backend.Core.Services.Impl
 {
     public class AddressesService : AbstractService, IAddressesService
     {
-        public AddressesService(IRequestSession request, IMapper mapper)
-            : base(request, mapper)
+        public AddressesService(IRequestSession request)
+            : base(request)
         {
             
         }

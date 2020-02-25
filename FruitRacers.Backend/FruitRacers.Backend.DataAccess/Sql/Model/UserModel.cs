@@ -28,6 +28,11 @@ namespace FruitRacers.Backend.DataAccess.Sql.Model
                     .HasMaxLength(256);
 
                 entity.Property(e => e.Telephone).HasMaxLength(20);
+
+                entity.HasOne(e => e.DefaultAddress)
+                    .WithOne()
+                    .HasForeignKey<User>(e => e.DefaultAddressId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
         }
     }

@@ -13,6 +13,8 @@
     <Compile Remove="Migrations\20191227164852_InitialDatabaseSchema.Designer.cs" />
     <Compile Remove="Migrations\20191231142232_RefactorImages.cs" />
     <Compile Remove="Migrations\20191231142232_RefactorImages.Designer.cs" />
+    <Compile Remove="Migrations\20200221142256_AddDefaultAddresses.cs" />
+    <Compile Remove="Migrations\20200221142256_AddDefaultAddresses.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +30,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="3.0.36" />
+    <PackageReference Include="Z.EntityFramework.Plus.EFCore" Version="3.0.37" />
   </ItemGroup>
 
   <ItemGroup>
