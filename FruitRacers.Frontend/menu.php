@@ -31,8 +31,8 @@ $page = basename($_SERVER['PHP_SELF']);
                 <span class="cart-badge badge">3</span>
             </div>
 
-            <div class="dropdown">
-                <button id="dropdown-account" class="btn icon ripple d-none d-lg-flex" title="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown d-none d-lg-block">
+                <button id="dropdown-account" class="btn icon ripple" title="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-account-circle"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-account">
@@ -57,8 +57,8 @@ $page = basename($_SERVER['PHP_SELF']);
                 </div>
             </div>
 
-            <div class="dropdown">
-                <button id="dropdown-admin" class="btn icon ripple d-none d-lg-flex" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown d-none d-lg-block">
+                <button id="dropdown-admin" class="btn icon ripple" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-pound-box"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-admin">
@@ -68,8 +68,8 @@ $page = basename($_SERVER['PHP_SELF']);
                 </div>
             </div>
 
-            <div class="dropdown">
-                <button id="dropdown-menu" class="btn icon ripple d-none d-lg-flex" title="Altro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="dropdown d-none d-lg-block">
+                <button id="dropdown-menu" class="btn icon ripple" title="Altro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu">
