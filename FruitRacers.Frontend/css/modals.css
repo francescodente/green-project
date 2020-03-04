@@ -59,6 +59,12 @@
     width: 100%;
 }
 
+.time-slots-wrapper {
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
 .time-slots {
     width: 100%;
 }
@@ -67,7 +73,6 @@
     text-align: center;
     padding: 10px 0;
     cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0.12);
     transition: background-color 0.2s ease-in-out;
 }
 
