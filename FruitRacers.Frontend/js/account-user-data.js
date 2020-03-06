@@ -16,6 +16,7 @@ $(document).ready(function() {
             icon.removeClass("mdi-content-save");
             icon.addClass("mdi-pencil");
             $(this).parent().find("input, textarea").prop("disabled", true);
+            $(this).blur();
             // TODO submit
         }
     });

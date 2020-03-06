@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Account</title>
+    <title>Fruitracers - I miei dati</title>
 </head>
 <body>
 
@@ -27,9 +27,9 @@
 
                 <!-- GENERAL -->
                 <div id="account-content-col" class="col-12 col-lg-9">
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true">
                         <h4 class="m-0">Generali</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" title="Nascondi">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" title="Nascondi">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -68,9 +68,9 @@
                     <div class="divider dark my-4"></div>
 
                     <!-- PERSONAL -->
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="false">
                         <h4 class="m-0">Dati personali</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -124,9 +124,9 @@
                     <div class="divider dark my-4"></div>
 
                     <!-- ADDRESSES -->
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-addresses" aria-expanded="false">
                         <h4 class="m-0">Indirizzi</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-addresses" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-addresses" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -169,9 +169,9 @@
                     <div class="divider dark my-4"></div>
 
                     <!-- COMPANY -->
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-company" aria-expanded="false">
                         <h4 class="m-0">Dati aziendali</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-company" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-company" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -230,9 +230,9 @@
                     <div class="divider dark my-4"></div>
 
                     <!-- IMAGES -->
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-images" aria-expanded="false">
                         <h4 class="m-0">Immagini</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#user-data-images" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-images" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>

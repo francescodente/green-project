@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Account</title>
+    <title>Fruitracers - Prodotti</title>
 </head>
 <body>
 
@@ -50,7 +50,7 @@
 
                                             <a href="edit-product.php" class="btn accent ripple w-100 mb-2">Modifica</a>
                                             <div class="d-flex">
-                                                <button class="btn outline ripple flex-grow-1 mr-2" style="width: 10px;" data-toggle="toast" data-target="#toast-product-disabled">Disabilita</button>
+                                                <button class="btn outline ripple flex-grow-1 mr-2" style="width: 10px;" data-toggle="modal" data-target="#modal-product-disable">Disabilita</button>
                                                 <button class="btn outline ripple flex-grow-1" style="width: 10px;" data-toggle="modal" data-target="#modal-product-delete">Elimina</button>
                                             </div>
                                         </div>
@@ -81,7 +81,7 @@
                                         <a href="edit-product.php" class="btn outline ripple w-100 mb-2">Modifica</a>
                                         <div class="d-flex">
                                             <button class="btn accent ripple flex-grow-1 mr-2" style="width: 10px;" data-toggle="toast" data-target="#toast-product-enabled">Abilita</button>
-                                            <button class="btn outline ripple flex-grow-1" style="width: 10px;" data-toggle="modal" data-target="#modal-product-delete">Elimina</button>
+                                            <button class="btn outline ripple flex-grow-1" style="width: 10px;" data-toggle="modal" data-target="#modal-product-delete-disabled">Elimina</button>
                                         </div>
                                     </div>
                                 </div>
@@ -107,11 +107,45 @@
                     <i class="modal-top-icon mdi mdi-delete-empty"></i>
                 </div>
                 <div class="modal-body">
-                    <p class="m-0">Sei sicuro di voler eliminare questo prodotto?<br>In caso contrario, è sempre possibile disabilitarlo.</p>
+                    <p class="m-0">Sei sicuro di voler eliminare questo prodotto?<br/>In caso contrario, è sempre possibile disabilitarlo.<br/>Il prodotto eliminato non sarà più acquistabile o visibile agli utenti, ma eventuali ordini che lo comprendono resteranno aperti.</p>
                 </div>
                 <div class="modal-bottom bg-primary d-flex justify-content-center">
                     <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Elimina</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" data-toggle="toast" data-target="#toast-product-deleted" style="width: 100px;">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-product-delete-disabled" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-delete-empty"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="m-0">Sei sicuro di voler eliminare questo prodotto?<br/>Il prodotto eliminato non sarà più acquistabile o visibile agli utenti, ma eventuali ordini che lo comprendono resteranno aperti.</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" data-toggle="toast" data-target="#toast-product-deleted" style="width: 100px;">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-product-disable" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-help-circle-outline"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="m-0">Sei sicuro di voler disabilitare questo prodotto?<br/>Il prodotto non sarà più acquistabile o visibile agli utenti, ma eventuali ordini che lo comprendono resteranno aperti.</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" data-toggle="toast" data-target="#toast-product-disabled" style="width: 100px;">Disabilita</button>
                 </div>
             </div>
         </div>
@@ -127,6 +161,13 @@
     <div id="toast-product-enabled" class="toast container" style="display: none;">
         <div class="toast-content flex-grow-1 flex-md-grow-0">
             <p class="text-sec-light">Il prodotto è stato abilitato.</p>
+            <button class="toast-close btn transparent light ripple" data-dismiss="toast">Ok</button>
+        </div>
+    </div>
+
+    <div id="toast-product-deleted" class="toast container" style="display: none;">
+        <div class="toast-content flex-grow-1 flex-md-grow-0">
+            <p class="text-sec-light">Il prodotto è stato eliminato.</p>
             <button class="toast-close btn transparent light ripple" data-dismiss="toast">Ok</button>
         </div>
     </div>

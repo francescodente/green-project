@@ -35,7 +35,7 @@
                 <button class="modal-close btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <div class="modal-body">
-                <h4 class="text-center">Aggiungi al carrello</h4>
+                <h4 class="text-center">Seleziona la quantità</h4>
                 <div class="d-flex align-items-center mb-2">
                     <button class="q-increase btn icon ripple mr-2" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
                     <div class="text-input flex-grow-1">

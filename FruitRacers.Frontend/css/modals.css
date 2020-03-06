@@ -43,7 +43,8 @@
 |   CART ADD MODAL   |
 \********************/
 
-#modal-cart-add .text-input span {
+#modal-cart-add .text-input span,
+#modal-confirm-available .text-input span {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

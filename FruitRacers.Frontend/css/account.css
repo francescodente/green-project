@@ -66,39 +66,29 @@
     width: 100%;
 }
 
-/*******************\
-|   CLIENT ORDERS   |
-\*******************/
+/****************\
+|   ALL ORDERS   |
+\****************/
 
-#client-orders .order {
+#account-content .order {
     border: 1px solid rgba(0, 0, 0, 0.12);
     border-radius: 4px;
 }
 
-#client-orders .product {
-    border-radius: 4px;
+#account-content .order-header {
+    background-color: var(--col-primary-dark);
 }
 
-#client-orders .product-image {
+/*******************\
+|   CLIENT ORDERS   |
+\*******************/
+
+#client-orders  .product-image {
     object-fit: cover;
     height: 56px;
     width: 56px;
     border-radius: 4px;
     margin: 8px 16px 8px 8px;
-}
-
-#client-orders .text-sec-dark span {
-    color: var(--col-text-sec-dark);
-}
-
-#client-orders .order-header {
-    background-color: var(--col-primary-dark);
-}
-
-#client-orders h6 .mdi {
-    height: 16px;
-    line-height: 16px;
-    font-size: 16px;
 }
 
 /* LG and up */
@@ -108,8 +98,12 @@
         border-right: 1px solid rgba(0, 0, 0, 0.12);
     }
 
-    #client-orders .collapse {
+    #client-orders .order-content .collapse {
         display: block!important;
+    }
+
+    #client-orders .order-content .area-collapse {
+        cursor: initial!important;
     }
 
 }
@@ -120,5 +114,61 @@
     #client-orders .products-col {
         border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     }
+
+}
+
+/*********************\
+|   BUSINESS ORDERS   |
+\*********************/
+
+#business-orders .product:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#business-orders .product-image {
+    object-fit: cover;
+    height: 64px;
+    width: 64px;
+    border-radius: 4px;
+}
+
+#business-orders .product.unavailable .product-image {
+    opacity: 0.5;
+}
+
+#business-orders .product.unavailable h5 {
+    color: var(--col-text-sec-dark);
+}
+
+#business-orders .product-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#business-orders span.available, #business-orders span.unavailable {
+    margin: 0 auto 8px auto;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+}
+
+#business-orders span.available {
+    background-color: var(--col-valid-dark);
+}
+
+/* MD and down */
+@media (max-width: 991px) {
+
+    /*#business-orders  .product-image {
+        margin-bottom: 0px!important;
+    }
+
+    #business-orders  .product-info {
+        padding-bottom: 0px!important;
+    }*/
 
 }
