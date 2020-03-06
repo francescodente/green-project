@@ -20,9 +20,9 @@
             <div class="row">
                 <div class="col-12">
 
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#faq1" aria-expanded="false">
                         <h4 class="m-0">Domanda 1</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#faq1" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#faq1" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -34,9 +34,9 @@
 
                     <div class="divider dark my-4"></div>
 
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#faq2" aria-expanded="false">
                         <h4 class="m-0">Domanda 2</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#faq2" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#faq2" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -48,9 +48,9 @@
 
                     <div class="divider dark my-4"></div>
 
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#faq3" aria-expanded="false">
                         <h4 class="m-0">Domanda 3</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#faq3" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#faq3" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -62,9 +62,9 @@
 
                     <div class="divider dark my-4"></div>
 
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#faq4" aria-expanded="false">
                         <h4 class="m-0">Domanda 4</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#faq4" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#faq4" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -76,9 +76,9 @@
 
                     <div class="divider dark my-4"></div>
 
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#faq5" aria-expanded="false">
                         <h4 class="m-0">Domanda 5</h4>
-                        <button class="btn icon ripple" data-toggle="collapse" data-target="#faq5" aria-expanded="false" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#faq5" aria-expanded="false" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>

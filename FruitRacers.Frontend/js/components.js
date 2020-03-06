@@ -153,7 +153,7 @@ $(document).ready(function() {
     \**************/
 
     $(document).on("click", "[data-toggle='collapse']", function() {
-        $(this).attr("title", $(this).attr("aria-expanded") != "true" ? "Mostra" : "Nascondi");
+        $(".btn-collapse[data-target='" + $(this).data("target") + "']").attr("title", $(this).attr("aria-expanded") != "true" ? "Mostra" : "Nascondi");
     });
 
     /***************\

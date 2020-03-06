@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Framework - Componenti</title>
+    <title>Framework - Components</title>
 </head>
 <body>
 
@@ -438,9 +438,23 @@
                     </div>
 
                     <div class="text-input">
+                        <input id="number" type="number" name="number" min="-10" max="10" step="2" placeholder=" ">
+                        <label for="number">Number</label>
+                        <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
+                        <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
+                    </div>
+
+                    <div class="text-input">
+                        <i class="leading-icon mdi small dark mdi-currency-eur"></i>
+                        <input id="currency" type="number" data-type="currency" name="currency" min="0" step="0.01" placeholder=" ">
+                        <label for="currency">Currency</label>
+                    </div>
+
+                    <div class="text-input">
                         <input id="text4" type="text"  placeholder=" " disabled/>
                         <label for="text4">Disabled</label>
                     </div>
+
 
                 </div>
 
@@ -506,7 +520,7 @@
                 <!------------------>
                 <h1 class="mt-5 mb-3">collapse</h1>
 
-                <button class="btn icon ripple" data-toggle="collapse" data-target="#collapse-example" aria-expanded="false" title="Mostra">
+                <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#collapse-example" aria-expanded="false" title="Mostra">
                     <i class="mdi dark mdi-chevron-down"></i>
                 </button>
                 <div id="collapse-example" class="collapse">
@@ -1154,6 +1168,19 @@
                     </div>
 
                     <div class="text-input dark">
+                        <input id="numberd" type="number" name="numberd" min="-10" max="10" step="2" placeholder=" ">
+                        <label for="numberd">Number</label>
+                        <button class="inc btn icon light ripple" tabindex="-1"><i class="mdi light mdi-menu-up"></i></button>
+                        <button class="dec btn icon light ripple" tabindex="-1"><i class="mdi light mdi-menu-down"></i></button>
+                    </div>
+
+                    <div class="text-input dark">
+                        <i class="leading-icon mdi small light mdi-currency-eur"></i>
+                        <input id="currencyd" type="number" data-type="currency" name="currencyd" min="0" step="0.01" placeholder=" ">
+                        <label for="currencyd">Currency</label>
+                    </div>
+
+                    <div class="text-input dark">
                         <input id="textd4" type="text" placeholder=" " disabled/>
                         <label for="textd4">Disabled</label>
                     </div>
@@ -1222,7 +1249,7 @@
                 <!------------------>
                 <h1 class="text-light mt-5 mb-3">collapse</h1>
 
-                <button class="btn icon light ripple" data-toggle="collapse" data-target="#collapse-example2" aria-expanded="false" title="Mostra">
+                <button class="btn-collapse btn icon light ripple" data-toggle="collapse" data-target="#collapse-example2" aria-expanded="false" title="Mostra">
                     <i class="mdi light mdi-chevron-down"></i>
                 </button>
                 <div id="collapse-example2" class="collapse">

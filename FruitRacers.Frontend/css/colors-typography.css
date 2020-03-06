@@ -157,6 +157,18 @@ a.light, a.light:hover {
     line-height: 24px;
 }
 
+.mdi.small {
+    height: 18px;
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.mdi.large {
+    height: 32px;
+    font-size: 32px;
+    line-height: 32px;
+}
+
 .mdi.dark {
     color: var(--col-icon-dark);
 }

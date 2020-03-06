@@ -123,6 +123,10 @@ div.divider.vertical.light {
 |   BUTTONS   |
 \*************/
 
+button {
+    font-weight: normal;
+}
+
 .btn {
     text-decoration: none!important;
     outline: none!important;
@@ -251,7 +255,7 @@ div.divider.vertical.light {
 
 .btn:disabled {
     opacity: 1;
-    pointer-events: none;
+    pointer-events: none!important;
 }
 
 .btn:disabled, .btn:disabled * {
@@ -297,11 +301,10 @@ div.divider.vertical.light {
 
 .file-input [type="file"] {
     position: absolute;
-    height: 0;
-    width: 0;
+    opacity: 0;
 }
 
-.file-input i {
+.file-input .mdi {
     height: 20px;
     font-size: 20px;
     line-height: 20px;
@@ -355,8 +358,7 @@ div.divider.vertical.light {
 
 .radio {
     position: absolute;
-    height: 0;
-    width: 0;
+    opacity: 0;
 }
 
 .radio + label {
@@ -434,8 +436,7 @@ div.divider.vertical.light {
 
 .rich-radio {
     position: absolute;
-    height: 0;
-    width: 0;
+    opacity: 0;
 }
 
 .rich-radio + label {
@@ -466,8 +467,7 @@ div.divider.vertical.light {
 
 .checkbox {
     position: absolute;
-    height: 0;
-    width: 0;
+    opacity: 0;
 }
 
 .checkbox + label {
@@ -564,8 +564,7 @@ div.divider.vertical.light {
 
 .switch {
     position: absolute;
-    height: 0;
-    width: 0;
+    opacity: 0;
 }
 
 .switch + label {
@@ -687,8 +686,7 @@ div.divider.vertical.light {
 
 .rich-switch {
     position: absolute;
-    height: 0;
-    width: 0;
+    opacity: 0;
 }
 
 .rich-switch + label {
@@ -830,6 +828,12 @@ div.divider.vertical.light {
 |   TEXT INPUTS & AREAS   |
 \*************************/
 
+input[type="text"], textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 .text-input, .text-area {
     position: relative;
     display: flex;
@@ -877,15 +881,17 @@ div.divider.vertical.light {
 }
 
 /* Leading and trailing icons */
-.text-input>.leading-icon {
+.text-input>.leading-icon, .text-input>.trailing-icon {
     position: absolute;
-    top: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.text-input>.leading-icon {
     left: 12px;
 }
 
 .text-input>.trailing-icon {
-    position: absolute;
-    top: 15px;
     right: 12px;
 }
 
@@ -1230,12 +1236,16 @@ textarea {
 |   COLLAPSE   |
 \**************/
 
-[data-toggle="collapse"] .mdi:before {
+.btn-collapse .mdi:before {
     transition: transform 0.3s ease;
 }
 
-[data-toggle="collapse"][aria-expanded="true"] .mdi:before {
+.btn-collapse[aria-expanded="true"] .mdi:before {
     transform: rotate(180deg);
+}
+
+.area-collapse {
+    cursor: pointer;
 }
 
 /***************\
@@ -1578,7 +1588,7 @@ button.chip {
 \*************/
 
 .slider-container {
-    height: 20px;
+    height: 22px;
     width: 100%;
     position: relative;
     display: flex;
@@ -1605,9 +1615,8 @@ button.chip {
     z-index: 20;
 }
 
-.slider:not(:disabled):hover,
-.slider:not(:disabled):hover ~ .slider-progress {
-    height: 6px;
+input[type=range]::-moz-focus-outer {
+    border: 0;
 }
 
 .slider::-webkit-slider-thumb {
@@ -1625,6 +1634,7 @@ button.chip {
     height: 16px;
     width: 16px;
     border-radius: 100%;
+    border: none;
     cursor: pointer;
     background-color: var(--col-accent);
     transition: box-shadow 0.2s ease-in-out, height 0.2s ease-in-out, width 0.2s ease-in-out;
@@ -1639,6 +1649,8 @@ button.chip {
 
 .slider:disabled::-moz-range-thumb {
     background-color: var(--col-primary);
+    height: 0;
+    width: 0;
     border: 8px solid rgba(0, 0, 0, 0.08);
     box-shadow: 0px 0px 0px 4px var(--col-primary);
     cursor: default;
@@ -1657,6 +1669,7 @@ button.chip {
 }
 
 .slider:not(:disabled)::-webkit-slider-thumb:hover,
+.slider:not(:disabled):hover::-webkit-slider-thumb,
 .slider:focus::-webkit-slider-thumb {
     height: 20px;
     width: 20px;
@@ -1664,6 +1677,7 @@ button.chip {
 }
 
 .slider:not(:disabled)::-moz-range-thumb:hover,
+.slider:not(:disabled):hover::-moz-range-thumb,
 .slider:focus::-moz-range-thumb {
     height: 20px;
     width: 20px;
@@ -1765,4 +1779,100 @@ button.chip {
 
 .text-input.picker .mdi {
     pointer-events: none;
+}
+
+/************\
+|   TABLES   |
+\************/
+
+.table {
+    background-color: transparent!important;
+}
+
+.table th {
+    font-family: var(--font-heading);
+}
+
+.table thead th {
+    border-top: none!important;
+}
+
+.table th, .table td {
+    border-bottom: none!important;
+    border-top: 1px solid #DDD;
+}
+
+.table-dark th, .table-dark td {
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 1px solid #444;
+}
+
+.table-hover tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.table-dark.table-hover tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.table-wrapper {
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    margin-bottom: 16px;
+}
+
+.table-wrapper.dark {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.table-wrapper .table {
+    margin-bottom: 0;
+}
+
+.table-bordered {
+    border: none;
+}
+
+.table-bordered tr>*:first-child {
+    border-left: none;
+}
+
+.table-bordered tr>*:last-child {
+    border-right: none;
+}
+
+.table-borderless th, .table-borderless td {
+    border: none!important;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--col-primary-dark);
+}
+
+.table-dark.table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--col-dark-primary-light);
+}
+
+table .nowrap {
+    width: 1%;
+    white-space: nowrap;
+}
+
+table tr.valign-middle>th, table tr.valign-middle>td,
+table tr>th.valign-middle, table tr>td.valign-middle {
+    vertical-align: middle;
+}
+
+table tr.valign-top>th, table tr.valign-top>td,
+table tr>th.valign-top, table tr>td.valign-top {
+    vertical-align: top;
+}
+
+table tr.valign-bottom>th, table tr.valign-bottom>td,
+table tr>th.valign-bottom, table tr>td.valign-bottom {
+    vertical-align: bottom;
 }

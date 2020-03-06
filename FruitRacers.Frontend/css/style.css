@@ -1,5 +1,6 @@
 :root {
-    --col-accent: #FF8A80!important;
+    /*--col-accent: #FF8A80!important;*/
+    --col-accent: #C85A54!important;
     --col-accent-dark: #C85A54!important;
 
     --font-heading: 'Montserrat', sans-serif!important;
@@ -25,6 +26,30 @@
 
 .loader {
     display: none;
+}
+
+/********************\
+|   ORDER STATUSES   |
+\********************/
+
+.order-pending {
+    color: #FFA000;
+}
+
+.order-working {
+    color: #6A1B9A;
+}
+
+.order-shipped {
+    color: #0277BD;
+}
+
+.order-ok {
+    color: #43A047;
+}
+
+.order-canceled {
+    color: var(--col-text-sec-dark);
 }
 
 /***********************\
