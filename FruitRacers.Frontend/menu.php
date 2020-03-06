@@ -62,9 +62,11 @@ $page = basename($_SERVER['PHP_SELF']);
                     <i class="mdi dark mdi-pound-box"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-admin">
-                    <a href="manage-users.php" class="dropdown-item menu-item">Gestione utenti</a>
-                    <a href="manage-products.php" class="dropdown-item menu-item">Gestione prodotti</a>
-                    <a href="manage-orders.php" class="dropdown-item menu-item">Gestione ordini</a>
+                    <a href="management-users.php" class="dropdown-item menu-item">Gestione utenti</a>
+                    <a href="management-products.php" class="dropdown-item menu-item">Gestione prodotti</a>
+                    <a href="management-orders.php" class="dropdown-item menu-item">Gestione ordini</a>
+                    <a href="management-stats.php" class="dropdown-item menu-item">Dati e statistiche</a>
+                    <a href="management-market-prices.php" class="dropdown-item menu-item">Prezzi di mercato</a>
                 </div>
             </div>
 
@@ -92,6 +94,7 @@ $page = basename($_SERVER['PHP_SELF']);
 
         <div class="menu-header bg-primary-dark">
             <a href="index.php"><img src="images/logo/fruitracers_logo_small.png"></a>
+            <button class="menu-toggle btn icon ripple" title="Nascondi"><i class="mdi dark mdi-arrow-left"></i></button>
         </div>
 
         <a href="index.php#home" class="menu-item ripple">
@@ -140,10 +143,6 @@ $page = basename($_SERVER['PHP_SELF']);
                 <span>Prodotti</span>
             </a>
             <a href="account-admin-management.php" class="menu-item ripple">
-                <i class="mdi mdi-pound-box"></i>
-                <span>Gestione</span>
-            </a>
-            <a href="account-admin-management.php" class="menu-item ripple">
                 <i class="mdi mdi-logout-variant"></i>
                 <span>Esci</span>
             </a>
@@ -160,9 +159,11 @@ $page = basename($_SERVER['PHP_SELF']);
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
         <div id="admin-submenu" class="submenu">
-            <a href="manage-users.php" class="menu-item">Gestione utenti</a>
-            <a href="manage-products.php" class="menu-item">Gestione prodotti</a>
-            <a href="manage-orders.php" class="menu-item">Gestione ordini</a>
+            <a href="management-users.php" class="menu-item">Gestione utenti</a>
+                    <a href="management-products.php" class="menu-item">Gestione prodotti</a>
+                    <a href="management-orders.php" class="menu-item">Gestione ordini</a>
+                    <a href="management-stats.php" class="menu-item">Dati e statistiche</a>
+                    <a href="management-market-prices.php" class="menu-item">Prezzi di mercato</a>
         </div>
 
         <div class="divider dark"></div>
