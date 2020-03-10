@@ -25,8 +25,6 @@ namespace FruitRacers.Backend.DataAccess.Sql
 
         public IReadOnlyRepository<Category> Categories => new SqlCategoryRepository(this.context);
 
-        public IRepository<Address> Addresses => new SqlAddressRepository(this.context);
-
         public IReadOnlyRepository<Supplier> Suppliers => new SqlSupplierRepository(this.context);
 
         public IRepository<Image> Images => new SqlImageRepository(this.context);

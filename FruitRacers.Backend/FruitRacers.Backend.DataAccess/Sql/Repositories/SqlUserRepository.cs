@@ -12,8 +12,7 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
     {
         public SqlUserRepository(FruitracersContext context)
             : base(context, q => q
-                .Where(u => !u.IsDeleted)
-                .Include(u => u.Addresses))
+                .Where(u => !u.IsDeleted))
         {
         }
 
@@ -30,11 +29,20 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
         public IUserRepository IncludingRoles()
         {
             return this.WrapRepository(q => q
+                .Include(user => user.Addresses)
+                .Include(user => user.DefaultAddress)
                 .Include(user => user.Person)
                 .Include(user => user.CustomerBusiness)
                 .Include(user => user.Supplier)
                 .Include(user => user.Administrator)
                 .Include(user => user.DeliveryCompany));
+        }
+
+        public IUserRepository IncludingAddresses()
+        {
+            return this.WrapRepository(q => q
+                .Include(user => user.Addresses)
+                .Include(user => user.DefaultAddress));
         }
     }
 }

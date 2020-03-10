@@ -1,5 +1,6 @@
 ﻿using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Entities.Extensions;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Shared.Utils;
@@ -17,61 +18,55 @@ namespace FruitRacers.Backend.Core.Services.Impl
             
         }
 
-        private async Task<Address> RequireAddress(int addressId)
-        {
-            return await this.Data
-                .Addresses
-                .FindOne(a => a.AddressId == addressId)
-                .Then(a => a.OrElseThrow(() => new AddressNotFoundException(addressId)));
-        }
-
-        private async Task<Address> RequireAddressWithOwnership(int userId, int addressId)
-        {
-            Address address = await this.RequireAddress(addressId);
-            ServiceUtils.RequireOwnership(address.UserId, userId);
-            return address;
-        }
-
         public async Task<AddressOutputDto> AddAddress(int userId, AddressInputDto address)
         {
+            User user = await this.RequireUserById(userId, r => r.IncludingAddresses());
             Address addressEntity = new Address
             {
-                UserId = userId,
                 Description = address.Description,
                 Latitude = address.Latitude,
                 Longitude = address.Longitude
             };
-            await this.Data.Addresses.Insert(addressEntity);
+
+            user.AddAddress(addressEntity);
+
             await this.Data.SaveChanges();
             return this.Mapper.Map<AddressOutputDto>(addressEntity);
         }
 
         public async Task DeleteAddress(int userId, int addressId)
         {
-            Address address = await this.RequireAddressWithOwnership(userId, addressId);
-            await this.Data.Addresses.Delete(address);
-            await this.Data.SaveChanges();
-        }
-
-        public async Task<IEnumerable<AddressOutputDto>> GetAddresses(int userId)
-        {
-            return await this.Data
+            User user = await this.RequireUserById(userId, r => r.IncludingAddresses());
+            Address address = user
                 .Addresses
-                .AsEnumerable(a => a.UserId == userId)
-                .Then(x => x.Select(this.Mapper.Map<Address, AddressOutputDto>));
-        }
+                .SingleOptional(a => a.AddressId == addressId)
+                .OrElseThrow(() => new AddressNotFoundException(addressId));
 
-        public async Task<AddressOutputDto> UpdateAddress(int userId, int addressId, AddressInputDto address)
-        {
-            Address addressEntity = await this.RequireAddressWithOwnership(userId, addressId);
-
-            addressEntity.Description = address.Description;
-            addressEntity.Latitude = address.Latitude;
-            addressEntity.Longitude = address.Longitude;
+            user.DeleteAddress(address);
 
             await this.Data.SaveChanges();
+        }
 
-            return this.Mapper.Map<AddressOutputDto>(addressEntity);
+        public async Task<AddressCollectionDto> GetAddresses(int userId)
+        {
+            User user = await this.RequireUserById(userId, r => r.IncludingAddresses());
+
+            return new AddressCollectionDto
+            {
+                Addresses = this.Mapper.Map<IEnumerable<AddressOutputDto>>(user.Addresses),
+                DefaultAddressId = user.DefaultAddressId
+            };
+        }
+
+        public async Task SetDefaultAddress(int userId, int addressId)
+        {
+            User user = await this.RequireUserById(userId, r => r.IncludingAddresses());
+            if (!user.Addresses.Any(a => a.AddressId == addressId))
+            {
+                throw new UnauthorizedUserAccessException(userId);
+            }
+            user.DefaultAddressId = addressId;
+            await this.Data.SaveChanges();
         }
     }
 }

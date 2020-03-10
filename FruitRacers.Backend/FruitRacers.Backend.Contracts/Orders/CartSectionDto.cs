@@ -8,7 +8,6 @@ namespace FruitRacers.Backend.Contracts.Orders
     {
         public int SupplierId { get; set; }
         public string SupplierName { get; set; }
-        public AddressOutputDto SupplierAddress { get; set; }
         public IEnumerable<CartItemOutputDto> Items { get; set; }
         public OrderPricesDto Prices { get; set; }
     }
