@@ -136,7 +136,7 @@
     opacity: 0.5;
 }
 
-#business-orders .product.unavailable h5 {
+#business-orders .product.unavailable .product-name {
     color: var(--col-text-sec-dark);
 }
 
@@ -144,31 +144,4 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-#business-orders span.available, #business-orders span.unavailable {
-    margin: 0 auto 8px auto;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    height: 36px;
-    width: 36px;
-    border-radius: 50%;
-}
-
-#business-orders span.available {
-    background-color: var(--col-valid-dark);
-}
-
-/* MD and down */
-@media (max-width: 991px) {
-
-    /*#business-orders  .product-image {
-        margin-bottom: 0px!important;
-    }
-
-    #business-orders  .product-info {
-        padding-bottom: 0px!important;
-    }*/
-
 }

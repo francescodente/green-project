@@ -61,7 +61,7 @@
                                                     <span class="order-working">In lavorazione</span><br/>
                                                 </div>
                                             </div>
-                                            <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-1" aria-expanded="true">
+                                            <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-1" aria-expanded="false">
                                                 <i class="mdi dark mdi-chevron-down"></i>
                                             </button>
                                         </div>
@@ -70,14 +70,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="order-1" class="order-content container collapse show">
+                                <div id="order-1" class="order-content container collapse">
                                     <div class="row">
                                         <!-- Order products -->
                                         <div class="table-responsive">
                                             <table class="table m-0">
                                                 <tbody>
 
-                                                    <tr class="valign-middle">
+                                                    <tr class="product valign-middle">
                                                         <td scope="row" class="nowrap">
                                                             <img class="product-image" src="images/example_product.jpg" style="height: 48px; width: 48px;"/>
                                                         </td>
@@ -96,7 +96,7 @@
                                                         </td>
                                                     </tr>
 
-                                                    <tr class="valign-middle">
+                                                    <tr class="product valign-middle">
                                                         <td scope="row" class="nowrap">
                                                             <img class="product-image" src="images/example_product.jpg" style="height: 48px; width: 48px;"/>
                                                         </td>
@@ -114,7 +114,7 @@
                                                         </td>
                                                     </tr>
 
-                                                    <tr class="valign-middle">
+                                                    <tr class="product unavailable valign-middle">
                                                         <td scope="row" class="nowrap">
                                                             <img class="product-image" src="images/example_product.jpg" style="height: 48px; width: 48px;"/>
                                                         </td>
@@ -134,6 +134,30 @@
 
                                                 </tbody>
                                             </table>
+                                            <div class="divider dark m-0"></div>
+                                            <div class="cost-summary bg-primary-dark p-3">
+                                                <div class="d-flex justify-content-between text-sec-dark">
+                                                    <span>SUBTOTALE</span>
+                                                    <span><span class="subtotal">0,00</span>€</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between text-sec-dark">
+                                                    <span>IVA</span>
+                                                    <span><span class="vat">0,00</span>€</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-2">
+                                                    <span>TOTALE</span>
+                                                    <span><span class="total">0,00</span>€</span>
+                                                </div>
+                                                <div class="divider dark my-3"></div>
+                                                <div class="d-flex justify-content-between text-sec-dark">
+                                                    <span>COMMISSIONE</span>
+                                                    <span><span class="shipping">0,00</span>€</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-2">
+                                                    <span>TOTALE</span>
+                                                    <span><span class="total">0,00</span>€</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -276,6 +300,14 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $(document).on("click", ".mark-all-available", function(event) {
+                event.stopPropagation();
+            });
+        });
+    </script>
 
 </body>
 </html>

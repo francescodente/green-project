@@ -63,7 +63,7 @@
                                                         <p class="product-name m-0">Product name</p>
                                                         <div class="d-flex justify-content-between">
                                                             <span class="text-sec-dark"><span class="product-quantity">1</span><span class="product-unit"> Kg</span></span>
-                                                            <span class="product-price text-sec-dark">€0,00</span>
+                                                            <span class="product-price text-sec-dark">0,00€</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -75,20 +75,20 @@
                                             <div class="divider dark my-3"></div>
                                             <div class="d-flex justify-content-between text-sec-dark">
                                                 <span>SUBTOTALE</span>
-                                                <span>€<span class="subtotal">0,00</span></span>
+                                                <span><span class="subtotal">0,00</span>€</span>
                                             </div>
                                             <div class="d-flex justify-content-between text-sec-dark">
                                                 <span>IVA</span>
-                                                <span>€<span class="vat">0,00</span></span>
+                                                <span><span class="vat">0,00</span>€</span>
                                             </div>
                                             <div class="d-flex justify-content-between text-sec-dark">
                                                 <span>SPEDIZIONE</span>
-                                                <span>€<span class="shipping">0,00</span></span>
+                                                <span><span class="shipping">0,00</span>€</span>
                                             </div>
                                             <div class="divider dark my-3"></div>
                                             <div class="d-flex justify-content-between mt-2">
                                                 <span>TOTALE</span>
-                                                <span>€<span class="total">0,00</span></span>
+                                                <span><span class="total">0,00</span>€</span>
                                             </div>
                                         </div>
                                     </div>
