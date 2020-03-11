@@ -445,7 +445,7 @@
                     </div>
 
                     <div class="text-input">
-                        <i class="leading-icon mdi small dark mdi-currency-eur"></i>
+                        <i class="trailing-icon mdi small dark mdi-currency-eur"></i>
                         <input id="currency" type="number" data-type="currency" name="currency" min="0" step="0.01" placeholder=" ">
                         <label for="currency">Currency</label>
                     </div>
@@ -1175,7 +1175,7 @@
                     </div>
 
                     <div class="text-input dark">
-                        <i class="leading-icon mdi small light mdi-currency-eur"></i>
+                        <i class="trailing-icon mdi small light mdi-currency-eur"></i>
                         <input id="currencyd" type="number" data-type="currency" name="currencyd" min="0" step="0.01" placeholder=" ">
                         <label for="currencyd">Currency</label>
                     </div>

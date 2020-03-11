@@ -16,25 +16,11 @@
     top: 0;
 }
 
-.fr-1-1 {
-    padding-top: 100%;
-}
-
-.fr-5-4 {
-    padding-top: 80%;
-}
-
-.fr-4-3 {
-    padding-top: 75%;
-}
-
-.fr-16-9 {
-    padding-top: 56.25%;
-}
-
-.fr-2-1 {
-    padding-top: 50%;
-}
+.fr-1-1 { padding-top: 100%; }
+.fr-5-4 { padding-top: 80%; }
+.fr-4-3 { padding-top: 75%; }
+.fr-16-9 { padding-top: 56.25%; }
+.fr-2-1 { padding-top: 50%; }
 
 /************\
 |   IMAGES   |
@@ -126,6 +112,11 @@ div.divider.vertical.light {
 button {
     font-weight: normal;
 }
+
+/*.btn, .btn span, .file-input span {
+    font-family: var(--font-heading);
+    font-weight: bold;
+}*/
 
 .btn {
     text-decoration: none!important;
@@ -359,6 +350,7 @@ button {
 .radio {
     position: absolute;
     opacity: 0;
+    visibility: hidden;
 }
 
 .radio + label {
@@ -468,6 +460,7 @@ button {
 .checkbox {
     position: absolute;
     opacity: 0;
+    visibility: hidden;
 }
 
 .checkbox + label {
@@ -843,6 +836,7 @@ input[type="text"], textarea {
 
 .text-input input {
     height: 42px;
+    width: 100%;
     margin: 6px 0;
     padding: 6px 12px;
     background-color: var(--col-primary);
@@ -1600,6 +1594,7 @@ button.chip {
     -webkit-appearance: none;
     appearance: none;
     outline: none!important;
+    cursor: pointer;
     height: 4px;
     width: 100%;
     border-radius: 360px;
@@ -1685,11 +1680,13 @@ input[type=range]::-moz-focus-outer {
 }
 
 .slider.dark:not(:disabled)::-webkit-slider-thumb:hover,
+.slider.dark:not(:disabled):hover::-webkit-slider-thumb,
 .slider.dark:focus::-webkit-slider-thumb {
     box-shadow: 0px 0px 0px 8px rgba(255, 255, 255, 0.12);
 }
 
 .slider.dark:not(:disabled)::-moz-range-thumb:hover,
+.slider.dark:not(:disabled):hover::-moz-range-thumb,
 .slider.dark:focus::-moz-range-thumb {
     box-shadow: 0px 0px 0px 8px rgba(255, 255, 255, 0.12);
 }
