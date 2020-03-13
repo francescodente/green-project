@@ -5,10 +5,11 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>2811bfa6-18de-4165-ac14-529ab1275a68</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
+    <DockerServiceUrl>http://192.168.99.100:5000/swagger</DockerServiceUrl>
     <DockerServiceName>fruitracers.backend.apilayer</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
+    <None Include=".env" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>
