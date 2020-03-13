@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FruitRacers.Backend.Contracts.Addresses;
+using FruitRacers.Backend.Contracts.Cart;
 using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Contracts.Products;

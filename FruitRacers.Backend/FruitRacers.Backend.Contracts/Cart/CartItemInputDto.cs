@@ -1,4 +1,4 @@
-﻿namespace FruitRacers.Backend.Contracts.Orders
+﻿namespace FruitRacers.Backend.Contracts.Cart
 {
     public class CartItemInputDto
     {

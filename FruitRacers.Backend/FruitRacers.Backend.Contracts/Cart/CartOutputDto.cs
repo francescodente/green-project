@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using FruitRacers.Backend.Contracts.Orders;
+using System.Collections.Generic;
 using System.Linq;
 
-namespace FruitRacers.Backend.Contracts.Orders
+namespace FruitRacers.Backend.Contracts.Cart
 {
     public class CartOutputDto
     {

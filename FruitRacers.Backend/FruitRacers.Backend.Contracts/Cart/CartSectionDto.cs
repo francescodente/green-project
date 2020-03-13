@@ -1,8 +1,9 @@
 ﻿using FruitRacers.Backend.Contracts.Addresses;
+using FruitRacers.Backend.Contracts.Orders;
 using FruitRacers.Backend.Contracts.Suppliers;
 using System.Collections.Generic;
 
-namespace FruitRacers.Backend.Contracts.Orders
+namespace FruitRacers.Backend.Contracts.Cart
 {
     public class CartSectionDto
     {

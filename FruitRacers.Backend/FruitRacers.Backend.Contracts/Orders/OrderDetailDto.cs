@@ -1,4 +1,5 @@
-﻿using FruitRacers.Backend.Contracts.Products;
+﻿using FruitRacers.Backend.Contracts.Orders.States;
+using FruitRacers.Backend.Contracts.Products;
 
 namespace FruitRacers.Backend.Contracts.Orders
 {
