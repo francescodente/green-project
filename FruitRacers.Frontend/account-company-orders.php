@@ -41,13 +41,29 @@
                         <!-- CURRENT ORDERS -->
                         <div class="tab-pane fade show active" id="nav-open-orders" role="tabpanel" aria-labelledby="nav-open-orders-tab">
 
+                            <!-- <div class="d-flex">
+                                <a href="#" class="btn round accent ripple mr-2">Oggi</a>
+                                <a href="#" class="btn round outline ripple mr-2">Domani</a>
+                                <a href="#" class="btn round outline ripple">1 Marzo</a>
+                            </div> -->
+
+                            <div class="chip-container d-flex flex-wrap mb-3">
+                                <a href="#" class="chip px-2 selected">
+                                    <span>Oggi</span>
+                                </a>
+                                <a href="#" class="chip px-2">
+                                    <span>Domani</span>
+                                </a>
+                                <a href="#" class="chip px-2">
+                                    <span>1 Marzo</span>
+                                </a>
+                            </div>
+
                             <!-- <div class="empty-state m-5">
                                 <img src="images/empty.png"/>
                                 <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun ordine attivo</h6>
                                 <p class="text-center text-dis-dark m-0">In questa sezione sono visualizzati i prodotti da consegnare al nostro fattorino.</p>
                             </div> -->
-
-                            <h4 class="mb-3">Oggi</h4>
 
                             <!-- Order -->
                             <div class="order mb-4">
@@ -163,23 +179,107 @@
                                 </div>
                             </div>
 
-                            <div class="divider dark mb-4"></div>
-
-                            <h4>Domani</h4>
-
-                            <div class="divider dark mb-4"></div>
-
-                            <h4>1 Marzo</h4>
-
                         </div>
                         <div class="tab-pane fade" id="nav-order-history" role="tabpanel" aria-labelledby="nav-order-history-tab">
 
                             <!-- ORDER HISTORY -->
 
-                            <div class="empty-state m-5">
+                            <!-- <div class="empty-state m-5">
                                 <img src="images/empty.png"/>
                                 <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">La cronologia ordini è vuota</h6>
                                 <p class="text-center text-dis-dark m-0">Gli ordini completati vengono mostrati qui.</p>
+                            </div> -->
+
+                            <!-- Order -->
+                            <div class="order mb-4">
+                                <div class="order-header container p-3" data-toggle="collapse" data-target="#order-1" aria-expanded="true">
+                                    <div class="row">
+                                        <div class="col-12 d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <p class="text-sec-dark font-weight-bold mb-2">Ordine N° <span class="order-number">201905100001</span> del <span class="order-date">1 Gen 2020</span></p>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="mdi dark small mdi-check-circle-outline mr-2"></i>
+                                                    <span class="text-sec-dark">Completato il 01/01/2020</span><br/>
+                                                </div>
+                                            </div>
+                                            <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-1" aria-expanded="false">
+                                                <i class="mdi dark mdi-chevron-down"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="order-1" class="order-content container collapse">
+                                    <div class="row">
+                                        <!-- Order products -->
+                                        <div class="table-responsive">
+                                            <table class="table m-0">
+                                                <tbody>
+
+                                                    <tr class="product valign-middle">
+                                                        <td scope="row" class="nowrap">
+                                                            <img class="product-image" src="images/example_product.jpg" style="height: 48px; width: 48px;"/>
+                                                        </td>
+                                                        <td style="white-space: nowrap;">
+                                                            <span class="product-name">Product name</span><br/>
+                                                            <div class="text-sec-dark">
+                                                                <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="product valign-middle">
+                                                        <td scope="row" class="nowrap">
+                                                            <img class="product-image" src="images/example_product.jpg" style="height: 48px; width: 48px;"/>
+                                                        </td>
+                                                        <td style="white-space: nowrap;">
+                                                            <span class="product-name">Product name</span><br/>
+                                                            <div class="text-sec-dark">
+                                                                <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr class="product unavailable valign-middle">
+                                                        <td scope="row" class="nowrap">
+                                                            <img class="product-image" src="images/example_product.jpg" style="height: 48px; width: 48px;"/>
+                                                        </td>
+                                                        <td style="white-space: nowrap;">
+                                                            <span class="product-name">Product name</span><br/>
+                                                            <div class="text-sec-dark">
+                                                                <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <div class="divider dark m-0"></div>
+                                            <div class="cost-summary bg-primary-dark p-3">
+                                                <div class="d-flex justify-content-between text-sec-dark">
+                                                    <span>SUBTOTALE</span>
+                                                    <span><span class="subtotal">0,00</span>€</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between text-sec-dark">
+                                                    <span>IVA</span>
+                                                    <span><span class="vat">0,00</span>€</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-2">
+                                                    <span>TOTALE</span>
+                                                    <span><span class="total">0,00</span>€</span>
+                                                </div>
+                                                <div class="divider dark my-3"></div>
+                                                <div class="d-flex justify-content-between text-sec-dark">
+                                                    <span>COMMISSIONE</span>
+                                                    <span><span class="shipping">0,00</span>€</span>
+                                                </div>
+                                                <div class="d-flex justify-content-between mt-2">
+                                                    <span>TOTALE</span>
+                                                    <span><span class="total">0,00</span>€</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="divider dark mb-4"></div>

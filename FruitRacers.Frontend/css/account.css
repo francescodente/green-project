@@ -145,3 +145,12 @@
     flex-direction: column;
     justify-content: center;
 }
+
+#business-orders .chip>span {
+    font-weight: bold;
+    color: var(--col-text-sec-dark);
+}
+
+#business-orders .chip.selected>span {
+    color: var(--col-accent);
+}
