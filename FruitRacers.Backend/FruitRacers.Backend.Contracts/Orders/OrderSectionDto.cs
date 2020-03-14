@@ -1,4 +1,5 @@
 ﻿using FruitRacers.Backend.Contracts.Addresses;
+using FruitRacers.Backend.Contracts.Orders.States;
 using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Contracts.Orders

@@ -8,5 +8,7 @@ namespace FruitRacers.Backend.Core.Repositories
     public interface IUserRepository : IRepository<User>
     {
         IUserRepository IncludingRoles();
+
+        IUserRepository IncludingAddresses();
     }
 }

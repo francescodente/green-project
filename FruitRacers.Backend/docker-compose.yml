@@ -6,3 +6,6 @@ services:
     build:
       context: .
       dockerfile: FruitRacers.Backend.ApiLayer/Dockerfile
+      args:
+        - HTTP_PORT=${HTTP_PORT}
+        - HTTPS_PORT=${HTTPS_PORT}

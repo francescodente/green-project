@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FruitRacers.Backend.Contracts.Orders.States;
+using System;
 using System.Collections.Generic;
 using System.Text;
 

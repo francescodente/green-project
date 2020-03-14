@@ -56,5 +56,23 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
             }
             return Optional.Empty<CustomerType>();
         }
+
+        public static void AddAddress(this User user, Address address)
+        {
+            if (user.Addresses.Count == 0)
+            {
+                user.DefaultAddress = address;
+            }
+            user.Addresses.Add(address);
+        }
+
+        public static void DeleteAddress(this User user, Address address)
+        {
+            if (user.DefaultAddressId == address.AddressId)
+            {
+                user.DefaultAddressId = null;
+            }
+            user.Addresses.Remove(address);
+        }
     }
 }

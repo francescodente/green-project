@@ -34,18 +34,19 @@ namespace FruitRacers.Backend.ApiLayer.Controllers
             return Ok(await this.addressesService.AddAddress(userId, address));
         }
 
-        [HttpPut("{addressId}")]
-        [OwnerOnly]
-        public async Task<IActionResult> UpdateAddress([FromRoute] int userId, [FromRoute] int addressId, [FromBody] AddressInputDto address)
-        {
-            return Ok(await this.addressesService.UpdateAddress(userId, addressId, address));
-        }
-
         [HttpDelete("{addressId}")]
         [OwnerOnly]
         public async Task<IActionResult> DeleteAddress([FromRoute] int userId, [FromRoute] int addressId)
         {
             await this.addressesService.DeleteAddress(userId, addressId);
+            return NoContent();
+        }
+
+        [HttpPut("default")]
+        [OwnerOnly]
+        public async Task<IActionResult> SetDefaultAddress([FromRoute] int userId, [FromBody] int addressId)
+        {
+            await this.addressesService.SetDefaultAddress(userId, addressId);
             return NoContent();
         }
     }

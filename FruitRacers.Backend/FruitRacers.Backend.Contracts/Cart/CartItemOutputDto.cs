@@ -1,7 +1,7 @@
 ﻿using FruitRacers.Backend.Contracts.Categories;
 using FruitRacers.Backend.Contracts.Products;
 
-namespace FruitRacers.Backend.Contracts.Orders
+namespace FruitRacers.Backend.Contracts.Cart
 {
     public class CartItemOutputDto
     {
