@@ -21,9 +21,7 @@ namespace FruitRacers.Backend.Core.Repositories
         IOrderRepository WithStates(params OrderState[] states);
 
         IOrderRepository BelongingTo(int userId);
-        
-        IOrderRepository DirectedTo(int supplierId);
 
-        IOrderRepository OrderBy<T>(Expression<Func<Order, T>> property);
+        IOrderRepository OrderByTimestamp();
     }
 }

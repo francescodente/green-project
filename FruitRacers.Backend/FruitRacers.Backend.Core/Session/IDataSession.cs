@@ -16,6 +16,7 @@ namespace FruitRacers.Backend.Core.Session
         IReadOnlyRepository<Category> Categories { get; }
         IReadOnlyRepository<Supplier> Suppliers { get; }
         IRepository<Image> Images { get; }
+        ISectionRepository Sections { get; }
 
         Task SaveChanges();
     }

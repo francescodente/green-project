@@ -29,6 +29,8 @@ namespace FruitRacers.Backend.DataAccess.Sql
 
         public IRepository<Image> Images => new SqlImageRepository(this.context);
 
+        public ISectionRepository Sections => new SqlSectionRepository(this.context);
+
         public void Dispose()
         {
             this.context.Dispose();

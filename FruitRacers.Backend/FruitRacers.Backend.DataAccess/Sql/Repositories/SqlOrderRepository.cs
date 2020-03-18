@@ -73,19 +73,14 @@ namespace FruitRacers.Backend.DataAccess.Sql.Repositories
                     .ThenInclude(u => u.Person));
         }
 
-        public IOrderRepository DirectedTo(int supplierId)
-        {
-            return this.WrapRepository(q => q.Where(o => o.Sections.Any(s => s.SupplierId == supplierId)));
-        }
-
         public IOrderRepository WithStates(params OrderState[] states)
         {
             return this.WrapRepository(q => q.Where(o => states.Contains(o.OrderState)));
         }
 
-        public IOrderRepository OrderBy<T>(Expression<Func<Order, T>> property)
+        public IOrderRepository OrderByTimestamp()
         {
-            return this.WrapRepository(q => q.OrderBy(property));
+            return this.WrapRepository(q => q.OrderByDescending(o => o.Timestamp));
         }
     }
 }

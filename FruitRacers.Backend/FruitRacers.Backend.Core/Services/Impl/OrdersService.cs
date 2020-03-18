@@ -76,9 +76,7 @@ namespace FruitRacers.Backend.Core.Services.Impl
 
         public async Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(int supplierId, OrderFilters filters, PaginationFilter pagination)
         {
-            IOrderRepository orders = this.FilteredOrders(filters)
-                .DirectedTo(supplierId)
-                .OrderBy(o => o.DeliveryDate);
+            IOrderRepository orders = this.FilteredOrders(filters);
             return await ServiceUtils.PagedCollectionFromRepository(orders, pagination, o => this.MapToSupplierOrderDto(o, supplierId));
         }
     }

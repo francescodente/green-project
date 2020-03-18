@@ -16,6 +16,7 @@ namespace FruitRacers.Backend.Infrastructure.Session
         private IReadOnlyRepository<Category> categories;
         private IReadOnlyRepository<Supplier> suppliers;
         private IRepository<Image> images;
+        private ISectionRepository sections;
 
         public LazyLoadedDataSession(IDataSession session)
         {
@@ -35,6 +36,8 @@ namespace FruitRacers.Backend.Infrastructure.Session
         public IReadOnlyRepository<Supplier> Suppliers => suppliers ?? (suppliers = session.Suppliers);
 
         public IRepository<Image> Images => images ?? (images = session.Images);
+
+        public ISectionRepository Sections => sections ?? (sections = session.Sections);
 
         public void Dispose()
         {
