@@ -30,7 +30,11 @@ namespace FruitRacers.Backend.Infrastructure.Pricing
         {
             OrderPricesDto prices = new OrderPricesDto();
 
-            prices.SubTotal = section.Details.Select(d => this.GetPriceForItem(d, customerType)).Sum();
+            prices.SubTotal = section
+                .Details
+                .Where(d => d.State != OrderDetailState.Removed)
+                .Select(d => this.GetPriceForItem(d, customerType))
+                .Sum();
             prices.Iva = this.settings.ProductsIvaPercentage * prices.SubTotal;
             if (prices.SubTotal <= this.settings.FreeShippingThreshold[customerType])
             {
