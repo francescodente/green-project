@@ -1,4 +1,4 @@
-﻿using FruitRacers.Backend.Core.Session;
+﻿using FruitRacers.Backend.Core.Utils.Session;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,10 +1,9 @@
 ﻿using FruitRacers.Backend.ApiLayer.Utils;
+using FruitRacers.Backend.Core.Logic;
 using FruitRacers.Backend.Core.Services;
-using FruitRacers.Backend.Core.Services.Impl;
-using FruitRacers.Backend.Core.Session;
+using FruitRacers.Backend.Core.Utils.Session;
 using FruitRacers.Backend.Core.Utils.Time;
 using FruitRacers.Backend.DataAccess.Sql;
-using FruitRacers.Backend.Infrastructure.Session;
 using FruitRacers.Backend.Infrastructure.Time;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,14 +17,10 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 
         public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<FruitracersContext>(options =>
+            services.AddDbContext<IDataSession, FruitracersContext>(options =>
             {
                 options.UseSqlServer(config.GetConnectionString(CONNECTION_STRING_KEY));
             });
-
-            services.AddScoped<IDataSession>(p => new LazyLoadedDataSession(
-                new SqlDataSession(p.GetRequiredService<FruitracersContext>())
-            ));
 
             services.AddScoped<IDateTime, MachineDateTime>();
             services.AddScoped<IUserSession, UserSession>();

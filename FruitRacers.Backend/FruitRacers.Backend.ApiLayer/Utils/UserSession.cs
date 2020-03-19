@@ -1,5 +1,5 @@
 ﻿using FruitRacers.Backend.Core.Entities;
-using FruitRacers.Backend.Core.Session;
+using FruitRacers.Backend.Core.Utils.Session;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

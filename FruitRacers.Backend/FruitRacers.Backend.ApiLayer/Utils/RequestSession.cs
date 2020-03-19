@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FruitRacers.Backend.Core.Session;
 using FruitRacers.Backend.Core.Utils.Notifications;
+using FruitRacers.Backend.Core.Utils.Session;
 using FruitRacers.Backend.Core.Utils.Time;
 
 namespace FruitRacers.Backend.ApiLayer.Utils

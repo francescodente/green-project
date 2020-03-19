@@ -1,13 +1,13 @@
-﻿using System;
-using FruitRacers.Backend.Core.Entities;
+﻿using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Utils.Session;
 using FruitRacers.Backend.DataAccess.Sql.Model;
 using FruitRacers.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using System.Threading.Tasks;
 
 namespace FruitRacers.Backend.DataAccess.Sql
 {
-    public partial class FruitracersContext : DbContext
+    public partial class FruitracersContext : DbContext, IDataSession
     {
         public FruitracersContext()
         {
@@ -35,10 +35,17 @@ namespace FruitRacers.Backend.DataAccess.Sql
         public virtual DbSet<TimeSlotOverride> TimeSlotOverrides { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
+        public Task SaveChangesAsync()
+        {
+            return base.SaveChangesAsync();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ReflectionUtils.InstancesOfSubtypes<IModelCreator>(typeof(FruitracersContext).Assembly)
                 .ForEach(m => m.UpdateModel(modelBuilder));
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

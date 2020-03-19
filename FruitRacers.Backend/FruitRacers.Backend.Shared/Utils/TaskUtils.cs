@@ -17,12 +17,12 @@ namespace FruitRacers.Backend.Shared.Utils
             await taskContinuation(await task);
         }
 
-        public static async Task<TResult> Then<TSource, TResult>(this Task<TSource> task, Func<TSource, TResult> mapper)
+        public static async Task<TResult> Map<TSource, TResult>(this Task<TSource> task, Func<TSource, TResult> mapper)
         {
             return mapper(await task);
         }
 
-        public static async Task<TResult> Then<TSource, TResult>(this Task<TSource> task, Func<TSource, Task<TResult>> taskContinuation)
+        public static async Task<TResult> FlatMap<TSource, TResult>(this Task<TSource> task, Func<TSource, Task<TResult>> taskContinuation)
         {
             return await taskContinuation(await task);
         }
