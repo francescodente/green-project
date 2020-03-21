@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FruitRacers.Backend.Contracts.Orders
 {
-    public class DeliveryInfoInputDto : AbstractDeliveryInfoDto
+    public class DeliveryInfoInputDto
     {
+        public string Notes { get; set; }
+        public DateTime? DeliveryDate { get; set; }
         public int? AddressId { get; set; }
         public int? TimeSlotId { get; set; }
     }

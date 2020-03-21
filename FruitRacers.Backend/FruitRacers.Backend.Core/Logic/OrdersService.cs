@@ -81,7 +81,7 @@ namespace FruitRacers.Backend.Core.Logic
         private SupplierOrderDto MapToSupplierOrderDto(OrderSection order)
         {
             SupplierOrderDto orderOutput = this.Mapper.Map<SupplierOrderDto>(order);
-            orderOutput.Details.Prices = this.pricing.Calculate(order);
+            orderOutput.Prices = this.pricing.Calculate(order);
             return orderOutput;
         }
     }

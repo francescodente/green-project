@@ -1,6 +1,5 @@
 ﻿using FruitRacers.Backend.Contracts.Orders;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace FruitRacers.Backend.Contracts.Cart
 {

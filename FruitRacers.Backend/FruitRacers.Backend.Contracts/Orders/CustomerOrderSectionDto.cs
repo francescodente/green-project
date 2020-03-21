@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace FruitRacers.Backend.Contracts.Orders
 {
-    public class OrderSectionDto
+    public class CustomerOrderSectionDto
     {
         public int SupplierId { get; set; }
         public string SupplierName { get; set; }

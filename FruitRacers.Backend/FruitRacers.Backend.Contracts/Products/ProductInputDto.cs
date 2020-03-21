@@ -1,7 +1,12 @@
-﻿namespace FruitRacers.Backend.Contracts.Products
+﻿using System.Collections.Generic;
+
+namespace FruitRacers.Backend.Contracts.Products
 {
-    public class ProductInputDto : AbstractProductDto
+    public class ProductInputDto
     {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public IDictionary<CustomerTypeDto, PriceDto> Prices { get; set; }
         public int CategoryId { get; set; }
     }
 }
