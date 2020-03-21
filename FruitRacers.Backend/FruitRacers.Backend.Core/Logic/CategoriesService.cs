@@ -6,6 +6,7 @@ using FruitRacers.Backend.Contracts.Categories;
 using Microsoft.EntityFrameworkCore;
 using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Utils.Session;
+using FruitRacers.Backend.Core.Logic.Utils;
 
 namespace FruitRacers.Backend.Core.Logic
 {

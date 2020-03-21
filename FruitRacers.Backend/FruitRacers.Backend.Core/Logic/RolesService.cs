@@ -1,5 +1,6 @@
 ﻿using FruitRacers.Backend.Contracts.Users.Roles;
 using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Logic.Utils;
 using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Utils.Session;
 using Microsoft.EntityFrameworkCore;

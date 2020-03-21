@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
-using FruitRacers.Backend.Core.Logic.Utils;
 using FruitRacers.Backend.Core.Utils.Notifications;
 using FruitRacers.Backend.Core.Utils.Session;
 using FruitRacers.Backend.Core.Utils.Time;
@@ -10,7 +9,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FruitRacers.Backend.Core.Logic
+namespace FruitRacers.Backend.Core.Logic.Utils
 {
     public abstract class AbstractService
     {
