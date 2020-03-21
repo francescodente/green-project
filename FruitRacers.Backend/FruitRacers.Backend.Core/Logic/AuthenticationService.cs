@@ -100,6 +100,14 @@ namespace FruitRacers.Backend.Core.Logic
                 VatNumber = registration.VatNumber,
                 IsValid = true
             };
+
+            string generatedPassword = this.handler.GenerateRandomPassword();
+            this.handler.AssignPassword(user, generatedPassword);
+
+            this.Data.Users.Add(user);
+
+            await this.Data.SaveChangesAsync();
+
             user.AddAddress(new Address
             {
                 Description = addressInput.Description,
@@ -107,10 +115,6 @@ namespace FruitRacers.Backend.Core.Logic
                 Longitude = addressInput.Longitude
             });
 
-            string generatedPassword = this.handler.GenerateRandomPassword();
-            this.handler.AssignPassword(user, generatedPassword);
-
-            this.Data.Users.Add(user);
             await this.Data.SaveChangesAsync();
 
             await this.Notifications.SupplierRegistered(user, generatedPassword);
