@@ -22,17 +22,17 @@ namespace FruitRacers.Backend.Infrastructure.Notifications
             this.settings = settings;
         }
 
-        public async Task OrderReceived(OrderSection order)
+        public Task OrderReceived(OrderSection order)
         {
-            await this.SendMailNotification(
+            return this.SendMailNotification(
                 this.settings.OrderReceived,
                 MailTemplates.OrderReceived(order),
                 order.Supplier.User.Email);
         }
 
-        public async Task SupplierRegistered(User supplier, string generatedPassword)
+        public Task SupplierRegistered(User supplier, string generatedPassword)
         {
-            await this.SendMailNotification(
+            return this.SendMailNotification(
                 this.settings.SupplierRegistered,
                 MailTemplates.SupplierRegistered(supplier, generatedPassword),
                 supplier.Email);
@@ -51,10 +51,10 @@ namespace FruitRacers.Backend.Infrastructure.Notifications
             await builder.Send();
         }
 
-        private async Task<string> LoadMailTemplate(MailNotificationDescription description)
+        private Task<string> LoadMailTemplate(MailNotificationDescription description)
         {
             string path = Path.Combine(this.baseTemplatePath, description.BodyTemplateFile);
-            return await File.ReadAllTextAsync(path);
+            return File.ReadAllTextAsync(path);
         }
     }
 }

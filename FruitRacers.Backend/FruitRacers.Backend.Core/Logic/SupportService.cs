@@ -17,9 +17,9 @@ namespace FruitRacers.Backend.Core.Logic
             this.mailService = mailService;
         }
 
-        public async Task SendSupportEmail(SupportRequestDto request)
+        public Task SendSupportEmail(SupportRequestDto request)
         {
-            await this.mailService.NewMail() // TODO: Setup real mail contexts and use those instead of the test one
+            return this.mailService.NewMail() // TODO: Setup real mail contexts and use those instead of the test one
                 .From(MailContext.Test)
                 .To(request.SenderEmail)
                 .Subject(request.Subject)

@@ -43,7 +43,7 @@ namespace FruitRacers.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public async Task<PagedCollection<ProductOutputDto>> GetProducts(int userId, PaginationFilter pagination, ProductsFilters filters)
+        public Task<PagedCollection<ProductOutputDto>> GetProducts(int userId, PaginationFilter pagination, ProductsFilters filters)
         {
             IQueryable<Product> products = this.Data
                 .Products
@@ -53,7 +53,7 @@ namespace FruitRacers.Backend.Core.Logic
                 ? products.Where(p => filters.Categories.Contains(p.CategoryId))
                 : products;
 
-            return await products.ToPagedCollection(pagination, this.Mapper.Map<ProductOutputDto>);
+            return products.ToPagedCollection(pagination, this.Mapper.Map<ProductOutputDto>);
         }
 
         public async Task<ProductOutputDto> InsertProduct(int userId, ProductInputDto product)

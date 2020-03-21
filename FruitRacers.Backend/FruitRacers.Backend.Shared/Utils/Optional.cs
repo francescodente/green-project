@@ -99,9 +99,9 @@ namespace FruitRacers.Backend.Shared.Utils
             }
         }
 
-        public static async Task<IOptional<T>> TryCatchAsync<T>(Func<Task<T>> supplier, Action<Exception> exceptionHandler = null)
+        public static Task<IOptional<T>> TryCatchAsync<T>(Func<Task<T>> supplier, Action<Exception> exceptionHandler = null)
         {
-            return await TryCatchAsync<T, Exception>(supplier, exceptionHandler);
+            return TryCatchAsync<T, Exception>(supplier, exceptionHandler);
         }
 
         public static async Task<IOptional<TResult>> TryCatchAsync<TResult, TException>(Func<Task<TResult>> supplier, Action<TException> exceptionHandler = null)

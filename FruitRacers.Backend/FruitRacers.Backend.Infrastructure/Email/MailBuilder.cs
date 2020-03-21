@@ -25,9 +25,9 @@ namespace FruitRacers.Backend.Infrastructure.Email
             this.settings = settings;
         }
 
-        public async Task Send()
+        public Task Send()
         {
-            await this.smtpClient.SendMailAsync(this.message);
+            return this.smtpClient.SendMailAsync(this.message);
         }
 
         public IMailBuilder To(string address)

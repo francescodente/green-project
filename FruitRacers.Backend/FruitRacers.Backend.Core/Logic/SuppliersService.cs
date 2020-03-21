@@ -18,7 +18,7 @@ namespace FruitRacers.Backend.Core.Logic
         {
         }
 
-        public async Task<PagedCollection<SupplierInfoDto>> GetAllSuppliers(PaginationFilter pagination)
+        public Task<PagedCollection<SupplierInfoDto>> GetAllSuppliers(PaginationFilter pagination)
         {
             IQueryable<Supplier> suppliers = this.Data
                 .Suppliers
@@ -26,7 +26,7 @@ namespace FruitRacers.Backend.Core.Logic
                 .Include(s => s.BackgroundImage)
                 .Include(s => s.User)
                     .ThenInclude(s => s.Addresses);
-            return await suppliers.ToPagedCollection(pagination, this.Mapper.Map<SupplierInfoDto>);
+            return suppliers.ToPagedCollection(pagination, this.Mapper.Map<SupplierInfoDto>);
         }
     }
 }

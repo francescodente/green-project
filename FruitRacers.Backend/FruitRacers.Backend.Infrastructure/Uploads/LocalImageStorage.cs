@@ -19,10 +19,10 @@ namespace FruitRacers.Backend.Infrastructure.Uploads
             this.defaultExtension = defaultExtension;
         }
 
-        public async Task DeleteImageAtPath(string path)
+        public Task DeleteImageAtPath(string path)
         {
             string completePath = this.GetCompletePath(path);
-            await Task.Run(() =>
+            return Task.Run(() =>
             {
                 if (File.Exists(completePath))
                 {

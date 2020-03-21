@@ -35,14 +35,14 @@ namespace FruitRacers.Backend.Core.Logic
                 .Map(u => u.OrElseThrow(exceptionSupplier));
         }
 
-        private async Task<User> FindUserById(int userId)
+        private Task<User> FindUserById(int userId)
         {
-            return await this.FindUser(u => u.UserId == userId, () => UserNotFoundException.WithId(userId));
+            return this.FindUser(u => u.UserId == userId, () => UserNotFoundException.WithId(userId));
         }
 
-        private async Task<User> FindUserByEmail(string email)
+        private Task<User> FindUserByEmail(string email)
         {
-            return await this.FindUser(u => u.Email == email, () => UserNotFoundException.WithEmail(email));
+            return this.FindUser(u => u.Email == email, () => UserNotFoundException.WithEmail(email));
         }
 
         public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)

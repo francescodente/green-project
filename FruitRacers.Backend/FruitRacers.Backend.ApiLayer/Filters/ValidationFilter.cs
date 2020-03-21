@@ -8,7 +8,7 @@ namespace FruitRacers.Backend.ApiLayer.Filters
 {
     public class ValidationFilter : IAsyncActionFilter
     {
-        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        public Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             if (!context.ModelState.IsValid)
             {
@@ -24,10 +24,10 @@ namespace FruitRacers.Backend.ApiLayer.Filters
                 };
 
                 context.Result = new BadRequestObjectResult(errorResponse);
-                return;
+                return Task.CompletedTask;
             }
 
-            await next();
+            return next();
         }
     }
 }

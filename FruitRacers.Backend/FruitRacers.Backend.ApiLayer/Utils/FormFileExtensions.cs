@@ -7,11 +7,11 @@ namespace FruitRacers.Backend.ApiLayer.Utils
 {
     public static class FormFileExtensions
     {
-        public static async Task CopyToAsync(this IFormFile formFile, IImageResource imageResource)
+        public static Task CopyToAsync(this IFormFile formFile, IImageResource imageResource)
         {
             using (Stream imageStream = formFile.OpenReadStream())
             {
-                await imageResource.Store(imageStream);
+                return imageResource.Store(imageStream);
             }
         }
     }

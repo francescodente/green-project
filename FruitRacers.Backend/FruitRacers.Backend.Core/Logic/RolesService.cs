@@ -17,9 +17,9 @@ namespace FruitRacers.Backend.Core.Logic
         {
         }
 
-        private async Task<User> RequireUser(int userId, Expression<Func<User, Role>> rolePropery)
+        private Task<User> RequireUser(int userId, Expression<Func<User, Role>> rolePropery)
         {
-            return await this.RequireUserById(userId, q => q.Include(rolePropery));
+            return this.RequireUserById(userId, q => q.Include(rolePropery));
         }
 
         public async Task<CustomerBusinessDto> AssignCustomerBusinessRole(int userId, CustomerBusinessDto customerBusiness)
