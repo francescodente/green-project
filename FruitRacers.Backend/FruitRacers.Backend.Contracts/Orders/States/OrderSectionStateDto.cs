@@ -2,7 +2,6 @@
 {
     public enum OrderSectionStateDto
     {
-        Cart,
         Pending,
         Accepted,
         Rejected,

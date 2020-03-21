@@ -1,12 +1,11 @@
 ﻿using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Utils.Session;
-using FruitRacers.Backend.Core.Utils.Uploads;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace FruitRacers.Backend.Core.Logic.Utils
+namespace FruitRacers.Backend.Core.Utils.Uploads
 {
     public class ImageResource : IImageResource
     {

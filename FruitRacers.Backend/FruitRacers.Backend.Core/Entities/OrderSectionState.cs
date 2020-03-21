@@ -6,7 +6,6 @@ namespace FruitRacers.Backend.Core.Entities
 {
     public enum OrderSectionState
     {
-        Cart,
         Pending,
         Accepted,
         Rejected,

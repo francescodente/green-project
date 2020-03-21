@@ -53,7 +53,7 @@ namespace FruitRacers.Backend.Core.Logic
                 ? products.Where(p => filters.Categories.Contains(p.CategoryId))
                 : products;
 
-            return await ServiceUtils.PagedCollectionFromQuery<Product, ProductOutputDto>(products, pagination, this.Mapper);
+            return await products.ToPagedCollection(pagination, this.Mapper.Map<ProductOutputDto>);
         }
 
         public async Task<ProductOutputDto> InsertProduct(int userId, ProductInputDto product)

@@ -1,14 +1,9 @@
-﻿using AutoMapper;
-using FruitRacers.Backend.Contracts.Filters;
-using FruitRacers.Backend.Contracts.Pagination;
-using FruitRacers.Backend.Core.Entities;
+﻿using FruitRacers.Backend.Core.Entities;
 using FruitRacers.Backend.Core.Exceptions;
-using FruitRacers.Backend.Core.Logic.Utils;
 using FruitRacers.Backend.Core.Utils.Session;
 using FruitRacers.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Z.EntityFramework.Plus;
@@ -72,38 +67,6 @@ namespace FruitRacers.Backend.Core.Logic.Utils
                 return Optional.Of(CustomerType.Person);
             }
             return Optional.Empty<CustomerType>();
-        }
-
-        public static async Task<PagedCollection<TDto>> PagedCollectionFromQuery<TEntity, TDto>(
-            IQueryable<TEntity> query,
-            PaginationFilter pagination,
-            IMapper mapper)
-            where TEntity : class
-        {
-            return await PagedCollectionFromQuery(query, pagination, mapper.Map<TDto>);
-        }
-
-        public static async Task<PagedCollection<TDto>> PagedCollectionFromQuery<TEntity, TDto>(
-            IQueryable<TEntity> repository,
-            PaginationFilter pagination,
-            Func<TEntity, TDto> mapper)
-            where TEntity : class
-        {
-            int count = await repository.CountAsync();
-
-            IEnumerable<TDto> results = await repository
-                .Skip(pagination.PageNumber * pagination.PageSize)
-                .Take(pagination.PageSize)
-                .ToListAsync()
-                .Map(entities => entities.Select(mapper));
-
-            return new PagedCollection<TDto>
-            {
-                PageSize = pagination.PageSize,
-                PageNumber = pagination.PageNumber,
-                PageCount = (count + pagination.PageSize - 1) / pagination.PageSize,
-                Results = results
-            };
         }
     }
 }

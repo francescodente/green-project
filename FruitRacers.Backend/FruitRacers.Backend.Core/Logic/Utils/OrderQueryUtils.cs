@@ -12,7 +12,7 @@ namespace FruitRacers.Backend.Core.Logic.Utils
                 .Include(o => o.Sections)
                     .ThenInclude(s => s.Supplier)
                         .ThenInclude(s => s.User)
-                            .ThenInclude(u => u.Addresses)
+                            .ThenInclude(u => u.DefaultAddress)
                 .Include(o => o.Sections)
                     .ThenInclude(o => o.Details)
                         .ThenInclude(d => d.Product)
@@ -23,7 +23,16 @@ namespace FruitRacers.Backend.Core.Logic.Utils
         {
             return orders
                 .Include(o => o.Address)
-                .Include(o => o.TimeSlotId);
+                .Include(o => o.TimeSlot);
+        }
+
+        public static IQueryable<OrderSection> IncludingDeliveryInfo(this IQueryable<OrderSection> sections)
+        {
+            return sections
+                .Include(s => s.Order)
+                    .ThenInclude(o => o.Address)
+                .Include(s => s.Order)
+                    .ThenInclude(o => o.TimeSlotId);
         }
     }
 }

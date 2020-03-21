@@ -7,6 +7,7 @@ using FruitRacers.Backend.Core.Services;
 using FruitRacers.Backend.Core.Utils.Pricing;
 using FruitRacers.Backend.Core.Utils.Session;
 using FruitRacers.Backend.Shared.Utils;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,31 +24,33 @@ namespace FruitRacers.Backend.Core.Logic
             this.pricing = pricing;
         }
 
-        private IQueryable<Order> FilteredOrders(OrderFilters filters)
+        private IEnumerable<OrderState> GetRequestedStates(OrderFilters filters)
         {
-            IQueryable<Order> orders = this.Data
-                .Orders
-                .IncludingDeliveryInfo()
-                .IncludingSections();
-
-            filters.FromDate.AsOptional().IfPresent(d => orders = orders.Where(o => o.DeliveryDate >= d));
-            filters.ToDate.AsOptional().IfPresent(d => orders = orders.Where(o => o.DeliveryDate <= d));
-
-            IList<OrderState> states = new List<OrderState>();
             if (filters.IncludeCanceled)
             {
-                states.Add(OrderState.Canceled);
+                yield return OrderState.Canceled;
             }
             if (!filters.IgnoreCompleted)
             {
-                states.Add(OrderState.Completed);
+                yield return OrderState.Completed;
             }
             if (!filters.IgnorePending)
             {
-                states.Add(OrderState.Pending);
+                yield return OrderState.Pending;
             }
+        }
 
-            return orders.Where(o => states.Contains(o.OrderState));
+        public Task<PagedCollection<CustomerOrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
+        {
+            IEnumerable<OrderState> states = this.GetRequestedStates(filters);
+            return this.Data
+                .Orders
+                .IncludingDeliveryInfo()
+                .IncludingSections()
+                .Where(o => states.Contains(o.OrderState))
+                .Where(o => o.UserId == customerId)
+                .OrderBy(o => o.Timestamp)
+                .ToPagedCollection(pagination, this.MapToCustomerOrderDto);
         }
 
         private CustomerOrderDto MapToCustomerOrderDto(Order order)
@@ -60,26 +63,26 @@ namespace FruitRacers.Backend.Core.Logic
             return orderOutput;
         }
 
-        private SupplierOrderDto MapToSupplierOrderDto(Order order, int supplierId)
-        {
-            SupplierOrderDto orderOutput = this.Mapper.Map<SupplierOrderDto>(order);
-            OrderSection section = order.Sections.Single(s => s.SupplierId == supplierId);
-            orderOutput.Details = this.Mapper.Map<OrderSectionDto>(section);
-            return orderOutput;
-        }
-
-        public Task<PagedCollection<CustomerOrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
-        {
-            IQueryable<Order> orders = this.FilteredOrders(filters)
-                .Where(o => o.UserId == customerId)
-                .OrderBy(o => o.Timestamp);
-            return ServiceUtils.PagedCollectionFromQuery(orders, pagination, this.MapToCustomerOrderDto);
-        }
-
         public Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(int supplierId, OrderFilters filters, PaginationFilter pagination)
         {
-            IQueryable<Order> orders = this.FilteredOrders(filters);
-            return ServiceUtils.PagedCollectionFromQuery(orders, pagination, o => this.MapToSupplierOrderDto(o, supplierId));
+            IEnumerable<OrderState> states = this.GetRequestedStates(filters);
+            return this.Data
+                .OrderSections
+                .IncludingDeliveryInfo()
+                .Include(s => s.Details)
+                    .ThenInclude(d => d.Product)
+                .Include(s => s.Order)
+                    .ThenInclude(o => o.User)
+                .Where(s => s.SupplierId == supplierId)
+                .Where(s => states.Contains(s.Order.OrderState))
+                .ToPagedCollection(pagination, this.MapToSupplierOrderDto);
+        }
+
+        private SupplierOrderDto MapToSupplierOrderDto(OrderSection order)
+        {
+            SupplierOrderDto orderOutput = this.Mapper.Map<SupplierOrderDto>(order);
+            orderOutput.Details.Prices = this.pricing.Calculate(order);
+            return orderOutput;
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using FruitRacers.Backend.Shared.Utils;
+﻿using FruitRacers.Backend.Contracts.Filters;
+using FruitRacers.Backend.Contracts.Pagination;
+using FruitRacers.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -31,6 +34,29 @@ namespace FruitRacers.Backend.Core.Logic.Utils
             where T : class
         {
             return queryable.SingleOrDefaultAsync(predicate).Map(t => t.AsOptional());
+        }
+
+        public static async Task<PagedCollection<TDto>> ToPagedCollection<TEntity, TDto>(
+            this IQueryable<TEntity> repository,
+            PaginationFilter pagination,
+            Func<TEntity, TDto> mapper)
+            where TEntity : class
+        {
+            int count = await repository.CountAsync();
+
+            IEnumerable<TDto> results = await repository
+                .Skip(pagination.PageNumber * pagination.PageSize)
+                .Take(pagination.PageSize)
+                .ToListAsync()
+                .Map(entities => entities.Select(mapper));
+
+            return new PagedCollection<TDto>
+            {
+                PageSize = pagination.PageSize,
+                PageNumber = pagination.PageNumber,
+                PageCount = (count + pagination.PageSize - 1) / pagination.PageSize,
+                Results = results
+            };
         }
     }
 }

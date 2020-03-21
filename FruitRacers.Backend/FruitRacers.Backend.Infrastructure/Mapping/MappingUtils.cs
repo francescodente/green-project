@@ -49,7 +49,7 @@ namespace FruitRacers.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.SupplierId, o => o.MapFrom(src => src.UserId))
                     .ForMember(dst => dst.LogoImageUrl, o => o.MapFrom(src => src.LogoImage.Path))
                     .ForMember(dst => dst.BackgroundImageUrl, o => o.MapFrom(src => src.BackgroundImage.Path))
-                    .ForMember(dst => dst.Address, o => o.MapFrom(src => src.User.Addresses.Single()));
+                    .ForMember(dst => dst.Address, o => o.MapFrom(src => src.User.DefaultAddress));
             }
         }
 
@@ -68,14 +68,19 @@ namespace FruitRacers.Backend.Infrastructure.Mapping
 
                 CreateMap<OrderDetail, CartItemOutputDto>();
 
-                CreateMap<Order, SupplierOrderDto>()
-                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+                CreateMap<OrderSection, SupplierOrderDto>()
+                    .ForMember(dst => dst.Timestamp, o => o.MapFrom(src => src.Order.Timestamp))
+                    .ForMember(dst => dst.OrderState, o => o.MapFrom(src => src.Order.OrderState))
+                    .ForMember(dst => dst.OrderId, o => o.MapFrom(src => src.Order.OrderId))
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src.Order))
+                    .ForMember(dst => dst.Details, o => o.MapFrom(src => src));
+
 
                 CreateMap<Order, CustomerOrderDto>()
                     .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
 
                 CreateMap<OrderSection, OrderSectionDto>()
-                    .ForMember(dst => dst.SupplierAddress, o => o.MapFrom(src => src.Supplier.User.Addresses.First()))
+                    .ForMember(dst => dst.SupplierAddress, o => o.MapFrom(src => src.Supplier.User.DefaultAddress))
                     .ForMember(dst => dst.SupplierName, o => o.MapFrom(src => src.Supplier.BusinessName))
                     .ForMember(dst => dst.Items, o => o.MapFrom(src => src.Details));
 

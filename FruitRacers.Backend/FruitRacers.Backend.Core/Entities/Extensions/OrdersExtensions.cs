@@ -43,7 +43,7 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
             OrderSection section = new OrderSection
             {
                 SupplierId = supplierId,
-                State = OrderSectionState.Cart
+                State = OrderSectionState.Pending
             };
             order.Sections.Add(section);
             return section;

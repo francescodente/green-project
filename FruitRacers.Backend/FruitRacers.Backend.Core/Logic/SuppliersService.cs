@@ -26,7 +26,7 @@ namespace FruitRacers.Backend.Core.Logic
                 .Include(s => s.BackgroundImage)
                 .Include(s => s.User)
                     .ThenInclude(s => s.Addresses);
-            return await ServiceUtils.PagedCollectionFromQuery<Supplier, SupplierInfoDto>(suppliers, pagination, this.Mapper);
+            return await suppliers.ToPagedCollection(pagination, this.Mapper.Map<SupplierInfoDto>);
         }
     }
 }

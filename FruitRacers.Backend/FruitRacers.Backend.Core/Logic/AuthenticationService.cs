@@ -5,6 +5,7 @@ using FruitRacers.Backend.Contracts.Addresses;
 using FruitRacers.Backend.Contracts.Authentication;
 using FruitRacers.Backend.Contracts.Users;
 using FruitRacers.Backend.Core.Entities;
+using FruitRacers.Backend.Core.Entities.Extensions;
 using FruitRacers.Backend.Core.Exceptions;
 using FruitRacers.Backend.Core.Logic.Utils;
 using FruitRacers.Backend.Core.Services;
@@ -99,12 +100,12 @@ namespace FruitRacers.Backend.Core.Logic
                 VatNumber = registration.VatNumber,
                 IsValid = true
             };
-            user.DefaultAddress = new Address
+            user.AddAddress(new Address
             {
                 Description = addressInput.Description,
                 Latitude = addressInput.Latitude,
                 Longitude = addressInput.Longitude
-            };
+            });
 
             string generatedPassword = this.handler.GenerateRandomPassword();
             this.handler.AssignPassword(user, generatedPassword);
