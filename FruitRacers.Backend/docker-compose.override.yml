@@ -5,6 +5,7 @@ services:
     environment:
       - "ASPNETCORE_ENVIRONMENT=Development"
       - "ASPNETCORE_URLS=http://+:${HTTP_PORT};https://+:${HTTPS_PORT}"
+      - "FRUITRACERS_CONNECTIONSTRINGS__FRUITRACERSDB=Server=sqlserver;Initial Catalog=fruitracersdb;User ID=SA;Password=${SQL_PASSWORD};"
     ports:
       - "${HOST_HTTP_PORT}:${HTTP_PORT}"
       - "${HOST_HTTPS_PORT}:${HTTPS_PORT}"
@@ -14,5 +15,21 @@ services:
     networks:
       - fruitracersnetwork
 
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+    volumes:
+      - "fruitracersdb:/var/opt/mssql"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - SA_PASSWORD=${SQL_PASSWORD}
+    ports:
+      - "1433:1433"
+    networks:
+      - fruitracersnetwork
+
 networks:
   fruitracersnetwork:
+
+volumes:
+  fruitracersdb:

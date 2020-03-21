@@ -17,10 +17,12 @@ namespace FruitRacers.Backend.ApiLayer.DependencyInjection
 
         public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<IDataSession, FruitracersContext>(options =>
+            services.AddDbContext<FruitracersContext>(options =>
             {
                 options.UseSqlServer(config.GetConnectionString(CONNECTION_STRING_KEY));
             });
+
+            services.AddScoped<IDataSession>(p => p.GetRequiredService<FruitracersContext>());
 
             services.AddScoped<IDateTime, MachineDateTime>();
             services.AddScoped<IUserSession, UserSession>();
