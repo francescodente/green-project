@@ -50,7 +50,7 @@ namespace FruitRacers.Backend.Core.Logic
             Address address = user
                 .Addresses
                 .SingleOptional(a => a.AddressId == addressId)
-                .OrElseThrow(() => new AddressNotFoundException(addressId));
+                .OrElseThrow(() => NotFoundException.AddressWithId(addressId));
 
             user.DeleteAddress(address);
 

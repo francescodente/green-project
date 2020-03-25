@@ -26,7 +26,7 @@ namespace FruitRacers.Backend.Core.Logic
             this.pricing = pricing;
         }
 
-        private DateTime DefaultDate => this.DateTime.Today.AddDays(1);
+        private DateTime FirstAvailableDate => this.DateTime.Today.AddDays(1);
 
         private IQueryable<Order> FilterCartForUser(int userId)
         {
@@ -48,7 +48,7 @@ namespace FruitRacers.Backend.Core.Logic
                 OrderState = OrderState.Cart,
                 UserId = user.UserId,
                 AddressId = user.DefaultAddressId,
-                DeliveryDate = this.DefaultDate
+                DeliveryDate = this.FirstAvailableDate,
             };
             this.Data.Orders.Add(newCart);
             return newCart;
@@ -66,15 +66,20 @@ namespace FruitRacers.Backend.Core.Logic
 
         private async Task EnsureTimeSlotIsValid(int timeSlotId, DateTime date)
         {
+            if (date < this.FirstAvailableDate)
+            {
+                throw InvalidDeliveryInfoException.PastDate();
+            }
+
             (TimeSlot timeSlot, int capacity) = await ServiceUtils.FindTimeSlotWithActualCapacity(this.Data, timeSlotId, date);
 
             if (timeSlot.Weekday != date.DayOfWeek)
             {
-                throw new TimeSlotMismatchException(timeSlot, date);
+                throw InvalidDeliveryInfoException.WeekdayMismatch();
             }
             if (capacity <= 0)
             {
-                throw new TimeSlotFullException(timeSlot, date);
+                throw InvalidDeliveryInfoException.TimeSlotFull();
             }
         }
 
@@ -87,9 +92,9 @@ namespace FruitRacers.Backend.Core.Logic
                     .Filter(c => c.Sections.Any())
                     .OrElseThrow(() => new CartEmptyException()));
 
-            if (cart.DeliveryDate == null || cart.AddressId == null || cart.TimeSlotId == null)
+            if (cart.TimeSlotId == null)
             {
-                throw new MissingDeliveryInfoException();
+                throw InvalidDeliveryInfoException.MissingTimeSlot();
             }
 
             cart.Confirm(this.DateTime.Now);
@@ -150,7 +155,7 @@ namespace FruitRacers.Backend.Core.Logic
                     DeliveryInfo = new DeliveryInfoOutputDto
                     {
                         Address = this.Mapper.Map<AddressOutputDto>(user.DefaultAddress),
-                        DeliveryDate = this.DefaultDate
+                        DeliveryDate = this.FirstAvailableDate
                     },
                     Sections = Enumerable.Empty<CartSectionDto>()
                 };
@@ -162,7 +167,7 @@ namespace FruitRacers.Backend.Core.Logic
             Order cart = await this.FilterCartForUser(userId)
                 .IncludingSections()
                 .SingleOptionalAsync()
-                .Map(oc => oc.OrElseThrow(() => new CartItemNotFoundException(productId)));
+                .Map(oc => oc.OrElseThrow(() => NotFoundException.CartItem(productId)));
 
             cart.RemoveOrderDetail(productId);
 
@@ -180,7 +185,7 @@ namespace FruitRacers.Backend.Core.Logic
             Product product = await this.Data
                 .Products
                 .SingleOptionalAsync(p => p.ProductId == item.ProductId)
-                .Map(p => p.OrElseThrow(() => new ProductNotFoundException(item.ProductId)));
+                .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(item.ProductId)));
 
             cart.AddProduct(product, item.Quantity);
 
@@ -192,13 +197,13 @@ namespace FruitRacers.Backend.Core.Logic
             Order order = await this.FilterCartForUser(userId)
                 .IncludingSections()
                 .SingleOptionalAsync()
-                .Map(oc => oc.OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId)));
+                .Map(oc => oc.OrElseThrow(() => NotFoundException.CartItem(cartItem.ProductId)));
 
             OrderDetail item = order
                 .Sections
                 .SelectMany(s => s.Details)
                 .SingleOptional(d => d.ProductId == cartItem.ProductId)
-                .OrElseThrow(() => new CartItemNotFoundException(cartItem.ProductId));
+                .OrElseThrow(() => NotFoundException.CartItem(cartItem.ProductId));
 
             item.Quantity = cartItem.Quantity;
 

@@ -36,7 +36,7 @@ namespace FruitRacers.Backend.Core.Logic.Utils
                 .TimeSlots
                 .IncludeFilter(t => t.TimeSlotOverrides.Where(o => o.Date == date))
                 .SingleOptionalAsync(t => t.TimeSlotId == timeSlotId)
-                .Map(ot => ot.OrElseThrow(() => new TimeSlotNotFoundException(timeSlotId)));
+                .Map(ot => ot.OrElseThrow(() => NotFoundException.TimeSlotWithId(timeSlotId)));
 
             int ordersInsideSelectedTimeSlot = await session
                 .Orders

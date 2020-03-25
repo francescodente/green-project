@@ -34,7 +34,7 @@ namespace FruitRacers.Backend.Core.Utils.Uploads
             Image currentImage = this.imageSupplier();
             if (currentImage == null)
             {
-                throw new NotFoundException(); // TODO: use proper exception
+                throw NotFoundException.Image();
             }
             await storage.DeleteImageAtPath(currentImage.Path);
             this.data.Images.Remove(currentImage);

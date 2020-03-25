@@ -54,7 +54,7 @@ namespace FruitRacers.Backend.Core.Entities.Extensions
             OrderDetail detail = order.Sections
                 .SelectMany(s => s.Details)
                 .SingleOptional(d => d.ProductId == productId)
-                .OrElseThrow(() => new CartItemNotFoundException(productId));
+                .OrElseThrow(() => NotFoundException.CartItem(productId));
 
             OrderSection section = detail.OrderSection;
             section.Details.Remove(detail);

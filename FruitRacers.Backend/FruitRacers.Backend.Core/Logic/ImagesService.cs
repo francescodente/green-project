@@ -54,7 +54,7 @@ namespace FruitRacers.Backend.Core.Logic
             Category category = await this.Data
                 .Categories
                 .SingleOptionalAsync(c => c.CategoryId == categoryId)
-                .Map(c => c.OrElseThrow(() => new CategoryNotFoundException(categoryId)));
+                .Map(c => c.OrElseThrow(() => NotFoundException.CategoryWithId(categoryId)));
 
             return this.CreateImageResource(
                 () => category.Image,
@@ -69,7 +69,7 @@ namespace FruitRacers.Backend.Core.Logic
                 .Products
                 .Include(p => p.Image)
                 .SingleOptionalAsync(p => p.ProductId == productId)
-                .Map(p => p.OrElseThrow(() => new ProductNotFoundException(productId)));
+                .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
 
             ServiceUtils.RequireOwnership(product.SupplierId, supplierId);
 
@@ -85,7 +85,7 @@ namespace FruitRacers.Backend.Core.Logic
             return this.Data
                 .Suppliers
                 .SingleOptionalAsync(s => s.UserId == supplierId)
-                .Map(s => s.OrElseThrow(() => UserNotFoundException.WithId(supplierId)));
+                .Map(s => s.OrElseThrow(() => NotFoundException.UserWithId(supplierId)));
         }
 
         public async Task<IImageResource> SupplierBackgroundImage(int supplierId)

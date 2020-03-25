@@ -20,7 +20,7 @@ namespace FruitRacers.Backend.Core.Logic
             Product product = await this.Data
                 .Products
                 .SingleOptionalAsync(p => p.ProductId == productId)
-                .Map(s => s.OrElseThrow(() => new ProductNotFoundException(productId)));
+                .Map(s => s.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
 
             product.IsLegal = enabled;
             await this.Data.SaveChangesAsync();
@@ -31,7 +31,7 @@ namespace FruitRacers.Backend.Core.Logic
             User user = await this.Data
                 .Users
                 .SingleOptionalAsync(s => s.UserId == userId)
-                .Map(s => s.OrElseThrow(() => UserNotFoundException.WithId(userId)));
+                .Map(s => s.OrElseThrow(() => NotFoundException.UserWithId(userId)));
 
             user.IsEnabled = enabled;
             await this.Data.SaveChangesAsync();

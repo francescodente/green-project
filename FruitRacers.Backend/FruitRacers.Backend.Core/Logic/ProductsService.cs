@@ -29,7 +29,7 @@ namespace FruitRacers.Backend.Core.Logic
                 .Include(p => p.Prices)
                 .Include(p => p.Image)
                 .SingleOptionalAsync(p => p.ProductId == productId)
-                .Map(p => p.OrElseThrow(() => new ProductNotFoundException(productId)));
+                .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
         }
 
         public async Task DeleteProduct(int userId, int productId)

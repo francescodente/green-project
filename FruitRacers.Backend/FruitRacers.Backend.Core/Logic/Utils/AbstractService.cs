@@ -44,7 +44,7 @@ namespace FruitRacers.Backend.Core.Logic.Utils
         protected Task<User> RequireUserById(int userId, Func<IQueryable<User>, IQueryable<User>> queryWrapper = null)
         {
             return this.FindUserById(userId, queryWrapper)
-                .Map(u => u.OrElseThrow(() => UserNotFoundException.WithId(userId)));
+                .Map(u => u.OrElseThrow(() => NotFoundException.UserWithId(userId)));
         }
     }
 }
