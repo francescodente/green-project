@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+  greenproject.backend.apilayer:
+    image: ${DOCKER_REGISTRY-}greenprojectbackendapilayer
+    build:
+      context: .
+      dockerfile: GreenProject.Backend.ApiLayer/Dockerfile
+      args:
+        - HTTP_PORT=${HTTP_PORT}
+        - HTTPS_PORT=${HTTPS_PORT}

@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  greenproject.backend.apilayer:
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Development"
+      - "ASPNETCORE_URLS=http://+:${HTTP_PORT};https://+:${HTTPS_PORT}"
+      - "GREENPROJECT_CONNECTIONSTRINGS__GREENPROJECTDB=Server=sqlserver;Initial Catalog=greenprojectdb;User ID=SA;Password=${SQL_PASSWORD};"
+    ports:
+      - "${HOST_HTTP_PORT}:${HTTP_PORT}"
+      - "${HOST_HTTPS_PORT}:${HTTPS_PORT}"
+    volumes:
+      - "${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro"
+      - "${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro"
+    networks:
+      - greenprojectnetwork
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+    volumes:
+      - "greenprojectdb:/var/opt/mssql"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Developer
+      - SA_PASSWORD=${SQL_PASSWORD}
+    ports:
+      - "1433:1433"
+    networks:
+      - greenprojectnetwork
+
+networks:
+  greenprojectnetwork:
+
+volumes:
+  greenprojectdb:

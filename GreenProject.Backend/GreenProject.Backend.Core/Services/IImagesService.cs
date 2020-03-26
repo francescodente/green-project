@@ -1,0 +1,16 @@
+﻿using GreenProject.Backend.Core.Utils.Uploads;
+using System.Threading.Tasks;
+
+namespace GreenProject.Backend.Core.Services
+{
+    public interface IImagesService
+    {
+        Task<IImageResource> ProductImage(int productId, int supplierId);
+
+        Task<IImageResource> CategoryImage(int categoryId);
+
+        Task<IImageResource> SupplierLogo(int supplierId);
+
+        Task<IImageResource> SupplierBackgroundImage(int supplierId);
+    }
+}
