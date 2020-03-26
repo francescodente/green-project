@@ -16,33 +16,16 @@
 
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-6 mb-5 mb-md-0">
-                        <a href="index.php"><img class="img-fluid" src="images/logo/fruitracers_logo_shadow.png"></a>
+                        <a href="index.php"><img class="img-fluid" src="images/logo/greenproject_logo_light.png"></a>
                     </div>
                 </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-8 col-xl-6 mt-5">
-                        <div class="container p-0">
-                            <div class="row">
-                                <!-- Address selection for users -->
-                                <div class="address-selection user col mx-3 mx-md-0 my-auto" role="button" data-toggle="modal" data-target="#modal-address-management">
-                                    <div class="address-icon">
-                                        <i class="mdi mdi-map-marker"></i>
-                                    </div>
-                                    <p class="address-user font-weight-bold mx-2 mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                                </div>
-                                <!-- Address selection for guests -->
-                                <div class="address-selection guest col mx-3 mx-md-0 my-auto d-none">
-                                    <div class="address-icon">
-                                        <i class="mdi light mdi-map-marker"></i>
-                                    </div>
-                                    <input type="text" class="address-user font-weight-bold mx-2 mb-0" name="address" placeholder="Indirizzo di consegna"/>
-                                </div>
-                                <div class="col-12 col-md-auto text-center mt-3 mt-md-0">
-                                    <a href="companies.php" class="btn-find-companies btn fab ripple" title="Trova"><i class="mdi light mdi-magnify"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                <div class="row mt-5">
+                    <div class="col-12 text-center">
+                        <h2 class="font-weight-bold text-light mb-4">ESCLUSIVA! Cassette settimanali personalizzabili</h2>
+                        <h5 class="text-light mb-4">Componi la tua cassetta settimanale con frutta e verdura fresca, di stagione e a KM 0.</h5>
+                        <h5 class="font-weight-bold text-light mb-5">Tutte le settimane a casa tua<br/><br/>Scopri di più</h5>
+                        <button class="btn accent ripple text-light font-weight-bold px-4">Scegli il tuo formato</button>
                     </div>
                 </div>
 

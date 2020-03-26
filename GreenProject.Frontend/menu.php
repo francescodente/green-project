@@ -7,7 +7,8 @@ $page = basename($_SERVER['PHP_SELF']);
 
         <div class="top-bar-left">
             <button class="menu-toggle btn icon ripple d-lg-none" title="Menu"><i class="mdi dark mdi-menu"></i></button>
-            <a href="index.php" class="top-bar-logo"><img src="images/logo/fruitracers_logo_small_shadow.png"></a>
+            <a href="index.php" class="top-bar-logo"><img src="images/logo/greenproject_logo_small.png"></a>
+            <a href="index.php" class="top-bar-logo light"><img src="images/logo/greenproject_logo_light_small.png"></a>
         </div>
 
         <div class="top-bar-center">
@@ -19,9 +20,6 @@ $page = basename($_SERVER['PHP_SELF']);
             </a>
             <a href="index.php#contacts" class="menu-item ripple d-none d-lg-flex">
                 <span>Contatti</span>
-            </a>
-            <a href="companies.php" class="menu-item ripple d-none d-lg-flex">
-                <span>Partner</span>
             </a>
         </div>
 
@@ -93,7 +91,7 @@ $page = basename($_SERVER['PHP_SELF']);
     <div class="menu-container">
 
         <div class="menu-header bg-primary-dark">
-            <a href="index.php"><img src="images/logo/fruitracers_logo_small.png"></a>
+            <a href="index.php"><img src="images/logo/greenproject_logo_small.png"></a>
             <button class="menu-toggle btn icon ripple" title="Nascondi"><i class="mdi dark mdi-arrow-left"></i></button>
         </div>
 

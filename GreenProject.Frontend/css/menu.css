@@ -60,6 +60,14 @@
     height: auto;
 }
 
+.top-bar-logo:not(.light), .top-bar.scroll .top-bar-logo.light {
+    display: none;
+}
+
+.top-bar.scroll .top-bar-logo:not(.light) {
+    display: inline-block!important;
+}
+
 .top-bar .mdi, .top-bar-center>.menu-item>span {
     color: var(--col-text-light);
     transition: color 0.2s ease-in-out;

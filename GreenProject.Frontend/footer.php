@@ -12,7 +12,7 @@
 
             <!-- Logo -->
             <div class="col-6 col-lg-4 order-1 order-lg-4">
-                <a href="index.php" class="footer-logo d-inline-block"><img src="images/logo/fruitracers_logo_small.png"></a>
+                <a href="index.php" class="footer-logo d-inline-block"><img src="images/logo/greenproject_logo_small.png"></a>
             </div>
 
             <!-- Social -->
