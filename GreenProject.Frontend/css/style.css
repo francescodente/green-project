@@ -1,10 +1,9 @@
 :root {
-    /*--col-accent: #FF8A80!important;*/
-    --col-accent: #C85A54!important;
-    --col-accent-dark: #C85A54!important;
+    --col-accent: #9CBF22!important;
+    --col-accent-dark: #9CBF22!important;
 
-    --font-heading: 'Montserrat', sans-serif!important;
-    --font-normal: 'Lato', sans-serif!important;
+    --font-heading: 'Work Sans', sans-serif!important;
+    --font-normal: 'Work Sans', sans-serif!important;
 }
 
 .card .cover {
@@ -151,6 +150,16 @@
     background-color: var(--col-primary-dark);
     border: 4px solid rgba(0, 0, 0, 0.12);
     border-radius: 100%;
+}
+
+/**************\
+|   PRODUCTS   |
+\**************/
+
+@media (max-width: 991px) {
+    #products-content .sticky-top {
+        position: initial!important;
+    }
 }
 
 /******************\
