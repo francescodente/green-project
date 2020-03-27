@@ -113,10 +113,10 @@ button {
     font-weight: normal;
 }
 
-/*.btn, .btn span, .file-input span {
+.btn, .btn span, .file-input span {
     font-family: var(--font-heading);
     font-weight: bold;
-}*/
+}
 
 .btn {
     text-decoration: none!important;

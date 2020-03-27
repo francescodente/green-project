@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Home</title>
+    <title>Green Project - Home</title>
 </head>
 <body>
 
@@ -23,8 +23,8 @@
                 <div class="row mt-5">
                     <div class="col-12 text-center">
                         <h2 class="font-weight-bold text-light mb-4">ESCLUSIVA! Cassette settimanali personalizzabili</h2>
-                        <h5 class="text-light mb-4">Componi la tua cassetta settimanale con frutta e verdura fresca, di stagione e a KM 0.</h5>
-                        <h5 class="font-weight-bold text-light mb-5">Tutte le settimane a casa tua<br/><br/>Scopri di più</h5>
+                        <p class="lead text-light">Componi la tua cassetta settimanale con frutta e verdura fresca, di stagione e a KM 0.</p>
+                        <p class="lead font-weight-bold text-light mb-5">Tutte le settimane a casa tua.</p>
                         <button class="btn accent ripple text-light font-weight-bold px-4">Scegli il tuo formato</button>
                     </div>
                 </div>

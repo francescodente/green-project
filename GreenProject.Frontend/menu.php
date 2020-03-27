@@ -15,6 +15,9 @@ $page = basename($_SERVER['PHP_SELF']);
             <a href="index.php#home" class="menu-item ripple d-none d-lg-flex">
                 <span>Home</span>
             </a>
+            <a href="index.php#products" class="menu-item ripple d-none d-lg-flex">
+                <span>Catalogo</span>
+            </a>
             <a href="index.php#about" class="menu-item ripple d-none d-lg-flex">
                 <span>Chi siamo</span>
             </a>
@@ -37,17 +40,14 @@ $page = basename($_SERVER['PHP_SELF']);
                     <a href="account-user-data.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
                     </a>
-                    <a href="account-client-orders.php" class="dropdown-item menu-item">
+                    <a href="account-crate-preferences.php" class="dropdown-item menu-item">
+                        <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassetta settimanale</span>
+                    </a>
+                    <a href="account-orders.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
                     </a>
-                    <a href="account-company-orders.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
-                    </a>
-                    <a href="account-delivery-orders.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
-                    </a>
-                    <a href="account-company-products.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-food-apple"></i><span class="text-dark">Prodotti</span>
+                    <a href="account-delivery.php" class="dropdown-item menu-item">
+                        <i class="mdi dark mdi-truck-delivery"></i><span class="text-dark">Consegne</span>
                     </a>
                     <a href="#" class="dropdown-item">
                         <i class="mdi dark mdi-logout-variant"></i><span>Esci</span>
@@ -60,11 +60,9 @@ $page = basename($_SERVER['PHP_SELF']);
                     <i class="mdi dark mdi-pound-box"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-admin">
-                    <a href="management-users.php" class="dropdown-item menu-item">Gestione utenti</a>
-                    <a href="management-products.php" class="dropdown-item menu-item">Gestione prodotti</a>
-                    <a href="management-orders.php" class="dropdown-item menu-item">Gestione ordini</a>
-                    <a href="management-stats.php" class="dropdown-item menu-item">Dati e statistiche</a>
-                    <a href="management-market-prices.php" class="dropdown-item menu-item">Prezzi di mercato</a>
+                    <a href="management-products.php" class="dropdown-item menu-item">
+                        <i class="mdi dark mdi-sprout"></i><span class="text-dark">Gestione catalogo</span>
+                    </a>
                 </div>
             </div>
 
@@ -99,6 +97,10 @@ $page = basename($_SERVER['PHP_SELF']);
             <i class="mdi mdi-home"></i>
             <span>Home</span>
         </a>
+        <a href="index.php#products" class="menu-item ripple">
+            <i class="mdi mdi-sprout"></i>
+            <span>Catalogo</span>
+        </a>
         <a href="index.php#about" class="menu-item ripple">
             <i class="mdi mdi-book-open-page-variant"></i>
             <span>Chi siamo</span>
@@ -106,10 +108,6 @@ $page = basename($_SERVER['PHP_SELF']);
         <a href="index.php#contacts" class="menu-item ripple">
             <i class="mdi mdi-account-box"></i>
             <span>Contatti</span>
-        </a>
-        <a href="companies.php" class="menu-item ripple">
-            <i class="mdi mdi-tractor"></i>
-            <span>Partner</span>
         </a>
 
         <div class="divider dark"></div>
@@ -120,29 +118,20 @@ $page = basename($_SERVER['PHP_SELF']);
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
         <div id="account-submenu" class="submenu">
-            <a href="account-user-data.php" class="menu-item ripple">
-                <i class="mdi mdi-card-text"></i>
-                <span>I miei dati</span>
+            <a href="account-user-data.php" class="menu-item">
+                <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
             </a>
-            <a href="account-client-orders.php" class="menu-item ripple">
-                <i class="mdi mdi-book-open"></i>
-                <span>Ordini</span>
+            <a href="account-crate-preferences.php" class="menu-item">
+                <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassetta settimanale</span>
             </a>
-            <a href="account-company-orders.php" class="menu-item ripple">
-                <i class="mdi mdi-book-open"></i>
-                <span>Ordini</span>
+            <a href="account-orders.php" class="menu-item">
+                <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
             </a>
-            <a href="account-delivery-orders.php" class="menu-item ripple">
-                <i class="mdi mdi-book-open"></i>
-                <span>Ordini</span>
+            <a href="account-delivery.php" class="menu-item">
+                <i class="mdi dark mdi-truck-delivery"></i><span class="text-dark">Consegne</span>
             </a>
-            <a href="account-company-products.php" class="menu-item ripple">
-                <i class="mdi mdi-food-apple"></i>
-                <span>Prodotti</span>
-            </a>
-            <a href="account-admin-management.php" class="menu-item ripple">
-                <i class="mdi mdi-logout-variant"></i>
-                <span>Esci</span>
+            <a href="#" class="menu-item">
+                <i class="mdi dark mdi-logout-variant"></i><span>Esci</span>
             </a>
         </div>
         <a href="cart.php" class="menu-item ripple">
@@ -157,11 +146,10 @@ $page = basename($_SERVER['PHP_SELF']);
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
         <div id="admin-submenu" class="submenu">
-            <a href="management-users.php" class="menu-item">Gestione utenti</a>
-                    <a href="management-products.php" class="menu-item">Gestione prodotti</a>
-                    <a href="management-orders.php" class="menu-item">Gestione ordini</a>
-                    <a href="management-stats.php" class="menu-item">Dati e statistiche</a>
-                    <a href="management-market-prices.php" class="menu-item">Prezzi di mercato</a>
+            <a href="management-products.php" class="menu-item">
+                <i class="mdi mdi-sprout"></i>
+                <span>Gestione catalogo</span>
+            </a>
         </div>
 
         <div class="divider dark"></div>

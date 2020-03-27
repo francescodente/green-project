@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Carrello</title>
+    <title>Green Project - Carrello</title>
 </head>
 <body>
 

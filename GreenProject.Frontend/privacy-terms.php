@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Fruitracers - Privacy e termini d'uso</title>
+    <title>Green Project - Privacy e termini d'uso</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
             <div class="container text-center">
                 <h1 class="text-light">PRIVACY E TERMINI D'USO</h1>
             </div>
-            <div class="parallax shade" data-parallax-image="images/privacy.jpg"></div>
+            <div class="parallax shade" data-parallax-image="images/privacy-terms.jpg"></div>
         </section>
         <section id="privacy-content" class="container py-4">
             <div class="row">
