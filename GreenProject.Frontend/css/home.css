@@ -1,44 +1,37 @@
-#tutorial .step {
-    color: var(--col-text-light);
-    background-color: var(--col-accent);
-    font-weight: bold;
-    line-height: 36px;
-    height: 36px;
-    width: 36px;
-    border-radius: 100%;
+#products .card-image-content {
+    transition: background-color 0.2s ease-in-out;
 }
 
-#tutorial .step-thumb {
-    background-color: var(--col-primary-dark);
+#products .card-image-content:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#contacts-content .img-fluid {
     border-radius: 4px;
 }
 
-#about-content .member-image {
-    border-radius: 100%;
-    height: 78px;
-    width: 78px;
-    object-fit: cover;
-    border: 4px solid rgba(0, 0, 0, 0.02);
+#map {
+    border: 0;
+    width: 100%;
 }
 
-#contacts-content textarea {
-    height: 320px;
+/* MD */
+@media (min-width: 768px) {
+    #map {
+        height: 500px;
+    }
 }
 
-#contacts-content .contact-icon {
-    border-radius: 100%;
-    height: 78px;
-    width: 78px;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.04);
-    border: 4px solid rgba(0, 0, 0, 0.02);
+/* SM, XS */
+@media (max-width: 767px) {
+    #map {
+        height: 300px;
+    }
 }
 
-#contacts-content .contact-icon .mdi {
-    height: 36px;
-    font-size: 36px;
-    line-height: 36px;
-    color: var(--col-accent);
+#products_ {
+    display: block;
+    visibility: hidden;
+    position: relative;
+    top: -72px;
 }

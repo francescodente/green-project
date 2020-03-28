@@ -15,7 +15,7 @@ $page = basename($_SERVER['PHP_SELF']);
             <a href="index.php#home" class="menu-item ripple d-none d-lg-flex">
                 <span>Home</span>
             </a>
-            <a href="index.php#products" class="menu-item ripple d-none d-lg-flex">
+            <a href="index.php#products_" class="menu-item ripple d-none d-lg-flex">
                 <span>Catalogo</span>
             </a>
             <a href="index.php#about" class="menu-item ripple d-none d-lg-flex">
@@ -97,7 +97,7 @@ $page = basename($_SERVER['PHP_SELF']);
             <i class="mdi mdi-home"></i>
             <span>Home</span>
         </a>
-        <a href="index.php#products" class="menu-item ripple">
+        <a href="index.php#products_" class="menu-item ripple">
             <i class="mdi mdi-sprout"></i>
             <span>Catalogo</span>
         </a>
