@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.ApiLayer.Validation.Configuration;
+﻿using GreenProject.Backend.ApiLayer.HostedServices;
+using GreenProject.Backend.ApiLayer.Validation.Configuration;
 using GreenProject.Backend.Core.Utils.Uploads;
 using GreenProject.Backend.Infrastructure.Email;
 using GreenProject.Backend.Infrastructure.Notifications;
@@ -17,6 +18,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
             this.InstallConfiguration<ImageUploadSettings>(services, config);
             this.InstallConfiguration<MailNotificationsSettings>(services, config);
             this.InstallConfiguration<PricingSettings>(services, config);
+            this.InstallConfiguration<NotificationsDaemonSettings>(services, config);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config)

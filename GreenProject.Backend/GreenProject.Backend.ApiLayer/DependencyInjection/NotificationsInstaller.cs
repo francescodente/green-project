@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Core.Utils.Email;
+﻿using GreenProject.Backend.ApiLayer.HostedServices;
+using GreenProject.Backend.Core.Utils.Email;
 using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Infrastructure.Notifications;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +16,9 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 
         public void InstallServices(IServiceCollection services, IConfiguration config)
         {
-            services.AddSingleton(this.CreateNotificationsService);
+            services
+                .AddSingleton(this.CreateNotificationsService)
+                .AddHostedService<NotificationsDaemon>();
         }
 
         private INotificationsService CreateNotificationsService(IServiceProvider provider)
