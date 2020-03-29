@@ -28,85 +28,40 @@
                 <div class="col-12 col-lg-8">
 
                     <!-- PRODUCTS -->
-                    <h4>Prodotti</h4>
+                    <h4 class="mb-4">Prodotti</h4>
 
-                    <h5 class="mt-3"><a href="company.php" class="company-name">Azienda</a></h5>
-                    <div class="product card flat mb-4">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 80px;">
-                                <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
-                                    <img class="card-bg" src="images/example_product.jpg"/>
-                                </a>
-                            </div>
-                            <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
-                                <div>
-                                    <p class="product-name m-0">Product name</p>
-                                    <p class="text-sec-dark m-0">
-                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
-                                    </p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
-                                        <i class="mdi dark mdi-plus-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
-                                        <i class="mdi dark mdi-delete"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product card flat mb-4">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 80px;">
-                                <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
-                                    <img class="card-bg" src="images/example_product.jpg"/>
-                                </a>
-                            </div>
-                            <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
-                                <div>
-                                    <p class="product-name m-0">Product name</p>
-                                    <p class="text-sec-dark m-0">
-                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
-                                    </p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
-                                        <i class="mdi dark mdi-plus-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
-                                        <i class="mdi dark mdi-delete"></i>
-                                    </button>
+                    <div id="cart-products">
+                        <?php
+                        for ($i = 0; $i < 3; $i++) {
+                            ?>
+                            <div class="product card flat mb-4">
+                                <div class="d-flex align-items-center">
+                                    <div style="width: 80px;">
+                                        <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
+                                            <img class="card-bg" src="images/example_product.jpg"/>
+                                        </a>
+                                    </div>
+                                    <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
+                                        <div>
+                                            <p class="product-name m-0">Product name</p>
+                                            <p class="text-sec-dark m-0">
+                                                <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                            </p>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
+                                                <i class="mdi dark mdi-plus-minus"></i>
+                                            </button>
+                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
+                                                <i class="mdi dark mdi-delete"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <h5 class="mt-3"><a href="company.php" class="company-name">Azienda</a></h5>
-                    <div class="product card flat mb-4">
-                        <div class="d-flex align-items-center">
-                            <div style="width: 80px;">
-                                <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
-                                    <img class="card-bg" src="images/example_product.jpg"/>
-                                </a>
-                            </div>
-                            <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
-                                <div>
-                                    <p class="product-name m-0">Product name</p>
-                                    <p class="text-sec-dark m-0">
-                                        <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
-                                    </p>
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
-                                        <i class="mdi dark mdi-plus-minus"></i>
-                                    </button>
-                                    <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
-                                        <i class="mdi dark mdi-delete"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            <?php
+                        }
+                        ?>
                     </div>
 
                     <!-- PAYMENT METHOD -->
@@ -159,20 +114,11 @@
                         </div>
                     </button>
 
-                    <!-- DATE & TIME SLOT -->
-                    <h4 class="mt-5 mb-4">Fascia oraria</h4>
-                    <div class="d-flex align-items-center mb-2">
-                        <p class="m-0"><span class="date">1 Gennaio 2020</span>, <span class="selected-time-slot">14:00 - 14:30</span></p>
-                        <button type="button" class="btn icon ripple ml-3" title="Seleziona" data-toggle="modal" data-target="#modal-time-slot"><i class="mdi dark mdi-calendar-edit"></i></button>
-                    </div>
-
-                    <!-- OTHER FIELDS -->
-                    <h4 class="mt-5 mb-4">Altro</h4>
+                    <!-- NOTES -->
+                    <h4 class="mt-5 mb-4">Note</h4>
                     <div class="text-area">
-                        <textarea id="notes" class="w-100" placeholder=" " disabled></textarea>
-                        <label for="textarea">Note per la consegna</label>
+                        <textarea id="notes" class="w-100" placeholder=" "></textarea>
                         <span>Inserisci qui il tuo buono sconto!</span>
-                        <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
                     </div>
 
                     <div class="divider dark d-lg-none mt-4"></div>
@@ -228,10 +174,8 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
-    <script src="js/cart.js"></script>
 
     <?php include("modal-address-management.php"); ?>
-    <?php include("modal-time-slot.php"); ?>
     <?php include("modals-product.php"); ?>
 
     <div id="modal-cart-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

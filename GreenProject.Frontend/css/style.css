@@ -27,6 +27,21 @@
     display: none;
 }
 
+/****************************\
+|   ANCHOR FOR HASH TARGET   |
+\****************************/
+
+.anchor {
+    display: block;
+    visibility: hidden;
+    position: relative;
+    top: -72px;
+}
+
+#general.anchor, #personal.anchor, #addresses.anchor {
+    top: -96px;
+}
+
 /********************\
 |   ORDER STATUSES   |
 \********************/

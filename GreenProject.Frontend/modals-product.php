@@ -10,14 +10,13 @@
             <div class="card-body">
                 <div class="product-info">
                     <h4 class="product-name mb-1">Product name</h4>
-                    <a href="company.php" class="company-name d-inline-block mb-2">Company name</a>
                     <p class="product-description text-sec-dark m-0">
                         Some quick example text to build on the component and make up the bulk of the component's content.
                     </p>
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
-                <p class="product-price m-0 ml-1">€00,00 / kg</p>
+                <p class="product-price m-0 ml-1">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</p>
                 <button class="add-to-cart btn icon ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-cart-add" title="Aggiungi al carrello">
                     <i class="mdi dark mdi-cart-plus"></i>
                 </button>
@@ -36,15 +35,14 @@
             </div>
             <div class="modal-body">
                 <h4 class="text-center">Seleziona la quantità</h4>
-                <div class="d-flex align-items-center mb-2">
-                    <button class="q-increase btn icon ripple mr-2" title="Diminuisci"><i class="mdi dark mdi-minus"></i></button>
+                <div class="d-flex align-items-center mx-3 mb-2">
                     <div class="text-input flex-grow-1">
-                        <input id="product-quantity" class="w-100" type="text" value="1"/>
-                        <span class="um">Kg</span>
+                        <input id="number" type="number" name="number" min="1" placeholder=" " value="1">
+                        <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
+                        <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
                     </div>
-                    <button class="q-increase btn icon ripple ml-2" title="Aumenta"><i class="mdi dark mdi-plus"></i></button>
                 </div>
-                <p class="text-center m-0"><span class="price">0,00</span><span class="currency">€</span></p>
+                <p class="text-center m-0">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="modal-cancel btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>

@@ -40,8 +40,11 @@ $page = basename($_SERVER['PHP_SELF']);
                     <a href="account-user-data.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
                     </a>
-                    <a href="account-crate-preferences.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassetta settimanale</span>
+                    <a href="account-user-addresses.php" class="dropdown-item menu-item">
+                        <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>
+                    </a>
+                    <a href="account-weekly-delivery-preferences.php" class="dropdown-item menu-item">
+                        <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Consegna settimanale</span>
                     </a>
                     <a href="account-orders.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
@@ -121,8 +124,11 @@ $page = basename($_SERVER['PHP_SELF']);
             <a href="account-user-data.php" class="menu-item">
                 <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
             </a>
-            <a href="account-crate-preferences.php" class="menu-item">
-                <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassetta settimanale</span>
+            <a href="account-user-addresses.php" class="menu-item">
+                <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>
+            </a>
+            <a href="account-weekly-delivery-preferences.php" class="menu-item">
+                <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Consegna settimanale</span>
             </a>
             <a href="account-orders.php" class="menu-item">
                 <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>

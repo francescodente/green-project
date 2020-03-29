@@ -43,7 +43,7 @@
         </section>
         <!-- TUTORIAL -->
         <section id="products" class="container py-4" data-section="products">
-            <span id="products_"></span>
+            <span id="products_" class="anchor"></span>
             <div class="row">
                 <div class="col-12 text-center mb-4">
                     <h2 class="h-variant-2 m-0">CATALOGO</h2>
@@ -92,14 +92,14 @@
         <section id="about-content" class="container pt-5 pb-4" data-section="about">
             <div class="row">
                 <div class="col-12 col-md-6 d-flex justofy-content-center align-items-center mb-4">
-                    <a href="index.php"><img class="img-fluid" src="images/logo/greenproject_logo_caption.jpg"></a>
+                    <a href="index.php"><img class="img-fluid" src="images/logo/greenproject_logo_caption.png"/></a>
                 </div>
                 <div class="col-12 col-md-6 d-flex flex-column justify-content-center mb-4">
                     <p>Green Project SS.</p>
                     <p><span class="font-weight-bold">Un'azienda agricola</span> sita nelle pianure di Cesena.</p>
                     <p>Coltiviamo ortaggi di stagione <span class="font-weight-bold">nel rispetto della stagionalità e dell'ambiente</span>.</p>
                     <p>Il nostro progetto è nato per portare sulle tavole degli italiani <span class="font-weight-bold">prodotti di qualità</span>:</p>
-                    <p>dall'idea alla pratica <span class="font-weight-bold">oggi consegniamo in tutto il territorio romagnolo</span>.</p>
+                    <p>dall'idea alla pratica <span class="font-weight-bold">oggi consegnamo in tutto il territorio romagnolo</span>.</p>
                     <p class="mb-4">Valorizzare le aziende del territorio e <span class="font-weight-bold">creare un legame tra produttore e consumatore</span> sono le nostre priorità.</p>
                     <div>
                         <a href="products.php" class="btn accent ripple">Guarda cosa coltiviamo</a>

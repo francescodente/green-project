@@ -28,10 +28,3 @@
         height: 300px;
     }
 }
-
-#products_ {
-    display: block;
-    visibility: hidden;
-    position: relative;
-    top: -72px;
-}
