@@ -20,16 +20,12 @@
         </section>
         <section id="account-content" class="container py-4">
             <div id="business-products" class="row">
-
-                <div id="account-tabs-col" class="d-none d-lg-block col-lg-3">
-                    <?php include("account-tabs.php"); ?>
-                </div>
-                <div id="account-content-col" class="col-12 col-lg-9">
+                <div id="account-content-col" class="col-12">
                     <div class="container">
                         <div class="row">
 
                             <div class="col-12 d-flex justify-content-between align-items-center mb-4">
-                                <a href="edit-product.php" class="btn outline ripple ripple-accent">
+                                <a href="management-product-edit.php" class="btn outline ripple ripple-accent">
                                     <i class="mdi accent mdi-plus mr-2"></i>
                                     <span class="text-accent">Nuovo prodotto</span>
                                 </a>
@@ -39,7 +35,7 @@
                             <?php
                             for ($i = 0; $i < 23; $i++) {
                                 ?>
-                                <div class="col-12 col-sm-6 col-md-4">
+                                <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                                     <div class="card product-card mb-4">
                                         <div class="fixed-ratio fr-4-3">
                                             <img class="card-bg" src="images/example_product.jpg"/>
@@ -56,7 +52,7 @@
                                                 <p class="m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
                                             </div>
 
-                                            <a href="edit-product.php" class="btn accent ripple w-100 mb-2">Modifica</a>
+                                            <a href="management-product-edit.php" class="btn accent ripple w-100 mb-2">Modifica</a>
                                             <div class="d-flex">
                                                 <button class="btn outline ripple flex-grow-1 mr-2" style="width: 10px;" data-toggle="modal" data-target="#modal-product-disable">Disabilita</button>
                                                 <button class="btn outline ripple flex-grow-1" style="width: 10px;" data-toggle="modal" data-target="#modal-product-delete">Elimina</button>
@@ -68,7 +64,7 @@
                             }
                             ?>
 
-                            <div class="col-12 col-sm-6 col-md-4">
+                            <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                                 <div class="card product-card disabled mb-4">
                                     <div class="fixed-ratio fr-4-3">
                                         <img class="card-bg" src="images/example_product.jpg"/>
@@ -86,7 +82,7 @@
                                             <p class="text-sec-dark m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
                                         </div>
 
-                                        <a href="edit-product.php" class="btn outline ripple w-100 mb-2">Modifica</a>
+                                        <a href="management-product-edit.php" class="btn outline ripple w-100 mb-2">Modifica</a>
                                         <div class="d-flex">
                                             <button class="btn accent ripple flex-grow-1 mr-2" style="width: 10px;" data-toggle="toast" data-target="#toast-product-enabled">Abilita</button>
                                             <button class="btn outline ripple flex-grow-1" style="width: 10px;" data-toggle="modal" data-target="#modal-product-delete-disabled">Elimina</button>

@@ -8,24 +8,24 @@ $page = basename($_SERVER['PHP_SELF']);
         <p class="m-0">I miei dati</p>
         <i class="mdi dark mdi-chevron-right"></i>
     </a>
-    <a id="client-orders-tab" href="account-client-orders.php" class="account-tab <?php echo $page == 'account-client-orders.php' ? 'selected' : '' ?>">
+    <a id="user-data-tab" href="account-user-addresses.php" class="account-tab <?php echo $page == 'account-user-addresses.php' ? 'selected' : '' ?>">
+        <i class="mdi dark mdi-map-marker"></i>
+        <p class="m-0">Indirizzi</p>
+        <i class="mdi dark mdi-chevron-right"></i>
+    </a>
+    <a id="weekly-delivery-preferences-tab" href="account-weekly-delivery-preferences.php" class="account-tab <?php echo $page == 'account-weekly-delivery-preferences.php' ? 'selected' : '' ?>">
+        <i class="mdi dark mdi-inbox-multiple"></i>
+        <p class="m-0">Consegna settimanale</p>
+        <i class="mdi dark mdi-chevron-right"></i>
+    </a>
+    <a id="orders-tab" href="account-orders.php" class="account-tab <?php echo $page == 'account-orders.php' ? 'selected' : '' ?>">
         <i class="mdi dark mdi-book-open"></i>
         <p class="m-0">Ordini</p>
         <i class="mdi dark mdi-chevron-right"></i>
     </a>
-    <a id="business-orders-tab" href="account-company-orders.php" class="account-tab <?php echo $page == 'account-company-orders.php' ? 'selected' : '' ?>">
-        <i class="mdi dark mdi-book-open"></i>
-        <p class="m-0">Ordini</p>
-        <i class="mdi dark mdi-chevron-right"></i>
-    </a>
-    <a id="delivery-orders-tab" href="account-delivery-orders.php" class="account-tab <?php echo $page == 'account-delivery-orders.php' ? 'selected' : '' ?>">
-        <i class="mdi dark mdi-book-open"></i>
-        <p class="m-0">Ordini</p>
-        <i class="mdi dark mdi-chevron-right"></i>
-    </a>
-    <a id="business-products-tab" href="account-company-products.php" class="account-tab <?php echo $page == 'account-company-products.php' ? 'selected' : '' ?>">
-        <i class="mdi dark mdi-food-apple"></i>
-        <p class="m-0">Prodotti</p>
+    <a id="delivery-tab" href="account-delivery.php" class="account-tab <?php echo $page == 'account-delivery.php' ? 'selected' : '' ?>">
+        <i class="mdi dark mdi-truck-delivery"></i>
+        <p class="m-0">Consegne</p>
         <i class="mdi dark mdi-chevron-right"></i>
     </a>
 </div>

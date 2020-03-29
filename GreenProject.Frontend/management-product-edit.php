@@ -220,7 +220,7 @@
                     <div class="divider dark my-4"></div>
 
                     <div class="d-flex justify-content-between">
-                        <a href="account-company-products.php" type="button" class="btn outline ripple" style="width: 160px">
+                        <a href="management-products.php" type="button" class="btn outline ripple" style="width: 160px">
                             <i class="mdi dark mdi-arrow-left"></i>
                             <span class="text-sec-dark">Annulla</span>
                         </a>
