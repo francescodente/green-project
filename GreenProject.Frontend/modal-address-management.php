@@ -1,44 +1,114 @@
-<div id="modal-address-management" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="modal-address-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-top d-flex justify-content-center">
-                <i class="modal-top-icon mdi mdi-map-marker-multiple"></i>
+                <div class="address-thumb" style="background-image: url('images/map-thumb.png');">
+                    <i class="mdi large mdi-map-marker"></i>
+                </div>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
-            <div class="modal-body address-management">
+            <div class="modal-body container">
 
-                <h4 class="text-center mt-3 mb-4">Gestione indirizzi</h4>
+                <h4 class="text-center mt-3 mb-2">Nuovo indirizzo</h4>
 
-                <div class="address d-flex align-items-center mb-2 selected">
-                    <div class="thumb" style="background-image: url('images/map-thumb.png');">
-                        <i class="mdi mdi-map-marker"></i>
+                <div class="row no-gutters">
+
+                    <!-- Province, city, ZIP code -->
+                    <div class="col-12">
+                        <div class="dropdown select">
+                            <div class="text-input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
+                                <input id="province-select-toggle" type="text" placeholder=" " readonly/>
+                                <label for="province-select-toggle">Provincia</label>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="select-toggle">
+                                <input id="prov1" type="radio" class="radio" name="select-province" value="1"/>
+                                <label for="prov1">First option</label>
+                                <input id="prov2" type="radio" class="radio" name="select-province" value="2"/>
+                                <label for="prov2">Second option</label>
+                                <input id="prov3" type="radio" class="radio" name="select-province" value="3"/>
+                                <label for="prov3">Third option</label>
+                                <input id="prov4" type="radio" class="radio" name="select-province" value="4"/>
+                                <label for="prov4">Fourth option</label>
+                                <input id="prov5" type="radio" class="radio" name="select-province" value="5"/>
+                                <label for="prov5">Fifth option</label>
+                            </div>
+                        </div>
                     </div>
-                    <p class="m-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                    <button class="delete-address btn icon ripple" title="Elimina" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-delete">
-                        <i class="mdi dark mdi-delete"></i>
-                    </button>
-                </div>
-                <div class="address d-flex align-items-center mb-2">
-                    <div class="thumb" style="background-image: url('images/map-thumb.png');">
-                        <i class="mdi mdi-map-marker"></i>
+                    <div class="col-7">
+                        <div class="dropdown select mr-3">
+                            <div class="text-input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
+                                <input id="city-select-toggle" type="text" placeholder=" " readonly/>
+                                <label for="city-select-toggle">Città</label>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="select-toggle">
+                                <input id="city1" type="radio" class="radio" name="select-city" value="1"/>
+                                <label for="city1">First option</label>
+                                <input id="city2" type="radio" class="radio" name="select-city" value="2"/>
+                                <label for="city2">Second option</label>
+                                <input id="city3" type="radio" class="radio" name="select-city" value="3"/>
+                                <label for="city3">Third option</label>
+                                <input id="city4" type="radio" class="radio" name="select-city" value="4"/>
+                                <label for="city4">Fourth option</label>
+                                <input id="city5" type="radio" class="radio" name="select-city" value="5"/>
+                                <label for="city5">Fifth option</label>
+                            </div>
+                        </div>
                     </div>
-                    <p class="m-0">Altra Via 999, 47522 - Cesena (FC)</p>
-                    <button class="set-default-address btn icon ripple mr-2" title="Imposta come predefinito" >
-                        <i class="mdi dark mdi-star-outline"></i>
-                    </button>
-                    <button class="delete-address btn icon ripple" title="Elimina" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-delete">
-                        <i class="mdi dark mdi-delete"></i>
-                    </button>
+                    <div class="col-5">
+                        <div class="dropdown select">
+                            <div class="text-input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
+                                <input id="cap-select-toggle" type="text" placeholder=" " readonly/>
+                                <label for="cap-select-toggle">CAP</label>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="select-toggle">
+                                <input id="cap1" type="radio" class="radio" name="select-cap" value="1"/>
+                                <label for="cap1">First option</label>
+                                <input id="cap2" type="radio" class="radio" name="select-cap" value="2"/>
+                                <label for="cap2">Second option</label>
+                                <input id="cap3" type="radio" class="radio" name="select-cap" value="3"/>
+                                <label for="cap3">Third option</label>
+                                <input id="cap4" type="radio" class="radio" name="select-cap" value="4"/>
+                                <label for="cap5">Fourth option</label>
+                                <input id="cap5" type="radio" class="radio" name="select-cap" value="5"/>
+                                <label for="cap5">Fifth option</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Street and house number -->
+                    <div class="col-7">
+                        <div class="text-input mr-3">
+                            <input id="text1" type="text" placeholder=" "/>
+                            <label for="text1">Via</label>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <div class="text-input">
+                            <input id="text1" type="text" placeholder=" "/>
+                            <label for="text1">Civico</label>
+                        </div>
+                    </div>
+
                 </div>
 
-                <div class="new address d-flex align-items-center">
-                    <div class="thumb">
-                        <i class="mdi mdi-map-marker-plus"></i>
-                    </div>
-                    <input type="text" class="address-input" name="address" placeholder="Inserisci un nuovo indirizzo"/>
-                    <button class="create-address btn icon ripple" title="Conferma"><i class="mdi dark mdi-check"></i></button>
+
+                <div class="text-input">
+                    <input id="text1" type="text" placeholder=" "/>
+                    <label for="text1">Nome</label>
+                </div>
+                <div class="text-input">
+                    <input id="text1" type="text" placeholder=" "/>
+                    <label for="text1">Telefono</label>
                 </div>
 
+
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Salva</button>
             </div>
         </div>
     </div>

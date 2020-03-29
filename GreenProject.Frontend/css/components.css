@@ -1323,7 +1323,7 @@ textarea {
     transition: transform 0.3s ease;
 }
 
-.show [data-toggle="dropdown"] .arrow:before {
+.dropdown.show [data-toggle="dropdown"] .arrow:before {
     transform: rotate(180deg);
 }
 

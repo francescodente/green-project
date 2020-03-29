@@ -67,7 +67,7 @@
                     <!-- PAYMENT METHOD -->
                     <h4 class="mt-5 mb-4">Modalità di pagamento</h4>
                     <input id="pm1" type="radio" class="rich-radio" name="payment-method" value="1" checked/>
-                    <label for="pm1" class="d-flex align-items-center">
+                    <label for="pm1" class="d-flex align-items-center p-2">
                         <div class="thumb">
                             <i class="mdi dark mdi-cash-multiple"></i>
                         </div>
@@ -76,7 +76,7 @@
                         </div>
                     </label>
                     <input id="pm2" type="radio" class="rich-radio" name="payment-method" value="2" disabled/>
-                    <label for="pm2" class="d-flex align-items-center">
+                    <label for="pm2" class="d-flex align-items-center p-2">
                         <div class="thumb">
                             <i class="mdi dark mdi-credit-card"></i>
                         </div>
@@ -88,31 +88,53 @@
                     <!-- DELIVERY ADDRESS -->
                     <h4 class="mt-5 mb-4">Indirizzo di consegna</h4>
                     <input id="da1" type="radio" class="rich-radio" name="delivery-address" value="1" checked/>
-                    <label for="da1" class="d-flex align-items-center">
-                        <div class="thumb" style="background-image: url('images/map-thumb.png');">
-                            <i class="mdi mdi-map-marker"></i>
+                    <label for="da1" class="d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
+                        <div class="d-flex align-items-center">
+                             <div class="thumb" style="background-image: url('images/map-thumb.png');">
+                                <i class="mdi mdi-map-marker"></i>
+                            </div>
+                            <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
                         </div>
-                        <div>
-                            <p class="m-0">Viale della Via 123, 47522 - Cesena (FC)</p>
+                        <div style="margin-left: 64px;">
+                            <div class="d-flex align-items-center mb-1">
+                                <i class="mdi small dark mdi-account mr-2"></i>
+                                <span class="text-sec-dark">Nome Congome</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="mdi small dark mdi-phone mr-2"></i>
+                                <span class="text-sec-dark">+39 1234567890</span>
+                            </div>
                         </div>
                     </label>
                     <input id="da2" type="radio" class="rich-radio" name="delivery-address" value="2"/>
-                    <label for="da2" class="d-flex align-items-center">
-                        <div class="thumb" style="background-image: url('images/map-thumb.png');">
-                            <i class="mdi mdi-map-marker"></i>
+                    <label for="da2" class="d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
+                        <div class="d-flex align-items-center">
+                             <div class="thumb" style="background-image: url('images/map-thumb.png');">
+                                <i class="mdi mdi-map-marker"></i>
+                            </div>
+                            <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
                         </div>
-                        <div>
-                            <p class="m-0">Altra Via 999, 47522 - Cesena (FC)</p>
+                        <div style="margin-left: 64px;">
+                            <div class="d-flex align-items-center mb-1">
+                                <i class="mdi small dark mdi-account mr-2"></i>
+                                <span class="text-sec-dark">Nome Congome</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="mdi small dark mdi-phone mr-2"></i>
+                                <span class="text-sec-dark">+39 1234567890</span>
+                            </div>
                         </div>
                     </label>
-                    <button type="button" class="manage-addresses ripple d-flex align-items-center" data-toggle="modal" data-target="#modal-address-management">
-                        <div class="thumb">
+                    <div class="d-flex justify-content-end">
+                        <a href="account-user-addresses.php" class="btn outline ripple mr-2">
+                            <span class="text-sec-dark">Gestisci</span>
                             <i class="mdi dark mdi-map-marker"></i>
-                        </div>
-                        <div>
-                            <p class="m-0">Gestisci indirizzi</p>
-                        </div>
-                    </button>
+                        </a>
+                        <button type="button" class="btn outline ripple" data-toggle="modal" data-target="#modal-address-edit">
+                            <span class="text-sec-dark">Aggiungi</span>
+                            <i class="mdi dark mdi-plus"></i>
+                        </button>
+                    </div>
 
                     <!-- NOTES -->
                     <h4 class="mt-5 mb-4">Note</h4>
@@ -190,6 +212,23 @@
                 <div class="modal-bottom bg-primary d-flex justify-content-center">
                     <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
                     <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-address-default" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-help-circle-outline"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="m-0">Impostare questo indirizzo come predefinito per gli acquisti futuri?</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">No</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Sì</button>
                 </div>
             </div>
         </div>

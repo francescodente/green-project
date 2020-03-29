@@ -6,6 +6,10 @@
     --font-normal: 'Work Sans', sans-serif!important;
 }
 
+.sticky-top {
+    z-index: 80;
+}
+
 .card .cover {
     pointer-events: none;
     position: absolute;
@@ -174,7 +178,8 @@
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-.address-management .address .thumb {
+.address-management .address .thumb,
+.address-thumb {
     background-size: cover;
     height: 48px;
     width: 48px;
@@ -192,7 +197,8 @@
     border: 2px solid transparent;
 }
 
-.address-management .address .thumb .mdi {
+.address-management .address .thumb .mdi,
+.address-thumb .mdi {
     color: #707070;
 }
 

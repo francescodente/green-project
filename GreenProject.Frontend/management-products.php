@@ -26,7 +26,7 @@
 
                             <div class="col-12 d-flex justify-content-between align-items-center mb-4">
                                 <a href="management-product-edit.php" class="btn outline ripple ripple-accent">
-                                    <i class="mdi accent mdi-plus mr-2"></i>
+                                    <i class="mdi accent mdi-plus"></i>
                                     <span class="text-accent">Nuovo prodotto</span>
                                 </a>
                                 <p class="text-dis-dark m-0">0 prodotti</p>

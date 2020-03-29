@@ -27,8 +27,20 @@
 |   ADDRESS MANAGEMENT MODAL   |
 \******************************/
 
-#modal-address-management .modal-content {
+#modal-address-edit .modal-content {
     width: 100%;
+}
+
+#modal-address-edit .address-thumb {
+    height: 128px;
+    width: 128px;
+    margin: 36px 48px;
+}
+
+#modal-address-edit .address-thumb .mdi {
+    line-height: 64px;
+    font-size: 64px;
+    height: 64px;
 }
 
 /*******************\
@@ -50,55 +62,4 @@
     transform: translateY(-50%);
     right: 12px;
     font-size: 16px;
-}
-
-/*********************\
-|   TIME SLOT MODAL   |
-\*********************/
-
-#modal-time-slot .modal-content {
-    width: 100%;
-}
-
-.time-slots-wrapper {
-    overflow: hidden;
-    border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-.time-slots {
-    width: 100%;
-}
-
-.time-slot {
-    text-align: center;
-    padding: 10px 0;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.time-slot:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
-.time-slot.disabled, .time-slot.full {
-    cursor: default;
-    background-color: var(--col-primary-dark);
-}
-
-.time-slot.disabled span {
-    display: none;
-}
-
-.time-slot.full span {
-    color: var(--col-text-dis-dark);
-}
-
-.time-slot.selected {
-    cursor: default;
-    background-color: var(--col-accent);
-}
-
-.time-slot.selected span {
-    color: var(--col-text-light);
 }
