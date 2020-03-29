@@ -28,4 +28,8 @@ $page = basename($_SERVER['PHP_SELF']);
         <p class="m-0">Consegne</p>
         <i class="mdi dark mdi-chevron-right"></i>
     </a>
+    <a id="logout-tab" href="#" class="account-tab">
+        <i class="mdi dark mdi-logout-variant"></i>
+        <p class="m-0">Esci</p>
+    </a>
 </div>
