@@ -125,7 +125,7 @@
                                             </div>
                                             <p class="notes m-0">-</p>
                                         </div>
-                                        <button class="btn accent ripple d-flex justify-content-center w-100 mt-4">ANNULLA ORDINE</button>
+                                        <!-- <button class="btn accent ripple d-flex justify-content-center w-100 mt-4">ANNULLA ORDINE</button> -->
                                     </div>
                                 </div>
                             </div>

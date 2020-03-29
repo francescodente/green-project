@@ -27,49 +27,71 @@
 
                 <div id="account-content-col" class="col-12 col-lg-9">
 
-                    <!-- ADDRESSES -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-addresses" aria-expanded="true">
-                        <h4 class="m-0">Indirizzi</h4>
-                        <span id="addresses" class="anchor"></span>
-                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-addresses" aria-expanded="true" title="Mostra">
-                            <i class="mdi dark mdi-chevron-down"></i>
-                        </button>
-                    </div>
-
-                    <div id="user-data-addresses" class="collapse show address-management">
-                        <div class="pt-3"></div>
-
-                        <div class="address d-flex align-items-center mb-2 selected">
-                            <div class="thumb" style="background-image: url('images/map-thumb.png');">
-                                <i class="mdi mdi-map-marker"></i>
+                    <div class="address-item default d-flex justify-content-between align-items-center p-2">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center">
+                                <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+                                    <i class="mdi mdi-map-marker"></i>
+                                </div>
+                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
                             </div>
-                            <p class="m-0">Viale della Via 123, 47522 - Cesena (FC)</p>
+                            <div style="margin-left: 64px;">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="mdi small dark mdi-account mr-2"></i>
+                                    <span class="text-sec-dark">Nome cognome</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi small dark mdi-phone mr-2"></i>
+                                    <span class="text-sec-dark">+39 1234567890</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                            <button class="set-default-address btn icon ripple mb-2" title="Questo è il tuo indirizzo predefinito" >
+                                <i class="mdi dark mdi-star"></i>
+                            </button>
                             <button class="delete-address btn icon ripple" title="Elimina" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-delete">
                                 <i class="mdi dark mdi-delete"></i>
                             </button>
                         </div>
-                        <div class="address d-flex align-items-center mb-2">
-                            <div class="thumb" style="background-image: url('images/map-thumb.png');">
-                                <i class="mdi mdi-map-marker"></i>
+                    </div>
+                    <div class="address-item d-flex justify-content-between align-items-center p-2">
+                        <div class="d-flex flex-column">
+                            <div class="d-flex align-items-center">
+                                <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+                                    <i class="mdi mdi-map-marker"></i>
+                                </div>
+                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
                             </div>
-                            <p class="m-0">Altra Via 999, 47522 - Cesena (FC)</p>
-                            <button class="set-default-address btn icon ripple mr-2" title="Imposta come predefinito" >
+                            <div style="margin-left: 64px;">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="mdi small dark mdi-account mr-2"></i>
+                                    <span class="text-sec-dark">Nome cognome</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi small dark mdi-phone mr-2"></i>
+                                    <span class="text-sec-dark">+39 1234567890</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column justify-content-center">
+                            <button class="set-default-address btn icon ripple mb-2" title="Imposta come predefinito" >
                                 <i class="mdi dark mdi-star-outline"></i>
                             </button>
                             <button class="delete-address btn icon ripple" title="Elimina" data-dismiss="modal" data-toggle="modal" data-target="#modal-address-delete">
                                 <i class="mdi dark mdi-delete"></i>
                             </button>
                         </div>
+                    </div>
 
-                        <div class="new address d-flex align-items-center">
-                            <div class="thumb">
+                    <button class="address-add address-item ripple d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-add">
+                        <div class="d-flex align-items-center">
+                             <div class="thumb flex-shrink-0">
                                 <i class="mdi mdi-map-marker-plus"></i>
                             </div>
-                            <input type="text" class="address-input" name="address" placeholder="Inserisci un nuovo indirizzo"/>
-                            <button class="create-address btn icon ripple" title="Conferma"><i class="mdi dark mdi-check"></i></button>
+                            <p class="mb-0">Nuovo indirizzo</p>
                         </div>
-
-                    </div>
+                    </button>
 
                 </div>
             </div>
@@ -80,9 +102,8 @@
     <?php include("footer.php"); ?>
 
     <?php include("scripts.php"); ?>
-    <script src="js/account-user-data.js"></script>
 
-    <?php include("modal-pwd-change.php"); ?>
+    <?php include("modals-address-management.php"); ?>
 
     <div id="modal-address-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

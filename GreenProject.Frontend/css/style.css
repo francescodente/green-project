@@ -163,65 +163,40 @@
 |   ADDRESS MANAGEMENT   |
 \************************/
 
-.address-management .address {
-    border: 2px solid var(--col-primary);
+.address-item {
     border-radius: 4px;
-    transition: background-color 0.2s ease-in-out;
+    border: 2px solid transparent;
+    margin-bottom: 8px;
 }
 
-.address-management .address.selected {
+.address-item.default {
     border: 2px solid var(--col-accent);
 }
 
-.address-management .new.address:hover,
-.address-management .new.address:focus-within {
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
-.address-management .address .thumb,
-.address-thumb {
+.address-item .thumb,
+.address-thumb,
+#cart-content [name="payment-method"] + label .thumb {
     background-size: cover;
     height: 48px;
     width: 48px;
     border-radius: 4px;
-    margin: 8px 16px 8px 8px;
+    margin-right: 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.08);
+}
+
+.address-item .thumb {
     border: 2px solid #EEE;
-    outline: none;
 }
 
-.address-management .new.address .thumb {
-    border: 2px solid transparent;
-}
-
-.address-management .address .thumb .mdi,
-.address-thumb .mdi {
+.address-item .thumb .mdi, .address-thumb .mdi {
     color: #707070;
 }
 
-.address-management p {
-    flex-grow: 1;
-}
-
-.address-management *:not(p) {
-    flex-shrink: 0;
-}
-
-.address-management .delete-address,
-.address-management .create-address {
-    margin-right: 14px;
-}
-
-.address-management .address-input {
-    height: 64px;
-    flex-grow: 1;
-    margin-right: 16px;
-    border: none;
-    outline: none;
-    background-color: transparent;
+.address-item span {
+    font-size: 14px;
 }
 
 /***********************\

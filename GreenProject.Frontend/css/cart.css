@@ -1,28 +1,3 @@
 #cart-content .summary-additions * {
     color: var(--col-text-sec-dark);
 }
-
-#cart-content [name="delivery-address"] + label .thumb,
-#cart-content [name="payment-method"] + label .thumb {
-    background-size: cover;
-    height: 48px;
-    width: 48px;
-    border-radius: 4px;
-    margin-right: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.08);
-}
-
-#cart-content [name="delivery-address"] + label .thumb {
-    border: 2px solid #EEE;
-}
-
-#cart-content [name="delivery-address"] + label .thumb .mdi {
-    color: #707070;
-}
-
-#cart-content [name="delivery-address"] + label span {
-    font-size: 14px;
-}

@@ -88,7 +88,7 @@
                     <!-- DELIVERY ADDRESS -->
                     <h4 class="mt-5 mb-4">Indirizzo di consegna</h4>
                     <input id="da1" type="radio" class="rich-radio" name="delivery-address" value="1" checked/>
-                    <label for="da1" class="d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
+                    <label for="da1" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
                         <div class="d-flex align-items-center">
                             <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
                                 <i class="mdi mdi-map-marker"></i>
@@ -98,7 +98,7 @@
                         <div style="margin-left: 64px;">
                             <div class="d-flex align-items-center mb-1">
                                 <i class="mdi small dark mdi-account mr-2"></i>
-                                <span class="text-sec-dark">Nome Congome</span>
+                                <span class="text-sec-dark">Nome cognome</span>
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="mdi small dark mdi-phone mr-2"></i>
@@ -107,7 +107,7 @@
                         </div>
                     </label>
                     <input id="da2" type="radio" class="rich-radio" name="delivery-address" value="2"/>
-                    <label for="da2" class="d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
+                    <label for="da2" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
                         <div class="d-flex align-items-center">
                              <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
                                 <i class="mdi mdi-map-marker"></i>
@@ -117,7 +117,7 @@
                         <div style="margin-left: 64px;">
                             <div class="d-flex align-items-center mb-1">
                                 <i class="mdi small dark mdi-account mr-2"></i>
-                                <span class="text-sec-dark">Nome Congome</span>
+                                <span class="text-sec-dark">Nome cognome</span>
                             </div>
                             <div class="d-flex align-items-center">
                                 <i class="mdi small dark mdi-phone mr-2"></i>
@@ -126,11 +126,11 @@
                         </div>
                     </label>
                     <div class="d-flex justify-content-end">
-                        <a href="account-user-addresses.php" class="btn outline ripple mr-2">
+                        <a href="account-user-addresses.php" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0">
                             <span class="text-sec-dark">Gestisci</span>
                             <i class="mdi dark mdi-map-marker"></i>
                         </a>
-                        <button type="button" class="btn outline ripple" data-toggle="modal" data-target="#modal-address-edit">
+                        <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0" data-toggle="modal" data-target="#modal-address-add">
                             <span class="text-sec-dark">Aggiungi</span>
                             <i class="mdi dark mdi-plus"></i>
                         </button>

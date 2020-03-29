@@ -100,3 +100,19 @@
     }
 
 }
+
+/**********************\
+|   CLIENT ADDRESSES   |
+\**********************/
+
+.address-add {
+    cursor: pointer;
+    width: 100%;
+    outline: none!important;
+    background-color: transparent;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.address-add:hover, .address-add:focus-within {
+    background-color: rgba(0, 0, 0, 0.08);
+}

@@ -27,17 +27,17 @@
 |   ADDRESS MANAGEMENT MODAL   |
 \******************************/
 
-#modal-address-edit .modal-content {
+#modal-address-add .modal-content {
     width: 100%;
 }
 
-#modal-address-edit .address-thumb {
+#modal-address-add .address-thumb {
     height: 128px;
     width: 128px;
     margin: 36px 48px;
 }
 
-#modal-address-edit .address-thumb .mdi {
+#modal-address-add .address-thumb .mdi {
     line-height: 64px;
     font-size: 64px;
     height: 64px;

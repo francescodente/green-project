@@ -15,7 +15,7 @@ $page = basename($_SERVER['PHP_SELF']);
     </a>
     <a id="weekly-delivery-preferences-tab" href="account-weekly-delivery-preferences.php" class="account-tab <?php echo $page == 'account-weekly-delivery-preferences.php' ? 'selected' : '' ?>">
         <i class="mdi dark mdi-inbox-multiple"></i>
-        <p class="m-0">Consegna settimanale</p>
+        <p class="m-0">Cassette</p>
         <i class="mdi dark mdi-chevron-right"></i>
     </a>
     <a id="orders-tab" href="account-orders.php" class="account-tab <?php echo $page == 'account-orders.php' ? 'selected' : '' ?>">

@@ -44,7 +44,7 @@ $page = basename($_SERVER['PHP_SELF']);
                         <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>
                     </a>
                     <a href="account-weekly-delivery-preferences.php" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Consegna settimanale</span>
+                        <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassette</span>
                     </a>
                     <a href="account-orders.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
@@ -128,7 +128,7 @@ $page = basename($_SERVER['PHP_SELF']);
                 <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>
             </a>
             <a href="account-weekly-delivery-preferences.php" class="menu-item">
-                <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Consegna settimanale</span>
+                <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassette</span>
             </a>
             <a href="account-orders.php" class="menu-item">
                 <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
