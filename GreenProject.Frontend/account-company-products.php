@@ -28,6 +28,14 @@
                     <div class="container">
                         <div class="row">
 
+                            <div class="col-12 d-flex justify-content-between align-items-center mb-4">
+                                <a href="edit-product.php" class="btn outline ripple ripple-accent">
+                                    <i class="mdi accent mdi-plus mr-2"></i>
+                                    <span class="text-accent">Nuovo prodotto</span>
+                                </a>
+                                <p class="text-dis-dark m-0">0 prodotti</p>
+                            </div>
+
                             <?php
                             for ($i = 0; $i < 23; $i++) {
                                 ?>
@@ -40,12 +48,12 @@
                                             <h5 class="product-name mb-1">Product name</h5>
                                             <p class="category text-sec-dark mb-2">Category</p>
                                             <div class="d-flex align-items-center mb-1">
-                                                <i class="mdi text-dis-dark mdi-account mr-2"></i>
-                                                <p class="m-0"><span>€<span class="product-price">00,00</span> / <span class="product-unit">Kg</span></span></p>
+                                                <i class="mdi dark mdi-account mr-2"></i>
+                                                <p class="m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
                                             </div>
                                             <div class="d-flex align-items-center mb-3">
-                                                <i class="mdi text-dis-dark mdi-store mr-2"></i>
-                                                <p class="m-0"><span>€<span class="product-price">00,00</span> / <span class="product-unit">Kg</span></span></p>
+                                                <i class="mdi dark mdi-store mr-2"></i>
+                                                <p class="m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
                                             </div>
 
                                             <a href="edit-product.php" class="btn accent ripple w-100 mb-2">Modifica</a>
@@ -71,11 +79,11 @@
                                         <p class="category text-dis-dark mb-2">Category</p>
                                         <div class="d-flex align-items-center mb-1">
                                             <i class="mdi text-dis-dark mdi-account mr-2"></i>
-                                            <p class="text-sec-dark m-0"><span>€<span class="product-price">00,00</span> / <span class="product-unit">Kg</span></span></p>
+                                            <p class="text-sec-dark m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
                                         </div>
                                         <div class="d-flex align-items-center mb-3">
                                             <i class="mdi text-dis-dark mdi-store mr-2"></i>
-                                            <p class="text-sec-dark m-0"><span>€<span class="product-price">00,00</span> / <span class="product-unit">Kg</span></span></p>
+                                            <p class="text-sec-dark m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
                                         </div>
 
                                         <a href="edit-product.php" class="btn outline ripple w-100 mb-2">Modifica</a>

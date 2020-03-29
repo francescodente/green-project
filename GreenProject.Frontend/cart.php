@@ -179,41 +179,45 @@
                 </div>
                 <div class="col-12 col-lg-4">
 
-                    <!-- ORDER SUMMARY -->
-                    <h4 class="mt-5 mt-lg-0 mb-4">Riepilogo</h4>
-                    <div class="summary-products">
-                        <div class="product-1 d-flex justify-content-between">
-                            <span>Prodotto 1</span>
-                            <span>€<span>0,00</span></span>
+                    <div class="sticky-top" style="top: 72px;">
+
+                        <!-- ORDER SUMMARY -->
+                        <h4 class="mt-5 mt-lg-0 mb-4">Riepilogo</h4>
+                        <div class="summary-products">
+                            <div class="product-1 d-flex justify-content-between">
+                                <span>Prodotto 1</span>
+                                <span>€<span>0,00</span></span>
+                            </div>
+                            <div class="product-2 d-flex justify-content-between">
+                                <span>Prodotto 1</span>
+                                <span>€<span>0,00</span></span>
+                            </div>
                         </div>
-                        <div class="product-2 d-flex justify-content-between">
-                            <span>Prodotto 1</span>
-                            <span>€<span>0,00</span></span>
+                        <div class="divider dark my-3"></div>
+                        <div class="summary-additions">
+                            <div class="d-flex justify-content-between">
+                                <span>Subtotale</span>
+                                <span>€<span class="subtotal">0,00</span></span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>IVA</span>
+                                <span>€<span class="vat">0,00</span></span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Spedizione</span>
+                                <span>€<span class="shipping">0,00</span></span>
+                            </div>
                         </div>
+                        <div class="divider dark my-3"></div>
+                        <div class="summary-total">
+                            <div class="d-flex justify-content-between">
+                                <span>Totale</span>
+                                <span>€<span class="total">0,00</span></span>
+                            </div>
+                        </div>
+                        <button class="btn accent ripple w-100 d-flex justify-content-center mt-4">Acquista</button>
+
                     </div>
-                    <div class="divider dark my-3"></div>
-                    <div class="summary-additions">
-                        <div class="d-flex justify-content-between">
-                            <span>Subtotale</span>
-                            <span>€<span class="subtotal">0,00</span></span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>IVA</span>
-                            <span>€<span class="vat">0,00</span></span>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>Spedizione</span>
-                            <span>€<span class="shipping">0,00</span></span>
-                        </div>
-                    </div>
-                    <div class="divider dark my-3"></div>
-                    <div class="summary-total">
-                        <div class="d-flex justify-content-between">
-                            <span>Totale</span>
-                            <span>€<span class="total">0,00</span></span>
-                        </div>
-                    </div>
-                    <button class="btn accent ripple w-100 d-flex justify-content-center mt-4">Acquista</button>
 
                 </div>
             </form>
