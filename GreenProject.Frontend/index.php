@@ -184,7 +184,6 @@
     <?php include("scripts.php"); ?>
 
     <?php include("modals-authentication.php"); ?>
-    <?php include("modal-address-management.php"); ?>
 
     <?php include("cookie.php"); ?>
 

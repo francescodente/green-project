@@ -68,7 +68,7 @@
                     <h4 class="mt-5 mb-4">Modalità di pagamento</h4>
                     <input id="pm1" type="radio" class="rich-radio" name="payment-method" value="1" checked/>
                     <label for="pm1" class="d-flex align-items-center p-2">
-                        <div class="thumb">
+                        <div class="thumb flex-shrink-0">
                             <i class="mdi dark mdi-cash-multiple"></i>
                         </div>
                         <div>
@@ -77,7 +77,7 @@
                     </label>
                     <input id="pm2" type="radio" class="rich-radio" name="payment-method" value="2" disabled/>
                     <label for="pm2" class="d-flex align-items-center p-2">
-                        <div class="thumb">
+                        <div class="thumb flex-shrink-0">
                             <i class="mdi dark mdi-credit-card"></i>
                         </div>
                         <div>
@@ -90,7 +90,7 @@
                     <input id="da1" type="radio" class="rich-radio" name="delivery-address" value="1" checked/>
                     <label for="da1" class="d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
                         <div class="d-flex align-items-center">
-                             <div class="thumb" style="background-image: url('images/map-thumb.png');">
+                            <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
                                 <i class="mdi mdi-map-marker"></i>
                             </div>
                             <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
@@ -109,7 +109,7 @@
                     <input id="da2" type="radio" class="rich-radio" name="delivery-address" value="2"/>
                     <label for="da2" class="d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
                         <div class="d-flex align-items-center">
-                             <div class="thumb" style="background-image: url('images/map-thumb.png');">
+                             <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
                                 <i class="mdi mdi-map-marker"></i>
                             </div>
                             <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
@@ -197,7 +197,7 @@
 
     <?php include("scripts.php"); ?>
 
-    <?php include("modal-address-management.php"); ?>
+    <?php include("modals-address-management.php"); ?>
     <?php include("modals-product.php"); ?>
 
     <div id="modal-cart-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

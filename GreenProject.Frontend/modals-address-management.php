@@ -1,5 +1,5 @@
 <div id="modal-address-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-top d-flex justify-content-center">
                 <div class="address-thumb" style="background-image: url('images/map-thumb.png');">
@@ -81,14 +81,14 @@
                     <!-- Street and house number -->
                     <div class="col-7">
                         <div class="text-input mr-3">
-                            <input id="text1" type="text" placeholder=" "/>
-                            <label for="text1">Via</label>
+                            <input id="street" type="text" placeholder=" "/>
+                            <label for="street">Via</label>
                         </div>
                     </div>
                     <div class="col-5">
                         <div class="text-input">
-                            <input id="text1" type="text" placeholder=" "/>
-                            <label for="text1">Civico</label>
+                            <input id="house-number" type="text" placeholder=" "/>
+                            <label for="house-number">Civico</label>
                         </div>
                     </div>
 
@@ -96,12 +96,12 @@
 
 
                 <div class="text-input">
-                    <input id="text1" type="text" placeholder=" "/>
-                    <label for="text1">Nome</label>
+                    <input id="name" type="text" placeholder=" "/>
+                    <label for="name">Nome</label>
                 </div>
                 <div class="text-input">
-                    <input id="text1" type="text" placeholder=" "/>
-                    <label for="text1">Telefono</label>
+                    <input id="phone" type="text" placeholder=" "/>
+                    <label for="phone">Telefono</label>
                 </div>
 
 
