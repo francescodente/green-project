@@ -29,33 +29,6 @@ namespace GreenProject.Backend.Core.Logic.Utils
             RequireOwnership(userId, session.UserId);
         }
 
-        public static async Task<(TimeSlot, int)> FindTimeSlotWithActualCapacity(IDataSession session, int timeSlotId, DateTime date)
-        {
-            // TODO: optimize and verify correctness
-            TimeSlot timeSlot = await session
-                .TimeSlots
-                .IncludeFilter(t => t.TimeSlotOverrides.Where(o => o.Date == date))
-                .SingleOptionalAsync(t => t.TimeSlotId == timeSlotId)
-                .Map(ot => ot.OrElseThrow(() => NotFoundException.TimeSlotWithId(timeSlotId)));
-
-            int ordersInsideSelectedTimeSlot = await session
-                .Orders
-                .Where(o => o.OrderState == OrderState.Pending)
-                .Where(o => o.DeliveryDate == date)
-                .Where(o => o.TimeSlotId == timeSlotId)
-                .CountAsync();
-
-            int capacityOverride = timeSlot
-                .TimeSlotOverrides
-                .Select(o => o.Offset)
-                .SingleOptional()
-                .OrElse(0);
-
-            int capacity = timeSlot.SlotCapacity + capacityOverride - ordersInsideSelectedTimeSlot;
-
-            return (timeSlot, capacity);
-        }
-
         public static IOptional<CustomerType> GetCustomerType(IUserSession user)
         {
             if (user.HasRole(RoleType.CustomerBusiness))

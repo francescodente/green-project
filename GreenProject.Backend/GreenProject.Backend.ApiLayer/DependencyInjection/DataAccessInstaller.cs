@@ -32,16 +32,14 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
             services
                 .AddScoped<IAddressesService, AddressesService>()
                 .AddScoped<IAuthenticationService, AuthenticationService>()
-                .AddScoped<ICartService, CartService>()
+                //.AddScoped<ICartService, CartService>()
                 .AddScoped<ICategoriesService, CategoriesService>()
                 .AddScoped<IProductsService, ProductsService>()
-                .AddScoped<ISuppliersService, SuppliersService>()
-                .AddScoped<ITimeSlotsService, TimeSlotsService>()
                 .AddScoped<IUsersService, UsersService>()
                 .AddScoped<IRolesService, RolesService>()
                 .AddScoped<ISupportService, SupportService>()
-                .AddScoped<IImagesService, ImagesService>()
-                .AddScoped<IOrdersService, OrdersService>();
+                .AddScoped<IImagesService, ImagesService>();
+                //.AddScoped<IOrdersService, OrdersService>();
         }
     }
 }

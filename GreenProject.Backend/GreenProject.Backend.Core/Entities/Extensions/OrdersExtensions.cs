@@ -21,66 +21,19 @@ namespace GreenProject.Backend.Core.Entities.Extensions
 
         private static void MaterializePrices(this Order order, CustomerType customerType)
         {
-            order.Sections
-                .SelectMany(s => s.Details)
-                .ForEach(d => d.AssignCurrentProductPrice(customerType));
+            order.Details.ForEach(d => d.AssignCurrentDetailPrice(customerType));
         }
 
-        private static void AssignCurrentProductPrice(this OrderDetail detail, CustomerType customerType)
+        private static void AssignCurrentDetailPrice(this OrderDetail detail, CustomerType customerType)
         {
             Price price = detail
-                .Product
+                .Item
                 .GetPrice(customerType)
-                .OrElseThrow(() => new ReservedProductException(detail.ProductId, customerType));
+                .OrElseThrow(() => new ReservedProductException(detail.ItemId, customerType));
 
             detail.Price = price.Value;
             detail.UnitName = price.UnitName;
             detail.UnitMultiplier = price.UnitMultiplier;
-        }
-
-        public static OrderSection CreateOrderSection(this Order order, int supplierId)
-        {
-            OrderSection section = new OrderSection
-            {
-                SupplierId = supplierId,
-                State = OrderSectionState.Pending
-            };
-            order.Sections.Add(section);
-            return section;
-        }
-
-        public static void RemoveOrderDetail(this Order order, int productId)
-        {
-            OrderDetail detail = order.Sections
-                .SelectMany(s => s.Details)
-                .SingleOptional(d => d.ProductId == productId)
-                .OrElseThrow(() => NotFoundException.CartItem(productId));
-
-            OrderSection section = detail.OrderSection;
-            section.Details.Remove(detail);
-
-            if (section.Details.Count == 0)
-            {
-                order.Sections.Remove(section);
-            }
-        }
-
-        public static void AddProduct(this Order order, Product product, int quantity)
-        {
-            IOptional<OrderSection> optionalSection = order.Sections
-                .SingleOptional(s => s.SupplierId == product.SupplierId);
-
-            // TODO: check if the number of sections exceeds a max value
-
-            OrderSection section = optionalSection
-                .OrElseGet(() => order.CreateOrderSection(product.SupplierId));
-
-            section.Details.Add(new OrderDetail
-            {
-                Product = product,
-                Quantity = quantity,
-                State = OrderDetailState.Available
-            });
         }
     }
 }

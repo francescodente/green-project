@@ -15,17 +15,6 @@ namespace GreenProject.Backend.Core.Logic
         {
         }
 
-        public async Task SetProductEnabledState(int productId, bool enabled)
-        {
-            Product product = await this.Data
-                .Products
-                .SingleOptionalAsync(p => p.ProductId == productId)
-                .Map(s => s.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
-
-            product.IsLegal = enabled;
-            await this.Data.SaveChangesAsync();
-        }
-
         public async Task SetUserEnabledState(int userId, bool enabled)
         {
             User user = await this.Data

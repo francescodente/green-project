@@ -86,52 +86,14 @@ namespace GreenProject.Backend.Core.Logic
             return this.Mapper.Map<UserOutputDto>(userEntity);
         }
 
-        public async Task<UserOutputDto> RegisterSupplier(SupplierRegistrationDto registration)
-        {
-            AddressInputDto addressInput = registration.Address;
-            User user = this.CreateUserFromUserDto(registration.UserData);
-            user.ShouldChangePassword = true;
-            user.Supplier = new Supplier
-            {
-                BusinessName = registration.BusinessName,
-                LegalForm = registration.LegalForm,
-                Pec = registration.Pec,
-                Sdi = registration.Sdi,
-                VatNumber = registration.VatNumber,
-                IsValid = true
-            };
-
-            string generatedPassword = this.handler.GenerateRandomPassword();
-            this.handler.AssignPassword(user, generatedPassword);
-
-            this.Data.Users.Add(user);
-
-            await this.Data.SaveChangesAsync();
-
-            user.AddAddress(new Address
-            {
-                Description = addressInput.Description,
-                Latitude = addressInput.Latitude,
-                Longitude = addressInput.Longitude
-            });
-
-            await this.Data.SaveChangesAsync();
-
-            await this.Notifications.SupplierRegistered(user, generatedPassword);
-
-            return this.Mapper.Map<UserOutputDto>(user);
-        }
-
         private User CreateUserFromUserDto(UserInputDto userInput)
         {
             return new User
             {
                 Email = userInput.Email,
                 Telephone = userInput.Telephone,
-                IsDeleted = false,
                 IsEnabled = true,
-                MarketingConsent = userInput.MarketingConsent,
-                CookieConsent = userInput.CookieConsent
+                MarketingConsent = userInput.MarketingConsent
             };
         }
     }

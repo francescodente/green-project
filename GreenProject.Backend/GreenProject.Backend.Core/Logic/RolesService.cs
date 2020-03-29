@@ -51,10 +51,8 @@ namespace GreenProject.Backend.Core.Logic
                 user.Person = new Person();
             }
 
-            user.Person.Cf = person.Cf;
             user.Person.FirstName = person.FirstName;
             user.Person.LastName = person.LastName;
-            user.Person.BirthDate = person.BirthDate;
 
             await this.Data.SaveChangesAsync();
 

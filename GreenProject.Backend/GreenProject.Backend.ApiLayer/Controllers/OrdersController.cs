@@ -31,12 +31,11 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return Ok(await this.ordersService.GetCustomerOrders(customerId, filters, pagination));
         }
 
-        [HttpGet("suppliers/{supplierId}/orders")]
-        [RequireLogin(RoleType.Supplier, RoleType.Administrator)]
-        [OwnerOrAdminOnly(PropertyName = "supplierId")]
-        public async Task<IActionResult> GetSupplierOrders([FromRoute] int supplierId, [FromQuery] OrderFilters filters, [FromQuery] PaginationFilter pagination)
+        [HttpGet("orders")]
+        [RequireLogin(RoleType.Administrator)]
+        public async Task<IActionResult> GetSupplierOrders([FromQuery] OrderFilters filters, [FromQuery] PaginationFilter pagination)
         {
-            return Ok(await this.ordersService.GetSupplierOrders(supplierId, filters, pagination));
+            return Ok(await this.ordersService.GetSupplierOrders(filters, pagination));
         }
     }
 }

@@ -18,9 +18,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
             return users
                 .Include(u => u.Person)
                 .Include(u => u.CustomerBusiness)
-                .Include(u => u.Supplier)
-                .Include(u => u.DeliveryCompany)
-                .Include(u => u.Administrator);
+                .Include(u => u.DeliveryCompany);
         }
     }
 }

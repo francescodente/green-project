@@ -8,7 +8,7 @@ namespace GreenProject.Backend.Core.Entities
         public Category()
         {
             ChildCategories = new HashSet<Category>();
-            Products = new HashSet<Product>();
+            PurchasableItems = new HashSet<PurchasableItem>();
         }
 
         public int CategoryId { get; set; }
@@ -19,6 +19,6 @@ namespace GreenProject.Backend.Core.Entities
         public virtual Image Image { get; set; }
         public virtual Category ParentCategory { get; set; }
         public virtual ICollection<Category> ChildCategories { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<PurchasableItem> PurchasableItems { get; set; }
     }
 }

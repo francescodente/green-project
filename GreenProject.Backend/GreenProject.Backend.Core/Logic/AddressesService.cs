@@ -32,9 +32,11 @@ namespace GreenProject.Backend.Core.Logic
 
             Address addressEntity = new Address
             {
-                Description = address.Description,
-                Latitude = address.Latitude,
-                Longitude = address.Longitude
+                Street = address.Street,
+                HouseNumber = address.HouseNumber,
+                ZipCode = address.ZipCode,
+                Name = address.Name,
+                Telephone = address.Telephone
             };
 
             user.AddAddress(addressEntity);

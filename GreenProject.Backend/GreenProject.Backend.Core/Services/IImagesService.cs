@@ -5,12 +5,8 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface IImagesService
     {
-        Task<IImageResource> ProductImage(int productId, int supplierId);
+        Task<IImageResource> PurchasableImage(int purchasableId);
 
         Task<IImageResource> CategoryImage(int categoryId);
-
-        Task<IImageResource> SupplierLogo(int supplierId);
-
-        Task<IImageResource> SupplierBackgroundImage(int supplierId);
     }
 }

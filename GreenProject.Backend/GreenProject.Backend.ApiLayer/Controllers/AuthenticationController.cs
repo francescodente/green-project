@@ -40,17 +40,10 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return NoContent();
         }
 
-        [HttpPost("register/customer")]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterCustomer([FromBody] RegistrationDto registration)
         {
             return Ok(await this.authenticationService.RegisterCustomer(registration));
-        }
-
-        [HttpPost("register/supplier")]
-        [RequireLogin(RoleType.Administrator)]
-        public async Task<IActionResult> RegisterSupplier([FromBody] SupplierRegistrationDto registration)
-        {
-            return Ok(await this.authenticationService.RegisterSupplier(registration));
         }
     }
 }

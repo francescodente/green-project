@@ -62,10 +62,5 @@ namespace GreenProject.Backend.Core.Exceptions
         {
             return ResourceWithId(nameof(Category), categoryId);
         }
-
-        public static NotFoundException TimeSlotWithId(int timeSlotId)
-        {
-            return ResourceWithId(nameof(TimeSlot), timeSlotId);
-        }
     }
 }

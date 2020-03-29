@@ -1,7 +1,7 @@
 ﻿namespace GreenProject.Backend.Core.Entities
 {
-    public class Administrator : Role
+    public class DeliveryMan : Role
     {
-        
+
     }
 }

@@ -25,7 +25,7 @@ namespace GreenProject.Backend.Core.Logic
 
         private IImageResource CreateImageResource(Func<Image> imageSupplier, Action<Image> imageSetter, ImageTypeUploadSettings imageSettings, params object[] directoryParams)
         {
-            Action<IImageStoringOptions> storingOptions = options =>
+            void storingOptions(IImageStoringOptions options)
             {
                 imageSettings
                     .Format
@@ -44,7 +44,7 @@ namespace GreenProject.Backend.Core.Logic
                     .Name
                     .AsOptional()
                     .IfPresent(n => options.SetName(n));
-            };
+            }
 
             return new ImageResource(this.storage, storingOptions, imageSupplier, imageSetter, this.Data);
         }
@@ -63,51 +63,19 @@ namespace GreenProject.Backend.Core.Logic
                 categoryId);
         }
 
-        public async Task<IImageResource> ProductImage(int productId, int supplierId)
+        public async Task<IImageResource> PurchasableImage(int productId)
         {
             Product product = await this.Data
                 .Products
                 .Include(p => p.Image)
-                .SingleOptionalAsync(p => p.ProductId == productId)
+                .SingleOptionalAsync(p => p.ItemId == productId)
                 .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
-
-            ServiceUtils.RequireOwnership(product.SupplierId, supplierId);
 
             return this.CreateImageResource(
                 () => product.Image,
                 img => product.Image = img,
                 this.settings.Products,
                 productId);
-        }
-
-        private Task<Supplier> FindSupplier(int supplierId)
-        {
-            return this.Data
-                .Suppliers
-                .SingleOptionalAsync(s => s.UserId == supplierId)
-                .Map(s => s.OrElseThrow(() => NotFoundException.UserWithId(supplierId)));
-        }
-
-        public async Task<IImageResource> SupplierBackgroundImage(int supplierId)
-        {
-            Supplier supplier = await this.FindSupplier(supplierId);
-
-            return this.CreateImageResource(
-                () => supplier.BackgroundImage,
-                img => supplier.BackgroundImage = img,
-                this.settings.SupplierBackgroundImages,
-                supplierId);
-        }
-
-        public async Task<IImageResource> SupplierLogo(int supplierId)
-        {
-            Supplier supplier = await this.FindSupplier(supplierId);
-
-            return this.CreateImageResource(
-                () => supplier.LogoImage,
-                img => supplier.LogoImage = img,
-                this.settings.SupplierLogos,
-                supplierId);
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Utils.Email;
 using GreenProject.Backend.Core.Utils.Notifications;
-using GreenProject.Backend.Shared.Utils;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -22,39 +20,42 @@ namespace GreenProject.Backend.Infrastructure.Notifications
             this.settings = settings;
         }
 
-        public Task OrderReceived(OrderSection order)
+        public Task OrderReceived(Order order)
         {
-            return this.SendMailNotification(
+            return this.ApplyTemplateAndSend(
+                this.MailTo(MailContext.Suppliers),
                 this.settings.OrderReceived,
-                MailTemplates.OrderReceived(order),
-                order.Supplier.User.Email);
+                MailTemplates.OrderReceived(order));
         }
 
-        public Task SupplierRegistered(User supplier, string generatedPassword)
-        {
-            return this.SendMailNotification(
-                this.settings.SupplierRegistered,
-                MailTemplates.SupplierRegistered(supplier, generatedPassword),
-                supplier.Email);
-        }
-
-        private async Task SendMailNotification(MailNotificationDescription description, Func<string, string> templateModifier, params string[] recipients)
+        private async Task ApplyTemplateAndSend(
+            IMailBuilder mail,
+            MailNotificationDescription description,
+            Func<string, string> templateModifier)
         {
             string bodyTemplate = await this.LoadMailTemplate(description);
 
-            IMailBuilder builder = this.mailService.NewMail()
+            await mail
                 .From(description.Context)
                 .Subject(description.Subject)
-                .BodyHtml(templateModifier(bodyTemplate));
-            recipients.ForEach(r => builder.To(r));
-
-            await builder.Send();
+                .BodyHtml(templateModifier(bodyTemplate))
+                .Send();
         }
 
         private Task<string> LoadMailTemplate(MailNotificationDescription description)
         {
             string path = Path.Combine(this.baseTemplatePath, description.BodyTemplateFile);
             return File.ReadAllTextAsync(path);
+        }
+
+        private IMailBuilder MailTo(string recipientAddress)
+        {
+            return this.mailService.NewMail().To(recipientAddress);
+        }
+
+        private IMailBuilder MailTo(MailContext recipientContext)
+        {
+            return this.mailService.NewMail().To(recipientContext);
         }
     }
 }

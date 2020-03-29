@@ -6,6 +6,9 @@ namespace GreenProject.Backend.Core.Utils.Email
 {
     public enum MailContext
     {
-        Test
+        Test,
+        Administrators,
+        Suppliers,
+        Support
     }
 }

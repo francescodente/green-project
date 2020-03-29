@@ -3,9 +3,8 @@
     public enum RoleType
     {
         Person,
-        Supplier,
         CustomerBusiness,
-        DeliveryCompany,
+        DeliveryMan,
         Administrator
     }
 
@@ -16,10 +15,8 @@
             return roleType switch
             {
                 RoleType.Person => user.Person,
-                RoleType.Supplier => user.Supplier,
                 RoleType.CustomerBusiness => user.CustomerBusiness,
-                RoleType.DeliveryCompany => user.DeliveryCompany,
-                RoleType.Administrator => user.Administrator,
+                RoleType.DeliveryMan => user.DeliveryCompany,
                 _ => null,
             };
         }

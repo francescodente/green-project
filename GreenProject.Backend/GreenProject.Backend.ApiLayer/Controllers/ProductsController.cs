@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/suppliers/{userId}/products")]
+    [Route(ApiRoutes.BASE_ROUTE + "/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
@@ -21,33 +21,32 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts([FromRoute] int userId, [FromQuery] PaginationFilter pagination, [FromQuery] ProductsFilters filters)
+        public async Task<IActionResult> GetProducts([FromQuery] PaginationFilter pagination, [FromQuery] ProductsFilters filters)
         {
-            return Ok(await this.productsService.GetProducts(userId, pagination, filters));
+            return Ok(await this.productsService.GetProducts(pagination, filters));
         }
 
         [HttpPost]
-        [RequireLogin(RoleType.Supplier)]
-        [OwnerOnly]
+        [RequireLogin(RoleType.Administrator)]
         public async Task<IActionResult> InsertProduct([FromRoute] int userId, [FromBody] ProductInputDto product)
         {
-            return Ok(await this.productsService.InsertProduct(userId, product));
+            return Ok(await this.productsService.InsertProduct(product));
         }
 
         [HttpPut("{productId}")]
-        [RequireLogin(RoleType.Supplier)]
+        [RequireLogin(RoleType.Administrator)]
         [OwnerOnly]
         public async Task<IActionResult> UpdateProduct([FromRoute] int userId, [FromRoute] int productId, [FromBody] ProductInputDto product)
         {
-            return Ok(await this.productsService.UpdateProduct(userId, productId, product));
+            return Ok(await this.productsService.UpdateProduct(productId, product));
         }
 
         [HttpDelete("{productId}")]
-        [RequireLogin(RoleType.Supplier)]
+        [RequireLogin(RoleType.Administrator)]
         [OwnerOnly]
-        public async Task<IActionResult> DeleteProduct([FromRoute] int userId, [FromRoute] int productId)
+        public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
-            await this.productsService.DeleteProduct(userId, productId);
+            await this.productsService.DeleteProduct(productId);
             return NoContent();
         }
     }

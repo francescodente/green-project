@@ -2,8 +2,10 @@
 {
     public class AddressInputDto
     {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public string Description { get; set; }
+        public string Street { get; set; }
+        public string HouseNumber { get; set; }
+        public string Name { get; set; }
+        public string Telephone { get; set; }
+        public string ZipCode { get; set; }
     }
 }
