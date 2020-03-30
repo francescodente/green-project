@@ -64,83 +64,119 @@
                         ?>
                     </div>
 
-                    <!-- PAYMENT METHOD -->
-                    <h4 class="mt-5 mb-4">Modalità di pagamento</h4>
-                    <input id="pm1" type="radio" class="rich-radio" name="payment-method" value="1" checked/>
-                    <label for="pm1" class="d-flex align-items-center p-2">
-                        <div class="thumb flex-shrink-0">
-                            <i class="mdi dark mdi-cash-multiple"></i>
-                        </div>
-                        <div>
-                            <p class="m-0">Pagamento alla consegna</p>
-                        </div>
-                    </label>
-                    <input id="pm2" type="radio" class="rich-radio" name="payment-method" value="2" disabled/>
-                    <label for="pm2" class="d-flex align-items-center p-2">
-                        <div class="thumb flex-shrink-0">
-                            <i class="mdi dark mdi-credit-card"></i>
-                        </div>
-                        <div>
-                            <p class="m-0">Ulteriori opzioni per il pagamento sono in arrivo!</p>
-                        </div>
-                    </label>
+                    <div class="divider dark mt-5 mb-4"></div>
 
-                    <!-- DELIVERY ADDRESS -->
-                    <h4 class="mt-5 mb-4">Indirizzo di consegna</h4>
-                    <input id="da1" type="radio" class="rich-radio" name="delivery-address" value="1" checked/>
-                    <label for="da1" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
-                        <div class="d-flex align-items-center">
-                            <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                                <i class="mdi mdi-map-marker"></i>
-                            </div>
-                            <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                        </div>
-                        <div style="margin-left: 64px;">
-                            <div class="d-flex align-items-center mb-1">
-                                <i class="mdi small dark mdi-account mr-2"></i>
-                                <span class="text-sec-dark">Nome cognome</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="mdi small dark mdi-phone mr-2"></i>
-                                <span class="text-sec-dark">+39 1234567890</span>
-                            </div>
-                        </div>
-                    </label>
-                    <input id="da2" type="radio" class="rich-radio" name="delivery-address" value="2"/>
-                    <label for="da2" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
-                        <div class="d-flex align-items-center">
-                             <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                                <i class="mdi mdi-map-marker"></i>
-                            </div>
-                            <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                        </div>
-                        <div style="margin-left: 64px;">
-                            <div class="d-flex align-items-center mb-1">
-                                <i class="mdi small dark mdi-account mr-2"></i>
-                                <span class="text-sec-dark">Nome cognome</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="mdi small dark mdi-phone mr-2"></i>
-                                <span class="text-sec-dark">+39 1234567890</span>
-                            </div>
-                        </div>
-                    </label>
-                    <div class="d-flex justify-content-end">
-                        <a href="account-user-addresses.php" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0">
-                            <span class="text-sec-dark">Gestisci</span>
-                            <i class="mdi dark mdi-map-marker"></i>
-                        </a>
-                        <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0" data-toggle="modal" data-target="#modal-address-add">
-                            <span class="text-sec-dark">Aggiungi</span>
-                            <i class="mdi dark mdi-plus"></i>
+                    <!-- PAYMENT METHOD -->
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#cart-payment-method" aria-expanded="false">
+                        <h4 class="m-0">Modalità di pagamento</h4>
+                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#cart-payment-method" aria-expanded="false" title="Nascondi">
+                            <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
+                    <div id="cart-payment-method" class="collapse">
+                        <div class="pt-3"></div>
+
+                        <input id="pm1" type="radio" class="rich-radio" name="payment-method" value="1" checked/>
+                        <label for="pm1" class="d-flex align-items-center p-2">
+                            <div class="thumb flex-shrink-0">
+                                <i class="mdi dark mdi-cash-multiple"></i>
+                            </div>
+                            <div>
+                                <p class="m-0">Pagamento alla consegna</p>
+                            </div>
+                        </label>
+                        <input id="pm2" type="radio" class="rich-radio" name="payment-method" value="2" disabled/>
+                        <label for="pm2" class="d-flex align-items-center p-2 m-0">
+                            <div class="thumb flex-shrink-0">
+                                <i class="mdi dark mdi-credit-card"></i>
+                            </div>
+                            <div>
+                                <p class="m-0">Ulteriori opzioni per il pagamento sono in arrivo!</p>
+                            </div>
+                        </label>
+
+                    </div>
+
+                    <div class="divider dark my-4"></div>
+
+                    <!-- DELIVERY ADDRESS -->
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#cart-delivery-address" aria-expanded="true">
+                        <h4 class="m-0">Indirizzo di consegna</h4>
+                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#cart-delivery-address" aria-expanded="true" title="Nascondi">
+                            <i class="mdi dark mdi-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div id="cart-delivery-address" class="collapse show">
+                        <div class="pt-3"></div>
+
+                        <input id="da1" type="radio" class="rich-radio" name="delivery-address" value="1" checked/>
+                        <label for="da1" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
+                            <div class="d-flex align-items-center">
+                                <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+                                    <i class="mdi mdi-map-marker"></i>
+                                </div>
+                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
+                            </div>
+                            <div style="margin-left: 64px;">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="mdi small dark mdi-account mr-2"></i>
+                                    <span class="text-sec-dark">Nome cognome</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi small dark mdi-phone mr-2"></i>
+                                    <span class="text-sec-dark">+39 1234567890</span>
+                                </div>
+                            </div>
+                        </label>
+                        <input id="da2" type="radio" class="rich-radio" name="delivery-address" value="2"/>
+                        <label for="da2" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
+                            <div class="d-flex align-items-center">
+                                 <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+                                    <i class="mdi mdi-map-marker"></i>
+                                </div>
+                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
+                            </div>
+                            <div style="margin-left: 64px;">
+                                <div class="d-flex align-items-center mb-1">
+                                    <i class="mdi small dark mdi-account mr-2"></i>
+                                    <span class="text-sec-dark">Nome cognome</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="mdi small dark mdi-phone mr-2"></i>
+                                    <span class="text-sec-dark">+39 1234567890</span>
+                                </div>
+                            </div>
+                        </label>
+                        <div class="d-flex justify-content-end">
+                            <a href="account-user-addresses.php" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0">
+                                <span class="text-sec-dark">Gestisci</span>
+                                <i class="mdi dark mdi-map-marker"></i>
+                            </a>
+                            <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0" data-toggle="modal" data-target="#modal-address-add">
+                                <span class="text-sec-dark">Aggiungi</span>
+                                <i class="mdi dark mdi-plus"></i>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <div class="divider dark my-4"></div>
 
                     <!-- NOTES -->
-                    <h4 class="mt-5 mb-4">Note</h4>
-                    <div class="text-area">
-                        <textarea id="notes" class="w-100" placeholder=" "></textarea>
-                        <span>Inserisci qui il tuo buono sconto!</span>
+                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#cart-notes" aria-expanded="false">
+                        <h4 class="m-0">Note</h4>
+                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#cart-notes" aria-expanded="false" title="Nascondi">
+                            <i class="mdi dark mdi-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div id="cart-notes" class="collapse">
+                        <div class="pt-3"></div>
+
+                        <div class="text-area mb-0">
+                            <textarea id="notes" class="w-100" placeholder=" "></textarea>
+                            <span>Inserisci qui il tuo buono sconto!</span>
+                        </div>
+
                     </div>
 
                     <div class="divider dark d-lg-none mt-4"></div>
@@ -150,37 +186,37 @@
                     <div class="sticky-top" style="top: 72px;">
 
                         <!-- ORDER SUMMARY -->
-                        <h4 class="mt-5 mt-lg-0 mb-4">Riepilogo</h4>
+                        <h4 class="mt-4 mt-lg-0 mb-4">Riepilogo</h4>
                         <div class="summary-products">
                             <div class="product-1 d-flex justify-content-between">
                                 <span>Prodotto 1</span>
-                                <span>€<span>0,00</span></span>
+                                <span><span>0,00</span>€</span>
                             </div>
                             <div class="product-2 d-flex justify-content-between">
                                 <span>Prodotto 1</span>
-                                <span>€<span>0,00</span></span>
+                                <span><span>0,00</span>€</span>
                             </div>
                         </div>
                         <div class="divider dark my-3"></div>
                         <div class="summary-additions">
-                            <div class="d-flex justify-content-between">
-                                <span>Subtotale</span>
-                                <span>€<span class="subtotal">0,00</span></span>
+                            <div class="d-flex justify-content-between text-sec-dark">
+                                <span>SUBTOTALE</span>
+                                <span><span class="subtotal">0,00</span>€</span>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between text-sec-dark">
                                 <span>IVA</span>
-                                <span>€<span class="vat">0,00</span></span>
+                                <span><span class="vat">0,00</span>€</span>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Spedizione</span>
-                                <span>€<span class="shipping">0,00</span></span>
+                            <div class="d-flex justify-content-between text-sec-dark">
+                                <span>SPEDIZIONE</span>
+                                <span><span class="shipping">0,00</span>€</span>
                             </div>
                         </div>
                         <div class="divider dark my-3"></div>
                         <div class="summary-total">
                             <div class="d-flex justify-content-between">
-                                <span>Totale</span>
-                                <span>€<span class="total">0,00</span></span>
+                                <span>TOTALE</span>
+                                <span><span class="total">0,00</span>€</span>
                             </div>
                         </div>
                         <button class="btn accent ripple w-100 d-flex justify-content-center mt-4">Acquista</button>

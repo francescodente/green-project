@@ -4,7 +4,7 @@
 <meta name="theme-color" content="#EEEEEE">
 
 <!-- Website icon -->
-<link type="image/x-icon" rel="shortcut icon" href="#" />
+<link type="image/x-icon" rel="shortcut icon" href="images/logo/favicon.png" />
 
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Work+Sans&display=swap" rel="stylesheet">
@@ -22,5 +22,4 @@
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
 <link rel="stylesheet" type="text/css" href="css/modals.css"/>
 <link rel="stylesheet" type="text/css" href="css/home.css"/>
-<link rel="stylesheet" type="text/css" href="css/cart.css"/>
 <link rel="stylesheet" type="text/css" href="css/account.css"/>
