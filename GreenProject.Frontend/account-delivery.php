@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Green Project - Ordini</title>
+    <title>Green Project - Consegne</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
             <div class="container text-center">
                 <h1 class="text-light">ACCOUNT</h1>
                 <br>
-                <h3 class="text-light">Ordini</h3>
+                <h3 class="text-light">Consegne</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
         </section>

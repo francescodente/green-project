@@ -96,13 +96,13 @@
                                     </div>
                                     <!-- Order details -->
                                     <div class="details-col col-12 col-lg-6 pt-3 pb-4 pb-lg-3 d-flex flex-column">
-                                        <div class="area-collapse d-flex justify-content-between align-items-center mb-2" data-toggle="collapse" data-target="#order-details-1" aria-expanded="false">
+                                        <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-details-1" aria-expanded="false">
                                             <h5 class="m-0">Dettagli</h5>
                                             <button class="btn-collapse btn icon ripple d-lg-none" data-toggle="collapse" data-target="#order-details-1" aria-expanded="false" title="Mostra">
                                                 <i class="mdi dark mdi-chevron-down"></i>
                                             </button>
                                         </div>
-                                        <div id="order-details-1" class="collapse mt-2 mx-2 flex-grow-1">
+                                        <div id="order-details-1" class="collapse mt-3 mx-2 flex-grow-1">
 
                                             <div class="d-flex align-items-center mb-1">
                                                 <i class="mdi small dark mdi-calendar-clock mr-2"></i>
