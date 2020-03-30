@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Green Project - I miei dati</title>
+    <title>Green Project - Consegna settimanale</title>
 </head>
 <body>
 
@@ -24,8 +24,34 @@
                 <div id="account-tabs-col" class="d-none d-lg-block col-lg-3">
                     <?php include("account-tabs.php"); ?>
                 </div>
+                <div id="account-content-col" class="col-12 col-lg-9">
 
-                weekly-delivery-preferences
+                    <h4>Cassette</h4>
+                    <div class="weekly-delivery crates card flat">
+                        <div class="weekly-product crate">
+                            <div class="crate-header bg-primary-dark d-flex align-items-center p-2">
+                                <img class="product-image img-fluid mr-3" src="images/example_product.jpg"/>
+                                <div class="d-flex flex-column">
+                                    <p class="product-name m-0">Cassetta 10 Kg</p>
+                                    <p class="text-sec-dark m-0">9.5 Kg su 10 - 0.00€</p>
+                                </div>
+                            </div>
+                            <div class="crate-products">
+                                <div class="product p-2">
+                                    crate-product
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Altri prodotti</h4>
+                    <div class="weekly-delivery products card flat">
+                        <div class="weekly-product product p-2">
+                            product
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
         </section>
