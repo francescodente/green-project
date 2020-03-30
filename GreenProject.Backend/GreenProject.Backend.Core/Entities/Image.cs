@@ -8,9 +8,7 @@ namespace GreenProject.Backend.Core.Entities
         public int ImageId { get; set; }
         public string Path { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual PurchasableItem PurchasableItem { get; set; }
         public virtual Category Category { get; set; }
-        public virtual Supplier LogoOwner { get; set; }
-        public virtual Supplier BackgroundImageOwner { get; set; }
     }
 }

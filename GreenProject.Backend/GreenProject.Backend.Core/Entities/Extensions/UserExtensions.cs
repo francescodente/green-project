@@ -9,21 +9,17 @@ namespace GreenProject.Backend.Core.Entities.Extensions
     {
         public static IEnumerable<RoleType> GetRoleTypes(this User user)
         {
-            if (user.Administrator != null)
+            if (user.IsAdministrator)
             {
                 yield return RoleType.Administrator;
             }
             if (user.DeliveryCompany != null)
             {
-                yield return RoleType.DeliveryCompany;
+                yield return RoleType.DeliveryMan;
             }
             if (user.Person != null)
             {
                 yield return RoleType.Person;
-            }
-            if (user.Supplier != null)
-            {
-                yield return RoleType.Supplier;
             }
             if (user.CustomerBusiness != null)
             {

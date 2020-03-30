@@ -9,6 +9,6 @@ namespace GreenProject.Backend.Core.Services
     {
         Task<PagedCollection<CustomerOrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination);
 
-        Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(int supplierId, OrderFilters filters, PaginationFilter pagination);
+        Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination);
     }
 }

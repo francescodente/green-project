@@ -28,13 +28,6 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return Ok(await this.cartService.GetCartDetails(userId));
         }
 
-        [HttpPut]
-        [OwnerOnly]
-        public async Task<IActionResult> UpdateCartDeliveryInfo([FromRoute] int userId, [FromBody] DeliveryInfoInputDto deliveryInfo)
-        {
-            return Ok(await this.cartService.UpdateCartDeliveryInfo(userId, deliveryInfo));
-        }
-
         [HttpPost("details")]
         [OwnerOnly]
         public async Task<IActionResult> InsertCartItem([FromRoute] int userId, [FromBody] CartItemInputDto insertion)
@@ -61,9 +54,9 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("confirm")]
         [OwnerOnly]
-        public async Task<IActionResult> ConfirmCart([FromRoute] int userId)
+        public async Task<IActionResult> ConfirmCart([FromRoute] int userId, [FromBody] DeliveryInfoInputDto deliveryInfo)
         {
-            return Ok(await this.cartService.ConfirmCart(userId));
+            return Ok(await this.cartService.ConfirmCart(userId, deliveryInfo));
         }
     }
 }

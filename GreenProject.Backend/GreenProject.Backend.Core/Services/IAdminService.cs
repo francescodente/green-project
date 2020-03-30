@@ -9,8 +9,6 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface IAdminService
     {
-        Task SetUserEnabledState(int supplierId, bool enabled);
-
-        Task SetProductEnabledState(int productId, bool enabled);
+        Task SetUserEnabledState(int userId, bool enabled);
     }
 }

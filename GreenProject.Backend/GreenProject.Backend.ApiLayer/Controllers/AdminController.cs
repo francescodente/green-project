@@ -29,12 +29,5 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             await this.adminService.SetUserEnabledState(userId, enabled);
             return NoContent();
         }
-
-        [HttpPut("products/{productId}/enable")]
-        public async Task<IActionResult> SetProductEnabledState([FromRoute] int productId, [FromBody] bool enabled)
-        {
-            await this.adminService.SetProductEnabledState(productId, enabled);
-            return NoContent();
-        }
     }
 }

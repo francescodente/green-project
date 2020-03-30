@@ -3,9 +3,8 @@
     public enum RoleTypeDto
     {
         Person,
-        Supplier,
         CustomerBusiness,
-        DeliveryCompany,
+        DeliveryMan,
         Administrator
     }
 }

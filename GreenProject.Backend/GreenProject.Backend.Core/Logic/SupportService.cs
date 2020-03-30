@@ -19,9 +19,9 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task SendSupportEmail(SupportRequestDto request)
         {
-            return this.mailService.NewMail() // TODO: Setup real mail contexts and use those instead of the test one
-                .From(MailContext.Test)
-                .To(request.SenderEmail)
+            return this.mailService.NewMail()
+                .From(MailContext.Support)
+                .To(MailContext.Administrators)
                 .Subject(request.Subject)
                 .Body(request.Body)
                 .Send();

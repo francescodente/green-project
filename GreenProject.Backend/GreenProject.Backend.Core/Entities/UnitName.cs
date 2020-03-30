@@ -4,11 +4,9 @@ using System.Text;
 
 namespace GreenProject.Backend.Core.Entities
 {
-    public enum OrderSectionState
+    public enum UnitName
     {
-        Pending,
-        Accepted,
-        Rejected,
-        Loaded
+        Kilogram,
+        Piece
     }
 }

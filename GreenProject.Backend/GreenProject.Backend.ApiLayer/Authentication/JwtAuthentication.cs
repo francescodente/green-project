@@ -1,5 +1,6 @@
 ﻿using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Utils;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.IdentityModel.Tokens;
@@ -93,33 +94,9 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         private IEnumerable<Claim> CreateClaimsList(User user)
         {
-            return this.GetUserRoles(user)
+            return user.GetRoleTypes()
                 .Select(CreateRoleClaim)
                 .Append(new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()));
-        }
-
-        private IEnumerable<RoleType> GetUserRoles(User user)
-        {
-            if (user.Person != null)
-            {
-                yield return RoleType.Person;
-            }
-            if (user.CustomerBusiness != null)
-            {
-                yield return RoleType.CustomerBusiness;
-            }
-            if (user.Supplier != null)
-            {
-                yield return RoleType.Supplier;
-            }
-            if (user.Administrator != null)
-            {
-                yield return RoleType.Administrator;
-            }
-            if (user.DeliveryCompany != null)
-            {
-                yield return RoleType.DeliveryCompany;
-            }
         }
 
         private Claim CreateRoleClaim(RoleType role)

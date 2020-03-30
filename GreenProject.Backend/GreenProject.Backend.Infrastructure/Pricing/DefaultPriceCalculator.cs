@@ -16,37 +16,29 @@ namespace GreenProject.Backend.Infrastructure.Pricing
             this.settings = settings;
         }
 
-        public OrderPricesDto Calculate(OrderSection order)
+        public void Calculate(Order order)
         {
-            CustomerType customerType = order.Order
+            CustomerType customerType = order
                 .User
-                .AsOptional()
-                .FlatMap(u => u.GetCustomerType())
+                .GetCustomerType()
                 .OrElse(CustomerType.Person);
-            return this.Calculate(order, customerType);
+
+            this.Calculate(order, customerType);
         }
 
-        private OrderPricesDto Calculate(OrderSection section, CustomerType customerType)
+        private void Calculate(Order order, CustomerType customerType)
         {
-            OrderPricesDto prices = new OrderPricesDto();
-
-            prices.SubTotal = section
+            order.Subtotal = order
                 .Details
-                .Where(d => d.State != OrderDetailState.Removed)
                 .Select(d => this.GetPriceForItem(d, customerType))
                 .Sum();
-            prices.Iva = this.settings.ProductsIvaPercentage * prices.SubTotal;
-            if (prices.SubTotal <= this.settings.FreeShippingThreshold[customerType])
-            {
-                prices.ShippingCost = this.settings.ShippingCost;
-            }
 
-            return prices;
+            order.Iva = this.settings.ProductsIvaPercentage * order.Subtotal;
         }
 
         private decimal GetPriceForItem(OrderDetail detail, CustomerType customerType)
         {
-            return (detail.Price ?? detail.Product.GetPrice(customerType).Value.Value) * detail.Quantity;
+            return detail.Item.GetPrice(customerType).Value.Value * detail.Quantity;
         }
     }
 }

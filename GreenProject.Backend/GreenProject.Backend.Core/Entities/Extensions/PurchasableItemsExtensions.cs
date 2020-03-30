@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace GreenProject.Backend.Core.Entities.Extensions
 {
-    public static class ProductsExtensions
+    public static class PurchasableItemsExtensions
     {
-        public static IOptional<Price> GetPrice(this Product product, CustomerType type)
+        public static IOptional<Price> GetPrice(this PurchasableItem item, CustomerType type)
         {
-            return product
+            return item
                 .Prices
                 .SingleOptional(p => p.Type == type);
         }

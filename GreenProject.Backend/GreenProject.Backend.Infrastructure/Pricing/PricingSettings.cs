@@ -9,6 +9,5 @@ namespace GreenProject.Backend.Infrastructure.Pricing
     {
         public decimal ProductsIvaPercentage { get; set; }
         public decimal ShippingCost { get; set; }
-        public IDictionary<CustomerType, decimal> FreeShippingThreshold { get; set; }
     }
 }

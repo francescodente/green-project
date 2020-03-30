@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Filters;
@@ -28,26 +29,22 @@ namespace GreenProject.Backend.Core.Logic
                 .Where(p => !p.IsDeleted)
                 .Include(p => p.Prices)
                 .Include(p => p.Image)
-                .SingleOptionalAsync(p => p.ProductId == productId)
+                .SingleOptionalAsync(p => p.ItemId == productId)
                 .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
         }
 
-        public async Task DeleteProduct(int userId, int productId)
+        public async Task DeleteProduct(int productId)
         {
             Product product = await this.RequireProduct(productId);
-
-            ServiceUtils.RequireOwnership(product.SupplierId, userId);
 
             product.IsDeleted = true;
 
             await this.Data.SaveChangesAsync();
         }
 
-        public Task<PagedCollection<ProductOutputDto>> GetProducts(int userId, PaginationFilter pagination, ProductsFilters filters)
+        public Task<PagedCollection<ProductOutputDto>> GetProducts(PaginationFilter pagination, ProductsFilters filters)
         {
-            IQueryable<Product> products = this.Data
-                .Products
-                .Where(p => p.SupplierId == userId);
+            IQueryable<Product> products = this.Data.Products;
 
             products = filters.Categories != null && filters.Categories.Any()
                 ? products.Where(p => filters.Categories.Contains(p.CategoryId))
@@ -56,17 +53,15 @@ namespace GreenProject.Backend.Core.Logic
             return products.ToPagedCollection(pagination, this.Mapper.Map<ProductOutputDto>);
         }
 
-        public async Task<ProductOutputDto> InsertProduct(int userId, ProductInputDto product)
+        public async Task<ProductOutputDto> InsertProduct(ProductInputDto product)
         {
             Product productEntity = new Product
             {
-                SupplierId = userId,
                 Description = product.Description,
                 Name = product.Name,
                 CategoryId = product.CategoryId,
                 IsDeleted = false,
-                IsEnabled = true,
-                IsLegal = true
+                IsEnabled = true
             };
 
             product.Prices
@@ -83,18 +78,15 @@ namespace GreenProject.Backend.Core.Logic
             return new Price
             {
                 Type = (CustomerType)customerType,
-                UnitName = dto.UnitName,
+                UnitName = Enum.Parse<UnitName>(dto.UnitName),
                 UnitMultiplier = dto.UnitMultiplier,
-                Value = dto.Value,
-                Minimum = dto.Minimum
+                Value = dto.Value
             };
         }
 
-        public async Task<ProductOutputDto> UpdateProduct(int userId, int productId, ProductInputDto product)
+        public async Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product)
         {
             Product productEntity = await this.RequireProduct(productId);
-
-            ServiceUtils.RequireOwnership(productEntity.SupplierId, userId);
 
             productEntity.Name = product.Name;
             productEntity.Description = product.Description;

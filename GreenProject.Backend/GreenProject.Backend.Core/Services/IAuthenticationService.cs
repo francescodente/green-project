@@ -8,8 +8,6 @@ namespace GreenProject.Backend.Core.Services
     {
         Task<UserOutputDto> RegisterCustomer(RegistrationDto registration);
 
-        Task<UserOutputDto> RegisterSupplier(SupplierRegistrationDto registration);
-
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 
         Task<AuthenticationResultDto> RenewToken();

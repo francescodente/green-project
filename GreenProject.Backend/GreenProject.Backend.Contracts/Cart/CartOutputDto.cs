@@ -5,7 +5,7 @@ namespace GreenProject.Backend.Contracts.Cart
 {
     public class CartOutputDto
     {
-        public DeliveryInfoOutputDto DeliveryInfo { get; set; }
-        public IEnumerable<CartSectionDto> Sections { get; set; }
+        public IEnumerable<CartItemOutputDto> Items { get; set; }
+        public OrderPricesDto Prices { get; set; }
     }
 }
