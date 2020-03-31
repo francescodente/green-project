@@ -120,7 +120,7 @@
 |   WEEKLY DELIVERY   |
 \*********************/
 
-.weekly-product:not(:last-child) {
+/*.weekly-product:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
@@ -128,4 +128,55 @@
     height: 56px;
     width: 56px;
     border-radius: 4px;
+}*/
+
+.weekly-group td, .weekly-group th {
+    white-space: nowrap;
+    padding: 8px;
+    vertical-align: middle!important;
+}
+
+.weekly-group.products tr:first-child>td,
+.summary-products tr:first-child>td {
+    border-top: none;
+}
+
+.weekly-group .product-image {
+    height: 56px;
+    width: 56px;
+    min-width: 56px;
+    border-radius: 4px;
+}
+
+.weekly-group .actions {
+    padding: 8px 16px;
+    text-align: right;
+}
+
+.weekly-group .add-product {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    border-radius: 0;
+    padding: 8px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.weekly-group .add-product:hover, .weekly-group .add-product:focus {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.weekly-group .add-product-icon {
+    background-color: rgba(0, 0, 0, 0.04);
+    height: 56px;
+    width: 56px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user-weekly-delivery .summary-preferences span {
+    color: var(--col-text-dark);
 }

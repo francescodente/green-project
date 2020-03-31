@@ -30,154 +30,43 @@
                     <!-- PRODUCTS -->
                     <h4 class="mb-4">Prodotti</h4>
 
-                    <div id="cart-products">
-                        <?php
-                        for ($i = 0; $i < 3; $i++) {
-                            ?>
-                            <div class="product card flat mb-4">
-                                <div class="d-flex align-items-center">
-                                    <div style="width: 80px;">
-                                        <a href="#" class="d-block fixed-ratio fr-1-1" data-toggle="modal" data-target="#modal-product">
-                                            <img class="card-bg" src="images/example_product.jpg"/>
-                                        </a>
-                                    </div>
-                                    <div class="flex-grow-1 d-flex align-items-center justify-content-between px-3 py-2">
-                                        <div>
+                    <div id="cart-products" class="weekly-group products table-wrapper table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <?php
+                                for ($i = 0; $i < 3; $i++) {
+                                    ?>
+                                    <tr>
+                                        <td class="nowrap">
+                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                        </td>
+                                        <td>
                                             <p class="product-name m-0">Product name</p>
                                             <p class="text-sec-dark m-0">
                                                 <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
                                             </p>
-                                        </div>
-                                        <div class="d-flex justify-content-between">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
-                                                <i class="mdi dark mdi-plus-minus"></i>
-                                            </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
-                                                <i class="mdi dark mdi-delete"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-                        }
-                        ?>
+                                        </td>
+                                        <td class="nowrap actions">
+                                            <div class="d-flex justify-content-end">
+                                                <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
+                                                    <i class="mdi dark mdi-pencil"></i>
+                                                </button>
+                                                <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
+                                                    <i class="mdi dark mdi-close"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="divider dark mt-5 mb-4"></div>
 
-                    <!-- PAYMENT METHOD -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#cart-payment-method" aria-expanded="false">
-                        <h4 class="m-0">Modalità di pagamento</h4>
-                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#cart-payment-method" aria-expanded="false" title="Nascondi">
-                            <i class="mdi dark mdi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="cart-payment-method" class="collapse">
-                        <div class="pt-3"></div>
-
-                        <input id="pm1" type="radio" class="rich-radio" name="payment-method" value="1" checked/>
-                        <label for="pm1" class="d-flex align-items-center p-2">
-                            <div class="thumb flex-shrink-0">
-                                <i class="mdi dark mdi-cash-multiple"></i>
-                            </div>
-                            <div>
-                                <p class="m-0">Pagamento alla consegna</p>
-                            </div>
-                        </label>
-                        <input id="pm2" type="radio" class="rich-radio" name="payment-method" value="2" disabled/>
-                        <label for="pm2" class="d-flex align-items-center p-2 m-0">
-                            <div class="thumb flex-shrink-0">
-                                <i class="mdi dark mdi-credit-card"></i>
-                            </div>
-                            <div>
-                                <p class="m-0">Ulteriori opzioni per il pagamento sono in arrivo!</p>
-                            </div>
-                        </label>
-
-                    </div>
-
-                    <div class="divider dark my-4"></div>
-
-                    <!-- DELIVERY ADDRESS -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#cart-delivery-address" aria-expanded="true">
-                        <h4 class="m-0">Indirizzo di consegna</h4>
-                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#cart-delivery-address" aria-expanded="true" title="Nascondi">
-                            <i class="mdi dark mdi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="cart-delivery-address" class="collapse show">
-                        <div class="pt-3"></div>
-
-                        <input id="da1" type="radio" class="rich-radio" name="delivery-address" value="1" checked/>
-                        <label for="da1" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
-                            <div class="d-flex align-items-center">
-                                <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                                    <i class="mdi mdi-map-marker"></i>
-                                </div>
-                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                            </div>
-                            <div style="margin-left: 64px;">
-                                <div class="d-flex align-items-center mb-1">
-                                    <i class="mdi small dark mdi-account mr-2"></i>
-                                    <span class="text-sec-dark">Nome cognome</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi small dark mdi-phone mr-2"></i>
-                                    <span class="text-sec-dark">+39 1234567890</span>
-                                </div>
-                            </div>
-                        </label>
-                        <input id="da2" type="radio" class="rich-radio" name="delivery-address" value="2"/>
-                        <label for="da2" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
-                            <div class="d-flex align-items-center">
-                                 <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                                    <i class="mdi mdi-map-marker"></i>
-                                </div>
-                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                            </div>
-                            <div style="margin-left: 64px;">
-                                <div class="d-flex align-items-center mb-1">
-                                    <i class="mdi small dark mdi-account mr-2"></i>
-                                    <span class="text-sec-dark">Nome cognome</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi small dark mdi-phone mr-2"></i>
-                                    <span class="text-sec-dark">+39 1234567890</span>
-                                </div>
-                            </div>
-                        </label>
-                        <div class="d-flex justify-content-end">
-                            <a href="account-user-addresses.php" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0">
-                                <span class="text-sec-dark">Gestisci</span>
-                                <i class="mdi dark mdi-map-marker"></i>
-                            </a>
-                            <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0" data-toggle="modal" data-target="#modal-address-add">
-                                <span class="text-sec-dark">Aggiungi</span>
-                                <i class="mdi dark mdi-plus"></i>
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div class="divider dark my-4"></div>
-
-                    <!-- NOTES -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#cart-notes" aria-expanded="false">
-                        <h4 class="m-0">Note</h4>
-                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#cart-notes" aria-expanded="false" title="Nascondi">
-                            <i class="mdi dark mdi-chevron-down"></i>
-                        </button>
-                    </div>
-                    <div id="cart-notes" class="collapse">
-                        <div class="pt-3"></div>
-
-                        <div class="text-area mb-0">
-                            <textarea id="notes" class="w-100" placeholder=" "></textarea>
-                            <span>Inserisci qui il tuo buono sconto!</span>
-                        </div>
-
-                    </div>
+                    <?php include("order-preferences.php"); ?>
 
                     <div class="divider dark d-lg-none mt-4"></div>
                 </div>
@@ -253,22 +142,9 @@
         </div>
     </div>
 
-    <div id="modal-address-default" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="width: 360px;">
-                <div class="modal-top text-center">
-                    <i class="modal-top-icon mdi mdi-help-circle-outline"></i>
-                </div>
-                <div class="modal-body">
-                    <p class="m-0">Impostare questo indirizzo come predefinito per gli acquisti futuri?</p>
-                </div>
-                <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">No</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Sì</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script>
+        $('.area-collapse[data-target="#order-delivery-address"]').click();
+    </script>
 
 </body>
 </html>

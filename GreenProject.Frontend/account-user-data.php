@@ -28,7 +28,7 @@
                 <div id="account-content-col" class="col-12 col-lg-9">
 
                     <!-- GENERAL -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true">
+                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true">
                         <h4 class="m-0">Generali</h4>
                         <span id="general" class="anchor"></span>
                         <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" title="Nascondi">
@@ -70,7 +70,7 @@
                     <div class="divider dark my-4"></div>
 
                     <!-- PERSONAL -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center pb-1" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="true">
+                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="true">
                         <h4 class="m-0">Dati personali</h4>
                         <span id="personal" class="anchor"></span>
                         <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="true" title="Mostra">
