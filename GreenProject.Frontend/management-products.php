@@ -10,17 +10,17 @@
 
     <div class="content">
 
-        <section id="account" class="parallax-container header d-flex justify-content-center align-items-center">
+        <section id="management" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
-                <h1 class="text-light">ACCOUNT</h1>
+                <h1 class="text-light">GESTIONE</h1>
                 <br>
                 <h3 class="text-light">Prodotti</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
         </section>
-        <section id="account-content" class="container py-4">
-            <div id="business-products" class="row">
-                <div id="account-content-col" class="col-12">
+        <section id="management-content" class="container py-4">
+            <div id="management-products" class="row">
+                <div id="management-content-col" class="col-12">
                     <div class="container">
                         <div class="row">
 

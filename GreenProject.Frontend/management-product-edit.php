@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <?php include("head.php"); ?>
-    <title>Green Project - Gestione prodotto</title>
+    <title>Green Project - Anagrafica prodotto</title>
 </head>
 <body>
 
@@ -10,15 +10,15 @@
 
     <div class="content">
 
-        <section id="account" class="parallax-container header d-flex justify-content-center align-items-center">
+        <section id="management" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
-                <h1 class="text-light">ACCOUNT</h1>
+                <h1 class="text-light">GESTIONE</h1>
                 <br>
-                <h3 class="text-light">Gestione prodotto</h3>
+                <h3 class="text-light">Anagrafica prodotto</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
         </section>
-        <section id="account-content" class="container py-4">
+        <section id="management-content" class="container py-4">
 
             <div class="edit-product row">
                 <div class="col-12">
