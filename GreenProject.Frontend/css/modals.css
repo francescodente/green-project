@@ -55,7 +55,7 @@
 |   CART ADD MODAL   |
 \********************/
 
-#modal-cart-add .text-input span,
+#modal-product-add .text-input span,
 #modal-confirm-available .text-input span {
     position: absolute;
     top: 50%;

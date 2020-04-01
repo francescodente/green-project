@@ -17,7 +17,7 @@
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
                 <p class="product-price m-0 ml-1">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</p>
-                <button class="add-to-cart btn icon ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-cart-add" title="Aggiungi al carrello">
+                <button class="add-to-cart btn icon ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add" title="Aggiungi al carrello">
                     <i class="mdi dark mdi-cart-plus"></i>
                 </button>
             </div>
@@ -26,11 +26,11 @@
 </div>
 
 <!-- ADD TO CART -->
-<div id="modal-cart-add" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="modal-product-add" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 360px;">
             <div class="modal-top text-center">
-                <i class="modal-top-icon mdi mdi-cart-plus"></i>
+                <i class="modal-top-icon mdi mdi-plus-box-outline"></i>
                 <button class="modal-close btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <div class="modal-body">

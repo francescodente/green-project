@@ -50,5 +50,10 @@ $(document).ready(function() {
     });
 
     setTimeout(highlightMenuItem, 100);
+    /*setTimeout(() => {
+        // Open submenu if current menu item is contained in it
+        var submenuId = $(".menu-item.selected").closest(".submenu").attr("id");
+        $(".menu-item[data-target='#" + submenuId + "']").click();
+    }, 200);*/
 
 });

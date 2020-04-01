@@ -30,7 +30,7 @@
                     <!-- PRODUCTS -->
                     <h4 class="mb-4">Prodotti</h4>
 
-                    <div id="cart-products" class="weekly-group products table-wrapper table-responsive">
+                    <div id="cart-products" class="product-group-table products table-wrapper table-responsive">
                         <table class="table">
                             <tbody>
                                 <?php
@@ -48,7 +48,7 @@
                                         </td>
                                         <td class="nowrap actions">
                                             <div class="d-flex justify-content-end">
-                                                <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-cart-add" title="Modifica quantità">
+                                                <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" title="Modifica quantità">
                                                     <i class="mdi dark mdi-pencil"></i>
                                                 </button>
                                                 <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">

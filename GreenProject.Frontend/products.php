@@ -64,7 +64,7 @@
                                         <h5 class="product-name mb-0">Product name</h5>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="text-sec-dark">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</span>
-                                            <button class="add-to-cart btn icon ripple" data-toggle="modal" data-target="#modal-cart-add" title="Aggiungi al carrello">
+                                            <button class="add-to-cart btn icon ripple" data-toggle="modal" data-target="#modal-product-add" title="Aggiungi al carrello">
                                                 <i class="mdi dark mdi-cart-plus"></i>
                                             </button>
                                         </div>
