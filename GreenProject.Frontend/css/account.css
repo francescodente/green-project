@@ -1,3 +1,8 @@
+#account-content .chip>span {
+    font-weight: bold;
+    color: var(--col-text-sec-dark);
+}
+
 /******************\
 |   ACCOUNT TABS   |
 \******************/
@@ -175,3 +180,19 @@
 #modal-product-add .table-wrapper {
     border: none;
 }
+
+/**************\
+|   DELIVERY   |
+\**************/
+
+.modal-client-info .modal-body a {
+    color: var(--col-text-dark);
+}
+
+.modal-client-info .modal-body a:hover {
+    color: var(--col-accent);
+}
+
+/*#account-delivery .dropdown.select>.text-input input {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}*/

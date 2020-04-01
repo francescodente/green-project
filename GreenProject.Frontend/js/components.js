@@ -46,9 +46,15 @@ $(document).ready(function() {
     function updateSelectButton(selectItem) {
         var val;
         if (selectItem.is(".checkbox")) {
-            val = selectItem.parent().find(".checkbox:checked").map(function() {
+            val = selectItem.parent().find(".checkbox.toggle-all:checked").map(function() {
                 return $("[for='" + $(this).attr("id") + "']").text();
             }).get().join(", ");
+            console.log(val);
+            if (val == null || val == "") {
+                val = selectItem.parent().find(".checkbox:checked").map(function() {
+                    return $("[for='" + $(this).attr("id") + "']").text();
+                }).get().join(", ");
+            }
         } else if (selectItem.is(".radio:checked")) {
             val = $("[for='" + selectItem.attr("id") + "']").text();
         }
