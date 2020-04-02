@@ -14,11 +14,11 @@ namespace GreenProject.Backend.ApiLayer.Filters
 
         public virtual void OnAuthorization(AuthorizationFilterContext context)
         {
-            if (context.RouteData.Values.ContainsKey(this.PropertyName))
+            if (context.RouteData.Values.TryGetValue(this.PropertyName, out object value))
             {
-                int userIdParam = int.Parse(context.RouteData.Values[this.PropertyName].ToString());
+                int userIdParam = int.Parse(value.ToString());
                 IUserSession session = context.HttpContext.RequestServices.GetRequiredService<IUserSession>();
-                if (session.UserId != userIdParam)
+                if (!session.IsLoggedIn || session.UserId != userIdParam)
                 {
                     context.Result = new ForbidResult();
                 }

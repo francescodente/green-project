@@ -31,7 +31,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            entity.HasOne(d => d.ZipCodeData)
+            entity.HasOne(d => d.Zone)
                 .WithMany(p => p.Addresses)
                 .HasForeignKey(d => d.ZipCode)
                 .OnDelete(DeleteBehavior.SetNull);

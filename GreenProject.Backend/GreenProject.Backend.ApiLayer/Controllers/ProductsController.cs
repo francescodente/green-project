@@ -2,7 +2,7 @@
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Filters;
-using GreenProject.Backend.Contracts.Products;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -21,14 +21,14 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetProducts([FromQuery] PaginationFilter pagination, [FromQuery] ProductsFilters filters)
+        public async Task<IActionResult> GetProducts([FromQuery] PaginationFilter pagination, [FromQuery] PurchasableFilters filters)
         {
             return Ok(await this.productsService.GetProducts(pagination, filters));
         }
 
         [HttpPost]
         [RequireLogin(RoleType.Administrator)]
-        public async Task<IActionResult> InsertProduct([FromRoute] int userId, [FromBody] ProductInputDto product)
+        public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
         {
             return Ok(await this.productsService.InsertProduct(product));
         }
@@ -36,7 +36,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [HttpPut("{productId}")]
         [RequireLogin(RoleType.Administrator)]
         [OwnerOnly]
-        public async Task<IActionResult> UpdateProduct([FromRoute] int userId, [FromRoute] int productId, [FromBody] ProductInputDto product)
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductInputDto product)
         {
             return Ok(await this.productsService.UpdateProduct(productId, product));
         }

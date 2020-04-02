@@ -28,7 +28,10 @@ namespace GreenProject.Backend.ApiLayer.HostedServices
 
         public void Dispose()
         {
-            this.timer.Dispose();
+            if (this.settings.IsEnabled)
+            {
+                this.timer.Dispose();
+            }
         }
 
         public Task StartAsync(CancellationToken cancellationToken)

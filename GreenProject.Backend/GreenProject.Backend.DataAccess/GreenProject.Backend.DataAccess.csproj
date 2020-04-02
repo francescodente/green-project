@@ -5,6 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200331165657_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331165657_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200331182829_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331182829_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200331183238_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331183238_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200331183426_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331183426_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200331183715_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331183715_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200331184304_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331184304_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200331185636_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331185636_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200402160420_AutoOrderNumber.cs" />
+    <Compile Remove="Migrations\20200402160420_AutoOrderNumber.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Inflector.NetCore" Version="1.2.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">

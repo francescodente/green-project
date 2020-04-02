@@ -3,7 +3,7 @@ using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Categories;
 using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Contracts.Products;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Contracts.Users.Roles;
 using GreenProject.Backend.Core.Entities;
@@ -20,6 +20,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
             MapperConfiguration config = new MapperConfiguration(c =>
             {
                 c.AddProfile<AddressMapping>();
+                c.AddProfile<CartMapping>();
                 c.AddProfile<OrderMapping>();
                 c.AddProfile<UserMapping>();
                 c.AddProfile<ProductMapping>();
@@ -42,15 +43,20 @@ namespace GreenProject.Backend.Infrastructure.Mapping
             {
                 CreateMap<Order, DeliveryInfoOutputDto>();
 
-                CreateMap<Order, CartOutputDto>();
-
-                CreateMap<OrderDetail, CartItemOutputDto>();
-
-
                 CreateMap<Order, CustomerOrderDto>()
                     .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
 
+                CreateMap<Order, OrderPricesDto>();
+
                 CreateMap<OrderDetail, OrderDetailDto>();
+            }
+        }
+
+        private class CartMapping : Profile
+        {
+            public CartMapping()
+            {
+                CreateMap<CartItem, CartItemOutputDto>();
             }
         }
 
@@ -62,7 +68,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
 
                 CreateMap<Product, ProductOutputDto>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path))
-                    .ForMember(dst => dst.Prices, o => o.MapFrom((src, dst, m, context) => CreatePriceDictionary(src, context)));
+                    .ForMember(dst => dst.Price, o => o.MapFrom(src => src.Prices.First(p => p.Type == CustomerType.Person)));
             }
 
             private IDictionary<CustomerTypeDto, PriceDto> CreatePriceDictionary(Product product, IMapper mapper)

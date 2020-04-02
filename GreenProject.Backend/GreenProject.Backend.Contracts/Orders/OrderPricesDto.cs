@@ -2,9 +2,9 @@
 {
     public class OrderPricesDto
     {
-        public decimal SubTotal { get; set; }
+        public decimal Subtotal { get; set; }
         public decimal Iva { get; set; }
         public decimal ShippingCost { get; set; }
-        public decimal Total => SubTotal + Iva + ShippingCost;
+        public decimal Total => Subtotal + Iva + ShippingCost;
     }
 }

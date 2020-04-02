@@ -16,7 +16,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
             entity.HasOne(e => e.Product)
                 .WithMany(d => d.CartItems)
                 .HasForeignKey(e => e.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(e => e.User)
                 .WithMany(d => d.CartItems)

@@ -1,6 +1,6 @@
 ﻿namespace GreenProject.Backend.Core.Entities
 {
-    public class BookedCrateProduct
+    public class OrderDetailSubProduct
     {
         public int OrderId { get; set; }
         public int CrateId { get; set; }

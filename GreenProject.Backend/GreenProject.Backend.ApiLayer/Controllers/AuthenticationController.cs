@@ -2,7 +2,6 @@
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Authentication;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 

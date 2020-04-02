@@ -1,4 +1,4 @@
-﻿namespace GreenProject.Backend.Contracts.Products
+﻿namespace GreenProject.Backend.Contracts.PurchasableItems
 {
     public class PriceDto
     {

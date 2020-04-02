@@ -8,12 +8,14 @@ namespace GreenProject.Backend.Core.Entities
         public Product()
         {
             CartItems = new HashSet<CartItem>();
-            BookedCrateProducts = new HashSet<BookedCrateProduct>();
+            SubProducts = new HashSet<OrderDetailSubProduct>();
             Compatibilities = new HashSet<CrateCompatibility>();
+            Compositions = new HashSet<BookedCrateComposition>();
         }
 
         public virtual ICollection<CartItem> CartItems { get; set; }
-        public virtual ICollection<BookedCrateProduct> BookedCrateProducts { get; set; }
+        public virtual ICollection<OrderDetailSubProduct> SubProducts { get; set; }
         public virtual ICollection<CrateCompatibility> Compatibilities { get; set; }
+        public virtual ICollection<BookedCrateComposition> Compositions { get; set; }
     }
 }

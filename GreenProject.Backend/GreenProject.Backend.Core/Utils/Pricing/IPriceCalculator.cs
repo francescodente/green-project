@@ -8,6 +8,8 @@ namespace GreenProject.Backend.Core.Utils.Pricing
 {
     public interface IPriceCalculator
     {
-        void Calculate(Order order);
+        void UpdateOrderPrices(Order order);
+
+        OrderPricesDto Calculate(IEnumerable<CartItem> items, CustomerType customerType);
     }
 }

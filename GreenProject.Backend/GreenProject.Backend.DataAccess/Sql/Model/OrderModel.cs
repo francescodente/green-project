@@ -5,18 +5,29 @@ using GreenProject.Backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class OrderModel : IEntityTypeConfiguration<Order>
     {
+        private const int YEAR_LENGTH = 4;
+        private const int DAY_LENGTH = 3;
+        private const int ID_LENGTH = 4;
+
+        private static readonly string YEAR_FORMAT = $"FORMAT(YEAR([{nameof(Order.Timestamp)}]), 'D{YEAR_LENGTH}')";
+        private static readonly string DAY_FORMAT = $"FORMAT(DATEPART(dayofyear, [{nameof(Order.Timestamp)}]), 'D{DAY_LENGTH}')";
+        private static readonly string ID_FORMAT = $"FORMAT([{nameof(Order.OrderId)}] % {Math.Pow(10, ID_LENGTH)}, 'D{ID_LENGTH}')";
+
         public void Configure(EntityTypeBuilder<Order> entity)
         {
             entity.HasKey(e => e.OrderId);
 
             entity.Property(e => e.OrderNumber)
                 .IsRequired()
-                .HasMaxLength(15);
+                .HasColumnType($"nchar({YEAR_LENGTH + DAY_LENGTH + ID_LENGTH})")
+                .ValueGeneratedOnAdd()
+                .HasComputedColumnSql($"{YEAR_FORMAT} + {DAY_FORMAT} + {ID_FORMAT}");
 
             entity.Property(e => e.DeliveryDate).HasColumnType("date");
 
@@ -24,7 +35,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.Timestamp).HasColumnType("datetime");
 
-            entity.Property(e => e.OrderState) // TODO: Check if nullable type can be converted
+            entity.Property(e => e.OrderState)
                 .HasConversion(new EnumToStringConverter<OrderState>())
                 .HasMaxLength(20);
 
@@ -36,7 +47,8 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.HasOne(d => d.Address)
                 .WithMany(p => p.Orders)
-                .HasForeignKey(d => d.AddressId);
+                .HasForeignKey(d => d.AddressId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(d => d.User)
                 .WithMany(p => p.Orders)

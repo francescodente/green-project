@@ -28,18 +28,5 @@ namespace GreenProject.Backend.Core.Logic.Utils
             }
             RequireOwnership(userId, session.UserId);
         }
-
-        public static IOptional<CustomerType> GetCustomerType(IUserSession user)
-        {
-            if (user.HasRole(RoleType.CustomerBusiness))
-            {
-                return Optional.Of(CustomerType.Business);
-            }
-            if (user.HasRole(RoleType.Person))
-            {
-                return Optional.Of(CustomerType.Person);
-            }
-            return Optional.Empty<CustomerType>();
-        }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
-using GreenProject.Backend.Contracts.Products;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
@@ -12,6 +12,7 @@ using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
+using Z.EntityFramework.Plus;
 
 namespace GreenProject.Backend.Core.Logic
 {
@@ -27,8 +28,7 @@ namespace GreenProject.Backend.Core.Logic
             return this.Data
                 .Products
                 .Where(p => !p.IsDeleted)
-                .Include(p => p.Prices)
-                .Include(p => p.Image)
+                .Where(p => p.IsEnabled)
                 .SingleOptionalAsync(p => p.ItemId == productId)
                 .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
         }
@@ -42,9 +42,17 @@ namespace GreenProject.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public Task<PagedCollection<ProductOutputDto>> GetProducts(PaginationFilter pagination, ProductsFilters filters)
+        public Task<PagedCollection<ProductOutputDto>> GetProducts(PaginationFilter pagination, PurchasableFilters filters)
         {
-            IQueryable<Product> products = this.Data.Products;
+            CustomerType type = (CustomerType)filters.CustomerType;
+
+            IQueryable<Product> products = this.Data
+                .Products
+                .Where(p => !p.IsDeleted)
+                .Where(p => p.IsEnabled)
+                .IncludeFilter(p => p.Prices.Where(p => p.Type == type))
+                .Where(p => p.Prices.Any())
+                .Include(p => p.Image);
 
             products = filters.Categories != null && filters.Categories.Any()
                 ? products.Where(p => filters.Categories.Contains(p.CategoryId))

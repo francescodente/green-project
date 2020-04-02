@@ -1,5 +1,4 @@
-﻿using GreenProject.Backend.Contracts.Addresses;
-using GreenProject.Backend.Contracts.Cart;
+﻿using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
@@ -11,148 +10,116 @@ using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic
 {
-    public class CartService// : AbstractService, ICartService
+    public class CartService : AbstractService, ICartService
     {
-        //private readonly IPriceCalculator pricing;
+        private readonly IPriceCalculator pricing;
+        private readonly IOrderScheduler scheduler;
 
-        //public CartService(IRequestSession request, IPriceCalculator pricing)
-        //    : base(request)
-        //{
-        //    this.pricing = pricing;
-        //}
+        public CartService(IRequestSession request, IPriceCalculator pricing, IOrderScheduler scheduler)
+            : base(request)
+        {
+            this.pricing = pricing;
+            this.scheduler = scheduler;
+        }
 
-        //private DateTime FirstAvailableDate => this.DateTime.Today.AddDays(1);
+        private Task<User> RequireUserWithCart(int userId)
+        {
+            return this.RequireUserById(userId, q => q.IncludingCart());
+        }
 
-        //public async Task<CustomerOrderDto> ConfirmCart(int userId)
-        //{
-        //    Order cart = await this.FilterCartForUser(userId)
-        //        .IncludingSections()
-        //        .SingleOptionalAsync()
-        //        .Map(oc => oc
-        //            .Filter(c => c.Sections.Any())
-        //            .OrElseThrow(() => new CartEmptyException()));
+        private Task<User> RequireUserWithCartAndCustomerRoles(int userId)
+        {
+            return this.RequireUserById(userId, q => q.IncludingCart().IncludingCustomerRoles());
+        }
 
-        //    if (cart.TimeSlotId == null)
-        //    {
-        //        throw InvalidDeliveryInfoException.MissingTimeSlot();
-        //    }
+        public async Task<CustomerOrderDto> ConfirmCart(int userId, DeliveryInfoInputDto deliveryInfo)
+        {
+            User user = await this.RequireUserById(userId, q => q
+                .IncludingCart()
+                .IncludingCustomerRoles()
+                .Include(u => u.Addresses));
 
-        //    cart.Confirm(this.DateTime.Now);
+            if (!user.CartItems.Any())
+            {
+                throw new CartEmptyException();
+            }
 
-        //    await this.Data.SaveChangesAsync();
+            Address address = user.Addresses
+                .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
+                .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
+            
+            DateTime scheduleDate = await this.scheduler.FindNextAvailableDate(this.Data, address, this.DateTime.Today.AddDays(1));
 
-        //    await Task.WhenAll(cart.Sections.Select(this.Notifications.OrderReceived));
+            CustomerType customerType = user.GetCustomerType().Value;
+            
+            Order order = new Order
+            {
+                Address = address,
+                DeliveryDate = scheduleDate,
+                IsSubscription = false,
+                Notes = deliveryInfo.Notes,
+                OrderState = OrderState.Pending,
+                Timestamp = this.DateTime.Now
+            };
 
-        //    return this.Mapper.Map<CustomerOrderDto>(cart);
-        //}
+            user.CartItems.Select(c => c.CreateOrderDetail(customerType)).ForEach(order.Details.Add);
+            this.pricing.UpdateOrderPrices(order);
+            user.CartItems.Clear();
 
-        //public async Task<DeliveryInfoOutputDto> UpdateCartDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo)
-        //{
-        //    User user = await this.RequireUserById(userId, q => q.Include(u => u.Addresses));
+            user.Orders.Add(order);
 
-        //    Order cart = await this.FilterCartForUser(userId)
-        //        .SingleOptionalAsync()
-        //        .Map(oc => oc.OrElseGet(() => this.CreateCart(user)));
+            await this.Data.SaveChangesAsync();
 
-        //    if (deliveryInfo.AddressId.HasValue)
-        //    {
-        //        if (!user.Addresses.Any(a => a.AddressId == deliveryInfo.AddressId.Value))
-        //        {
-        //            throw new UnauthorizedUserAccessException(userId);
-        //        }
-        //    }
+            return this.Mapper.Map<CustomerOrderDto>(order);
+        }
 
-        //    if (deliveryInfo.TimeSlotId.HasValue && deliveryInfo.DeliveryDate.HasValue)
-        //    {
-        //        await this.EnsureTimeSlotIsValid(deliveryInfo.TimeSlotId.Value, deliveryInfo.DeliveryDate.Value);
-        //    }
+        public async Task<CartOutputDto> GetCartDetails(int userId)
+        {
+            User user = await this.RequireUserWithCartAndCustomerRoles(userId);
+            CustomerType customerType = user.GetCustomerType().Value;
+            return new CartOutputDto
+            {
+                Items = this.Mapper.Map<IEnumerable<CartItemOutputDto>>(user.CartItems),
+                Prices = this.pricing.Calculate(user.CartItems, customerType)
+            };
+        }
 
-        //    cart.TimeSlotId = deliveryInfo.TimeSlotId;
-        //    cart.AddressId = deliveryInfo.AddressId;
-        //    cart.Notes = deliveryInfo.Notes;
-        //    cart.DeliveryDate = deliveryInfo.DeliveryDate;
+        public async Task InsertCartItem(int userId, CartItemInputDto item)
+        {
+            Product product = await this.Data
+                .Products
+                .SingleOptionalAsync(p => p.ItemId == item.ProductId)
+                .Map(op => op.OrElseThrow(() => NotFoundException.ProductWithId(item.ProductId)));
 
-        //    await this.Data.SaveChangesAsync();
-        //    return this.Mapper.Map<DeliveryInfoOutputDto>(cart);
-        //}
+            User user = await this.RequireUserWithCartAndCustomerRoles(userId);
 
-        //public async Task<CartOutputDto> GetCartDetails(int userId)
-        //{
-        //    IOptional<CartOutputDto> cart = await this.FilterCartForUser(userId)
-        //        .IncludingSections()
-        //        .SingleOptionalAsync()
-        //        .Map(oc => oc.Map(this.MapToCartDto));
+            user.AddProductToCart(product, item.Quantity);
 
-        //    if (cart.IsPresent())
-        //    {
-        //        return cart.Value;
-        //    }
-        //    else
-        //    {
-        //        User user = await this.RequireUserById(userId, q => q.Include(u => u.Addresses));
-        //        return new CartOutputDto
-        //        {
-        //            DeliveryInfo = new DeliveryInfoOutputDto
-        //            {
-        //                Address = this.Mapper.Map<AddressOutputDto>(user.DefaultAddress),
-        //                DeliveryDate = this.FirstAvailableDate
-        //            },
-        //            Sections = Enumerable.Empty<CartSectionDto>()
-        //        };
-        //    }
-        //}
+            await this.Data.SaveChangesAsync();
+        }
 
-        //public async Task DeleteCartItem(int userId, int productId)
-        //{
-        //    Order cart = await this.FilterCartForUser(userId)
-        //        .IncludingSections()
-        //        .SingleOptionalAsync()
-        //        .Map(oc => oc.OrElseThrow(() => NotFoundException.CartItem(productId)));
+        public async Task UpdateCartItem(int userId, CartItemInputDto item)
+        {
+            User user = await this.RequireUserWithCart(userId);
 
-        //    cart.RemoveOrderDetail(productId);
+            user.UpdateCartItemQuantity(item.ProductId, item.Quantity);
 
-        //    await this.Data.SaveChangesAsync();
-        //}
+            await this.Data.SaveChangesAsync();
+        }
 
-        //public async Task InsertCartItem(int userId, CartItemInputDto item)
-        //{
-        //    User user = await this.RequireUserById(userId, q => q.Include(u => u.Addresses));
+        public async Task DeleteCartItem(int userId, int productId)
+        {
+            User user = await this.RequireUserWithCart(userId);
 
-        //    Order cart = await this.FilterCartForUser(userId)
-        //        .SingleOptionalAsync()
-        //        .Map(oc => oc.OrElseGet(() => this.CreateCart(user)));
+            user.RemoveProductFromCart(productId);
 
-        //    Product product = await this.Data
-        //        .Products
-        //        .SingleOptionalAsync(p => p.ItemId == item.ProductId)
-        //        .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(item.ProductId)));
-
-        //    cart.AddProduct(product, item.Quantity);
-
-        //    await this.Data.SaveChangesAsync();
-        //}
-
-        //public async Task UpdateCartItem(int userId, CartItemInputDto cartItem)
-        //{
-        //    Order order = await this.FilterCartForUser(userId)
-        //        .IncludingSections()
-        //        .SingleOptionalAsync()
-        //        .Map(oc => oc.OrElseThrow(() => NotFoundException.CartItem(cartItem.ProductId)));
-
-        //    OrderDetail item = order
-        //        .Sections
-        //        .SelectMany(s => s.Details)
-        //        .SingleOptional(d => d.ProductId == cartItem.ProductId)
-        //        .OrElseThrow(() => NotFoundException.CartItem(cartItem.ProductId));
-
-        //    item.Quantity = cartItem.Quantity;
-
-        //    await this.Data.SaveChangesAsync();
-        //}
+            await this.Data.SaveChangesAsync();
+        }
     }
 }

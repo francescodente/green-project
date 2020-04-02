@@ -1,5 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Orders.States;
-using GreenProject.Backend.Contracts.Products;
+using GreenProject.Backend.Contracts.PurchasableItems;
 
 namespace GreenProject.Backend.Contracts.Orders
 {

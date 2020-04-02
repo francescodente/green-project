@@ -8,7 +8,10 @@ namespace GreenProject.Backend.Core.Utils.Session
     public interface IDataSession : IDisposable
     {
         DbSet<Address> Addresses { get; }
-        DbSet<BookedCrateProduct> BookedCrateProducts { get; }
+        DbSet<Availability> Availabilities { get; }
+        DbSet<BookedCrate> BookedCrates { get; }
+        DbSet<OrderDetailSubProduct> BookedCrateProducts { get; }
+        DbSet<BookedCrateComposition> Compositions { get; }
         DbSet<CartItem> CartItems { get; }
         DbSet<Category> Categories { get; }
         DbSet<Crate> Crates { get; }
@@ -23,7 +26,8 @@ namespace GreenProject.Backend.Core.Utils.Session
         DbSet<Product> Products { get; }
         DbSet<PurchasableItem> PurchasableItems { get; }
         DbSet<User> Users { get; }
-        DbSet<ZipCode> ZipCodes { get; }
+        DbSet<Zone> Zones { get; }
+        DbSet<ZoneAvailability> ZoneAvailabilities { get; }
 
         Task SaveChangesAsync();
     }

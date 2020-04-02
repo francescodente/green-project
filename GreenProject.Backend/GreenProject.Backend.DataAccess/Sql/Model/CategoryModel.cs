@@ -23,8 +23,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.HasOne(d => d.ParentCategory)
                 .WithMany(p => p.ChildCategories)
-                .HasForeignKey(d => d.ParentCategoryId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .HasForeignKey(d => d.ParentCategoryId);
         }
     }
 }
