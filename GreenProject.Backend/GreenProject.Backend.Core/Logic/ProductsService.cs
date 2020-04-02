@@ -33,25 +33,15 @@ namespace GreenProject.Backend.Core.Logic
                 .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
         }
 
-        public async Task DeleteProduct(int productId)
-        {
-            Product product = await this.RequireProduct(productId);
-
-            product.IsDeleted = true;
-
-            await this.Data.SaveChangesAsync();
-        }
-
         public Task<PagedCollection<ProductOutputDto>> GetProducts(PaginationFilter pagination, PurchasableFilters filters)
         {
-            CustomerType type = (CustomerType)filters.CustomerType;
-
             IQueryable<Product> products = this.Data
                 .Products
                 .Where(p => !p.IsDeleted)
                 .Where(p => p.IsEnabled)
-                .IncludeFilter(p => p.Prices.Where(p => p.Type == type))
-                .Where(p => p.Prices.Any())
+                .Where(p => p.Prices.Any(price => price.Type == CustomerType.Person))
+                .Include(p => p.Prices)
+                //.IncludeFilter(p => p.Prices.Where(p => p.Type == CustomerType.Person))
                 .Include(p => p.Image);
 
             products = filters.Categories != null && filters.Categories.Any()
@@ -59,6 +49,15 @@ namespace GreenProject.Backend.Core.Logic
                 : products;
 
             return products.ToPagedCollection(pagination, this.Mapper.Map<ProductOutputDto>);
+        }
+
+        public async Task DeleteProduct(int productId)
+        {
+            Product product = await this.RequireProduct(productId);
+
+            product.IsDeleted = true;
+
+            await this.Data.SaveChangesAsync();
         }
 
         public async Task<ProductOutputDto> InsertProduct(ProductInputDto product)
