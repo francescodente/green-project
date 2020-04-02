@@ -197,7 +197,7 @@
     color: #707070;
 }
 
-.address-item span {
+.address-item .address-owner-info span {
     font-size: 14px;
 }
 

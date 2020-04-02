@@ -28,7 +28,7 @@
 
                     <div class="alert alert-accent" role="alert">
                         <p class="summary-preferences text-sec-dark m-0">
-                            La prossima consegna include <span class="crate-count">1</span> cassette e <span class="product-count">2</span> prodotti sfusi, per un totale di <span class="total">0.00€</span>.<br/>Sarà effettuata il giorno <span class="delivery-date">1 Gen 2020</span> all'indirizzo <span class="delivery-address">Viale della Via 123, 47522 Cesena (FC)</span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>In questa pagina è possibile modificare le preferenze dell'ordine.
+                            La prossima consegna include <span class="crate-count">1</span> cassette e <span class="product-count">2</span> prodotti sfusi, per un totale di <span class="total">0.00€</span>.<br/>Sarà effettuata il giorno <span class="delivery-date">1 Gen 2020</span> all'indirizzo <span class="delivery-address">Viale della Via 123, 47522 Cesena (FC)</span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>48 ore</span> prima della consegna prestabilita.
                         </p>
                     </div>
 
@@ -52,10 +52,13 @@
                                         </p>
                                     </th>
                                     <th class="nowrap actions">
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" title="Rimuovi">
-                                                <i class="mdi dark mdi-close"></i>
+                                        <div class="dropdown">
+                                            <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="mdi dark mdi-dots-vertical"></i>
                                             </button>
+                                            <div class="dropdown-menu">
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-remove">Elimina</a>
+                                            </div>
                                         </div>
                                     </th>
                                 </tr>
