@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer bg-primary-dark">
     <div class="container my-4">
         <div class="row">
 
@@ -16,7 +16,7 @@
 
             <!-- Copyright -->
             <div class="col-12 col-md-9 d-flex justify-content-center justify-content-md-start align-items-center order-2 order-md-1">
-                <p class="m-0">&copy; Copyright <?php echo date("Y"); ?> Az. Agricola Green Project</p>
+                <p class="text-sec-dark m-0">&copy; Copyright <?php echo date("Y"); ?> Az. Agricola Green Project</p>
             </div>
 
         </div>
