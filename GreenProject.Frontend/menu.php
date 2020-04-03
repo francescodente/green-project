@@ -77,7 +77,7 @@ $page = basename($_SERVER['PHP_SELF']);
                     <i class="mdi dark mdi-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu">
-                    <a href="faq.php" class="dropdown-item menu-item">
+                    <a href="help.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-help-circle"></i><span class="text-dark">Aiuto</span>
                     </a>
                     <a href="privacy-terms.php" class="dropdown-item menu-item">
@@ -167,7 +167,7 @@ $page = basename($_SERVER['PHP_SELF']);
 
         <div class="divider dark"></div>
 
-        <a href="faq.php" class="menu-item ripple">
+        <a href="help.php" class="menu-item ripple">
             <i class="mdi mdi-help-circle"></i>
             <span>Aiuto</span>
         </a>
