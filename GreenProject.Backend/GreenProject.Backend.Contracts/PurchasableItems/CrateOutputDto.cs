@@ -11,6 +11,6 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
         public string Description { get; set; }
         public decimal Price { get; set; }
         public int Capacity { get; set; }
-        public IEnumerable<AvailableProductOutputDto> AvailableProducts { get; set; }
+        public IEnumerable<CompatibleProductOutputDto> CompatibleProducts { get; set; }
     }
 }

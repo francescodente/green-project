@@ -38,6 +38,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 .AddScoped<ICartService, CartService>()
                 .AddScoped<ICategoriesService, CategoriesService>()
                 .AddScoped<IProductsService, ProductsService>()
+                .AddScoped<ICratesService, CratesService>()
                 .AddScoped<IUsersService, UsersService>()
                 .AddScoped<IRolesService, RolesService>()
                 .AddScoped<ISupportService, SupportService>()

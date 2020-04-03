@@ -67,14 +67,14 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                 CreateMap<Price, PriceDto>();
 
                 CreateMap<Product, ProductOutputDto>()
+                    .ForMember(dst => dst.ProductId, o => o.MapFrom(src => src.ItemId))
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path))
                     .ForMember(dst => dst.Price, o => o.MapFrom(src => src.Prices.First(p => p.Type == CustomerType.Person)));
-            }
 
-            private IDictionary<CustomerTypeDto, PriceDto> CreatePriceDictionary(Product product, IMapper mapper)
-            {
-                return product.Prices
-                    .ToDictionary(p => (CustomerTypeDto)p.Type, mapper.Map<PriceDto>);
+                CreateMap<Crate, CrateOutputDto>()
+                    .ForMember(dst => dst.CrateId, o => o.MapFrom(src => src.ItemId))
+                    .ForMember(dst => dst.Price, o => o.MapFrom(src => src.Prices.First(p => p.Type == CustomerType.Person).Value))
+                    .ForMember(dst => dst.CompatibleProducts, o => o.MapFrom(src => src.Compatibilities));
             }
         }
 

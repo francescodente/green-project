@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GreenProject.Backend.Contracts.PurchasableItems
 {
-    public class AvailableProductOutputDto
+    public class CompatibleProductOutputDto
     {
         public ProductOutputDto Product { get; set; }
         public int Maximum { get; set; }

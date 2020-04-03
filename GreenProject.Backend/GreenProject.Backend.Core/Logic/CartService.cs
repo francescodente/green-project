@@ -95,7 +95,7 @@ namespace GreenProject.Backend.Core.Logic
             Product product = await this.Data
                 .Products
                 .SingleOptionalAsync(p => p.ItemId == item.ProductId)
-                .Map(op => op.OrElseThrow(() => NotFoundException.ProductWithId(item.ProductId)));
+                .Map(op => op.OrElseThrow(() => NotFoundException.PurchasableItemWithId(item.ProductId)));
 
             User user = await this.RequireUserWithCartAndCustomerRoles(userId);
 

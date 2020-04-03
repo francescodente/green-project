@@ -3,7 +3,7 @@
     public class PriceDto
     {
         public decimal Value { get; set; }
-        public string UnitName { get; set; }
+        public UnitNameDto UnitName { get; set; }
         public decimal UnitMultiplier { get; set; }
     }
 }

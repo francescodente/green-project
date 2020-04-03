@@ -36,6 +36,15 @@ namespace GreenProject.Backend.Core.Logic.Utils
             return queryable.SingleOrDefaultAsync(predicate).Map(t => t.AsOptional());
         }
 
+        public static IQueryable<T> WrapIfPresent<T>(this IQueryable<T> queryable, Func<IQueryable<T>, IQueryable<T>> queryWrapper)
+        {
+            if (queryWrapper != null)
+            {
+                return queryWrapper(queryable);
+            }
+            return queryable;
+        }
+
         public static async Task<PagedCollection<TDto>> ToPagedCollection<TEntity, TDto>(
             this IQueryable<TEntity> repository,
             PaginationFilter pagination,

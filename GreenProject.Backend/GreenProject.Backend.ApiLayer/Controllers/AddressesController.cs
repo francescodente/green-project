@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Addresses;
@@ -15,12 +14,10 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     public class AddressesController : ControllerBase
     {
         private readonly IAddressesService addressesService;
-        private readonly ISchedulingService scheduling;
 
-        public AddressesController(IAddressesService addressesService, ISchedulingService scheduling)
+        public AddressesController(IAddressesService addressesService)
         {
             this.addressesService = addressesService;
-            this.scheduling = scheduling;
         }
 
         [HttpGet]
@@ -51,14 +48,6 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         {
             await this.addressesService.SetDefaultAddress(userId, addressId);
             return NoContent();
-        }
-
-        [HttpGet("{addressId}/availability")]
-        [OwnerOnly]
-        public async Task<IActionResult> GetNextAvailableDate([FromRoute] int userId, [FromRoute] int addressId)
-        {
-            DateTime date = await this.scheduling.FindNextAvailableDate(userId, addressId);
-            return Ok(new { Date = date });
         }
     }
 }

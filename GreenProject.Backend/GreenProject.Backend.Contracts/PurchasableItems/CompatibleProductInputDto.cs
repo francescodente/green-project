@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GreenProject.Backend.Contracts.PurchasableItems
 {
-    public class AvailableProductInputDto
+    public class CompatibleProductInputDto
     {
         public int ProductId { get; set; }
         public int Multiplier { get; set; }

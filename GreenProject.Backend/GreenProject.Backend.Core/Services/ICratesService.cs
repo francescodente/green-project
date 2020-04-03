@@ -12,10 +12,10 @@ namespace GreenProject.Backend.Core.Services
     {
         Task<PagedCollection<CrateOutputDto>> GetCrates(PaginationFilter pagination, PurchasableFilters filters);
 
-        Task<CrateOutputDto> InsertCrate(CrateInputDto product);
+        Task<CrateOutputDto> InsertCrate(CrateInputDto crate);
 
-        Task<CrateOutputDto> UpdateCrate(int productId, CrateInputDto product);
+        Task<CrateOutputDto> UpdateCrate(int crateId, CrateInputDto crate);
 
-        Task DeleteCrate(int productId);
+        Task DeleteCrate(int crateId);
     }
 }
