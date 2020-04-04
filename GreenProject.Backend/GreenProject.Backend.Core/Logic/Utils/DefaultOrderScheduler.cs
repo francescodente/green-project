@@ -1,4 +1,5 @@
 ﻿using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
 {
     public class DefaultOrderScheduler : IOrderScheduler
     {
-        public async Task<DateTime> FindNextAvailableDate(IDataSession data, Address address, DateTime startingDate)
+        public async Task<DateTime> FindNextAvailableDateForAddress(IDataSession data, Address address, DateTime startingDate)
         {
             IDictionary<DateTime, int> orderCountsByDate = await data
                 .Orders
@@ -33,6 +34,19 @@ namespace GreenProject.Backend.Core.Logic.Utils
                 .Where(d => availabilities.ContainsKey(d.DayOfWeek))
                 .Where(d => availabilities[d.DayOfWeek] - orderCountsByDate.GetValueAsOptional(d).OrElse(0) > 0)
                 .First();
+        }
+
+        public async Task<DateTime> FindNextAvailableDateForAddressId(IDataSession data, int addressId, DateTime startingDate)
+        {
+            Address address = await data
+                .Addresses
+                .Include(a => a.Zone)
+                    .ThenInclude(z => z.Availabilities)
+                        .ThenInclude(a => a.Availability)
+                .SingleOptionalAsync(a => a.AddressId == addressId)
+                .Map(a => a.OrElseThrow(() => NotFoundException.AddressWithId(addressId)));
+
+            return await this.FindNextAvailableDateForAddress(data, address, startingDate);
         }
     }
 }

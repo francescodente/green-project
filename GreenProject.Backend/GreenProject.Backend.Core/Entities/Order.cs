@@ -26,5 +26,10 @@ namespace GreenProject.Backend.Core.Entities
         public virtual Address Address { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<OrderDetail> Details { get; set; }
+
+        internal void ChangeState(object newState)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,39 +1,35 @@
 ﻿using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Shared.Utils;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GreenProject.Backend.Core.Entities.Extensions
 {
     public static class OrdersExtensions
     {
-        public static void Confirm(this Order order, DateTime timestamp)
+        private static IDictionary<OrderState, ISet<OrderState>> validStateTransitions;
+
+        static OrdersExtensions()
         {
-            CustomerType customerType = order.User
-                .GetCustomerType()
-                .OrElseThrow(() => new UnauthorizedPurchaseException());
-
-            order.MaterializePrices(customerType);
-
-            order.OrderState = OrderState.Pending;
-            order.Timestamp = timestamp;
+            validStateTransitions = new Dictionary<OrderState, ISet<OrderState>>
+            {
+                { OrderState.Pending, new HashSet<OrderState> { OrderState.Shipping, OrderState.Canceled } },
+                { OrderState.Shipping, new HashSet<OrderState> { OrderState.Completed } },
+                { OrderState.Completed, new HashSet<OrderState> { } },
+                { OrderState.Canceled, new HashSet<OrderState> { } }
+            };
         }
 
-        private static void MaterializePrices(this Order order, CustomerType customerType)
+        public static void ChageState(this Order order, OrderState newState)
         {
-            order.Details.ForEach(d => d.AssignCurrentDetailPrice(customerType));
-        }
+            if (!validStateTransitions[order.OrderState].Contains(newState))
+            {
+                throw new InvalidStateChangeException(order.OrderState, newState);
+            }
 
-        private static void AssignCurrentDetailPrice(this OrderDetail detail, CustomerType customerType)
-        {
-            Price price = detail
-                .Item
-                .GetPrice(customerType)
-                .OrElseThrow(() => new ReservedProductException(detail.ItemId, customerType));
+            order.OrderState = newState;
 
-            detail.Price = price.Value;
-            detail.UnitName = price.UnitName;
-            detail.UnitMultiplier = price.UnitMultiplier;
         }
     }
 }

@@ -28,6 +28,32 @@ namespace GreenProject.Backend.Infrastructure.Notifications
                 MailTemplates.OrderReceived(order));
         }
 
+        public Task OrderStateChanged(Order order, OrderState oldState)
+        {
+            return order.OrderState switch
+            {
+                OrderState.Shipping  => this.OrderShipped(order),
+                OrderState.Completed => this.OrderCompleted(order),
+                OrderState.Canceled  => this.OrderCanceled(order)
+                _ => Task.CompletedTask
+            };
+        }
+
+        private Task OrderShipped(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Task OrderCompleted(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Task OrderCanceled(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
         private async Task ApplyTemplateAndSend(
             IMailBuilder mail,
             MailNotificationDescription description,

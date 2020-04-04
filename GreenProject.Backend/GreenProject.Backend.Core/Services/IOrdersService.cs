@@ -12,6 +12,6 @@ namespace GreenProject.Backend.Core.Services
 
         Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination);
 
-        Task ChangeOrderState(int orderId, OrderStateDto orderState);
+        Task ChangeOrderState(int orderId, OrderStateDto newState);
     }
 }

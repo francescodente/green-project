@@ -54,7 +54,7 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
                 .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
             
-            DateTime scheduleDate = await this.scheduler.FindNextAvailableDate(this.Data, address, this.DateTime.Today.AddDays(1));
+            DateTime scheduleDate = await this.scheduler.FindNextAvailableDateForAddressId(this.Data, address, this.DateTime.Today.AddDays(1));
 
             CustomerType customerType = user.GetCustomerType().Value;
             
@@ -75,6 +75,8 @@ namespace GreenProject.Backend.Core.Logic
             user.Orders.Add(order);
 
             await this.Data.SaveChangesAsync();
+
+            await this.Notifications.OrderReceived(order);
 
             return this.Mapper.Map<CustomerOrderDto>(order);
         }

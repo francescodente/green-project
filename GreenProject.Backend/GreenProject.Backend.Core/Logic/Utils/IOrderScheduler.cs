@@ -9,6 +9,8 @@ namespace GreenProject.Backend.Core.Logic.Utils
 {
     public interface IOrderScheduler
     {
-        Task<DateTime> FindNextAvailableDate(IDataSession data, Address address, DateTime startingDate);
+        Task<DateTime> FindNextAvailableDateForAddress(IDataSession data, Address address, DateTime startingDate);
+
+        Task<DateTime> FindNextAvailableDateForAddressId(IDataSession data, int addressId, DateTime startingDate);
     }
 }

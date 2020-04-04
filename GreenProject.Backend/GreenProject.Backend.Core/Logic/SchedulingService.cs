@@ -34,7 +34,7 @@ namespace GreenProject.Backend.Core.Logic
 
             ServiceUtils.RequireOwnership(address.UserId, userId);
 
-            return await this.scheduler.FindNextAvailableDate(this.Data, address, this.DateTime.Today.AddDays(1));
+            return await this.scheduler.FindNextAvailableDateForAddress(this.Data, address, this.DateTime.Today.AddDays(1));
         }
     }
 }
