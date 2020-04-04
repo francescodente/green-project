@@ -34,7 +34,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications
             {
                 OrderState.Shipping  => this.OrderShipped(order),
                 OrderState.Completed => this.OrderCompleted(order),
-                OrderState.Canceled  => this.OrderCanceled(order)
+                OrderState.Canceled  => this.OrderCanceled(order),
                 _ => Task.CompletedTask
             };
         }
