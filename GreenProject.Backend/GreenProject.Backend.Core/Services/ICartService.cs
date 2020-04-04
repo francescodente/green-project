@@ -15,6 +15,6 @@ namespace GreenProject.Backend.Core.Services
 
         Task DeleteCartItem(int userId, int productId);
 
-        Task<CustomerOrderDto> ConfirmCart(int userId, DeliveryInfoInputDto deliveryInfo);
+        Task<OrderDto> ConfirmCart(int userId, DeliveryInfoInputDto deliveryInfo);
     }
 }

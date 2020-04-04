@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Filters;
-using GreenProject.Backend.Contracts.Orders.States;
+using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
 using Microsoft.AspNetCore.Http;

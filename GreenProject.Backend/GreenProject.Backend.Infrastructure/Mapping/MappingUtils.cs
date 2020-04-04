@@ -33,7 +33,9 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public AddressMapping()
             {
-                CreateMap<Address, AddressOutputDto>();
+                CreateMap<Address, AddressOutputDto>()
+                    .ForMember(dst => dst.Province, o => o.MapFrom(src => src.Zone.Province))
+                    .ForMember(dst => dst.City, o => o.MapFrom(src => src.Zone.City));
             }
         }
 
@@ -43,8 +45,9 @@ namespace GreenProject.Backend.Infrastructure.Mapping
             {
                 CreateMap<Order, DeliveryInfoOutputDto>();
 
-                CreateMap<Order, CustomerOrderDto>()
-                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+                CreateMap<Order, OrderDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src))
+                    .ForMember(dst => dst.Prices, o => o.MapFrom(src => src));
 
                 CreateMap<Order, OrderPricesDto>();
 

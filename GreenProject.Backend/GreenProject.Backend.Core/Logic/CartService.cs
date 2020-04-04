@@ -38,7 +38,7 @@ namespace GreenProject.Backend.Core.Logic
             return this.RequireUserById(userId, q => q.IncludingCart().IncludingCustomerRoles());
         }
 
-        public async Task<CustomerOrderDto> ConfirmCart(int userId, DeliveryInfoInputDto deliveryInfo)
+        public async Task<OrderDto> ConfirmCart(int userId, DeliveryInfoInputDto deliveryInfo)
         {
             User user = await this.RequireUserById(userId, q => q
                 .IncludingCart()
@@ -78,7 +78,7 @@ namespace GreenProject.Backend.Core.Logic
 
             await this.Notifications.OrderReceived(order);
 
-            return this.Mapper.Map<CustomerOrderDto>(order);
+            return this.Mapper.Map<OrderDto>(order);
         }
 
         public async Task<CartOutputDto> GetCartDetails(int userId)

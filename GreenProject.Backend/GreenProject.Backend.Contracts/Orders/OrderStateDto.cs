@@ -1,4 +1,4 @@
-﻿namespace GreenProject.Backend.Contracts.Orders.States
+﻿namespace GreenProject.Backend.Contracts.Orders
 {
     public enum OrderStateDto
     {

@@ -11,12 +11,17 @@ namespace GreenProject.Backend.Core.Logic.Utils
             return orders
                 .Include(o => o.Details)
                     .ThenInclude(d => d.Item)
-                        .ThenInclude(p => p.Prices);
+                        .ThenInclude(p => p.Prices)
+                .Include(o => o.Details)
+                    .ThenInclude(d => d.Item)
+                        .ThenInclude(s => s.Image);
         }
 
         public static IQueryable<Order> IncludingDeliveryInfo(this IQueryable<Order> orders)
         {
-            return orders.Include(o => o.Address);
+            return orders
+                .Include(o => o.Address)
+                    .ThenInclude(a => a.Zone);
         }
     }
 }
