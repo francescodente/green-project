@@ -30,28 +30,18 @@ namespace GreenProject.Backend.Infrastructure.Notifications
 
         public Task OrderStateChanged(Order order, OrderState oldState)
         {
-            return order.OrderState switch
+            MailNotificationDescription description = order.OrderState switch
             {
-                OrderState.Shipping  => this.OrderShipped(order),
-                OrderState.Completed => this.OrderCompleted(order),
-                OrderState.Canceled  => this.OrderCanceled(order),
-                _ => Task.CompletedTask
+                OrderState.Shipping  => this.settings.OrderShipped,
+                OrderState.Completed => this.settings.OrderCompleted,
+                OrderState.Canceled  => this.settings.OrderCanceled,
+                _ => throw new ArgumentException(nameof(oldState))
             };
-        }
 
-        private Task OrderShipped(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Task OrderCompleted(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Task OrderCanceled(Order order)
-        {
-            throw new NotImplementedException();
+            return this.ApplyTemplateAndSend(
+                this.MailTo(order.User.Email),
+                description,
+                MailTemplates.OrderStateChanged(order));
         }
 
         private async Task ApplyTemplateAndSend(

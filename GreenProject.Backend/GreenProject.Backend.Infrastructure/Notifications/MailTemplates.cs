@@ -8,9 +8,14 @@ namespace GreenProject.Backend.Infrastructure.Notifications
     {
         public static Func<string, string> OrderReceived(Order order)
         {
-            return t => t
-                .Replace("{orderId}", order.OrderId.ToString())
+            return template => template
+                .Replace("{orderId}", order.OrderNumber)
                 .Replace("{customerName}", order.User.GetCustomerName());
+        }
+
+        public static Func<string, string> OrderStateChanged(Order order)
+        {
+            return template => template;
         }
     }
 }
