@@ -9,5 +9,6 @@ namespace GreenProject.Backend.Contracts.Filters
         public bool IncludeCanceled { get; set; }
         public bool IgnoreCompleted { get; set; }
         public bool IgnorePending { get; set; }
+        public DateTime? DeliveryDate { get; set; }
     }
 }

@@ -29,6 +29,37 @@ namespace GreenProject.Backend.Core.Logic
             this.pricing = pricing;
         }
 
+        public Task<PagedCollection<CustomerOrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
+        {
+            IEnumerable<OrderState> states = this.GetRequestedStates(filters);
+            return this.GetOrdersFilteredBy(filters)
+                .Where(o => o.UserId == customerId)
+                .OrderBy(o => o.Timestamp)
+                .ToPagedCollection(pagination, this.Mapper.Map<CustomerOrderDto>);
+        }
+
+        public Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination)
+        {
+            return this.GetOrdersFilteredBy(filters)
+                .OrderBy(o => o.Timestamp)
+                .ToPagedCollection(pagination, this.Mapper.Map<SupplierOrderDto>);
+        }
+
+        private IQueryable<Order> GetOrdersFilteredBy(OrderFilters filters)
+        {
+            IEnumerable<OrderState> states = this.GetRequestedStates(filters);
+
+            IQueryable<Order> query = this.Data
+                .Orders
+                .Where(o => states.Contains(o.OrderState))
+                .IncludingDeliveryInfo();
+
+            return filters.DeliveryDate
+                .AsOptional()
+                .Map(d => query.Where(o => o.DeliveryDate == d))
+                .OrElse(query);
+        }
+
         private IEnumerable<OrderState> GetRequestedStates(OrderFilters filters)
         {
             if (filters.IncludeCanceled)
@@ -42,24 +73,8 @@ namespace GreenProject.Backend.Core.Logic
             if (!filters.IgnorePending)
             {
                 yield return OrderState.Pending;
+                yield return OrderState.Shipping;
             }
-        }
-
-        public Task<PagedCollection<CustomerOrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
-        {
-            IEnumerable<OrderState> states = this.GetRequestedStates(filters);
-            return this.Data
-                .Orders
-                .IncludingDeliveryInfo()
-                .Where(o => states.Contains(o.OrderState))
-                .Where(o => o.UserId == customerId)
-                .OrderBy(o => o.Timestamp)
-                .ToPagedCollection(pagination, this.Mapper.Map<CustomerOrderDto>);
-        }
-
-        public Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task ChangeOrderState(int orderId, OrderStateDto newState)
