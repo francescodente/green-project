@@ -8,12 +8,13 @@ namespace GreenProject.Backend.Core.Entities
     {
         public Crate()
         {
-            this.Compatibilities = new HashSet<CrateCompatibility>();
+            Compatibilities = new HashSet<CrateCompatibility>();
+            BookedCrates = new HashSet<BookedCrate>();
         }
 
-        public decimal Price { get; set; }
         public int Capacity { get; set; }
 
         public virtual ICollection<CrateCompatibility> Compatibilities { get; set; }
+        public virtual ICollection<BookedCrate> BookedCrates { get; set; }
     }
 }

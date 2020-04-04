@@ -1,5 +1,6 @@
 ﻿using GreenProject.Backend.ApiLayer.Utils;
 using GreenProject.Backend.Core.Logic;
+using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Core.Utils.Time;
@@ -29,17 +30,21 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 
             services.AddScoped<IRequestSession, RequestSession>();
 
+            services.AddScoped<IOrderScheduler, DefaultOrderScheduler>();
+
             services
                 .AddScoped<IAddressesService, AddressesService>()
                 .AddScoped<IAuthenticationService, AuthenticationService>()
-                //.AddScoped<ICartService, CartService>()
+                .AddScoped<ICartService, CartService>()
                 .AddScoped<ICategoriesService, CategoriesService>()
                 .AddScoped<IProductsService, ProductsService>()
+                .AddScoped<ICratesService, CratesService>()
                 .AddScoped<IUsersService, UsersService>()
                 .AddScoped<IRolesService, RolesService>()
                 .AddScoped<ISupportService, SupportService>()
-                .AddScoped<IImagesService, ImagesService>();
-                //.AddScoped<IOrdersService, OrdersService>();
+                .AddScoped<IImagesService, ImagesService>()
+                .AddScoped<ISchedulingService, SchedulingService>()
+                .AddScoped<IOrdersService, OrdersService>();
         }
     }
 }

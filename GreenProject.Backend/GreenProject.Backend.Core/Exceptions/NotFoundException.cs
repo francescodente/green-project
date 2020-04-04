@@ -33,9 +33,9 @@ namespace GreenProject.Backend.Core.Exceptions
             return ResourceWithId("products in the cart", productId);
         }
 
-        public static NotFoundException ProductWithId(int productId)
+        public static NotFoundException PurchasableItemWithId(int itemId)
         {
-            return ResourceWithId(nameof(Product), productId);
+            return ResourceWithId(nameof(PurchasableItem), itemId);
         }
 
         public static NotFoundException Image()
@@ -61,6 +61,11 @@ namespace GreenProject.Backend.Core.Exceptions
         public static NotFoundException CategoryWithId(int categoryId)
         {
             return ResourceWithId(nameof(Category), categoryId);
+        }
+
+        public static NotFoundException OrderWithId(int orderId)
+        {
+            return ResourceWithId(nameof(Order), orderId);
         }
     }
 }

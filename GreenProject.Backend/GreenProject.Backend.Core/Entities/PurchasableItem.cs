@@ -9,6 +9,7 @@ namespace GreenProject.Backend.Core.Entities
         public PurchasableItem()
         {
             OrderDetails = new HashSet<OrderDetail>();
+            Prices = new HashSet<Price>();
         }
 
         public int ItemId { get; set; }

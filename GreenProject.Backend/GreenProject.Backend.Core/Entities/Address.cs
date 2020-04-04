@@ -19,7 +19,7 @@ namespace GreenProject.Backend.Core.Entities
         public int UserId { get; set; }
 
         public virtual User User { get; set; }
-        public virtual ZipCode ZipCodeData { get; set; }
+        public virtual Zone Zone { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
 }

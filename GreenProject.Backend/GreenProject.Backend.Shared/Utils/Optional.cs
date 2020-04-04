@@ -118,20 +118,22 @@ namespace GreenProject.Backend.Shared.Utils
             }
         }
 
-        public static void IfPresent<T>(this IOptional<T> optional, Action<T> action)
+        public static IOptional<T> IfPresent<T>(this IOptional<T> optional, Action<T> action)
         {
             if (optional.IsPresent())
             {
                 action(optional.Value);
             }
+            return optional;
         }
 
-        public static void IfAbsent<T>(this IOptional<T> optional, Action action)
+        public static IOptional<T> IfAbsent<T>(this IOptional<T> optional, Action action)
         {
             if (optional.IsAbsent())
             {
                 action();
             }
+            return optional;
         }
 
         public static void IfElse<T>(this IOptional<T> optional, Action<T> ifPresent, Action ifAbsent)

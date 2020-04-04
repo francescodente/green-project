@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Shared.Utils;
+﻿using GreenProject.Backend.Core.Exceptions;
+using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,11 @@ namespace GreenProject.Backend.Core.Entities.Extensions
             return Optional.Empty<CustomerType>();
         }
 
+        private static CustomerType RequireCustomerType(this User user)
+        {
+            return user.GetCustomerType().OrElseThrow(() => new UnauthorizedPurchaseException());
+        }
+
         public static void AddAddress(this User user, Address address)
         {
             if (user.Addresses.Count == 0)
@@ -69,6 +75,37 @@ namespace GreenProject.Backend.Core.Entities.Extensions
                 user.DefaultAddressId = null;
             }
             user.Addresses.Remove(address);
+        }
+
+        public static void AddProductToCart(this User user, Product product, int quantity)
+        {
+            CustomerType customerType = user.RequireCustomerType();
+
+            user.CartItems
+                .SingleOptional(i => i.ProductId == product.ItemId)
+                .IfPresent(i => i.Quantity += quantity)
+                .IfAbsent(() => user.CartItems.Add(new CartItem
+                {
+                    Product = product,
+                    Quantity = quantity
+                }));
+        }
+
+        public static void UpdateCartItemQuantity(this User user, int productId, int quantity)
+        {
+            user.CartItems
+                .SingleOptional(i => i.ProductId == productId)
+                .IfPresent(i => i.Quantity = quantity)
+                .OrElseThrow(() => NotFoundException.CartItem(productId));
+        }
+
+        public static void RemoveProductFromCart(this User user, int productId)
+        {
+            CartItem item = user.CartItems
+                .SingleOptional(i => i.ProductId == productId)
+                .OrElseThrow(() => NotFoundException.CartItem(productId));
+
+            user.CartItems.Remove(item);
         }
     }
 }

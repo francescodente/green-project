@@ -7,13 +7,13 @@ using System.Text;
 
 namespace GreenProject.Backend.DataAccess.Sql.Model
 {
-    public class ZipCodeModel : IEntityTypeConfiguration<ZipCode>
+    public class ZoneModel : IEntityTypeConfiguration<Zone>
     {
-        public void Configure(EntityTypeBuilder<ZipCode> entity)
+        public void Configure(EntityTypeBuilder<Zone> entity)
         {
-            entity.HasKey(e => e.Code);
+            entity.HasKey(e => e.ZipCode);
 
-            entity.Property(e => e.Code)
+            entity.Property(e => e.ZipCode)
                 .IsRequired()
                 .HasMaxLength(5);
 

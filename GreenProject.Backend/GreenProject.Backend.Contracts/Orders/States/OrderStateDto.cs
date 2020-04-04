@@ -2,9 +2,9 @@
 {
     public enum OrderStateDto
     {
-        Cart,
         Pending,
         Canceled,
+        Shipping,
         Completed
     }
 }

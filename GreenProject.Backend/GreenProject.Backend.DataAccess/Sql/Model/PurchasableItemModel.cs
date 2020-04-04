@@ -21,12 +21,11 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.HasOne(d => d.Category)
                 .WithMany(p => p.PurchasableItems)
-                .HasForeignKey(d => d.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(d => d.CategoryId);
 
             entity.HasOne(d => d.Image)
                 .WithOne(p => p.PurchasableItem)
-                .HasForeignKey<Product>(d => d.ImageId);
+                .HasForeignKey<PurchasableItem>(d => d.ImageId);
         }
     }
 }

@@ -8,8 +8,11 @@ namespace GreenProject.Backend.ApiLayer.Validation
     {
         public PersonValidator()
         {
-            RuleFor(x => x.BirthDate)
-                .LessThan(_ => DateTime.Today);
+            RuleFor(x => x.FirstName)
+                .NotEmpty();
+
+            RuleFor(x => x.LastName)
+                .NotEmpty();
         }
     }
 }

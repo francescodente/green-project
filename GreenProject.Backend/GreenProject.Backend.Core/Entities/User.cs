@@ -9,6 +9,8 @@ namespace GreenProject.Backend.Core.Entities
         {
             Addresses = new HashSet<Address>();
             Orders = new HashSet<Order>();
+            CartItems = new HashSet<CartItem>();
+            BookedCrates = new HashSet<BookedCrate>();
         }
 
         public int UserId { get; set; }
@@ -20,6 +22,7 @@ namespace GreenProject.Backend.Core.Entities
         public bool IsEnabled { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsAdministrator { get; set; }
+        public bool IsSubscribed { get; set; }
         public bool ShouldChangePassword { get; set; }
         public int? DefaultAddressId { get; set; }
 
@@ -30,5 +33,6 @@ namespace GreenProject.Backend.Core.Entities
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
+        public virtual ICollection<BookedCrate> BookedCrates { get; set; }
     }
 }

@@ -1,0 +1,53 @@
+﻿using GreenProject.Backend.ApiLayer.Filters;
+using GreenProject.Backend.ApiLayer.Routes;
+using GreenProject.Backend.Contracts.Filters;
+using GreenProject.Backend.Contracts.PurchasableItems;
+using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Core.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
+
+namespace GreenProject.Backend.ApiLayer.Controllers
+{
+    [Route(ApiRoutes.BASE_ROUTE + "/crates")]
+    [ApiController]
+    public class CratesController : ControllerBase
+    {
+        private readonly ICratesService cratesService;
+
+        public CratesController(ICratesService cratesService)
+        {
+            this.cratesService = cratesService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetCrates([FromQuery] PaginationFilter pagination, [FromQuery] PurchasableFilters filters)
+        {
+            return Ok(await this.cratesService.GetCrates(pagination, filters));
+        }
+
+        [HttpPost]
+        [RequireLogin(RoleType.Administrator)]
+        public async Task<IActionResult> InsertCrate([FromBody] CrateInputDto crate)
+        {
+            return Ok(await this.cratesService.InsertCrate(crate));
+        }
+
+        [HttpPut("{crateId}")]
+        [RequireLogin(RoleType.Administrator)]
+        [OwnerOnly]
+        public async Task<IActionResult> UpdateCrate([FromRoute] int crateId, [FromBody] CrateInputDto crate)
+        {
+            return Ok(await this.cratesService.UpdateCrate(crateId, crate));
+        }
+
+        [HttpDelete("{crateId}")]
+        [RequireLogin(RoleType.Administrator)]
+        [OwnerOnly]
+        public async Task<IActionResult> DeleteCrate([FromRoute] int crateId)
+        {
+            await this.cratesService.DeleteCrate(crateId);
+            return NoContent();
+        }
+    }
+}

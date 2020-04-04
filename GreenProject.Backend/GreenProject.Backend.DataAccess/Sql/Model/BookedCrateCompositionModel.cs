@@ -1,0 +1,27 @@
+﻿using GreenProject.Backend.Core.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace GreenProject.Backend.DataAccess.Sql.Model
+{
+    public class BookedCrateCompositionModel : IEntityTypeConfiguration<BookedCrateComposition>
+    {
+        public void Configure(EntityTypeBuilder<BookedCrateComposition> entity)
+        {
+            entity.HasKey(e => new { e.BookedCrateId, e.ProductId });
+
+            entity.HasOne(e => e.BookedCrate)
+                .WithMany(d => d.Compositions)
+                .HasForeignKey(e => e.BookedCrateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            entity.HasOne(e => e.Product)
+                .WithMany(d => d.Compositions)
+                .HasForeignKey(e => e.ProductId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
+    }
+}

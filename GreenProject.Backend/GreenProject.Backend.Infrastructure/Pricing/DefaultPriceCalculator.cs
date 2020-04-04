@@ -3,6 +3,7 @@ using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Shared.Utils;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GreenProject.Backend.Infrastructure.Pricing
@@ -16,29 +17,35 @@ namespace GreenProject.Backend.Infrastructure.Pricing
             this.settings = settings;
         }
 
-        public void Calculate(Order order)
+        public OrderPricesDto Calculate(IEnumerable<CartItem> items, CustomerType customerType)
         {
-            CustomerType customerType = order
-                .User
-                .GetCustomerType()
-                .OrElse(CustomerType.Person);
+            OrderPricesDto prices = new OrderPricesDto();
 
-            this.Calculate(order, customerType);
+            prices.Subtotal = items.Select(i => this.GetPriceForCartItem(i, customerType)).Sum();
+            prices.Iva = prices.Subtotal * this.settings.ProductsIvaPercentage;
+            prices.ShippingCost = items.Any() ? this.settings.ShippingCost : 0;
+
+            return prices;
         }
 
-        private void Calculate(Order order, CustomerType customerType)
+        private decimal GetPriceForCartItem(CartItem item, CustomerType customerType)
+        {
+            return item.Product.GetPrice(customerType).Value.Value * item.Quantity;
+        }
+
+        public void UpdateOrderPrices(Order order)
         {
             order.Subtotal = order
                 .Details
-                .Select(d => this.GetPriceForItem(d, customerType))
+                .Select(d => this.GetPriceForItem(d))
                 .Sum();
 
             order.Iva = this.settings.ProductsIvaPercentage * order.Subtotal;
         }
 
-        private decimal GetPriceForItem(OrderDetail detail, CustomerType customerType)
+        private decimal GetPriceForItem(OrderDetail detail)
         {
-            return detail.Item.GetPrice(customerType).Value.Value * detail.Quantity;
+            return detail.Price * detail.Quantity;
         }
     }
 }

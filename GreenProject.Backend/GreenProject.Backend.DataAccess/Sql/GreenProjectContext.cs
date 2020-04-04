@@ -1,9 +1,6 @@
 ﻿using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Utils.Session;
-using GreenProject.Backend.DataAccess.Sql.Model;
-using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.DataAccess.Sql
@@ -20,7 +17,10 @@ namespace GreenProject.Backend.DataAccess.Sql
         }
 
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<BookedCrateProduct> BookedCrateProducts { get; set; }
+        public DbSet<Availability> Availabilities { get; set; }
+        public DbSet<BookedCrate> BookedCrates { get; set; }
+        public DbSet<OrderDetailSubProduct> BookedCrateProducts { get; set; }
+        public DbSet<BookedCrateComposition> Compositions { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Crate> Crates { get; set; }
@@ -35,7 +35,8 @@ namespace GreenProject.Backend.DataAccess.Sql
         public DbSet<Product> Products { get; set; }
         public DbSet<PurchasableItem> PurchasableItems { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ZipCode> ZipCodes { get; set; }
+        public DbSet<Zone> Zones { get; set; }
+        public DbSet<ZoneAvailability> ZoneAvailabilities { get; set; }
 
         public Task SaveChangesAsync()
         {

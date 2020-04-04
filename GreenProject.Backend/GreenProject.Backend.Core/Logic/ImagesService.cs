@@ -69,7 +69,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Products
                 .Include(p => p.Image)
                 .SingleOptionalAsync(p => p.ItemId == productId)
-                .Map(p => p.OrElseThrow(() => NotFoundException.ProductWithId(productId)));
+                .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(productId)));
 
             return this.CreateImageResource(
                 () => product.Image,

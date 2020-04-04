@@ -1,5 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Categories;
-using GreenProject.Backend.Contracts.Products;
+using GreenProject.Backend.Contracts.PurchasableItems;
 
 namespace GreenProject.Backend.Contracts.Cart
 {

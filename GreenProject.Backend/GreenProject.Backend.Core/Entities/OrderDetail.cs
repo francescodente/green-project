@@ -5,6 +5,11 @@ namespace GreenProject.Backend.Core.Entities
 {
     public class OrderDetail
     {
+        public OrderDetail()
+        {
+            SubProducts = new HashSet<OrderDetailSubProduct>();
+        }
+
         public int OrderId { get; set; }
         public int ItemId { get; set; }
         public int Quantity { get; set; }
@@ -14,6 +19,6 @@ namespace GreenProject.Backend.Core.Entities
 
         public virtual Order Order { get; set; }
         public virtual PurchasableItem Item { get; set; }
-        public virtual ICollection<BookedCrateProduct> Products { get; set; }
+        public virtual ICollection<OrderDetailSubProduct> SubProducts { get; set; }
     }
 }
