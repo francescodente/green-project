@@ -10,7 +10,7 @@ namespace GreenProject.Backend.Core.Utils.Session
         DbSet<Address> Addresses { get; }
         DbSet<Availability> Availabilities { get; }
         DbSet<BookedCrate> BookedCrates { get; }
-        DbSet<OrderDetailSubProduct> BookedCrateProducts { get; }
+        DbSet<OrderDetailSubProduct> OrderDetailSubProducts { get; }
         DbSet<BookedCrateComposition> Compositions { get; }
         DbSet<CartItem> CartItems { get; }
         DbSet<Category> Categories { get; }

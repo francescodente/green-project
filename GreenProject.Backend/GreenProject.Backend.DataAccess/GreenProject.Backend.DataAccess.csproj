@@ -21,6 +21,8 @@
     <Compile Remove="Migrations\20200331185636_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20200402160420_AutoOrderNumber.cs" />
     <Compile Remove="Migrations\20200402160420_AutoOrderNumber.Designer.cs" />
+    <Compile Remove="Migrations\20200404161549_AddOrderDetailId.cs" />
+    <Compile Remove="Migrations\20200404161549_AddOrderDetailId.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

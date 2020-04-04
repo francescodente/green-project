@@ -2,8 +2,7 @@
 {
     public class OrderDetailSubProduct
     {
-        public int OrderId { get; set; }
-        public int CrateId { get; set; }
+        public int OrderDetailId { get; set; }
         public int ProductId { get; set; }
         public int Quantity { get; set; }
 

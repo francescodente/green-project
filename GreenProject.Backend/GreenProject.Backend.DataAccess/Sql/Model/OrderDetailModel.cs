@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GreenProject.Backend.Core.Entities;
+﻿using GreenProject.Backend.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -12,7 +9,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
     {
         public void Configure(EntityTypeBuilder<OrderDetail> entity)
         {
-            entity.HasKey(e => new { e.OrderId, e.ItemId });
+            entity.HasKey(e => e.OrderDetailId);
 
             entity.Property(e => e.Price).HasColumnType("money");
 
