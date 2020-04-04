@@ -115,13 +115,21 @@
 |   PRODUCT CARD   |
 \******************/
 
-.product-card.disabled .disabled-shade {
+.product-disabled .disabled-shade {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.product-disabled .product-name {
+    color: var(--col-text-sec-dark);
+}
+
+.product-disabled .product-price {
+    color: var(--col-text-dis-dark);
 }
 
 /******************\

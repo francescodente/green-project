@@ -21,78 +21,81 @@
         <section id="management-content" class="container py-4">
             <div id="management-products" class="row">
                 <div id="management-content-col" class="col-12">
-                    <div class="container">
-                        <div class="row">
 
-                            <div class="col-12 d-flex justify-content-between align-items-center mb-4">
-                                <a href="management-product-edit.php" class="btn outline ripple ripple-accent">
-                                    <i class="mdi accent mdi-plus"></i>
-                                    <span class="text-accent">Nuovo prodotto</span>
-                                </a>
-                                <p class="text-dis-dark m-0">0 prodotti</p>
-                            </div>
-
-                            <?php
-                            for ($i = 0; $i < 23; $i++) {
-                                ?>
-                                <div class="col-12 col-sm-6 col-md-4 col-xl-3">
-                                    <div class="card product-card mb-4">
-                                        <div class="fixed-ratio fr-4-3">
-                                            <img class="card-bg" src="images/example_product.jpg"/>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="product-name mb-1">Product name</h5>
-                                            <p class="category text-sec-dark mb-2">Category</p>
-                                            <div class="d-flex align-items-center mb-1">
-                                                <i class="mdi dark mdi-account mr-2"></i>
-                                                <p class="m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
-                                            </div>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <i class="mdi dark mdi-store mr-2"></i>
-                                                <p class="m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
-                                            </div>
-
-                                            <a href="management-product-edit.php" class="btn accent ripple w-100 mb-2">Modifica</a>
-                                            <div class="d-flex">
-                                                <button class="btn outline ripple flex-grow-1 mr-2" style="width: 10px;" data-toggle="modal" data-target="#modal-product-disable">Disabilita</button>
-                                                <button class="btn outline ripple flex-grow-1" style="width: 10px;" data-toggle="modal" data-target="#modal-product-delete">Elimina</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
-                            }
-                            ?>
-
-                            <div class="col-12 col-sm-6 col-md-4 col-xl-3">
-                                <div class="card product-card disabled mb-4">
-                                    <div class="fixed-ratio fr-4-3">
-                                        <img class="card-bg" src="images/example_product.jpg"/>
-                                        <div class="disabled-shade"></div>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="product-name text-sec-dark mb-1">Product name</h5>
-                                        <p class="category text-dis-dark mb-2">Category</p>
-                                        <div class="d-flex align-items-center mb-1">
-                                            <i class="mdi text-dis-dark mdi-account mr-2"></i>
-                                            <p class="text-sec-dark m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
-                                        </div>
-                                        <div class="d-flex align-items-center mb-3">
-                                            <i class="mdi text-dis-dark mdi-store mr-2"></i>
-                                            <p class="text-sec-dark m-0"><span><span class="product-price">00,00</span> €/<span class="product-unit">Kg</span></span></p>
-                                        </div>
-
-                                        <a href="management-product-edit.php" class="btn outline ripple w-100 mb-2">Modifica</a>
-                                        <div class="d-flex">
-                                            <button class="btn accent ripple flex-grow-1 mr-2" style="width: 10px;" data-toggle="toast" data-target="#toast-product-enabled">Abilita</button>
-                                            <button class="btn outline ripple flex-grow-1" style="width: 10px;" data-toggle="modal" data-target="#modal-product-delete-disabled">Elimina</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <a href="management-product-edit.php" class="btn outline ripple ripple-accent">
+                            <i class="mdi accent mdi-plus"></i>
+                            <span class="text-accent">Nuovo prodotto</span>
+                        </a>
+                        <p class="text-dis-dark m-0">0 prodotti</p>
                     </div>
+
+                    <div class="product-group-table products table-wrapper table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <?php
+                                for ($i = 0; $i < 23; $i++) {
+                                     ?>
+                                    <tr>
+                                        <td class="nowrap">
+                                            <div class="position-relative">
+                                                <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                                <div class="disabled-shade"></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="product-name m-0">Product name</p>
+                                            <p class="text-sec-dark m-0">
+                                                <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                            </p>
+                                        </td>
+                                        <td class="nowrap actions">
+                                            <div class="dropdown">
+                                                <button class="btn icon ripple" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="mdi dark mdi-dots-vertical"></i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a href="management-product-edit.php" class="dropdown-item">Modifica</a>
+                                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-disable">Disabilita</a>
+                                                    <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-delete">Elimina</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                                ?>
+
+                                <tr class="product-disabled">
+                                    <td class="nowrap">
+                                        <div class="position-relative">
+                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                            <div class="disabled-shade"></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="product-name m-0">Product name</p>
+                                        <p class="product-price text-sec-dark m-0">
+                                            <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-price-value">0,00</span><span class="currency">€</span>
+                                        </p>
+                                    </td>
+                                    <td class="nowrap actions">
+                                        <div class="dropdown">
+                                            <button class="btn icon ripple" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
+                                                <i class="mdi dark mdi-dots-vertical"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="management-product-edit.php" class="dropdown-item">Modifica</a>
+                                                <a href="#" class="dropdown-item" data-toggle="toast" data-target="#toast-product-enabled">Abilita</a>
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-delete">Elimina</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </section>
