@@ -213,9 +213,9 @@
 
                 <h6>Title</h6>
                 <input id="r1" type="radio" class="radio" name="radio-example" value="1" checked/>
-                <label for="r1">First option</label><br>
+                <label for="r1">First option</label><br/>
                 <input id="r2" type="radio" class="radio" name="radio-example" value="2"/>
-                <label for="r2">Second option</label><br>
+                <label for="r2">Second option</label><br/>
                 <input id="r3" type="radio" class="radio" name="radio-example" value="3" disabled/>
                 <label for="r3">Third option (disabled)</label>
 
@@ -226,11 +226,11 @@
 
                 <h6>Title</h6>
                 <input id="c-toggle" type="checkbox" class="checkbox toggle-all" data-toggle-all="checkbox-example"/>
-                <label for="c-toggle">All</label><br>
+                <label for="c-toggle">All</label><br/>
                 <input id="c1" type="checkbox" class="checkbox" name="checkbox-example" value="1" checked/>
-                <label for="c1">First option</label><br>
+                <label for="c1">First option</label><br/>
                 <input id="c2" type="checkbox" class="checkbox" name="checkbox-example" value="2"/>
-                <label for="c2">Second option</label><br>
+                <label for="c2">Second option</label><br/>
                 <input id="c3" type="checkbox" class="checkbox" name="checkbox-example-dis" value="3" disabled/>
                 <label for="c3">Third option (disabled)</label>
 
@@ -240,7 +240,7 @@
                 <h1 class="mt-5 mb-3">switch</h1>
 
                 <input id="s1" type="checkbox" class="switch" name="switch-example" checked>
-                <label for="s1">Switch <span class="on">On</span><span class="off">Off</span></label><br>
+                <label for="s1">Switch <span class="on">On</span><span class="off">Off</span></label><br/>
                 <input id="s2" type="checkbox" class="switch" name="switch-example" disabled>
                 <label for="s2">Switch <span class="on">On</span><span class="off">Off</span> (disabled)</label>
 
@@ -353,11 +353,11 @@
 
                 <div class="rich-switch-container">
                     <input id="rs1" type="radio" class="rich-switch" name="rich-switch-example" value="1" checked/>
-                    <label for="rs1" class="ripple">First option</label><br>
+                    <label for="rs1" class="ripple">First option</label><br/>
                     <input id="rs2" type="radio" class="rich-switch" name="rich-switch-example" value="2"/>
-                    <label for="rs2" class="ripple">Second option</label><br>
+                    <label for="rs2" class="ripple">Second option</label><br/>
                     <input id="rs3" type="radio" class="rich-switch" name="rich-switch-example" value="3"/>
-                    <label for="rs3" class="ripple">Third option</label><br>
+                    <label for="rs3" class="ripple">Third option</label><br/>
                 </div>
 
                 <!---------------------->
@@ -943,9 +943,9 @@
 
                 <h6 class="text-light">Title</h6>
                 <input id="rd1" type="radio" class="radio light" name="radio-example2" value="1" checked/>
-                <label for="rd1">First option</label><br>
+                <label for="rd1">First option</label><br/>
                 <input id="rd2" type="radio" class="radio light" name="radio-example2" value="2"/>
-                <label for="rd2">Second option</label><br>
+                <label for="rd2">Second option</label><br/>
                 <input id="rd3" type="radio" class="radio light" name="radio-example2" value="3" disabled/>
                 <label for="rd3">Third option (disabled)</label>
 
@@ -956,11 +956,11 @@
 
                 <h6 class="text-light">Title</h6>
                 <input id="cd-toggle" type="checkbox" class="checkbox light toggle-all" data-toggle-all="checkbox-example2"/>
-                <label for="cd-toggle">All</label><br>
+                <label for="cd-toggle">All</label><br/>
                 <input id="cd1" type="checkbox" class="checkbox light" name="checkbox-example2" value="1" checked/>
-                <label for="cd1">First option</label><br>
+                <label for="cd1">First option</label><br/>
                 <input id="cd2" type="checkbox" class="checkbox light" name="checkbox-example2" value="2"/>
-                <label for="cd2">Second option</label><br>
+                <label for="cd2">Second option</label><br/>
                 <input id="cd3" type="checkbox" class="checkbox light" name="checkbox-example2-dis" value="3" disabled/>
                 <label for="cd3">Third option (disabled)</label>
 
@@ -970,7 +970,7 @@
                 <h1 class="text-light mt-5 mb-3">switch</h1>
 
                 <input id="sd1" type="checkbox" class="switch light" name="switch-example2" checked>
-                <label for="sd1">Switch <span class="on">On</span><span class="off">Off</span></label><br>
+                <label for="sd1">Switch <span class="on">On</span><span class="off">Off</span></label><br/>
                 <input id="sd2" type="checkbox" class="switch light" name="switch-example2" disabled>
                 <label for="sd2">Switch <span class="on">On</span><span class="off">Off</span> (disabled)</label>
 
@@ -1083,11 +1083,11 @@
 
                 <div class="rich-switch-container dark">
                     <input id="rsd1" type="radio" class="rich-switch dark" name="rich-switch-example2" value="1" checked/>
-                    <label for="rsd1" class="ripple">First option</label><br>
+                    <label for="rsd1" class="ripple">First option</label><br/>
                     <input id="rsd2" type="radio" class="rich-switch dark" name="rich-switch-example2" value="2"/>
-                    <label for="rsd2" class="ripple">Second option</label><br>
+                    <label for="rsd2" class="ripple">Second option</label><br/>
                     <input id="rsd3" type="radio" class="rich-switch dark" name="rich-switch-example2" value="3"/>
-                    <label for="rsd3" class="ripple">Third option</label><br>
+                    <label for="rsd3" class="ripple">Third option</label><br/>
                 </div>
 
                 <!---------------------->

@@ -13,7 +13,7 @@
         <section id="account" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">ACCOUNT</h1>
-                <br>
+                <br/>
                 <h3 class="text-light">Consegna settimanale</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>

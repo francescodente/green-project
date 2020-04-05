@@ -13,7 +13,7 @@
         <section id="management" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">GESTIONE</h1>
-                <br>
+                <br/>
                 <h3 class="text-light">Prodotti</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
@@ -34,7 +34,7 @@
                         <table class="table">
                             <tbody>
                                 <?php
-                                for ($i = 0; $i < 23; $i++) {
+                                for ($i = 0; $i < 18; $i++) {
                                      ?>
                                     <tr>
                                         <td class="nowrap">
@@ -65,6 +65,34 @@
                                     <?php
                                 }
                                 ?>
+
+                                <tr>
+                                    <td class="nowrap">
+                                        <div class="position-relative">
+                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                            <div class="disabled-shade"></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p class="product-name m-0">Product name</p>
+                                        <p class="text-sec-dark m-0">
+                                            <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
+                                        </p>
+                                    </td>
+                                    <td class="nowrap actions">
+                                        <button class="btn icon ripple" title="Prodotto in rilievo" data-toggle="tooltip"><i class="mdi mdi-star-outline"></i></button>
+                                        <div class="dropdown">
+                                            <button class="product-starred btn icon ripple" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
+                                                <i class="mdi dark mdi-dots-vertical"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a href="management-product-edit.php" class="dropdown-item">Modifica</a>
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-disable">Disabilita</a>
+                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-delete">Elimina</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
 
                                 <tr class="product-disabled">
                                     <td class="nowrap">

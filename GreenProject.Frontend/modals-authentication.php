@@ -31,7 +31,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- KEEP LOGIN -->
                     <input id="keep-login" type="checkbox" class="checkbox" name="keep-login" value="1"/>
-                    <label for="keep-login" class="my-2">Ricordami</label><br>
+                    <label for="keep-login" class="my-2">Ricordami</label><br/>
 
                     <a href="#" class="text-sec-dark" data-toggle="modal" data-target="#modal-pwd-recovery" data-dismiss="modal">Password dimenticata?</a>
                 </div>
@@ -83,11 +83,11 @@
 
                 <!-- PRIVACY CONSENT -->
                 <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1"/>
-                <label for="privacy-consent" class="my-2">Ho letto <a href="privacy-terms.php" target="_blank">privacy e termini</a></label><br>
+                <label for="privacy-consent" class="my-2">Ho letto <a href="privacy-terms.php" target="_blank">privacy e termini</a></label><br/>
 
                 <!-- MARKETING CONSENT -->
                 <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
-                <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br>
+                <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br/>
 
                 <div class="text-center">
                     <button type="submit" class="btn accent ripple mt-3">Registrati</button>
@@ -111,7 +111,7 @@
 
                 <h4 class="text-center my-3">Recupero password</h4>
 
-                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> del tuo account.</p>
+                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br/>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> del tuo account.</p>
 
                 <!-- E-MAIL -->
                 <div class="text-input">

@@ -13,7 +13,7 @@
         <section id="account" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">ACCOUNT</h1>
-                <br>
+                <br/>
                 <h3 class="text-light">I miei dati</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
@@ -61,9 +61,9 @@
 
                         <h6>Consensi</h6>
                         <input id="c1" type="checkbox" class="checkbox" name="cookie-consent" value="1" checked/>
-                        <label for="c1">Consenso all'uso dei cookie</label><br>
+                        <label for="c1">Consenso all'uso dei cookie</label><br/>
                         <input id="c2" type="checkbox" class="checkbox" name="marketing-consent" value="1" checked/>
-                        <label for="c2">Consenso alla ricezione di informazioni di marketing</label><br>
+                        <label for="c2">Consenso alla ricezione di informazioni di marketing</label><br/>
 
                     </div>
 
@@ -100,9 +100,9 @@
 
                         <h6>Sesso</h6>
                         <input id="r1" type="radio" class="radio" name="gender" value="male" disabled checked/>
-                        <label for="r1">Maschio</label><br>
+                        <label for="r1">Maschio</label><br/>
                         <input id="r2" type="radio" class="radio" name="gender" value="female" disabled/>
-                        <label for="r2">Femmina</label><br>
+                        <label for="r2">Femmina</label><br/>
                         <input id="r3" type="radio" class="radio" name="gender" value="other" disabled/>
                         <label for="r3" class="mb-2">Altro</label>
 
@@ -122,7 +122,7 @@
                     <div class="divider dark my-4"></div>
 
                     <p class="text-sec-dark">
-                        I campi contrassegnati da * sono obbligatori.<br>
+                        I campi contrassegnati da * sono obbligatori.<br/>
                         I campi contrassegnati da ** sono necessari per effettuare acquisti.
                     </p>
 

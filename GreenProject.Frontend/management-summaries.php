@@ -13,7 +13,7 @@
         <section id="management" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">GESTIONE</h1>
-                <br>
+                <br/>
                 <h3 class="text-light">File di riepilogo</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>

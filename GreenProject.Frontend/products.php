@@ -26,16 +26,16 @@
                 <div id="filters-col" class="col-12 col-lg-3 d-none">
                     <div class="sticky-top" style="top: 72px;">
                         <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle-all="categories"/>
-                        <label for="c1" class="mt-2">Category</label><br>
+                        <label for="c1" class="mt-2">Category</label><br/>
                         <div class="pl-4">
                             <input id="sc1" type="checkbox" class="checkbox" name="categories" value="sc1" checked/>
-                            <label for="sc1">Subcategory 1</label><br>
+                            <label for="sc1">Subcategory 1</label><br/>
                             <input id="sc2" type="checkbox" class="checkbox" name="categories" value="sc2" checked/>
-                            <label for="sc2">Subcategory 2</label><br>
+                            <label for="sc2">Subcategory 2</label><br/>
                             <input id="sc3" type="checkbox" class="checkbox" name="categories" value="sc3" checked/>
-                            <label for="sc3">Subcategory 3</label><br>
+                            <label for="sc3">Subcategory 3</label><br/>
                             <input id="sc4" type="checkbox" class="checkbox" name="categories" value="sc4" checked/>
-                            <label for="sc4">Subcategory 4</label><br>
+                            <label for="sc4">Subcategory 4</label><br/>
                         </div>
                         <br/>
                         <button class="apply-filter btn accent ripple w-100 mb-4">Applica</button>
