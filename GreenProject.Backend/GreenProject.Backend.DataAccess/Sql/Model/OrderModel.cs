@@ -35,10 +35,6 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.Timestamp).HasColumnType("datetime");
 
-            entity.Property(e => e.OrderState)
-                .HasConversion(new EnumToStringConverter<OrderState>())
-                .HasMaxLength(20);
-
             entity.Property(e => e.Subtotal).HasColumnType("money");
 
             entity.Property(e => e.Iva).HasColumnType("money");

@@ -277,10 +277,8 @@ namespace GreenProject.Backend.DataAccess.Migrations
                         .HasColumnType("nchar(11)")
                         .HasComputedColumnSql("FORMAT(YEAR([Timestamp]), 'D4') + FORMAT(DATEPART(dayofyear, [Timestamp]), 'D3') + FORMAT([OrderId] % 10000, 'D4')");
 
-                    b.Property<string>("OrderState")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                    b.Property<int>("OrderState")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ShippingCost")
                         .HasColumnType("money");
@@ -325,9 +323,8 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.Property<decimal?>("UnitMultiplier")
                         .HasColumnType("decimal(8, 4)");
 
-                    b.Property<string>("UnitName")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                    b.Property<int?>("UnitName")
+                        .HasColumnType("int");
 
                     b.HasKey("OrderDetailId");
 
@@ -387,10 +384,8 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.Property<decimal>("UnitMultiplier")
                         .HasColumnType("decimal(8, 4)");
 
-                    b.Property<string>("UnitName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                    b.Property<int>("UnitName")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Value")
                         .HasColumnType("money");

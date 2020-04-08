@@ -53,6 +53,7 @@ namespace GreenProject.Backend.Core.Logic
         {
             Category category = await this.Data
                 .Categories
+                .Include(c => c.Image)
                 .SingleOptionalAsync(c => c.CategoryId == categoryId)
                 .Map(c => c.OrElseThrow(() => NotFoundException.CategoryWithId(categoryId)));
 

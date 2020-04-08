@@ -11,7 +11,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
         public static IQueryable<T> VisibleToCustomers<T>(this IQueryable<T> query)
             where T : PurchasableItem
         {
-            return query.Where(i => i.IsEnabled).Where(i => !i.IsDeleted);
+            return query.Where(i => i.IsEnabled && !i.IsDeleted);
         }
     }
 }

@@ -49,7 +49,6 @@ namespace GreenProject.Backend.Core.Logic.Utils
             this IQueryable<TEntity> repository,
             PaginationFilter pagination,
             Func<TEntity, TDto> mapper)
-            where TEntity : class
         {
             int count = await repository.CountAsync();
 
@@ -60,6 +59,24 @@ namespace GreenProject.Backend.Core.Logic.Utils
                 .Map(entities => entities.Select(mapper));
 
             return new PagedCollection<TDto>
+            {
+                PageSize = pagination.PageSize,
+                PageNumber = pagination.PageNumber,
+                PageCount = (count + pagination.PageSize - 1) / pagination.PageSize,
+                Results = results
+            };
+        }
+
+        public static async Task<PagedCollection<T>> ToPagedCollection<T>(this IQueryable<T> repository, PaginationFilter pagination)
+        {
+            int count = await repository.CountAsync();
+
+            IEnumerable<T> results = await repository
+                .Skip(pagination.PageNumber * pagination.PageSize)
+                .Take(pagination.PageSize)
+                .ToListAsync();
+
+            return new PagedCollection<T>
             {
                 PageSize = pagination.PageSize,
                 PageNumber = pagination.PageNumber,

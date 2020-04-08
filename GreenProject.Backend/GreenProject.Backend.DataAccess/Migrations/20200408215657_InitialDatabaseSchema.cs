@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreenProject.Backend.DataAccess.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialDatabaseSchema : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -158,11 +158,11 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 name: "Prices",
                 columns: table => new
                 {
-                    Type = table.Column<string>(maxLength: 10, nullable: false),
+                    Type = table.Column<int>(nullable: false),
                     ItemId = table.Column<int>(nullable: false),
                     Value = table.Column<decimal>(type: "money", nullable: false),
                     UnitMultiplier = table.Column<decimal>(type: "decimal(8, 4)", nullable: false),
-                    UnitName = table.Column<string>(maxLength: 10, nullable: false)
+                    UnitName = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -181,11 +181,11 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 {
                     OrderId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderNumber = table.Column<string>(maxLength: 15, nullable: false),
+                    OrderNumber = table.Column<string>(type: "nchar(11)", nullable: false, computedColumnSql: "FORMAT(YEAR([Timestamp]), 'D4') + FORMAT(DATEPART(dayofyear, [Timestamp]), 'D3') + FORMAT([OrderId] % 10000, 'D4')"),
                     Notes = table.Column<string>(maxLength: 1000, nullable: true),
                     DeliveryDate = table.Column<DateTime>(type: "date", nullable: false),
                     Timestamp = table.Column<DateTime>(type: "datetime", nullable: false),
-                    OrderState = table.Column<string>(maxLength: 20, nullable: false),
+                    OrderState = table.Column<int>(nullable: false),
                     Subtotal = table.Column<decimal>(type: "money", nullable: false),
                     Iva = table.Column<decimal>(type: "money", nullable: false),
                     ShippingCost = table.Column<decimal>(type: "money", nullable: false),
@@ -202,16 +202,18 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 name: "OrderDetails",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false),
-                    ItemId = table.Column<int>(nullable: false),
+                    OrderDetailId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<int>(nullable: false),
-                    UnitName = table.Column<string>(maxLength: 10, nullable: true),
+                    UnitName = table.Column<int>(nullable: true),
                     Price = table.Column<decimal>(type: "money", nullable: false),
-                    UnitMultiplier = table.Column<decimal>(type: "decimal(8, 4)", nullable: true)
+                    UnitMultiplier = table.Column<decimal>(type: "decimal(8, 4)", nullable: true),
+                    OrderId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_OrderDetails", x => new { x.OrderId, x.ItemId });
+                    table.PrimaryKey("PK_OrderDetails", x => x.OrderDetailId);
                     table.ForeignKey(
                         name: "FK_OrderDetails_PurchasableItems_ItemId",
                         column: x => x.ItemId,
@@ -227,28 +229,27 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookedCrateProducts",
+                name: "OrderDetailSubProducts",
                 columns: table => new
                 {
-                    OrderId = table.Column<int>(nullable: false),
-                    CrateId = table.Column<int>(nullable: false),
+                    OrderDetailId = table.Column<int>(nullable: false),
                     ProductId = table.Column<int>(nullable: false),
                     Quantity = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookedCrateProducts", x => new { x.OrderId, x.ProductId, x.CrateId });
+                    table.PrimaryKey("PK_OrderDetailSubProducts", x => new { x.OrderDetailId, x.ProductId });
                     table.ForeignKey(
-                        name: "FK_BookedCrateProducts_PurchasableItems_ProductId",
+                        name: "FK_OrderDetailSubProducts_OrderDetails_OrderDetailId",
+                        column: x => x.OrderDetailId,
+                        principalTable: "OrderDetails",
+                        principalColumn: "OrderDetailId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderDetailSubProducts_PurchasableItems_ProductId",
                         column: x => x.ProductId,
                         principalTable: "PurchasableItems",
                         principalColumn: "ItemId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_BookedCrateProducts_OrderDetails_OrderId_CrateId",
-                        columns: x => new { x.OrderId, x.CrateId },
-                        principalTable: "OrderDetails",
-                        principalColumns: new[] { "OrderId", "ItemId" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -452,16 +453,6 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 column: "ZipCode");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookedCrateProducts_ProductId",
-                table: "BookedCrateProducts",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BookedCrateProducts_OrderId_CrateId",
-                table: "BookedCrateProducts",
-                columns: new[] { "OrderId", "CrateId" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_BookedCrates_CrateId",
                 table: "BookedCrates",
                 column: "CrateId");
@@ -508,6 +499,16 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 name: "IX_OrderDetails_ItemId",
                 table: "OrderDetails",
                 column: "ItemId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetails_OrderId",
+                table: "OrderDetails",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderDetailSubProducts_ProductId",
+                table: "OrderDetailSubProducts",
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_AddressId",
@@ -586,9 +587,6 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 table: "Addresses");
 
             migrationBuilder.DropTable(
-                name: "BookedCrateProducts");
-
-            migrationBuilder.DropTable(
                 name: "CartItems");
 
             migrationBuilder.DropTable(
@@ -604,6 +602,9 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 name: "DeliveryMen");
 
             migrationBuilder.DropTable(
+                name: "OrderDetailSubProducts");
+
+            migrationBuilder.DropTable(
                 name: "People");
 
             migrationBuilder.DropTable(
@@ -613,19 +614,19 @@ namespace GreenProject.Backend.DataAccess.Migrations
                 name: "ZoneAvailabilities");
 
             migrationBuilder.DropTable(
-                name: "OrderDetails");
+                name: "BookedCrates");
 
             migrationBuilder.DropTable(
-                name: "BookedCrates");
+                name: "OrderDetails");
 
             migrationBuilder.DropTable(
                 name: "Availabilities");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "PurchasableItems");
 
             migrationBuilder.DropTable(
-                name: "PurchasableItems");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Categories");

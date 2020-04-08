@@ -6,8 +6,6 @@ using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic

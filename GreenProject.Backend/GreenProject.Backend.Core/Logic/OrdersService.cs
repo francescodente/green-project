@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Contracts.Filters;
+﻿using AutoMapper.QueryableExtensions;
+using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Core.Entities;
@@ -34,14 +35,16 @@ namespace GreenProject.Backend.Core.Logic
             return this.GetOrdersFilteredBy(filters)
                 .Where(o => o.UserId == customerId)
                 .OrderBy(o => o.Timestamp)
-                .ToPagedCollection(pagination, this.Mapper.Map<OrderDto>);
+                .ProjectTo<OrderDto>(this.Mapper.ConfigurationProvider)
+                .ToPagedCollection(pagination);
         }
 
         public Task<PagedCollection<OrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination)
         {
             return this.GetOrdersFilteredBy(filters)
                 .OrderBy(o => o.Timestamp)
-                .ToPagedCollection(pagination, this.Mapper.Map<OrderDto>);
+                .ProjectTo<OrderDto>(this.Mapper.ConfigurationProvider)
+                .ToPagedCollection(pagination);
         }
 
         private IQueryable<Order> GetOrdersFilteredBy(OrderFilters filters)
@@ -50,9 +53,7 @@ namespace GreenProject.Backend.Core.Logic
 
             IQueryable<Order> query = this.Data
                 .Orders
-                .Where(o => states.Contains(o.OrderState))
-                .IncludingDetails()
-                .IncludingDeliveryInfo();
+                .Where(o => states.Contains(o.OrderState));
 
             return filters.DeliveryDate
                 .AsOptional()

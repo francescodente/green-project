@@ -33,6 +33,8 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public AddressMapping()
             {
+                CreateMap<User, AddressCollectionDto>();
+
                 CreateMap<Address, AddressOutputDto>()
                     .ForMember(dst => dst.Province, o => o.MapFrom(src => src.Zone.Province))
                     .ForMember(dst => dst.City, o => o.MapFrom(src => src.Zone.City));

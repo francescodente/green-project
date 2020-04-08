@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Contracts.Filters;
+﻿using AutoMapper.QueryableExtensions;
+using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Exceptions;
@@ -34,15 +35,15 @@ namespace GreenProject.Backend.Core.Logic
         protected Task<PagedCollection<TOutput>> GetPaged<TOutput>(PaginationFilter pagination, PurchasableFilters filters)
         {
             IQueryable<T> items = this.GetDefaultQuery()
-                .VisibleToCustomers()
-                .Include(p => p.Prices)
-                .Include(p => p.Image);
+                .VisibleToCustomers();
 
             items = filters.Categories != null && filters.Categories.Any()
                 ? items.Where(p => filters.Categories.Contains(p.CategoryId))
                 : items;
 
-            return items.ToPagedCollection(pagination, this.Mapper.Map<TOutput>);
+            return items
+                .ProjectTo<TOutput>(this.Mapper.ConfigurationProvider)
+                .ToPagedCollection(pagination);
         }
 
         protected async Task<TOutput> Insert<TOutput>(Action<T> initializer)

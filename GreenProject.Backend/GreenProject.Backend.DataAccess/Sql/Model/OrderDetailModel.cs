@@ -17,10 +17,6 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.UnitMultiplier).HasColumnType("decimal(8, 4)");
 
-            entity.Property(e => e.UnitName)
-                .HasConversion(new EnumToStringConverter<UnitName>())
-                .HasMaxLength(10);
-
             entity.HasOne(d => d.Order)
                 .WithMany(p => p.Details)
                 .HasForeignKey(d => d.OrderId)

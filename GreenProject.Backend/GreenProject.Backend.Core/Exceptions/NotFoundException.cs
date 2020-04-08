@@ -43,6 +43,11 @@ namespace GreenProject.Backend.Core.Exceptions
             return WithMessage($"Unable to find the requested image");
         }
 
+        public static NotFoundException ZoneWithZipCode(string zipCode)
+        {
+            return ResourceWithProperty(nameof(Zone), nameof(Zone.ZipCode), zipCode);
+        }
+
         public static NotFoundException UserWithId(int userId)
         {
             return ResourceWithId(nameof(User), userId);
