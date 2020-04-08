@@ -127,13 +127,10 @@
 
                     <div class="divider dark my-4"></div>
 
-                    <h4 class="mb-3">Prezzo</h4>
-
-                    <!-- Price for private clients -->
-                    <div class="d-flex align-items-center mb-2">
-                        <h6 class="m-0">Clienti privati</h6>
-                        <button class="btn icon ripple ml-2" style="height: 28px; width: 28px;" data-toggle="popover" data-placement="right"
-                        title="Aiuto" data-html="true" data-content="Il <b>prezzo</b> va specificato in relazione all'unità di misura selezionata. Se questo campo non viene valorizzato, il prodotto non sarà disponibile per i clienti privati.<br>Il <b>moltiplicatore</b> limita l'acquisto a multipli della quantità inserita. Ad esempio, per un prodotto acquistabile a pezzi un moltiplicatore di valore 10 consente ai clienti di acquistare 10 o 20 pezzi, ma non 15.">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="m-0">Prezzo</h4>
+                        <button class="btn icon ripple" style="height: 28px; width: 28px;" data-toggle="popover" data-placement="right"
+                        title="Aiuto" data-html="true" data-content="Il prezzo va specificato in relazione all'unità di misura selezionata e al moltiplicatore inserito.<br/>Esempio:<br/>- Unità di misura: Kg<br/>- Moltiplicatore: 1.5<br/>- Prezzo: 1€<br/>Significa che 1.5Kg di prodotto costano 1€ e che il prodotto è acquistabile in multipli di 1.5Kg.">
                             <i class="mdi dark mdi-help-circle"></i>
                         </button>
                     </div>
@@ -147,7 +144,7 @@
                                         <label for="client-um-select-toggle">UM</label>
                                     </div>
                                     <div class="dropdown-menu" aria-labelledby="client-um-select-toggle" style="width: 100%;">
-                                        <input id="umc1" type="radio" class="radio" name="client-um" value="KG" checked/>
+                                        <input id="umc1" type="radio" class="radio" name="client-um" value="KG"/>
                                         <label for="umc1">Chilogrammi [KG]</label>
                                         <input id="umc2" type="radio" class="radio" name="client-um" value="g"/>
                                         <label for="umc2">Grammi [g]</label>
@@ -158,60 +155,16 @@
                             </div>
                             <div class="col-4">
                                 <div class="text-input my-0 ml-3">
-                                    <input id="client-price" type="number" data-type="currency" name="client-price" min="0" placeholder=" ">
-                                    <label for="client-price">Prezzo</label>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="text-input my-0 ml-3">
                                     <input id="min-client" type="number" name="min-client" min="1" placeholder=" ">
                                     <label for="min-client">Moltiplicatore</label>
                                     <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
                                     <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Price for business clients -->
-                    <div class="d-flex align-items-center mt-3 mb-2">
-                        <h6 class="m-0">Clienti con P. IVA</h6>
-                        <button class="btn icon ripple ml-2" style="height: 28px; width: 28px;" data-toggle="popover" data-placement="right"
-                        title="Aiuto" data-html="true" data-content="Il <b>prezzo</b> va specificato in relazione all'unità di misura selezionata. Se questo campo non viene valorizzato, il prodotto non sarà disponibile per i clienti con P. IVA.<br>Il <b>moltiplicatore</b> limita l'acquisto a multipli della quantità inserita. Ad esempio, per un prodotto acquistabile a pezzi un moltiplicatore di valore 10 consente ai clienti di acquistare 10 o 20 pezzi, ma non 15.">
-                            <i class="mdi dark mdi-help-circle"></i>
-                        </button>
-                    </div>
-                    <div class="container p-0">
-                        <div class="row no-gutters">
-                            <div class="col-4">
-                                <div class="dropdown select m-0">
-                                    <div class="text-input m-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
-                                        <input id="business-um-select-toggle" type="text" placeholder=" " readonly/>
-                                        <label for="business-um-select-toggle">UM</label>
-                                    </div>
-                                    <div class="dropdown-menu" aria-labelledby="business-um-select-toggle" style="width: 100%;">
-                                        <input id="umb1" type="radio" class="radio" name="business-um" value="KG" checked/>
-                                        <label for="umb1">Chilogrammi [KG]</label>
-                                        <input id="umb2" type="radio" class="radio" name="business-um" value="g"/>
-                                        <label for="umb2">Grammi [g]</label>
-                                        <input id="umb3" type="radio" class="radio" name="business-um" value="PZ"/>
-                                        <label for="umb3">Pezzi [PZ]</label>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-4">
                                 <div class="text-input my-0 ml-3">
-                                    <input id="business-price" type="number" data-type="currency" name="business-price" min="0" placeholder=" ">
-                                    <label for="business-price">Prezzo</label>
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <div class="text-input my-0 ml-3">
-                                    <input id="min-business" type="number" name="min-business" min="1" placeholder=" ">
-                                    <label for="min-business">Moltiplicatore</label>
-                                    <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
-                                    <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
+                                    <input id="client-price" type="number" data-type="currency" name="client-price" min="0" placeholder=" ">
+                                    <label for="client-price">Prezzo</label>
                                 </div>
                             </div>
                         </div>
@@ -219,12 +172,18 @@
 
                     <div class="divider dark my-4"></div>
 
+                    <h4 class="mb-3">Cassette</h4>
+
+                    <p>Per ogni taglio di cassetta, inserisci la quantità massima di questo prodotto che è possibile inserirvi.</p>
+
+                    <div class="divider dark my-4"></div>
+
                     <div class="d-flex justify-content-between">
-                        <a href="management-products.php" type="button" class="btn outline ripple" style="width: 160px">
+                        <a href="management-products.php" class="btn outline ripple flex-grow-1 flex-md-grow-0 mr-2" style="width: 160px;">
                             <i class="mdi dark mdi-arrow-left"></i>
                             <span class="text-sec-dark">Annulla</span>
                         </a>
-                        <button type="button" class="btn accent ripple" style="width: 160px">
+                        <button type="button" class="btn accent ripple flex-grow-1 flex-md-grow-0" style="width: 160px;">
                             <span class="text-light">Salva</span>
                             <i class="mdi light mdi-content-save"></i>
                         </button>

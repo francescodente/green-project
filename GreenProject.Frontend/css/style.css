@@ -36,6 +36,32 @@
     display: none;
 }
 
+/************\
+|   FOOTER   |
+\************/
+
+.footer .btn.facebook .mdi, .footer .btn.instagram .mdi {
+    transition: color 0.2s ease-in-out;
+}
+
+.footer .btn.facebook:hover {
+    background-color: rgba(25, 118, 210, 0.12);
+}
+
+.footer .btn.facebook:hover .mdi {
+    color: #1976D2;
+    opacity: 0.9;
+}
+
+.footer .btn.instagram:hover {
+    background-color: rgba(236, 64, 122, 0.12);
+}
+
+.footer .btn.instagram:hover .mdi {
+    color: #EC407A;
+    opacity: 0.9;
+}
+
 /****************************\
 |   ANCHOR FOR HASH TARGET   |
 \****************************/
@@ -89,13 +115,21 @@
 |   PRODUCT CARD   |
 \******************/
 
-.product-card.disabled .disabled-shade {
+.product-disabled .disabled-shade {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.5);
+}
+
+.product-disabled .product-name {
+    color: var(--col-text-sec-dark);
+}
+
+.product-disabled .product-price {
+    color: var(--col-text-dis-dark);
 }
 
 /******************\
@@ -197,7 +231,7 @@
     color: #707070;
 }
 
-.address-item span {
+.address-item .address-owner-info span {
     font-size: 14px;
 }
 
