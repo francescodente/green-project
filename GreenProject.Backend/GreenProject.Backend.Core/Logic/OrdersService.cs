@@ -134,7 +134,7 @@ namespace GreenProject.Backend.Core.Logic
             {
                 ItemId = bookedCrate.CrateId,
                 Price = bookedCrate.Crate.Prices.Single().Value,
-                Quantity = bookedCrate.Quantity
+                Quantity = 1
             };
 
             bookedCrate.Compositions.Select(c => new OrderDetailSubProduct

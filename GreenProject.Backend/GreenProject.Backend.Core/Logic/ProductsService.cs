@@ -6,6 +6,7 @@ using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Shared.Utils;
 
 namespace GreenProject.Backend.Core.Logic
 {
@@ -35,6 +36,8 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.CategoryId = product.CategoryId;
 
                 productEntity.Prices.Add(this.CreatePriceFromDto(product.Price, CustomerTypeDto.Person));
+
+                this.AddCompatibleCrates(productEntity, product);
             });
         }
 
@@ -62,7 +65,21 @@ namespace GreenProject.Backend.Core.Logic
                 price.Value = product.Price.Value;
                 price.UnitName = (UnitName)product.Price.UnitName;
                 price.UnitMultiplier = product.Price.UnitMultiplier;
+
+                this.AddCompatibleCrates(productEntity, product);
             });
+        }
+
+        private void AddCompatibleCrates(Product productEntity, ProductInputDto product)
+        {
+            productEntity.Compatibilities.Clear();
+            product.CompatibleCrates.Select(c => new CrateCompatibility
+            {
+                CrateId = c.CrateId,
+                Maximum = c.Maximum,
+                Multiplier = c.Multiplier
+            })
+            .ForEach(productEntity.Compatibilities.Add);
         }
 
         protected override IQueryable<Product> GetDefaultQuery()

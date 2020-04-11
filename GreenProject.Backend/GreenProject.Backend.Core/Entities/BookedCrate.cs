@@ -12,7 +12,6 @@ namespace GreenProject.Backend.Core.Entities
         }
 
         public int BookedCrateId { get; set; }
-        public int Quantity { get; set; }
         public int UserId { get; set; }
         public int CrateId { get; set; }
 

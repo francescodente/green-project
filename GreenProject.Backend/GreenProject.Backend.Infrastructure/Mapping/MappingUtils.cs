@@ -8,6 +8,7 @@ using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Contracts.Users.Roles;
 using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
+using GreenProject.Backend.Core.Utils.Pricing;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,6 +62,10 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public CartMapping()
             {
+                OrderPricesDto prices = null;
+                CreateMap<User, CartOutputDto>()
+                    .ForMember(dst => dst.Prices, o => o.MapFrom(src => prices));
+
                 CreateMap<CartItem, CartItemOutputDto>();
             }
         }

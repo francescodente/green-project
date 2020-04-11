@@ -26,14 +26,12 @@ namespace GreenProject.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public Task<UserOutputDto> GetUserData(int userId)
+        public async Task<UserOutputDto> GetUserData(int userId)
         {
-            return this.Data
-                .Users
-                .Where(u => u.UserId == userId)
-                .ProjectTo<UserOutputDto>(this.Mapper.ConfigurationProvider)
-                .SingleOptionalAsync()
-                .Map(u => u.OrElseThrow(() => NotFoundException.UserWithId(userId)));
+            User userEntity = await this.RequireUserById(userId, r => r
+                .IncludingAddresses()
+                .IncludingRoles());
+            return this.Mapper.Map<UserOutputDto>(userEntity);
         }
     }
 }

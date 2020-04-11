@@ -4,9 +4,9 @@ using System.Text;
 
 namespace GreenProject.Backend.Contracts.PurchasableItems
 {
-    public class CompatibleProductInputDto
+    public class CompatibleCrateInputDto
     {
-        public int ProductId { get; set; }
+        public int CrateId { get; set; }
         public int Multiplier { get; set; }
         public int Maximum { get; set; }
     }

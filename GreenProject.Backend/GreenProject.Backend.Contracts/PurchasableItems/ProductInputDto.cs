@@ -8,5 +8,6 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
         public string Description { get; set; }
         public PriceDto Price { get; set; }
         public int CategoryId { get; set; }
+        public IEnumerable<CompatibleCrateInputDto> CompatibleCrates { get; set; }
     }
 }
