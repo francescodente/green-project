@@ -1,6 +1,6 @@
-﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Utils.Email;
+﻿using GreenProject.Backend.Core.Utils.Email;
 using GreenProject.Backend.Core.Utils.Notifications;
+using GreenProject.Backend.Entities;
 using System;
 using System.IO;
 using System.Threading.Tasks;

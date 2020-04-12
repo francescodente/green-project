@@ -1,4 +1,4 @@
-﻿using GreenProject.Backend.Core.Entities;
+﻿using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;

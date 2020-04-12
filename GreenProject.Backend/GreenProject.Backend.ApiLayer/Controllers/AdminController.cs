@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

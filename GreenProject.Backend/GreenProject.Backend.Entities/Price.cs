@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GreenProject.Backend.Core.Entities
+namespace GreenProject.Backend.Entities
 {
     public class Price
     {

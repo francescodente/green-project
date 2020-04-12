@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Contracts.PurchasableItems;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 
 namespace GreenProject.Backend.Core.Logic

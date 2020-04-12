@@ -4,13 +4,13 @@ using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Contracts.Users;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 

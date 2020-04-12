@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Shared.Utils;
+﻿using GreenProject.Backend.Entities;
+using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
 using System.Text;

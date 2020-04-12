@@ -1,12 +1,12 @@
 ﻿using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;

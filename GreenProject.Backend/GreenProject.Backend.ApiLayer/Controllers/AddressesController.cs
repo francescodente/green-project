@@ -2,8 +2,8 @@
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Addresses;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers

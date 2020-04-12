@@ -6,9 +6,9 @@ using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Contracts.Users.Roles;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Utils.Pricing;
+using GreenProject.Backend.Entities;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -1,4 +1,4 @@
-﻿namespace GreenProject.Backend.Core.Entities
+﻿namespace GreenProject.Backend.Entities
 {
     public enum RoleType
     {

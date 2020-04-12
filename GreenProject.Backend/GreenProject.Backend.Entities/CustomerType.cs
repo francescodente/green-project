@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GreenProject.Backend.Core.Entities
+namespace GreenProject.Backend.Entities
 {
     public enum CustomerType
     {

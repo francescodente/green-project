@@ -1,4 +1,4 @@
-﻿using GreenProject.Backend.Core.Entities;
+﻿using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

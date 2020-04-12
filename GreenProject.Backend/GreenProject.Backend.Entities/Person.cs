@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GreenProject.Backend.Core.Entities
+namespace GreenProject.Backend.Entities
 {
     public class Person : Role
     {

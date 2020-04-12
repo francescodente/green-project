@@ -1,6 +1,6 @@
-﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Exceptions;
+﻿using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
