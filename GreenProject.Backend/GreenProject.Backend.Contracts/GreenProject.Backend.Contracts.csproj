@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GreenProject.Backend.Entities\GreenProject.Backend.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

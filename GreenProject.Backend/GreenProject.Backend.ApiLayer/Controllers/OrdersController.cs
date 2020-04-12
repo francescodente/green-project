@@ -41,7 +41,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("orders/{orderId}/state")]
         [RequireLogin(RoleType.Administrator, RoleType.DeliveryMan)]
-        public async Task<IActionResult> ChangeOrderState([FromRoute] int orderId, [FromBody] OrderStateDto newState)
+        public async Task<IActionResult> ChangeOrderState([FromRoute] int orderId, [FromBody] OrderState newState)
         {
             await this.ordersService.ChangeOrderState(orderId, newState);
             return NoContent();

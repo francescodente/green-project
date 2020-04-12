@@ -103,20 +103,20 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => CreateRoleDictionary(src, context)));
             }
 
-            private IDictionary<RoleTypeDto, RoleDto> CreateRoleDictionary(User source, IMapper mapper)
+            private IDictionary<RoleType, RoleDto> CreateRoleDictionary(User source, IMapper mapper)
             {
-                IDictionary<RoleTypeDto, RoleDto> roles = new Dictionary<RoleTypeDto, RoleDto>();
+                IDictionary<RoleType, RoleDto> roles = new Dictionary<RoleType, RoleDto>();
                 if (source.DeliveryCompany != null)
                 {
-                    roles.Add(RoleTypeDto.DeliveryMan, mapper.Map<DeliveryManDto>(source.DeliveryCompany));
+                    roles.Add(RoleType.DeliveryMan, mapper.Map<DeliveryManDto>(source.DeliveryCompany));
                 }
                 if (source.Person != null)
                 {
-                    roles.Add(RoleTypeDto.Person, mapper.Map<PersonDto>(source.Person));
+                    roles.Add(RoleType.Person, mapper.Map<PersonDto>(source.Person));
                 }
                 if (source.CustomerBusiness != null)
                 {
-                    roles.Add(RoleTypeDto.CustomerBusiness, mapper.Map<CustomerBusinessDto>(source.CustomerBusiness));
+                    roles.Add(RoleType.CustomerBusiness, mapper.Map<CustomerBusinessDto>(source.CustomerBusiness));
                 }
                 return roles;
             }

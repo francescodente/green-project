@@ -79,7 +79,7 @@ namespace GreenProject.Backend.Core.Logic
             }
         }
 
-        public async Task ChangeOrderState(int orderId, OrderStateDto newState)
+        public async Task ChangeOrderState(int orderId, OrderState newState)
         {
             Order order = await this.Data
                 .Orders
@@ -87,12 +87,11 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptionalAsync(o => o.OrderId == orderId)
                 .Map(o => o.OrElseThrow(() => NotFoundException.OrderWithId(orderId)));
 
-            OrderState targetState = (OrderState)newState;
             OrderState oldState = order.OrderState;
 
-            order.ChangeState(targetState);
+            order.ChangeState(newState);
 
-            if (order.IsSubscription && (targetState == OrderState.Canceled || targetState == OrderState.Completed))
+            if (order.IsSubscription && (newState == OrderState.Canceled || newState == OrderState.Completed))
             {
                 await this.RenewWeeklyOrder(order.User, order.DeliveryDate);
             }

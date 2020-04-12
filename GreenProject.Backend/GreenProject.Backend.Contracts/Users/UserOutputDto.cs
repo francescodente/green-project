@@ -1,4 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Users.Roles;
+using GreenProject.Backend.Entities;
 using System.Collections.Generic;
 
 namespace GreenProject.Backend.Contracts.Users
@@ -10,8 +11,8 @@ namespace GreenProject.Backend.Contracts.Users
         public string Telephone { get; set; }
         public bool MarketingConsent { get; set; }
         public bool IsAdministrator { get; set; }
-        public IEnumerable<RoleTypeDto> Roles { get; set; }
-        public IDictionary<RoleTypeDto, RoleDto> RolesData { get; set; }
+        public IEnumerable<RoleType> Roles { get; set; }
+        public IDictionary<RoleType, RoleDto> RolesData { get; set; }
         public bool ShouldChangePassword { get; set; }
     }
 }
