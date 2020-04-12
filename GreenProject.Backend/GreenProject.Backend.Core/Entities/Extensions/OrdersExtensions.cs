@@ -21,7 +21,7 @@ namespace GreenProject.Backend.Core.Entities.Extensions
             };
         }
 
-        public static void ChageState(this Order order, OrderState newState)
+        public static void ChangeState(this Order order, OrderState newState)
         {
             if (!validStateTransitions[order.OrderState].Contains(newState))
             {

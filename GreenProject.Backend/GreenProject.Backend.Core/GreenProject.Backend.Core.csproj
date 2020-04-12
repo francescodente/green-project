@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GreenProject.Backend.Contracts\GreenProject.Backend.Contracts.csproj" />
+    <ProjectReference Include="..\GreenProject.Backend.Entities\GreenProject.Backend.Entities.csproj" />
     <ProjectReference Include="..\GreenProject.Backend.Shared\GreenProject.Backend.Shared.csproj" />
   </ItemGroup>
 
