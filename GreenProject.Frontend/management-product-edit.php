@@ -23,6 +23,8 @@
             <form class="edit-product row">
                 <div class="col-12">
 
+                    <h4 class="text-center mb-3">Immagine</h4>
+
                     <!-- Image -->
                     <div class="edit-product-img mx-auto mb-4" style="border: 1px solid rgba(0, 0, 0, 0.08);">
                         <img class="card-bg" src="images/default_product.png"/>
@@ -152,8 +154,8 @@
                                 <div class="text-input my-1 mx-2">
                                     <input id="min-client" type="number" name="min-client" min="1" placeholder=" " required/>
                                     <label for="min-client">Moltiplicatore</label>
-                                    <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
-                                    <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
+                                    <button type="button" class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
+                                    <button type="button" class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
                                 </div>
                             </div>
                             <div class="col-4">

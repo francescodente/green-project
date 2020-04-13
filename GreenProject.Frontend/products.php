@@ -17,11 +17,6 @@
             <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
         </section>
         <section id="products-content" class="container py-4">
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="companies.php">Partner</a></li>
-                <li class="breadcrumb-item"><a href="company.php">Company name</a></li>
-                <li class="breadcrumb-item active">Category</li>
-            </ol>
             <div class="row">
                 <div id="filters-col" class="col-12 col-lg-3 d-none">
                     <div class="sticky-top" style="top: 72px;">
