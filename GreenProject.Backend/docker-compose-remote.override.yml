@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  greenproject.backend.apilayer:
+    environment:
+      - "ASPNETCORE_ENVIRONMENT=Development"
+      - "ASPNETCORE_URLS=http://+:${HTTP_PORT}"
+    ports:
+      - "${HOST_HTTP_PORT}:${HTTP_PORT}"
+      - "${HOST_HTTPS_PORT}:${HTTPS_PORT}"
+    volumes:
+      - "${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro"
+      - "${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro"
+    networks:
+      - greenprojectnetwork
+
+networks:
+  greenprojectnetwork:
+
+volumes:
+  greenprojectdb:
