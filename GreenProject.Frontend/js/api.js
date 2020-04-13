@@ -1,6 +1,6 @@
-var serverAddress = "192.168.1.9:5001";
+var serverAddress = "localhost:5000";
 var apiVer = "v1";
-var basePath = "https://" + serverAddress + "/api/" + apiVer + "/";
+var basePath = "http://" + serverAddress + "/api/" + apiVer + "/";
 
 function getBasePath() {
     return basePath;
@@ -64,7 +64,7 @@ function changePsw() {
 }
 
 function registerCustomer(data) {
-    return post("auth/register/customer", data);
+    return post("auth/register", data);
 }
 
 function registerSupplier() {

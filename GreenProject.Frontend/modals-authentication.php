@@ -139,7 +139,7 @@
             registerCustomer({
                 user: {
                     email: $("#sign-up-email").val(),
-                    cookeConsent: true,
+                    telephone: "1",
                     marketingConsent: $("#marketing-consent").is(":checked")
                 },
                 password: $("#sign-up-password").val()
