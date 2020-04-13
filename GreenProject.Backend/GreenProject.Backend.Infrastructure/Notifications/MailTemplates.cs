@@ -1,5 +1,5 @@
-﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Entities.Extensions;
+﻿using GreenProject.Backend.Core.Entities.Extensions;
+using GreenProject.Backend.Entities;
 using System;
 
 namespace GreenProject.Backend.Infrastructure.Notifications

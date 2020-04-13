@@ -1,13 +1,14 @@
-﻿using GreenProject.Backend.Contracts.Filters;
+﻿using AutoMapper.QueryableExtensions;
+using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Contracts.Orders.States;
 using GreenProject.Backend.Contracts.Pagination;
-using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -29,20 +30,22 @@ namespace GreenProject.Backend.Core.Logic
             this.pricing = pricing;
         }
 
-        public Task<PagedCollection<CustomerOrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
+        public Task<PagedCollection<OrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
         {
             IEnumerable<OrderState> states = this.GetRequestedStates(filters);
             return this.GetOrdersFilteredBy(filters)
                 .Where(o => o.UserId == customerId)
                 .OrderBy(o => o.Timestamp)
-                .ToPagedCollection(pagination, this.Mapper.Map<CustomerOrderDto>);
+                .ProjectTo<OrderDto>(this.Mapper.ConfigurationProvider)
+                .ToPagedCollection(pagination);
         }
 
-        public Task<PagedCollection<SupplierOrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination)
+        public Task<PagedCollection<OrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination)
         {
             return this.GetOrdersFilteredBy(filters)
                 .OrderBy(o => o.Timestamp)
-                .ToPagedCollection(pagination, this.Mapper.Map<SupplierOrderDto>);
+                .ProjectTo<OrderDto>(this.Mapper.ConfigurationProvider)
+                .ToPagedCollection(pagination);
         }
 
         private IQueryable<Order> GetOrdersFilteredBy(OrderFilters filters)
@@ -51,8 +54,7 @@ namespace GreenProject.Backend.Core.Logic
 
             IQueryable<Order> query = this.Data
                 .Orders
-                .Where(o => states.Contains(o.OrderState))
-                .IncludingDeliveryInfo();
+                .Where(o => states.Contains(o.OrderState));
 
             return filters.DeliveryDate
                 .AsOptional()
@@ -77,7 +79,7 @@ namespace GreenProject.Backend.Core.Logic
             }
         }
 
-        public async Task ChangeOrderState(int orderId, OrderStateDto newState)
+        public async Task ChangeOrderState(int orderId, OrderState newState)
         {
             Order order = await this.Data
                 .Orders
@@ -85,12 +87,11 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptionalAsync(o => o.OrderId == orderId)
                 .Map(o => o.OrElseThrow(() => NotFoundException.OrderWithId(orderId)));
 
-            OrderState targetState = (OrderState)newState;
             OrderState oldState = order.OrderState;
 
-            order.ChangeState(targetState);
+            order.ChangeState(newState);
 
-            if (order.IsSubscription && (targetState == OrderState.Canceled || targetState == OrderState.Completed))
+            if (order.IsSubscription && (newState == OrderState.Canceled || newState == OrderState.Completed))
             {
                 await this.RenewWeeklyOrder(order.User, order.DeliveryDate);
             }
@@ -133,7 +134,7 @@ namespace GreenProject.Backend.Core.Logic
             {
                 ItemId = bookedCrate.CrateId,
                 Price = bookedCrate.Crate.Prices.Single().Value,
-                Quantity = bookedCrate.Quantity
+                Quantity = 1
             };
 
             bookedCrate.Compositions.Select(c => new OrderDetailSubProduct

@@ -1,7 +1,7 @@
 ﻿using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Utils.Pricing;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using System.Collections.Generic;
 using System.Linq;

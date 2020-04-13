@@ -1,5 +1,5 @@
-﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Utils.Session;
+﻿using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
@@ -19,7 +19,7 @@ namespace GreenProject.Backend.DataAccess.Sql
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Availability> Availabilities { get; set; }
         public DbSet<BookedCrate> BookedCrates { get; set; }
-        public DbSet<OrderDetailSubProduct> BookedCrateProducts { get; set; }
+        public DbSet<OrderDetailSubProduct> OrderDetailSubProducts { get; set; }
         public DbSet<BookedCrateComposition> Compositions { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Category> Categories { get; set; }

@@ -1,10 +1,11 @@
-﻿using GreenProject.Backend.Contracts.Addresses;
-using GreenProject.Backend.Core.Entities;
+﻿using AutoMapper.QueryableExtensions;
+using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,11 +32,16 @@ namespace GreenProject.Backend.Core.Logic
         {
             User user = await this.RequireUserWithAddresses(userId);
 
+            Zone zone = await this.Data
+                .Zones
+                .SingleOptionalAsync(z => z.ZipCode == address.ZipCode)
+                .Map(z => z.OrElseThrow(() => NotFoundException.ZoneWithZipCode(address.ZipCode)));
+
             Address addressEntity = new Address
             {
                 Street = address.Street,
                 HouseNumber = address.HouseNumber,
-                ZipCode = address.ZipCode,
+                Zone = zone,
                 Name = address.Name,
                 Telephone = address.Telephone
             };
@@ -60,15 +66,14 @@ namespace GreenProject.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public async Task<AddressCollectionDto> GetAddresses(int userId)
+        public Task<AddressCollectionDto> GetAddresses(int userId)
         {
-            User user = await this.RequireUserWithAddresses(userId);
-
-            return new AddressCollectionDto
-            {
-                Addresses = this.Mapper.Map<IEnumerable<AddressOutputDto>>(user.Addresses),
-                DefaultAddressId = user.DefaultAddressId
-            };
+            return this.Data
+                .Users
+                .Where(u => u.UserId == userId)
+                .ProjectTo<AddressCollectionDto>(this.Mapper.ConfigurationProvider)
+                .SingleOptionalAsync()
+                .Map(a => a.OrElseThrow(() => NotFoundException.UserWithId(userId)));
         }
 
         public async Task SetDefaultAddress(int userId, int addressId)

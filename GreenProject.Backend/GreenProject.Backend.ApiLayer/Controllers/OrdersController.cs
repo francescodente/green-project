@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Filters;
-using GreenProject.Backend.Contracts.Orders.States;
-using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +41,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("orders/{orderId}/state")]
         [RequireLogin(RoleType.Administrator, RoleType.DeliveryMan)]
-        public async Task<IActionResult> ChangeOrderState([FromRoute] int orderId, [FromBody] OrderStateDto newState)
+        public async Task<IActionResult> ChangeOrderState([FromRoute] int orderId, [FromBody] OrderState newState)
         {
             await this.ordersService.ChangeOrderState(orderId, newState);
             return NoContent();

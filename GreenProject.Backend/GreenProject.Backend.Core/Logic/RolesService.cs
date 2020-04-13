@@ -1,8 +1,8 @@
 ﻿using GreenProject.Backend.Contracts.Users.Roles;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq.Expressions;

@@ -1,4 +1,4 @@
-﻿using GreenProject.Backend.Core.Entities;
+﻿using GreenProject.Backend.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -41,6 +41,11 @@ namespace GreenProject.Backend.Core.Exceptions
         public static NotFoundException Image()
         {
             return WithMessage($"Unable to find the requested image");
+        }
+
+        public static NotFoundException ZoneWithZipCode(string zipCode)
+        {
+            return ResourceWithProperty(nameof(Zone), nameof(Zone.ZipCode), zipCode);
         }
 
         public static NotFoundException UserWithId(int userId)

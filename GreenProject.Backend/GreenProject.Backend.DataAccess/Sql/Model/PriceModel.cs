@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -15,10 +15,6 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
             entity.HasKey(e => new { e.Type, e.ItemId });
 
             entity.Property(e => e.UnitMultiplier).HasColumnType("decimal(8, 4)");
-
-            entity.Property(e => e.UnitName)
-                .HasConversion(new EnumToStringConverter<UnitName>())
-                .HasMaxLength(10);
 
             entity.Property(e => e.Value).HasColumnType("money");
 

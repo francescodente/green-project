@@ -1,9 +1,6 @@
-﻿using GreenProject.Backend.Core.Entities;
+﻿using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.DataAccess.Sql.Model
 {
@@ -11,7 +8,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
     {
         public void Configure(EntityTypeBuilder<OrderDetailSubProduct> entity)
         {
-            entity.HasKey(e => new { e.OrderId, e.ProductId, e.CrateId });
+            entity.HasKey(e => new { e.OrderDetailId, e.ProductId });
 
             entity.HasOne(e => e.Product)
                 .WithMany(p => p.SubProducts)
@@ -19,7 +16,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.HasOne(e => e.OrderDetail)
                 .WithMany(d => d.SubProducts)
-                .HasForeignKey(e => new { e.OrderId, e.CrateId })
+                .HasForeignKey(e => e.OrderDetailId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

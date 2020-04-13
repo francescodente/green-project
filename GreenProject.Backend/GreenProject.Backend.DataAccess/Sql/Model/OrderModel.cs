@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
@@ -34,10 +34,6 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
             entity.Property(e => e.Notes).HasMaxLength(1000);
 
             entity.Property(e => e.Timestamp).HasColumnType("datetime");
-
-            entity.Property(e => e.OrderState)
-                .HasConversion(new EnumToStringConverter<OrderState>())
-                .HasMaxLength(20);
 
             entity.Property(e => e.Subtotal).HasColumnType("money");
 

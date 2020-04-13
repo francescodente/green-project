@@ -2,8 +2,8 @@
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.ApiLayer.Utils;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

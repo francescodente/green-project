@@ -1,5 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Authentication;
-using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Entities;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Utils

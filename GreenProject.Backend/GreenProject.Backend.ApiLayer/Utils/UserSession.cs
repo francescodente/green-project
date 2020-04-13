@@ -1,5 +1,5 @@
-﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Utils.Session;
+﻿using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

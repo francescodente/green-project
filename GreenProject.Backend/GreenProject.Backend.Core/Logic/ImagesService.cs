@@ -1,9 +1,9 @@
-﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Exceptions;
+﻿using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Core.Utils.Uploads;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -53,6 +53,7 @@ namespace GreenProject.Backend.Core.Logic
         {
             Category category = await this.Data
                 .Categories
+                .Include(c => c.Image)
                 .SingleOptionalAsync(c => c.CategoryId == categoryId)
                 .Map(c => c.OrElseThrow(() => NotFoundException.CategoryWithId(categoryId)));
 

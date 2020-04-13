@@ -1,5 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Core.Entities;
+using GreenProject.Backend.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

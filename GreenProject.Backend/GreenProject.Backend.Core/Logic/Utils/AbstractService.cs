@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Core.Utils.Time;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Linq;

@@ -1,5 +1,5 @@
-﻿using GreenProject.Backend.Core.Entities;
-using GreenProject.Backend.Core.Utils.Session;
+﻿using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using System;

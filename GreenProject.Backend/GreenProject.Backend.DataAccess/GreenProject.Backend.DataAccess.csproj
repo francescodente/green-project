@@ -19,8 +19,22 @@
     <Compile Remove="Migrations\20200331184304_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20200331185636_InitialMigration.cs" />
     <Compile Remove="Migrations\20200331185636_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200331190646_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200331190646_InitialMigration.Designer.cs" />
     <Compile Remove="Migrations\20200402160420_AutoOrderNumber.cs" />
     <Compile Remove="Migrations\20200402160420_AutoOrderNumber.Designer.cs" />
+    <Compile Remove="Migrations\20200402161041_AutoOrderNumber.cs" />
+    <Compile Remove="Migrations\20200402161041_AutoOrderNumber.Designer.cs" />
+    <Compile Remove="Migrations\20200402223843_IntegerCustomerType.cs" />
+    <Compile Remove="Migrations\20200402223843_IntegerCustomerType.Designer.cs" />
+    <Compile Remove="Migrations\20200404161549_AddOrderDetailId.cs" />
+    <Compile Remove="Migrations\20200404161549_AddOrderDetailId.Designer.cs" />
+    <Compile Remove="Migrations\20200404161912_AddOrderDetailId.cs" />
+    <Compile Remove="Migrations\20200404161912_AddOrderDetailId.Designer.cs" />
+    <Compile Remove="Migrations\20200408214026_EnumerationsAsIntegers.cs" />
+    <Compile Remove="Migrations\20200408214026_EnumerationsAsIntegers.Designer.cs" />
+    <Compile Remove="Migrations\20200408215450_AddOrderDetailId.cs" />
+    <Compile Remove="Migrations\20200408215450_AddOrderDetailId.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,8 +6,9 @@ using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Contracts.Users.Roles;
-using GreenProject.Backend.Core.Entities;
 using GreenProject.Backend.Core.Entities.Extensions;
+using GreenProject.Backend.Core.Utils.Pricing;
+using GreenProject.Backend.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -33,7 +34,11 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public AddressMapping()
             {
-                CreateMap<Address, AddressOutputDto>();
+                CreateMap<User, AddressCollectionDto>();
+
+                CreateMap<Address, AddressOutputDto>()
+                    .ForMember(dst => dst.Province, o => o.MapFrom(src => src.Zone.Province))
+                    .ForMember(dst => dst.City, o => o.MapFrom(src => src.Zone.City));
             }
         }
 
@@ -43,8 +48,9 @@ namespace GreenProject.Backend.Infrastructure.Mapping
             {
                 CreateMap<Order, DeliveryInfoOutputDto>();
 
-                CreateMap<Order, CustomerOrderDto>()
-                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src));
+                CreateMap<Order, OrderDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src))
+                    .ForMember(dst => dst.Prices, o => o.MapFrom(src => src));
 
                 CreateMap<Order, OrderPricesDto>();
 
@@ -56,6 +62,10 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public CartMapping()
             {
+                OrderPricesDto prices = null;
+                CreateMap<User, CartOutputDto>()
+                    .ForMember(dst => dst.Prices, o => o.MapFrom(src => prices));
+
                 CreateMap<CartItem, CartItemOutputDto>();
             }
         }
@@ -93,20 +103,20 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => CreateRoleDictionary(src, context)));
             }
 
-            private IDictionary<RoleTypeDto, RoleDto> CreateRoleDictionary(User source, IMapper mapper)
+            private IDictionary<RoleType, RoleDto> CreateRoleDictionary(User source, IMapper mapper)
             {
-                IDictionary<RoleTypeDto, RoleDto> roles = new Dictionary<RoleTypeDto, RoleDto>();
+                IDictionary<RoleType, RoleDto> roles = new Dictionary<RoleType, RoleDto>();
                 if (source.DeliveryCompany != null)
                 {
-                    roles.Add(RoleTypeDto.DeliveryMan, mapper.Map<DeliveryManDto>(source.DeliveryCompany));
+                    roles.Add(RoleType.DeliveryMan, mapper.Map<DeliveryManDto>(source.DeliveryCompany));
                 }
                 if (source.Person != null)
                 {
-                    roles.Add(RoleTypeDto.Person, mapper.Map<PersonDto>(source.Person));
+                    roles.Add(RoleType.Person, mapper.Map<PersonDto>(source.Person));
                 }
                 if (source.CustomerBusiness != null)
                 {
-                    roles.Add(RoleTypeDto.CustomerBusiness, mapper.Map<CustomerBusinessDto>(source.CustomerBusiness));
+                    roles.Add(RoleType.CustomerBusiness, mapper.Map<CustomerBusinessDto>(source.CustomerBusiness));
                 }
                 return roles;
             }

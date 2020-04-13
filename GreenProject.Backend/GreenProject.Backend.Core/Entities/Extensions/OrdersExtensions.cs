@@ -1,4 +1,5 @@
 ﻿using GreenProject.Backend.Core.Exceptions;
+using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace GreenProject.Backend.Core.Entities.Extensions
             };
         }
 
-        public static void ChageState(this Order order, OrderState newState)
+        public static void ChangeState(this Order order, OrderState newState)
         {
             if (!validStateTransitions[order.OrderState].Contains(newState))
             {

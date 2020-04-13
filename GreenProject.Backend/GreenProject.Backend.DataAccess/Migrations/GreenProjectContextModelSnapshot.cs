@@ -81,9 +81,6 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.Property<int>("CrateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -277,10 +274,8 @@ namespace GreenProject.Backend.DataAccess.Migrations
                         .HasColumnType("nchar(11)")
                         .HasComputedColumnSql("FORMAT(YEAR([Timestamp]), 'D4') + FORMAT(DATEPART(dayofyear, [Timestamp]), 'D3') + FORMAT([OrderId] % 10000, 'D4')");
 
-                    b.Property<string>("OrderState")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                    b.Property<int>("OrderState")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("ShippingCost")
                         .HasColumnType("money");
@@ -305,10 +300,15 @@ namespace GreenProject.Backend.DataAccess.Migrations
 
             modelBuilder.Entity("GreenProject.Backend.Core.Entities.OrderDetail", b =>
                 {
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("ItemId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -320,38 +320,34 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.Property<decimal?>("UnitMultiplier")
                         .HasColumnType("decimal(8, 4)");
 
-                    b.Property<string>("UnitName")
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                    b.Property<int?>("UnitName")
+                        .HasColumnType("int");
 
-                    b.HasKey("OrderId", "ItemId");
+                    b.HasKey("OrderDetailId");
 
                     b.HasIndex("ItemId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails");
                 });
 
             modelBuilder.Entity("GreenProject.Backend.Core.Entities.OrderDetailSubProduct", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<int>("OrderDetailId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CrateId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderId", "ProductId", "CrateId");
+                    b.HasKey("OrderDetailId", "ProductId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("OrderId", "CrateId");
-
-                    b.ToTable("BookedCrateProducts");
+                    b.ToTable("OrderDetailSubProducts");
                 });
 
             modelBuilder.Entity("GreenProject.Backend.Core.Entities.Person", b =>
@@ -385,10 +381,8 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.Property<decimal>("UnitMultiplier")
                         .HasColumnType("decimal(8, 4)");
 
-                    b.Property<string>("UnitName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(10)")
-                        .HasMaxLength(10);
+                    b.Property<int>("UnitName")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Value")
                         .HasColumnType("money");
@@ -692,15 +686,15 @@ namespace GreenProject.Backend.DataAccess.Migrations
 
             modelBuilder.Entity("GreenProject.Backend.Core.Entities.OrderDetailSubProduct", b =>
                 {
-                    b.HasOne("GreenProject.Backend.Core.Entities.Product", "Product")
+                    b.HasOne("GreenProject.Backend.Core.Entities.OrderDetail", "OrderDetail")
                         .WithMany("SubProducts")
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("OrderDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GreenProject.Backend.Core.Entities.OrderDetail", "OrderDetail")
+                    b.HasOne("GreenProject.Backend.Core.Entities.Product", "Product")
                         .WithMany("SubProducts")
-                        .HasForeignKey("OrderId", "CrateId")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
