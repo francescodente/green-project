@@ -134,7 +134,7 @@
 
     <?php include("footer.php"); ?>
 
-    <?php include("scripts.php"); ?>
+    <?php include("resources.php"); ?>
     <script src="js/account-user-data.js"></script>
 
     <?php include("modal-pwd-change.php"); ?>

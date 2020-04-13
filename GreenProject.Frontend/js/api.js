@@ -141,8 +141,8 @@ function deleteSupplierBackground() {
 
 // Products
 
-function getProducts() {
-
+function getProducts(categories, pageNumber = 0, pageSize = 30) {
+    return get("products");
 }
 
 function createProduct() {

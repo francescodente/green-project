@@ -28,7 +28,7 @@
 
     <?php include("footer.php"); ?>
 
-    <?php include("scripts.php"); ?>
+    <?php include("resources.php"); ?>
 
 </body>
 </html>

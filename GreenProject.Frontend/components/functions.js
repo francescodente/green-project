@@ -6,8 +6,8 @@ function getTemplate(className) {
     return html;
 }
 
-function fillBootstrapRow(gridRow, elems) {
-    $.each(elems, function(value) {
-        $("<div class='" + $(gridRow).data("children-class") + "'>").html(value.html).appendTo(gridRow);
+function fillBootstrapRow(row, elems) {
+    elems.forEach((elem) => {
+        $("<div class='" + row.data("children-class") + "'>").html(elem.html).appendTo(row);
     });
 }

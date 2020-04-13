@@ -181,11 +181,7 @@
 
     <?php include("footer.php"); ?>
 
-    <?php include("scripts.php"); ?>
-
-    <?php include("modals-authentication.php"); ?>
-
-    <?php include("cookie.php"); ?>
+    <?php include("resources.php") ?>
 
 </body>
 </html>
