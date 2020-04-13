@@ -8,6 +8,6 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
     {
         public int CrateId { get; set; }
         public int Multiplier { get; set; }
-        public int Maximum { get; set; }
+        public int? Maximum { get; set; }
     }
 }

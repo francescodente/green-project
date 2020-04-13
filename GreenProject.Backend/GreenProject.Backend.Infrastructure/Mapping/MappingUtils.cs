@@ -85,6 +85,8 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.CrateId, o => o.MapFrom(src => src.ItemId))
                     .ForMember(dst => dst.Price, o => o.MapFrom(src => src.Prices.First(p => p.Type == CustomerType.Person).Value))
                     .ForMember(dst => dst.CompatibleProducts, o => o.MapFrom(src => src.Compatibilities));
+
+                CreateMap<CrateCompatibility, CompatibleProductOutputDto>();
             }
         }
 
