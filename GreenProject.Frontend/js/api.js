@@ -63,12 +63,12 @@ function changePsw() {
 
 }
 
-function registerCustomer(data) {
+function signup(data) {
     return post("auth/register", data);
 }
 
-function registerSupplier() {
-
+function logout() {
+    sessionStorage.clear();
 }
 
 // Cart
@@ -80,7 +80,6 @@ function getCart() {
 function editCartOptions() {
 
 }
-
 
 function addToCart() {
 

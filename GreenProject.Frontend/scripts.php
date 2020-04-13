@@ -9,6 +9,7 @@
     <script src="js/menu.js"></script>
     <script src="js/main.js"></script>
     <script src="js/api.js"></script>
+    <script src="js/authentication-guard.js"></script>
 </div>
 
 <div id="sizer">

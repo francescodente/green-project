@@ -28,7 +28,7 @@ $page = basename($_SERVER['PHP_SELF']);
         <span>Consegne</span>
         <i class="mdi dark mdi-chevron-right"></i>
     </a>
-    <a id="logout-tab" href="#" class="account-tab">
+    <a id="logout-tab" href="#" class="btn-logout account-tab">
         <i class="mdi dark mdi-logout-variant"></i>
         <span>Esci</span>
     </a>

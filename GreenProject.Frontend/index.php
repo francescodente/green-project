@@ -37,7 +37,7 @@
 
             </div>
             <div class="bottom-content mb-4">
-                <button class="btn round outline light ripple" data-toggle="modal" data-target="#modal-login">Accedi o registrati</button>
+                <button class="btn round outline light ripple req-logout" data-toggle="modal" data-target="#modal-login">Accedi o registrati</button>
             </div>
             <div class="parallax shade" data-parallax-image="images/home.jpg"></div>
         </section>

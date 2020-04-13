@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn accent ripple my-3">Accedi</button>
+                    <button type="submit" class="btn-login btn accent ripple my-3">Accedi</button>
                 </div>
 
                 <p class="text-center text-sec-dark m-0">Non hai un account? <a href="#" data-toggle="modal" data-target="#modal-sign-up" data-dismiss="modal">Registrati ora</a></p>
@@ -136,7 +136,7 @@
         $("#form-sign-up").submit(function(event) {
             event.preventDefault();
             console.log("sign-up");
-            registerCustomer({
+            signup({
                 user: {
                     email: $("#sign-up-email").val(),
                     telephone: "1",
@@ -159,6 +159,7 @@
             event.preventDefault();
             console.log("login");
             $("#login-loader").show();
+            $(".btn-login").prop("disabled", true);
             authToken({
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
@@ -167,11 +168,6 @@
                 sessionStorage.setItem("expiration", data.expiration);
                 sessionStorage.setItem("userId", data.userId);
                 location.reload();
-                /*console.log("done");
-                console.log(data);
-                console.log(sessionStorage.getItem("token"));
-                console.log(sessionStorage.getItem("expiration"));
-                console.log(sessionStorage.getItem("userId"));*/
             }).fail(function(data) {
                 $("#login-email").addClass("error");
                 $("#login-password").addClass("error");
@@ -180,6 +176,7 @@
                 console.log(data);*/
             }).always(function(data) {
                 $("#login-loader").hide();
+                $(".btn-login").prop("disabled", false);
             });
         });
 
