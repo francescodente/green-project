@@ -61,7 +61,7 @@ namespace GreenProject.Backend.Core.Logic
 
         protected async Task<TOutput> Update<TOutput>(int itemId, Action<T> updater, Func<IQueryable<T>, IQueryable<T>> queryWrapper = null)
         {
-            T entity = await this.Require(itemId, queryWrapper);
+            T entity = await this.Require(itemId, q => q.WrapIfPresent(queryWrapper).Include(p => p.Prices));
 
             updater(entity);
 
