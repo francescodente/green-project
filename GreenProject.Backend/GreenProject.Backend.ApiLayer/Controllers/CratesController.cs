@@ -49,5 +49,11 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             await this.cratesService.DeleteCrate(crateId);
             return NoContent();
         }
+
+        [HttpGet("{crateId}/compatibilities")]
+        public async Task<IActionResult> GetCrateCompatibilities([FromRoute] int crateId)
+        {
+            return Ok(await this.cratesService.GetCompatibleProducts(crateId));
+        }
     }
 }
