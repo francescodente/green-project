@@ -57,7 +57,7 @@ namespace GreenProject.Backend.Core.Entities.Extensions
 
         private static CustomerType RequireCustomerType(this User user)
         {
-            return user.GetCustomerType().OrElseThrow(() => new UnauthorizedPurchaseException());
+            return user.GetCustomerType().OrElseThrow(() => new MissingPurchasePermissionException());
         }
 
         public static void AddAddress(this User user, Address address)

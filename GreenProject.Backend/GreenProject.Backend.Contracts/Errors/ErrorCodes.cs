@@ -21,6 +21,35 @@ namespace GreenProject.Backend.Contracts.Errors
             public static readonly string DuplicateField = $"{BASE}.DUPLICATE_FIELD";
 
             public static readonly string UnsupportedValue = $"{BASE}.UNSUPPORTED_VALUE";
+
+            public static readonly string NotFound = $"{BASE}.NOT_FOUND";
+        }
+
+        public static class Auth
+        {
+            private static readonly string AuthBase = $"{BASE}.AUTH";
+
+            public static readonly string IncorrectPassword = $"{AuthBase}.INCORRECT_PASSWORD";
+
+            public static readonly string MissingPermission = $"{AuthBase}.MISSING_PERMISSION";
+
+            public static readonly string UnauthorizedAccess = $"{AuthBase}.UNAUTHORIZED_ACCESS";
+        }
+
+        public static class Cart
+        {
+            private static readonly string CartBase = $"{BASE}.CART";
+
+            public static readonly string Empty = $"{CartBase}.EMPTY_CART";
+        }
+
+        public static class Orders
+        {
+            private static readonly string OrdersBase = $"{BASE}.ORDERS";
+
+            public static readonly string InvalidStateTransition = $"{OrdersBase}.INVALID_STATE_TRANSITION";
+
+            public static readonly string ReservedProduct = $"{OrdersBase}.RESERVED_PRODUCT";
         }
     }
 }
