@@ -4,9 +4,10 @@ using System.Text;
 
 namespace GreenProject.Backend.Contracts.Errors
 {
-    public class ErrorDto
+    public class PropertyErrorDto
     {
-        public string PropertyName { get; set; }
+        public string Property { get; set; }
         public string Message { get; set; }
+        public string Code { get; set; }
     }
 }

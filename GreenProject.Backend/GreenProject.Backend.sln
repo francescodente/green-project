@@ -19,11 +19,11 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{8FCFCCDF-B045-4BBC-9B93-8C8496BC513D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Runnable", "Runnable", "{27530CA6-B4F9-472C-A31F-C3CD9AC1EAAF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{27530CA6-B4F9-472C-A31F-C3CD9AC1EAAF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{43778FE8-F1D6-4CC0-859B-4AC00FF96C3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenProject.Backend.Entities", "GreenProject.Backend.Entities\GreenProject.Backend.Entities.csproj", "{E7F4C922-0951-493C-9B29-69258BBAE3EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreenProject.Backend.Entities", "GreenProject.Backend.Entities\GreenProject.Backend.Entities.csproj", "{E7F4C922-0951-493C-9B29-69258BBAE3EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
