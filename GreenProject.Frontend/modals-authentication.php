@@ -164,9 +164,9 @@
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
             }).done(function(data) {
-                sessionStorage.setItem("token", data.token);
-                sessionStorage.setItem("expiration", data.expiration);
-                sessionStorage.setItem("userId", data.userId);
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("expiration", data.expiration);
+                localStorage.setItem("userId", data.userId);
                 location.reload();
             }).fail(function(data) {
                 $("#login-email").addClass("error");

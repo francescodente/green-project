@@ -18,10 +18,10 @@ $(document).ready(function() {
     \************/
 
     // Lock scrolling when a modal is shown
-    $(".modal:not(.toast)").on("show.bs.modal", function() {
+    $("body").on("show.bs.modal", ".modal:not(.toast)", function() {
         $("body").addClass("modal-no-scroll");
     });
-    $(".modal:not(.toast)").on("hide.bs.modal", function() {
+    $("body").on("hide.bs.modal", ".modal:not(.toast)", function() {
         $("body").removeClass("modal-no-scroll");
     });
 

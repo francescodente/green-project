@@ -68,7 +68,7 @@ function signup(data) {
 }
 
 function logout() {
-    sessionStorage.clear();
+    localStorage.clear();
 }
 
 // Cart
@@ -142,7 +142,14 @@ function deleteSupplierBackground() {
 // Products
 
 function getProducts(categories, pageNumber = 0, pageSize = 30) {
-    return get("products");
+    var searchParams = new URLSearchParams();
+    searchParams.append("PageNumber", pageNumber);
+    searchParams.append("PageSize", pageSize);
+    categories.forEach(category => {
+        searchParams.append("Categories", category);
+    });
+    console.log(searchParams.toString());
+    return get("products?" + searchParams.toString());
 }
 
 function createProduct() {

@@ -19,16 +19,17 @@ $(document).ready(function() {
 
     // Get products
     $("#products-loader").show();
-    getProducts([])
+    let url = new URL(window.location.href);
+    let categories = url.searchParams.getAll("Categories");
+    getProducts(categories)
     .done(function(data) {
-        console.log(data);
-        data.results.forEach((product) => {
-            products.push(ProductCard(product));
+        let product = new Product(data.results[0]);
+        data.results.forEach((json) => {
+            products.push(new Product(json));
         });
         fillBootstrapRow($(".product-list"), products);
         $(".products-count").text(products.length);
-
-        products[0].addToCart();
+        //products[0].addToCart();
     })
     .fail(function(data) {
         // TODO

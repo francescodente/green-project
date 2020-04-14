@@ -70,12 +70,8 @@
     </div>
 
     <?php include("footer.php"); ?>
-
     <?php include("resources.php") ?>
-
     <script src="js/products.js"></script>
-
-    <?php include("modals-product.php"); ?>
 
 </body>
 </html>
