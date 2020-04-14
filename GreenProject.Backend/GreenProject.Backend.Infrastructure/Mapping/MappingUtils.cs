@@ -100,7 +100,6 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                 CreateMap<DeliveryMan, DeliveryManDto>();
 
                 CreateMap<User, UserOutputDto>()
-                    .ForMember(dst => dst.Roles, o => o.MapFrom(src => src.GetRoleTypes()))
                     .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => CreateRoleDictionary(src, context)));
             }
 

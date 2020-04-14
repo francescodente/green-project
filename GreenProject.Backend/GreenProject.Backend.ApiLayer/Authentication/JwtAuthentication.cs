@@ -86,7 +86,8 @@ namespace GreenProject.Backend.ApiLayer.Authentication
             {
                 UserId = user.UserId,
                 Token = tokenHandler.WriteToken(token),
-                Expiration = tokenDescriptor.Expires.Value
+                Expiration = tokenDescriptor.Expires.Value,
+                Roles = user.GetRoleTypes()
             };
 
             return Task.FromResult(result);
