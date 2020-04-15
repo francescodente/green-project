@@ -71,11 +71,16 @@ namespace GreenProject.Backend.Core.Entities.Extensions
 
         public static void DeleteAddress(this User user, Address address)
         {
-            if (user.DefaultAddressId == address.AddressId)
+            bool isDefault = user.DefaultAddressId == address.AddressId;
+            if (isDefault && user.IsSubscribed)
             {
-                user.DefaultAddressId = null;
+                throw new DefaultAddressDeletionException();
             }
             user.Addresses.Remove(address);
+            if (isDefault)
+            {
+                user.DefaultAddressId = user.Addresses.FirstOrDefault()?.AddressId;
+            }
         }
 
         public static void AddProductToCart(this User user, Product product, int quantity)

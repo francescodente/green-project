@@ -51,5 +51,12 @@ namespace GreenProject.Backend.Contracts.Errors
 
             public static readonly string ReservedProduct = $"{OrdersBase}.RESERVED_PRODUCT";
         }
+
+        public static class Addresses
+        {
+            private static readonly string AddressesBase = $"{BASE}.ADDRESSES";
+
+            public static readonly string DeletingDefaultAddress = $"{AddressesBase}.DELETING_DEFAULT";
+        }
     }
 }
