@@ -21,5 +21,11 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         {
             return Ok(await this.categoriesService.GetCategoryTree());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCategory([FromBody] CategoryInputDto category)
+        {
+            return Ok(await this.categoriesService.AddCategory(category));
+        }
     }
 }

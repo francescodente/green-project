@@ -7,6 +7,7 @@ using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Entities;
+using AutoMapper.QueryableExtensions;
 
 namespace GreenProject.Backend.Core.Logic
 {
@@ -48,25 +49,19 @@ namespace GreenProject.Backend.Core.Logic
 
             return new CategoryTreeDto
             {
-                Category = new CategoryOutputDto
-                {
-                    CategoryId = 0,
-                    Name = ROOT_CATEGORY_NAME
-                },
+                Name = ROOT_CATEGORY_NAME,
                 Children = roots
             };
         }
 
         private CategoryTreeDto CreateSubTree(Category root, IList<Category> categories)
         {
-            return new CategoryTreeDto
-            {
-                Category = this.Mapper.Map<Category, CategoryOutputDto>(root),
-                Children = categories
+            IEnumerable<CategoryTreeDto> children = categories
                     .Where(c => c.ParentCategoryId == root.CategoryId)
                     .Select(c => CreateSubTree(c, categories))
-                    .ToArray()
-            };
+                    .ToArray();
+
+            return this.Mapper.Map(root, new CategoryTreeDto { Children = children });
         }
     }
 }

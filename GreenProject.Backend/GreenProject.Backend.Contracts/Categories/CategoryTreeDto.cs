@@ -4,7 +4,9 @@ namespace GreenProject.Backend.Contracts.Categories
 {
     public class CategoryTreeDto
     {
-        public CategoryOutputDto Category { get; set; }
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
+        public string ImageUrl { get; set; }
         public IEnumerable<CategoryTreeDto> Children { get; set; }
     }
 }
