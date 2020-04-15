@@ -11,6 +11,7 @@ namespace GreenProject.Backend.Contracts.Users
         public string Telephone { get; set; }
         public bool MarketingConsent { get; set; }
         public IDictionary<RoleType, RoleDto> RolesData { get; set; }
+        public bool IsSubscribed { get; set; }
         public bool ShouldChangePassword { get; set; }
     }
 }
