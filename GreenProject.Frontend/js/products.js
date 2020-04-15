@@ -23,16 +23,19 @@ $(document).ready(function() {
     let categories = url.searchParams.getAll("Categories");
     getProducts(categories)
     .done(function(data) {
-        let product = new Product(data.results[0]);
-        data.results.forEach((json) => {
-            products.push(new Product(json));
-        });
-        fillBootstrapRow($(".product-list"), products);
-        $(".products-count").text(products.length);
-        //products[0].addToCart();
+        if (data.results.length == 0) {
+            $(".search-no-results").removeClass("d-none");
+        } else {
+            let product = new Product(data.results[0]);
+            data.results.forEach((json) => {
+                products.push(new Product(json));
+            });
+            fillBootstrapRow($(".product-list"), products);
+            $(".products-count").text(products.length);
+        }
     })
     .fail(function(data) {
-        // TODO
+        $(".search-error").removeClass("d-none");
     })
     .always(function(data) {
         $("#products-loader").hide();

@@ -102,7 +102,7 @@ function createOrder() {
 // Categories
 
 function getCategories() {
-
+    return get("categories");
 }
 
 // Images

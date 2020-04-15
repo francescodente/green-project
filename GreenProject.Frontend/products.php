@@ -36,7 +36,7 @@
                         <button class="apply-filter btn accent ripple w-100 mb-4">Applica</button>
                     </div>
                 </div>
-                <div id="results-col" class="col-12 container" data-children-class="col-6 col-md-4 col-lg-3">
+                <div id="results-col" class="col-12 container">
                     <div class="product-list row" data-children-class="col-6 col-md-4 col-lg-3">
                         <div class="col-12 d-flex justify-content-between align-items-center mb-4">
                             <button class="toggle-filters btn transparent ripple ripple-accent">
@@ -48,6 +48,26 @@
 
                         <div id="products-loader" class="loader col-12 text-center my-5">
                             <?php include("loader.php"); ?>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="search-no-results empty-state m-5 d-none">
+                                <i class="mdi mdi-feature-search-outline"></i>
+                                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun risultato</h6>
+                                <p class="text-center text-dis-dark m-0">
+                                    La ricerca effettuata non ha restituito risultati.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="search-error empty-state m-5 d-none">
+                                <i class="mdi mdi-emoticon-sad-outline"></i>
+                                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Oops! Qualcosa è andato storto</h6>
+                                <p class="text-center text-dis-dark m-0">
+                                    C'è stato un errore, ti preghiamo di riprovare.
+                                </p>
+                            </div>
                         </div>
 
                     </div>
