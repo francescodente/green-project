@@ -83,8 +83,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
 
                 CreateMap<Crate, CrateOutputDto>()
                     .ForMember(dst => dst.CrateId, o => o.MapFrom(src => src.ItemId))
-                    .ForMember(dst => dst.Price, o => o.MapFrom(src => src.Prices.First(p => p.Type == CustomerType.Person).Value))
-                    .ForMember(dst => dst.CompatibleProducts, o => o.MapFrom(src => src.Compatibilities));
+                    .ForMember(dst => dst.Price, o => o.MapFrom(src => src.Prices.First(p => p.Type == CustomerType.Person).Value));
 
                 CreateMap<CrateCompatibility, CompatibleProductOutputDto>();
             }
@@ -101,7 +100,6 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                 CreateMap<DeliveryMan, DeliveryManDto>();
 
                 CreateMap<User, UserOutputDto>()
-                    .ForMember(dst => dst.Roles, o => o.MapFrom(src => src.GetRoleTypes()))
                     .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => CreateRoleDictionary(src, context)));
             }
 
@@ -128,7 +126,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public CategoriesMapping()
             {
-                CreateMap<Category, CategoryDto>()
+                CreateMap<Category, CategoryOutputDto>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
             }
         }

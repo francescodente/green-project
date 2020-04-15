@@ -19,14 +19,14 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet("{userId}")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> GetUserData([FromRoute] int userId)
         {
             return Ok(await this.usersService.GetUserData(userId));
         }
 
         [HttpDelete("{userId}")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteUser([FromRoute] int userId)
         {
             await this.usersService.DeleteUser(userId);

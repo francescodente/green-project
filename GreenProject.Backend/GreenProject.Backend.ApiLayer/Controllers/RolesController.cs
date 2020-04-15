@@ -20,21 +20,21 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPut("person")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> AssignPersonRole([FromRoute] int userId, [FromBody] PersonDto person)
         {
             return Ok(await this.rolesService.AssignPersonRole(userId, person));
         }
 
         [HttpPut("customerbusiness")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> AssingCustomerBusinessRole([FromRoute] int userId, [FromBody] CustomerBusinessDto customerBusiness)
         {
             return Ok(await this.rolesService.AssignCustomerBusinessRole(userId, customerBusiness));
         }
 
         [HttpDelete("person")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> RemovePersonRole([FromRoute] int userId)
         {
             await this.rolesService.RemovePersonRole(userId);
@@ -42,7 +42,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpDelete("customerbusiness")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> RemoveCustomerBusinessRole([FromRoute] int userId)
         {
             await this.rolesService.RemoveCustomerBusinessRole(userId);

@@ -12,11 +12,11 @@ namespace GreenProject.Backend.ApiLayer.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            if (!(context.Exception is DomainException))
+            if (!(context.Exception is DomainException domainException))
             {
                 return;
             }
-            context.Result = new BadRequestObjectResult(new { context.Exception.Message });
+            context.Result = new BadRequestObjectResult(domainException.GetErrorResponse());
         }
     }
 }

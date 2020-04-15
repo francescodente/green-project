@@ -35,7 +35,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("{productId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductInputDto product)
         {
             return Ok(await this.productsService.UpdateProduct(productId, product));
@@ -43,7 +43,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpDelete("{productId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
             await this.productsService.DeleteProduct(productId);

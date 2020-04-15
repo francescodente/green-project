@@ -35,7 +35,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("{crateId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> UpdateCrate([FromRoute] int crateId, [FromBody] CrateInputDto crate)
         {
             return Ok(await this.cratesService.UpdateCrate(crateId, crate));
@@ -43,11 +43,17 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpDelete("{crateId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteCrate([FromRoute] int crateId)
         {
             await this.cratesService.DeleteCrate(crateId);
             return NoContent();
+        }
+
+        [HttpGet("{crateId}/compatibilities")]
+        public async Task<IActionResult> GetCrateCompatibilities([FromRoute] int crateId)
+        {
+            return Ok(await this.cratesService.GetCompatibleProducts(crateId));
         }
     }
 }

@@ -22,14 +22,14 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> GetCart([FromRoute] int userId)
         {
             return Ok(await this.cartService.GetCartDetails(userId));
         }
 
         [HttpPost("details")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> InsertCartItem([FromRoute] int userId, [FromBody] CartItemInputDto insertion)
         {
             await this.cartService.InsertCartItem(userId, insertion);
@@ -37,7 +37,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPut("details")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> UpdateCartItem([FromRoute] int userId, [FromBody] CartItemInputDto insertion)
         {
             await this.cartService.UpdateCartItem(userId, insertion);
@@ -45,7 +45,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpDelete("details/{productId}")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteCartItem([FromRoute] int userId, [FromRoute] int productId)
         {
             await this.cartService.DeleteCartItem(userId, productId);
@@ -53,7 +53,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPut("confirm")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> ConfirmCart([FromRoute] int userId, [FromBody] DeliveryInfoInputDto deliveryInfo)
         {
             return Ok(await this.cartService.ConfirmCart(userId, deliveryInfo));

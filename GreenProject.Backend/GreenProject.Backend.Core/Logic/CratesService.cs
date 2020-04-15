@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Contracts.Filters;
+﻿using AutoMapper.QueryableExtensions;
+using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Services;
@@ -6,6 +7,7 @@ using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -64,6 +66,15 @@ namespace GreenProject.Backend.Core.Logic
         protected override IQueryable<Crate> GetDefaultQuery()
         {
             return this.Data.Crates;
+        }
+
+        public async Task<IEnumerable<CompatibleProductOutputDto>> GetCompatibleProducts(int crateId)
+        {
+            return await this.Data
+                .CrateCompatibilities
+                .Where(c => c.CrateId == crateId)
+                .ProjectTo<CompatibleProductOutputDto>(this.Mapper.ConfigurationProvider)
+                .ToArrayAsync();
         }
     }
 }

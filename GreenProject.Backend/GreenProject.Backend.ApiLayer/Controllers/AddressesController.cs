@@ -21,21 +21,21 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> GetAddresses([FromRoute] int userId)
         {
             return Ok(await this.addressesService.GetAddresses(userId));
         }
 
         [HttpPost]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> InsertAddress([FromRoute] int userId, [FromBody] AddressInputDto address)
         {
             return Ok(await this.addressesService.AddAddress(userId, address));
         }
 
         [HttpDelete("{addressId}")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteAddress([FromRoute] int userId, [FromRoute] int addressId)
         {
             await this.addressesService.DeleteAddress(userId, addressId);
@@ -43,7 +43,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPut("default")]
-        [OwnerOnly]
+        [OwnerOrAdminOnly]
         public async Task<IActionResult> SetDefaultAddress([FromRoute] int userId, [FromBody] int addressId)
         {
             await this.addressesService.SetDefaultAddress(userId, addressId);

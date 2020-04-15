@@ -10,6 +10,8 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface ICratesService
     {
+        Task<IEnumerable<CompatibleProductOutputDto>> GetCompatibleProducts(int crateId);
+
         Task<PagedCollection<CrateOutputDto>> GetCrates(PaginationFilter pagination, PurchasableFilters filters);
 
         Task<CrateOutputDto> InsertCrate(CrateInputDto crate);

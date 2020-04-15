@@ -4,8 +4,9 @@ using System.Text;
 
 namespace GreenProject.Backend.Contracts.Errors
 {
-    public class ValidationErrorResponse
+    public class GlobalErrorDto
     {
-        public IEnumerable<ErrorDto> Errors { get; set; }
+        public string Code { get; set; }
+        public string Message { get; set; }
     }
 }
