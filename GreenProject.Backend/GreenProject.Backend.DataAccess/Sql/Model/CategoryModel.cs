@@ -17,6 +17,9 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .IsRequired()
                 .HasMaxLength(30);
 
+            entity.Property(e => e.Description)
+                .HasMaxLength(100);
+
             entity.HasOne(d => d.Image)
                 .WithOne(p => p.Category)
                 .HasForeignKey<Category>(d => d.ImageId);
