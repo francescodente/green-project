@@ -18,3 +18,20 @@ function showModal(modal) {
     }).modal("hide");
     modal.modal("show");
 }
+
+function fillPagination(elem, pageNumber, pageCount) {
+    if (pageNumber == 0) {
+        elem.find(".page-prev").addClass("disabled");
+    }
+    if (pageNumber == pageCount - 1) {
+        elem.find(".page-next").addClass("disabled");
+    }
+    for (let i = 0; i < pageCount; i++) {
+        let page = elem.find(".pages>li.d-none").clone().removeClass("d-none");
+        page.find("a").html(i + 1);
+        if (pageNumber == i) {
+            page.find("a").addClass("selected");
+        }
+        page.appendTo(elem.find(".pages"));
+    }
+}

@@ -208,6 +208,7 @@
             data.children.forEach((json) => {
                 categories.push(new Category(json));
             });
+            console.log(categories[2]);
             //fillBootstrapRow($(".product-list"), products);
             //$(".products-count").text(products.length);
         })

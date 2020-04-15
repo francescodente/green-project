@@ -23,15 +23,18 @@ $(document).ready(function() {
     let categories = url.searchParams.getAll("Categories");
     getProducts(categories)
     .done(function(data) {
+        console.log(data);
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
         } else {
-            let product = new Product(data.results[0]);
+            // Create product objects
             data.results.forEach((json) => {
                 products.push(new Product(json));
             });
             fillBootstrapRow($(".product-list"), products);
             $(".products-count").text(products.length);
+            // Handle pagination
+            fillPagination($("#products-pagination"), data.pageNumber, data.pageCount);
         }
     })
     .fail(function(data) {

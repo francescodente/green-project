@@ -148,7 +148,6 @@ function getProducts(categories, pageNumber = 0, pageSize = 30) {
     categories.forEach(category => {
         searchParams.append("Categories", category);
     });
-    console.log(searchParams.toString());
     return get("products?" + searchParams.toString());
 }
 
