@@ -22,18 +22,17 @@ namespace GreenProject.Backend.Infrastructure.Uploads
         public Task DeleteImageAtPath(string path)
         {
             string completePath = this.GetCompletePath(path);
-            return Task.Run(() =>
+            if (File.Exists(completePath))
             {
-                if (File.Exists(completePath))
-                {
-                    File.Delete(completePath);
-                }
-            });
+                File.Delete(completePath);
+            }
+            return Task.CompletedTask;
         }
 
-        public async Task<string> StoreImage(Stream imageStream, Action<IImageStoringOptions> options = null)
+        public Task<string> StoreImage(Stream imageStream, Action<IImageStoringOptions> options = null)
         {
             LocalImageStoringOptions storingOptions = new LocalImageStoringOptions();
+            storingOptions.Extension = this.defaultExtension;
             options?.Invoke(storingOptions);
 
             string relativePath = Path.Combine(
@@ -55,7 +54,7 @@ namespace GreenProject.Backend.Infrastructure.Uploads
 
                 image.Save(completePath);
             }
-            return relativePath;
+            return Task.FromResult(relativePath);
         }
 
         private string GetCompletePath(string relativePath)
