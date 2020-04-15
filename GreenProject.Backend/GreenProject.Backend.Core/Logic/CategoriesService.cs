@@ -26,6 +26,7 @@ namespace GreenProject.Backend.Core.Logic
             Category entity = new Category
             {
                 Name = category.Name,
+                Description = category.Description,
                 ParentCategoryId = category.ParentCategoryId
             };
 
