@@ -6,6 +6,7 @@ using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic
@@ -22,17 +23,15 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<DateTime> FindNextAvailableDate(int userId, int addressId)
         {
-            Address address = await this.Data
+            string zipCode = await this.Data
                 .Addresses
-                .Include(a => a.Zone)
-                    .ThenInclude(z => z.Availabilities)
-                        .ThenInclude(a => a.Availability)
-                .SingleOptionalAsync(a => a.AddressId == addressId)
+                .Where(a => a.UserId == userId)
+                .Where(a => a.AddressId == addressId)
+                .Select(a => a.ZipCode)
+                .SingleOptionalAsync()
                 .Map(a => a.OrElseThrow(() => NotFoundException.AddressWithId(addressId)));
 
-            ServiceUtils.RequireOwnership(address.UserId, userId);
-
-            return await this.scheduler.FindNextAvailableDateForAddress(this.Data, address, this.DateTime.Today.AddDays(1));
+            return await this.scheduler.FindNextAvailableDate(this.DateTime.Today.AddDays(1), zipCode);
         }
     }
 }

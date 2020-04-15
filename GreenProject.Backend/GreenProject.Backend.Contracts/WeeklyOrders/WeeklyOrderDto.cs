@@ -6,7 +6,6 @@ namespace GreenProject.Backend.Contracts.WeeklyOrders
 {
     public class WeeklyOrderDto
     {
-        public bool IsSubscribed { get; set; }
         public DeliveryInfoOutputDto DeliveryInfo { get; set; }
         public IEnumerable<BookedCrateDto> Crates { get; set; }
         public IEnumerable<CartItemOutputDto> ExtraProducts { get; set; }

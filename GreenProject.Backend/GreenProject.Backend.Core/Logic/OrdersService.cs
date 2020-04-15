@@ -83,7 +83,6 @@ namespace GreenProject.Backend.Core.Logic
         {
             Order order = await this.Data
                 .Orders
-                .Include(o => o.User)
                 .SingleOptionalAsync(o => o.OrderId == orderId)
                 .Map(o => o.OrElseThrow(() => NotFoundException.OrderWithId(orderId)));
 
@@ -93,7 +92,7 @@ namespace GreenProject.Backend.Core.Logic
 
             if (order.IsSubscription && (newState == OrderState.Canceled || newState == OrderState.Completed))
             {
-                await this.RenewWeeklyOrder(order.User, order.DeliveryDate);
+                await this.RenewWeeklyOrder(order);
             }
 
             await this.Data.SaveChangesAsync();
@@ -101,18 +100,24 @@ namespace GreenProject.Backend.Core.Logic
             await this.Notifications.OrderStateChanged(order, oldState);
         }
 
-        private async Task RenewWeeklyOrder(User user, DateTime currentDate)
+        private async Task RenewWeeklyOrder(Order order)
         {
+            User user = await this.Data
+                .Users
+                .Where(u => u.UserId == order.UserId)
+                .Include(u => u.DefaultAddress)
+                .SingleAsync();
+
             IEnumerable<BookedCrate> bookedCrates = await this.Data
                 .BookedCrates
-                .Where(c => c.UserId == user.UserId)
+                .Where(c => c.UserId == order.UserId)
                 .Include(c => c.Crate)
                 .Include(c => c.Compositions)
                 .ToListAsync();
 
-            Order order = new Order
+            Order newOrder = new Order
             {
-                DeliveryDate = await scheduler.FindNextAvailableDateForAddressId(this.Data, user.DefaultAddressId.Value, currentDate.AddDays(7)),
+                DeliveryDate = await scheduler.FindNextAvailableDate(order.DeliveryDate.AddDays(7), user.DefaultAddress.ZipCode),
                 AddressId = user.DefaultAddressId.Value,
                 Timestamp = this.DateTime.Now,
                 OrderState = OrderState.Pending,
@@ -121,11 +126,11 @@ namespace GreenProject.Backend.Core.Logic
 
             bookedCrates
                 .Select(this.CreateDetailFromBookedCrate)
-                .ForEach(order.Details.Add);
+                .ForEach(newOrder.Details.Add);
 
-            this.pricing.UpdateOrderPrices(order);
+            this.pricing.UpdateOrderPrices(newOrder);
 
-            user.Orders.Add(order);
+            user.Orders.Add(newOrder);
         }
 
         private OrderDetail CreateDetailFromBookedCrate(BookedCrate bookedCrate)
