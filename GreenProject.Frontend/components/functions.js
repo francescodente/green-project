@@ -33,7 +33,7 @@ function fillPagination(elem, pageNumber, pageCount) {
         elem.find(".page-prev").attr("href", url.toString());
     }
     // Disable or add url to next link
-    if (pageNumber == pageCount - 1) {
+    if (pageNumber == pageCount - 1 || pageCount == 0) {
         elem.find(".page-next").addClass("disabled");
     } else {
         url.searchParams.set("PageNumber", pageNumber + 1);

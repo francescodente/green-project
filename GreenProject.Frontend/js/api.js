@@ -1,6 +1,7 @@
+var protocol = "http://"
 var serverAddress = "localhost:5000";
 var apiVer = "v1";
-var basePath = "http://" + serverAddress + "/api/" + apiVer + "/";
+var basePath = protocol + serverAddress + "/api/" + apiVer + "/";
 
 function getBasePath() {
     return basePath;
@@ -142,7 +143,7 @@ function deleteSupplierBackground() {
 // Products
 
 function getProducts(categories, pageNumber = 0, pageSize = 30) {
-    var searchParams = new URLSearchParams();
+    let searchParams = new URLSearchParams();
     searchParams.append("PageNumber", pageNumber);
     searchParams.append("PageSize", pageSize);
     categories.forEach(category => {

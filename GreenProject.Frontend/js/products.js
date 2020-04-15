@@ -33,9 +33,9 @@ $(document).ready(function() {
             });
             fillBootstrapRow($(".product-list"), products);
             $(".products-count").text(products.length);
-            // Handle pagination
-            fillPagination($("#products-pagination"), data.pageNumber, data.pageCount);
         }
+        // Handle pagination
+        fillPagination($("#products-pagination"), data.pageNumber, data.pageCount);
     })
     .fail(function(data) {
         $(".search-error").removeClass("d-none");

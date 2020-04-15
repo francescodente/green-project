@@ -2,7 +2,7 @@
 function getCategoryLeaves(category) {
     let children = [];
     if (category.children.length == 0) {
-        children.push(category.name);
+        children.push(category);
     } else {
         category.children.forEach(child => {
             children = children.concat(getCategoryLeaves(child));
@@ -18,11 +18,29 @@ var Category = function(json) {
 
     this.html.main = getTemplate("CategoryCard");
 
+    // Build products link
+    let subCategories = getCategoryLeaves(this).map(c => c.categoryId);
+    let searchParams = new URLSearchParams();
+    searchParams.append("PageNumber", 0);
+    searchParams.append("PageSize", 24);
+    subCategories.forEach(category => {
+        searchParams.append("Categories", category);
+    });
+    let productsUrl = "products.php?" + searchParams.toString();
+
     let product = this;
     for (let k in product.html) {
 
         // Replace values in templates
         $(product.html[k]).find(".category-name").html(this.name);
-        //$(product.html[k]).find(".category-description").html(this.description);
+        if (this.description != null) {
+            $(product.html[k]).find(".category-description").html(this.description);
+        }
+        if (this.imageUrl != null) {
+            let imageUrl = protocol + serverAddress + "/" + this.imageUrl;
+            $(product.html[k]).find(".category-image").attr("src", imageUrl);
+        }
+        $(product.html[k]).find(".products-url").attr("href", productsUrl);
+
     }
 }
