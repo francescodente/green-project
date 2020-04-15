@@ -1,7 +1,7 @@
 <!-- PRODUCT ITEM -->
 <div data-template-name="ProductCard" data-class="card product-card mb-4" class="d-none">
-    <a href="#" class="product-image fixed-ratio fr-1-1 img-hover-zoom">
-        <img class="card-bg" src="images/default_product.png"/>
+    <a href="#" class="fixed-ratio fr-1-1 img-hover-zoom">
+        <img class="product-image card-bg" src="images/default_product.png"/>
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
     <div class="card-body">
@@ -37,7 +37,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="card-header-image fixed-ratio fr-4-3">
-                <img class="product-image card-bg" src="images/example_product.jpg"/>
+                <img class="product-image card-bg" src="images/default_product.png"/>
                 <div class="image-shade-top"></div>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi light mdi-close"></i></button>
             </div>

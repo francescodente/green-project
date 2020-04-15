@@ -27,6 +27,7 @@ var Category = function(json) {
         searchParams.append("Categories", category);
     });
     let productsUrl = "products.php?" + searchParams.toString();
+    let imageUrl = protocol + serverAddress + "/" + this.imageUrl;
 
     let product = this;
     for (let k in product.html) {
@@ -37,7 +38,6 @@ var Category = function(json) {
             $(product.html[k]).find(".category-description").html(this.description);
         }
         if (this.imageUrl != null) {
-            let imageUrl = protocol + serverAddress + "/" + this.imageUrl;
             $(product.html[k]).find(".category-image").attr("src", imageUrl);
         }
         $(product.html[k]).find(".products-url").attr("href", productsUrl);

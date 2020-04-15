@@ -23,7 +23,6 @@ $(document).ready(function() {
     let categories = url.searchParams.getAll("Categories");
     getProducts(categories)
     .done(function(data) {
-        console.log(data);
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
         } else {

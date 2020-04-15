@@ -19,8 +19,8 @@
         <section id="products-content" class="container py-4">
             <div class="row">
                 <div id="filters-col" class="col-12 col-lg-3 d-none">
-                    <div class="sticky-top" style="top: 72px;">
-                        <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle-all="categories"/>
+                    <div class="product-filters sticky-top" style="top: 72px;">
+                        <!-- <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle-all="categories"/>
                         <label for="c1" class="mt-2">Category</label><br/>
                         <div class="pl-4">
                             <input id="sc1" type="checkbox" class="checkbox" name="categories" value="sc1" checked/>
@@ -33,16 +33,17 @@
                             <label for="sc4">Subcategory 4</label><br/>
                         </div>
                         <br/>
-                        <button class="apply-filter btn accent ripple w-100 mb-4">Applica</button>
+                        <button class="apply-filter btn accent ripple w-100 mb-4">Applica</button> -->
                     </div>
                 </div>
                 <div id="results-col" class="col-12 container">
                     <div class="product-list row" data-children-class="col-6 col-md-4 col-lg-3">
                         <div class="col-12 d-flex justify-content-between align-items-center mb-4">
-                            <button class="toggle-filters btn transparent ripple ripple-accent">
+                            <!-- <button class="toggle-filters btn transparent ripple ripple-accent">
                                 <i class="mdi dark mdi-filter"></i>
                                 <span class="text-sec-dark">Filtra</span>
-                            </button>
+                            </button> -->
+                            <span></span>
                             <p class="text-dis-dark m-0"><span class="products-count">0</span> risultati</p>
                         </div>
 

@@ -38,11 +38,16 @@ function Product(json) {
     this.html.quantityModal = getTemplate("ProductQuantityModal");
 
     let product = this;
+    let imageUrl = protocol + serverAddress + "/" + this.imageUrl;
+
     for (let k in product.html) {
 
         // Replace values in templates
         $(product.html[k]).find(".product-name").html(this.name);
         $(product.html[k]).find(".product-description").html(this.description);
+        if (this.imageUrl != null) {
+            $(product.html[k]).find(".product-image").attr("src", imageUrl);
+        }
 
         // Add event listeners
         $(product.html[k]).find(".product-image").click(function() { product.showDetailsModal(); });

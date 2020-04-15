@@ -63,37 +63,6 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-12 col-md-4">
-                    <div class="px-5 px-md-2 mb-5">
-                        <a href="products.php?Categories=1" class="card flat fixed-ratio fr-1-1 img-hover-zoom">
-                            <img class="card-bg" src="images/category_crates.jpg"/>
-                            <div class="card-image-content text-light">
-                                <h3 class="font-weight-bold text-center">Cassette settimanali</h3>
-                                <p class="font-weight-bold text-center m-0">SPEDIZIONE INCLUSA</p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="px-5 px-md-2 mb-5">
-                        <a href="products.php?Categories=3" class="card flat fixed-ratio fr-1-1 img-hover-zoom">
-                            <img class="card-bg" src="images/category_vegetables.jpg"/>
-                            <div class="card-image-content text-light">
-                                <h3 class="font-weight-bold text-center">Ortaggi freschi</h3>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="px-5 px-md-2 mb-5">
-                        <a href="products.php?Categories=2" class="card flat fixed-ratio fr-1-1 img-hover-zoom">
-                            <img class="card-bg" src="images/category_fruit.jpg"/>
-                            <div class="card-image-content text-light">
-                                <h3 class="font-weight-bold text-center">Frutta fresca</h3>
-                            </div>
-                        </a>
-                    </div>
-                </div> -->
             </div>
         </section>
 
@@ -204,13 +173,9 @@
         var categories = [];
         getCategories()
         .done(function(data) {
-            //console.log(data);
-            console.log("Leaves");
-            console.log(getCategoryLeaves(data));
             data.children.forEach((json) => {
                 categories.push(new Category(json));
             });
-            //console.log(categories);
             fillBootstrapRow($(".category-list"), categories);
         })
         .fail(function(data) {
