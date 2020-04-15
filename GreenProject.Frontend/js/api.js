@@ -8,9 +8,10 @@ function getBasePath() {
 }
 
 function ajax(method, url, data) {
+    // TODO add some token renewal method
     return $.ajax({
         headers: {
-            "authorization" : "bearer TOKEN",
+            "authorization" : "bearer " + localStorage.getItem("token"),
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
@@ -192,8 +193,8 @@ function addTimeSlotOverride() {
 
 // Users
 
-function getUsers() {
-
+function getCurrentUserInfo() {
+    return get("users/" + localStorage.getItem("userId"));
 }
 
 function deleteUsers() {

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // CHANGE WITH A MORE APPROPRIATE LOGIN CHECK METHOD
     if (localStorage.getItem("token") === null) {
         // User is not logged in
         $(".req-login").remove();
