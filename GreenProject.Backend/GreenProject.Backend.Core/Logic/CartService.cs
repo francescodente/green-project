@@ -42,25 +42,25 @@ namespace GreenProject.Backend.Core.Logic
         {
             User user = await this.RequireUserById(userId, q => q
                 .IncludingCart()
-                .IncludingCustomerRoles()
-                .Include(u => u.Addresses));
+                .IncludingCustomerRoles());
 
             if (!user.CartItems.Any())
             {
                 throw new CartEmptyException();
             }
 
-            Address address = user.Addresses
-                .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
-                .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
-            
-            DateTime scheduleDate = await this.scheduler.FindNextAvailableDateForAddress(this.Data, address, this.DateTime.Today.AddDays(1));
-
-            CustomerType customerType = user.GetCustomerType().Value;
+            string zipCode = await this.Data
+                .Addresses
+                .Where(a => a.AddressId == deliveryInfo.AddressId)
+                .Where(a => a.UserId == userId)
+                .Select(a => a.ZipCode)
+                .SingleOptionalAsync()
+                .Map(z => z.OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId)));
+            DateTime scheduleDate = await this.scheduler.FindNextAvailableDate(this.DateTime.Today.AddDays(1), zipCode);
             
             Order order = new Order
             {
-                Address = address,
+                AddressId = deliveryInfo.AddressId,
                 DeliveryDate = scheduleDate,
                 IsSubscription = false,
                 Notes = deliveryInfo.Notes,
@@ -68,6 +68,7 @@ namespace GreenProject.Backend.Core.Logic
                 Timestamp = this.DateTime.Now
             };
 
+            CustomerType customerType = user.GetCustomerType().Value;
             user.CartItems.Select(c => c.CreateOrderDetail(customerType)).ForEach(order.Details.Add);
             this.pricing.UpdateOrderPrices(order);
             user.CartItems.Clear();

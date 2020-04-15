@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 
 namespace GreenProject.Backend.ApiLayer.DependencyInjection
@@ -22,6 +24,15 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
         }
 
         private INotificationsService CreateNotificationsService(IServiceProvider provider)
+        {
+            ICollection<INotificationsService> subServices = new List<INotificationsService>();
+
+            //subServices.Add(this.CreateMailNotificationsService(provider));
+
+            return new CompositeNotificationsService(subServices);
+        }
+
+        private INotificationsService CreateMailNotificationsService(IServiceProvider provider)
         {
             string contentRoot = provider.GetRequiredService<IWebHostEnvironment>().WebRootPath;
             string basePath = Path.Combine(contentRoot, TEMPLATES_FOLDER);
