@@ -44,7 +44,7 @@
         <!-- TUTORIAL -->
         <section id="products" class="container pt-4" data-section="products">
             <span id="products_" class="anchor"></span>
-            <div class="row" data-children-class="">
+            <div class="row category-list" data-children-class="col-12 col-md-4">
                 <div class="col-12 text-center mb-4">
                     <h2 class="h-variant-2 m-0">CATALOGO</h2>
                 </div>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="search-error empty-state m-5 d-none">
+                    <div class="cat-error empty-state m-5 d-none">
                         <i class="mdi mdi-emoticon-sad-outline"></i>
                         <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Oops! Qualcosa è andato storto</h6>
                         <p class="text-center text-dis-dark m-0">
@@ -204,19 +204,18 @@
         var categories = [];
         getCategories()
         .done(function(data) {
-            console.log(data.children);
+            console.log(data);
             data.children.forEach((json) => {
                 categories.push(new Category(json));
             });
-            console.log(categories[2]);
-            //fillBootstrapRow($(".product-list"), products);
-            //$(".products-count").text(products.length);
+            console.log(categories);
+            fillBootstrapRow($(".category-list"), categories);
         })
         .fail(function(data) {
-            //$(".search-error").removeClass("d-none");
+            $(".cat-error").removeClass("d-none");
         })
         .always(function(data) {
-            $("#products-loader").hide();
+            $("#categories-loader").hide();
         });
     </script>
 

@@ -75,22 +75,9 @@
             </div>
             <div class="divider dark mb-4"></div>
             <div class="row justify-content-center">
-                <!-- <ul class="pagination">
-                    <li><a href="#" class="btn icon ripple disabled" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
-                    <div class="d-flex align-items-center">
-                        <li><a href="#" class="selected">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                    </div>
-                    <li><a href="#" class="btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
-                </ul> -->
                 <ul id="products-pagination" class="pagination">
                     <li><a href="#" class="page-prev btn icon ripple" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
-                    <div class="pages d-flex align-items-center">
-                        <li class="d-none"><a href="#">1</a></li>
-                    </div>
+                    <div class="pages d-flex align-items-center"><li class="d-none"><a href="#">1</a></li></div>
                     <li><a href="#" class="page-next btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
                 </ul>
             </div>

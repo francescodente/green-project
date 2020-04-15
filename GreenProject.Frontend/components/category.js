@@ -1,3 +1,11 @@
+// Given a category, returns all the subcategories with no children
+function getCategoryLeaves(category) {
+    if (category.children.length == 0) {
+        return category;
+    }
+    let children = "";
+}
+
 // Category
 var Category = function(json) {
     for (let k in json) this[k] = json[k];
