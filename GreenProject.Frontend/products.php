@@ -47,10 +47,6 @@
                             <p class="text-dis-dark m-0"><span class="products-count">0</span> risultati</p>
                         </div>
 
-                        <div id="products-loader" class="loader col-12 text-center my-5">
-                            <?php include("loader.php"); ?>
-                        </div>
-
                         <div class="col-12">
                             <div class="search-no-results empty-state m-5 d-none">
                                 <i class="mdi mdi-feature-search-outline"></i>

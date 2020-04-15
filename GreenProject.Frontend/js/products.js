@@ -18,7 +18,7 @@ $(document).ready(function() {
     });
 
     // Get products
-    $("#products-loader").show();
+    $("#modal-loading").modal("show");
     let url = new URL(window.location.href);
     let categories = url.searchParams.getAll("Categories");
     getProducts(categories)
@@ -40,7 +40,7 @@ $(document).ready(function() {
         $(".search-error").removeClass("d-none");
     })
     .always(function(data) {
-        $("#products-loader").hide();
+        fadeOutModal($("#modal-loading"));
     });
 
 });

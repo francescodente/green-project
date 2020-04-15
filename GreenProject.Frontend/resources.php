@@ -3,6 +3,7 @@ include("scripts.php");
 include("components/objects.php");
 include("modals-authentication.php");
 include("cookie.php");
+include("loading-modal.php");
 ?>
 
 <div id="sizer">

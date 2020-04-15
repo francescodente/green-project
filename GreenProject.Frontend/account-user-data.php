@@ -178,6 +178,7 @@
         }
 
         // Get user data
+        $("#modal-loading").modal("show");
         getCurrentUserInfo()
         .done(function(data) {
             // Fill user info
@@ -194,7 +195,7 @@
 
         })
         .always(function(data) {
-
+            fadeOutModal($("#modal-loading"));
         });
     </script>
 

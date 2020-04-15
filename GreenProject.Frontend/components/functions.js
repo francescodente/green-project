@@ -22,6 +22,15 @@ function showModal(modal) {
     modal.modal("show");
 }
 
+// Gracefully fade out a modal
+function fadeOutModal(modal) {
+    modal.fadeOut();
+    $(".modal-backdrop").fadeOut();
+    setTimeout(function() {
+        modal.modal("hide");
+    }, 500);
+}
+
 // Fill the given pagination DOM element
 function fillPagination(elem, pageNumber, pageCount) {
     let url = new URL(window.location.href);
