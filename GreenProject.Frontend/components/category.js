@@ -1,9 +1,14 @@
-// Given a category, returns all the subcategories with no children
+// Given a category, returns the names of all the subcategories with no children
 function getCategoryLeaves(category) {
+    let children = [];
     if (category.children.length == 0) {
-        return category;
+        children.push(category.name);
+    } else {
+        category.children.forEach(child => {
+            children = children.concat(getCategoryLeaves(child));
+        });
     }
-    let children = "";
+    return children;
 }
 
 // Category

@@ -204,11 +204,13 @@
         var categories = [];
         getCategories()
         .done(function(data) {
-            console.log(data);
+            //console.log(data);
+            console.log("Leaves");
+            console.log(getCategoryLeaves(data));
             data.children.forEach((json) => {
                 categories.push(new Category(json));
             });
-            console.log(categories);
+            //console.log(categories);
             fillBootstrapRow($(".category-list"), categories);
         })
         .fail(function(data) {
