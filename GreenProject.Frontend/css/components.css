@@ -1348,6 +1348,11 @@ textarea {
     fill: var(--col-accent);
 }
 
+.modal-loading.show ~ .modal-backdrop {
+    background-color: var(--col-primary-dark);
+    opacity: 1;
+}
+
 /**************\
 |   CAROUSEL   |
 \**************/
