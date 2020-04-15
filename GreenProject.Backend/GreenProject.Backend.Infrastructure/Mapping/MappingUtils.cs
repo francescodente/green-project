@@ -126,7 +126,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public CategoriesMapping()
             {
-                CreateMap<Category, CategoryDto>()
+                CreateMap<Category, CategoryOutputDto>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
             }
         }

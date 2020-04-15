@@ -23,7 +23,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 
         private INotificationsService CreateNotificationsService(IServiceProvider provider)
         {
-            string contentRoot = provider.GetRequiredService<IWebHostEnvironment>().ContentRootPath;
+            string contentRoot = provider.GetRequiredService<IWebHostEnvironment>().WebRootPath;
             string basePath = Path.Combine(contentRoot, TEMPLATES_FOLDER);
 
             return new MailNotifications(

@@ -43,7 +43,7 @@ namespace GreenProject.Backend.Core.Logic
         public Task<PagedCollection<OrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination)
         {
             return this.GetOrdersFilteredBy(filters)
-                .OrderBy(o => o.Timestamp)
+                .OrderBy(o => o.DeliveryDate)
                 .ProjectTo<OrderDto>(this.Mapper.ConfigurationProvider)
                 .ToPagedCollection(pagination);
         }

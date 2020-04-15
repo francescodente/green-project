@@ -41,23 +41,20 @@ namespace GreenProject.Backend.Infrastructure.Uploads
                 (storingOptions.Name ?? Guid.NewGuid().ToString()) + storingOptions.Extension);
             string completePath = this.GetCompletePath(relativePath);
 
-            await Task.Run(() =>
+            string dir = Path.GetDirectoryName(completePath);
+            if (!Directory.Exists(dir))
             {
-                string dir = Path.GetDirectoryName(completePath);
-                if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
+            }
+            using (Image image = Image.Load(imageStream))
+            {
+                if (storingOptions.ImageModifier != null)
                 {
-                    Directory.CreateDirectory(dir);
+                    image.Mutate(storingOptions.ImageModifier);
                 }
-                using (Image image = Image.Load(imageStream))
-                {
-                    if (storingOptions.ImageModifier != null)
-                    {
-                        image.Mutate(storingOptions.ImageModifier);
-                    }
 
-                    image.Save(completePath);
-                }
-            });
+                image.Save(completePath);
+            }
             return relativePath;
         }
 
