@@ -58,5 +58,14 @@ namespace GreenProject.Backend.Contracts.Errors
 
             public static readonly string DeletingDefaultAddress = $"{AddressesBase}.DELETING_DEFAULT";
         }
+
+        public static class WeeklyOrders
+        {
+            private static readonly string WeeklyOrdersBase = $"{BASE}.WEEKLY_ORDERS";
+
+            public static readonly string NotSubscribed = $"{WeeklyOrdersBase}.NOT_SUBSCRIBED";
+
+            public static readonly string AlreadySubscribed = $"{WeeklyOrdersBase}.ALREADY_SUBSCRIBED";
+        }
     }
 }

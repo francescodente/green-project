@@ -1,4 +1,5 @@
 ﻿using GreenProject.Backend.Core.Exceptions;
+using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using System;
@@ -30,7 +31,31 @@ namespace GreenProject.Backend.Core.Entities.Extensions
             }
 
             order.OrderState = newState;
+        }
 
+        public static OrderDetail CreateCopy(this OrderDetail detail)
+        {
+            OrderDetail copy = new OrderDetail
+            {
+                ItemId = detail.ItemId,
+                Quantity = detail.Quantity,
+                Price = detail.Item.Prices.Single().Value
+            };
+
+            detail.SubProducts
+                .Select(CreateCopy)
+                .ForEach(copy.SubProducts.Add);
+
+            return copy;
+        }
+
+        private static OrderDetailSubProduct CreateCopy(this OrderDetailSubProduct subProduct)
+        {
+            return new OrderDetailSubProduct
+            {
+                ProductId = subProduct.ProductId,
+                Quantity = subProduct.Quantity
+            };
         }
     }
 }

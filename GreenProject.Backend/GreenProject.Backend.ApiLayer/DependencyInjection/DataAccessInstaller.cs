@@ -43,7 +43,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 .AddScoped<IRolesService, RolesService>()
                 .AddScoped<ISupportService, SupportService>()
                 .AddScoped<IImagesService, ImagesService>()
-                .AddScoped<ISchedulingService, SchedulingService>()
+                .AddScoped<IZonesService, ZonesService>()
                 .AddScoped<IOrdersService, OrdersService>();
         }
     }
