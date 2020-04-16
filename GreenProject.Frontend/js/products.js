@@ -1,11 +1,4 @@
-/*$(document).ready(function() {
-
-    for (var i = 0; i < 24; i++) {
-        var productCard = new ProductCard();
-        $("<div class='" + $("#results-col").data("children-class") + "'>").html(productCard.html).appendTo("#results-col .row");
-    }
-
-});*/
+var products = [];
 
 $(document).ready(function() {
 
@@ -22,6 +15,32 @@ $(document).ready(function() {
             $("#results-col").removeClass("col-lg-9");
             $(".product-card:not([data-class])").parent().addClass("col-lg-3");
         }
+    });
+
+    // Get products
+    $("#products-loader").show();
+    let url = new URL(window.location.href);
+    let categories = url.searchParams.getAll("Categories");
+    getProducts(categories)
+    .done(function(data) {
+        if (data.results.length == 0) {
+            $(".search-no-results").removeClass("d-none");
+        } else {
+            // Create product objects
+            data.results.forEach((json) => {
+                products.push(new Product(json));
+            });
+            fillBootstrapRow($(".product-list"), products);
+            $(".products-count").text(products.length);
+        }
+        // Handle pagination
+        fillPagination($("#products-pagination"), data.pageNumber, data.pageCount);
+    })
+    .fail(function(data) {
+        $(".search-error").removeClass("d-none");
+    })
+    .always(function(data) {
+        $("#products-loader").hide();
     });
 
 });

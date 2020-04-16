@@ -27,12 +27,15 @@ $page = basename($_SERVER['PHP_SELF']);
         </div>
 
         <div class="top-bar-right">
-            <div style="position: relative">
+
+            <button class="btn-login btn icon ripple req-logout" title="Accedi" data-toggle="modal" data-target="#modal-login"><i class="mdi dark mdi-login-variant"></i></button>
+
+            <div style="position: relative;" class="req-login">
                 <a href="cart.php" class="btn icon ripple" title="Carrello"><i class="mdi dark mdi-cart"></i></a>
                 <span class="cart-badge badge">3</span>
             </div>
 
-            <div class="dropdown d-none d-lg-block">
+            <div class="dropdown d-none d-lg-block req-login">
                 <button id="dropdown-account" class="btn icon ripple" title="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-account-circle"></i>
                 </button>
@@ -52,13 +55,13 @@ $page = basename($_SERVER['PHP_SELF']);
                     <a href="account-delivery.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-truck-delivery"></i><span class="text-dark">Consegne</span>
                     </a>
-                    <a href="#" class="dropdown-item">
+                    <a href="#" class="btn-logout dropdown-item">
                         <i class="mdi dark mdi-logout-variant"></i><span>Esci</span>
                     </a>
                 </div>
             </div>
 
-            <div class="dropdown d-none d-lg-block">
+            <div class="dropdown d-none d-lg-block req-login">
                 <button id="dropdown-admin" class="btn icon ripple" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-pound-box"></i>
                 </button>
@@ -118,12 +121,17 @@ $page = basename($_SERVER['PHP_SELF']);
 
         <div class="divider dark"></div>
 
-        <button class="menu-item ripple" data-toggle="submenu" data-target="#account-submenu">
+        <a href="#" class="menu-item ripple req-logout" data-toggle="modal" data-target="#modal-login" onclick="toggleMenu(false);">
+            <i class="mdi mdi-login-variant"></i>
+            <span>Accedi</span>
+        </a>
+
+        <button class="menu-item ripple req-login" data-toggle="submenu" data-target="#account-submenu">
             <i class="mdi mdi-account-circle"></i>
             <span>Account</span>
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
-        <div id="account-submenu" class="submenu">
+        <div id="account-submenu" class="submenu req-login">
             <a href="account-user-data.php" class="menu-item">
                 <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
             </a>
@@ -139,22 +147,22 @@ $page = basename($_SERVER['PHP_SELF']);
             <a href="account-delivery.php" class="menu-item">
                 <i class="mdi dark mdi-truck-delivery"></i><span class="text-dark">Consegne</span>
             </a>
-            <a href="#" class="menu-item">
+            <a href="#" class="btn-logout menu-item">
                 <i class="mdi dark mdi-logout-variant"></i><span>Esci</span>
             </a>
         </div>
-        <a href="cart.php" class="menu-item ripple">
+        <a href="cart.php" class="menu-item ripple req-login">
             <i class="mdi mdi-cart"></i>
             <span>Carrello</span>
             <span class="cart-badge badge">3</span>
         </a>
 
-        <button class="menu-item ripple" data-toggle="submenu" data-target="#admin-submenu">
+        <button class="menu-item ripple req-login" data-toggle="submenu" data-target="#admin-submenu">
             <i class="mdi mdi-pound-box"></i>
             <span>Gestione</span>
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
-        <div id="admin-submenu" class="submenu">
+        <div id="admin-submenu" class="submenu req-login">
             <a href="management-products.php" class="menu-item">
                 <i class="mdi mdi-sprout"></i>
                 <span>Gestione catalogo</span>

@@ -37,48 +37,32 @@
 
             </div>
             <div class="bottom-content mb-4">
-                <button class="btn round outline light ripple" data-toggle="modal" data-target="#modal-login">Accedi o registrati</button>
+                <button class="btn round outline light ripple req-logout" data-toggle="modal" data-target="#modal-login">Accedi o registrati</button>
             </div>
             <div class="parallax shade" data-parallax-image="images/home.jpg"></div>
         </section>
         <!-- TUTORIAL -->
-        <section id="products" class="container py-4" data-section="products">
+        <section id="products" class="container pt-4" data-section="products">
             <span id="products_" class="anchor"></span>
-            <div class="row">
+            <div class="row category-list" data-children-class="col-12 col-md-4">
                 <div class="col-12 text-center mb-4">
                     <h2 class="h-variant-2 m-0">CATALOGO</h2>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="px-5 px-md-2 mb-5 mb-md-4">
-                        <a href="products.php" class="card flat fixed-ratio fr-1-1 img-hover-zoom">
-                            <img class="card-bg" src="images/category_crates.jpg"/>
-                            <div class="card-image-content text-light">
-                                <h3 class="font-weight-bold text-center">Cassette settimanali</h3>
-                                <p class="font-weight-bold text-center m-0">SPEDIZIONE INCLUSA</p>
-                            </div>
-                        </a>
+
+                <div id="categories-loader" class="loader col-12 text-center my-5">
+                    <?php include("loader.php"); ?>
+                </div>
+
+                <div class="col-12">
+                    <div class="cat-error empty-state m-5 d-none">
+                        <i class="mdi mdi-emoticon-sad-outline"></i>
+                        <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Oops! Qualcosa è andato storto</h6>
+                        <p class="text-center text-dis-dark m-0">
+                            C'è stato un errore, ti preghiamo di riprovare.
+                        </p>
                     </div>
                 </div>
-                <div class="col-12 col-md-4">
-                    <div class="px-5 px-md-2 mb-5 mb-md-4">
-                        <a href="products.php" class="card flat fixed-ratio fr-1-1 img-hover-zoom">
-                            <img class="card-bg" src="images/category_vegetables.jpg"/>
-                            <div class="card-image-content text-light">
-                                <h3 class="font-weight-bold text-center">Ortaggi freschi</h3>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="px-5 px-md-2 mb-5 mb-md-4">
-                        <a href="products.php" class="card flat fixed-ratio fr-1-1 img-hover-zoom">
-                            <img class="card-bg" src="images/category_fruit.jpg"/>
-                            <div class="card-image-content text-light">
-                                <h3 class="font-weight-bold text-center">Frutta fresca</h3>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+
             </div>
         </section>
 
@@ -181,11 +165,26 @@
 
     <?php include("footer.php"); ?>
 
-    <?php include("scripts.php"); ?>
+    <?php include("resources.php") ?>
 
-    <?php include("modals-authentication.php"); ?>
-
-    <?php include("cookie.php"); ?>
+    <script>
+        // Get categories
+        $("#categories-loader").show();
+        var categories = [];
+        getCategories()
+        .done(function(data) {
+            data.children.forEach((json) => {
+                categories.push(new Category(json));
+            });
+            fillBootstrapRow($(".category-list"), categories);
+        })
+        .fail(function(data) {
+            $(".cat-error").removeClass("d-none");
+        })
+        .always(function(data) {
+            $("#categories-loader").hide();
+        });
+    </script>
 
 </body>
 </html>

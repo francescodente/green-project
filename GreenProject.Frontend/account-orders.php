@@ -13,7 +13,7 @@
         <section id="account" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">ACCOUNT</h1>
-                <br>
+                <br/>
                 <h3 class="text-light">Ordini</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
@@ -154,7 +154,7 @@
 
     <?php include("footer.php"); ?>
 
-    <?php include("scripts.php"); ?>
+    <?php include("resources.php") ?>
 
     <?php include("modals-product.php"); ?>
 

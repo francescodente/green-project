@@ -13,7 +13,7 @@
         <section id="account" class="parallax-container header d-flex justify-content-center align-items-center">
             <div class="container text-center">
                 <h1 class="text-light">ACCOUNT</h1>
-                <br>
+                <br/>
                 <h3 class="text-light">I miei dati</h3>
             </div>
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
@@ -41,7 +41,7 @@
 
                         <h6>E-mail *</h6>
                         <div class="text-input mb-3">
-                            <input id="email" type="email" name="email" value="user@domain.com" disabled/>
+                            <input id="email" type="email" name="email" value="" disabled/>
                             <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
                         </div>
 
@@ -55,15 +55,13 @@
 
                         <h6>Telefono **</h6>
                         <div class="text-input mb-3">
-                            <input id="telephone" type="text" name="telephone" value="123 456 7890" disabled/>
+                            <input id="telephone" type="text" name="telephone" value="" disabled/>
                             <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
                         </div>
 
                         <h6>Consensi</h6>
-                        <input id="c1" type="checkbox" class="checkbox" name="cookie-consent" value="1" checked/>
-                        <label for="c1">Consenso all'uso dei cookie</label><br>
-                        <input id="c2" type="checkbox" class="checkbox" name="marketing-consent" value="1" checked/>
-                        <label for="c2">Consenso alla ricezione di informazioni di marketing</label><br>
+                        <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
+                        <label for="marketing-consent">Consenso alla ricezione di informazioni di marketing</label><br/>
 
                     </div>
 
@@ -83,12 +81,12 @@
 
                         <h6>Nome **</h6>
                         <div class="text-input mb-3">
-                            <input id="first-name" type="text" name="first-name" disabled/>
+                            <input id="first-name" type="text" name="first-name" disabled required/>
                         </div>
 
                         <h6>Cognome **</h6>
                         <div class="text-input mb-3">
-                            <input id="last-name" type="text" name="last-name" disabled/>
+                            <input id="last-name" type="text" name="last-name" disabled required/>
                         </div>
 
                         <h6>Data di nascita</h6>
@@ -99,15 +97,15 @@
                         </div>
 
                         <h6>Sesso</h6>
-                        <input id="r1" type="radio" class="radio" name="gender" value="male" disabled checked/>
-                        <label for="r1">Maschio</label><br>
+                        <input id="r1" type="radio" class="radio" name="gender" value="male" disabled/>
+                        <label for="r1">Maschio</label><br/>
                         <input id="r2" type="radio" class="radio" name="gender" value="female" disabled/>
-                        <label for="r2">Femmina</label><br>
+                        <label for="r2">Femmina</label><br/>
                         <input id="r3" type="radio" class="radio" name="gender" value="other" disabled/>
                         <label for="r3" class="mb-2">Altro</label>
 
                         <div class="text-right mt-4">
-                            <button type="button" class="delete-form btn outline ripple" style="width: 120px">
+                            <button type="button" class="delete-form btn outline ripple" style="width: 120px" data-toggle="modal" data-target="#modal-person-role-delete">
                                 <span class="text-sec-dark">Cancella</span>
                                 <i class="mdi dark mdi-delete"></i>
                             </button>
@@ -122,7 +120,7 @@
                     <div class="divider dark my-4"></div>
 
                     <p class="text-sec-dark">
-                        I campi contrassegnati da * sono obbligatori.<br>
+                        I campi contrassegnati da * sono obbligatori.<br/>
                         I campi contrassegnati da ** sono necessari per effettuare acquisti.
                     </p>
 
@@ -134,7 +132,7 @@
 
     <?php include("footer.php"); ?>
 
-    <?php include("scripts.php"); ?>
+    <?php include("resources.php"); ?>
     <script src="js/account-user-data.js"></script>
 
     <?php include("modal-pwd-change.php"); ?>
@@ -155,6 +153,50 @@
             </div>
         </div>
     </div>
+
+    <div id="modal-person-role-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-delete-empty"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="m-0">Vuoi davvero eliminare le tue informazioni personali?<br/>Senza questi dati non è possibile effettuare ordini.</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Elimina</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CHANGE WITH A MORE APPROPRIATE LOGIN CHECK METHOD
+        if (localStorage.getItem("token") === null) {
+            window.location.href = "index.php";
+        }
+
+        // Get user data
+        getCurrentUserInfo()
+        .done(function(data) {
+            // Fill user info
+            $("#email").val(data.email);
+            $("#telephone").val(data.telephone);
+            $("#marketing-consent").prop("checked", data.marketingConsent);
+            // Fill personal info
+            if ("Person" in data.rolesData) {
+                $("#first-name").val(data.rolesData.Person.firstName);
+                $("#last-name").val(data.rolesData.Person.lastName);
+            }
+        })
+        .fail(function(data) {
+
+        })
+        .always(function(data) {
+
+        });
+    </script>
 
 </body>
 </html>

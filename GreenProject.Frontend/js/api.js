@@ -1,15 +1,17 @@
-var serverAddress = "192.168.1.9:5001";
+var protocol = "http://"
+var serverAddress = "localhost:5000";
 var apiVer = "v1";
-var basePath = "https://" + serverAddress + "/api/" + apiVer + "/";
+var basePath = protocol + serverAddress + "/api/" + apiVer + "/";
 
 function getBasePath() {
     return basePath;
 }
 
 function ajax(method, url, data) {
+    // TODO add some token renewal method
     return $.ajax({
         headers: {
-            "authorization" : "bearer TOKEN",
+            "authorization" : "bearer " + localStorage.getItem("token"),
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
@@ -63,12 +65,12 @@ function changePsw() {
 
 }
 
-function registerCustomer(data) {
-    return post("auth/register/customer", data);
+function signup(data) {
+    return post("auth/register", data);
 }
 
-function registerSupplier() {
-
+function logout() {
+    localStorage.clear();
 }
 
 // Cart
@@ -80,7 +82,6 @@ function getCart() {
 function editCartOptions() {
 
 }
-
 
 function addToCart() {
 
@@ -103,7 +104,7 @@ function createOrder() {
 // Categories
 
 function getCategories() {
-
+    return get("categories");
 }
 
 // Images
@@ -142,8 +143,14 @@ function deleteSupplierBackground() {
 
 // Products
 
-function getProducts() {
-
+function getProducts(categories, pageNumber = 0, pageSize = 30) {
+    let searchParams = new URLSearchParams();
+    searchParams.append("PageNumber", pageNumber);
+    searchParams.append("PageSize", pageSize);
+    categories.forEach(category => {
+        searchParams.append("Categories", category);
+    });
+    return get("products?" + searchParams.toString());
 }
 
 function createProduct() {
@@ -186,8 +193,8 @@ function addTimeSlotOverride() {
 
 // Users
 
-function getUsers() {
-
+function getCurrentUserInfo() {
+    return get("users/" + localStorage.getItem("userId"));
 }
 
 function deleteUsers() {

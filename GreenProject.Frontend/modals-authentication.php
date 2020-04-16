@@ -31,13 +31,13 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- KEEP LOGIN -->
                     <input id="keep-login" type="checkbox" class="checkbox" name="keep-login" value="1"/>
-                    <label for="keep-login" class="my-2">Ricordami</label><br>
+                    <label for="keep-login" class="my-2">Ricordami</label><br/>
 
                     <a href="#" class="text-sec-dark" data-toggle="modal" data-target="#modal-pwd-recovery" data-dismiss="modal">Password dimenticata?</a>
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn accent ripple my-3">Accedi</button>
+                    <button type="submit" class="btn-login btn accent ripple my-3">Accedi</button>
                 </div>
 
                 <p class="text-center text-sec-dark m-0">Non hai un account? <a href="#" data-toggle="modal" data-target="#modal-sign-up" data-dismiss="modal">Registrati ora</a></p>
@@ -83,11 +83,11 @@
 
                 <!-- PRIVACY CONSENT -->
                 <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1"/>
-                <label for="privacy-consent" class="my-2">Ho letto <a href="privacy-terms.php" target="_blank">privacy e termini</a></label><br>
+                <label for="privacy-consent" class="my-2">Ho letto <a href="privacy-terms.php" target="_blank">privacy e termini</a></label><br/>
 
                 <!-- MARKETING CONSENT -->
                 <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
-                <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br>
+                <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br/>
 
                 <div class="text-center">
                     <button type="submit" class="btn accent ripple mt-3">Registrati</button>
@@ -111,7 +111,7 @@
 
                 <h4 class="text-center my-3">Recupero password</h4>
 
-                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> del tuo account.</p>
+                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br/>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> del tuo account.</p>
 
                 <!-- E-MAIL -->
                 <div class="text-input">
@@ -136,10 +136,10 @@
         $("#form-sign-up").submit(function(event) {
             event.preventDefault();
             console.log("sign-up");
-            registerCustomer({
+            signup({
                 user: {
                     email: $("#sign-up-email").val(),
-                    cookeConsent: true,
+                    telephone: "1",
                     marketingConsent: $("#marketing-consent").is(":checked")
                 },
                 password: $("#sign-up-password").val()
@@ -159,19 +159,15 @@
             event.preventDefault();
             console.log("login");
             $("#login-loader").show();
+            $(".btn-login").prop("disabled", true);
             authToken({
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
             }).done(function(data) {
-                sessionStorage.setItem("token", data.token);
-                sessionStorage.setItem("expiration", data.expiration);
-                sessionStorage.setItem("userId", data.userId);
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("expiration", data.expiration);
+                localStorage.setItem("userId", data.userId);
                 location.reload();
-                /*console.log("done");
-                console.log(data);
-                console.log(sessionStorage.getItem("token"));
-                console.log(sessionStorage.getItem("expiration"));
-                console.log(sessionStorage.getItem("userId"));*/
             }).fail(function(data) {
                 $("#login-email").addClass("error");
                 $("#login-password").addClass("error");
@@ -180,6 +176,7 @@
                 console.log(data);*/
             }).always(function(data) {
                 $("#login-loader").hide();
+                $(".btn-login").prop("disabled", false);
             });
         });
 

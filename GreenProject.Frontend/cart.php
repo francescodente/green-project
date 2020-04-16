@@ -120,7 +120,7 @@
 
     <?php include("footer.php"); ?>
 
-    <?php include("scripts.php"); ?>
+    <?php include("resources.php"); ?>
 
     <?php include("modals-address-management.php"); ?>
     <?php include("modals-product.php"); ?>
