@@ -102,54 +102,33 @@ namespace GreenProject.Backend.Core.Logic
 
         private async Task RenewWeeklyOrder(Order order)
         {
-            User user = await this.Data
+            var destinationData = await this.Data
                 .Users
                 .Where(u => u.UserId == order.UserId)
-                .Include(u => u.DefaultAddress)
+                .Select(u => new { AddressId = u.DefaultAddressId.Value, u.DefaultAddress.ZipCode })
                 .SingleAsync();
 
-            IEnumerable<BookedCrate> bookedCrates = await this.Data
-                .BookedCrates
-                .Where(c => c.UserId == order.UserId)
-                .Include(c => c.Crate)
-                .Include(c => c.Compositions)
-                .ToListAsync();
+            DateTime scheduleDate = await scheduler.FindNextAvailableDate(order.DeliveryDate.AddDays(7), destinationData.ZipCode);
 
             Order newOrder = new Order
             {
-                DeliveryDate = await scheduler.FindNextAvailableDate(order.DeliveryDate.AddDays(7), user.DefaultAddress.ZipCode),
-                AddressId = user.DefaultAddressId.Value,
+                UserId = order.UserId,
+                DeliveryDate = scheduleDate,
+                AddressId = destinationData.AddressId,
                 Timestamp = this.DateTime.Now,
                 OrderState = OrderState.Pending,
                 IsSubscription = true
             };
 
-            bookedCrates
-                .Select(this.CreateDetailFromBookedCrate)
+            newOrder
+                .Details
+                .Where(d => d.Item is Crate)
+                .Select(d => d.CreateCopy())
                 .ForEach(newOrder.Details.Add);
 
             this.pricing.UpdateOrderPrices(newOrder);
 
-            user.Orders.Add(newOrder);
-        }
-
-        private OrderDetail CreateDetailFromBookedCrate(BookedCrate bookedCrate)
-        {
-            OrderDetail detail = new OrderDetail
-            {
-                ItemId = bookedCrate.CrateId,
-                Price = bookedCrate.Crate.Prices.Single().Value,
-                Quantity = 1
-            };
-
-            bookedCrate.Compositions.Select(c => new OrderDetailSubProduct
-            {
-                ProductId = c.ProductId,
-                Quantity = c.Quantity
-            })
-                .ForEach(detail.SubProducts.Add);
-
-            return detail;
+            this.Data.Orders.Add(newOrder);
         }
     }
 }

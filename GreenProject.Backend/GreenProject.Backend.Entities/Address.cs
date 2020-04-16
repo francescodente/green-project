@@ -16,7 +16,7 @@ namespace GreenProject.Backend.Entities
         public string Name { get; set; }
         public string Telephone { get; set; }
         public string ZipCode { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         public virtual User User { get; set; }
         public virtual Zone Zone { get; set; }
