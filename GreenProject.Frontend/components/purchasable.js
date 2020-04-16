@@ -38,7 +38,7 @@ function Product(json) {
     this.html.quantityModal = getTemplate("ProductQuantityModal");
 
     let product = this;
-    let imageUrl = protocol + serverAddress + "/" + this.imageUrl;
+    let imageUrl = getBasePath() + this.imageUrl;
 
     for (let k in product.html) {
 

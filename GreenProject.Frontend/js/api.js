@@ -1,22 +1,29 @@
 var protocol = "http://"
 var serverAddress = "localhost:5000";
 var apiVer = "v1";
-var basePath = protocol + serverAddress + "/api/" + apiVer + "/";
+var basePath = protocol + serverAddress + "/";
+var apiPath = basePath + "api/" + apiVer + "/";
 
 function getBasePath() {
     return basePath;
 }
 
+function getApiPath() {
+    return apiPath;
+}
+
 function ajax(method, url, data) {
     // TODO add some token renewal method
+    let authData = localStorage.getObject("authData");
+    let token = authData != null ? authData.token : "";
     return $.ajax({
         headers: {
-            "authorization" : "bearer " + localStorage.getItem("token"),
+            "authorization" : "bearer " + token,
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
         method: method,
-        url: getBasePath() + url,
+        url: getApiPath() + url,
         data: data
     });
 }
@@ -57,7 +64,7 @@ function authToken(data) {
     return post("auth/token", data);
 }
 
-function renewUserAuth() {
+function renewToken() {
 
 }
 
@@ -125,22 +132,6 @@ function deleteCategoryImage() {
 
 }
 
-function createSupplierLogo() {
-
-}
-
-function deleteSupplierLogo() {
-
-}
-
-function createSupplierBackground() {
-
-}
-
-function deleteSupplierBackground() {
-
-}
-
 // Products
 
 function getProducts(categories, pageNumber = 0, pageSize = 30) {
@@ -167,36 +158,20 @@ function deleteProduct() {
 
 // Roles
 
-
-
-// Suppliers
-
-function getSuppliers() {
-
+function setPersonRole(userId, data) {
+    return put("users/" + userId + "/roles/person", data);
 }
 
-// Support
-
-function sendSupportRequest() {
-
-}
-
-// TimeSlots
-
-function getTimeSlots() {
-
-}
-
-function addTimeSlotOverride() {
-
+function deletePersonRole(userId) {
+    return del("users/" + userId + "/roles/person");
 }
 
 // Users
 
 function getCurrentUserInfo() {
-    return get("users/" + localStorage.getItem("userId"));
+    return get("users/" + localStorage.getObject("authData").userId);
 }
 
-function deleteUsers() {
+function deleteUser() {
 
 }

@@ -135,7 +135,6 @@
 
         $("#form-sign-up").submit(function(event) {
             event.preventDefault();
-            console.log("sign-up");
             signup({
                 user: {
                     email: $("#sign-up-email").val(),
@@ -157,23 +156,19 @@
 
         $("#form-login").submit(function(event) {
             event.preventDefault();
-            console.log("login");
             $("#login-loader").show();
             $(".btn-login").prop("disabled", true);
             authToken({
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
             }).done(function(data) {
-                localStorage.setItem("token", data.token);
-                localStorage.setItem("expiration", data.expiration);
-                localStorage.setItem("userId", data.userId);
-                location.reload();
+                console.log(data);
+                localStorage.setObject("authData", data);
+                saveCurrentUserInfo().then(function() { location.reload(); });
             }).fail(function(data) {
                 $("#login-email").addClass("error");
                 $("#login-password").addClass("error");
                 $("#form-login").find(".text-error-dark").removeClass("d-none");
-                /*console.log("fail");
-                console.log(data);*/
             }).always(function(data) {
                 $("#login-loader").hide();
                 $(".btn-login").prop("disabled", false);

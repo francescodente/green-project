@@ -76,7 +76,7 @@
                         </button>
                     </div>
 
-                    <form id="user-data-personal" class="collapse show">
+                    <form id="form-user-data-personal" class="collapse show">
                         <div class="pt-3"></div>
 
                         <h6>Nome **</h6>
@@ -104,14 +104,21 @@
                         <input id="r3" type="radio" class="radio" name="gender" value="other" disabled/>
                         <label for="r3" class="mb-2">Altro</label>
 
-                        <div class="text-right mt-4">
-                            <button type="button" class="delete-form btn outline ripple" style="width: 120px" data-toggle="modal" data-target="#modal-person-role-delete">
-                                <span class="text-sec-dark">Cancella</span>
-                                <i class="mdi dark mdi-delete"></i>
+                        <div class="user-data-form-options justify-content-end mt-3" style="display: flex;">
+                            <button type="button" class="delete-form btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-person-role-delete">
+                                <span class="text-sec-dark">Cancella</span><i class="mdi dark mdi-delete"></i>
                             </button>
-                            <button type="button" class="edit-form btn accent ripple" style="width: 120px">
-                                <span class="text-light">Modifica</span>
-                                <i class="mdi light mdi-pencil"></i>
+                            <button type="button" class="edit-form btn accent ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;">
+                                <span class="text-light">Modifica</span><i class="mdi light mdi-pencil"></i>
+                            </button>
+                        </div>
+
+                        <div class="user-data-form-controls justify-content-end mt-3 d-none" style="display: flex;">
+                            <button type="button" class="cancel-form-edits btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;">
+                                <span class="text-sec-dark">Annulla</span><i class="mdi dark mdi-arrow-left"></i>
+                            </button>
+                            <button type="submit" class="save-form btn accent ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;">
+                                <span class="text-light">Salva</span><i class="mdi light mdi-content-save"></i>
                             </button>
                         </div>
 
@@ -164,40 +171,12 @@
                     <p class="m-0">Vuoi davvero eliminare le tue informazioni personali?<br/>Senza questi dati non è possibile effettuare ordini.</p>
                 </div>
                 <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Elimina</button>
+                    <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button id="delete-user-data-personal" class="btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Elimina</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // CHANGE WITH A MORE APPROPRIATE LOGIN CHECK METHOD
-        if (localStorage.getItem("token") === null) {
-            window.location.href = "index.php";
-        }
-
-        // Get user data
-        $("#modal-loading").modal("show");
-        getCurrentUserInfo()
-        .done(function(data) {
-            // Fill user info
-            $("#email").val(data.email);
-            $("#telephone").val(data.telephone);
-            $("#marketing-consent").prop("checked", data.marketingConsent);
-            // Fill personal info
-            if ("Person" in data.rolesData) {
-                $("#first-name").val(data.rolesData.Person.firstName);
-                $("#last-name").val(data.rolesData.Person.lastName);
-            }
-        })
-        .fail(function(data) {
-
-        })
-        .always(function(data) {
-            fadeOutModal($("#modal-loading"));
-        });
-    </script>
 
 </body>
 </html>

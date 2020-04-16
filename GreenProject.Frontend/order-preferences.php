@@ -80,11 +80,11 @@
         </div>
     </label>
     <div class="d-flex justify-content-end">
-        <a href="account-user-addresses.php" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0">
+        <a href="account-user-addresses.php" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;">
             <span class="text-sec-dark">Gestisci</span>
             <i class="mdi dark mdi-map-marker"></i>
         </a>
-        <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0" data-toggle="modal" data-target="#modal-address-add">
+        <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-address-add">
             <span class="text-sec-dark">Aggiungi</span>
             <i class="mdi dark mdi-plus"></i>
         </button>

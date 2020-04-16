@@ -27,7 +27,7 @@ var Category = function(json) {
         searchParams.append("Categories", category);
     });
     let productsUrl = "products.php?" + searchParams.toString();
-    let imageUrl = protocol + serverAddress + "/" + this.imageUrl;
+    let imageUrl = getBasePath() + this.imageUrl;
 
     let product = this;
     for (let k in product.html) {

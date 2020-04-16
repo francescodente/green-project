@@ -18,7 +18,7 @@ $(document).ready(function() {
     });
 
     // Get products
-    $("#modal-loading").modal("show");
+    showModal($("#modal-loading"));
     let url = new URL(window.location.href);
     let categories = url.searchParams.getAll("Categories");
     getProducts(categories)
