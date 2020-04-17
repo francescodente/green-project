@@ -60,3 +60,32 @@ function fillPagination(elem, pageNumber, pageCount) {
         page.appendTo(elem.find(".pages"));
     }
 }
+
+// Fill the given dropdown with the provided key -> value array
+function fillDropdownSelect(select, items) {
+    let dropdownMenu = select.find(".dropdown-menu");
+    let inputTemplate = select.find(".select-item-template>input");
+    let labelTemplate = select.find(".select-item-template>label");
+    dropdownMenu.empty();
+    select.find(".text-input>input").val("");
+    items.forEach(item => {
+        let input = inputTemplate.clone();
+        let label = labelTemplate.clone();
+        input.attr("id", item.key).val(item.key);
+        label.attr("for", item.key).html(item.value);
+        if (inputTemplate.data("required") == true) {
+            input.prop("required", true);
+        }
+        dropdownMenu.append(input, label);
+    });
+}
+
+function toggleDropdownSelectEnabled(select, enable) {
+    if (enable) {
+        select.find(".text-input").removeClass("disabled");
+        select.find("input").prop("disabled", false);
+    } else {
+        select.find(".text-input").addClass("disabled");
+        select.find("input").prop("disabled", true);
+    }
+}

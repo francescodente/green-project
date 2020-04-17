@@ -167,11 +167,11 @@ $(document).ready(function() {
     \***************/
 
     // slideDown animation to expanding dropdown, dropleft and dropright
-    $(".dropdown, .dropleft, .dropright").on("show.bs.dropdown", function() {
+    $("body").on("show.bs.dropdown", ".dropdown, .dropleft, .dropright", function() {
         $(this).find(".dropdown-menu").first().stop(true, true).slideDown(200);
     });
     // slideUp animation to collapsing dropdown, dropleft and dropright
-    $(".dropdown, .dropleft, .dropright").on("hide.bs.dropdown", function() {
+    $("body").on("hide.bs.dropdown", ".dropdown, .dropleft, .dropright", function() {
         $(this).find(".dropdown-menu").first().stop(true, true).slideUp(200);
     });
 

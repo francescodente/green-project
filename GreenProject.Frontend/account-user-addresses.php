@@ -27,72 +27,27 @@
 
                 <div id="account-content-col" class="col-12 col-lg-9">
 
-                    <div class="address-item default d-flex justify-content-between align-items-center p-2">
-                        <div class="d-flex flex-column">
-                            <div class="d-flex align-items-center">
-                                <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                                    <i class="mdi mdi-map-marker"></i>
-                                </div>
-                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                            </div>
-                            <div class="address-owner-info" style="margin-left: 64px;">
-                                <div class="d-flex align-items-center mb-1">
-                                    <i class="mdi small dark mdi-account mr-2"></i>
-                                    <span class="text-sec-dark">Nome cognome</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi small dark mdi-phone mr-2"></i>
-                                    <span class="text-sec-dark">+39 1234567890</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown mb-auto">
-                            <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="mdi dark mdi-dots-vertical"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-address-delete">
-                                    <i class="mdi dark mdi-delete"></i>
-                                    <span>Elimina</span>
-                                </a>
-                            </div>
+                    <div class="col-12">
+                        <div class="addresses-no-results empty-state m-5 d-none">
+                            <img src="images/empty.png"/>
+                            <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun indirizzo</h6>
+                            <p class="text-center text-dis-dark m-0">
+                                In questa pagina sono elencati i tuoi indirizzi.
+                            </p>
                         </div>
                     </div>
-                    <div class="address-item d-flex justify-content-between align-items-center p-2">
-                        <div class="d-flex flex-column">
-                            <div class="d-flex align-items-center">
-                                <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                                    <i class="mdi mdi-map-marker"></i>
-                                </div>
-                                <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                            </div>
-                            <div style="margin-left: 64px;">
-                                <div class="d-flex align-items-center mb-1">
-                                    <i class="mdi small dark mdi-account mr-2"></i>
-                                    <span class="text-sec-dark">Nome cognome</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="mdi small dark mdi-phone mr-2"></i>
-                                    <span class="text-sec-dark">+39 1234567890</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dropdown mb-auto">
-                            <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="mdi dark mdi-dots-vertical"></i>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" class="dropdown-item">
-                                    <i class="mdi dark mdi-star"></i>
-                                    <span>Imposta predefinito</span>
-                                </a>
-                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-address-delete">
-                                    <i class="mdi dark mdi-delete"></i>
-                                    <span>Elimina</span>
-                                </a>
-                            </div>
+
+                    <div class="col-12">
+                        <div class="addresses-error empty-state m-5 d-none">
+                            <i class="mdi mdi-emoticon-sad-outline"></i>
+                            <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Oops! Qualcosa è andato storto</h6>
+                            <p class="text-center text-dis-dark m-0">
+                                C'è stato un errore, ti preghiamo di riprovare.
+                            </p>
                         </div>
                     </div>
+
+                    <div class="address-list"></div>
 
                     <button class="address-add address-item ripple d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-add">
                         <div class="d-flex align-items-center">
@@ -131,6 +86,36 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var addresses = [];
+
+        // Show addresses
+        showModal($("#modal-loading"));
+        getAddresses(localStorage.getObject("userData").userId)
+        .done(function(data) {
+            if (data.addresses.length == 0) {
+                $(".addresses-no-results").removeClass("d-none");
+            } else {
+                data.addresses.forEach(json => {
+                    json.isDefaultAddress = json.addressId == data.defaultAddressId;
+                    let address = new Address(json);
+                    addresses.push(address);
+                    if (address.isDefaultAddress) {
+                        $(".address-list").prepend(address.html.main);
+                    } else {
+                        $(".address-list").append(address.html.main);
+                    }
+                });
+            }
+        })
+        .fail(function(data) {
+            $(".addresses-error").removeClass("d-none");
+        })
+        .always(function(data) {
+            fadeOutModal($("#modal-loading"));
+        });
+    </script>
 
 </body>
 </html>

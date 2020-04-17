@@ -47,15 +47,19 @@ function del(url, data) {
 // Addresses
 
 function getAddresses(userId) {
-
+    return get("customers/" + userId + "/addresses");
 }
 
 function createAddress(userId, address) {
-
+    return post("customers/" + userId + "/addresses", address);
 }
 
 function deleteAddress(userId, addressId) {
+    return del("customers/" + userId + "/addresses/" + addressId);
+}
 
+function setDefaultAddress(userId, addressId) {
+    return put("customers/" + userId + "/addresses/default", addressId);
 }
 
 // Authentication
@@ -173,5 +177,15 @@ function getCurrentUserInfo() {
 }
 
 function deleteUser() {
+
+}
+
+// Zones
+
+function getZones() {
+    return get("zones");
+}
+
+function getZoneSchedule() {
 
 }
