@@ -6,6 +6,7 @@ using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Contracts.Users.Roles;
+using GreenProject.Backend.Contracts.WeeklyOrders;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
@@ -26,6 +27,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                 c.AddProfile<UserMapping>();
                 c.AddProfile<ProductMapping>();
                 c.AddProfile<CategoriesMapping>();
+                c.AddProfile<WeeklyOrdersMapping>();
             });
             return config.CreateMapper();
         }
@@ -36,9 +38,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
             {
                 CreateMap<User, AddressCollectionDto>();
 
-                CreateMap<Address, AddressOutputDto>()
-                    .ForMember(dst => dst.Province, o => o.MapFrom(src => src.Zone.Province))
-                    .ForMember(dst => dst.City, o => o.MapFrom(src => src.Zone.City));
+                CreateMap<Address, AddressOutputDto>();
             }
         }
 
@@ -65,11 +65,9 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public CartMapping()
             {
-                OrderPricesDto prices = null;
-                CreateMap<User, CartOutputDto>()
-                    .ForMember(dst => dst.Prices, o => o.MapFrom(src => prices));
+                CreateMap<User, CartOutputDto>();
 
-                CreateMap<CartItem, CartItemOutputDto>();
+                CreateMap<CartItem, QuantifiedProductOutputDto>();
             }
         }
 
@@ -134,6 +132,24 @@ namespace GreenProject.Backend.Infrastructure.Mapping
 
                 CreateMap<Category, CategoryTreeDto>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
+            }
+        }
+
+        private class WeeklyOrdersMapping : Profile
+        {
+            public WeeklyOrdersMapping()
+            {
+                CreateMap<Order, WeeklyOrderDto>()
+                    .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src))
+                    .ForMember(dst => dst.Prices, o => o.MapFrom(src => src))
+                    .ForMember(dst => dst.Crates, o => o.MapFrom(src => src.Details.Where(d => d.Item is Crate)))
+                    .ForMember(dst => dst.ExtraProducts, o => o.MapFrom(src => src.Details.Where(d => d.Item is Product)));
+
+                CreateMap<OrderDetail, BookedCrateDto>()
+                    .ForMember(dst => dst.Products, o => o.MapFrom(src => src.SubProducts))
+                    .ForMember(dst => dst.CrateDescription, o => o.MapFrom(src => (Crate)src.Item));
+
+                CreateMap<OrderDetailSubProduct, QuantifiedProductOutputDto>();
             }
         }
     }

@@ -1,14 +1,11 @@
-﻿using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Core.Entities.Extensions;
+﻿using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
-using GreenProject.Backend.Shared.Utils;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace GreenProject.Backend.Infrastructure.Pricing
 {
-    public class DefaultPriceCalculator : IPriceCalculator
+    public class DefaultPriceCalculator : IPricingService
     {
         private readonly PricingSettings settings;
 
@@ -17,35 +14,36 @@ namespace GreenProject.Backend.Infrastructure.Pricing
             this.settings = settings;
         }
 
-        public OrderPricesDto Calculate(IEnumerable<CartItem> items, CustomerType customerType)
+        public OrderPrices CalculatePrices(Order order)
         {
-            OrderPricesDto prices = new OrderPricesDto();
+            OrderPrices prices = new OrderPrices();
 
-            prices.Subtotal = items.Select(i => this.GetPriceForCartItem(i, customerType)).Sum();
-            prices.Iva = prices.Subtotal * this.settings.ProductsIvaPercentage;
-            prices.ShippingCost = items.Any() ? this.settings.ShippingCost : 0;
+            prices.Subtotal = order
+                .Details
+                .Select(d => d.Price * d.Quantity)
+                .Sum();
+
+            prices.Iva = this.settings.ProductsIvaPercentage * order.Subtotal;
+
+            prices.ShippingCost = order.Details.Any(d => d.Item is Product) ? this.settings.ShippingCost : 0;
 
             return prices;
         }
 
-        private decimal GetPriceForCartItem(CartItem item, CustomerType customerType)
+        public OrderPrices CalculatePrices(CartOutputDto cart)
         {
-            return item.Product.GetPrice(customerType).Value.Value * item.Quantity;
-        }
+            OrderPrices prices = new OrderPrices();
 
-        public void UpdateOrderPrices(Order order)
-        {
-            order.Subtotal = order
-                .Details
-                .Select(d => this.GetPriceForItem(d))
+            prices.Subtotal = cart
+                .Items
+                .Select(i => i.Product.Price.Value * i.Quantity)
                 .Sum();
 
-            order.Iva = this.settings.ProductsIvaPercentage * order.Subtotal;
-        }
+            prices.Iva = this.settings.ProductsIvaPercentage * prices.Subtotal;
 
-        private decimal GetPriceForItem(OrderDetail detail)
-        {
-            return detail.Price * detail.Quantity;
+            prices.ShippingCost = this.settings.ShippingCost;
+
+            return prices;
         }
     }
 }

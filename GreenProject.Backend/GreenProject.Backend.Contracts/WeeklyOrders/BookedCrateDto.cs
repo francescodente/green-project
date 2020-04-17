@@ -6,8 +6,8 @@ namespace GreenProject.Backend.Contracts.WeeklyOrders
 {
     public class BookedCrateDto
     {
-        public int BookedCrateId { get; set; }
+        public int OrderDetailId { get; set; }
         public CrateOutputDto CrateDescription { get; set; }
-        public IEnumerable<CartItemOutputDto> Products { get; set; }
+        public IEnumerable<QuantifiedProductOutputDto> Products { get; set; }
     }
 }

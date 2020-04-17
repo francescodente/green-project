@@ -30,7 +30,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost("details")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> InsertCartItem([FromRoute] int userId, [FromBody] CartItemInputDto insertion)
+        public async Task<IActionResult> InsertCartItem([FromRoute] int userId, [FromBody] QuantifiedProductInputDto insertion)
         {
             await this.cartService.InsertCartItem(userId, insertion);
             return NoContent();
@@ -38,7 +38,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("details")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> UpdateCartItem([FromRoute] int userId, [FromBody] CartItemInputDto insertion)
+        public async Task<IActionResult> UpdateCartItem([FromRoute] int userId, [FromBody] QuantifiedProductInputDto insertion)
         {
             await this.cartService.UpdateCartItem(userId, insertion);
             return NoContent();

@@ -21,9 +21,9 @@ namespace GreenProject.Backend.Core.Logic
     public class OrdersService : AbstractService, IOrdersService
     {
         private readonly IOrderScheduler scheduler;
-        private readonly IPriceCalculator pricing;
+        private readonly IPricingService pricing;
 
-        public OrdersService(IRequestSession request, IOrderScheduler scheduler, IPriceCalculator pricing)
+        public OrdersService(IRequestSession request, IOrderScheduler scheduler, IPricingService pricing)
             : base(request)
         {
             this.scheduler = scheduler;
@@ -126,7 +126,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Select(d => d.CreateCopy())
                 .ForEach(newOrder.Details.Add);
 
-            this.pricing.UpdateOrderPrices(newOrder);
+            this.pricing.AssignPricesToOrder(newOrder);
 
             this.Data.Orders.Add(newOrder);
         }

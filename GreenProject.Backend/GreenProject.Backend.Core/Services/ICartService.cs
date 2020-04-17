@@ -9,9 +9,9 @@ namespace GreenProject.Backend.Core.Services
     {
         Task<CartOutputDto> GetCartDetails(int userId);
 
-        Task InsertCartItem(int userId, CartItemInputDto item);
+        Task InsertCartItem(int userId, QuantifiedProductInputDto item);
 
-        Task UpdateCartItem(int userId, CartItemInputDto item);
+        Task UpdateCartItem(int userId, QuantifiedProductInputDto item);
 
         Task DeleteCartItem(int userId, int productId);
 
