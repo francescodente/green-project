@@ -8,6 +8,7 @@ namespace GreenProject.Backend.Contracts.Orders
     {
         public int OrderId { get; set; }
         public string OrderNumber { get; set; }
+        public bool IsSubscription { get; set; }
         public DateTime Timestamp { get; set; }
         public OrderState OrderState { get; set; }
         public DeliveryInfoOutputDto DeliveryInfo { get; set; }

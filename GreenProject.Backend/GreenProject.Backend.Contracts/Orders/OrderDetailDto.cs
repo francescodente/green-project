@@ -4,6 +4,7 @@ namespace GreenProject.Backend.Contracts.Orders
 {
     public class OrderDetailDto
     {
+        public int OrderDetailId { get; set; }
         public int ItemId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

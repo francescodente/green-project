@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Contracts.Cart;
+﻿using AutoMapper.QueryableExtensions;
+using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Exceptions;
@@ -8,9 +9,7 @@ using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,10 +17,10 @@ namespace GreenProject.Backend.Core.Logic
 {
     public class CartService : AbstractService, ICartService
     {
-        private readonly IPriceCalculator pricing;
+        private readonly IPricingService pricing;
         private readonly IOrderScheduler scheduler;
 
-        public CartService(IRequestSession request, IPriceCalculator pricing, IOrderScheduler scheduler)
+        public CartService(IRequestSession request, IPricingService pricing, IOrderScheduler scheduler)
             : base(request)
         {
             this.pricing = pricing;
@@ -70,7 +69,7 @@ namespace GreenProject.Backend.Core.Logic
 
             CustomerType customerType = user.GetCustomerType().Value;
             user.CartItems.Select(c => c.CreateOrderDetail(customerType)).ForEach(order.Details.Add);
-            this.pricing.UpdateOrderPrices(order);
+            this.pricing.AssignPricesToOrder(order);
             user.CartItems.Clear();
 
             user.Orders.Add(order);
@@ -84,16 +83,19 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<CartOutputDto> GetCartDetails(int userId)
         {
-            User user = await this.RequireUserWithCartAndCustomerRoles(userId);
-            CustomerType customerType = user.GetCustomerType().Value;
-            return new CartOutputDto
-            {
-                Items = this.Mapper.Map<IEnumerable<CartItemOutputDto>>(user.CartItems),
-                Prices = this.pricing.Calculate(user.CartItems, customerType)
-            };
+            CartOutputDto output = await this.Data
+                .Users
+                .Where(u => u.UserId == userId)
+                .ProjectTo<CartOutputDto>(this.Mapper.ConfigurationProvider)
+                .SingleOptionalAsync()
+                .Map(c => c.OrElseThrow(() => NotFoundException.UserWithId(userId)));
+
+            this.pricing.AssignPricesToCart(output);
+
+            return output;
         }
 
-        public async Task InsertCartItem(int userId, CartItemInputDto item)
+        public async Task InsertCartItem(int userId, QuantifiedProductInputDto item)
         {
             Product product = await this.Data
                 .Products
@@ -107,7 +109,7 @@ namespace GreenProject.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public async Task UpdateCartItem(int userId, CartItemInputDto item)
+        public async Task UpdateCartItem(int userId, QuantifiedProductInputDto item)
         {
             User user = await this.RequireUserWithCart(userId);
 

@@ -17,11 +17,11 @@ namespace GreenProject.Backend.Core.Services
 
         Task RemoveCrate(int userId, int crateId);
 
-        Task AddProductToCrate(int userId, int bookedCrateId, CartItemInputDto insertion);
+        Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductInputDto insertion);
 
-        Task RemoveProductFromCrate(int userId, int bookedCrateId, int productId);
+        Task RemoveProductFromCrate(int userId, int orderDetailId, int productId);
 
-        Task UpdateProductInCrate(int userId, int bookedCrateId, CartItemInputDto update);
+        Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductInputDto update);
 
 
     }
