@@ -75,5 +75,10 @@ namespace GreenProject.Backend.Core.Exceptions
         {
             return ResourceWithId(nameof(Order), orderId);
         }
+
+        public static NotFoundException OrderDetailWithId(int orderDetailId)
+        {
+            return ResourceWithId(nameof(OrderDetail), orderDetailId);
+        }
     }
 }

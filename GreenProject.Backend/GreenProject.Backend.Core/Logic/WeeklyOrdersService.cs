@@ -59,44 +59,25 @@ namespace GreenProject.Backend.Core.Logic
                 .Take(1);
         }
 
-        public async Task AddCrate(int userId, int crateId)
+        private Task<Order> FindUnlockedSubscriptionOrder(int userId, QueryWrapper<Order> wrapper = null)
+        {
+            return this.FilterFirstSubscriptionOrder(userId)
+                .WrapIfPresent(wrapper)
+                .SingleOptionalAsync()
+                .Map(o => o.OrElseThrow(() => new OrderLockedException()));
+        }
+
+        private async Task UpdateDetailsForWeeklyOrder(int userId, Func<Order, Task> updateAction)
         {
             await this.RequireSubscription(userId);
-            
-            Order order = await this.FilterFirstSubscriptionOrder(userId).SingleAsync();
-            order.Details.Add(new OrderDetail
-            {
-                ItemId = crateId,
-                Quantity = 1
-            });
+
+            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q.Include(o => o.Details));
+
+            await updateAction(order);
 
             this.pricing.AssignPricesToOrder(order);
 
             await this.Data.SaveChangesAsync();
-        }
-
-        public async Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductInputDto insertion)
-        {
-            await this.RequireSubscription(userId);
-        }
-
-        public async Task<WeeklyOrderDto> GetWeeklyOrderData(int userId)
-        {
-            await this.RequireSubscription(userId);
-
-            return await this.FilterFirstSubscriptionOrder(userId)
-                .ProjectTo<WeeklyOrderDto>(this.Mapper.ConfigurationProvider)
-                .SingleAsync();
-        }
-
-        public async Task RemoveCrate(int userId, int crateId)
-        {
-            await this.RequireSubscription(userId);
-        }
-
-        public async Task RemoveProductFromCrate(int userId, int orderDetailId, int productId)
-        {
-            await this.RequireSubscription(userId);
         }
 
         public async Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoInputDto deliveryInfo)
@@ -142,14 +123,69 @@ namespace GreenProject.Backend.Core.Logic
             user.IsSubscribed = false;
 
             await this.FilterFirstSubscriptionOrder(userId)
-                .Where(o => this.DateTime.Today.AddDays(this.settings.LockTimeSpanInDays) < o.DeliveryDate)
+                .UnlockedOnly(this.DateTime, this.settings)
                 .SingleOptionalAsync()
                 .Then(o => o.IfPresent(order => order.OrderState = OrderState.Canceled));
 
             await this.Data.SaveChangesAsync();
         }
 
-        public async Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductInputDto update)
+        public async Task<WeeklyOrderDto> GetWeeklyOrderData(int userId)
+        {
+            await this.RequireSubscription(userId);
+
+            return await this.FilterFirstSubscriptionOrder(userId)
+                .ProjectTo<WeeklyOrderDto>(this.Mapper.ConfigurationProvider)
+                .SingleAsync();
+        }
+
+        public Task AddCrate(int userId, int crateId)
+        {
+            return this.UpdateDetailsForWeeklyOrder(userId, async order =>
+            {
+                decimal price = await this.Data
+                    .Crates
+                    .Where(c => c.ItemId == crateId)
+                    .Select(c => new { c.Prices.Single().Value })
+                    .SingleOptionalAsync()
+                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)).Value);
+
+                order.Details.Add(new OrderDetail
+                {
+                    ItemId = crateId,
+                    Quantity = 1,
+                    Price = price
+                });
+            });
+        }
+
+        public Task RemoveItem(int userId, int orderDetailId)
+        {
+            return this.UpdateDetailsForWeeklyOrder(userId, order =>
+            {
+                OrderDetail detail = order.Details
+                    .SingleOptional(d => d.OrderDetailId == orderDetailId)
+                    .OrElseThrow(() => NotFoundException.OrderDetailWithId(orderDetailId));
+
+                order.Details.Remove(detail);
+
+                return Task.CompletedTask;
+            });
+        }
+
+        public async Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductInputDto insertion)
+        {
+            await this.RequireSubscription(userId);
+
+            Order order = await this.FindUnlockedSubscriptionOrder(userId);
+        }
+
+        public async Task RemoveProductFromCrate(int userId, int orderDetailId, int productId)
+        {
+            await this.RequireSubscription(userId);
+        }
+
+        public async Task UpdateProductInCrate(int userId, int orderDetailId, int quantity)
         {
             await this.RequireSubscription(userId);
         }

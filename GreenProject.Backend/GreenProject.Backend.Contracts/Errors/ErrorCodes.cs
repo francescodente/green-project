@@ -50,6 +50,8 @@ namespace GreenProject.Backend.Contracts.Errors
             public static readonly string InvalidStateTransition = $"{OrdersBase}.INVALID_STATE_TRANSITION";
 
             public static readonly string ReservedProduct = $"{OrdersBase}.RESERVED_PRODUCT";
+
+            public static readonly string OrderLocked = $"{OrdersBase}.ORDER_LOCKED";
         }
 
         public static class Addresses
@@ -66,6 +68,8 @@ namespace GreenProject.Backend.Contracts.Errors
             public static readonly string NotSubscribed = $"{WeeklyOrdersBase}.NOT_SUBSCRIBED";
 
             public static readonly string AlreadySubscribed = $"{WeeklyOrdersBase}.ALREADY_SUBSCRIBED";
+
+            public static readonly string IncompatibleProduct = $"{WeeklyOrdersBase}.INCOMPATIBLE_PRODUCT";
         }
     }
 }

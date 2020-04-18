@@ -19,12 +19,14 @@ namespace GreenProject.Backend.Core.Logic
     {
         private readonly IPricingService pricing;
         private readonly IOrderScheduler scheduler;
+        private readonly OrdersSettings settings;
 
-        public CartService(IRequestSession request, IPricingService pricing, IOrderScheduler scheduler)
+        public CartService(IRequestSession request, IPricingService pricing, IOrderScheduler scheduler, OrdersSettings settings)
             : base(request)
         {
             this.pricing = pricing;
             this.scheduler = scheduler;
+            this.settings = settings;
         }
 
         private Task<User> RequireUserWithCart(int userId)
@@ -55,7 +57,8 @@ namespace GreenProject.Backend.Core.Logic
                 .Select(a => a.ZipCode)
                 .SingleOptionalAsync()
                 .Map(z => z.OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId)));
-            DateTime scheduleDate = await this.scheduler.FindNextAvailableDate(this.DateTime.Today.AddDays(1), zipCode);
+            DateTime scheduleDate = await this.scheduler
+                .FindNextAvailableDate(this.DateTime.Today.AddDays(this.settings.LockTimeSpanInDays), zipCode);
             
             Order order = new Order
             {

@@ -22,12 +22,14 @@ namespace GreenProject.Backend.Core.Logic
     {
         private readonly IOrderScheduler scheduler;
         private readonly IPricingService pricing;
+        private readonly OrdersSettings settings;
 
-        public OrdersService(IRequestSession request, IOrderScheduler scheduler, IPricingService pricing)
+        public OrdersService(IRequestSession request, IOrderScheduler scheduler, IPricingService pricing, OrdersSettings settings)
             : base(request)
         {
             this.scheduler = scheduler;
             this.pricing = pricing;
+            this.settings = settings;
         }
 
         public Task<PagedCollection<OrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
@@ -108,7 +110,9 @@ namespace GreenProject.Backend.Core.Logic
                 .Select(u => new { AddressId = u.DefaultAddressId.Value, u.DefaultAddress.ZipCode })
                 .SingleAsync();
 
-            DateTime scheduleDate = await scheduler.FindNextAvailableDate(order.DeliveryDate.AddDays(7), destinationData.ZipCode);
+            DateTime scheduleDate = await scheduler.FindNextAvailableDate(
+                order.DeliveryDate.AddDays(this.settings.WeeklyOrderRenewTimeInDays),
+                destinationData.ZipCode);
 
             Order newOrder = new Order
             {
