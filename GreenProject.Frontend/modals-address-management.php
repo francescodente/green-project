@@ -117,43 +117,45 @@
 
 <script>
 
-    var zones;
-
     function getProvinces() {
-        return zones.map(zone => zone.provinceName);
+        return zones.children.map(zone => zone.provinceName);
     }
 
     function getCities(provinceName) {
-        return zones.filter(zone => zone.provinceName == provinceName)
+        return zones.children.filter(zone => zone.provinceName == provinceName)
             .map(zone => zone.cities)[0]
             .map(city => city.cityName);
     }
 
     function getZipCodes(provinceName, cityName) {
-        return zones.filter(zone => zone.provinceName == provinceName)
+        return zones.children.filter(zone => zone.provinceName == provinceName)
             .map(zone => zone.cities)[0]
             .filter(city => city.cityName == cityName)
             .map(city => city.zipCodes)[0];
     }
 
+    // Get zones
     $("#address-form-loader").show();
     $(".form-fields").hide();
-    getZones()
-    .done(function(data) {
+    var zones;
+    getOrUpdateZones()
+    .then(function(data) {
         zones = data;
         let provinces = getProvinces().map(p => { return { key: p, value: p }; });
         fillDropdownSelect($("#select-province"), provinces);
         toggleDropdownSelectEnabled($("#select-city"), false);
         toggleDropdownSelectEnabled($("#select-zipcode"), false);
     })
-    .fail(function(data) {
+    .catch(function(data) {
         console.log("fail");
+        console.log(data);
     })
-    .always(function(data) {
+    .finally(function(data) {
         $("#address-form-loader").hide();
         $(".form-fields").show();
     });
 
+    // Province selected
     $("body").on("change", "[name='select-province']", function() {
         let cities = getCities(this.value).map(c => { return { key: c, value: c }; });
         fillDropdownSelect($("#select-city"), cities);
@@ -162,6 +164,7 @@
         toggleDropdownSelectEnabled($("#select-zipcode"), false);
     });
 
+    // City selected
     $("body").on("change", "[name='select-city']", function() {
         let province = $("[name='select-province']:checked").val();
         let zipCodes = getZipCodes(province, this.value).map(z => { return { key: z, value: z }; });
@@ -169,6 +172,7 @@
         toggleDropdownSelectEnabled($("#select-zipcode"), true);
     });
 
+    // Check if submit button can be enabled
     $("body").on("change", "#modal-address-add input", function() {
         if ($("[name='select-province']:checked").length &&
             $("[name='select-city']:checked").length &&
@@ -183,6 +187,7 @@
         }
     });
 
+    // Form submission
     $("body").on("submit", "#modal-address-add", function(event) {
         event.preventDefault();
         $("#address-form-loader").show();
@@ -198,9 +203,8 @@
         .done(function(data) {
             location.reload();
         })
-        .fail(function(data) {
-            console.log("fail");
-            console.log(data);
+        .fail(function(jqXHR) {
+            new Error(jqXHR).show();
         });
     });
 </script>

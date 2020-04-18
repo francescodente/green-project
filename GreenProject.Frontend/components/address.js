@@ -36,12 +36,10 @@ Address.prototype.deleteAddress = function() {
     deleteAddress(localStorage.getObject("userData").userId, this.addressId)
     .done(function(data) {
         location.reload();
-        console.log(data);
     })
-    .fail(function(data) {
-        console.log("fail");
-        console.log(data);
+    .fail(function(jqXHR) {
         fadeOutModal($("#modal-loading"));
+        new Error(jqXHR).show();
     });
 }
 
@@ -51,9 +49,8 @@ Address.prototype.setDefault = function() {
     .done(function(data) {
         location.reload();
     })
-    .fail(function(data) {
-        console.log("fail");
-        console.log(data);
+    .fail(function(jqXHR) {
         fadeOutModal($("#modal-loading"));
+        new Error(jqXHR).show();
     });
 }

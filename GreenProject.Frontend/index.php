@@ -171,17 +171,17 @@
         // Get categories
         $("#categories-loader").show();
         var categories = [];
-        getCategories()
-        .done(function(data) {
+        getOrUpdateCategories()
+        .then(function(data) {
             data.children.forEach((json) => {
                 categories.push(new Category(json));
             });
             fillBootstrapRow($(".category-list"), categories);
         })
-        .fail(function(data) {
+        .catch(function(jqXHR) {
             $(".cat-error").removeClass("d-none");
         })
-        .always(function(data) {
+        .finally(function(data) {
             $("#categories-loader").hide();
         });
     </script>

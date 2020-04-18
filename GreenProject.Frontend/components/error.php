@@ -5,9 +5,10 @@
                 <i class="modal-top-icon text-error-dark mdi mdi-close-circle-outline"></i>
             </div>
             <div class="modal-body">
+                <h4 class="mb-1">Errore <span class="status"></span></h4>
+                <p class="status-text text-sec-dark mb-2"></p>
                 <p class="generic-text mb-2">Si è verificato un errore.</p>
-                <p class="err-code m-0"></p>
-                <p class="err-text text-sec-dark m-0"></p>
+                <p class="err-codes text-small text-sec-dark m-0"></p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="btn outline ripple" data-dismiss="modal" style="width: 160px;">Ok</button>

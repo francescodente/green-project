@@ -1,21 +1,25 @@
-var Error = function(json) {
+var Error = function(json, message) {
     for (let k in json) this[k] = json[k];
     this.html = {};
-
     this.html.main = getTemplate("ErrorModal");
+
+    if (json != null) {
+        this.errCodes = this.responseJSON.globalErrors.map(err => err.code).join(", ");
+    }
 
     let error = this;
     for (let k in error.html) {
 
         // Replace values in templates
-        if ("genericText" in error) {
-            $(error.html[k]).find(".generic-text").html(this.genericText);
+        if (message != null) {
+            $(error.html[k]).find(".generic-text").html(message);
         }
-        if ("errCode" in error) {
-            $(error.html[k]).find(".err-code").html(this.errCode);
+        if ("status" in error) {
+            $(error.html[k]).find(".status").html(error.status);
+            $(error.html[k]).find(".status-text").html(error.statusText);
         }
-        if ("errText" in error) {
-            $(error.html[k]).find(".err-text").html(this.errText);
+        if ("errCodes" in error) {
+            $(error.html[k]).find(".err-codes").html(error.errCodes);
         }
     }
 }
