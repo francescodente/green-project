@@ -26,12 +26,12 @@ namespace GreenProject.Backend.Core.Logic.Utils
             this.Request = request;
         }
 
-        protected Task<User> FindRequestingUser(Func<IQueryable<User>, IQueryable<User>> queryWrapper = null)
+        protected Task<User> FindRequestingUser(QueryWrapper<User> queryWrapper = null)
         {
             return this.RequireUserById(this.RequestingUser.UserId, queryWrapper);
         }
 
-        protected Task<IOptional<User>> FindUserById(int userId, Func<IQueryable<User>, IQueryable<User>> queryWrapper = null)
+        protected Task<IOptional<User>> FindUserById(int userId, QueryWrapper<User> queryWrapper = null)
         {
             return this.Data
                 .Users
@@ -40,7 +40,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
                 .SingleOptionalAsync(u => u.UserId == userId);
         }
 
-        protected Task<User> RequireUserById(int userId, Func<IQueryable<User>, IQueryable<User>> queryWrapper = null)
+        protected Task<User> RequireUserById(int userId, QueryWrapper<User> queryWrapper = null)
         {
             return this.FindUserById(userId, queryWrapper)
                 .Map(u => u.OrElseThrow(() => NotFoundException.UserWithId(userId)));

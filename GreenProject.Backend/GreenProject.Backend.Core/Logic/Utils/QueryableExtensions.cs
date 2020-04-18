@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic.Utils
 {
+    public delegate IQueryable<T> QueryWrapper<T>(IQueryable<T> query);
+
+    public delegate IQueryable<TResult> QueryMapper<TSource, TResult>(IQueryable<TSource> query);
+
     public static class QueryableExtensions
     {
         public static Task<IOptional<T>> FirstOptionalAsync<T>(this IQueryable<T> queryable)
@@ -36,7 +40,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
             return queryable.SingleOrDefaultAsync(predicate).Map(t => t.AsOptional());
         }
 
-        public static IQueryable<T> WrapIfPresent<T>(this IQueryable<T> queryable, Func<IQueryable<T>, IQueryable<T>> queryWrapper)
+        public static IQueryable<T> WrapIfPresent<T>(this IQueryable<T> queryable, QueryWrapper<T> queryWrapper)
         {
             if (queryWrapper != null)
             {

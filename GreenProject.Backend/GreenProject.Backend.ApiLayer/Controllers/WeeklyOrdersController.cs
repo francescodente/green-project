@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
+using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
@@ -44,6 +45,22 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         public async Task<IActionResult> GetWeeklyOrderData([FromRoute] int userId)
         {
             return Ok(await this.weeklyOrdersService.GetWeeklyOrderData(userId));
+        }
+
+        [HttpPost("crates")]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> AddCrateToWeeklyOrder([FromRoute] int userId, [FromBody] int crateId)
+        {
+            await this.weeklyOrdersService.AddCrate(userId, crateId);
+            return NoContent();
+        }
+
+        [HttpDelete("details/{orderDetailId}")]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> RemoveItemFromWeeklyOrder([FromRoute] int userId, int orderDetailId)
+        {
+            await this.weeklyOrdersService.RemoveItem(userId, orderDetailId);
+            return NoContent();
         }
     }
 }

@@ -9,5 +9,6 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
         public string Description { get; set; }
         public PriceDto Price { get; set; }
         public string ImageUrl { get; set; }
+        public int CategoryId { get; set; }
     }
 }

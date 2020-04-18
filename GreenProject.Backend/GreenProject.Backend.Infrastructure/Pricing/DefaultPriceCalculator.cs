@@ -23,7 +23,7 @@ namespace GreenProject.Backend.Infrastructure.Pricing
                 .Select(d => d.Price * d.Quantity)
                 .Sum();
 
-            prices.Iva = this.settings.ProductsIvaPercentage * order.Subtotal;
+            prices.Iva = this.settings.ProductsIvaPercentage * prices.Subtotal;
 
             prices.ShippingCost = order.Details.Any(d => d.Item is Product) ? this.settings.ShippingCost : 0;
 

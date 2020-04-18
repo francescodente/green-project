@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Entities;
+﻿using GreenProject.Backend.Core.Utils.Time;
+using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -22,6 +23,11 @@ namespace GreenProject.Backend.Core.Logic.Utils
             return orders
                 .Include(o => o.Address)
                     .ThenInclude(a => a.Zone);
+        }
+
+        public static IQueryable<Order> UnlockedOnly(this IQueryable<Order> orders, IDateTime dateTime, OrdersSettings settings)
+        {
+            return orders.Where(o => dateTime.Today.AddDays(settings.LockTimeSpanInDays) <= o.DeliveryDate);
         }
     }
 }

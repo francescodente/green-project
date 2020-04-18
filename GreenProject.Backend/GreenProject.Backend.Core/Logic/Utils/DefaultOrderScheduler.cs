@@ -25,6 +25,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
             IDictionary<DateTime, int> orderCountsByDate = await data
                 .Orders
                 .Where(o => o.DeliveryDate >= startingDate)
+                .Where(o => o.OrderState != OrderState.Canceled)
                 .GroupBy(o => o.DeliveryDate, (date, orders) => new { Date = date, Orders = orders.Count() })
                 .ToDictionaryAsync(x => x.Date, x => x.Orders);
 

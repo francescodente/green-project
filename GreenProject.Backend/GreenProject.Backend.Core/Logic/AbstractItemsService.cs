@@ -23,7 +23,7 @@ namespace GreenProject.Backend.Core.Logic
 
         protected abstract IQueryable<T> GetDefaultQuery();
 
-        protected Task<T> Require(int itemId, Func<IQueryable<T>, IQueryable<T>> queryWrapper = null)
+        protected Task<T> Require(int itemId, QueryWrapper<T> queryWrapper = null)
         {
             return this.GetDefaultQuery()
                 .Where(i => !i.IsDeleted)
@@ -59,7 +59,7 @@ namespace GreenProject.Backend.Core.Logic
             return this.Mapper.Map<TOutput>(entity);
         }
 
-        protected async Task<TOutput> Update<TOutput>(int itemId, Action<T> updater, Func<IQueryable<T>, IQueryable<T>> queryWrapper = null)
+        protected async Task<TOutput> Update<TOutput>(int itemId, Action<T> updater, QueryWrapper<T> queryWrapper = null)
         {
             T entity = await this.Require(itemId, q => q.WrapIfPresent(queryWrapper).Include(p => p.Prices));
 
