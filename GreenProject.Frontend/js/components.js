@@ -79,9 +79,10 @@ $(document).ready(function() {
     |   TEXT INPUTS   |
     \*****************/
 
-    // Update character counter
-    $(document).on("change paste keyup", ".text-input, .text-area", function () {
+    // Update character counter and remove error status
+    $(document).on("change paste keyup", ".text-input, .text-area", function() {
         var input = $(this).find("input, textarea");
+        input.removeClass("error");
         $(this).find(".counter").text(input.val().length + " / " + input.attr("maxlength"));
     });
 

@@ -12,17 +12,19 @@
 
                 <!-- E-MAIL -->
                 <div class="text-input">
-                    <input id="login-email" type="email" name="email" placeholder=" "/>
+                    <input id="login-email" type="email" name="email" placeholder=" " required/>
                     <label for="login-email">E-mail</label>
+                    <span id="login-email-error" class="error">Non esiste alcun account collegato a questa email.</span>
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="text-input">
-                    <input id="login-password" type="password" name="password" placeholder=" "/>
+                    <input id="login-password" type="password" name="password" placeholder=" " required/>
                     <label for="login-password">Password</label>
+                    <span id="login-password-error" class="error">Password errata.</span>
                 </div>
 
-                <p class="text-error-dark mb-2 d-none">E-mail o password errate</p>
+                <p id="generic-login-error" class="text-center text-error-dark my-3 d-none">Si è verificato un errore.</p>
 
                 <div id="login-loader" class="loader text-center my-3">
                     <?php include("loader.php"); ?>
@@ -30,10 +32,10 @@
 
                 <div class="d-flex justify-content-between align-items-center">
                     <!-- KEEP LOGIN -->
-                    <input id="keep-login" type="checkbox" class="checkbox" name="keep-login" value="1"/>
-                    <label for="keep-login" class="my-2">Ricordami</label><br/>
+                    <!-- <input id="keep-login" type="checkbox" class="checkbox" name="keep-login" value="1"/>
+                    <label for="keep-login" class="my-2">Ricordami</label><br/> -->
 
-                    <a href="#" class="text-sec-dark" data-toggle="modal" data-target="#modal-pwd-recovery" data-dismiss="modal">Password dimenticata?</a>
+                    <a href="#" class="text-sec-dark text-small" data-toggle="modal" data-target="#modal-pwd-recovery" data-dismiss="modal">Password dimenticata?</a>
                 </div>
 
                 <div class="text-center">
@@ -62,27 +64,26 @@
 
                 <!-- E-MAIL -->
                 <div class="text-input">
-                    <input id="sign-up-email" type="email" name="email" placeholder=" "/>
+                    <input id="sign-up-email" type="email" name="email" placeholder=" " required/>
                     <label for="sign-up-email">E-mail</label>
-                    <span class="email-error d-none">Error message</span>
+                    <span id="sign-up-email-error" class="error">Error message</span>
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="text-input">
-                    <input id="sign-up-password" type="password" name="password" placeholder=" "/>
+                    <input id="sign-up-password" type="password" name="password" placeholder=" " required/>
                     <label for="sign-up-password">Password</label>
-                    <span class="password-error d-none">Error message</span>
+                    <span id="sign-up-password-error" class="error">Error message</span>
                 </div>
 
                 <!-- CONFIRM PASSWORD -->
                 <div class="text-input">
-                    <input id="confirm-password" type="password" name="confirm-password" placeholder=" "/>
+                    <input id="confirm-password" type="password" name="confirm-password" placeholder=" " required/>
                     <label for="confirm-password">Conferma password</label>
-                    <span class="confirm-password-error d-none">Error message</span>
                 </div>
 
                 <!-- PRIVACY CONSENT -->
-                <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1"/>
+                <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1" required/>
                 <label for="privacy-consent" class="my-2">Ho letto <a href="privacy-terms.php" target="_blank">privacy e termini</a></label><br/>
 
                 <!-- MARKETING CONSENT -->
@@ -133,27 +134,7 @@
 <script>
     $(document).ready(function() {
 
-        $("#form-sign-up").submit(function(event) {
-            event.preventDefault();
-            signup({
-                user: {
-                    email: $("#sign-up-email").val(),
-                    telephone: "1",
-                    marketingConsent: $("#marketing-consent").is(":checked")
-                },
-                password: $("#sign-up-password").val()
-            }).done(function(data) {
-                console.log("done");
-                console.log(data);
-            }).fail(function(data) {
-                console.log("fail");
-                console.log(data);
-            }).always(function(data) {
-                console.log("always");
-                console.log(data);
-            });
-        });
-
+        // LOGIN
         $("#form-login").submit(function(event) {
             event.preventDefault();
             $("#login-loader").show();
@@ -161,17 +142,48 @@
             authToken({
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
-            }).done(function(data) {
-                console.log(data);
+            })
+            .done(function(data) {
                 localStorage.setObject("authData", data);
                 saveCurrentUserInfo().then(function() { location.reload(); });
-            }).fail(function(data) {
-                $("#login-email").addClass("error");
-                $("#login-password").addClass("error");
-                $("#form-login").find(".text-error-dark").removeClass("d-none");
-            }).always(function(data) {
+            })
+            .fail(function(jqXHR) {
+                let errCode = jqXHR.responseJSON.globalErrors[0].code
+                if (errCode == "ERR.NOT_FOUND") {
+                    $("#login-email").addClass("error");
+                    $("#login-email-error").removeClass("d-none");
+                } else if (errCode == "ERR.AUTH.INCORRECT_PASSWORD") {
+                    $("#login-password").addClass("error");
+                    $("#login-password-error").removeClass("d-none");
+                } else {
+                    $("#generic-login-error").removeClass("d-none");
+                }
                 $("#login-loader").hide();
                 $(".btn-login").prop("disabled", false);
+            });
+        });
+
+        // REGISTRATION
+        $("#form-sign-up").submit(function(event) {
+            event.preventDefault();
+            signup({
+                user: {
+                    email: $("#sign-up-email").val(),
+                    marketingConsent: $("#marketing-consent").is(":checked")
+                },
+                password: $("#sign-up-password").val()
+            })
+            .done(function(data) {
+                console.log("done");
+                console.log(data);
+            })
+            .fail(function(jqXHR) {
+                console.log("fail");
+                console.log(data);
+            })
+            .always(function(data) {
+                console.log("always");
+                console.log(data);
             });
         });
 

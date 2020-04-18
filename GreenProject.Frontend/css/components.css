@@ -989,13 +989,18 @@ input[type="text"], textarea {
     color: var(--col-text-sec-light);
 }
 
-.text-input input.error ~ span,
-textarea.error ~ span {
+.text-input input:not(.error) ~ span.error,
+textarea:not(.error) ~ span.error {
+    display: none;
+}
+
+.text-input input.error ~ span.error,
+textarea.error ~ span.error {
     color: #B71C1C;
 }
 
-.text-input.dark input.error ~ span,
-.text-area.dark textarea.error ~ span {
+.text-input.dark input.error ~ span.error,
+.text-area.dark textarea.error ~ span.error {
     color: #D50000;
 }
 
