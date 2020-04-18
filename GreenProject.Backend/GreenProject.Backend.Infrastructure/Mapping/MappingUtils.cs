@@ -84,6 +84,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
 
                 CreateMap<Crate, CrateOutputDto>()
                     .ForMember(dst => dst.CrateId, o => o.MapFrom(src => src.ItemId))
+                    .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path))
                     .ForMember(dst => dst.Price, o => o.MapFrom(src => src.Prices.First(p => p.Type == CustomerType.Person).Value));
 
                 CreateMap<CrateCompatibility, CompatibleProductOutputDto>();
