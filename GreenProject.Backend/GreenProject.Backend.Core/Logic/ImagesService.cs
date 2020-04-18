@@ -75,7 +75,7 @@ namespace GreenProject.Backend.Core.Logic
             return this.CreateImageResource(
                 () => item.Image,
                 img => item.Image = img,
-                this.settings.Products,
+                this.settings.PurchasableItems,
                 itemId);
         }
     }

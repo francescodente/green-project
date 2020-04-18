@@ -8,8 +8,6 @@ namespace GreenProject.Backend.Core.Utils.Uploads
     {
         public ImageFormat DefaultFormat { get; set; }
         public ImageTypeUploadSettings Categories { get; set; }
-        public ImageTypeUploadSettings Products { get; set; }
-        public ImageTypeUploadSettings SupplierLogos { get; set; }
-        public ImageTypeUploadSettings SupplierBackgroundImages { get; set; }
+        public ImageTypeUploadSettings PurchasableItems { get; set; }
     }
 }
