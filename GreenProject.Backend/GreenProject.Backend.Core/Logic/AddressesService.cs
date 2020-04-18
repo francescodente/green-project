@@ -78,7 +78,7 @@ namespace GreenProject.Backend.Core.Logic
             User user = await this.RequireUserWithAddresses(userId);
             if (!user.Addresses.Any(a => a.AddressId == addressId))
             {
-                throw new UnauthorizedUserAccessException(userId);
+                throw new UnauthorizedUserAccessException();
             }
             user.DefaultAddressId = addressId;
             await this.Data.SaveChangesAsync();

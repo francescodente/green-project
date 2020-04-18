@@ -57,9 +57,17 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpDelete("details/{orderDetailId}")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> RemoveItemFromWeeklyOrder([FromRoute] int userId, int orderDetailId)
+        public async Task<IActionResult> RemoveItemFromWeeklyOrder([FromRoute] int userId, [FromRoute] int orderDetailId)
         {
             await this.weeklyOrdersService.RemoveItem(userId, orderDetailId);
+            return NoContent();
+        }
+
+        [HttpPost("crates/{orderDetailId}/subproducts")]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> AddProductToCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromBody] QuantifiedProductInputDto product)
+        {
+            await this.weeklyOrdersService.AddProductToCrate(userId, orderDetailId, product);
             return NoContent();
         }
     }

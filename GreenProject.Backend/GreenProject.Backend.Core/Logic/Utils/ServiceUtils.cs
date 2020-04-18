@@ -16,7 +16,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
         {
             if (resourceOwnerId != userId)
             {
-                throw new UnauthorizedUserAccessException(userId);
+                throw new UnauthorizedUserAccessException();
             }
         }
 

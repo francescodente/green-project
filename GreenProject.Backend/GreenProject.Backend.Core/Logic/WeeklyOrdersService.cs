@@ -62,6 +62,7 @@ namespace GreenProject.Backend.Core.Logic
         private Task<Order> FindUnlockedSubscriptionOrder(int userId, QueryWrapper<Order> wrapper = null)
         {
             return this.FilterFirstSubscriptionOrder(userId)
+                .UnlockedOnly(this.DateTime, this.settings)
                 .WrapIfPresent(wrapper)
                 .SingleOptionalAsync()
                 .Map(o => o.OrElseThrow(() => new OrderLockedException()));
@@ -85,7 +86,7 @@ namespace GreenProject.Backend.Core.Logic
             User user = await this.RequireUserById(userId, q => q
                 .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));
 
-            Address address = user.Addresses.SingleOptional().OrElseThrow(() => new UnauthorizedUserAccessException(userId));
+            Address address = user.Addresses.SingleOptional().OrElseThrow(() => new UnauthorizedUserAccessException());
 
             if (user.IsSubscribed)
             {
@@ -143,18 +144,19 @@ namespace GreenProject.Backend.Core.Logic
         {
             return this.UpdateDetailsForWeeklyOrder(userId, async order =>
             {
-                decimal price = await this.Data
+                var crateData = await this.Data
                     .Crates
                     .Where(c => c.ItemId == crateId)
-                    .Select(c => new { c.Prices.Single().Value })
+                    .Select(c => new { Price = c.Prices.Single().Value, c.Capacity })
                     .SingleOptionalAsync()
-                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)).Value);
+                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)));
 
                 order.Details.Add(new OrderDetail
                 {
                     ItemId = crateId,
                     Quantity = 1,
-                    Price = price
+                    Price = crateData.Price,
+                    RemainingSlots = crateData.Capacity
                 });
             });
         }
@@ -177,7 +179,43 @@ namespace GreenProject.Backend.Core.Logic
         {
             await this.RequireSubscription(userId);
 
-            Order order = await this.FindUnlockedSubscriptionOrder(userId);
+            int orderId = await this.FilterFirstSubscriptionOrder(userId)
+                .UnlockedOnly(this.DateTime, this.settings)
+                .Select(o => new { o.OrderId })
+                .SingleOptionalAsync()
+                .Map(o => o.OrElseThrow(() => new OrderLockedException()).OrderId);
+
+            OrderDetail detail = await this.Data
+                .OrderDetails
+                .Where(d => d.Item is Crate)
+                .SingleOptionalAsync(d => d.OrderDetailId == orderDetailId)
+                .Map(d => d.OrElseThrow(() => NotFoundException.OrderDetailWithId(orderDetailId)));
+
+            if (detail.OrderId != orderId)
+            {
+                throw new UnauthorizedUserAccessException();
+            }
+
+            CrateCompatibility compatibility = await this.Data
+                .CrateCompatibilities
+                .SingleOptionalAsync(c => c.CrateId == detail.ItemId && c.ProductId == insertion.ProductId)
+                .Map(c => c.OrElseThrow(() => new IncompatibleProductException()));
+
+            int actualQuantity = compatibility.Multiplier * insertion.Quantity;
+
+            if (actualQuantity > detail.RemainingSlots || insertion.Quantity > compatibility.Maximum.GetValueOrDefault(int.MaxValue))
+            {
+                throw new InvalidQuantityException();
+            }
+
+            detail.SubProducts.Add(new OrderDetailSubProduct
+            {
+                ProductId = insertion.ProductId,
+                Quantity = insertion.Quantity
+            });
+            detail.RemainingSlots -= insertion.Quantity * compatibility.Multiplier;
+
+            await this.Data.SaveChangesAsync();
         }
 
         public async Task RemoveProductFromCrate(int userId, int orderDetailId, int productId)
