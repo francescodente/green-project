@@ -120,6 +120,7 @@ $(document).ready(function() {
         if (value == min || value == max) {
             input.focus();
         }
+        input.trigger("change");
     }
     $(document).on("click", ".text-input .inc", function () {
         updateNumberInput($(this).parent().find("[type='number']"), 1);

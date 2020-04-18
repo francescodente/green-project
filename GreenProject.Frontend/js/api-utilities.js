@@ -29,7 +29,7 @@ function saveCurrentUserInfo() {
 }
 
 function getOrUpdateCategories() {
-    const UPDATE_INTERVAL_MINUTES = 5;
+    const UPDATE_INTERVAL_MINUTES = 30;
     return new Promise(function(resolve, reject) {
         let now = Date.now();
         let categories = localStorage.getObject("categories");
@@ -49,7 +49,7 @@ function getOrUpdateCategories() {
 }
 
 function getOrUpdateZones() {
-    const UPDATE_INTERVAL_MINUTES = 5;
+    const UPDATE_INTERVAL_MINUTES = 60;
     return new Promise(function(resolve, reject) {
         let now = Date.now();
         let zones = localStorage.getObject("zones");

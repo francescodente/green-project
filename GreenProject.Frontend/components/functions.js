@@ -89,3 +89,11 @@ function toggleDropdownSelectEnabled(select, enable) {
         select.find("input").prop("disabled", true);
     }
 }
+
+function formatDecimal(value, nPlaces) {
+    return value.toFixed(nPlaces).replace(".", ",");
+}
+
+function formatCurrency(value) {
+    return formatDecimal(value, 2) + "€";
+}

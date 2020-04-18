@@ -1,3 +1,9 @@
+// Measurement units
+var Units = {
+    Piece: "pezzi",
+    Kilogram: "Kg"
+}
+
 // Purchasable item
 var Purchasable = function(json) {
     for (let k in json) this[k] = json[k];
@@ -39,20 +45,29 @@ function Product(json) {
 
     let product = this;
     let imageUrl = getBasePath() + this.imageUrl;
+    let multiplier = this.price.unitMultiplier.toString().replace(".", ",");
+    let unit = Units[this.price.unitName];
+    let price = formatCurrency(this.price.value);
 
     for (let k in product.html) {
 
         // Replace values in templates
         $(product.html[k]).find(".product-name").html(this.name);
         $(product.html[k]).find(".product-description").html(this.description);
-        if (this.imageUrl != null) {
+        if (product.imageUrl != null) {
             $(product.html[k]).find(".product-image").attr("src", imageUrl);
         }
+        $(product.html[k]).find(".multiplier").html(multiplier);
+        $(product.html[k]).find(".unit").html(unit);
+        $(product.html[k]).find(".price").html(price);
 
         // Add event listeners
         $(product.html[k]).find(".product-image").click(function() { product.showDetailsModal(); });
         $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
         $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
+        $(product.html[k]).on("change paste keyup", "[name='quantity']", function() {
+            product.reactToQuantityChange();
+        });
     }
 }
 
@@ -67,6 +82,18 @@ Product.prototype.showDetailsModal = function() {
 Product.prototype.showQuantityModal = function() {
     console.log("show quantity modal " + this.productId);
     showModal($(this.html.quantityModal));
+}
+
+Product.prototype.reactToQuantityChange = function() {
+    let quantity = this.html.quantityModal.find("[name='quantity']").val();
+    let multiplier = 0;
+    let price = formatCurrency(0);
+    if (quantity != null && quantity != "") {
+        multiplier = (this.price.unitMultiplier * quantity).toString().replace(".", ",");
+        price = formatCurrency(this.price.value * quantity);
+    }
+    $(this.html.quantityModal).find(".multiplier").html(multiplier);
+    $(this.html.quantityModal).find(".price").html(price);
 }
 
 Product.prototype.addToCart = function() {
@@ -103,6 +130,8 @@ function Crate(json) {
 
     let crate = this;
     let imageUrl = getBasePath() + this.imageUrl;
+    let capacity = this.capacity.toString().replace(".", ",");
+    let price = formatCurrency(this.price);
 
     for (let k in crate.html) {
 
@@ -112,6 +141,8 @@ function Crate(json) {
         if (this.imageUrl != null) {
             $(crate.html[k]).find(".crate-image").attr("src", imageUrl);
         }
+        $(crate.html[k]).find(".capacity").html(capacity);
+        $(crate.html[k]).find(".price").html(price);
 
         // Add event listeners
         $(crate.html[k]).find(".crate-image").click(function() { crate.showDetailsModal(); });

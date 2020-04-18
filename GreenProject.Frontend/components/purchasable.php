@@ -7,7 +7,7 @@
     <div class="card-body">
         <h5 class="product-name mb-0">Product name</h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
-            <span class="text-sec-dark">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</span>
+            <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
             <button class="show-quantity-modal btn icon ripple" title="Aggiungi al carrello">
                 <i class="mdi dark mdi-cart-plus"></i>
             </button>
@@ -24,7 +24,7 @@
     <div class="card-body">
         <h5 class="crate-name mb-0">Product name</h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
-            <span class="text-sec-dark">1<span class="crate-unit">Kg</span> - <span class="crate-price">00,00</span>€</span>
+            <span class="text-sec-dark"><span class="capacity"></span>Kg - <span class="price"></span></span>
             <button class="subscribe btn icon ripple" title="Abbonati">
                 <i class="mdi dark mdi-bookmark-plus-outline"></i>
             </button>
@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
-                <p class="product-price m-0 ml-1">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</p>
+                <p class="m-0 ml-1"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
                 <button class="show-quantity-modal btn icon ripple" data-dismiss="modal" title="Aggiungi al carrello">
                     <i class="mdi dark mdi-cart-plus"></i>
                 </button>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
-                <p class="product-price m-0 ml-1">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</p>
+                <p class="m-0 ml-1"><span class="capacity"></span>Kg - <span class="price"></span></p>
                 <button class="show-quantity-modal btn icon ripple" data-dismiss="modal" title="Aggiungi al carrello">
                     <i class="mdi dark mdi-cart-plus"></i>
                 </button>
@@ -86,7 +86,7 @@
     </div>
 </div>
 
-<!-- ADD TO CART MODAL -->
+<!-- QUANTITY MODAL -->
 <div data-template-name="ProductQuantityModal" data-class="modal-product-quantity modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 360px;">
@@ -98,12 +98,12 @@
                 <h4 class="text-center">Seleziona la quantità</h4>
                 <div class="d-flex align-items-center mx-3 mb-2">
                     <div class="text-input flex-grow-1">
-                        <input id="number" type="number" name="number" min="1" placeholder=" " value="1">
+                        <input type="number" name="quantity" min="1" placeholder=" " value="1">
                         <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
                         <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
                     </div>
                 </div>
-                <p class="text-center m-0">1<span class="product-unit">Kg</span> - <span class="product-price">00,00</span>€</p>
+                <p class="text-center m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="add-to-cart btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
