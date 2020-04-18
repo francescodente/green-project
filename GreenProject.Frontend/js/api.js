@@ -1,22 +1,29 @@
 var protocol = "http://"
 var serverAddress = "localhost:5000";
 var apiVer = "v1";
-var basePath = protocol + serverAddress + "/api/" + apiVer + "/";
+var basePath = protocol + serverAddress + "/";
+var apiPath = basePath + "api/" + apiVer + "/";
 
 function getBasePath() {
     return basePath;
 }
 
+function getApiPath() {
+    return apiPath;
+}
+
 function ajax(method, url, data) {
     // TODO add some token renewal method
+    let authData = localStorage.getObject("authData");
+    let token = authData != null ? authData.token : "";
     return $.ajax({
         headers: {
-            "authorization" : "bearer " + localStorage.getItem("token"),
+            "authorization" : "bearer " + token,
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
         method: method,
-        url: getBasePath() + url,
+        url: getApiPath() + url,
         data: data
     });
 }
@@ -40,15 +47,19 @@ function del(url, data) {
 // Addresses
 
 function getAddresses(userId) {
-
+    return get("customers/" + userId + "/addresses");
 }
 
 function createAddress(userId, address) {
-
+    return post("customers/" + userId + "/addresses", address);
 }
 
 function deleteAddress(userId, addressId) {
+    return del("customers/" + userId + "/addresses/" + addressId);
+}
 
+function setDefaultAddress(userId, addressId) {
+    return put("customers/" + userId + "/addresses/default", addressId);
 }
 
 // Authentication
@@ -57,7 +68,7 @@ function authToken(data) {
     return post("auth/token", data);
 }
 
-function renewUserAuth() {
+function renewToken() {
 
 }
 
@@ -107,6 +118,31 @@ function getCategories() {
     return get("categories");
 }
 
+// Crates
+
+function getCrates(pageNumber = 0, pageSize = 30) {
+    let searchParams = new URLSearchParams();
+    searchParams.append("PageNumber", pageNumber);
+    searchParams.append("PageSize", pageSize);
+    return get("crates?" + searchParams.toString());
+}
+
+function createCrate() {
+
+}
+
+function editCrate() {
+
+}
+
+function deleteCrate() {
+
+}
+
+function getCrateCompatibilities() {
+
+}
+
 // Images
 
 function createProductImage() {
@@ -125,25 +161,12 @@ function deleteCategoryImage() {
 
 }
 
-function createSupplierLogo() {
-
-}
-
-function deleteSupplierLogo() {
-
-}
-
-function createSupplierBackground() {
-
-}
-
-function deleteSupplierBackground() {
-
-}
-
 // Products
 
 function getProducts(categories, pageNumber = 0, pageSize = 30) {
+    if (categories[0] == 1) {
+        return getCrates(pageNumber, pageSize);
+    }
     let searchParams = new URLSearchParams();
     searchParams.append("PageNumber", pageNumber);
     searchParams.append("PageSize", pageSize);
@@ -167,36 +190,30 @@ function deleteProduct() {
 
 // Roles
 
-
-
-// Suppliers
-
-function getSuppliers() {
-
+function setPersonRole(userId, data) {
+    return put("users/" + userId + "/roles/person", data);
 }
 
-// Support
-
-function sendSupportRequest() {
-
-}
-
-// TimeSlots
-
-function getTimeSlots() {
-
-}
-
-function addTimeSlotOverride() {
-
+function deletePersonRole(userId) {
+    return del("users/" + userId + "/roles/person");
 }
 
 // Users
 
 function getCurrentUserInfo() {
-    return get("users/" + localStorage.getItem("userId"));
+    return get("users/" + localStorage.getObject("authData").userId);
 }
 
-function deleteUsers() {
+function deleteUser() {
+
+}
+
+// Zones
+
+function getZones() {
+    return get("zones");
+}
+
+function getZoneSchedule() {
 
 }

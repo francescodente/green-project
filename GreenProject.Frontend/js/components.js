@@ -79,9 +79,10 @@ $(document).ready(function() {
     |   TEXT INPUTS   |
     \*****************/
 
-    // Update character counter
-    $(document).on("change paste keyup", ".text-input, .text-area", function () {
+    // Update character counter and remove error status
+    $(document).on("change paste keyup", ".text-input, .text-area", function() {
         var input = $(this).find("input, textarea");
+        input.removeClass("error");
         $(this).find(".counter").text(input.val().length + " / " + input.attr("maxlength"));
     });
 
@@ -119,6 +120,7 @@ $(document).ready(function() {
         if (value == min || value == max) {
             input.focus();
         }
+        input.trigger("change");
     }
     $(document).on("click", ".text-input .inc", function () {
         updateNumberInput($(this).parent().find("[type='number']"), 1);
@@ -167,11 +169,11 @@ $(document).ready(function() {
     \***************/
 
     // slideDown animation to expanding dropdown, dropleft and dropright
-    $(".dropdown, .dropleft, .dropright").on("show.bs.dropdown", function() {
+    $("body").on("show.bs.dropdown", ".dropdown, .dropleft, .dropright", function() {
         $(this).find(".dropdown-menu").first().stop(true, true).slideDown(200);
     });
     // slideUp animation to collapsing dropdown, dropleft and dropright
-    $(".dropdown, .dropleft, .dropright").on("hide.bs.dropdown", function() {
+    $("body").on("hide.bs.dropdown", ".dropdown, .dropleft, .dropright", function() {
         $(this).find(".dropdown-menu").first().stop(true, true).slideUp(200);
     });
 

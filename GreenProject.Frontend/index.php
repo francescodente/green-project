@@ -31,7 +31,7 @@
                             <h4 class="font-weight-bold text-light mb-4">ESCLUSIVA!<br/>Cassette settimanali personalizzabili</h4>
                             <p class="lead text-light mb-5">Tutte le settimane a casa tua.</p>
                         </div>
-                        <a href="products.php" class="btn accent ripple px-4">Scegli il tuo formato</a>
+                        <a href="products.php?PageNumber=0&PageSize=24&Categories=1" class="btn accent ripple px-4">Scegli il tuo formato</a>
                     </div>
                 </div>
 
@@ -171,17 +171,17 @@
         // Get categories
         $("#categories-loader").show();
         var categories = [];
-        getCategories()
-        .done(function(data) {
+        getOrUpdateCategories()
+        .then(function(data) {
             data.children.forEach((json) => {
                 categories.push(new Category(json));
             });
             fillBootstrapRow($(".category-list"), categories);
         })
-        .fail(function(data) {
+        .catch(function(jqXHR) {
             $(".cat-error").removeClass("d-none");
         })
-        .always(function(data) {
+        .finally(function(data) {
             $("#categories-loader").hide();
         });
     </script>
