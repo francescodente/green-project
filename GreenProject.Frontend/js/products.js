@@ -21,6 +21,7 @@ $(document).ready(function() {
     showModal($("#modal-loading"));
     let url = new URL(window.location.href);
     let categories = url.searchParams.getAll("Categories");
+    let isCrate = categories[0] == 1;
     getProducts(categories)
     .done(function(data) {
         if (data.results.length == 0) {
@@ -28,7 +29,11 @@ $(document).ready(function() {
         } else {
             // Create product objects
             data.results.forEach((json) => {
-                products.push(new Product(json));
+                if (isCrate) {
+                    products.push(new Crate(json));
+                } else {
+                    products.push(new Product(json));
+                }
             });
             fillBootstrapRow($(".product-list"), products);
             $(".products-count").text(products.length);

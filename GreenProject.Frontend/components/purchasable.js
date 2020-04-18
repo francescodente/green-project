@@ -96,12 +96,41 @@ Product.prototype.removeFromOrder = function() {
 // Crate
 function Crate(json) {
     Purchasable.call(this, json);
+
+    // Add templates
+    this.html.main = getTemplate("CrateCard");
+    this.html.detailsModal = getTemplate("CrateDetailsModal");
+
+    let crate = this;
+    let imageUrl = getBasePath() + this.imageUrl;
+
+    for (let k in crate.html) {
+
+        // Replace values in templates
+        $(crate.html[k]).find(".crate-name").html(this.name);
+        $(crate.html[k]).find(".crate-description").html(this.description);
+        if (this.imageUrl != null) {
+            $(crate.html[k]).find(".crate-image").attr("src", imageUrl);
+        }
+
+        // Add event listeners
+        $(crate.html[k]).find(".crate-image").click(function() { crate.showDetailsModal(); });
+        $(crate.html[k]).find(".subscribe").click(function() { crate.addToPreferences(); });
+    }
+}
+
+Crate.prototype = Object.create(Purchasable.prototype);
+Crate.prototype.constructor = Crate;
+
+Crate.prototype.showDetailsModal = function() {
+    console.log("show details modal " + this.crateId);
+    showModal($(this.html.detailsModal));
 }
 
 Crate.prototype.addToPreferences = function() {
-    console.log("add to preferences " + this.productId);
+    console.log("add to preferences " + this.crateId);
 }
 
 Crate.prototype.removeFromPreferences = function() {
-    console.log("remove from preferences " + this.productId);
+    console.log("remove from preferences " + this.crateId);
 }

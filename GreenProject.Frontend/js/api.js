@@ -118,6 +118,31 @@ function getCategories() {
     return get("categories");
 }
 
+// Crates
+
+function getCrates(pageNumber = 0, pageSize = 30) {
+    let searchParams = new URLSearchParams();
+    searchParams.append("PageNumber", pageNumber);
+    searchParams.append("PageSize", pageSize);
+    return get("crates?" + searchParams.toString());
+}
+
+function createCrate() {
+
+}
+
+function editCrate() {
+
+}
+
+function deleteCrate() {
+
+}
+
+function getCrateCompatibilities() {
+
+}
+
 // Images
 
 function createProductImage() {
@@ -139,6 +164,9 @@ function deleteCategoryImage() {
 // Products
 
 function getProducts(categories, pageNumber = 0, pageSize = 30) {
+    if (categories[0] == 1) {
+        return getCrates(pageNumber, pageSize);
+    }
     let searchParams = new URLSearchParams();
     searchParams.append("PageNumber", pageNumber);
     searchParams.append("PageSize", pageSize);
