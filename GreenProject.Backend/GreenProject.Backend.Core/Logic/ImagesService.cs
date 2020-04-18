@@ -64,19 +64,19 @@ namespace GreenProject.Backend.Core.Logic
                 categoryId);
         }
 
-        public async Task<IImageResource> PurchasableImage(int productId)
+        public async Task<IImageResource> PurchasableImage(int itemId)
         {
-            Product product = await this.Data
-                .Products
+            PurchasableItem item = await this.Data
+                .PurchasableItems
                 .Include(p => p.Image)
-                .SingleOptionalAsync(p => p.ItemId == productId)
-                .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(productId)));
+                .SingleOptionalAsync(p => p.ItemId == itemId)
+                .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(itemId)));
 
             return this.CreateImageResource(
-                () => product.Image,
-                img => product.Image = img,
+                () => item.Image,
+                img => item.Image = img,
                 this.settings.Products,
-                productId);
+                itemId);
         }
     }
 }
