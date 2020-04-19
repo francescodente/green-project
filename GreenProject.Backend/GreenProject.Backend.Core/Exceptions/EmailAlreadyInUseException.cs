@@ -5,13 +5,13 @@ using System.Text;
 
 namespace GreenProject.Backend.Core.Exceptions
 {
-    public class InvalidQuantityException : DomainException
+    public class EmailAlreadyInUseException : DomainException
     {
-        private readonly string quantityProperty;
+        private readonly string emailProperty;
 
-        public InvalidQuantityException(string quantityProperty = "quantity")
+        public EmailAlreadyInUseException(string emailProperty = "email")
         {
-            this.quantityProperty = quantityProperty;
+            this.emailProperty = emailProperty;
         }
 
         public override string MainErrorCode => throw new NotImplementedException();
@@ -25,9 +25,9 @@ namespace GreenProject.Backend.Core.Exceptions
         {
             yield return new PropertyErrorDto
             {
-                Code = ErrorCodes.Orders.InvalidQuantity,
-                Message = "The given quantity is not valid",
-                Property = this.quantityProperty
+                Code = ErrorCodes.Common.DuplicateField,
+                Message = "The given email is already in use",
+                Property = this.emailProperty
             };
         }
     }

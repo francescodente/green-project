@@ -17,18 +17,12 @@ namespace GreenProject.Backend.Core.Logic.Utils
 
         protected IMapper Mapper => this.Request.Mapper;
         protected IDataSession Data => this.Request.Data;
-        protected IUserSession RequestingUser => this.Request.User;
         protected IDateTime DateTime => this.Request.DateTime;
         protected INotificationsService Notifications => this.Request.Notifications;
 
         public AbstractService(IRequestSession request)
         {
             this.Request = request;
-        }
-
-        protected Task<User> FindRequestingUser(QueryWrapper<User> queryWrapper = null)
-        {
-            return this.RequireUserById(this.RequestingUser.UserId, queryWrapper);
         }
 
         protected Task<IOptional<User>> FindUserById(int userId, QueryWrapper<User> queryWrapper = null)
