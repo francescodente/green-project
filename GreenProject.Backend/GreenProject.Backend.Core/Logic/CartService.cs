@@ -9,6 +9,7 @@ using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -128,6 +129,15 @@ namespace GreenProject.Backend.Core.Logic
             user.RemoveProductFromCart(productId);
 
             await this.Data.SaveChangesAsync();
+        }
+
+        public Task<int> GetCartSize(int userId)
+        {
+            return this.Data
+                .Users
+                .Where(u => u.UserId == userId)
+                .Select(u => u.CartItems.Count())
+                .SingleAsync();
         }
     }
 }

@@ -35,13 +35,13 @@ namespace GreenProject.Backend.Infrastructure.Pricing
             OrderPrices prices = new OrderPrices();
 
             prices.Subtotal = cart
-                .Items
+                .CartItems
                 .Select(i => i.Product.Price.Value * i.Quantity)
                 .Sum();
 
             prices.Iva = this.settings.ProductsIvaPercentage * prices.Subtotal;
 
-            prices.ShippingCost = this.settings.ShippingCost;
+            prices.ShippingCost = cart.CartItems.Any() ? this.settings.ShippingCost : 0;
 
             return prices;
         }
