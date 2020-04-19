@@ -52,6 +52,8 @@ namespace GreenProject.Backend.Contracts.Errors
             public static readonly string ReservedProduct = $"{OrdersBase}.RESERVED_PRODUCT";
 
             public static readonly string OrderLocked = $"{OrdersBase}.ORDER_LOCKED";
+
+            public static readonly string InvalidQuantity = $"{OrdersBase}.INVALID_QUANTITY";
         }
 
         public static class Addresses

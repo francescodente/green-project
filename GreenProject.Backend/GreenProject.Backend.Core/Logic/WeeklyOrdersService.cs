@@ -2,6 +2,7 @@
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.WeeklyOrders;
+using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
@@ -161,6 +162,29 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
+        public Task AddExtraProduct(int userId, QuantifiedProductInputDto product)
+        {
+            return this.UpdateDetailsForWeeklyOrder(userId, async order =>
+            {
+                Price price = await this.Data
+                    .Products
+                    .Where(c => c.ItemId == product.ProductId)
+                    .Select(c => c.Prices.Single())
+                    .SingleOptionalAsync()
+                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId)));
+
+                order.Details
+                    .SingleOptional(d => d.ItemId == product.ProductId)
+                    .IfPresent(d => d.Quantity += product.Quantity)
+                    .IfAbsent(() => order.Details.Add(new OrderDetail
+                    {
+                        ItemId = product.ProductId,
+                        Quantity = product.Quantity
+                    }
+                    .WithPrices(price)));
+            });
+        }
+
         public Task RemoveItem(int userId, int orderDetailId)
         {
             return this.UpdateDetailsForWeeklyOrder(userId, order =>
@@ -175,7 +199,31 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
-        public async Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductInputDto insertion)
+        public Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductInputDto insertion)
+        {
+            return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
+            {
+                detail.AddSubProduct(insertion.ProductId, insertion.Quantity);
+            });
+        }
+
+        public Task RemoveProductFromCrate(int userId, int orderDetailId, int productId)
+        {
+            return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
+            {
+                detail.DeleteSubProduct(productId);
+            });
+        }
+
+        public Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductInputDto update)
+        {
+            return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
+            {
+                detail.UpdateSubProductQuantity(update.ProductId, update.Quantity);
+            });
+        }
+
+        private async Task UpdateCrateSubProduct(int userId, int orderDetailId, Action<OrderDetail> detailAction)
         {
             await this.RequireSubscription(userId);
 
@@ -188,6 +236,9 @@ namespace GreenProject.Backend.Core.Logic
             OrderDetail detail = await this.Data
                 .OrderDetails
                 .Where(d => d.Item is Crate)
+                .Include(d => d.Item)
+                    .ThenInclude(d => ((Crate)d).Compatibilities)
+                .Include(d => d.SubProducts)
                 .SingleOptionalAsync(d => d.OrderDetailId == orderDetailId)
                 .Map(d => d.OrElseThrow(() => NotFoundException.OrderDetailWithId(orderDetailId)));
 
@@ -196,36 +247,9 @@ namespace GreenProject.Backend.Core.Logic
                 throw new UnauthorizedUserAccessException();
             }
 
-            CrateCompatibility compatibility = await this.Data
-                .CrateCompatibilities
-                .SingleOptionalAsync(c => c.CrateId == detail.ItemId && c.ProductId == insertion.ProductId)
-                .Map(c => c.OrElseThrow(() => new IncompatibleProductException()));
-
-            int actualQuantity = compatibility.Multiplier * insertion.Quantity;
-
-            if (actualQuantity > detail.RemainingSlots || insertion.Quantity > compatibility.Maximum.GetValueOrDefault(int.MaxValue))
-            {
-                throw new InvalidQuantityException();
-            }
-
-            detail.SubProducts.Add(new OrderDetailSubProduct
-            {
-                ProductId = insertion.ProductId,
-                Quantity = insertion.Quantity
-            });
-            detail.RemainingSlots -= insertion.Quantity * compatibility.Multiplier;
+            detailAction(detail);
 
             await this.Data.SaveChangesAsync();
-        }
-
-        public async Task RemoveProductFromCrate(int userId, int orderDetailId, int productId)
-        {
-            await this.RequireSubscription(userId);
-        }
-
-        public async Task UpdateProductInCrate(int userId, int orderDetailId, int quantity)
-        {
-            await this.RequireSubscription(userId);
         }
     }
 }

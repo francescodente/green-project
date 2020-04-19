@@ -57,5 +57,76 @@ namespace GreenProject.Backend.Core.Entities.Extensions
                 Quantity = subProduct.Quantity
             };
         }
+
+        public static void AddSubProduct(this OrderDetail detail, int productId, int quantity)
+        {
+            detail.ChangeProductQuantity(productId, old => old + quantity);
+        }
+
+        public static void UpdateSubProductQuantity(this OrderDetail detail, int productId, int newQuantity)
+        {
+            detail.ChangeProductQuantity(productId, old =>
+            {
+                if (old == 0)
+                {
+                    throw NotFoundException.PurchasableItemWithId(productId);
+                }
+                return newQuantity;
+            });
+        }
+
+        public static void DeleteSubProduct(this OrderDetail detail, int productId)
+        {
+            detail.ChangeProductQuantity(productId, old =>
+            {
+                if (old == 0)
+                {
+                    throw NotFoundException.PurchasableItemWithId(productId);
+                }
+                return 0;
+            });
+        }
+
+        public static void ChangeProductQuantity(this OrderDetail detail, int productId, Func<int, int> quantitySupplier)
+        {
+            IOptional<OrderDetailSubProduct> current = detail.SubProducts
+                .SingleOptional(p => p.ProductId == productId);
+
+            CrateCompatibility compatibility = (detail.Item as Crate)
+                .Compatibilities
+                .SingleOptional(c => c.CrateId == detail.ItemId && c.ProductId == productId)
+                .OrElseThrow(() => new IncompatibleProductException());
+
+            int oldQuantity = current.Map(c => c.Quantity).OrElse(0);
+            int newQuantity = quantitySupplier(oldQuantity);
+            int actualQuantity = compatibility.Multiplier * newQuantity;
+
+            if (actualQuantity > detail.RemainingSlots || newQuantity > compatibility.Maximum.GetValueOrDefault(int.MaxValue))
+            {
+                throw new InvalidQuantityException();
+            }
+
+            if (current.IsPresent())
+            {
+                if (newQuantity == 0)
+                {
+                    detail.SubProducts.Remove(current.Value);
+                }
+                else
+                {
+                    current.Value.Quantity = newQuantity;
+                }
+            }
+            else
+            {
+                detail.SubProducts.Add(new OrderDetailSubProduct
+                {
+                    ProductId = productId,
+                    Quantity = newQuantity
+                });
+            }
+
+            detail.RemainingSlots -= (newQuantity - oldQuantity) * compatibility.Multiplier;
+        }
     }
 }

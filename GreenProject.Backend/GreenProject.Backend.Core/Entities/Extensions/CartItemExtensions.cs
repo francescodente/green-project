@@ -11,14 +11,20 @@ namespace GreenProject.Backend.Core.Entities.Extensions
         public static OrderDetail CreateOrderDetail(this CartItem item, CustomerType customerType)
         {
             Price price = item.Product.GetPrice(customerType).OrElseThrow(() => new Exception());
-            return new OrderDetail
+            OrderDetail detail = new OrderDetail
             {
                 Item = item.Product,
-                Quantity = item.Quantity,
-                Price = price.Value,
-                UnitName = price.UnitName,
-                UnitMultiplier = price.UnitMultiplier
+                Quantity = item.Quantity
             };
+            return detail.WithPrices(price);
+        }
+
+        public static OrderDetail WithPrices(this OrderDetail detail, Price price)
+        {
+            detail.Price = price.Value;
+            detail.UnitName = price.UnitName;
+            detail.UnitMultiplier = price.UnitMultiplier;
+            return detail;
         }
     }
 }
