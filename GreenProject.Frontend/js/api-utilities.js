@@ -58,6 +58,7 @@ function getOrUpdateCategories() {
         let categories = localStorage.getObject("categories");
         if (categories != null && parseInt((now - categories.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
             resolve(categories);
+            return;
         }
         getCategories()
         .done(function(data) {
@@ -78,6 +79,7 @@ function getOrUpdateZones() {
         let zones = localStorage.getObject("zones");
         if (zones != null && parseInt((now - zones.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
             resolve(zones);
+            return;
         }
         getZones()
         .done(function(data) {

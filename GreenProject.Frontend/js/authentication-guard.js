@@ -10,6 +10,11 @@ $(document).ready(function() {
         .catch(function(jqXHR) { new Error(jqXHR).show(); });
     }
 
+    getOrUpdateCategories()
+    .catch(function(jqXHR) { new Error(jqXHR).show(); });
+    getOrUpdateZones()
+    .catch(function(jqXHR) { new Error(jqXHR).show(); });
+
     $(document).on("click", ".btn-logout", function() {
         logout();
         location.reload();

@@ -21,7 +21,6 @@ $(document).ready(function() {
                 // Add product to cart summary
                 let productSummary = $(".summary-products>.product-summary.d-none")
                     .clone().removeClass("d-none");
-                console.log(product.name);
                 productSummary.find(".product-name").html(product.name);
                 productSummary.find(".product-price").html(product.formattedPrice);
                 productSummary.appendTo(".summary-products");
@@ -33,11 +32,7 @@ $(document).ready(function() {
             $(".total").html(formatCurrency(data.prices.total));
         }
     })
-    .fail(function(jqXHR) {
-        console.log(jqXHR);
-    })
-    .always(function(data) {
-        fadeOutModal($("#modal-loading"));
-    });
+    .fail(function(jqXHR) { new Error(jqXHR).show(); })
+    .always(function(data) { fadeOutModal($("#modal-loading")); });
 
 });
