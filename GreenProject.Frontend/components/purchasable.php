@@ -104,6 +104,9 @@
                     </div>
                 </div>
                 <p class="text-center m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
+                <div class="loader text-center mt-3">
+                    <?php include("loader.php"); ?>
+                </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="add-to-cart btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
@@ -111,3 +114,46 @@
         </div>
     </div>
 </div>
+
+<!-- REMOVE MODAL -->
+<div data-template-name="ProductRemoveModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-delete-empty"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Sei sicuro di voler rimuovere questo prodotto dal carrello?</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                <button class="remove-from-cart btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PRODUCT CART ENTRY -->
+<table class="d-none">
+    <tr data-template-name="ProductCartEntry" class="d-none">
+        <td class="nowrap">
+            <img class="product-image img-fluid" src="images/default_product.png"/>
+        </td>
+        <td>
+            <p class="product-name m-0">Product name</p>
+            <p class="text-sec-dark m-0">
+                <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
+            </p>
+        </td>
+        <td class="nowrap actions">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="show-quantity-modal btn icon ripple mr-2" title="Modifica quantità">
+                    <i class="mdi dark mdi-pencil"></i>
+                </button>
+                <button type="button" class="show-remove-modal btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
+                    <i class="mdi dark mdi-close"></i>
+                </button>
+            </div>
+        </td>
+    </tr>
+</table>
