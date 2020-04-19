@@ -7,9 +7,24 @@ Storage.prototype.setObject = function(key, value) {
 };
 
 Storage.prototype.getObject = function(key) {
-    var value = this.getItem(key);
+    let value = this.getItem(key);
     return JSON.parse(value);
 };
+
+Storage.prototype.setObjectProperty = function(objectKey, key, value) {
+    let object = this.getObject(objectKey);
+    object[key] = value;
+    this.setObject(objectKey, object)
+};
+
+/***************\
+|   UTILITIES   |
+\***************/
+
+function updateCartQuantity(quantity) {
+    localStorage.setObjectProperty("userData", "quantity", quantity);
+    $(".cart-badge").html(quantity != 0 ? quantity : "");
+}
 
 /********************************\
 |   WRAPPERS FOR API FUNCTIONS   |

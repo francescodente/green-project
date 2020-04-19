@@ -75,12 +75,10 @@ Product.prototype = Object.create(Purchasable.prototype);
 Product.prototype.constructor = Product;
 
 Product.prototype.showDetailsModal = function() {
-    console.log("show details modal " + this.productId);
     showModal($(this.html.detailsModal));
 }
 
 Product.prototype.showQuantityModal = function() {
-    console.log("show quantity modal " + this.productId);
     showModal($(this.html.quantityModal));
 }
 
@@ -91,13 +89,30 @@ Product.prototype.reactToQuantityChange = function() {
     if (quantity != null && quantity != "") {
         multiplier = (this.price.unitMultiplier * quantity).toString().replace(".", ",");
         price = formatCurrency(this.price.value * quantity);
+        this.html.quantityModal.find(".add-to-cart").prop("disabled", false);
+    } else {
+        this.html.quantityModal.find(".add-to-cart").prop("disabled", true);
     }
-    $(this.html.quantityModal).find(".multiplier").html(multiplier);
-    $(this.html.quantityModal).find(".price").html(price);
+    this.html.quantityModal.find(".multiplier").html(multiplier);
+    this.html.quantityModal.find(".price").html(price);
 }
 
 Product.prototype.addToCart = function() {
     console.log("add to cart " + this.productId);
+    let quantity = this.html.quantityModal.find("[name='quantity']").val();
+    if (quantity == null || quantity == "") return;
+    /*addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
+    .done(function(data) {
+        console.log("done");
+        console.log(data);
+    })
+    .done(function(data) {
+        let cartQuantity = localStorage.getObject("userData").quantity;
+        updateCartQuantity(cartQuantity + 1);
+    })
+    .fail(function(jqXHR) {
+        new Error(jqXHR).show();
+    });*/
 }
 
 Product.prototype.addToCrate = function() {
@@ -110,6 +125,7 @@ Product.prototype.addToOrder = function() {
 
 Product.prototype.removeFromCart = function() {
     console.log("remove from cart " + this.productId);
+    // TODO update cart counter
 }
 
 Product.prototype.removeFromCrate = function() {

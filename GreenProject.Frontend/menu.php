@@ -32,7 +32,7 @@ $page = basename($_SERVER['PHP_SELF']);
 
             <div style="position: relative;" class="req-login">
                 <a href="cart.php" class="btn icon ripple" title="Carrello"><i class="mdi dark mdi-cart"></i></a>
-                <span class="cart-badge badge">3</span>
+                <span class="cart-badge badge"></span>
             </div>
 
             <div class="dropdown d-none d-lg-block req-login">
@@ -154,7 +154,7 @@ $page = basename($_SERVER['PHP_SELF']);
         <a href="cart.php" class="menu-item ripple req-login">
             <i class="mdi mdi-cart"></i>
             <span>Carrello</span>
-            <span class="cart-badge badge">3</span>
+            <span class="cart-badge badge"></span>
         </a>
 
         <button class="menu-item ripple req-login" data-toggle="submenu" data-target="#admin-submenu">
