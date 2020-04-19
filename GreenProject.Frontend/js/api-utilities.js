@@ -7,9 +7,32 @@ Storage.prototype.setObject = function(key, value) {
 };
 
 Storage.prototype.getObject = function(key) {
-    var value = this.getItem(key);
+    let value = this.getItem(key);
     return JSON.parse(value);
 };
+
+Storage.prototype.setObjectProperty = function(objectKey, key, value) {
+    let object = this.getObject(objectKey);
+    object[key] = value;
+    this.setObject(objectKey, object)
+};
+
+/***************\
+|   UTILITIES   |
+\***************/
+
+function updateCartBadge() {
+    return new Promise(function(resolve, reject) {
+        getCartSize(localStorage.getObject("authData").userId)
+        .done(function(data) {
+            $(".cart-badge").html(data != 0 ? data : "");
+            resolve(data);
+        })
+        .fail(function(jqXHR) {
+            reject(jqXHR);
+        });
+    });
+}
 
 /********************************\
 |   WRAPPERS FOR API FUNCTIONS   |
@@ -35,6 +58,7 @@ function getOrUpdateCategories() {
         let categories = localStorage.getObject("categories");
         if (categories != null && parseInt((now - categories.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
             resolve(categories);
+            return;
         }
         getCategories()
         .done(function(data) {
@@ -55,6 +79,7 @@ function getOrUpdateZones() {
         let zones = localStorage.getObject("zones");
         if (zones != null && parseInt((now - zones.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
             resolve(zones);
+            return;
         }
         getZones()
         .done(function(data) {

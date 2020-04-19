@@ -86,29 +86,36 @@ function logout() {
 
 // Cart
 
-function getCart() {
-
+function getCart(userId) {
+    return get("customers/" + localStorage.getObject("authData").userId + "/cart");
 }
 
-function editCartOptions() {
-
+function getCartSize(userId) {
+    return get("customers/" + localStorage.getObject("authData").userId + "/cart/size");
 }
 
-function addToCart() {
-
+function addToCart(userId, productId, quantity) {
+    let data = {
+        productId: productId,
+        quantity: quantity
+    };
+    return post("customers/" + localStorage.getObject("authData").userId + "/cart/details", data);
 }
 
-function editCartQuantity() {
-
+function editCartQuantity(userId, productId, quantity) {
+    let data = {
+        productId: productId,
+        quantity: quantity
+    };
+    return put("customers/" + localStorage.getObject("authData").userId + "/cart/details", data);
 }
 
-
-function removeFromCart() {
-
+function removeFromCart(userId, productId) {
+    return del("customers/" + localStorage.getObject("authData").userId + "/cart/details/" + productId);
 }
 
-function createOrder() {
-
+function confirmCart(userId, data) {
+    return put("customers/" + localStorage.getObject("authData").userId + "/cart/confirm", data);
 }
 
 

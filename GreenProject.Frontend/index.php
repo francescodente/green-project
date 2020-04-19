@@ -184,6 +184,14 @@
         .finally(function(data) {
             $("#categories-loader").hide();
         });
+
+        getCart(localStorage.getObject("userData").userId)
+        .done(function(data) {
+            console.log(data);
+        })
+        .fail(function(jqXHR) {
+            console.log(jqXHR);
+        });
     </script>
 
 </body>

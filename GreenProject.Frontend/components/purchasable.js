@@ -35,19 +35,24 @@ Purchasable.prototype.edit = function() {
 }
 
 // Product
-function Product(json) {
+function Product(json, quantity = 1) {
     Purchasable.call(this, json);
+    this.quantity = quantity;
 
     // Add templates
     this.html.main = getTemplate("ProductCard");
     this.html.detailsModal = getTemplate("ProductDetailsModal");
     this.html.quantityModal = getTemplate("ProductQuantityModal");
+    this.html.removeModal = getTemplate("ProductRemoveModal");
+    this.html.cartEntry = getTemplate("ProductCartEntry");
+
+    // Save formatted fields
+    this.formattedMultiplier = (this.price.unitMultiplier * this.quantity).toString().replace(".", ",");
+    this.formattedUnit = Units[this.price.unitName];
+    this.formattedPrice = formatCurrency(this.price.value * this.quantity);
 
     let product = this;
     let imageUrl = getBasePath() + this.imageUrl;
-    let multiplier = this.price.unitMultiplier.toString().replace(".", ",");
-    let unit = Units[this.price.unitName];
-    let price = formatCurrency(this.price.value);
 
     for (let k in product.html) {
 
@@ -57,14 +62,16 @@ function Product(json) {
         if (product.imageUrl != null) {
             $(product.html[k]).find(".product-image").attr("src", imageUrl);
         }
-        $(product.html[k]).find(".multiplier").html(multiplier);
-        $(product.html[k]).find(".unit").html(unit);
-        $(product.html[k]).find(".price").html(price);
+        $(product.html[k]).find(".multiplier").html(product.formattedMultiplier);
+        $(product.html[k]).find(".unit").html(product.formattedUnit);
+        $(product.html[k]).find(".price").html(product.formattedPrice);
 
         // Add event listeners
         $(product.html[k]).find(".product-image").click(function() { product.showDetailsModal(); });
         $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
+        $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
         $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
+        $(product.html[k]).find(".remove-from-cart").click(function() { product.removeFromCart(); });
         $(product.html[k]).on("change paste keyup", "[name='quantity']", function() {
             product.reactToQuantityChange();
         });
@@ -75,29 +82,72 @@ Product.prototype = Object.create(Purchasable.prototype);
 Product.prototype.constructor = Product;
 
 Product.prototype.showDetailsModal = function() {
-    console.log("show details modal " + this.productId);
-    showModal($(this.html.detailsModal));
+    showModal(this.html.detailsModal);
 }
 
 Product.prototype.showQuantityModal = function() {
-    console.log("show quantity modal " + this.productId);
-    showModal($(this.html.quantityModal));
+    this.html.quantityModal.find("[name='quantity']").val(this.quantity);
+    this.reactToQuantityChange();
+    showModal(this.html.quantityModal);
+}
+
+Product.prototype.showCrateQuantityModal = function() {
+    console.log("show crate quantity modal");
+    //showModal($(this.html.quantityModal));
+}
+
+Product.prototype.showRemoveModal = function() {
+    showModal(this.html.removeModal);
+}
+
+Product.prototype.showCrateRemoveModal = function() {
+    console.log("show crate remove modal");
+    //showModal($(this.html.quantityModal));
 }
 
 Product.prototype.reactToQuantityChange = function() {
-    let quantity = this.html.quantityModal.find("[name='quantity']").val();
+    let quantityModal = this.html.quantityModal
+    let quantity = quantityModal.find("[name='quantity']").val();
     let multiplier = 0;
     let price = formatCurrency(0);
     if (quantity != null && quantity != "") {
         multiplier = (this.price.unitMultiplier * quantity).toString().replace(".", ",");
         price = formatCurrency(this.price.value * quantity);
+        quantityModal.find(".add-to-cart").prop("disabled", false);
+    } else {
+        quantityModal.find(".add-to-cart").prop("disabled", true);
     }
-    $(this.html.quantityModal).find(".multiplier").html(multiplier);
-    $(this.html.quantityModal).find(".price").html(price);
+    quantityModal.find(".multiplier").html(multiplier);
+    quantityModal.find(".price").html(price);
 }
 
 Product.prototype.addToCart = function() {
-    console.log("add to cart " + this.productId);
+    let quantityModal = this.html.quantityModal
+    // Detect if request comes from cart
+    let page = new URL(window.location.href).pathname;
+    page = page.substring(page.lastIndexOf("/") + 1);
+    let isFromCart = page == "cart.php";
+    // Get quantity
+    let quantity = quantityModal.find("[name='quantity']").val();
+    if (quantity == null || quantity == "") return;
+    // Perform request
+    quantityModal.find(".loader").show();
+    quantityModal.find(".add-to-cart").attr("disabled", true);
+    if (isFromCart) {
+        editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
+        .done(function(data) { location.reload(); })
+        .fail(function(jqXHR) { new Error(jqXHR).show(); });
+    } else {
+        addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
+        .done(function(data) {
+            updateCartBadge()
+            .catch(function(jqXHR) { new Error(jqXHR).show(); });
+            quantityModal.modal("hide");
+            quantityModal.find(".loader").hide();
+            quantityModal.find(".add-to-cart").attr("disabled", false);
+        })
+        .fail(function(jqXHR) { new Error(jqXHR).show(); });
+    }
 }
 
 Product.prototype.addToCrate = function() {
@@ -110,6 +160,9 @@ Product.prototype.addToOrder = function() {
 
 Product.prototype.removeFromCart = function() {
     console.log("remove from cart " + this.productId);
+    removeFromCart(localStorage.getObject("userData").userId, this.productId)
+    .done(function(data) { location.reload(); })
+    .fail(function(jqXHR) { new Error(jqXHR).show(); });
 }
 
 Product.prototype.removeFromCrate = function() {
