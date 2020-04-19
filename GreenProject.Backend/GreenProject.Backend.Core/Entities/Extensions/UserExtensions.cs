@@ -55,11 +55,6 @@ namespace GreenProject.Backend.Core.Entities.Extensions
             return Optional.Empty<CustomerType>();
         }
 
-        private static CustomerType RequireCustomerType(this User user)
-        {
-            return user.GetCustomerType().OrElseThrow(() => new MissingPurchasePermissionException());
-        }
-
         public static void AddAddress(this User user, Address address)
         {
             if (user.Addresses.Count == 0)
@@ -85,8 +80,6 @@ namespace GreenProject.Backend.Core.Entities.Extensions
 
         public static void AddProductToCart(this User user, Product product, int quantity)
         {
-            CustomerType customerType = user.RequireCustomerType();
-
             user.CartItems
                 .SingleOptional(i => i.ProductId == product.ItemId)
                 .IfPresent(i => i.Quantity += quantity)

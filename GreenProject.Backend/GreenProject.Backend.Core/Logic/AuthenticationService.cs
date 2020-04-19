@@ -42,7 +42,7 @@ namespace GreenProject.Backend.Core.Logic
 
         private Task<User> FindUserByEmail(string email)
         {
-            return this.FindUser(u => u.Email == email, () => NotFoundException.UserWithEmail(email));
+            return this.FindUser(u => u.Email == email, () => new LoginFailedException());
         }
 
         public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)
@@ -70,7 +70,7 @@ namespace GreenProject.Backend.Core.Logic
         {
             if (!this.handler.IsPasswordCorrect(user, password))
             {
-                throw new IncorrectPasswordException();
+                throw new LoginFailedException();
             }
         }
 

@@ -87,7 +87,7 @@ namespace GreenProject.Backend.Core.Entities.Extensions
             });
         }
 
-        public static void ChangeProductQuantity(this OrderDetail detail, int productId, Func<int, int> quantitySupplier)
+        private static void ChangeProductQuantity(this OrderDetail detail, int productId, Func<int, int> quantitySupplier)
         {
             IOptional<OrderDetailSubProduct> current = detail.SubProducts
                 .SingleOptional(p => p.ProductId == productId);
