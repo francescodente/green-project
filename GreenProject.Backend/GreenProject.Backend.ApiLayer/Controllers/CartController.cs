@@ -28,6 +28,13 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return Ok(await this.cartService.GetCartDetails(userId));
         }
 
+        [HttpGet("size")]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> GetCartSize([FromRoute] int userId)
+        {
+            return Ok(await this.cartService.GetCartSize(userId));
+        }
+
         [HttpPost("details")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> InsertCartItem([FromRoute] int userId, [FromBody] QuantifiedProductInputDto insertion)

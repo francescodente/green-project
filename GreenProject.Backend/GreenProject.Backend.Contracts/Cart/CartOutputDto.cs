@@ -5,7 +5,7 @@ namespace GreenProject.Backend.Contracts.Cart
 {
     public class CartOutputDto
     {
-        public IEnumerable<QuantifiedProductOutputDto> Items { get; set; }
+        public IEnumerable<QuantifiedProductOutputDto> CartItems { get; set; }
         public OrderPricesDto Prices { get; set; }
     }
 }
