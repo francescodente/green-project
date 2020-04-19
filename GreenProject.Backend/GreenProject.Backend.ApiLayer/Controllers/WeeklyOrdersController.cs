@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
@@ -55,6 +51,14 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return NoContent();
         }
 
+        [HttpPost("extras")]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> AddExtraProductToWeeklyOrder([FromRoute] int userId, [FromBody] QuantifiedProductInputDto product)
+        {
+            await this.weeklyOrdersService.AddExtraProduct(userId, product);
+            return NoContent();
+        }
+
         [HttpDelete("details/{orderDetailId}")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> RemoveItemFromWeeklyOrder([FromRoute] int userId, [FromRoute] int orderDetailId)
@@ -70,5 +74,15 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             await this.weeklyOrdersService.AddProductToCrate(userId, orderDetailId, product);
             return NoContent();
         }
+
+        [HttpDelete("crates/{orderDetailId}/subproducts/{productId}")]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> ProductProductFromCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromRoute] int productId)
+        {
+            await this.weeklyOrdersService.RemoveProductFromCrate(userId, orderDetailId, productId);
+            return NoContent();
+        }
+
+
     }
 }

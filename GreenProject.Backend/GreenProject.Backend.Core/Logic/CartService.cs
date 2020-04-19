@@ -136,8 +136,9 @@ namespace GreenProject.Backend.Core.Logic
             return this.Data
                 .Users
                 .Where(u => u.UserId == userId)
-                .Select(u => u.CartItems.Count())
-                .SingleAsync();
+                .Select(u => new { Size = u.CartItems.Count() })
+                .SingleOptionalAsync()
+                .Map(x => x.OrElseThrow(() => NotFoundException.UserWithId(userId)).Size);
         }
     }
 }
