@@ -90,6 +90,10 @@ function getCart(userId) {
     return get("customers/" + localStorage.getObject("authData").userId + "/cart");
 }
 
+function getCartSize(userId) {
+    return get("customers/" + localStorage.getObject("authData").userId + "/cart/size");
+}
+
 function addToCart(userId, productId, quantity) {
     let data = {
         productId: productId,

@@ -98,21 +98,14 @@ Product.prototype.reactToQuantityChange = function() {
 }
 
 Product.prototype.addToCart = function() {
-    console.log("add to cart " + this.productId);
     let quantity = this.html.quantityModal.find("[name='quantity']").val();
     if (quantity == null || quantity == "") return;
-    /*addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
+    addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
     .done(function(data) {
-        console.log("done");
-        console.log(data);
+        updateCartBadge()
+        .catch(function(jqXHR) { new Error(jqXHR).show(); });
     })
-    .done(function(data) {
-        let cartQuantity = localStorage.getObject("userData").quantity;
-        updateCartQuantity(cartQuantity + 1);
-    })
-    .fail(function(jqXHR) {
-        new Error(jqXHR).show();
-    });*/
+    .fail(function(jqXHR) { new Error(jqXHR).show(); });
 }
 
 Product.prototype.addToCrate = function() {

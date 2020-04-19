@@ -21,9 +21,17 @@ Storage.prototype.setObjectProperty = function(objectKey, key, value) {
 |   UTILITIES   |
 \***************/
 
-function updateCartQuantity(quantity) {
-    localStorage.setObjectProperty("userData", "quantity", quantity);
-    $(".cart-badge").html(quantity != 0 ? quantity : "");
+function updateCartBadge() {
+    return new Promise(function(resolve, reject) {
+        getCartSize(localStorage.getObject("authData").userId)
+        .done(function(data) {
+            $(".cart-badge").html(data != 0 ? data : "");
+            resolve(data);
+        })
+        .fail(function(jqXHR) {
+            reject(jqXHR);
+        });
+    });
 }
 
 /********************************\
