@@ -266,3 +266,15 @@
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
 }
+
+/**********\
+|   CART   |
+\**********/
+
+#cart-content .product-summary>.product-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    margin-right: 8px;
+}
