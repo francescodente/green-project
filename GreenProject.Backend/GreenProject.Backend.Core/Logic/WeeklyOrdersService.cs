@@ -87,13 +87,13 @@ namespace GreenProject.Backend.Core.Logic
             User user = await this.RequireUserById(userId, q => q
                 .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));
 
-            Address address = user.Addresses.SingleOptional().OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
-
             if (user.IsSubscribed)
             {
                 throw new AlreadySubscribedException();
             }
             user.IsSubscribed = true;
+
+            Address address = user.Addresses.SingleOptional().OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
 
             Order order = new Order
             {
@@ -262,6 +262,38 @@ namespace GreenProject.Backend.Core.Logic
             }
 
             detailAction(detail);
+
+            await this.Data.SaveChangesAsync();
+        }
+
+        public async Task SkipWeeks(int userId, int weeks)
+        {
+            await this.RequireSubscription(userId);
+
+            Order order = await this.FindUnlockedSubscriptionOrder(userId);
+
+            order.DeliveryDate += TimeSpan.FromDays(7 * weeks);
+
+            await this.Data.SaveChangesAsync();
+        }
+
+        public async Task UpdateDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo)
+        {
+            User user = await this.RequireUserById(userId, q => q
+               .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));
+
+            if (!user.IsSubscribed)
+            {
+                throw new NotSubscribedException();
+            }
+
+            Address address = user.Addresses.SingleOptional().OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
+
+            Order order = await this.FindUnlockedSubscriptionOrder(userId);
+
+            order.DeliveryDate = await this.scheduler.FindNextAvailableDate(order.DeliveryDate, address.ZipCode);
+            order.Address = address;
+            order.Notes = deliveryInfo.Notes;
 
             await this.Data.SaveChangesAsync();
         }

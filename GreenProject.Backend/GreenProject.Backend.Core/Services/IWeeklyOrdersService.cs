@@ -24,5 +24,9 @@ namespace GreenProject.Backend.Core.Services
         Task RemoveProductFromCrate(int userId, int orderDetailId, int productId);
 
         Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductInputDto update);
+
+        Task SkipWeeks(int userId, int weeks);
+
+        Task UpdateDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo);
     }
 }
