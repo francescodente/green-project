@@ -22,8 +22,8 @@
                     <label for="login-password">Password</label>
                 </div>
 
-                <p id="login-failed-error" class="text-center text-small text-error-dark my-3 d-none">E-mail o password errate.</p>
-                <p id="generic-login-error" class="text-center text-small text-error-dark my-3 d-none">Si è verificato un errore.</p>
+                <p id="login-failed-error" class="error-message text-center text-small text-error-dark my-3" style="display: none;">E-mail o password errate.</p>
+                <p id="generic-login-error" class="error-message text-center text-small text-error-dark my-3" style="display: none;">Si è verificato un errore.</p>
 
                 <div id="login-loader" class="loader text-center my-3">
                     <?php include("loader.php"); ?>
@@ -65,7 +65,7 @@
                 <div class="text-input">
                     <input id="sign-up-email" type="email" name="email" placeholder=" " required/>
                     <label for="sign-up-email">E-mail</label>
-                    <span id="sign-up-email-error" class="error">Questo indirizzo è associato ad un altro account</span>
+                    <span id="sign-up-email-error" class="error">Email già in uso</span>
                 </div>
 
                 <!-- PASSWORD -->
@@ -80,7 +80,7 @@
                     <label for="confirm-password">Conferma password</label>
                 </div>
 
-                <p id="sign-up-password-error" class="text-small text-error-dark my-3 d-none">Le due password non corrispondono.</p>
+                <p id="sign-up-password-error" class="error-message text-small text-error-dark my-3" style="display: none;">Le due password non corrispondono.</p>
 
                 <!-- PRIVACY CONSENT -->
                 <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1" required/>
@@ -90,7 +90,7 @@
                 <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
                 <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br/>
 
-                <p id="generic-sign-up-error" class="text-small text-error-dark my-3 d-none">Si è verificato un errore.</p>
+                <p id="generic-sign-up-error" class="error-message text-small text-error-dark my-3" style="display: none;">Si è verificato un errore.</p>
 
                 <div id="sign-up-loader" class="loader text-center my-3">
                     <?php include("loader.php"); ?>
@@ -138,13 +138,21 @@
 </div>
 
 <script>
+
+    // Prepares form for validation: removes previous errors, disables submit button
+    function prepForValidation(form) {
+        form.find("[type='submit']").prop("disabled", true);
+        form.find("input").removeClass("error");
+        form.find(".error-message").hide();
+    }
+
     $(document).ready(function() {
 
         // LOGIN
         $("#form-login").submit(function(event) {
             event.preventDefault();
             $("#login-loader").show();
-            $(".btn-login").prop("disabled", true);
+            prepForValidation($(this));
             authToken({
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
@@ -158,9 +166,9 @@
                 if (errCode == "Err.Auth.LoginFailed") {
                     $("#login-email").addClass("error");
                     $("#login-password").addClass("error");
-                    $("#login-failed-error").removeClass("d-none");
+                    $("#login-failed-error").show();
                 } else {
-                    $("#generic-login-error").removeClass("d-none");
+                    $("#generic-login-error").show();
                 }
                 $("#login-loader").hide();
                 $(".btn-login").prop("disabled", false);
@@ -170,17 +178,19 @@
         // REGISTRATION
         $("#form-sign-up").submit(function(event) {
             event.preventDefault();
+            $("#form-sign-up .error-message").hide();
             // Check password fields
             let password = $("#sign-up-password").val();
             if (password != $("#confirm-password").val()) {
                 $("#sign-up-password").addClass("error");
                 $("#confirm-password").addClass("error");
-                $("#sign-up-password-error").removeClass("d-none");
+                $("#sign-up-password-error").show();
+                $(".btn-sign-up").prop("disabled", false);
                 return;
             }
             // Perform registration
             $("#sign-up-loader").show();
-            $(".btn-sign-up").prop("disabled", true);
+            prepForValidation($(this));
             signup({
                 user: {
                     email: $("#sign-up-email").val(),
@@ -193,15 +203,15 @@
                 console.log(data);
             })
             .fail(function(jqXHR) {
-                console.log(jqXHR);
-                let errCode = jqXHR.responseJSON.globalErrors[0].code;
-                if (errCode == "Err.DuplicateField") {
-                    $("#login-email").addClass("error");
+                if (jqXHR.responseJSON.propertyErrors.length &&
+                    jqXHR.responseJSON.propertyErrors[0].code == "Err.DuplicateField") {
+                    console.log(jqXHR.responseJSON.propertyErrors[0]);
+                    $("#sign-up-email").addClass("error");
                 } else {
-                    $("#generic-login-error").removeClass("d-none");
+                    $("#generic-sign-up-error").show();
                 }
                 $("#sign-up-loader").hide();
-            $(".btn-sign-up").prop("disabled", false);
+                $(".btn-sign-up").prop("disabled", false);
             });
         });
 
