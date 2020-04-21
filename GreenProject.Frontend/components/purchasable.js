@@ -136,17 +136,17 @@ Product.prototype.addToCart = function() {
     if (isFromCart) {
         editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
         .done(function(data) { location.reload(); })
-        .fail(function(jqXHR) { new Error(jqXHR).show(); });
+        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     } else {
         addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
         .done(function(data) {
             updateCartBadge()
-            .catch(function(jqXHR) { new Error(jqXHR).show(); });
+            .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
             quantityModal.modal("hide");
             quantityModal.find(".loader").hide();
             quantityModal.find(".add-to-cart").attr("disabled", false);
         })
-        .fail(function(jqXHR) { new Error(jqXHR).show(); });
+        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     }
 }
 
@@ -162,7 +162,7 @@ Product.prototype.removeFromCart = function() {
     console.log("remove from cart " + this.productId);
     removeFromCart(localStorage.getObject("userData").userId, this.productId)
     .done(function(data) { location.reload(); })
-    .fail(function(jqXHR) { new Error(jqXHR).show(); });
+    .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
 }
 
 Product.prototype.removeFromCrate = function() {

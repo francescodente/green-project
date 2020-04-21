@@ -15,14 +15,9 @@ $(document).ready(function() {
         }
     }
 
-    // CHANGE WITH A MORE APPROPRIATE LOGIN CHECK METHOD
-    if (localStorage.getObject("authData") === null) {
-        window.location.href = "index.php";
-    }
-
     // Get user data
     showModal($("#modal-loading"));
-    saveCurrentUserInfo()
+    getOrUpdateCurrentUserInfo()
     .then(function(data) {
         fillFormFields();
         fadeOutModal($("#modal-loading"));

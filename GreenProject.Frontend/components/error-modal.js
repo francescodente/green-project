@@ -1,4 +1,4 @@
-var Error = function(json, message) {
+var ErrorModal = function(json, message) {
     for (let k in json) this[k] = json[k];
     this.html = {};
     this.html.main = getTemplate("ErrorModal");
@@ -24,6 +24,6 @@ var Error = function(json, message) {
     }
 }
 
-Error.prototype.show = function() {
+ErrorModal.prototype.show = function() {
     showModal($(this.html.main));
 }

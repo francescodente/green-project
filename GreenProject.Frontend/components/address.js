@@ -66,7 +66,7 @@ Address.prototype.deleteAddress = function() {
     .done(function(data) { location.reload(); })
     .fail(function(jqXHR) {
         fadeOutModal($("#modal-loading"));
-        new Error(jqXHR).show();
+        new ErrorModal(jqXHR).show();
     });
 }
 
@@ -78,6 +78,6 @@ Address.prototype.setDefault = function() {
     })
     .fail(function(jqXHR) {
         fadeOutModal($("#modal-loading"));
-        new Error(jqXHR).show();
+        new ErrorModal(jqXHR).show();
     });
 }

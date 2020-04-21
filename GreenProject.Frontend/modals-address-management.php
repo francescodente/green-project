@@ -204,7 +204,7 @@
             location.reload();
         })
         .fail(function(jqXHR) {
-            new Error(jqXHR).show();
+            new ErrorModal(jqXHR).show();
         });
     });
 </script>

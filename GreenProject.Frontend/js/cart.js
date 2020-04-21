@@ -32,7 +32,7 @@ $(document).ready(function() {
             $(".total").html(formatCurrency(data.prices.total));
         }
     })
-    .fail(function(jqXHR) { new Error(jqXHR).show(); })
+    .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); })
     .always(function(data) { fadeOutModal($("#modal-loading")); });
 
 });
