@@ -20,7 +20,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
             this.data = data;
         }
 
-        public async Task<DateTime> FindNextAvailableDate(DateTime startingDate, string zipCode)
+        public async Task<IEnumerable<DateTime>> EnumerateAvailableDates(DateTime startingDate, string zipCode)
         {
             IDictionary<DateTime, int> orderCountsByDate = await data
                 .Orders
@@ -35,22 +35,19 @@ namespace GreenProject.Backend.Core.Logic.Utils
                 .Select(z => z.Availability)
                 .ToDictionaryAsync(a => a.Day, a => a.AvailableSlots);
 
-            return this.FindNextAvailableDate(orderCountsByDate, availabilities, startingDate);
-        }
-
-        private DateTime FindNextAvailableDate(IDictionary<DateTime, int> orderCountsByDate, IDictionary<DayOfWeek, int> availabilities, DateTime startingDate)
-        {
             if (availabilities.Count == 0)
             {
                 throw new InvalidOperationException("Zone with no availabilities in the database");
             }
 
-            DateTime targetDate = EnumerableUtils.Iterate(startingDate, d => d.AddDays(1))
+            return EnumerableUtils.Iterate(startingDate, d => d.AddDays(1))
                 .Where(d => availabilities.ContainsKey(d.DayOfWeek))
-                .Where(d => availabilities[d.DayOfWeek] - orderCountsByDate.GetValueAsOptional(d).OrElse(0) > 0)
-                .First();
+                .Where(d => availabilities[d.DayOfWeek] - orderCountsByDate.GetValueAsOptional(d).OrElse(0) > 0);
+        }
 
-            return targetDate;
+        public Task<DateTime> FindNextAvailableDate(DateTime startingDate, string zipCode)
+        {
+            return this.EnumerateAvailableDates(startingDate, zipCode).Map(d => d.First());
         }
     }
 }

@@ -3,6 +3,7 @@ using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Core.Utils.Session;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
@@ -12,10 +13,12 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthenticationService authenticationService;
+        private readonly IUserSession userSession;
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(IAuthenticationService authenticationService, IUserSession userSession)
         {
             this.authenticationService = authenticationService;
+            this.userSession = userSession;
         }
 
         [HttpPost("token")]
@@ -24,18 +27,11 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return Ok(await this.authenticationService.Authenticate(credentials));
         }
 
-        [HttpGet("renew")]
-        [RequireLogin]
-        public async Task<IActionResult> RenewToken()
-        {
-            return Ok(await this.authenticationService.RenewToken());
-        }
-
         [HttpPost("changepsw")]
         [RequireLogin]
         public async Task<IActionResult> ChangePassword([FromBody] PasswordChangeRequestDto request)
         {
-            await this.authenticationService.ChangePassword(request);
+            await this.authenticationService.ChangePassword(this.userSession.UserId, request);
             return NoContent();
         }
 

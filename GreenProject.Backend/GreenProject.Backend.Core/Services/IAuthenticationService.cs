@@ -10,8 +10,6 @@ namespace GreenProject.Backend.Core.Services
 
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 
-        Task<AuthenticationResultDto> RenewToken();
-
-        Task ChangePassword(PasswordChangeRequestDto request);
+        Task ChangePassword(int userId, PasswordChangeRequestDto request);
     }
 }

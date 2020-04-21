@@ -1,10 +1,6 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using GreenProject.Backend.Contracts.Addresses;
+﻿using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Contracts.Users;
-using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
@@ -26,56 +22,17 @@ namespace GreenProject.Backend.Core.Logic
             this.handler = handler;
         }
 
-        private Task<User> FindUser(Expression<Func<User, bool>> predicate, Func<Exception> exceptionSupplier)
-        {
-            return this.Data
-                .Users
-                .IncludingRoles()
-                .SingleOptionalAsync(predicate)
-                .Map(u => u.OrElseThrow(exceptionSupplier));
-        }
-
-        private Task<User> FindUserById(int userId)
-        {
-            return this.FindUser(u => u.UserId == userId, () => NotFoundException.UserWithId(userId));
-        }
-
-        private Task<User> FindUserByEmail(string email)
-        {
-            return this.FindUser(u => u.Email == email, () => new LoginFailedException());
-        }
-
-        public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)
-        {
-            User user = await this.FindUserByEmail(credentials.Email);
-            this.EnsurePasswordIsCorrect(user, credentials.Password);
-            return await this.handler.OnUserAuthenticated(user);
-        }
-
-        public async Task ChangePassword(PasswordChangeRequestDto request)
-        {
-            User user = await this.FindUserById(this.RequestingUser.UserId);
-            this.EnsurePasswordIsCorrect(user, request.OldPassword);
-            this.handler.AssignPassword(user, request.NewPassword);
-            user.ShouldChangePassword = false;
-            await this.Data.SaveChangesAsync();
-        }
-
-        public Task<AuthenticationResultDto> RenewToken()
-        {
-            return this.FindUserById(this.RequestingUser.UserId).FlatMap(this.handler.OnUserAuthenticated);
-        }
-
-        private void EnsurePasswordIsCorrect(User user, string password)
-        {
-            if (!this.handler.IsPasswordCorrect(user, password))
-            {
-                throw new LoginFailedException();
-            }
-        }
-
         public async Task<UserOutputDto> RegisterCustomer(RegistrationDto registration)
         {
+            bool emailInUse = await this.Data
+                .Users
+                .AnyAsync(u => u.Email == registration.User.Email);
+
+            if (emailInUse)
+            {
+                throw new EmailAlreadyInUseException();
+            }
+
             User userEntity = this.CreateUserFromUserDto(registration.User);
             this.handler.AssignPassword(userEntity, registration.Password);
             this.Data.Users.Add(userEntity);
@@ -95,6 +52,37 @@ namespace GreenProject.Backend.Core.Logic
                 IsEnabled = true,
                 MarketingConsent = userInput.MarketingConsent
             };
+        }
+
+        public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)
+        {
+            User user = await this.Data
+                .Users
+                .SingleOptionalAsync(u => u.Email == credentials.Email)
+                .Map(u => u.OrElseThrow(() => new LoginFailedException()));
+            this.EnsurePasswordIsCorrect(user, credentials.Password);
+            return await this.handler.OnUserAuthenticated(user);
+        }
+
+        public async Task ChangePassword(int userId, PasswordChangeRequestDto request)
+        {
+            User user = await this.Data
+                .Users
+                .SingleOptionalAsync(u => u.UserId == userId)
+                .Map(u => u.OrElseThrow(() => NotFoundException.UserWithId(userId)));
+
+            this.EnsurePasswordIsCorrect(user, request.OldPassword);
+            this.handler.AssignPassword(user, request.NewPassword);
+            user.ShouldChangePassword = false;
+            await this.Data.SaveChangesAsync();
+        }
+
+        private void EnsurePasswordIsCorrect(User user, string password)
+        {
+            if (!this.handler.IsPasswordCorrect(user, password))
+            {
+                throw new LoginFailedException();
+            }
         }
     }
 }
