@@ -207,8 +207,8 @@ function deletePersonRole(userId) {
 
 // Users
 
-function getCurrentUserInfo() {
-    return get("users/" + localStorage.getObject("authData").userId);
+function getUserInfo(userId) {
+    return get("users/" + userId);
 }
 
 function deleteUser() {

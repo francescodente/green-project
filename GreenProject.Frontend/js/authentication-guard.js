@@ -6,6 +6,8 @@ $(document).ready(function() {
     } else {
         // User is logged in
         $(".req-logout").remove();
+        getOrUpdateCurrentUserInfo()
+        .catch(function(jqXHR) { new Error(jqXHR).show(); });
         updateCartBadge()
         .catch(function(jqXHR) { new Error(jqXHR).show(); });
     }
