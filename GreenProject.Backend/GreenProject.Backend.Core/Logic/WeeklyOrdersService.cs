@@ -87,7 +87,7 @@ namespace GreenProject.Backend.Core.Logic
             User user = await this.RequireUserById(userId, q => q
                 .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));
 
-            Address address = user.Addresses.SingleOptional().OrElseThrow(() => new UnauthorizedUserAccessException());
+            Address address = user.Addresses.SingleOptional().OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
 
             if (user.IsSubscribed)
             {
@@ -185,6 +185,20 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
+        public Task UpdateExtraProduct(int userId, QuantifiedProductInputDto product)
+        {
+            return this.UpdateDetailsForWeeklyOrder(userId, order =>
+            {
+                order.Details
+                    .Where(d => d.Item is Product)
+                    .SingleOptional(d => d.ItemId == product.ProductId)
+                    .IfPresent(d => d.Quantity = product.Quantity)
+                    .OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId));
+
+                return Task.CompletedTask;
+            });
+        }
+
         public Task RemoveItem(int userId, int orderDetailId)
         {
             return this.UpdateDetailsForWeeklyOrder(userId, order =>
@@ -244,7 +258,7 @@ namespace GreenProject.Backend.Core.Logic
 
             if (detail.OrderId != orderId)
             {
-                throw new UnauthorizedUserAccessException();
+                throw NotFoundException.OrderDetailWithId(orderDetailId);
             }
 
             detailAction(detail);

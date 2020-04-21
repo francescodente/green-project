@@ -6,72 +6,77 @@ namespace GreenProject.Backend.Contracts.Errors
 {
     public static class ErrorCodes
     {
-        private const string BASE = "ERR";
+        private const string BASE = "Err";
 
         public static class Common
         {
-            public static readonly string Generic = $"{BASE}.GENERIC";
+            public static readonly string Generic = $"{BASE}.Generic";
 
-            public static readonly string MissingValue = $"{BASE}.MISSING_VALUE";
+            public static readonly string MissingValue = $"{BASE}.MissingValue";
 
-            public static readonly string IncorrectFormat = $"{BASE}.INCORRECT_FORMAT";
+            public static readonly string IncorrectFormat = $"{BASE}.IncorrectFormat";
 
-            public static readonly string ValueOutOfRange = $"{BASE}.VALUE_OUT_OF_RANGE";
+            public static readonly string ValueOutOfRange = $"{BASE}.ValueOutOfRange";
 
-            public static readonly string DuplicateField = $"{BASE}.DUPLICATE_FIELD";
+            public static readonly string DuplicateField = $"{BASE}.DuplicateField";
 
-            public static readonly string UnsupportedValue = $"{BASE}.UNSUPPORTED_VALUE";
+            public static readonly string UnsupportedValue = $"{BASE}.UnsupportedValue";
 
-            public static readonly string NotFound = $"{BASE}.NOT_FOUND";
+            public static readonly string NotFound = $"{BASE}.NotFound";
+
+            public static string ResourceNotFound(string resourceName)
+            {
+                return $"{NotFound}.{resourceName}";
+            }
         }
 
         public static class Auth
         {
-            private static readonly string AuthBase = $"{BASE}.AUTH";
+            private static readonly string AuthBase = $"{BASE}.Auth";
 
-            public static readonly string IncorrectPassword = $"{AuthBase}.INCORRECT_PASSWORD";
+            public static readonly string LoginFailed = $"{AuthBase}.LoginFailed";
 
-            public static readonly string MissingPermission = $"{AuthBase}.MISSING_PERMISSION";
+            public static readonly string MissingPermission = $"{AuthBase}.MissingPermission";
 
-            public static readonly string UnauthorizedAccess = $"{AuthBase}.UNAUTHORIZED_ACCESS";
+            public static readonly string UnauthorizedAccess = $"{AuthBase}.UnauthorizedAccess";
         }
 
         public static class Cart
         {
-            private static readonly string CartBase = $"{BASE}.CART";
+            private static readonly string CartBase = $"{BASE}.Cart";
 
-            public static readonly string Empty = $"{CartBase}.EMPTY_CART";
+            public static readonly string Empty = $"{CartBase}.EmptyCart";
         }
 
         public static class Orders
         {
-            private static readonly string OrdersBase = $"{BASE}.ORDERS";
+            private static readonly string OrdersBase = $"{BASE}.Orders";
 
-            public static readonly string InvalidStateTransition = $"{OrdersBase}.INVALID_STATE_TRANSITION";
+            public static readonly string InvalidStateTransition = $"{OrdersBase}.InvalidStateTransition";
 
-            public static readonly string ReservedProduct = $"{OrdersBase}.RESERVED_PRODUCT";
+            public static readonly string ReservedProduct = $"{OrdersBase}.ReservedProduct";
 
-            public static readonly string OrderLocked = $"{OrdersBase}.ORDER_LOCKED";
+            public static readonly string OrderLocked = $"{OrdersBase}.OrderLocked";
 
-            public static readonly string InvalidQuantity = $"{OrdersBase}.INVALID_QUANTITY";
+            public static readonly string InvalidQuantity = $"{OrdersBase}.InvalidQuantity";
         }
 
         public static class Addresses
         {
-            private static readonly string AddressesBase = $"{BASE}.ADDRESSES";
+            private static readonly string AddressesBase = $"{BASE}.Addresses";
 
-            public static readonly string DeletingDefaultAddress = $"{AddressesBase}.DELETING_DEFAULT";
+            public static readonly string DeletingDefaultAddress = $"{AddressesBase}.DeletingDefault";
         }
 
         public static class WeeklyOrders
         {
-            private static readonly string WeeklyOrdersBase = $"{BASE}.WEEKLY_ORDERS";
+            private static readonly string WeeklyOrdersBase = $"{BASE}.WeeklyOrders";
 
-            public static readonly string NotSubscribed = $"{WeeklyOrdersBase}.NOT_SUBSCRIBED";
+            public static readonly string NotSubscribed = $"{WeeklyOrdersBase}.NotSubscribed";
 
-            public static readonly string AlreadySubscribed = $"{WeeklyOrdersBase}.ALREADY_SUBSCRIBED";
+            public static readonly string AlreadySubscribed = $"{WeeklyOrdersBase}.AlreadySubscribed";
 
-            public static readonly string IncompatibleProduct = $"{WeeklyOrdersBase}.INCOMPATIBLE_PRODUCT";
+            public static readonly string IncompatibleProduct = $"{WeeklyOrdersBase}.IncompatibleProduct";
         }
     }
 }

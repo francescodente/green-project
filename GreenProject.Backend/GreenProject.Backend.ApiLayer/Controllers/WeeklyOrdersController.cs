@@ -83,6 +83,12 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return NoContent();
         }
 
-
+        [HttpPut("crates/{orderDetailId}/subproducts/{productId}")]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> UpdateProductInCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromBody] QuantifiedProductInputDto update)
+        {
+            await this.weeklyOrdersService.UpdateProductInCrate(userId, orderDetailId, update);
+            return NoContent();
+        }
     }
 }

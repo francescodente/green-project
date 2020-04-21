@@ -8,22 +8,24 @@ namespace GreenProject.Backend.Core.Exceptions
 {
     public class NotFoundException : DomainException
     {
-        public override string MainErrorCode => ErrorCodes.Common.NotFound;
+        public override string MainErrorCode => resourceName == null ? ErrorCodes.Common.NotFound : ErrorCodes.Common.ResourceNotFound(resourceName);
 
-        private NotFoundException(string message)
+        private string resourceName;
+
+        private NotFoundException(string message, string resourceName)
             : base(message)
         {
-
+            this.resourceName = resourceName;
         }
 
-        public static NotFoundException WithMessage(string message)
+        public static NotFoundException WithMessage(string message, string resourceName = null)
         {
-            return new NotFoundException(message);
+            return new NotFoundException(message, resourceName);
         }
 
         public static NotFoundException ResourceWithProperty(string resourceType, string propertyName, object propertyValue)
         {
-            return WithMessage($"Unable to find {resourceType} with {propertyName} equal to {propertyValue}");
+            return WithMessage($"Unable to find {resourceType} with {propertyName} equal to {propertyValue}", resourceType);
         }
 
         public static NotFoundException ResourceWithId(string resourceType, int id)
@@ -33,7 +35,7 @@ namespace GreenProject.Backend.Core.Exceptions
 
         public static NotFoundException CartItem(int productId)
         {
-            return ResourceWithId("products in the cart", productId);
+            return ResourceWithId(nameof(CartItem), productId);
         }
 
         public static NotFoundException PurchasableItemWithId(int itemId)
@@ -43,7 +45,7 @@ namespace GreenProject.Backend.Core.Exceptions
 
         public static NotFoundException Image()
         {
-            return WithMessage($"Unable to find the requested image");
+            return WithMessage("Unable to find the requested image", nameof(Image));
         }
 
         public static NotFoundException ZoneWithZipCode(string zipCode)

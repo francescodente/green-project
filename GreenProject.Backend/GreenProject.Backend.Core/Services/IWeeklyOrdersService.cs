@@ -9,9 +9,9 @@ namespace GreenProject.Backend.Core.Services
     {
         Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoInputDto deliveryInfo);
 
-        Task<WeeklyOrderDto> GetWeeklyOrderData(int userId);
-
         Task Unsubscribe(int userId);
+
+        Task<WeeklyOrderDto> GetWeeklyOrderData(int userId);
 
         Task AddCrate(int userId, int crateId);
 
