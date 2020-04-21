@@ -24,7 +24,7 @@
     <div class="card-body">
         <h5 class="crate-name mb-0">Product name</h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
-            <span class="text-sec-dark"><span class="capacity"></span>Kg - <span class="price"></span></span>
+            <span class="text-sec-dark"><span class="capacity"></span> Kg - <span class="price"></span></span>
             <button class="subscribe btn icon ripple" title="Abbonati">
                 <i class="mdi dark mdi-bookmark-plus-outline"></i>
             </button>
@@ -77,10 +77,10 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
-                <p class="m-0 ml-1"><span class="capacity"></span>Kg - <span class="price"></span></p>
-                <button class="show-quantity-modal btn icon ripple" data-dismiss="modal" title="Aggiungi al carrello">
-                    <i class="mdi dark mdi-cart-plus"></i>
-                </button>
+                <p class="m-0 ml-1"><span class="capacity"></span> Kg - <span class="price"></span></p>
+                <button class="subscribe btn icon ripple" title="Abbonati">
+                <i class="mdi dark mdi-bookmark-plus-outline"></i>
+            </button>
             </div>
         </div>
     </div>
