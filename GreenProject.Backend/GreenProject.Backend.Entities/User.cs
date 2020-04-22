@@ -17,7 +17,6 @@ namespace GreenProject.Backend.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
-        public string Telephone { get; set; }
         public bool MarketingConsent { get; set; }
         public bool IsEnabled { get; set; }
         public bool IsDeleted { get; set; }

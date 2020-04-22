@@ -110,6 +110,8 @@ namespace GreenProject.Backend.Core.Logic
             this.Data.Orders.Add(order);
             await this.Data.SaveChangesAsync();
 
+            await this.Notifications.UserSubscribed(user);
+
             return this.Mapper.Map<WeeklyOrderDto>(order);
         }
 
@@ -130,6 +132,8 @@ namespace GreenProject.Backend.Core.Logic
                 .Then(o => o.IfPresent(order => order.OrderState = OrderState.Canceled));
 
             await this.Data.SaveChangesAsync();
+
+            await this.Notifications.UserUnsubscribed(user);
         }
 
         public async Task<WeeklyOrderDto> GetWeeklyOrderData(int userId)

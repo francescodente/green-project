@@ -1,5 +1,6 @@
 ﻿using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -67,12 +68,13 @@ namespace GreenProject.Backend.ApiLayer.HostedServices
 
         private async Task SendAvailableNotifications(IDataSession data, INotificationsService notifications)
         {
-            // TODO: implement real notifications
-            int id = await data.Users
-                .Select(u => u.UserId)
-                .FirstAsync();
-
-            this.logger.LogInformation("Sending mail notifications to {id}", id);
+            DateTime now = DateTime.Now;
+            IEnumerable<Order> ordersToBeNotified = await data.Orders
+                .Where(o => now + this.settings.SubscriptionReminderTime >= o.DeliveryDate)
+                .Where(o => now <= o.DeliveryDate)
+                .Where(o => o.OrderState == OrderState.Pending)
+                .Include(o => o.User) // TODO: check what else needs to be included or if ProjectTo<WeeklyOrderDto>() can be used.
+                .ToArrayAsync();
         }
     }
 }

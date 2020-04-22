@@ -23,6 +23,13 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .IsRequired()
                 .HasMaxLength(50);
 
+            entity.Property(e => e.Code)
+                .IsRequired()
+                .HasMaxLength(20);
+
+            entity.Property(e => e.DateOfBirth)
+                .HasColumnType("date");
+
             entity.HasOne(d => d.User)
                 .WithOne(p => p.Person)
                 .HasForeignKey<Person>(d => d.UserId)

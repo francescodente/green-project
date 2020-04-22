@@ -28,8 +28,6 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .IsRequired()
                 .HasMaxLength(256);
 
-            entity.Property(e => e.Telephone).HasMaxLength(20);
-
             entity.HasOne(e => e.DefaultAddress)
                 .WithOne()
                 .HasForeignKey<User>(e => e.DefaultAddressId)

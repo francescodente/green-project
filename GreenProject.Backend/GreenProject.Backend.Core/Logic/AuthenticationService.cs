@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Core.Exceptions;
@@ -48,7 +49,6 @@ namespace GreenProject.Backend.Core.Logic
             return new User
             {
                 Email = userInput.Email,
-                Telephone = userInput.Telephone,
                 IsEnabled = true,
                 MarketingConsent = userInput.MarketingConsent
             };
@@ -58,6 +58,7 @@ namespace GreenProject.Backend.Core.Logic
         {
             User user = await this.Data
                 .Users
+                .IncludingRoles()
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
             this.EnsurePasswordIsCorrect(user, credentials.Password);
@@ -83,6 +84,11 @@ namespace GreenProject.Backend.Core.Logic
             {
                 throw new LoginFailedException();
             }
+        }
+
+        public Task SendPasswordRecovery(PasswordRecoveryRequestDto request)
+        {
+            throw new NotImplementedException();
         }
     }
 }
