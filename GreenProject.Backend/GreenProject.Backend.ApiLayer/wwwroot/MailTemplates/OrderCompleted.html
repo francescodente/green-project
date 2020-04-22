@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Green Project - Nuovo ordine</title>
+    <title>Green Project - Ordine completato</title>
 </head>
 <body>
     <table style="width: 480px; border-collapse: collapse; margin: 0 auto;">
@@ -15,17 +15,28 @@
         <!-- Content -->
         <tr>
             <td colspan="12" style="padding: 16px;">
-                <h1>Nuovo ordine ricevuto!</h1>
+                <h1>Ordine completato</h1>
                 <p>
-                    È stato registrato un nuovo ordine che comprende <strong>{productName}</strong> e altri <strong>{itemCount}</strong> prodotti.
+                    Il tuo ordine N° <strong>{orderNumber}</strong> è stato contrassegnato come completato.
                 </p>
-                <p>
-                    Cliente: <strong>{customerEmail}</strong>
-                    <br/>
+                <h4 style="margin: 16px 0 8px 0;">Speriamo di rivederti presto!</h4>
+                <h4 style="color: #9CBF22; margin: 16px 0 8px 0;">Ordine</h4>
+                <p style="margin-bottom: 0;">
                     N° ordine: <strong>{orderNumber}</strong>
                     <br/>
                     Data di consegna: <strong>{deliveryDate}</strong>
+                    <br/>
+                    Indirizzo di consegna: <strong>{deliveryAddress}</strong>
+                    <br/>
+                    Nome: <strong>{deliveryName}</strong>
                 </p>
+                <p style="margin: 0 0 8px 0;">Prodotti:</p>
+                <table>
+                    <tr>
+                        <td><img src="{wwwroot}/Images/MailTemplates/default_product.png" height="96px"/></td>
+                        <td><strong>{productName}</strong> e altri <strong>{itemCount}</strong> prodotti</td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <!-- Footer -->
