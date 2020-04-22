@@ -58,6 +58,7 @@ namespace GreenProject.Backend.Core.Logic
         {
             User user = await this.Data
                 .Users
+                .IncludingRoles()
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
             this.EnsurePasswordIsCorrect(user, credentials.Password);
