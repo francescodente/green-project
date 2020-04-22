@@ -39,24 +39,18 @@
                     <div id="user-data-general" class="collapse show">
                         <div class="pt-3"></div>
 
-                        <h6>E-mail *</h6>
+                        <h6>E-mail</h6>
                         <div class="text-input mb-3">
                             <input id="email" type="email" name="email" value="" disabled/>
                             <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
                         </div>
 
-                        <h6>Password *</h6>
+                        <h6>Password</h6>
                         <div class="text-input mb-3">
                             <input id="password" type="password" name="password" value="aaaaaaaa" disabled/>
                             <button class="btn icon ripple" title="Modifica" data-toggle="modal" data-target="#modal-pwd-change">
                                 <i class="mdi dark mdi-pencil"></i>
                             </button>
-                        </div>
-
-                        <h6>Telefono **</h6>
-                        <div class="text-input mb-3">
-                            <input id="telephone" type="text" name="telephone" value="" disabled/>
-                            <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
                         </div>
 
                         <h6>Consensi</h6>
@@ -79,29 +73,35 @@
                     <form id="form-user-data-personal" class="collapse show">
                         <div class="pt-3"></div>
 
-                        <h6>Nome **</h6>
+                        <h6>Codice fiscale o P. IVA *</h6>
+                        <div class="text-input mb-3">
+                            <input id="code" type="text" name="code" disabled required/>
+                        </div>
+
+                        <h6>Nome *</h6>
                         <div class="text-input mb-3">
                             <input id="first-name" type="text" name="first-name" disabled required/>
                         </div>
 
-                        <h6>Cognome **</h6>
+                        <h6>Cognome *</h6>
                         <div class="text-input mb-3">
                             <input id="last-name" type="text" name="last-name" disabled required/>
                         </div>
 
                         <h6>Data di nascita</h6>
                         <div class="text-input mb-3">
-                            <input id="birth-date" type="text" name="birth-date" disabled/>
+                            <input id="birth-date" type="text" name="birth-date" maxlength="10" disabled/>
                             <label></label>
                             <span>gg/mm/aaaa</span>
+                            <span class="error">Data non valida</span>
                         </div>
 
                         <h6>Sesso</h6>
-                        <input id="r1" type="radio" class="radio" name="gender" value="male" disabled/>
+                        <input id="r1" type="radio" class="radio" name="gender" value="Male" disabled/>
                         <label for="r1">Maschio</label><br/>
-                        <input id="r2" type="radio" class="radio" name="gender" value="female" disabled/>
+                        <input id="r2" type="radio" class="radio" name="gender" value="Female" disabled/>
                         <label for="r2">Femmina</label><br/>
-                        <input id="r3" type="radio" class="radio" name="gender" value="other" disabled/>
+                        <input id="r3" type="radio" class="radio" name="gender" value="Other" disabled/>
                         <label for="r3" class="mb-2">Altro</label>
 
                         <div class="user-data-form-options justify-content-end mt-3" style="display: flex;">
@@ -126,10 +126,7 @@
 
                     <div class="divider dark my-4"></div>
 
-                    <p class="text-sec-dark">
-                        I campi contrassegnati da * sono obbligatori.<br/>
-                        I campi contrassegnati da ** sono necessari per effettuare acquisti.
-                    </p>
+                    <p class="text-sec-dark">I campi contrassegnati da * sono necessari per effettuare acquisti.</p>
 
                 </div>
             </div>

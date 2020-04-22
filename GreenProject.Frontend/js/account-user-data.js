@@ -15,16 +15,33 @@ $(document).ready(function() {
         }
     }
 
+    function validateDateOfBirth(date) {
+        let pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+        if (date == null || date == "" || !pattern.test(date)) {
+            return false;
+        }
+        let dd = date.substring(0, 2);
+        let mm = date.substring(3, 5);
+        let yyyy  = date.substring(6, 10);
+        let dateObject = new Date(yyyy + "/" + mm + "/" + dd);
+        let dateString = ("0" + dateObject.getDate()).slice(-2) + "/"
+                       + ("0" + (dateObject.getMonth()+1)).slice(-2) + "/"
+                       + dateObject.getFullYear();
+        if (date != dateString) {
+            return false;
+        }
+        if (dateObject.getTime() > new Date().getTime()) {
+            return false
+        }
+        return yyyy + "-" + mm + "-" + dd;
+    }
+
     // Get user data
     showModal($("#modal-loading"));
     getOrUpdateCurrentUserInfo()
-    .then(function(data) {
-        fillFormFields();
-        fadeOutModal($("#modal-loading"));
-    })
-    .catch(function(data) {
-        // TODO redirect to error page
-    });
+    .then(function(data) { fillFormFields(); })
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); })
+    .finally(function(data) { fadeOutModal($("#modal-loading")); });
 
     /*$("#user-data").on("click", ".edit-field", function() {
         var icon = $(this).find(".mdi");
@@ -62,34 +79,61 @@ $(document).ready(function() {
 
     $("#form-user-data-personal").submit(function(event) {
         event.preventDefault();
-        showModal($("#modal-loading"));
-        setPersonRole(localStorage.getObject("authData").userId, {
+        //showModal($("#modal-loading"));
+
+        // TODO check code format
+
+        let data = {
+            code: $("#code").val(),
             firstName: $("#first-name").val(),
             lastName: $("#last-name").val()
+        };
+
+        // Check date format
+        let date = $("#birth-date").val();
+        if (date != null && date != "") {
+            date = validateDateOfBirth($("#birth-date").val());
+            if (date == false) {
+                $("#birth-date").addClass("error");
+                return;
+            } else {
+                data.dateOfBirth = date;
+            }
+        }
+
+        // Check gender
+        let gender = $("[name='gender']:checked").val();
+        if (gender != null) {
+            data.gender = gender;
+        }
+
+        console.log(data);
+
+        return;
+
+        setPersonRole(localStorage.getObject("authData").userId, {
+            code: "",
+            firstName: $("#first-name").val(),
+            lastName: $("#last-name").val(),
+            dateOfBirth: "",
+            gender: ""
         })
         .done(function(data) {
             console.log("done");
-            saveCurrentUserInfo().then(function() { location.reload(); });
+            localStorage.removeItem("userData");
+            location.reload();
         })
-        .fail(function(data) {
-            console.log("fail");
-        });
+        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     });
 
     $("#delete-user-data-personal").click(function() {
-        console.log("delete");
         showModal($("#modal-loading"));
         deletePersonRole(localStorage.getObject("authData").userId)
         .done(function(data) {
-            console.log("done");
-            saveCurrentUserInfo().then(function() { location.reload(); });
+            localStorage.removeItem("userData");
+            location.reload();
         })
-        .fail(function(data) {
-            console.log("fail");
-        })
-        .always(function(data) {
-            console.log("always");
-        });
+        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     });
 
 });

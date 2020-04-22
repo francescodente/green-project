@@ -68,10 +68,6 @@ function authToken(data) {
     return post("auth/token", data);
 }
 
-function renewToken() {
-
-}
-
 function changePsw() {
 
 }
