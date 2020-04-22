@@ -61,7 +61,7 @@ $page = basename($_SERVER['PHP_SELF']);
                 </div>
             </div>
 
-            <div class="dropdown d-none d-lg-block req-login">
+            <div class="dropdown d-none d-lg-block req-login req-admin">
                 <button id="dropdown-admin" class="btn icon ripple" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-pound-box"></i>
                 </button>
@@ -157,7 +157,7 @@ $page = basename($_SERVER['PHP_SELF']);
             <span class="cart-badge badge"></span>
         </a>
 
-        <button class="menu-item ripple req-login" data-toggle="submenu" data-target="#admin-submenu">
+        <button class="menu-item ripple req-login req-admin" data-toggle="submenu" data-target="#admin-submenu">
             <i class="mdi mdi-pound-box"></i>
             <span>Gestione</span>
             <i class="mdi expand dark mdi-chevron-down"></i>

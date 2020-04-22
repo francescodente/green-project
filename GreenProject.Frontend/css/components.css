@@ -350,7 +350,7 @@ button {
 .radio {
     position: absolute;
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
 }
 
 .radio + label {
@@ -460,7 +460,7 @@ button {
 .checkbox {
     position: absolute;
     opacity: 0;
-    visibility: hidden;
+    pointer-events: none;
 }
 
 .checkbox + label {

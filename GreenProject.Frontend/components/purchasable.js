@@ -86,6 +86,10 @@ Product.prototype.showDetailsModal = function() {
 }
 
 Product.prototype.showQuantityModal = function() {
+    if (localStorage.getObject("authData") === null) {
+        new InfoModal("Devi essere registrato e aver effettuato l'accesso per aggiungere prodotti al carrello.").show();
+        return;
+    }
     this.html.quantityModal.find("[name='quantity']").val(this.quantity);
     this.reactToQuantityChange();
     showModal(this.html.quantityModal);
@@ -212,6 +216,10 @@ Crate.prototype.showDetailsModal = function() {
 }
 
 Crate.prototype.addToPreferences = function() {
+    if (localStorage.getObject("authData") === null) {
+        new InfoModal("Devi essere registrato e aver effettuato l'accesso per abbonarti a una cassetta settimanale.").show();
+        return;
+    }
     console.log("add to preferences " + this.crateId);
 }
 

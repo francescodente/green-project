@@ -4,7 +4,7 @@
     <?php include("head.php"); ?>
     <title>Green Project - File di riepilogo</title>
 </head>
-<body class="req-login">
+<body class="req-login req-admin">
 
     <?php include("menu.php"); ?>
 
