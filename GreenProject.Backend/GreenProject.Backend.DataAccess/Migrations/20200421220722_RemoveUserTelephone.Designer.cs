@@ -4,14 +4,16 @@ using GreenProject.Backend.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GreenProject.Backend.DataAccess.Migrations
 {
     [DbContext(typeof(GreenProjectContext))]
-    partial class GreenProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20200421220722_RemoveUserTelephone")]
+    partial class RemoveUserTelephone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -362,21 +364,10 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("date");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<int?>("Gender")
-                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()

@@ -8,7 +8,6 @@ namespace GreenProject.Backend.Contracts.Users
     {
         public int UserId { get; set; }
         public string Email { get; set; }
-        public string Telephone { get; set; }
         public bool MarketingConsent { get; set; }
         public IDictionary<RoleType, RoleDto> RolesData { get; set; }
         public bool IsSubscribed { get; set; }

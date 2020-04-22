@@ -35,6 +35,8 @@
     <Compile Remove="Migrations\20200408214026_EnumerationsAsIntegers.Designer.cs" />
     <Compile Remove="Migrations\20200408215450_AddOrderDetailId.cs" />
     <Compile Remove="Migrations\20200408215450_AddOrderDetailId.Designer.cs" />
+    <Compile Remove="Migrations\20200421230349_AddPersonFields.cs" />
+    <Compile Remove="Migrations\20200421230349_AddPersonFields.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

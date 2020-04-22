@@ -20,6 +20,11 @@ namespace GreenProject.Backend.Infrastructure.Notifications
             this.settings = settings;
         }
 
+        public Task OrderAccepted(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task OrderReceived(Order order)
         {
             return this.ApplyTemplateAndSend(
@@ -42,6 +47,21 @@ namespace GreenProject.Backend.Infrastructure.Notifications
                 this.MailTo(order.User.Email),
                 description,
                 MailTemplates.OrderStateChanged(order));
+        }
+
+        public Task UserSubscribed(User user)
+        {
+            throw new NotImplementedException(); // TODO: Implement notifications.
+        }
+
+        public Task UserUnsubscribed(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task WeeklyOrderReminder(User user)
+        {
+            throw new NotImplementedException();
         }
 
         private async Task ApplyTemplateAndSend(
