@@ -14,17 +14,16 @@
                 <div class="text-input">
                     <input id="login-email" type="email" name="email" placeholder=" " required/>
                     <label for="login-email">E-mail</label>
-                    <span id="login-email-error" class="error">Non esiste alcun account collegato a questa email.</span>
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="text-input">
                     <input id="login-password" type="password" name="password" placeholder=" " required/>
                     <label for="login-password">Password</label>
-                    <span id="login-password-error" class="error">Password errata.</span>
                 </div>
 
-                <p id="generic-login-error" class="text-center text-error-dark my-3 d-none">Si è verificato un errore.</p>
+                <p id="login-failed-error" class="error-message text-center text-small text-error-dark my-3" style="display: none;">E-mail o password errate.</p>
+                <p id="generic-login-error" class="error-message text-center text-small text-error-dark my-3" style="display: none;">Si è verificato un errore.</p>
 
                 <div id="login-loader" class="loader text-center my-3">
                     <?php include("loader.php"); ?>
@@ -66,14 +65,13 @@
                 <div class="text-input">
                     <input id="sign-up-email" type="email" name="email" placeholder=" " required/>
                     <label for="sign-up-email">E-mail</label>
-                    <span id="sign-up-email-error" class="error">Error message</span>
+                    <span id="sign-up-email-error" class="error">Email già in uso</span>
                 </div>
 
                 <!-- PASSWORD -->
                 <div class="text-input">
                     <input id="sign-up-password" type="password" name="password" placeholder=" " required/>
                     <label for="sign-up-password">Password</label>
-                    <span id="sign-up-password-error" class="error">Error message</span>
                 </div>
 
                 <!-- CONFIRM PASSWORD -->
@@ -81,6 +79,8 @@
                     <input id="confirm-password" type="password" name="confirm-password" placeholder=" " required/>
                     <label for="confirm-password">Conferma password</label>
                 </div>
+
+                <p id="sign-up-password-error" class="error-message text-small text-error-dark my-3" style="display: none;">Le due password non corrispondono.</p>
 
                 <!-- PRIVACY CONSENT -->
                 <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1" required/>
@@ -90,8 +90,14 @@
                 <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
                 <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br/>
 
+                <p id="generic-sign-up-error" class="error-message text-small text-error-dark my-3" style="display: none;">Si è verificato un errore.</p>
+
+                <div id="sign-up-loader" class="loader text-center my-3">
+                    <?php include("loader.php"); ?>
+                </div>
+
                 <div class="text-center">
-                    <button type="submit" class="btn accent ripple mt-3">Registrati</button>
+                    <button type="submit" class="btn-sign-up btn accent ripple mt-3">Registrati</button>
                 </div>
 
             </form>
@@ -120,7 +126,7 @@
                     <label for="recovery-email">E-mail</label>
                 </div>
 
-                <span class="text-error-dark mb-2 d-none">Error message</span>
+                <span class="text-small text-error-dark mb-2 d-none">Error message</span>
 
                 <div class="text-center">
                     <button type="submit" class="btn accent ripple mt-3">Invia</button>
@@ -132,31 +138,37 @@
 </div>
 
 <script>
+
+    // Prepares form for validation: removes previous errors, disables submit button
+    function prepForValidation(form) {
+        form.find("[type='submit']").prop("disabled", true);
+        form.find("input").removeClass("error");
+        form.find(".error-message").hide();
+    }
+
     $(document).ready(function() {
 
         // LOGIN
         $("#form-login").submit(function(event) {
             event.preventDefault();
             $("#login-loader").show();
-            $(".btn-login").prop("disabled", true);
+            prepForValidation($(this));
             authToken({
                 email: $("#login-email").val(),
                 password: $("#login-password").val()
             })
             .done(function(data) {
                 localStorage.setObject("authData", data);
-                saveCurrentUserInfo().then(function() { location.reload(); });
+                location.reload();
             })
             .fail(function(jqXHR) {
-                let errCode = jqXHR.responseJSON.globalErrors[0].code
-                if (errCode == "ERR.NOT_FOUND") {
+                let errCode = jqXHR.responseJSON.globalErrors[0].code;
+                if (errCode == "Err.Auth.LoginFailed") {
                     $("#login-email").addClass("error");
-                    $("#login-email-error").removeClass("d-none");
-                } else if (errCode == "ERR.AUTH.INCORRECT_PASSWORD") {
                     $("#login-password").addClass("error");
-                    $("#login-password-error").removeClass("d-none");
+                    $("#login-failed-error").show();
                 } else {
-                    $("#generic-login-error").removeClass("d-none");
+                    $("#generic-login-error").show();
                 }
                 $("#login-loader").hide();
                 $(".btn-login").prop("disabled", false);
@@ -166,24 +178,40 @@
         // REGISTRATION
         $("#form-sign-up").submit(function(event) {
             event.preventDefault();
+            $("#form-sign-up .error-message").hide();
+            // Check password fields
+            let password = $("#sign-up-password").val();
+            if (password != $("#confirm-password").val()) {
+                $("#sign-up-password").addClass("error");
+                $("#confirm-password").addClass("error");
+                $("#sign-up-password-error").show();
+                $(".btn-sign-up").prop("disabled", false);
+                return;
+            }
+            // Perform registration
+            $("#sign-up-loader").show();
+            prepForValidation($(this));
             signup({
                 user: {
                     email: $("#sign-up-email").val(),
                     marketingConsent: $("#marketing-consent").is(":checked")
                 },
-                password: $("#sign-up-password").val()
+                password: password
             })
             .done(function(data) {
                 console.log("done");
                 console.log(data);
             })
             .fail(function(jqXHR) {
-                console.log("fail");
-                console.log(data);
-            })
-            .always(function(data) {
-                console.log("always");
-                console.log(data);
+                if (jqXHR.responseJSON.propertyErrors.length &&
+                    jqXHR.responseJSON.propertyErrors[0].code == "Err.DuplicateField") {
+                    console.log(jqXHR.responseJSON.propertyErrors[0]);
+                    $("#sign-up-email").addClass("error");
+                } else {
+                    $("#generic-sign-up-error").show();
+                }
+                $("#sign-up-loader").hide();
+                $(".btn-sign-up").prop("disabled", false);
             });
         });
 

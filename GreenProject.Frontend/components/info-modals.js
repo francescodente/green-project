@@ -1,4 +1,4 @@
-var Error = function(json, message) {
+var ErrorModal = function(json, message) {
     for (let k in json) this[k] = json[k];
     this.html = {};
     this.html.main = getTemplate("ErrorModal");
@@ -24,6 +24,24 @@ var Error = function(json, message) {
     }
 }
 
-Error.prototype.show = function() {
+ErrorModal.prototype.show = function() {
+    showModal($(this.html.main));
+}
+
+var InfoModal = function(message) {
+    this.html = {};
+    this.html.main = getTemplate("InfoModal");
+
+    let info = this;
+    for (let k in info.html) {
+
+        // Replace values in templates
+        if (message != null) {
+            $(info.html[k]).find(".info-text").html(message);
+        }
+    }
+}
+
+InfoModal.prototype.show = function() {
     showModal($(this.html.main));
 }

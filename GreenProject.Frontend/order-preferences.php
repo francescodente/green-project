@@ -54,50 +54,16 @@
             </p>
         </div>
 
+        <div class="addresses-error empty-state m-5 d-none">
+            <i class="mdi mdi-emoticon-sad-outline"></i>
+            <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Oops! Qualcosa è andato storto</h6>
+            <p class="text-center text-dis-dark m-0">
+                C'è stato un errore, ti preghiamo di riprovare.
+            </p>
+        </div>
+
         <div class="address-list"></div>
 
-        <!-- <div>
-            <input id="da1" type="radio" class="rich-radio" name="delivery-address" value="1" checked/>
-            <label for="da1" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
-                <div class="d-flex align-items-center">
-                    <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                        <i class="mdi mdi-map-marker"></i>
-                    </div>
-                    <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                </div>
-                <div style="margin-left: 64px;">
-                    <div class="d-flex align-items-center mb-1">
-                        <i class="mdi small dark mdi-account mr-2"></i>
-                        <span class="text-sec-dark">Nome cognome</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <i class="mdi small dark mdi-phone mr-2"></i>
-                        <span class="text-sec-dark">+39 1234567890</span>
-                    </div>
-                </div>
-            </label>
-        </div>
-        <div>
-            <input id="da2" type="radio" class="rich-radio" name="delivery-address" value="2"/>
-            <label for="da2" class="address-item d-flex flex-column p-2" data-toggle="modal" data-target="#modal-address-default">
-                <div class="d-flex align-items-center">
-                     <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
-                        <i class="mdi mdi-map-marker"></i>
-                    </div>
-                    <p class="mb-0">Viale della Via 123, 47522 - Cesena (FC)</p>
-                </div>
-                <div style="margin-left: 64px;">
-                    <div class="d-flex align-items-center mb-1">
-                        <i class="mdi small dark mdi-account mr-2"></i>
-                        <span class="text-sec-dark">Nome cognome</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <i class="mdi small dark mdi-phone mr-2"></i>
-                        <span class="text-sec-dark">+39 1234567890</span>
-                    </div>
-                </div>
-            </label>
-        </div>-->
         <div class="d-flex justify-content-end">
             <a href="account-user-addresses.php" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;">
                 <span class="text-sec-dark">Gestisci</span>

@@ -6,7 +6,6 @@ var Address = function(json) {
     this.html.deleteModal = getTemplate("DeleteAddressModal");
     this.html.setDefaultModal = getTemplate("SetDefaultAddressModal");
     this.html.richRadio = getTemplate("AddressRadio");
-    console.log(this);
 
     let zones = localStorage.getObject("zones").children;
     zones.forEach(province => {
@@ -64,15 +63,10 @@ Address.prototype.showSetDefaultModal = function() {
 Address.prototype.deleteAddress = function() {
     showModal($("#modal-loading"));
     deleteAddress(localStorage.getObject("userData").userId, this.addressId)
-    .done(function(data) {
-        page = page.substring(page.lastIndexOf("/") + 1);
-        if (page == "account-user-addresses.php") {
-            location.reload();
-        }
-    })
+    .done(function(data) { location.reload(); })
     .fail(function(jqXHR) {
         fadeOutModal($("#modal-loading"));
-        new Error(jqXHR).show();
+        new ErrorModal(jqXHR).show();
     });
 }
 
@@ -84,6 +78,6 @@ Address.prototype.setDefault = function() {
     })
     .fail(function(jqXHR) {
         fadeOutModal($("#modal-loading"));
-        new Error(jqXHR).show();
+        new ErrorModal(jqXHR).show();
     });
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Green Project - Nuovo ordine</title>
+    <title>Green Project - Promemoria</title>
 </head>
 <body>
     <table style="width: 480px; border-collapse: collapse; margin: 0 auto;">
@@ -15,17 +15,33 @@
         <!-- Content -->
         <tr>
             <td colspan="12" style="padding: 16px;">
-                <h1>Nuovo ordine ricevuto!</h1>
+                <h1>Promemoria settimanale</h1>
                 <p>
-                    È stato registrato un nuovo ordine che comprende <strong>{productName}</strong> e altri <strong>{itemCount}</strong> prodotti.
+                    Il tuo ordine settimanale sarà consegnato il giorno <strong>{deliveryDate}</strong>. Clicca sul pulsante sottostante o su <a href="#" style="color: #9CBF22; text-decoration: none;">questo link</a> per visualizzarne e modificarne il contenuto.
+                </p>
+                <p style="text-align: center;">
+                    <a href="#" style="display: inline-block; color: #FFF; background-color: #9CBF22; text-decoration: none; padding: 6px 24px; border-radius: 4px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225);">Modifica preferenze</a>
                 </p>
                 <p>
-                    Cliente: <strong>{customerEmail}</strong>
-                    <br/>
+                    Ti invieremo una email quando i tuoi prodotti saranno spediti.
+                </p>
+                <h4 style="color: #9CBF22; margin: 16px 0 8px 0;">Ordine</h4>
+                <p style="margin-bottom: 0;">
                     N° ordine: <strong>{orderNumber}</strong>
                     <br/>
                     Data di consegna: <strong>{deliveryDate}</strong>
+                    <br/>
+                    Indirizzo di consegna: <strong>{deliveryAddress}</strong>
+                    <br/>
+                    Nome: <strong>{deliveryName}</strong>
                 </p>
+                <p style="margin: 0 0 8px 0;">Prodotti:</p>
+                <table>
+                    <tr>
+                        <td><img src="{wwwroot}/Images/MailTemplates/default_product.png" height="96px" width="96px" alt="Immagine del prodotto"/></td>
+                        <td><strong>{crateName}</strong> e altri <strong>{itemCount}</strong> prodotti</td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <!-- Footer -->

@@ -38,10 +38,20 @@ function updateCartBadge() {
 |   WRAPPERS FOR API FUNCTIONS   |
 \********************************/
 
-function saveCurrentUserInfo() {
+function getOrUpdateCurrentUserInfo() {
+    const UPDATE_INTERVAL_MINUTES = 10;
     return new Promise(function(resolve, reject) {
-        getCurrentUserInfo()
+        let authData = localStorage.getObject("authData");
+        if (authData == null) reject(null);
+        let now = Date.now();
+        let userData = localStorage.getObject("userData");
+        if (userData != null && parseInt((now - userData.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
+            resolve(userData);
+            return;
+        }
+        getUserInfo(authData.userId)
         .done(function(data) {
+            data.expiration = now;
             localStorage.setObject("userData", data);
             resolve(data);
         })

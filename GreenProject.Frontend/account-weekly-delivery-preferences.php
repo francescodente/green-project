@@ -4,7 +4,7 @@
     <?php include("head.php"); ?>
     <title>Green Project - Consegna settimanale</title>
 </head>
-<body>
+<body class="req-login">
 
     <?php include("menu.php"); ?>
 
