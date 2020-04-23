@@ -3,15 +3,26 @@ $(document).ready(function() {
     function fillFormFields() {
         let userData = localStorage.getObject("userData");
         $("#email").val(userData.email);
-        $("#telephone").val(userData.telephone);
         $("#marketing-consent").prop("checked", userData.marketingConsent);
         if ("Person" in userData.rolesData) {
             let person = userData.rolesData.Person;
+            $("#code").val(person.code);
             $("#first-name").val(person.firstName);
             $("#last-name").val(person.lastName);
+            if (person.dateOfBirth != null) {
+                let dd = person.dateOfBirth.substring(8, 10);
+                let mm = person.dateOfBirth.substring(5, 7);
+                let yyyy  = person.dateOfBirth.substring(0, 4);
+                let date = dd + "/" + mm + "/" + yyyy;
+                $("#birth-date").val(date);
+            }
+            $("[name=gender][value=" + person.gender + "]").prop("checked", true);
         } else {
+            $("#code").val("");
             $("#first-name").val("");
             $("#last-name").val("");
+            $("#birth-date").val("");
+            $("[name=gender]").prop("checked", false);
         }
     }
 
@@ -64,12 +75,14 @@ $(document).ready(function() {
         }
     });*/
 
+    // Edit form click
     $("#user-data").on("click", ".edit-form", function() {
         $(".user-data-form-options").addClass("d-none");
         $(".user-data-form-controls").removeClass("d-none");
         $(this).closest("form").find("input, textarea").prop("disabled", false);
     });
 
+    // Cancel form edits click
     $("#user-data").on("click", ".cancel-form-edits", function() {
         $(".user-data-form-controls").addClass("d-none");
         $(".user-data-form-options").removeClass("d-none");
@@ -77,14 +90,19 @@ $(document).ready(function() {
         fillFormFields();
     });
 
+    // Submit personal data
     $("#form-user-data-personal").submit(function(event) {
         event.preventDefault();
-        //showModal($("#modal-loading"));
 
-        // TODO check code format
+        // Check code format
+        let code = $("#code").val().toUpperCase();
+        if (!CFValidator.validate(code).isValid && !PIValidator.validate(code).isValid) {
+            $("#code").addClass("error");
+            return;
+        }
 
         let data = {
-            code: $("#code").val(),
+            code: code,
             firstName: $("#first-name").val(),
             lastName: $("#last-name").val()
         };
@@ -107,17 +125,8 @@ $(document).ready(function() {
             data.gender = gender;
         }
 
-        console.log(data);
-
-        return;
-
-        setPersonRole(localStorage.getObject("authData").userId, {
-            code: "",
-            firstName: $("#first-name").val(),
-            lastName: $("#last-name").val(),
-            dateOfBirth: "",
-            gender: ""
-        })
+        showModal($("#modal-loading"));
+        setPersonRole(localStorage.getObject("authData").userId, data)
         .done(function(data) {
             console.log("done");
             localStorage.removeItem("userData");
@@ -126,6 +135,7 @@ $(document).ready(function() {
         .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     });
 
+    // Delete personal data
     $("#delete-user-data-personal").click(function() {
         showModal($("#modal-loading"));
         deletePersonRole(localStorage.getObject("authData").userId)

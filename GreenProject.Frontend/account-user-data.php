@@ -76,6 +76,7 @@
                         <h6>Codice fiscale o P. IVA *</h6>
                         <div class="text-input mb-3">
                             <input id="code" type="text" name="code" disabled required/>
+                            <span class="error">Formato non valido</span>
                         </div>
 
                         <h6>Nome *</h6>
@@ -137,6 +138,8 @@
     <?php include("footer.php"); ?>
 
     <?php include("resources.php"); ?>
+    <script src="js/validators/CFValidator.js"></script>
+    <script src="js/validators/PIValidator.js"></script>
     <script src="js/account-user-data.js"></script>
 
     <?php include("modal-pwd-change.php"); ?>
