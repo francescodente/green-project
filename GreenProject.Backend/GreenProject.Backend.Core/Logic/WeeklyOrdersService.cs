@@ -73,7 +73,7 @@ namespace GreenProject.Backend.Core.Logic
         {
             await this.RequireSubscription(userId);
 
-            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q.Include(o => o.Details));
+            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q.Include(o => o.Details).ThenInclude(d => d.Item));
 
             await updateAction(order);
 

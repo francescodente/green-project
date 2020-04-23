@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GreenProject.Backend.Entities.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace GreenProject.Backend.Entities
@@ -13,7 +14,7 @@ namespace GreenProject.Backend.Entities
         public int OrderDetailId { get; set; }
         public int Quantity { get; set; }
         public UnitName? UnitName { get; set; }
-        public decimal Price { get; set; }
+        public Money Price { get; set; }
         public decimal? UnitMultiplier { get; set; }
         public int RemainingSlots { get; set; }
         public int OrderId { get; set; }

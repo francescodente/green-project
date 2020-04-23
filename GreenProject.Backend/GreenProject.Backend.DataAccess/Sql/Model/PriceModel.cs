@@ -16,7 +16,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.UnitMultiplier).HasColumnType("decimal(8, 4)");
 
-            entity.Property(e => e.Value).HasColumnType("money");
+            entity.Property(e => e.Value).HasTypeMoney();
 
             entity.HasOne(d => d.Item)
                 .WithMany(p => p.Prices)

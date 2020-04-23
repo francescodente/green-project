@@ -35,11 +35,11 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.Timestamp).HasColumnType("datetime");
 
-            entity.Property(e => e.Subtotal).HasColumnType("money");
+            entity.Property(e => e.Subtotal).HasTypeMoney();
 
-            entity.Property(e => e.Iva).HasColumnType("money");
+            entity.Property(e => e.Iva).HasTypeMoney();
 
-            entity.Property(e => e.ShippingCost).HasColumnType("money");
+            entity.Property(e => e.ShippingCost).HasTypeMoney();
 
             entity.HasOne(d => d.Address)
                 .WithMany(p => p.Orders)

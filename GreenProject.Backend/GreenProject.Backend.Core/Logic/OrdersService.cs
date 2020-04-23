@@ -85,6 +85,8 @@ namespace GreenProject.Backend.Core.Logic
         {
             Order order = await this.Data
                 .Orders
+                .Include(o => o.Details)
+                    .ThenInclude(d => d.Item)
                 .SingleOptionalAsync(o => o.OrderId == orderId)
                 .Map(o => o.OrElseThrow(() => NotFoundException.OrderWithId(orderId)));
 

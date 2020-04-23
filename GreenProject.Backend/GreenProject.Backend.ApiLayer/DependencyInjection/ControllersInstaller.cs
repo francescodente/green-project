@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using FluentValidation.Internal;
+using GreenProject.Backend.ApiLayer.Converter;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Validation;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 .AddNewtonsoftJson(options =>
                 {
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
+                    options.SerializerSettings.Converters.Add(new MoneyConverter());
                 });
         }
     }

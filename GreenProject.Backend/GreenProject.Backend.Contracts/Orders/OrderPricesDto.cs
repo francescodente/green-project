@@ -1,10 +1,12 @@
-﻿namespace GreenProject.Backend.Contracts.Orders
+﻿using GreenProject.Backend.Entities.Utils;
+
+namespace GreenProject.Backend.Contracts.Orders
 {
     public class OrderPricesDto
     {
-        public decimal Subtotal { get; set; }
-        public decimal Iva { get; set; }
-        public decimal ShippingCost { get; set; }
-        public decimal Total => Subtotal + Iva + ShippingCost;
+        public Money Subtotal { get; set; }
+        public Money Iva { get; set; }
+        public Money ShippingCost { get; set; }
+        public Money Total => Subtotal + Iva + ShippingCost;
     }
 }

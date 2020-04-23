@@ -19,6 +19,9 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .IsRequired()
                 .HasMaxLength(100);
 
+            entity.Property(e => e.IvaPercentage)
+                .HasColumnType("decimal(4, 3)");
+
             entity.HasOne(d => d.Category)
                 .WithMany(p => p.PurchasableItems)
                 .HasForeignKey(d => d.CategoryId);

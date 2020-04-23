@@ -15,6 +15,7 @@ namespace GreenProject.Backend.Entities
         public int ItemId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public decimal IvaPercentage { get; set; }
         public bool IsEnabled { get; set; }
         public bool IsDeleted { get; set; }
         public int CategoryId { get; set; }

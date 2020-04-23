@@ -21,9 +21,12 @@ namespace GreenProject.Backend.Infrastructure.Pricing
             prices.Subtotal = order
                 .Details
                 .Select(d => d.Price * d.Quantity)
-                .Sum();
+                .Sum(d => d.Value);
 
-            prices.Iva = this.settings.ProductsIvaPercentage * prices.Subtotal;
+            prices.Iva = order
+                .Details
+                .Select(d => d.Price * d.Quantity * d.Item.IvaPercentage)
+                .Sum(d => d.Value);
 
             prices.ShippingCost = order.Details.Any(d => d.Item is Product) ? this.settings.ShippingCost : 0;
 
@@ -37,7 +40,7 @@ namespace GreenProject.Backend.Infrastructure.Pricing
             prices.Subtotal = cart
                 .CartItems
                 .Select(i => i.Product.Price.Value * i.Quantity)
-                .Sum();
+                .Sum(m => m.Value);
 
             prices.Iva = this.settings.ProductsIvaPercentage * prices.Subtotal;
 

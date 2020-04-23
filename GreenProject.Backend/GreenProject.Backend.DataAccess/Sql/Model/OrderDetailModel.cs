@@ -11,7 +11,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
         {
             entity.HasKey(e => e.OrderDetailId);
 
-            entity.Property(e => e.Price).HasColumnType("money");
+            entity.Property(e => e.Price).HasTypeMoney();
 
             entity.Property(e => e.Quantity);
 
