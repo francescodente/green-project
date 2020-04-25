@@ -2,7 +2,7 @@
 using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.Pagination;
-using GreenProject.Backend.Core.Entities.Extensions;
+using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;

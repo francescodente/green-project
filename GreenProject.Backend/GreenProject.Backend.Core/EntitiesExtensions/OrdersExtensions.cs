@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GreenProject.Backend.Core.Entities.Extensions
+namespace GreenProject.Backend.Core.EntitiesExtensions
 {
     public static class OrdersExtensions
     {

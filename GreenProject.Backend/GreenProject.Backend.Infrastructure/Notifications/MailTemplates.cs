@@ -1,4 +1,4 @@
-﻿using GreenProject.Backend.Core.Entities.Extensions;
+﻿using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Entities;
 using System;
 
