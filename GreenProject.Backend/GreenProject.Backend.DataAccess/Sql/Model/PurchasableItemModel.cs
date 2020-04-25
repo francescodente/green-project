@@ -22,6 +22,9 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
             entity.Property(e => e.IvaPercentage)
                 .HasColumnType("decimal(4, 3)");
 
+            entity.Property(e => e.Price)
+                .HasTypeMoney();
+
             entity.HasOne(d => d.Category)
                 .WithMany(p => p.PurchasableItems)
                 .HasForeignKey(d => d.CategoryId);

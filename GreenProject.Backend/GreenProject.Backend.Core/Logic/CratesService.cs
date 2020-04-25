@@ -35,14 +35,7 @@ namespace GreenProject.Backend.Core.Logic
                 crateEntity.Description = crate.Description;
                 crateEntity.Capacity = crate.Capacity;
                 crateEntity.CategoryId = CRATE_CATEGORY_ID;
-
-                crateEntity.Prices.Add(new Price
-                {
-                    Value = crate.Price,
-                    UnitName = UnitName.Piece,
-                    UnitMultiplier = 1,
-                    Type = CustomerType.Person
-                });
+                crateEntity.Price = crate.Price;
             });
         }
 
@@ -58,8 +51,7 @@ namespace GreenProject.Backend.Core.Logic
                 crateEntity.Name = crate.Name;
                 crateEntity.Description = crate.Description;
                 crateEntity.Capacity = crate.Capacity;
-
-                crateEntity.Prices.Single().Value = crate.Price;
+                crateEntity.Price = crate.Price;
             });
         }
 

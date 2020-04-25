@@ -12,6 +12,8 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
         public void Configure(EntityTypeBuilder<Product> entity)
         {
             entity.HasBaseType<PurchasableItem>();
+
+            entity.Property(e => e.UnitMultiplier).HasColumnType("decimal(8, 4)");
         }
     }
 }

@@ -43,26 +43,9 @@ namespace GreenProject.Backend.Core.Logic
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<SupplierProductReportModel>> GetDailySupplierReport(DateTime date)
+        public Task<IEnumerable<SupplierProductReportModel>> GetDailySupplierReport(DateTime date)
         {
-            IDictionary<(int, int), int> multiplierMap = await this.Data
-                .CrateCompatibilities
-                .ToDictionaryAsync(c => (c.CrateId, c.ProductId), c => c.Multiplier);
-
-            var products = await this.Data
-                .Products
-                .Select(p => new
-                {
-                    Product = p,
-                    Price = p.Prices.Single(),
-                    CrateQuantities = p.SubProducts,
-                    OrderDetailQuantity = p.OrderDetails
-                        .Where(o => o.Order.DeliveryDate == date)
-                        .Sum(o => o.Quantity)
-                })
-                .ToArrayAsync();
-
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

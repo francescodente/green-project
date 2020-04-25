@@ -22,7 +22,6 @@ namespace GreenProject.Backend.Core.Utils.Session
         DbSet<Order> Orders { get; }
         DbSet<OrderDetail> OrderDetails { get; }
         DbSet<Person> People { get; }
-        DbSet<Price> Prices { get; }
         DbSet<Product> Products { get; }
         DbSet<PurchasableItem> PurchasableItems { get; }
         DbSet<User> Users { get; }

@@ -24,8 +24,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
         {
             return users
                 .Include(u => u.CartItems)
-                    .ThenInclude(i => i.Product)
-                        .ThenInclude(p => p.Prices);
+                    .ThenInclude(i => i.Product);
         }
 
         public static IQueryable<User> IncludingCustomerRoles(this IQueryable<User> users)

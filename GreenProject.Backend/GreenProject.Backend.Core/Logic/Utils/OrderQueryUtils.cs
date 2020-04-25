@@ -12,9 +12,6 @@ namespace GreenProject.Backend.Core.Logic.Utils
             return orders
                 .Include(o => o.Details)
                     .ThenInclude(d => d.Item)
-                        .ThenInclude(p => p.Prices)
-                .Include(o => o.Details)
-                    .ThenInclude(d => d.Item)
                         .ThenInclude(s => s.Image);
         }
 

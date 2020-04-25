@@ -9,6 +9,7 @@ using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
+using GreenProject.Backend.Entities.Utils;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -152,7 +153,7 @@ namespace GreenProject.Backend.Core.Logic
                 var crateData = await this.Data
                     .Crates
                     .Where(c => c.ItemId == crateId)
-                    .Select(c => new { Price = c.Prices.Single().Value, c.Capacity })
+                    .Select(c => new { c.Price, c.Capacity })
                     .SingleOptionalAsync()
                     .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)));
 
@@ -170,12 +171,12 @@ namespace GreenProject.Backend.Core.Logic
         {
             return this.UpdateDetailsForWeeklyOrder(userId, async order =>
             {
-                Price price = await this.Data
+                Money price = await this.Data
                     .Products
                     .Where(c => c.ItemId == product.ProductId)
-                    .Select(c => c.Prices.Single())
+                    .Select(c => new { c.Price })
                     .SingleOptionalAsync()
-                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId)));
+                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId)).Price);
 
                 order.Details
                     .SingleOptional(d => d.ItemId == product.ProductId)
@@ -183,9 +184,9 @@ namespace GreenProject.Backend.Core.Logic
                     .IfAbsent(() => order.Details.Add(new OrderDetail
                     {
                         ItemId = product.ProductId,
-                        Quantity = product.Quantity
-                    }
-                    .WithPrices(price)));
+                        Quantity = product.Quantity,
+                        Price = price
+                    }));
             });
         }
 
@@ -256,6 +257,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Where(d => d.Item is Crate)
                 .Include(d => d.Item)
                     .ThenInclude(d => ((Crate)d).Compatibilities)
+                        .ThenInclude(c => c.Product)
                 .Include(d => d.SubProducts)
                 .SingleOptionalAsync(d => d.OrderDetailId == orderDetailId)
                 .Map(d => d.OrElseThrow(() => NotFoundException.OrderDetailWithId(orderDetailId)));

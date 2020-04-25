@@ -8,6 +8,5 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
     {
         public ProductOutputDto Product { get; set; }
         public int? Maximum { get; set; }
-        public int Multiplier { get; set; }
     }
 }

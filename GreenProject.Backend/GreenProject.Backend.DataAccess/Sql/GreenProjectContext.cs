@@ -31,7 +31,6 @@ namespace GreenProject.Backend.DataAccess.Sql
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Person> People { get; set; }
-        public DbSet<Price> Prices { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<PurchasableItem> PurchasableItems { get; set; }
         public DbSet<User> Users { get; set; }

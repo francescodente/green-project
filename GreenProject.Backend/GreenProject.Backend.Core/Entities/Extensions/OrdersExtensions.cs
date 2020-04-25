@@ -39,7 +39,7 @@ namespace GreenProject.Backend.Core.Entities.Extensions
             {
                 ItemId = detail.ItemId,
                 Quantity = detail.Quantity,
-                Price = detail.Item.Prices.Single().Value
+                Price = detail.Item.Price
             };
 
             detail.SubProducts
@@ -99,7 +99,7 @@ namespace GreenProject.Backend.Core.Entities.Extensions
 
             int oldQuantity = current.Map(c => c.Quantity).OrElse(0);
             int newQuantity = quantitySupplier(oldQuantity);
-            int actualQuantity = compatibility.Multiplier * newQuantity;
+            int actualQuantity = compatibility.Product.CrateMultiplier * newQuantity;
 
             if (actualQuantity > detail.RemainingSlots || newQuantity > compatibility.Maximum.GetValueOrDefault(int.MaxValue))
             {
@@ -126,7 +126,7 @@ namespace GreenProject.Backend.Core.Entities.Extensions
                 });
             }
 
-            detail.RemainingSlots -= (newQuantity - oldQuantity) * compatibility.Multiplier;
+            detail.RemainingSlots -= (newQuantity - oldQuantity) * compatibility.Product.CrateMultiplier;
         }
     }
 }

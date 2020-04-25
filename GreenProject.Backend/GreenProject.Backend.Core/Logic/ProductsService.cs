@@ -37,7 +37,9 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.Description = product.Description;
                 productEntity.CategoryId = product.CategoryId;
 
-                productEntity.Prices.Add(this.CreatePriceFromDto(product.Price, CustomerType.Person));
+                productEntity.Price = product.Price.Value;
+                productEntity.UnitName = product.Price.UnitName;
+                productEntity.UnitMultiplier = product.Price.UnitMultiplier;
 
                 this.AddCompatibleCrates(productEntity, product);
             });
@@ -48,21 +50,9 @@ namespace GreenProject.Backend.Core.Logic
             product.CompatibleCrates.Select(c => new CrateCompatibility
             {
                 CrateId = c.CrateId,
-                Maximum = c.Maximum,
-                Multiplier = c.Multiplier
+                Maximum = c.Maximum
             })
             .ForEach(productEntity.Compatibilities.Add);
-        }
-
-        private Price CreatePriceFromDto(PriceDto dto, CustomerType customerType)
-        {
-            return new Price
-            {
-                Type = customerType,
-                UnitName = dto.UnitName,
-                UnitMultiplier = dto.UnitMultiplier,
-                Value = dto.Value
-            };
         }
 
         public Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product)
@@ -73,11 +63,9 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.Description = product.Description;
                 productEntity.CategoryId = product.CategoryId;
 
-                Price price = productEntity.Prices.Single();
-
-                price.Value = product.Price.Value;
-                price.UnitName = product.Price.UnitName;
-                price.UnitMultiplier = product.Price.UnitMultiplier;
+                productEntity.Price = product.Price.Value;
+                productEntity.UnitName = product.Price.UnitName;
+                productEntity.UnitMultiplier = product.Price.UnitMultiplier;
 
                 productEntity.Compatibilities.Clear();
                 this.AddCompatibleCrates(productEntity, product);
@@ -95,7 +83,6 @@ namespace GreenProject.Backend.Core.Logic
                 .ForEach(p =>
                 {
                     p.e.Maximum = p.d.Maximum;
-                    p.e.Multiplier = p.d.Multiplier;
                 });
 
             productInput.CompatibleCrates
@@ -103,8 +90,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Select(c => new CrateCompatibility
                 {
                     CrateId = c.CrateId,
-                    Maximum = c.Maximum,
-                    Multiplier = c.Multiplier
+                    Maximum = c.Maximum
                 })
                 .ForEach(c => productEntity.Compatibilities.Add(c));
         }
