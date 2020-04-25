@@ -3,6 +3,8 @@ using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
+using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +25,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost("subscription")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> Subscribe([FromRoute] int userId, [FromBody] DeliveryInfoInputDto deliveryInfo)
+        public async Task<IActionResult> Subscribe([FromRoute] int userId, [FromBody] DeliveryInfoDto.Input deliveryInfo)
         {
             return Ok(await this.weeklyOrdersService.Subscribe(userId, deliveryInfo));
         }
@@ -53,7 +55,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost("extras")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> AddExtraProductToWeeklyOrder([FromRoute] int userId, [FromBody] QuantifiedProductInputDto product)
+        public async Task<IActionResult> AddExtraProductToWeeklyOrder([FromRoute] int userId, [FromBody] QuantifiedProductDto.Input product)
         {
             await this.weeklyOrdersService.AddExtraProduct(userId, product);
             return NoContent();
@@ -69,7 +71,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost("crates/{orderDetailId}/subproducts")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> AddProductToCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromBody] QuantifiedProductInputDto product)
+        public async Task<IActionResult> AddProductToCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromBody] QuantifiedProductDto.Input product)
         {
             await this.weeklyOrdersService.AddProductToCrate(userId, orderDetailId, product);
             return NoContent();
@@ -85,7 +87,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("crates/{orderDetailId}/subproducts/{productId}")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> UpdateProductInCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromBody] QuantifiedProductInputDto update)
+        public async Task<IActionResult> UpdateProductInCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromBody] QuantifiedProductDto.Input update)
         {
             await this.weeklyOrdersService.UpdateProductInCrate(userId, orderDetailId, update);
             return NoContent();

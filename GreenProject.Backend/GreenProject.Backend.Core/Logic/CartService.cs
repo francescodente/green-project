@@ -1,6 +1,8 @@
 ﻿using AutoMapper.QueryableExtensions;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
+using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
@@ -40,7 +42,7 @@ namespace GreenProject.Backend.Core.Logic
             return this.RequireUserById(userId, q => q.IncludingCart().IncludingCustomerRoles());
         }
 
-        public async Task<OrderDto> ConfirmCart(int userId, DeliveryInfoInputDto deliveryInfo)
+        public async Task<OrderDto> ConfirmCart(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
             User user = await this.RequireUserById(userId, q => q
                 .IncludingCart()
@@ -85,12 +87,12 @@ namespace GreenProject.Backend.Core.Logic
             return this.Mapper.Map<OrderDto>(order);
         }
 
-        public async Task<CartOutputDto> GetCartDetails(int userId)
+        public async Task<CartDto> GetCartDetails(int userId)
         {
-            CartOutputDto output = await this.Data
+            CartDto output = await this.Data
                 .Users
                 .Where(u => u.UserId == userId)
-                .ProjectTo<CartOutputDto>(this.Mapper.ConfigurationProvider)
+                .ProjectTo<CartDto>(this.Mapper.ConfigurationProvider)
                 .SingleOptionalAsync()
                 .Map(c => c.OrElseThrow(() => NotFoundException.UserWithId(userId)));
 
@@ -99,7 +101,7 @@ namespace GreenProject.Backend.Core.Logic
             return output;
         }
 
-        public async Task InsertCartItem(int userId, QuantifiedProductInputDto item)
+        public async Task InsertCartItem(int userId, QuantifiedProductDto.Input item)
         {
             Product product = await this.Data
                 .Products
@@ -113,7 +115,7 @@ namespace GreenProject.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public async Task UpdateCartItem(int userId, QuantifiedProductInputDto item)
+        public async Task UpdateCartItem(int userId, QuantifiedProductDto.Input item)
         {
             User user = await this.RequireUserWithCart(userId);
 

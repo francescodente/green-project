@@ -3,11 +3,11 @@ using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Categories;
 using GreenProject.Backend.Contracts.Orders;
+using GreenProject.Backend.Contracts.Orders.Delivery;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Contracts.Users.Roles;
 using GreenProject.Backend.Contracts.WeeklyOrders;
-using GreenProject.Backend.Core.Entities.Extensions;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
 using System.Collections.Generic;
@@ -38,7 +38,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
             {
                 CreateMap<User, AddressCollectionDto>();
 
-                CreateMap<Address, AddressOutputDto>();
+                CreateMap<Address, AddressDto.Output>();
             }
         }
 
@@ -46,7 +46,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public OrderMapping()
             {
-                CreateMap<Order, DeliveryInfoOutputDto>();
+                CreateMap<Order, DeliveryInfoDto.Output>();
 
                 CreateMap<Order, OrderDto>()
                     .ForMember(dst => dst.DeliveryInfo, o => o.MapFrom(src => src))
@@ -65,9 +65,9 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public CartMapping()
             {
-                CreateMap<User, CartOutputDto>();
+                CreateMap<User, CartDto>();
 
-                CreateMap<CartItem, QuantifiedProductOutputDto>();
+                CreateMap<CartItem, QuantifiedProductDto.Output>();
             }
         }
 
@@ -78,16 +78,16 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                 CreateMap<Product, PriceDto>()
                     .ForMember(dst => dst.Value, o => o.MapFrom(src => src.Price));
 
-                CreateMap<Product, ProductOutputDto>()
+                CreateMap<Product, ProductDto.Output>()
                     .ForMember(dst => dst.Price, o => o.MapFrom(src => src))
                     .ForMember(dst => dst.ProductId, o => o.MapFrom(src => src.ItemId))
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
 
-                CreateMap<Crate, CrateOutputDto>()
+                CreateMap<Crate, CrateDto.Output>()
                     .ForMember(dst => dst.CrateId, o => o.MapFrom(src => src.ItemId))
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
 
-                CreateMap<CrateCompatibility, CompatibleProductOutputDto>();
+                CreateMap<CrateCompatibility, CompatibilityDto.Output>();
             }
         }
 
@@ -128,10 +128,10 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public CategoriesMapping()
             {
-                CreateMap<Category, CategoryOutputDto>()
+                CreateMap<Category, CategoryDto.Output>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
 
-                CreateMap<Category, CategoryTreeDto>()
+                CreateMap<Category, CategoryDto.Tree>()
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
             }
         }
@@ -150,7 +150,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.Products, o => o.MapFrom(src => src.SubProducts))
                     .ForMember(dst => dst.CrateDescription, o => o.MapFrom(src => (Crate)src.Item));
 
-                CreateMap<OrderDetailSubProduct, QuantifiedProductOutputDto>();
+                CreateMap<OrderDetailSubProduct, QuantifiedProductDto.Output>();
             }
         }
     }

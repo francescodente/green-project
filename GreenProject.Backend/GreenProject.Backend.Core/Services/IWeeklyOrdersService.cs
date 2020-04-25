@@ -1,5 +1,7 @@
 ﻿using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
+using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.WeeklyOrders;
 using System.Threading.Tasks;
 
@@ -7,7 +9,7 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface IWeeklyOrdersService
     {
-        Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoInputDto deliveryInfo);
+        Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoDto.Input deliveryInfo);
 
         Task Unsubscribe(int userId);
 
@@ -15,18 +17,18 @@ namespace GreenProject.Backend.Core.Services
 
         Task AddCrate(int userId, int crateId);
 
-        Task AddExtraProduct(int userId, QuantifiedProductInputDto product);
+        Task AddExtraProduct(int userId, QuantifiedProductDto.Input product);
 
         Task RemoveItem(int userId, int orderDetailId);
 
-        Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductInputDto insertion);
+        Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductDto.Input insertion);
 
         Task RemoveProductFromCrate(int userId, int orderDetailId, int productId);
 
-        Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductInputDto update);
+        Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductDto.Input update);
 
         Task SkipWeeks(int userId, int weeks);
 
-        Task UpdateDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo);
+        Task UpdateDeliveryInfo(int userId, DeliveryInfoDto.Input deliveryInfo);
     }
 }

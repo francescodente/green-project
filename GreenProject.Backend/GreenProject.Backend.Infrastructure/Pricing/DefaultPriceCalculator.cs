@@ -33,7 +33,7 @@ namespace GreenProject.Backend.Infrastructure.Pricing
             return prices;
         }
 
-        public OrderPrices CalculatePrices(CartOutputDto cart)
+        public OrderPrices CalculatePrices(CartDto cart)
         {
             OrderPrices prices = new OrderPrices();
 

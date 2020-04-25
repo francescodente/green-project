@@ -5,8 +5,8 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface ICategoriesService
     {
-        Task<CategoryTreeDto> GetCategoryTree();
+        Task<CategoryDto.Tree> GetCategoryTree();
 
-        Task<CategoryOutputDto> AddCategory(CategoryInputDto category);
+        Task<CategoryDto.Output> AddCategory(CategoryDto.Input category);
     }
 }

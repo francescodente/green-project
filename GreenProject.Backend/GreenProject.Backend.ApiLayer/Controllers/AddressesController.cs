@@ -29,7 +29,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> InsertAddress([FromRoute] int userId, [FromBody] AddressInputDto address)
+        public async Task<IActionResult> InsertAddress([FromRoute] int userId, [FromBody] AddressDto.Input address)
         {
             return Ok(await this.addressesService.AddAddress(userId, address));
         }

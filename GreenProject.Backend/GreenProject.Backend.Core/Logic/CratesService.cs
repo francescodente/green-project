@@ -22,14 +22,14 @@ namespace GreenProject.Backend.Core.Logic
         {
         }
 
-        public Task<PagedCollection<CrateOutputDto>> GetCrates(PaginationFilter pagination, PurchasableFilters filters)
+        public Task<PagedCollection<CrateDto.Output>> GetCrates(PaginationFilter pagination, PurchasableFilters filters)
         {
-            return this.GetPaged<CrateOutputDto>(pagination, filters);
+            return this.GetPaged<CrateDto.Output>(pagination, filters);
         }
 
-        public Task<CrateOutputDto> InsertCrate(CrateInputDto crate)
+        public Task<CrateDto.Output> InsertCrate(CrateDto.Input crate)
         {
-            return this.Insert<CrateOutputDto>(crateEntity =>
+            return this.Insert<CrateDto.Output>(crateEntity =>
             {
                 crateEntity.Name = crate.Name;
                 crateEntity.Description = crate.Description;
@@ -44,9 +44,9 @@ namespace GreenProject.Backend.Core.Logic
             return this.Delete(crateId);
         }
 
-        public Task<CrateOutputDto> UpdateCrate(int crateId, CrateInputDto crate)
+        public Task<CrateDto.Output> UpdateCrate(int crateId, CrateDto.Input crate)
         {
-            return this.Update<CrateOutputDto>(crateId, crateEntity =>
+            return this.Update<CrateDto.Output>(crateId, crateEntity =>
             {
                 crateEntity.Name = crate.Name;
                 crateEntity.Description = crate.Description;
@@ -60,12 +60,12 @@ namespace GreenProject.Backend.Core.Logic
             return this.Data.Crates;
         }
 
-        public async Task<IEnumerable<CompatibleProductOutputDto>> GetCompatibleProducts(int crateId)
+        public async Task<IEnumerable<CompatibilityDto.Output>> GetCompatibleProducts(int crateId)
         {
             return await this.Data
                 .CrateCompatibilities
                 .Where(c => c.CrateId == crateId)
-                .ProjectTo<CompatibleProductOutputDto>(this.Mapper.ConfigurationProvider)
+                .ProjectTo<CompatibilityDto.Output>(this.Mapper.ConfigurationProvider)
                 .ToArrayAsync();
         }
     }

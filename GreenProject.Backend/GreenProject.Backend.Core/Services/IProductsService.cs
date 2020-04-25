@@ -8,11 +8,11 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface IProductsService
     {
-        Task<PagedCollection<ProductOutputDto>> GetProducts(PaginationFilter pagination, PurchasableFilters filters);
+        Task<PagedCollection<ProductDto.Output>> GetProducts(PaginationFilter pagination, PurchasableFilters filters);
 
-        Task<ProductOutputDto> InsertProduct(ProductInputDto product);
+        Task<ProductDto.Output> InsertProduct(ProductDto.Insertion product);
 
-        Task<ProductOutputDto> UpdateProduct(int productId, ProductInputDto product);
+        Task<ProductDto.Output> UpdateProduct(int productId, ProductDto.Update product);
 
         Task DeleteProduct(int productId);
     }
