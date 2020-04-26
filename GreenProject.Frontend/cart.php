@@ -86,5 +86,40 @@
     <?php include("modals-address-management.php"); ?>
     <script src="js/cart.js"></script>
 
+    <div id="expected-date-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-calendar"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="m-0">La data di consegna prevista per il tuo ordine è il giorno <span class="expected-date"></span>.<br/>Proseguire?</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex">
+                    <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="flex-basis: 100px;">Annulla</button>
+                    <button class="submit-cart btn accent ripple flex-grow-1" style="flex-basis: 100px;">Acquista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="order-placed-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-bookmark-check"></i>
+                </div>
+                <div class="modal-body">
+                    <h4>Il tuo ordine è stato registrato!</h4>
+                    <p class="mb-2">Abbiamo preso in carico il tuo ordine.<br/>Puoi controllarne lo stato alla sezione <a href="account-orders.php">Ordini</a> del tuo account.</p>
+                    <p class="m-0">Grazie per aver scelto Green Project!</p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <a href="index.php" class="btn outline ripple" style="width: 160px;">Chiudi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

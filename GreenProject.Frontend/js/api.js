@@ -217,6 +217,6 @@ function getZones() {
     return get("zones");
 }
 
-function getZoneSchedule() {
-
+function getZoneSchedule(zipCode) {
+    return get("zones/" + zipCode + "/schedule");
 }

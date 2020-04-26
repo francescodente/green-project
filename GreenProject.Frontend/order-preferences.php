@@ -11,7 +11,7 @@
         </button>
     </div>
     <div id="order-payment-method" class="collapse">
-        <div class="pt-3"></div>
+        <div class="pt-4"></div>
 
         <input id="pm1" type="radio" class="rich-radio" name="payment-method" value="1" checked/>
         <label for="pm1" class="payment-item d-flex align-items-center p-2">
@@ -44,7 +44,7 @@
         </button>
     </div>
     <div id="order-delivery-address" class="collapse">
-        <div class="pt-3"></div>
+        <div class="pt-4"></div>
 
         <div class="addresses-no-results empty-state m-5 d-none">
             <img src="images/empty.png"/>

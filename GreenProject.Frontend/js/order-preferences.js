@@ -1,6 +1,6 @@
-$(document).ready(function() {
+var addresses = [];
 
-    var addresses = [];
+$(document).ready(function() {
 
     // Show addresses
     $("#order-preferences-loader").show();

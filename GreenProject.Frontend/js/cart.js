@@ -1,9 +1,12 @@
 var products = [];
+var selectedAddress;
 
 $(document).ready(function() {
 
-    // Uncollapse addresses section
+    // Uncollapse sections
+    $('.area-collapse[data-target="#order-payment-method"]').click();
     $('.area-collapse[data-target="#order-delivery-address"]').click();
+    $('.area-collapse[data-target="#order-notes"]').click();
 
     // Get cart content
     showModal($("#modal-loading"));
@@ -34,5 +37,44 @@ $(document).ready(function() {
     })
     .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); })
     .always(function(data) { fadeOutModal($("#modal-loading")); });
+
+    // Cart confirm
+    $(".confirm-cart").click(function() {
+        // Check if and address is selected
+        selectedAddress = $("[name='delivery-address']:checked");
+        if (!selectedAddress.length) {
+            new InfoModal("Seleziona un indirizzo di consegna per procedere con la creazione dell'ordine").show();
+            return;
+        }
+        selectedAddress = addresses.filter(address => address.addressId == selectedAddress.val())[0];
+        let zipCode = selectedAddress.zipCode;
+        // Get expected delivery date
+        showModal($("#modal-loading"));
+        getZoneSchedule(zipCode)
+        .done(function(data) {
+            let dd = data.substring(8, 10);
+            let mm  = data.substring(5, 7);
+            let yyyy = data.substring(0, 4);
+            let date = dd + "/" + mm + "/" + yyyy;
+            $("#expected-date-modal .expected-date").html(date);
+            showModal($("#expected-date-modal"));
+        })
+        .fail(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    });
+
+    // Cart submission
+    $(".submit-cart").click(function() {
+        showModal($("#modal-loading"));
+        confirmCart(localStorage.getObject("userData").userId, {
+            addressId: selectedAddress.addressId,
+            notes: $("#notes").val()
+        })
+        .done(function(data) {
+            $(".cart-not-empty").addClass("d-none");
+            $(".cart-empty").removeClass("d-none");
+            showModal($("#order-placed-modal"));
+        })
+        .fail(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    });
 
 });
