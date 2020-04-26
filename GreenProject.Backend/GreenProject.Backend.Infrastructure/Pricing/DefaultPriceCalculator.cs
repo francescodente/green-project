@@ -39,7 +39,7 @@ namespace GreenProject.Backend.Infrastructure.Pricing
 
             prices.Subtotal = cart
                 .CartItems
-                .Select(i => i.Product.Price.Value * i.Quantity)
+                .Select(i => i.Product.Price * i.Quantity)
                 .Sum(m => m.Value);
 
             prices.Iva = this.settings.ProductsIvaPercentage * prices.Subtotal;

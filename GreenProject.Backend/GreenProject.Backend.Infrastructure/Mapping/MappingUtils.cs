@@ -75,11 +75,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
         {
             public ProductMapping()
             {
-                CreateMap<Product, PriceDto>()
-                    .ForMember(dst => dst.Value, o => o.MapFrom(src => src.Price));
-
                 CreateMap<Product, ProductDto.Output>()
-                    .ForMember(dst => dst.Price, o => o.MapFrom(src => src))
                     .ForMember(dst => dst.ProductId, o => o.MapFrom(src => src.ItemId))
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
 
