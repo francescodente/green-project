@@ -41,7 +41,18 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                         new List<string>()
                     }
                 });
+                c.CustomSchemaIds(this.GetFullNameWithoutNamespace);
             });
+        }
+
+        private string GetFullNameWithoutNamespace(Type type)
+        {
+            if (type.DeclaringType == null)
+            {
+                return type.Name;
+            }
+
+            return $"{this.GetFullNameWithoutNamespace(type.DeclaringType)}.{type.Name}";
         }
     }
 }
