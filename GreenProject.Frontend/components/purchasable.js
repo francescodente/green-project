@@ -1,5 +1,5 @@
 // Measurement units
-var Units = {
+const Units = {
     Piece: "pezzi",
     Kilogram: "Kg"
 }
@@ -45,6 +45,7 @@ function Product(json, quantity = 1) {
     this.html.quantityModal = getTemplate("ProductQuantityModal");
     this.html.removeModal = getTemplate("ProductRemoveModal");
     this.html.cartEntry = getTemplate("ProductCartEntry");
+    this.html.orderEntry = getTemplate("ProductOrderEntry");
 
     // Save formatted fields
     this.formattedMultiplier = (this.price.unitMultiplier * this.quantity).toString().replace(".", ",");
@@ -67,7 +68,7 @@ function Product(json, quantity = 1) {
         $(product.html[k]).find(".price").html(product.formattedPrice);
 
         // Add event listeners
-        $(product.html[k]).find(".product-image").click(function() { product.showDetailsModal(); });
+        $(product.html[k]).find(".product-modal-link").click(function() { product.showDetailsModal(); });
         $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
         $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
         $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
@@ -202,7 +203,7 @@ function Crate(json) {
         $(crate.html[k]).find(".price").html(price);
 
         // Add event listeners
-        $(crate.html[k]).find(".crate-image").click(function() { crate.showDetailsModal(); });
+        $(crate.html[k]).find(".crate-modal-link").click(function() { crate.showDetailsModal(); });
         $(crate.html[k]).find(".subscribe").click(function() { crate.addToPreferences(); });
     }
 }

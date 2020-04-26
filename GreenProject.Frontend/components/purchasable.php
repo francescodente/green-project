@@ -1,6 +1,6 @@
 <!-- PRODUCT ITEM -->
 <div data-template-name="ProductCard" data-class="card product-card mb-4" class="d-none">
-    <a href="#" class="fixed-ratio fr-1-1 img-hover-zoom">
+    <a href="#" class="product-modal-link fixed-ratio fr-1-1 img-hover-zoom">
         <img class="product-image card-bg" src="images/default_product.png"/>
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
@@ -17,7 +17,7 @@
 
 <!-- CRATE ITEM -->
 <div data-template-name="CrateCard" data-class="card product-card mb-4" class="d-none">
-    <a href="#" class="fixed-ratio fr-1-1 img-hover-zoom">
+    <a href="#" class="crate-modal-link fixed-ratio fr-1-1 img-hover-zoom">
         <img class="crate-image card-bg" src="images/default_product.png"/>
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
@@ -137,7 +137,9 @@
 <table class="d-none">
     <tr data-template-name="ProductCartEntry" class="d-none">
         <td class="nowrap">
-            <img class="product-image img-fluid" src="images/default_product.png"/>
+            <a href="#" class="product-modal-link">
+                <img class="product-image img-fluid" src="images/default_product.png"/>
+            </a>
         </td>
         <td>
             <p class="product-name m-0">Product name</p>
@@ -157,3 +159,17 @@
         </td>
     </tr>
 </table>
+
+<!-- PRODUCT ORDER ENTRY -->
+<div data-template-name="ProductOrderEntry" data-class="product d-flex align-items-center" class="d-none">
+    <a href="#" class="product-modal-link">
+        <img class="product-image" src="images/default_product.png"/>
+    </a>
+    <div class="d-flex flex-column w-100">
+        <p class="product-name m-0"></p>
+        <div class="d-flex justify-content-between">
+            <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span></span>
+            <span class="price text-sec-dark"></span>
+        </div>
+    </div>
+</div>

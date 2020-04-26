@@ -29,11 +29,21 @@ var Order = function(json) {
         this.prices[formattedK] = formatCurrency(this.prices[k]);
     }
 
+    // Create product entries
+    for (let i = 0; i < this.details.length; i++) {
+        this.details[i] = new Product(this.details[i]);
+    }
+
+    // Retrieve state HTML
+    let stateHtml = OrderStates.filter(state => state.name == this.orderState)
+                               .map(state => state.html)[0];
+
     let order = this;
     for (let k in order.html) {
 
         // Replace values in templates
         $(order.html[k]).find(".order-number").html(this.orderNumber);
+        $(order.html[k]).find(".order-state").html(stateHtml);
         $(order.html[k]).find(".order-date").html(this.formattedTimestamp);
         $(order.html[k]).find(".subtotal").html(this.prices.formattedSubtotal);
         $(order.html[k]).find(".iva").html(this.prices.formattedIva);
@@ -47,6 +57,9 @@ var Order = function(json) {
             $(order.html[k]).find(".notes").html("-");
         }
 
+        // Add product entries
+        this.details.forEach(product => product.html.orderEntry.appendTo($(order.html[k]).find(".order-products-list")));
+
         // Set IDs to make collapses work
         $(order.html[k]).find("[id=order-OID]").attr("id", "order-" + this.orderId);
         $(order.html[k]).find("[data-target='#order-OID']").attr("data-target", "#order-" + this.orderId);
@@ -54,6 +67,4 @@ var Order = function(json) {
         $(order.html[k]).find("[data-target='#order-details-OID']").attr("data-target", "#order-details-" + this.orderId);
 
     }
-
-    console.log(this);
 }

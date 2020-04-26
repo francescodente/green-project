@@ -2,10 +2,7 @@
     <div class="order-header area-collapse d-flex justify-content-between align-items-center p-3" data-toggle="collapse" data-target="#order-OID" aria-expanded="true">
         <div>
             <p class="text-sec-dark font-weight-bold mb-2">Ordine N° <span class="order-number"></span> del <span class="order-date"></span></p>
-            <div class="d-flex align-items-center m-0">
-                <i class="order-pending mdi small mdi-progress-clock mr-2"></i>
-                <span class="order-pending">In attesa</span>
-            </div>
+            <div class="order-state d-flex align-items-center m-0"></div>
         </div>
         <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-OID" aria-expanded="true">
             <i class="mdi dark mdi-chevron-down"></i>

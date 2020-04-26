@@ -13,4 +13,5 @@
 <script src="components/category.js"></script>
 <script src="components/address.js"></script>
 <script src="components/info-modals.js"></script>
+<script src="components/order-states.js"></script>
 <script src="components/order.js"></script>
