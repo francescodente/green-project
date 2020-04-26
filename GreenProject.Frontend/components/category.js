@@ -21,26 +21,24 @@ var Category = function(json) {
     // Build products link
     let subCategories = getCategoryLeaves(this).map(c => c.categoryId);
     let searchParams = new URLSearchParams();
-    searchParams.append("PageNumber", 0);
-    searchParams.append("PageSize", 24);
     subCategories.forEach(category => {
         searchParams.append("Categories", category);
     });
     let productsUrl = "products.php?" + searchParams.toString();
     let imageUrl = getBasePath() + this.imageUrl;
 
-    let product = this;
-    for (let k in product.html) {
+    let category = this;
+    for (let k in category.html) {
 
         // Replace values in templates
-        $(product.html[k]).find(".category-name").html(this.name);
+        $(category.html[k]).find(".category-name").html(this.name);
         if (this.description != null) {
-            $(product.html[k]).find(".category-description").html(this.description);
+            $(category.html[k]).find(".category-description").html(this.description);
         }
         if (this.imageUrl != null) {
-            $(product.html[k]).find(".category-image").attr("src", imageUrl);
+            $(category.html[k]).find(".category-image").attr("src", imageUrl);
         }
-        $(product.html[k]).find(".products-url").attr("href", productsUrl);
+        $(category.html[k]).find(".products-url").attr("href", productsUrl);
 
     }
 }

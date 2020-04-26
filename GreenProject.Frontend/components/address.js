@@ -17,7 +17,7 @@ var Address = function(json) {
                 }
             })
         })
-    })
+    });
     let id = "address-radio-" + this.addressId;
     this.addressString = this.street + " " + this.houseNumber + ", " + this.zipCode + " " + this.city + " (" + this.province + ")";
 

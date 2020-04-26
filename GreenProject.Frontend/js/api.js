@@ -164,6 +164,23 @@ function deleteCategoryImage() {
 
 }
 
+// Orders
+
+function getCustomerOrders(userId, pageNumber = 0, pageSize = 30) {
+    let searchParams = new URLSearchParams();
+    searchParams.append("PageNumber", pageNumber);
+    searchParams.append("PageSize", pageSize);
+    return get("customers/" + localStorage.getObject("authData").userId + "/orders?" + searchParams.toString());
+}
+
+function getOrders() {
+
+}
+
+function changeOrderState() {
+
+}
+
 // Products
 
 function getProducts(categories, pageNumber = 0, pageSize = 30) {

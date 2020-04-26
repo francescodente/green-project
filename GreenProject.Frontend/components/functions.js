@@ -81,6 +81,7 @@ function fillDropdownSelect(select, items) {
     });
 }
 
+// Enable or disable a dropdown select item
 function toggleDropdownSelectEnabled(select, enable) {
     if (enable) {
         select.find(".text-input").removeClass("disabled");
@@ -91,10 +92,20 @@ function toggleDropdownSelectEnabled(select, enable) {
     }
 }
 
+// Format the given decimal number
 function formatDecimal(value, nPlaces) {
     return value.toFixed(nPlaces).replace(".", ",");
 }
 
+// Format the given currency value
 function formatCurrency(value) {
     return formatDecimal(value, 2) + "€";
+}
+
+// Format the given date from YYYY*MM*DD to DD/MM/YYYY
+function formatDate(dateString) {
+    let dd = dateString.substring(8, 10);
+    let mm  = dateString.substring(5, 7);
+    let yyyy = dateString.substring(0, 4);
+    return dd + "/" + mm + "/" + yyyy;
 }

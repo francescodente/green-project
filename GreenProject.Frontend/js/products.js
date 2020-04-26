@@ -1,3 +1,5 @@
+const PAGE_SIZE = 24;
+
 var products = [];
 
 $(document).ready(function() {
@@ -20,9 +22,11 @@ $(document).ready(function() {
     // Get products
     showModal($("#modal-loading"));
     let url = new URL(window.location.href);
+    let pageNumber = url.searchParams.get("PageNumber");
+    if (pageNumber == null) pageNumber = 0;
     let categories = url.searchParams.getAll("Categories");
     let isCrate = categories[0] == 1;
-    getProducts(categories)
+    getProducts(categories, pageNumber, PAGE_SIZE)
     .done(function(data) {
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
@@ -41,11 +45,9 @@ $(document).ready(function() {
         // Handle pagination
         fillPagination($("#products-pagination"), data.pageNumber, data.pageCount);
     })
-    .fail(function(data) {
+    .fail(function(jqXHR) {
         $(".search-error").removeClass("d-none");
     })
-    .always(function(data) {
-        fadeOutModal($("#modal-loading"));
-    });
+    .always(function(data) { fadeOutModal($("#modal-loading")) });
 
 });
