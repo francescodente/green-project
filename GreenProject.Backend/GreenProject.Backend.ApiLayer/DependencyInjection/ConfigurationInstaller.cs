@@ -1,4 +1,5 @@
 ﻿using GreenProject.Backend.ApiLayer.HostedServices;
+using GreenProject.Backend.ApiLayer.Utils.Csv;
 using GreenProject.Backend.ApiLayer.Validation.Configuration;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Utils.Uploads;
@@ -21,6 +22,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
             this.InstallConfiguration<PricingSettings>(services, config);
             this.InstallConfiguration<NotificationsDaemonSettings>(services, config);
             this.InstallConfiguration<OrdersSettings>(services, config);
+            this.InstallConfiguration<CsvSettings>(services, config);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config)
