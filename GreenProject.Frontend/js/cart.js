@@ -52,11 +52,7 @@ $(document).ready(function() {
         showModal($("#modal-loading"));
         getZoneSchedule(zipCode)
         .done(function(data) {
-            let dd = data.substring(8, 10);
-            let mm  = data.substring(5, 7);
-            let yyyy = data.substring(0, 4);
-            let date = dd + "/" + mm + "/" + yyyy;
-            $("#expected-date-modal .expected-date").html(date);
+            $("#expected-date-modal .expected-date").html(formatDate(data));
             showModal($("#expected-date-modal"));
         })
         .fail(function(jqXHR) { new ErrorModal(jqXHR).show() });

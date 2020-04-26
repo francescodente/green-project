@@ -10,11 +10,7 @@ $(document).ready(function() {
             $("#first-name").val(person.firstName);
             $("#last-name").val(person.lastName);
             if (person.dateOfBirth != null) {
-                let dd = person.dateOfBirth.substring(8, 10);
-                let mm = person.dateOfBirth.substring(5, 7);
-                let yyyy  = person.dateOfBirth.substring(0, 4);
-                let date = dd + "/" + mm + "/" + yyyy;
-                $("#birth-date").val(date);
+                $("#birth-date").val(formatDate(person.dateOfBirth));
             }
             $("[name=gender][value=" + person.gender + "]").prop("checked", true);
         } else {
@@ -24,6 +20,7 @@ $(document).ready(function() {
             $("#birth-date").val("");
             $("[name=gender]").prop("checked", false);
         }
+        $("input").removeClass("error");
     }
 
     function validateDateOfBirth(date) {
@@ -34,17 +31,15 @@ $(document).ready(function() {
         let dd = date.substring(0, 2);
         let mm = date.substring(3, 5);
         let yyyy  = date.substring(6, 10);
-        let dateObject = new Date(yyyy + "/" + mm + "/" + dd);
-        let dateString = ("0" + dateObject.getDate()).slice(-2) + "/"
+        let dateString = yyyy + "-" + mm + "-" + dd;
+        let dateObject = new Date(dateString);
+        let dateObjectString = ("0" + dateObject.getDate()).slice(-2) + "/"
                        + ("0" + (dateObject.getMonth()+1)).slice(-2) + "/"
                        + dateObject.getFullYear();
-        if (date != dateString) {
+        if (date != dateObjectString || dateObject.getTime() > new Date().getTime()) {
             return false;
         }
-        if (dateObject.getTime() > new Date().getTime()) {
-            return false
-        }
-        return yyyy + "-" + mm + "-" + dd;
+        return dateString;
     }
 
     // Get user data
@@ -53,27 +48,6 @@ $(document).ready(function() {
     .then(function(data) { fillFormFields(); })
     .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); })
     .finally(function(data) { fadeOutModal($("#modal-loading")); });
-
-    /*$("#user-data").on("click", ".edit-field", function() {
-        var icon = $(this).find(".mdi");
-        if (icon.hasClass("mdi-pencil")) {
-            // Switch to edit mode
-            $(this).attr("title", "Salva");
-            icon.removeClass("mdi-pencil");
-            icon.addClass("mdi-content-save");
-            var input = $(this).parent().find("input, textarea");
-            input.prop("disabled", false);
-            input.select();
-        } else {
-            // Save edits
-            $(this).attr("title", "Modifica");
-            icon.removeClass("mdi-content-save");
-            icon.addClass("mdi-pencil");
-            $(this).parent().find("input, textarea").prop("disabled", true);
-            $(this).blur();
-            // TODO submit
-        }
-    });*/
 
     // Edit form click
     $("#user-data").on("click", ".edit-form", function() {
