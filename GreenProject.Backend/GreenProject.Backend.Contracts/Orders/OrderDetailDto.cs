@@ -1,4 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.PurchasableItems;
+using GreenProject.Backend.Entities.Utils;
 
 namespace GreenProject.Backend.Contracts.Orders
 {
@@ -10,6 +11,6 @@ namespace GreenProject.Backend.Contracts.Orders
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public int Quantity { get; set; }
-        public decimal Price { get; set; }
+        public Money Price { get; set; }
     }
 }

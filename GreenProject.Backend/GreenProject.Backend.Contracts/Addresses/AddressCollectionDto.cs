@@ -6,7 +6,7 @@ namespace GreenProject.Backend.Contracts.Addresses
 {
     public class AddressCollectionDto
     {
-        public IEnumerable<AddressOutputDto> Addresses { get; set; }
+        public IEnumerable<AddressDto.Output> Addresses { get; set; }
         public int? DefaultAddressId { get; set; }
     }
 }

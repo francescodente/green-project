@@ -1,8 +1,10 @@
 ﻿using AutoMapper.QueryableExtensions;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
+using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.WeeklyOrders;
-using GreenProject.Backend.Core.Entities.Extensions;
+using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
@@ -83,7 +85,7 @@ namespace GreenProject.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public async Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoInputDto deliveryInfo)
+        public async Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
             User user = await this.RequireUserById(userId, q => q
                 .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));
@@ -167,7 +169,7 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
-        public Task AddExtraProduct(int userId, QuantifiedProductInputDto product)
+        public Task AddExtraProduct(int userId, QuantifiedProductDto.Input product)
         {
             return this.UpdateDetailsForWeeklyOrder(userId, async order =>
             {
@@ -190,7 +192,7 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
-        public Task UpdateExtraProduct(int userId, QuantifiedProductInputDto product)
+        public Task UpdateExtraProduct(int userId, QuantifiedProductDto.Input product)
         {
             return this.UpdateDetailsForWeeklyOrder(userId, order =>
             {
@@ -218,7 +220,7 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
-        public Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductInputDto insertion)
+        public Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductDto.Input insertion)
         {
             return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
             {
@@ -234,7 +236,7 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
-        public Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductInputDto update)
+        public Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductDto.Input update)
         {
             return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
             {
@@ -283,7 +285,7 @@ namespace GreenProject.Backend.Core.Logic
             await this.Data.SaveChangesAsync();
         }
 
-        public async Task UpdateDeliveryInfo(int userId, DeliveryInfoInputDto deliveryInfo)
+        public async Task UpdateDeliveryInfo(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
             User user = await this.RequireUserById(userId, q => q
                .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));

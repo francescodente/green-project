@@ -19,7 +19,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
             order.Iva = prices.Iva;
         }
 
-        public static void AssignPricesToCart(this IPricingService pricing, CartOutputDto cart)
+        public static void AssignPricesToCart(this IPricingService pricing, CartDto cart)
         {
             OrderPrices prices = pricing.CalculatePrices(cart);
 

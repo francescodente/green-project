@@ -9,7 +9,7 @@ namespace GreenProject.Backend.Core.Services
     {
         Task<AddressCollectionDto> GetAddresses(int userId);
 
-        Task<AddressOutputDto> AddAddress(int userId, AddressInputDto address);
+        Task<AddressDto.Output> AddAddress(int userId, AddressDto.Input address);
 
         Task DeleteAddress(int userId, int addressId);
 

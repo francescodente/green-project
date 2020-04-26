@@ -1,5 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Authentication;
-using GreenProject.Backend.Core.Entities.Extensions;
+using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Utils;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;

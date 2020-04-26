@@ -7,6 +7,6 @@ namespace GreenProject.Backend.Core.Utils.Pricing
     {
         OrderPrices CalculatePrices(Order order);
 
-        OrderPrices CalculatePrices(CartOutputDto cart);
+        OrderPrices CalculatePrices(CartDto cart);
     }
 }

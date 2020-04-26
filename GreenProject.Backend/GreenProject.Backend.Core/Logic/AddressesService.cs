@@ -1,6 +1,6 @@
 ﻿using AutoMapper.QueryableExtensions;
 using GreenProject.Backend.Contracts.Addresses;
-using GreenProject.Backend.Core.Entities.Extensions;
+using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
@@ -25,7 +25,7 @@ namespace GreenProject.Backend.Core.Logic
             return this.RequireUserById(userId, q => q.IncludingAddresses());
         }
 
-        public async Task<AddressOutputDto> AddAddress(int userId, AddressInputDto address)
+        public async Task<AddressDto.Output> AddAddress(int userId, AddressDto.Input address)
         {
             User user = await this.RequireUserWithAddresses(userId);
 
@@ -47,7 +47,7 @@ namespace GreenProject.Backend.Core.Logic
 
             await this.Data.SaveChangesAsync();
 
-            return this.Mapper.Map<AddressOutputDto>(addressEntity);
+            return this.Mapper.Map<AddressDto.Output>(addressEntity);
         }
 
         public async Task DeleteAddress(int userId, int addressId)

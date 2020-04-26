@@ -21,7 +21,7 @@ namespace GreenProject.Backend.Core.Logic
 
         }
 
-        public async Task<CategoryOutputDto> AddCategory(CategoryInputDto category)
+        public async Task<CategoryDto.Output> AddCategory(CategoryDto.Input category)
         {
             Category entity = new Category
             {
@@ -34,35 +34,35 @@ namespace GreenProject.Backend.Core.Logic
 
             await this.Data.SaveChangesAsync();
 
-            return this.Mapper.Map<CategoryOutputDto>(entity);
+            return this.Mapper.Map<CategoryDto.Output>(entity);
         }
 
-        public async Task<CategoryTreeDto> GetCategoryTree()
+        public async Task<CategoryDto.Tree> GetCategoryTree()
         {
             IList<Category> allCategories = await this.Data
                 .Categories
                 .Include(c => c.Image)
                 .ToListAsync();
 
-            IEnumerable<CategoryTreeDto> roots = allCategories
+            IEnumerable<CategoryDto.Tree> roots = allCategories
                 .Where(c => c.ParentCategoryId == null)
                 .Select(c => CreateSubTree(c, allCategories)).ToArray();
 
-            return new CategoryTreeDto
+            return new CategoryDto.Tree
             {
                 Name = ROOT_CATEGORY_NAME,
                 Children = roots
             };
         }
 
-        private CategoryTreeDto CreateSubTree(Category root, IList<Category> categories)
+        private CategoryDto.Tree CreateSubTree(Category root, IList<Category> categories)
         {
-            IEnumerable<CategoryTreeDto> children = categories
+            IEnumerable<CategoryDto.Tree> children = categories
                     .Where(c => c.ParentCategoryId == root.CategoryId)
                     .Select(c => CreateSubTree(c, categories))
                     .ToArray();
 
-            return this.Mapper.Map(root, new CategoryTreeDto { Children = children });
+            return this.Mapper.Map(root, new CategoryDto.Tree { Children = children });
         }
     }
 }

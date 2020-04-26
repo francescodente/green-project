@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Entities;
+﻿using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Entities;
 using System;
 using System.Collections.Generic;
 
@@ -11,7 +12,7 @@ namespace GreenProject.Backend.Contracts.Orders
         public bool IsSubscription { get; set; }
         public DateTime Timestamp { get; set; }
         public OrderState OrderState { get; set; }
-        public DeliveryInfoOutputDto DeliveryInfo { get; set; }
+        public DeliveryInfoDto.Output DeliveryInfo { get; set; }
         public IEnumerable<OrderDetailDto> Details { get; set; }
         public OrderPricesDto Prices { get; set; }
     }

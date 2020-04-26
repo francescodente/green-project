@@ -28,7 +28,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost]
         [RequireLogin(RoleType.Administrator)]
-        public async Task<IActionResult> InsertProduct([FromBody] ProductInputDto product)
+        public async Task<IActionResult> InsertProduct([FromBody] ProductDto.Insertion product)
         {
             return Ok(await this.productsService.InsertProduct(product));
         }
@@ -36,7 +36,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [HttpPut("{productId}")]
         [RequireLogin(RoleType.Administrator)]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductInputDto product)
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductDto.Update product)
         {
             return Ok(await this.productsService.UpdateProduct(productId, product));
         }

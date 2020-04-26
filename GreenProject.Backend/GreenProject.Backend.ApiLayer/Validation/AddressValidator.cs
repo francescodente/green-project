@@ -4,7 +4,7 @@ using GreenProject.Backend.Contracts.Errors;
 
 namespace GreenProject.Backend.ApiLayer.Validation
 {
-    public class AddressValidator : AbstractValidator<AddressInputDto>
+    public class AddressValidator : AbstractValidator<AddressDto.Input>
     {
         public AddressValidator()
         {

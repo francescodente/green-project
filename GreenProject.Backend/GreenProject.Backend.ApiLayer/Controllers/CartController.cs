@@ -3,6 +3,8 @@ using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
+using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +39,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost("details")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> InsertCartItem([FromRoute] int userId, [FromBody] QuantifiedProductInputDto insertion)
+        public async Task<IActionResult> InsertCartItem([FromRoute] int userId, [FromBody] QuantifiedProductDto.Input insertion)
         {
             await this.cartService.InsertCartItem(userId, insertion);
             return NoContent();
@@ -45,7 +47,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("details")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> UpdateCartItem([FromRoute] int userId, [FromBody] QuantifiedProductInputDto insertion)
+        public async Task<IActionResult> UpdateCartItem([FromRoute] int userId, [FromBody] QuantifiedProductDto.Input insertion)
         {
             await this.cartService.UpdateCartItem(userId, insertion);
             return NoContent();
@@ -61,7 +63,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("confirm")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> ConfirmCart([FromRoute] int userId, [FromBody] DeliveryInfoInputDto deliveryInfo)
+        public async Task<IActionResult> ConfirmCart([FromRoute] int userId, [FromBody] DeliveryInfoDto.Input deliveryInfo)
         {
             return Ok(await this.cartService.ConfirmCart(userId, deliveryInfo));
         }

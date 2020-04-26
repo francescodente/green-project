@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Routes;
+using GreenProject.Backend.Contracts.Categories;
 using GreenProject.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCategory([FromBody] CategoryInputDto category)
+        public async Task<IActionResult> AddCategory([FromBody] CategoryDto.Input category)
         {
             return Ok(await this.categoriesService.AddCategory(category));
         }

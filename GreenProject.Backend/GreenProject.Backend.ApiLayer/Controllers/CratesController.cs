@@ -28,7 +28,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPost]
         [RequireLogin(RoleType.Administrator)]
-        public async Task<IActionResult> InsertCrate([FromBody] CrateInputDto crate)
+        public async Task<IActionResult> InsertCrate([FromBody] CrateDto.Input crate)
         {
             return Ok(await this.cratesService.InsertCrate(crate));
         }
@@ -36,7 +36,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [HttpPut("{crateId}")]
         [RequireLogin(RoleType.Administrator)]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> UpdateCrate([FromRoute] int crateId, [FromBody] CrateInputDto crate)
+        public async Task<IActionResult> UpdateCrate([FromRoute] int crateId, [FromBody] CrateDto.Input crate)
         {
             return Ok(await this.cratesService.UpdateCrate(crateId, crate));
         }
