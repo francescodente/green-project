@@ -4,6 +4,7 @@ using GreenProject.Backend.Contracts.Reports;
 using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
             using (MemoryStream stream = new MemoryStream())
             using (StreamWriter writer = new StreamWriter(stream, Encoding.GetEncoding(this.settings.Encoding)))
             {
-                using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                using (CsvWriter csv = new CsvWriter(writer, CultureInfo.GetCultureInfo(this.settings.CultureInfo)))
                 {
                     csv.Configuration.Delimiter = this.settings.Delimiter;
                     writeAction(csv);
@@ -63,34 +64,21 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
                 .Distinct()
                 .OrderBy(s => s);
 
-            CsvReportSettings settings = this.settings.DailyProducts;
+            ClassMap map = new CsvMappings.ProductReportModelMap(
+                this.settings.DailyProducts,
+                productNames,
+                CultureInfo.GetCultureInfo(this.settings.CultureInfo));
 
             return new CsvReport
             {
-                FileName = string.Format(settings.FileName, date),
-                Content = this.CreateReportContent(csv =>
-                {
-                    csv.WriteField(settings.HeaderNames[nameof(ProductReportModel.OrderNumber)]);
-                    productNames.ForEach(csv.WriteField);
-                    csv.WriteField(settings.HeaderNames[nameof(ProductReportModel.Weight)]);
-                    csv.NextRecord();
-
-                    records.ForEach(r =>
-                    {
-                        csv.WriteField(r.OrderNumber);
-                        productNames
-                            .Select(n => r.ProductQuantities.GetValueAsOptional(n).Map(q => q.ToString()).OrElse(""))
-                            .ForEach(csv.WriteField);
-                        csv.WriteField(r.Weight);
-                        csv.NextRecord();
-                    });
-                })
+                FileName = string.Format(this.settings.DailyProducts.FileName, date),
+                Content = this.CreateReportContentFromClassMap(records, map)
             };
         }
 
         public CsvReport SupplierOrder(IEnumerable<SupplierProductReportModel> records, DateTime date)
         {
-            ClassMap map = null;
+            ClassMap map = new CsvMappings.SupplierProductReportModelMap(this.settings.SupplierOrder);
 
             return new CsvReport
             {

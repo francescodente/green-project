@@ -13,5 +13,6 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
         public CsvReportSettings DailyProducts { get; set; }
         public CsvReportSettings SupplierOrder { get; set; }
         public CsvReportSettings Revenue { get; set; }
+        public string CultureInfo { get; set; }
     }
 }

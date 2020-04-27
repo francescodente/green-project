@@ -3,6 +3,7 @@ using GreenProject.Backend.Contracts.Reports;
 using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -15,23 +16,15 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
         public abstract class OrderedClassMap<T> : ClassMap<T>
         {
             private readonly CsvReportSettings settings;
-            private int index;
 
             public OrderedClassMap(CsvReportSettings settings)
             {
                 this.settings = settings;
-                this.index = 0;
-            }
-
-            public MemberMap<T, TProperty> AddMap<TProperty>(Expression<Func<T, TProperty>> expression)
-            {
-                return Map(expression).Index(this.index++);
             }
 
             public MemberMap<T, TProperty> AddPropertyMap<TProperty>(Expression<Func<T, TProperty>> property)
             {
-                return AddMap(property)
-                    .Name(this.settings.HeaderNames[this.GetPropertyName(property)]);
+                return Map(property).Name(this.settings.HeaderNames[this.GetPropertyName(property)]);
             }
 
             private string GetPropertyName<TProperty>(Expression<Func<T, TProperty>> property)
@@ -63,6 +56,39 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
                 AddPropertyMap(x => x.ZipCode);
                 AddPropertyMap(x => x.Name);
                 AddPropertyMap(x => x.OrderNumber);
+            }
+        }
+
+        public class SupplierProductReportModelMap : OrderedClassMap<SupplierProductReportModel>
+        {
+            public SupplierProductReportModelMap(CsvReportSettings settings)
+                : base(settings)
+            {
+                AddPropertyMap(x => x.ProductName);
+                AddPropertyMap(x => x.Quantity);
+                AddPropertyMap(x => x.UnitName);
+            }
+        }
+
+        public class ProductReportModelMap : OrderedClassMap<ProductReportModel>
+        {
+            public ProductReportModelMap(CsvReportSettings settings, IEnumerable<string> productNames, IFormatProvider quantityFormat)
+                : base(settings)
+            {
+                AddPropertyMap(x => x.OrderNumber);
+                productNames.ForEach(n => Map()
+                    .Name(n)
+                    .ConvertUsing((object r) => GetQuantityForProduct(r, n, quantityFormat)));
+                AddPropertyMap(x => x.Weight);
+            }
+
+            private string GetQuantityForProduct(object productItem, string productName, IFormatProvider quantityFormat)
+            {
+                return ((ProductReportModel)productItem)
+                    .ProductQuantities
+                    .GetValueAsOptional(productName)
+                    .Map(d => d.ToString(quantityFormat))
+                    .OrElse("");
             }
         }
     }
