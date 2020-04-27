@@ -15,16 +15,18 @@ namespace GreenProject.Backend.Core.Logic
     public class ZonesService : AbstractService, IZonesService
     {
         private readonly IOrderScheduler scheduler;
+        private readonly OrdersSettings settings;
 
-        public ZonesService(IRequestSession request, IOrderScheduler scheduler)
+        public ZonesService(IRequestSession request, IOrderScheduler scheduler, OrdersSettings settings)
             : base(request)
         {
             this.scheduler = scheduler;
+            this.settings = settings;
         }
 
         public async Task<DateTime> GetNextAvailableSchedule(string zipCode)
         {
-            return await this.scheduler.FindNextAvailableDate(this.DateTime.Today.AddDays(1), zipCode);
+            return await this.scheduler.FindNextAvailableDate(this.DateTime.Today.AddDays(settings.LockTimeSpanInDays), zipCode);
         }
 
         public async Task<IEnumerable<ProvinceDto>> GetSupportedZones()
