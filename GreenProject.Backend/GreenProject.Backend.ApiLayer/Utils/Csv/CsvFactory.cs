@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Utils.Csv
@@ -23,12 +24,11 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
         private byte[] CreateReportContent(Action<CsvWriter> writeAction)
         {
             using (MemoryStream stream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(stream))
+            using (StreamWriter writer = new StreamWriter(stream, Encoding.GetEncoding(this.settings.Encoding)))
             {
                 using (CsvWriter csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
-                    csv.Configuration.Delimiter = "|";
-                    csv.Configuration.UseNewObjectForNullReferenceMembers = false;
+                    csv.Configuration.Delimiter = this.settings.Delimiter;
                     writeAction(csv);
                 }
 

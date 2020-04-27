@@ -66,7 +66,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Where(d => d.Item is Crate)
                 .Select((detail, i) => new ProductReportModel
                 {
-                    OrderNumber = $"{order.OrderNumber} ({i})",
+                    OrderNumber = $"{order.OrderNumber} ({i + 1})",
                     ProductQuantities = detail
                         .SubProducts
                         .ToDictionary(s => this.GetProductHeaderString(s.Product), this.GetActualCrateQuantityInMainUnit),
