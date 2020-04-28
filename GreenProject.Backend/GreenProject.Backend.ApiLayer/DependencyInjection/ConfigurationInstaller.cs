@@ -2,10 +2,10 @@
 using GreenProject.Backend.ApiLayer.Utils.Csv;
 using GreenProject.Backend.ApiLayer.Validation.Configuration;
 using GreenProject.Backend.Core.Logic.Utils;
+using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Uploads;
 using GreenProject.Backend.Infrastructure.Email;
 using GreenProject.Backend.Infrastructure.Notifications;
-using GreenProject.Backend.Infrastructure.Pricing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 

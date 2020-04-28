@@ -13,5 +13,7 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
         CsvReport DailyProducts(IEnumerable<ProductReportModel> records, DateTime date);
 
         CsvReport SupplierOrder(IEnumerable<SupplierProductReportModel> records, DateTime date);
+
+        CsvReport Revenue(IEnumerable<DailyRevenueModel> records, DateTime date);
     }
 }

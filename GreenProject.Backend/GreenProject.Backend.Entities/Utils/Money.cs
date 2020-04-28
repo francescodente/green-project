@@ -49,5 +49,15 @@ namespace GreenProject.Backend.Entities.Utils
         {
             return money / divisor;
         }
+
+        public override string ToString()
+        {
+            return this.Value.ToString("0,00");
+        }
+
+        public string ToString(IFormatProvider format)
+        {
+            return this.Value.ToString(format);
+        }
     }
 }

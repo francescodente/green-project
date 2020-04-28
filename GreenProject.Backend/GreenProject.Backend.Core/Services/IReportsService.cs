@@ -14,5 +14,7 @@ namespace GreenProject.Backend.Core.Services
         Task<IEnumerable<ProductReportModel>> GetDailyRequestedProductsReport(DateTime date);
 
         Task<IEnumerable<SupplierProductReportModel>> GetDailySupplierReport(DateTime date, IEnumerable<int> categories);
+
+        Task<IEnumerable<DailyRevenueModel>> GetRevenueReport(DateTime date);
     }
 }

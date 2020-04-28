@@ -64,6 +64,17 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return CsvFile(this.csvFactory.SupplierOrder(records, targetDate));
         }
 
+        [HttpGet("revenue")]
+        public async Task<IActionResult> GetRevenueReport([FromQuery] DateTime? date)
+        {
+            DateTime targetDate = date ?? DateTime.Today;
+
+            IEnumerable<DailyRevenueModel> records = await this.reportsService
+                .GetRevenueReport(targetDate);
+
+            return CsvFile(this.csvFactory.Revenue(records, targetDate));
+        }
+
         private IActionResult CsvFile(CsvReport report)
         {
             return File(report.Content, CSV_MIME_TYPE, report.FileName);
