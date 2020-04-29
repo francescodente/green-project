@@ -55,9 +55,9 @@ class Product extends Purchasable {
         this.html.orderEntry = getTemplate("ProductOrderEntry");
 
         // Save formatted fields
-        this.formattedMultiplier = (this.price.unitMultiplier * this.quantity).toString().replace(".", ",");
-        this.formattedUnit = Units[this.price.unitName];
-        this.formattedPrice = formatCurrency(this.price.value * this.quantity);
+        this.formattedMultiplier = (this.unitMultiplier * this.quantity).toString().replace(".", ",");
+        this.formattedUnit = Units[this.unitName];
+        this.formattedPrice = formatCurrency(this.price * this.quantity);
 
         let product = this;
         let imageUrl = getBasePath() + this.imageUrl;
@@ -120,8 +120,8 @@ class Product extends Purchasable {
         let multiplier = 0;
         let price = formatCurrency(0);
         if (quantity != null && quantity != "") {
-            multiplier = (this.price.unitMultiplier * quantity).toString().replace(".", ",");
-            price = formatCurrency(this.price.value * quantity);
+            multiplier = (this.unitMultiplier * quantity).toString().replace(".", ",");
+            price = formatCurrency(this.price * quantity);
             quantityModal.find(".add-to-cart").prop("disabled", false);
         } else {
             quantityModal.find(".add-to-cart").prop("disabled", true);

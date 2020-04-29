@@ -32,7 +32,7 @@ class Order extends Entity {
 
         // Create product entries
         for (let i = 0; i < this.details.length; i++) {
-            this.details[i] = new Product(this.details[i]);
+            this.details[i] = new Product(this.details[i], this.details[i].quantity);
         }
 
         // Retrieve state HTML
