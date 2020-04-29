@@ -59,6 +59,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Orders
                 .Where(o => o.UserId == userId)
                 .Where(o => o.IsSubscription)
+                .Where(o => o.OrderState != OrderState.Canceled)
                 .OrderByDescending(o => o.DeliveryDate)
                 .Take(1);
         }
@@ -152,19 +153,18 @@ namespace GreenProject.Backend.Core.Logic
         {
             return this.UpdateDetailsForWeeklyOrder(userId, async order =>
             {
-                var crateData = await this.Data
+                Crate crate = await this.Data
                     .Crates
                     .Where(c => c.ItemId == crateId)
-                    .Select(c => new { c.Price, c.Capacity })
                     .SingleOptionalAsync()
                     .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)));
 
                 order.Details.Add(new OrderDetail
                 {
-                    ItemId = crateId,
+                    Item = crate,
                     Quantity = 1,
-                    Price = crateData.Price,
-                    RemainingSlots = crateData.Capacity
+                    Price = crate.Price,
+                    RemainingSlots = crate.Capacity
                 });
             });
         }

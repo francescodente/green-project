@@ -37,7 +37,7 @@ namespace GreenProject.Backend.Core.Logic
             IEnumerable<OrderState> states = this.GetRequestedStates(filters);
             return this.GetOrdersFilteredBy(filters)
                 .Where(o => o.UserId == customerId)
-                .OrderBy(o => o.Timestamp)
+                .OrderByDescending(o => o.Timestamp)
                 .ProjectTo<OrderDto>(this.Mapper.ConfigurationProvider)
                 .ToPagedCollection(pagination);
         }

@@ -36,10 +36,9 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.Name = product.Name;
                 productEntity.Description = product.Description;
                 productEntity.CategoryId = product.CategoryId;
-
-                productEntity.Price = product.Price.Value;
-                productEntity.UnitName = product.Price.UnitName;
-                productEntity.UnitMultiplier = product.Price.UnitMultiplier;
+                productEntity.Price = product.Price;
+                productEntity.UnitName = product.UnitName;
+                productEntity.UnitMultiplier = product.UnitMultiplier;
 
                 this.AddCompatibleCrates(productEntity, product.CompatibleCrates);
             });

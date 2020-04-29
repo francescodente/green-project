@@ -36,10 +36,6 @@
     <None Include="wwwroot\MailTemplates\OrderReceived.html" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Utils\Csv\" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
