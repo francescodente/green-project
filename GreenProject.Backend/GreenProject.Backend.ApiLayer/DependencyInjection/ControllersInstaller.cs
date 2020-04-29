@@ -6,6 +6,7 @@ using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Validation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace GreenProject.Backend.ApiLayer.DependencyInjection
@@ -37,6 +38,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 {
                     options.SerializerSettings.Converters.Add(new StringEnumConverter());
                     options.SerializerSettings.Converters.Add(new MoneyConverter());
+                    options.SerializerSettings.FloatParseHandling = FloatParseHandling.Decimal;
                 });
         }
     }

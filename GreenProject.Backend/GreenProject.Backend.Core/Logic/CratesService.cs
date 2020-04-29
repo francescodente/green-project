@@ -36,6 +36,7 @@ namespace GreenProject.Backend.Core.Logic
                 crateEntity.Capacity = crate.Capacity;
                 crateEntity.CategoryId = CRATE_CATEGORY_ID;
                 crateEntity.Price = crate.Price;
+                crateEntity.IvaPercentage = crate.IvaPercentage;
             });
         }
 
@@ -52,6 +53,7 @@ namespace GreenProject.Backend.Core.Logic
                 crateEntity.Description = crate.Description;
                 crateEntity.Capacity = crate.Capacity;
                 crateEntity.Price = crate.Price;
+                crateEntity.IvaPercentage = crate.IvaPercentage;
             });
         }
 
