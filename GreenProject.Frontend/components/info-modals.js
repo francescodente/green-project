@@ -1,47 +1,57 @@
-var ErrorModal = function(json, message) {
-    for (let k in json) this[k] = json[k];
-    this.html = {};
-    this.html.main = getTemplate("ErrorModal");
+class Modal extends Entity {
 
-    if (json != null) {
-        this.errCodes = this.responseJSON.globalErrors.map(err => err.code).join(", ");
+    constructor(json) {
+        super(json);
     }
 
-    let error = this;
-    for (let k in error.html) {
-
-        // Replace values in templates
-        if (message != null) {
-            $(error.html[k]).find(".generic-text").html(message);
-        }
-        if ("status" in error) {
-            $(error.html[k]).find(".status").html(error.status);
-            $(error.html[k]).find(".status-text").html(error.statusText);
-        }
-        if ("errCodes" in error) {
-            $(error.html[k]).find(".err-codes").html(error.errCodes);
-        }
+    show() {
+        showModal($(this.html.main));
     }
 }
 
-ErrorModal.prototype.show = function() {
-    showModal($(this.html.main));
-}
+class ErrorModal extends Modal {
 
-var InfoModal = function(message) {
-    this.html = {};
-    this.html.main = getTemplate("InfoModal");
+    constructor(json, message) {
+        super(json);
+        this.html.main = getTemplate("ErrorModal");
 
-    let info = this;
-    for (let k in info.html) {
+        if (json != null) {
+            this.errCodes = this.responseJSON.globalErrors.map(err => err.code).join(", ");
+        }
 
-        // Replace values in templates
-        if (message != null) {
-            $(info.html[k]).find(".info-text").html(message);
+        let error = this;
+        for (let k in error.html) {
+
+            // Replace values in templates
+            if (message != null) {
+                $(error.html[k]).find(".generic-text").html(message);
+            }
+            if ("status" in error) {
+                $(error.html[k]).find(".status").html(error.status);
+                $(error.html[k]).find(".status-text").html(error.statusText);
+            }
+            if ("errCodes" in error) {
+                $(error.html[k]).find(".err-codes").html(error.errCodes);
+            }
         }
     }
+
 }
 
-InfoModal.prototype.show = function() {
-    showModal($(this.html.main));
+class InfoModal extends Modal {
+
+    constructor(message) {
+        super(null);
+        this.html.main = getTemplate("InfoModal");
+
+        let info = this;
+        for (let k in info.html) {
+
+            // Replace values in templates
+            if (message != null) {
+                $(info.html[k]).find(".info-text").html(message);
+            }
+        }
+    }
+
 }
