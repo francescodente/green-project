@@ -49,7 +49,6 @@ $(document).ready(function() {
             val = selectItem.parent().find(".checkbox.toggle-all:checked").map(function() {
                 return $("[for='" + $(this).attr("id") + "']").text();
             }).get().join(", ");
-            console.log(val);
             if (val == null || val == "") {
                 val = selectItem.parent().find(".checkbox:checked").map(function() {
                     return $("[for='" + $(this).attr("id") + "']").text();

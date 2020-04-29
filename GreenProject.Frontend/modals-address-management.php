@@ -146,10 +146,7 @@
         toggleDropdownSelectEnabled($("#select-city"), false);
         toggleDropdownSelectEnabled($("#select-zipcode"), false);
     })
-    .catch(function(data) {
-        console.log("fail");
-        console.log(data);
-    })
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() })
     .finally(function(data) {
         $("#address-form-loader").hide();
         $(".form-fields").show();

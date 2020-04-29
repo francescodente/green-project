@@ -1,15 +1,28 @@
 // Measurement units
-const Units = {
-    Piece: "pezzi",
-    Kilogram: "Kg"
-}
-
+const Units = [
+    {
+        name: "Piece",
+        singular: "pezzo",
+        plural: "pezzi"
+    },
+    {
+        name: "Kilogram",
+        singular: "Kg",
+        plural: "Kg"
+    }
+]
 
 // Purchasable item
 class Purchasable extends Entity {
 
     constructor(json) {
         super(json);
+    }
+
+    static getFormattedUnit(unitName, plural = false) {
+        console.log(Units.filter(unit => unit.name == unitName));
+        return Units.filter(unit => unit.name == unitName)
+                    .map(unit => plural ? unit.plural : unit.singular)[0];
     }
 
     showRemoveModal() {
@@ -56,7 +69,7 @@ class Product extends Purchasable {
 
         // Save formatted fields
         this.formattedMultiplier = (this.unitMultiplier * this.quantity).toString().replace(".", ",");
-        this.formattedUnit = Units[this.unitName];
+        this.formattedUnit = Purchasable.getFormattedUnit(this.unitName, this.quantity != 1);
         this.formattedPrice = formatCurrency(this.price * this.quantity);
 
         let product = this;
@@ -168,7 +181,6 @@ class Product extends Purchasable {
     }
 
     removeFromCart() {
-        console.log("remove from cart " + this.productId);
         removeFromCart(localStorage.getObject("userData").userId, this.productId)
         .done(function(data) { location.reload(); })
         .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
@@ -218,7 +230,6 @@ class Crate extends Purchasable {
     }
 
     showDetailsModal() {
-        console.log("show details modal " + this.crateId);
         showModal($(this.html.detailsModal));
     }
 

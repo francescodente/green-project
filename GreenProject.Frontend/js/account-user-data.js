@@ -102,7 +102,6 @@ $(document).ready(function() {
         showModal($("#modal-loading"));
         setPersonRole(localStorage.getObject("authData").userId, data)
         .done(function(data) {
-            console.log("done");
             localStorage.removeItem("userData");
             location.reload();
         })

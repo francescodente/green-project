@@ -51,8 +51,6 @@ class Address extends Entity {
             });
 
         }
-
-        console.log(this);
     }
 
     showDeleteModal() {
@@ -60,7 +58,6 @@ class Address extends Entity {
     }
 
     showSetDefaultModal() {
-        console.log("set default modal");
         showModal($(this.html.setDefaultModal));
     }
 
