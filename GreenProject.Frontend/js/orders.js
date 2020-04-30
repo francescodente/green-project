@@ -11,7 +11,6 @@ $(document).ready(function() {
     if (pageNumber == null) pageNumber = 0;
     getCustomerOrders(localStorage.getObject("authData").userId, pageNumber, PAGE_SIZE)
     .done(function(data) {
-        console.log(data);
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
         } else {
@@ -26,7 +25,6 @@ $(document).ready(function() {
         fillPagination($("#orders-pagination"), data.pageNumber, data.pageCount);
     })
     .fail(function(jqXHR) {
-        console.log(jqXHR);
         $(".orders-error").removeClass("d-none");
     })
     .always(function(data) { fadeOutModal($("#modal-loading")) });

@@ -20,7 +20,6 @@ class Purchasable extends Entity {
     }
 
     static getFormattedUnit(unitName, plural = false) {
-        console.log(Units.filter(unit => unit.name == unitName));
         return Units.filter(unit => unit.name == unitName)
                     .map(unit => plural ? unit.plural : unit.singular)[0];
     }
