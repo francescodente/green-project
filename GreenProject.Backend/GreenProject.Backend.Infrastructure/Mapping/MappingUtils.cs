@@ -55,6 +55,8 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                 CreateMap<Order, OrderPricesDto>();
 
                 CreateMap<OrderDetail, OrderDetailDto>()
+                    .ForMember(dst => dst.UnitName, o => o.MapFrom(src => ((Product)src.Item).UnitName))
+                    .ForMember(dst => dst.UnitMultiplier, o => o.MapFrom(src => ((Product)src.Item).UnitMultiplier))
                     .ForMember(dst => dst.Name, o => o.MapFrom(src => src.Item.Name))
                     .ForMember(dst => dst.Description, o => o.MapFrom(src => src.Item.Description))
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Item.Image.Path));

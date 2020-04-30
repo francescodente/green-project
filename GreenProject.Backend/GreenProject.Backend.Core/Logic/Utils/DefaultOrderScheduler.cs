@@ -40,7 +40,7 @@ namespace GreenProject.Backend.Core.Logic.Utils
                 throw new InvalidOperationException("Zone with no availabilities in the database");
             }
 
-            return EnumerableUtils.Iterate(startingDate, d => d.AddDays(1))
+            return EnumerableUtils.EnumerateDates(startingDate)
                 .Where(d => availabilities.ContainsKey(d.DayOfWeek))
                 .Where(d => availabilities[d.DayOfWeek] - orderCountsByDate.GetValueAsOptional(d).OrElse(0) > 0);
         }

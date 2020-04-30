@@ -86,5 +86,19 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
                 Content = this.CreateReportContentFromClassMap(records, map)
             };
         }
+
+        public CsvReport Revenue(IEnumerable<DailyRevenueModel> records, DateTime date)
+        {
+            ClassMap map = new CsvMappings.DailyRevenueModelMap(
+                this.settings.Revenue,
+                this.settings.SupportedIvaValues,
+                CultureInfo.GetCultureInfo(this.settings.CultureInfo));
+
+            return new CsvReport
+            {
+                FileName = string.Format(this.settings.Revenue.FileName, date),
+                Content = this.CreateReportContentFromClassMap(records, map)
+            };
+        }
     }
 }

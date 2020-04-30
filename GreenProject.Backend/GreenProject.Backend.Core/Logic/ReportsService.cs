@@ -1,8 +1,11 @@
 ﻿using GreenProject.Backend.Contracts.Reports;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
+using GreenProject.Backend.Entities.Utils;
+using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,10 +19,12 @@ namespace GreenProject.Backend.Core.Logic
     public class ReportsService : AbstractService, IReportsService
     {
         private const decimal KILOGRAMS_PER_SLOT = 0.5m;
+        private readonly PricingSettings pricingSettings;
 
-        public ReportsService(IRequestSession request)
+        public ReportsService(IRequestSession request, PricingSettings pricingSettings)
             : base(request)
         {
+            this.pricingSettings = pricingSettings;
         }
 
         public async Task<IEnumerable<OrderReportModel>> GetDailyOrdersReport(DateTime date)
@@ -139,6 +144,39 @@ namespace GreenProject.Backend.Core.Logic
                     UnitName = p.Product.UnitName.GetPrintableName(),
                     Quantity = p.OrderDetailQuantity * p.Product.UnitMultiplier + p.CrateQuantity
                 });
+        }
+
+        public async Task<IEnumerable<DailyRevenueModel>> GetRevenueReport(DateTime date)
+        {
+            IEnumerable<Order> orders = await this.Data
+                .Orders
+                .Where(o => o.OrderState == OrderState.Completed)
+                .Where(o => o.DeliveryDate.Year == date.Year && o.DeliveryDate.Month == date.Month)
+                .Include(o => o.Details)
+                    .ThenInclude(d => d.Item)
+                .ToArrayAsync();
+
+            DateTime startOfMonth = new DateTime(date.Year, date.Month, 1);
+
+            return EnumerableUtils.EnumerateDates(startOfMonth)
+                .Take(System.DateTime.DaysInMonth(date.Year, date.Month))
+                .GroupJoin(orders, d => d, o => o.DeliveryDate, this.CreateDailyRevenueModel);
+        }
+
+        private DailyRevenueModel CreateDailyRevenueModel(DateTime date, IEnumerable<Order> orders)
+        {
+            DailyRevenueModel record = new DailyRevenueModel { Date = date };
+
+            orders
+                .Peek(o => record.IvaValues.Merge(this.pricingSettings.ShippingIvaPercentage, o.ShippingCost, (a, b) => a + b))
+                .SelectMany(o => o.Details)
+                .ForEach(d =>
+                {
+                    Money increment = d.Price * d.Quantity * (1 + d.Item.IvaPercentage);
+                    record.IvaValues.Merge(d.Item.IvaPercentage, increment, (a, b) => a + b);
+                });
+
+            return record;
         }
     }
 }

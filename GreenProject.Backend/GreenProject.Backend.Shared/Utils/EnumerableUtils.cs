@@ -33,6 +33,15 @@ namespace GreenProject.Backend.Shared.Utils
             }
         }
 
+        public static IEnumerable<T> Peek<T>(this IEnumerable<T> sequence, Action<T> action)
+        {
+            foreach (T item in sequence)
+            {
+                action(item);
+                yield return item;
+            }
+        }
+
         public static IOptional<T> SingleOptional<T>(this IEnumerable<T> sequence)
         {
             IEnumerator<T> enumerator = sequence.GetEnumerator();
@@ -70,6 +79,11 @@ namespace GreenProject.Backend.Shared.Utils
                 .AppendJoin(separator, sequence)
                 .Append(suffix)
                 .ToString();
+        }
+
+        public static IEnumerable<DateTime> EnumerateDates(DateTime start)
+        {
+            return Iterate(start, d => d.AddDays(1));
         }
     }
 }
