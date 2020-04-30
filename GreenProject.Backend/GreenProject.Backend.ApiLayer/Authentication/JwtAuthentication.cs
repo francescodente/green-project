@@ -1,6 +1,8 @@
 ﻿using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Utils;
+using GreenProject.Backend.Core.Utils.Session;
+using GreenProject.Backend.Core.Utils.Time;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.IdentityModel.Tokens;
@@ -22,17 +24,24 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         private readonly IHashCalculator hashCalculator;
         private readonly ISaltGenerator saltGenerator;
         private readonly IStringEncoding encoding;
+        private readonly IDateTime dateTime;
         private readonly AuthenticationSettings settings;
+        private readonly TokenValidationParameters refreshValidation;
 
-        public JwtAuthentication(IHashCalculator hashCalculator,
+        public JwtAuthentication(IDateTime dateTime,
+                                 IHashCalculator hashCalculator,
                                  ISaltGenerator saltGenerator,
                                  IStringEncoding encoding,
-                                 AuthenticationSettings settings)
+                                 AuthenticationSettings settings,
+                                 TokenValidationParameters tokenValidationParameters)
         {
+            this.dateTime = dateTime;
             this.hashCalculator = hashCalculator;
             this.saltGenerator = saltGenerator;
             this.encoding = encoding;
             this.settings = settings;
+            this.refreshValidation = tokenValidationParameters.Clone();
+            this.refreshValidation.ValidateLifetime = false;
         }
 
         public void AssignPassword(User user, string password)
@@ -68,46 +77,53 @@ namespace GreenProject.Backend.ApiLayer.Authentication
             return result == 0;
         }
 
-        public Task<AuthenticationResultDto> OnUserAuthenticated(User user)
+        public Task<(AuthenticationResultDto, RefreshToken)> OnUserAuthenticated(User user)
         {
             byte[] key = Encoding.ASCII.GetBytes(this.settings.SecretKey);
             IEnumerable<Claim> claims = CreateClaimsList(user);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                NotBefore = DateTime.UtcNow,
-                Expires = DateTime.UtcNow.Add(this.settings.TokenDuration),
+                NotBefore = this.dateTime.Now,
+                Expires = this.dateTime.Now.Add(this.settings.TokenDuration),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+
+            RefreshToken refreshToken = new RefreshToken
+            {
+                AccessTokenId = token.Id,
+                User = user,
+                Token = Guid.NewGuid().ToString(),
+                CreationDate = this.dateTime.Now,
+                Expiration = this.dateTime.Now.Add(this.settings.RefreshTokenDuration)
+            };
+
             AuthenticationResultDto result = new AuthenticationResultDto
             {
                 UserId = user.UserId,
                 Token = tokenHandler.WriteToken(token),
+                RefreshToken = refreshToken.Token,
                 Expiration = tokenDescriptor.Expires.Value,
                 Roles = user.GetRoleTypes()
             };
 
-            return Task.FromResult(result);
+            return Task.FromResult((result, refreshToken));
         }
 
         private IEnumerable<Claim> CreateClaimsList(User user)
         {
             return user.GetRoleTypes()
                 .Select(CreateRoleClaim)
+                .Append(new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()))
                 .Append(new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()));
         }
 
         private Claim CreateRoleClaim(RoleType role)
         {
             return new Claim(ClaimTypes.Role, role.ToString());
-        }
-
-        public Task OnUserLoggedOut(User user)
-        {
-            return Task.CompletedTask;
         }
 
         public string GenerateRandomPassword()
@@ -122,6 +138,52 @@ namespace GreenProject.Backend.ApiLayer.Authentication
                 .Select(b => b % chars.Length)
                 .Select(b => chars[b])
                 .ConcatStrings();
+        }
+
+        public bool CanBeRefreshed(string accessToken, RefreshToken refreshToken)
+        {
+            return this.GetPrincipalFromToken(accessToken)
+                .Filter(p => refreshToken.Expiration > this.dateTime.Now)
+                .Filter(p => !refreshToken.IsInvalid)
+                .Filter(p => !refreshToken.IsUsed)
+                .Filter(p => refreshToken.AccessTokenId == p.FindFirstValue(JwtRegisteredClaimNames.Jti))
+                .IsPresent();
+        }
+
+        private IOptional<ClaimsPrincipal> GetPrincipalFromToken(string accessToken)
+        {
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+            try
+            {
+                ClaimsPrincipal principal = tokenHandler.ValidateToken(
+                    accessToken,
+                    refreshValidation,
+                    out SecurityToken validatedToken);
+
+                if (!this.IsJwtWithValidSecurityAlgorithm(validatedToken))
+                {
+                    return Optional.Empty<ClaimsPrincipal>();
+                }
+
+                return Optional.Of(principal);
+            }
+            catch
+            {
+                return Optional.Empty<ClaimsPrincipal>();
+            }
+        }
+
+        private bool IsJwtWithValidSecurityAlgorithm(SecurityToken validatedToken)
+        {
+            if (!(validatedToken is JwtSecurityToken jwtSecurityToken))
+            {
+                return false;
+            }
+            return jwtSecurityToken
+                .Header
+                .Alg
+                .Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }

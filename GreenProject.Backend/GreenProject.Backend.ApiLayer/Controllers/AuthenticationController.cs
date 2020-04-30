@@ -27,6 +27,12 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return Ok(await this.authenticationService.Authenticate(credentials));
         }
 
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenRequestDto request)
+        {
+            return Ok(await this.authenticationService.RefreshToken(request));
+        }
+
         [HttpPost("changepsw")]
         [RequireLogin]
         public async Task<IActionResult> ChangePassword([FromBody] PasswordChangeRequestDto request)

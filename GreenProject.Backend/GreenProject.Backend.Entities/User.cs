@@ -33,5 +33,6 @@ namespace GreenProject.Backend.Entities
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual ICollection<BookedCrate> BookedCrates { get; set; }
+        public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
     }
 }
