@@ -1,0 +1,87 @@
+function getProvinces() {
+    return zones.children.map(zone => zone.provinceName);
+}
+
+function getCities(provinceName) {
+    return zones.children.filter(zone => zone.provinceName == provinceName)
+        .map(zone => zone.cities)[0]
+        .map(city => city.cityName);
+}
+
+function getZipCodes(provinceName, cityName) {
+    return zones.children.filter(zone => zone.provinceName == provinceName)
+        .map(zone => zone.cities)[0]
+        .filter(city => city.cityName == cityName)
+        .map(city => city.zipCodes)[0];
+}
+
+// Get zones
+$("#address-form-loader").show();
+$(".form-fields").hide();
+var zones;
+getOrUpdateZones()
+.then(function(data) {
+    zones = data;
+    let provinces = getProvinces().map(p => { return { key: p, value: p }; });
+    fillDropdownSelect($("#select-province"), provinces);
+    toggleDropdownSelectEnabled($("#select-city"), false);
+    toggleDropdownSelectEnabled($("#select-zipcode"), false);
+})
+.catch(function(jqXHR) { new ErrorModal(jqXHR).show() })
+.finally(function(data) {
+    $("#address-form-loader").hide();
+    $(".form-fields").show();
+});
+
+// Province selected
+$("body").on("change", "[name='select-province']", function() {
+    let cities = getCities(this.value).map(c => { return { key: c, value: c }; });
+    fillDropdownSelect($("#select-city"), cities);
+    fillDropdownSelect($("#select-zipcode"), []);
+    toggleDropdownSelectEnabled($("#select-city"), true);
+    toggleDropdownSelectEnabled($("#select-zipcode"), false);
+});
+
+// City selected
+$("body").on("change", "[name='select-city']", function() {
+    let province = $("[name='select-province']:checked").val();
+    let zipCodes = getZipCodes(province, this.value).map(z => { return { key: z, value: z }; });
+    fillDropdownSelect($("#select-zipcode"), zipCodes);
+    toggleDropdownSelectEnabled($("#select-zipcode"), true);
+});
+
+// Check if submit button can be enabled
+$("body").on("change", "#modal-new-address input", function() {
+    if ($("[name='select-province']:checked").length &&
+        $("[name='select-city']:checked").length &&
+        $("[name='select-zipcode']:checked").length &&
+        $("#street").val().length &&
+        $("#house-number").val().length &&
+        $("#address-name").val().length &&
+        $("#address-telephone").val().length) {
+        $(".submit-address").attr("disabled", false);
+    } else {
+        $(".submit-address").attr("disabled", true);
+    }
+});
+
+// Form submission
+$("body").on("submit", "#modal-new-address", function(event) {
+    event.preventDefault();
+    $("#address-form-loader").show();
+    $(".form-fields").hide();
+    $(".submit-address").attr("disabled", true);
+    createAddress(localStorage.getObject("userData").userId, {
+        "street": $("#street").val(),
+        "houseNumber": $("#house-number").val(),
+        "name": $("#address-name").val(),
+        "telephone": $("#address-telephone").val(),
+        "zipCode": $("[name='select-zipcode']:checked").val()
+    })
+    .done(function(data) {
+        location.reload();
+    })
+    .fail(function(jqXHR) {
+        new ErrorModal(jqXHR).show();
+    });
+});

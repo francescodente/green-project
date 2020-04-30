@@ -155,8 +155,6 @@
 
     <?php include("resources.php") ?>
 
-    <?php include("modals-product.php"); ?>
-
     <!-- USER INFO -->
     <div id="modal-client-info-1" class="modal-client-info modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

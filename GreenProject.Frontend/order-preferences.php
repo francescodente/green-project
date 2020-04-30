@@ -69,7 +69,7 @@
                 <span class="text-sec-dark">Gestisci</span>
                 <i class="mdi dark mdi-map-marker"></i>
             </a>
-            <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-address-add">
+            <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-new-address">
                 <span class="text-sec-dark">Aggiungi</span>
                 <i class="mdi dark mdi-plus"></i>
             </button>
@@ -95,4 +95,4 @@
     </div>
 </div>
 
-<script defer src="js/order-preferences.js"></script>
+<script defer src="js/pages/order-preferences.js"></script>

@@ -253,8 +253,7 @@
 
     <?php include("resources.php"); ?>
 
-    <?php include("modals-product.php"); ?>
-    <?php include("modals-address-management.php"); ?>
+    <?php include("modal-new-address.php"); ?>
 
     <div id="modal-product-remove" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

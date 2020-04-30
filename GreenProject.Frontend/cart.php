@@ -83,8 +83,8 @@
 
     <?php include("resources.php"); ?>
 
-    <?php include("modals-address-management.php"); ?>
-    <script src="js/cart.js"></script>
+    <?php include("modal-new-address.php"); ?>
+    <script src="js/pages/cart.js"></script>
 
     <div id="expected-date-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

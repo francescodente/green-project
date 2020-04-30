@@ -140,26 +140,9 @@
     <?php include("resources.php"); ?>
     <script src="js/validators/CFValidator.js"></script>
     <script src="js/validators/PIValidator.js"></script>
-    <script src="js/account-user-data.js"></script>
+    <script src="js/pages/account-user-data.js"></script>
 
     <?php include("modal-pwd-change.php"); ?>
-
-    <div id="modal-address-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="width: 360px;">
-                <div class="modal-top text-center">
-                    <i class="modal-top-icon mdi mdi-delete-empty"></i>
-                </div>
-                <div class="modal-body">
-                    <p class="m-0">Sei sicuro di voler eliminare questo indirizzo?</p>
-                </div>
-                <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="modal-person-role-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">

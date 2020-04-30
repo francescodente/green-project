@@ -84,7 +84,7 @@
 
     <?php include("footer.php"); ?>
     <?php include("resources.php") ?>
-    <script src="js/products.js"></script>
+    <script src="js/pages/products.js"></script>
 
 </body>
 </html>
