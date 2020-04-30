@@ -19,13 +19,13 @@ function getZipCodes(provinceName, cityName) {
 $("#address-form-loader").show();
 $(".form-fields").hide();
 var zones;
-getOrUpdateZones()
+APIUtils.getOrUpdateZones()
 .then(function(data) {
     zones = data;
     let provinces = getProvinces().map(p => { return { key: p, value: p }; });
-    fillDropdownSelect($("#select-province"), provinces);
-    toggleDropdownSelectEnabled($("#select-city"), false);
-    toggleDropdownSelectEnabled($("#select-zipcode"), false);
+    $("#select-province").fillSelect(provinces);
+    $("#select-city").setSelectEnabled(false);
+    $("#select-zipcode").setSelectEnabled(false);
 })
 .catch(function(jqXHR) { new ErrorModal(jqXHR).show() })
 .finally(function(data) {
@@ -36,18 +36,18 @@ getOrUpdateZones()
 // Province selected
 $("body").on("change", "[name='select-province']", function() {
     let cities = getCities(this.value).map(c => { return { key: c, value: c }; });
-    fillDropdownSelect($("#select-city"), cities);
-    fillDropdownSelect($("#select-zipcode"), []);
-    toggleDropdownSelectEnabled($("#select-city"), true);
-    toggleDropdownSelectEnabled($("#select-zipcode"), false);
+    $("#select-city").fillSelect(cities);
+    $("#select-zipcode").fillSelect([]);
+    $("#select-city").setSelectEnabled(true);
+    $("#select-zipcode").setSelectEnabled(false);
 });
 
 // City selected
 $("body").on("change", "[name='select-city']", function() {
     let province = $("[name='select-province']:checked").val();
     let zipCodes = getZipCodes(province, this.value).map(z => { return { key: z, value: z }; });
-    fillDropdownSelect($("#select-zipcode"), zipCodes);
-    toggleDropdownSelectEnabled($("#select-zipcode"), true);
+    $("#select-zipcode").fillSelect(zipCodes);
+    $("#select-zipcode").setSelectEnabled(true);
 });
 
 // Check if submit button can be enabled
@@ -71,7 +71,7 @@ $("body").on("submit", "#modal-new-address", function(event) {
     $("#address-form-loader").show();
     $(".form-fields").hide();
     $(".submit-address").attr("disabled", true);
-    createAddress(localStorage.getObject("userData").userId, {
+    API.createAddress(localStorage.getObject("userData").userId, {
         "street": $("#street").val(),
         "houseNumber": $("#house-number").val(),
         "name": $("#address-name").val(),

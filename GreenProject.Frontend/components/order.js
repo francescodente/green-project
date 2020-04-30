@@ -4,7 +4,7 @@ class Order extends Entity {
     constructor(json) {
         super(json);
 
-        this.html.main = getTemplate("OrderCard");
+        this.html.main = Entity.getTemplate("OrderCard");
         this.html.products = [];
 
         // Format address fields
@@ -22,12 +22,12 @@ class Order extends Entity {
         });
         address.addressString = address.street + " " + address.houseNumber + ", " + address.zipCode + " " + address.city + " (" + address.province + ")";
         // Format date fields
-        this.deliveryInfo.formattedDeliveryDate = formatDate(this.deliveryInfo.deliveryDate);
-        this.formattedTimestamp = formatDate(this.timestamp);
+        this.deliveryInfo.formattedDeliveryDate = Utils.formatDate(this.deliveryInfo.deliveryDate);
+        this.formattedTimestamp = Utils.formatDate(this.timestamp);
         // Format cost summary fields
         for (let k in this.prices) {
             let formattedK = "formatted" + k[0].toUpperCase() + k.slice(1);
-            this.prices[formattedK] = formatCurrency(this.prices[k]);
+            this.prices[formattedK] = Utils.formatCurrency(this.prices[k]);
         }
 
         // Create product entries

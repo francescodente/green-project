@@ -12,6 +12,7 @@
         <script src="js/main.js"></script>
         <script src="js/api.js"></script>
         <script src="js/api-utils.js"></script>
+        <script src="js/utils.js"></script>
         <script src="js/authentication-guard.js"></script>
     </div>
 

@@ -8,7 +8,6 @@
     ?>
 </div>
 
-<script src="components/functions.js"></script>
 <script src="components/entity.js"></script>
 <script src="components/purchasable.js"></script>
 <script src="components/category.js"></script>

@@ -1,12 +1,12 @@
 // Get categories
 $("#categories-loader").show();
 var categories = [];
-getOrUpdateCategories()
+APIUtils.getOrUpdateCategories()
 .then(function(data) {
     data.children.forEach((json) => {
         categories.push(new Category(json));
     });
-    fillBootstrapRow($(".category-list"), categories);
+    $(".category-list").fillRow(categories.map(category => category.html.main));
 })
 .catch(function(jqXHR) {
     $(".cat-error").removeClass("d-none");

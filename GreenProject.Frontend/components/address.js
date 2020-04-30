@@ -4,10 +4,10 @@ class Address extends Entity {
         super(json);
 
         // Get HTML templates
-        this.html.main = getTemplate("AddressCard");
-        this.html.deleteModal = getTemplate("DeleteAddressModal");
-        this.html.setDefaultModal = getTemplate("SetDefaultAddressModal");
-        this.html.richRadio = getTemplate("AddressRadio");
+        this.html.main = Entity.getTemplate("AddressCard");
+        this.html.deleteModal = Entity.getTemplate("DeleteAddressModal");
+        this.html.setDefaultModal = Entity.getTemplate("SetDefaultAddressModal");
+        this.html.richRadio = Entity.getTemplate("AddressRadio");
 
         // Get province and city
         let zones = localStorage.getObject("zones").children;
@@ -43,7 +43,7 @@ class Address extends Entity {
             // Add event listeners
             address.html[k].find(".address-set-default").click(function() { address.setDefault(); });
             address.html[k].find(".address-show-delete-modal").click(function() { address.showDeleteModal(); });
-            address.html[k].find(".address-delete").click(function() { address.deleteAddress(); });
+            address.html[k].find(".address-delete").click(function() { address.API.deleteAddress(); });
             address.html[k].find("input").change(function() {
                 if (!address.isDefaultAddress) {
                     address.showSetDefaultModal();
@@ -54,31 +54,31 @@ class Address extends Entity {
     }
 
     showDeleteModal() {
-        showModal($(this.html.deleteModal));
+        this.html.deleteModal.showModal();
     }
 
     showSetDefaultModal() {
-        showModal($(this.html.setDefaultModal));
+        this.html.setDefaultModal.showModal();
     }
 
     deleteAddress() {
-        showModal($("#modal-loading"));
-        deleteAddress(localStorage.getObject("userData").userId, this.addressId)
+        $("#modal-loading").showModal();
+        API.deleteAddress(localStorage.getObject("userData").userId, this.addressId)
         .done(function(data) { location.reload(); })
         .fail(function(jqXHR) {
-            fadeOutModal($("#modal-loading"));
+            $("#modal-loading").fadeModal();
             new ErrorModal(jqXHR).show();
         });
     }
 
     setDefault() {
-        showModal($("#modal-loading"));
-        setDefaultAddress(localStorage.getObject("userData").userId, this.addressId)
+        $("#modal-loading").showModal();
+        API.setDefaultAddress(localStorage.getObject("userData").userId, this.addressId)
         .done(function(data) {
             location.reload();
         })
         .fail(function(jqXHR) {
-            fadeOutModal($("#modal-loading"));
+            $("#modal-loading").fadeModal();
             new ErrorModal(jqXHR).show();
         });
     }

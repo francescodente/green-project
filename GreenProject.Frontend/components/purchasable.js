@@ -59,20 +59,20 @@ class Product extends Purchasable {
         this.quantity = quantity;
 
         // Add templates
-        this.html.main = getTemplate("ProductCard");
-        this.html.detailsModal = getTemplate("ProductDetailsModal");
-        this.html.quantityModal = getTemplate("ProductQuantityModal");
-        this.html.removeModal = getTemplate("ProductRemoveModal");
-        this.html.cartEntry = getTemplate("ProductCartEntry");
-        this.html.orderEntry = getTemplate("ProductOrderEntry");
+        this.html.main = Entity.getTemplate("ProductCard");
+        this.html.detailsModal = Entity.getTemplate("ProductDetailsModal");
+        this.html.quantityModal = Entity.getTemplate("ProductQuantityModal");
+        this.html.removeModal = Entity.getTemplate("ProductRemoveModal");
+        this.html.cartEntry = Entity.getTemplate("ProductCartEntry");
+        this.html.orderEntry = Entity.getTemplate("ProductOrderEntry");
 
         // Save formatted fields
         this.formattedMultiplier = (this.unitMultiplier * this.quantity).toString().replace(".", ",");
         this.formattedUnit = Purchasable.getFormattedUnit(this.unitName, this.quantity != 1);
-        this.formattedPrice = formatCurrency(this.price * this.quantity);
+        this.formattedPrice = Utils.formatCurrency(this.price * this.quantity);
 
         let product = this;
-        let imageUrl = getBasePath() + this.imageUrl;
+        let imageUrl = API.basePath + this.imageUrl;
 
         for (let k in product.html) {
 
@@ -90,8 +90,8 @@ class Product extends Purchasable {
             $(product.html[k]).find(".product-modal-link").click(function() { product.showDetailsModal(); });
             $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
             $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
-            $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
-            $(product.html[k]).find(".remove-from-cart").click(function() { product.removeFromCart(); });
+            $(product.html[k]).find(".add-to-cart").click(function() { product.API.addToCart(); });
+            $(product.html[k]).find(".remove-from-cart").click(function() { product.API.removeFromCart(); });
             $(product.html[k]).on("change paste keyup", "[name='quantity']", function() {
                 product.reactToQuantityChange();
             });
@@ -99,7 +99,7 @@ class Product extends Purchasable {
     }
 
     showDetailsModal() {
-        showModal(this.html.detailsModal);
+        this.html.detailsModal.showModal();
     }
 
     showQuantityModal() {
@@ -109,7 +109,7 @@ class Product extends Purchasable {
         }
         this.html.quantityModal.find("[name='quantity']").val(this.quantity);
         this.reactToQuantityChange();
-        showModal(this.html.quantityModal);
+        this.html.quantityModal.showModal();
     }
 
     showCrateQuantityModal() {
@@ -118,7 +118,7 @@ class Product extends Purchasable {
     }
 
     showRemoveModal() {
-        showModal(this.html.removeModal);
+        this.html.removeModal.showModal();
     }
 
     showCrateRemoveModal() {
@@ -130,10 +130,10 @@ class Product extends Purchasable {
         let quantityModal = this.html.quantityModal
         let quantity = quantityModal.find("[name='quantity']").val();
         let multiplier = 0;
-        let price = formatCurrency(0);
+        let price = Utils.formatCurrency(0);
         if (quantity != null && quantity != "") {
             multiplier = (this.unitMultiplier * quantity).toString().replace(".", ",");
-            price = formatCurrency(this.price * quantity);
+            price = Utils.formatCurrency(this.price * quantity);
             quantityModal.find(".add-to-cart").prop("disabled", false);
         } else {
             quantityModal.find(".add-to-cart").prop("disabled", true);
@@ -155,13 +155,13 @@ class Product extends Purchasable {
         quantityModal.find(".loader").show();
         quantityModal.find(".add-to-cart").attr("disabled", true);
         if (isFromCart) {
-            editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
+            API.editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
             .done(function(data) { location.reload(); })
             .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
         } else {
-            addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
+            API.addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
             .done(function(data) {
-                updateCartBadge()
+                APIUtils.updateCartBadge()
                 .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
                 quantityModal.modal("hide");
                 quantityModal.find(".loader").hide();
@@ -180,7 +180,7 @@ class Product extends Purchasable {
     }
 
     removeFromCart() {
-        removeFromCart(localStorage.getObject("userData").userId, this.productId)
+        API.removeFromCart(localStorage.getObject("userData").userId, this.productId)
         .done(function(data) { location.reload(); })
         .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     }
@@ -203,13 +203,13 @@ class Crate extends Purchasable {
         super(json);
 
         // Add templates
-        this.html.main = getTemplate("CrateCard");
-        this.html.detailsModal = getTemplate("CrateDetailsModal");
+        this.html.main = Entity.getTemplate("CrateCard");
+        this.html.detailsModal = Entity.getTemplate("CrateDetailsModal");
 
         let crate = this;
-        let imageUrl = getBasePath() + this.imageUrl;
+        let imageUrl = API.basePath + this.imageUrl;
         let capacity = this.capacity.toString().replace(".", ",");
-        let price = formatCurrency(this.price);
+        let price = Utils.formatCurrency(this.price);
 
         for (let k in crate.html) {
 
@@ -229,7 +229,7 @@ class Crate extends Purchasable {
     }
 
     showDetailsModal() {
-        showModal($(this.html.detailsModal));
+        this.html.detailsModalshowModal();
     }
 
     addToPreferences() {

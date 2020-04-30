@@ -1,15 +1,15 @@
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 2;
 
 var orders = [];
 
 $(document).ready(function() {
 
     // Get orders
-    showModal($("#modal-loading"));
+    $("#modal-loading").showModal();
     let url = new URL(window.location.href);
     let pageNumber = url.searchParams.get("PageNumber");
     if (pageNumber == null) pageNumber = 0;
-    getCustomerOrders(localStorage.getObject("authData").userId, pageNumber, PAGE_SIZE)
+    API.getCustomerOrders(localStorage.getObject("authData").userId, pageNumber, PAGE_SIZE)
     .done(function(data) {
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
@@ -22,11 +22,11 @@ $(document).ready(function() {
             });
         }
         // Handle pagination
-        fillPagination($("#orders-pagination"), data.pageNumber, data.pageCount);
+        $("#orders-pagination").fillPagination(data.pageNumber, data.pageCount);
     })
     .fail(function(jqXHR) {
         $(".orders-error").removeClass("d-none");
     })
-    .always(function(data) { fadeOutModal($("#modal-loading")) });
+    .always(function(data) { $("#modal-loading").fadeModal() });
 
 });

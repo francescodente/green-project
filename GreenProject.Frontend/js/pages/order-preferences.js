@@ -5,7 +5,7 @@ $(document).ready(function() {
     // Show addresses
     $("#order-preferences-loader").show();
     $(".order-preferences-content").hide();
-    getAddresses(localStorage.getObject("userData").userId)
+    API.getAddresses(localStorage.getObject("userData").userId)
     .done(function(data) {
         if (data.addresses.length == 0) {
             $(".addresses-no-results").removeClass("d-none");

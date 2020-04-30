@@ -9,8 +9,8 @@ $(document).ready(function() {
     $('.area-collapse[data-target="#order-notes"]').click();
 
     // Get cart content
-    showModal($("#modal-loading"));
-    getCart(localStorage.getObject("userData").userId)
+    $("#modal-loading").showModal();
+    API.getCart(localStorage.getObject("userData").userId)
     .done(function(data) {
         if (data.cartItems.length == 0) {
             $(".cart-empty").removeClass("d-none");
@@ -29,14 +29,14 @@ $(document).ready(function() {
                 productSummary.appendTo(".summary-products");
             });
             // Fill summary
-            $(".subtotal").html(formatCurrency(data.prices.subtotal));
-            $(".iva").html(formatCurrency(data.prices.iva));
-            $(".shipping").html(formatCurrency(data.prices.shippingCost));
-            $(".total").html(formatCurrency(data.prices.total));
+            $(".subtotal").html(Utils.formatCurrency(data.prices.subtotal));
+            $(".iva").html(Utils.formatCurrency(data.prices.iva));
+            $(".shipping").html(Utils.formatCurrency(data.prices.shippingCost));
+            $(".total").html(Utils.formatCurrency(data.prices.total));
         }
     })
     .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); })
-    .always(function(data) { fadeOutModal($("#modal-loading")); });
+    .always(function(data) { $("#modal-loading").fadeModal() });
 
     // Cart confirm
     $(".confirm-cart").click(function() {
@@ -49,26 +49,26 @@ $(document).ready(function() {
         selectedAddress = addresses.filter(address => address.addressId == selectedAddress.val())[0];
         let zipCode = selectedAddress.zipCode;
         // Get expected delivery date
-        showModal($("#modal-loading"));
-        getZoneSchedule(zipCode)
+        $("#modal-loading").showModal();
+        API.getZoneSchedule(zipCode)
         .done(function(data) {
-            $("#expected-date-modal .expected-date").html(formatDate(data));
-            showModal($("#expected-date-modal"));
+            $("#expected-date-modal .expected-date").html(Utils.formatDate(data));
+            $("#expected-date-modal").showModal();
         })
         .fail(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
 
     // Cart submission
     $(".submit-cart").click(function() {
-        showModal($("#modal-loading"));
-        confirmCart(localStorage.getObject("userData").userId, {
+        $("#modal-loading").showModal();
+        API.confirmCart(localStorage.getObject("userData").userId, {
             addressId: selectedAddress.addressId,
             notes: $("#notes").val()
         })
         .done(function(data) {
             $(".cart-not-empty").addClass("d-none");
             $(".cart-empty").removeClass("d-none");
-            showModal($("#order-placed-modal"));
+            $("#order-placed-modal").showModal();
         })
         .fail(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });

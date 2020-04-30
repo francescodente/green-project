@@ -10,7 +10,7 @@ $(document).ready(function() {
             $("#first-name").val(person.firstName);
             $("#last-name").val(person.lastName);
             if (person.dateOfBirth != null) {
-                $("#birth-date").val(formatDate(person.dateOfBirth));
+                $("#birth-date").val(Utils.formatDate(person.dateOfBirth));
             }
             $("[name=gender][value=" + person.gender + "]").prop("checked", true);
         } else {
@@ -43,11 +43,11 @@ $(document).ready(function() {
     }
 
     // Get user data
-    showModal($("#modal-loading"));
-    getOrUpdateCurrentUserInfo()
+    $("#modal-loading").showModal();
+    APIUtils.getOrUpdateCurrentUserInfo()
     .then(function(data) { fillFormFields(); })
     .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); })
-    .finally(function(data) { fadeOutModal($("#modal-loading")); });
+    .finally(function(data) { $("#modal-loading").fadeModal() });
 
     // Edit form click
     $("#user-data").on("click", ".edit-form", function() {
@@ -99,8 +99,8 @@ $(document).ready(function() {
             data.gender = gender;
         }
 
-        showModal($("#modal-loading"));
-        setPersonRole(localStorage.getObject("authData").userId, data)
+        $("#modal-loading").showModal();
+        API.setPersonRole(localStorage.getObject("authData").userId, data)
         .done(function(data) {
             localStorage.removeItem("userData");
             location.reload();
@@ -110,8 +110,8 @@ $(document).ready(function() {
 
     // Delete personal data
     $("#delete-user-data-personal").click(function() {
-        showModal($("#modal-loading"));
-        deletePersonRole(localStorage.getObject("authData").userId)
+        $("#modal-loading").showModal();
+        API.deletePersonRole(localStorage.getObject("authData").userId)
         .done(function(data) {
             localStorage.removeItem("userData");
             location.reload();

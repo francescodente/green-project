@@ -12,7 +12,7 @@ $(document).ready(function() {
         event.preventDefault();
         $("#login-loader").show();
         prepForValidation($(this));
-        authToken({
+        API.authToken({
             email: $("#login-email").val(),
             password: $("#login-password").val()
         })
@@ -50,7 +50,7 @@ $(document).ready(function() {
         // Perform registration
         $("#sign-up-loader").show();
         prepForValidation($(this));
-        signup({
+        API.signup({
             user: {
                 email: $("#sign-up-email").val(),
                 marketingConsent: $("#marketing-consent").is(":checked")

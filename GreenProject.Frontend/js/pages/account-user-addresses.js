@@ -1,8 +1,8 @@
 var addresses = [];
 
 // Show addresses
-showModal($("#modal-loading"));
-getAddresses(localStorage.getObject("userData").userId)
+$("#modal-loading").showModal();
+API.getAddresses(localStorage.getObject("userData").userId)
 .done(function(data) {
     if (data.addresses.length == 0) {
         $(".addresses-no-results").removeClass("d-none");
@@ -20,4 +20,4 @@ getAddresses(localStorage.getObject("userData").userId)
     }
 })
 .fail(function(data) { $(".addresses-error").removeClass("d-none") })
-.always(function(data) { fadeOutModal($("#modal-loading")) });
+.always(function(data) { $("#modal-loading").fadeModal() });

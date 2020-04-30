@@ -20,13 +20,13 @@ $(document).ready(function() {
     });
 
     // Get products
-    showModal($("#modal-loading"));
+    $("#modal-loading").showModal();
     let url = new URL(window.location.href);
     let pageNumber = url.searchParams.get("PageNumber");
     if (pageNumber == null) pageNumber = 0;
     let categories = url.searchParams.getAll("Categories");
     let isCrate = categories[0] == 1;
-    getProducts(categories, pageNumber, PAGE_SIZE)
+    API.getProducts(categories, pageNumber, PAGE_SIZE)
     .done(function(data) {
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
@@ -39,15 +39,15 @@ $(document).ready(function() {
                     products.push(new Product(json));
                 }
             });
-            fillBootstrapRow($(".product-list"), products);
+            $(".product-list").fillRow(products.map(product => product.html.main));
             $(".products-count").text(products.length);
         }
         // Handle pagination
-        fillPagination($("#products-pagination"), data.pageNumber, data.pageCount);
+        $("#products-pagination").fillPagination(data.pageNumber, data.pageCount);
     })
     .fail(function(jqXHR) {
         $(".search-error").removeClass("d-none");
     })
-    .always(function(data) { fadeOutModal($("#modal-loading")) });
+    .always(function(data) { $("#modal-loading").fadeModal() });
 
 });

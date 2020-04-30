@@ -3,7 +3,7 @@ class Category extends Entity {
     constructor(json) {
         super(json);
 
-        this.html.main = getTemplate("CategoryCard");
+        this.html.main = Entity.getTemplate("CategoryCard");
 
         // Build products link
         let subCategories = Category.getCategoryLeaves(this).map(c => c.categoryId);
@@ -12,7 +12,7 @@ class Category extends Entity {
             searchParams.append("Categories", category);
         });
         let productsUrl = "products.php?" + searchParams.toString();
-        let imageUrl = getBasePath() + this.imageUrl;
+        let imageUrl = API.basePath + this.imageUrl;
 
         let category = this;
         for (let k in category.html) {
