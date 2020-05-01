@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
@@ -11,7 +12,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class SwaggerInstaller : IServiceInstaller
     {
-        public void InstallServices(IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
             services.AddSwaggerGen(c =>
             {

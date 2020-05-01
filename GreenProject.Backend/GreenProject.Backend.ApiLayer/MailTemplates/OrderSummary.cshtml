@@ -1,37 +1,45 @@
-﻿<!DOCTYPE html>
+﻿@using GreenProject.Backend.Entities;
+@using GreenProject.Backend.Core.EntitiesExtensions;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Green Project - Ordine annullato</title>
+    <title>Green Project - Riepilogo ordine</title>
 </head>
 <body>
+    @{
+        Order order = Model.Data.Order;
+    }
     <table style="width: 480px; border-collapse: collapse; margin: 0 auto;">
         <!-- Header -->
         <tr>
             <td colspan="12" style="padding: 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.12); text-align: center; vertical-align: middle;">
-                <a href="#"><img src="{wwwroot}/Images/MailTemplates/greenproject_logo_small.png" height="80px" width="180px" alt="Green Project logo"/></a>
+                <a href="#"><img src="@Model.WebRoot/Images/MailTemplates/greenproject_logo_small.png" height="80px" width="180px" alt="Green Project logo" /></a>
             </td>
         </tr>
         <!-- Content -->
         <tr>
             <td colspan="12" style="padding: 16px;">
-                <h1>Ordine annullato</h1>
+                <h1>Riepilogo ordine</h1>
+                <h4 style="color: #9CBF22; margin: 16px 0 8px 0;">Grazie per il tuo ordine.</h4>
                 <p>
-                    Il tuo ordine N° <strong>{orderNumber}</strong> è stato annullato.
+                    Ti invieremo una email quando i tuoi prodotti saranno spediti.<br />Puoi consultare le informazioni relative al tuo ordine qui sotto o alla sezione <a href="#" style="color: #9CBF22; text-decoration: none;">Ordini</a> su greenproject.store.
                 </p>
-                <h4 style="margin: 16px 0 8px 0;">Speriamo di rivederti presto!</h4>
                 <h4 style="color: #9CBF22; margin: 16px 0 8px 0;">Ordine</h4>
                 <p style="margin-bottom: 0;">
                     N° ordine: <strong>{orderNumber}</strong>
-                    <br/>
+                    <br />
+                    Data di consegna: <strong>{deliveryDate}</strong>
+                    <br />
                     Indirizzo di consegna: <strong>{deliveryAddress}</strong>
-                    <br/>
+                    <br />
                     Nome: <strong>{deliveryName}</strong>
                 </p>
                 <p style="margin: 0 0 8px 0;">Prodotti:</p>
                 <table>
                     <tr>
-                        <td><img src="{wwwroot}/Images/MailTemplates/default_product.png" height="96px" width="96px" alt="Immagine del prodotto"/></td>
+                        <td><img src="@Model.WebRoot/Images/MailTemplates/default_product.png" height="96px" width="96px" alt="Immagine del prodotto" /></td>
                         <td><strong>{productName}</strong> e altri <strong>{itemCount}</strong> prodotti</td>
                     </tr>
                 </table>
@@ -42,22 +50,22 @@
             <td colspan="6" style="padding: 16px; text-align: center;">
                 <h5 style="color: #9CBF22; font-size: 14px; font-weight: bold; letter-spacing: 0.1rem; margin: 0 0 8px 0;">SITO</h5>
                 <p style="margin: 0;">
-                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Home</a><br/>
-                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Catalogo</a><br/>
-                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Chi siamo</a><br/>
-                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Contatti</a><br/>
-                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Aiuto</a><br/>
-                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Privacy e termini</a><br/>
+                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Home</a><br />
+                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Catalogo</a><br />
+                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Chi siamo</a><br />
+                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Contatti</a><br />
+                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Aiuto</a><br />
+                    <a href="#" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">Privacy e termini</a><br />
                 </p>
             </td>
             <td colspan="6" style="padding: 16px; text-align: center;">
                 <h5 style="color: #9CBF22; font-size: 14px; font-weight: bold; letter-spacing: 0.1rem; margin: 0 0 8px 0;">CONTATTI</h5>
-                <img src="{wwwroot}/Images/MailTemplates/email.png" height="20px" width="20px" alt="Icona footer"/><br/>
+                <img src="@Model.WebRoot/Images/MailTemplates/email.png" height="20px" width="20px" alt="Icona footer" /><br />
                 <p style="margin: 0 0 8px 0;">
                     <a href="mailto:info@greenproject.com" target="_top" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">info@greenproject.com</a><br>
                     <a href="mailto:support@greenproject.com" target="_top" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">support@greenproject.com</a>
                 </p>
-                <img src="{wwwroot}/Images/MailTemplates/phone.png" height="20px" width="20px" alt="Icona footer"/><br/>
+                <img src="@Model.WebRoot/Images/MailTemplates/phone.png" height="20px" width="20px" alt="Icona footer" /><br />
                 <a href="tel: +39 123 456 7890" style="color: rgba(0, 0, 0, 0.54); text-decoration: none;">+39 123 456 7890</a>
             </td>
         </tr>
@@ -67,11 +75,11 @@
             </td>
             <td colspan="6" style="padding: 16px; text-align: center;">
                 <a href="https://www.facebook.com/Green-Project-SS-417945002127818/" target="_blank" style="text-decoration: none;">
-                    <img src="{wwwroot}/Images/MailTemplates/facebook.png" height="20px" width="20px" alt="Icona footer"/>
+                    <img src="@Model.WebRoot/Images/MailTemplates/facebook.png" height="20px" width="20px" alt="Icona footer" />
                 </a>
                 &nbsp;&nbsp;
                 <a href="https://www.instagram.com/_green.project_/" target="_blank" style="text-decoration: none;">
-                    <img src="{wwwroot}/Images/MailTemplates/instagram.png" height="20px" width="20px" alt="Icona footer"/>
+                    <img src="@Model.WebRoot/Images/MailTemplates/instagram.png" height="20px" width="20px" alt="Icona footer" />
                 </a>
             </td>
         </tr>

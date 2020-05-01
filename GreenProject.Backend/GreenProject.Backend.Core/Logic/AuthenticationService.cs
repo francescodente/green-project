@@ -37,9 +37,9 @@ namespace GreenProject.Backend.Core.Logic
             User userEntity = this.CreateUserFromUserDto(registration.User);
             this.handler.AssignPassword(userEntity, registration.Password);
             this.Data.Users.Add(userEntity);
-            await this.Data.SaveChangesAsync();
+            //await this.Data.SaveChangesAsync();
 
-            // TODO: Send confirmation email
+            await this.Notifications.AccountConfirmation(userEntity);
 
             return this.Mapper.Map<UserOutputDto>(userEntity);
         }

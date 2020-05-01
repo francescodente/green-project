@@ -1,7 +1,10 @@
-﻿using GreenProject.Backend.ApiLayer.HostedServices;
-using GreenProject.Backend.Core.Utils.Email;
+﻿using FluentEmail.Core;
+using FluentEmail.Core.Interfaces;
+using FluentEmail.MailKitSmtp;
+using GreenProject.Backend.ApiLayer.HostedServices;
 using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Infrastructure.Notifications;
+using GreenProject.Backend.Infrastructure.Notifications.Mail;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,10 +17,12 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class NotificationsInstaller : IServiceInstaller
     {
-        private const string TEMPLATES_FOLDER = "MailTemplates";
-
-        public void InstallServices(IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
+            services.AddFluentEmail(null);
+
+            services.AddSingleton<ITemplateRenderer>(new RazorRenderer(typeof(Startup)));
+
             services
                 .AddSingleton(this.CreateNotificationsService)
                 .AddHostedService<NotificationsDaemon>();
@@ -27,20 +32,16 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
         {
             ICollection<INotificationsService> subServices = new List<INotificationsService>();
 
-            //subServices.Add(this.CreateMailNotificationsService(provider));
+            subServices.Add(this.CreateMailNotificationsService(provider));
 
             return new CompositeNotificationsService(subServices);
         }
 
         private INotificationsService CreateMailNotificationsService(IServiceProvider provider)
         {
-            string contentRoot = provider.GetRequiredService<IWebHostEnvironment>().WebRootPath;
-            string basePath = Path.Combine(contentRoot, TEMPLATES_FOLDER);
-
-            return new MailNotifications(
-                provider.GetRequiredService<IMailService>(),
-                basePath,
-                provider.GetRequiredService<MailNotificationsSettings>());
+            return new FluentMailNotifications(
+                provider.GetRequiredService<IFluentEmailFactory>(),
+                provider.GetRequiredService<MailSettings>());
         }
     }
 }

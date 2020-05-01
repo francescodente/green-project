@@ -11,17 +11,19 @@ namespace GreenProject.Backend.ApiLayer
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
+            this.Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
             ReflectionUtils.InstancesOfSubtypes<IServiceInstaller>(typeof(Startup).Assembly)
-                .ForEach(installer => installer.InstallServices(services, this.Configuration));
+                .ForEach(installer => installer.InstallServices(services, this.Configuration, this.Environment));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

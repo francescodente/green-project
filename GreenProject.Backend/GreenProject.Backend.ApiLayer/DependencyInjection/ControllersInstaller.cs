@@ -4,6 +4,7 @@ using FluentValidation.Internal;
 using GreenProject.Backend.ApiLayer.Converter;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Validation;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -13,7 +14,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class ControllersInstaller : IServiceInstaller
     {
-        public void InstallServices(IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
             services.AddHttpContextAccessor();
             services.AddSingleton<IValidatorInterceptor, ValidationResultInterceptor>();

@@ -82,7 +82,7 @@ namespace GreenProject.Backend.Core.Logic
 
             await this.Data.SaveChangesAsync();
 
-            await this.Notifications.OrderReceived(order);
+            await this.Notifications.OrderAccepted(order);
 
             return this.Mapper.Map<OrderDto>(order);
         }

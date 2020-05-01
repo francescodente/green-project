@@ -4,8 +4,8 @@ using GreenProject.Backend.ApiLayer.Validation.Configuration;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Uploads;
-using GreenProject.Backend.Infrastructure.Email;
-using GreenProject.Backend.Infrastructure.Notifications;
+using GreenProject.Backend.Infrastructure.Notifications.Mail;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,12 +13,11 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class ConfigurationInstaller : IServiceInstaller
     {
-        public void InstallServices(IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
             this.InstallConfiguration<PasswordValidationSettings>(services, config);
             this.InstallConfiguration<MailSettings>(services, config);
             this.InstallConfiguration<ImageUploadSettings>(services, config);
-            this.InstallConfiguration<MailNotificationsSettings>(services, config);
             this.InstallConfiguration<PricingSettings>(services, config);
             this.InstallConfiguration<NotificationsDaemonSettings>(services, config);
             this.InstallConfiguration<OrdersSettings>(services, config);

@@ -1,8 +1,6 @@
-﻿using GreenProject.Backend.Core.Utils.Email;
-
-namespace GreenProject.Backend.Infrastructure.Notifications
+﻿namespace GreenProject.Backend.Infrastructure.Notifications.Mail
 {
-    public class MailNotificationDescription
+    public class MailDescription
     {
         public string Subject { get; set; }
         public string BodyTemplateFile { get; set; }

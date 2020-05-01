@@ -2,6 +2,7 @@
 using GreenProject.Backend.Core.Utils;
 using GreenProject.Backend.Infrastructure.PasswordHashing;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -12,7 +13,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class AuthenticationInstaller : IServiceInstaller
     {
-        public void InstallServices(IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
             services
                 .AddSingleton<IHashCalculator, Pbkdf2Hashing>()

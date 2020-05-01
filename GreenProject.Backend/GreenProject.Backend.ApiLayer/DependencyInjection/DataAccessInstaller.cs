@@ -6,6 +6,7 @@ using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Core.Utils.Time;
 using GreenProject.Backend.DataAccess.Sql;
 using GreenProject.Backend.Infrastructure.Time;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +17,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
     {
         private const string CONNECTION_STRING_KEY = "GreenProjectDb";
 
-        public void InstallServices(IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
             services.AddDbContext<GreenProjectContext>(options =>
             {
