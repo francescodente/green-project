@@ -16,11 +16,11 @@ $(document).ready(function() {
             email: $("#login-email").val(),
             password: $("#login-password").val()
         })
-        .done(function(data) {
+        .then(function(data) {
             localStorage.setObject("authData", data);
             location.reload();
         })
-        .fail(function(jqXHR) {
+        .catch(function(jqXHR) {
             let errCode = jqXHR.responseJSON.globalErrors[0].code;
             if (errCode == "Err.Auth.LoginFailed") {
                 $("#login-email").addClass("error");
@@ -57,11 +57,11 @@ $(document).ready(function() {
             },
             password: password
         })
-        .done(function(data) {
+        .then(function(data) {
             console.log("done");
             console.log(data);
         })
-        .fail(function(jqXHR) {
+        .catch(function(jqXHR) {
             if (jqXHR.responseJSON.propertyErrors.length &&
                 jqXHR.responseJSON.propertyErrors[0].code == "Err.DuplicateField") {
                 console.log(jqXHR.responseJSON.propertyErrors[0]);

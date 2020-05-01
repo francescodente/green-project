@@ -1,4 +1,4 @@
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 8;
 
 var orders = [];
 
@@ -10,7 +10,7 @@ $(document).ready(function() {
     let pageNumber = url.searchParams.get("PageNumber");
     if (pageNumber == null) pageNumber = 0;
     API.getCustomerOrders(localStorage.getObject("authData").userId, pageNumber, PAGE_SIZE)
-    .done(function(data) {
+    .then(function(data) {
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
         } else {
@@ -24,9 +24,9 @@ $(document).ready(function() {
         // Handle pagination
         $("#orders-pagination").fillPagination(data.pageNumber, data.pageCount);
     })
-    .fail(function(jqXHR) {
+    .catch(function(jqXHR) {
         $(".orders-error").removeClass("d-none");
     })
-    .always(function(data) { $("#modal-loading").fadeModal() });
+    .finally(function(data) { $("#modal-loading").fadeModal() });
 
 });

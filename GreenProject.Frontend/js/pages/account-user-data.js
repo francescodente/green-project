@@ -101,22 +101,22 @@ $(document).ready(function() {
 
         $("#modal-loading").showModal();
         API.setPersonRole(localStorage.getObject("authData").userId, data)
-        .done(function(data) {
+        .then(function(data) {
             localStorage.removeItem("userData");
             location.reload();
         })
-        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     });
 
     // Delete personal data
     $("#delete-user-data-personal").click(function() {
         $("#modal-loading").showModal();
         API.deletePersonRole(localStorage.getObject("authData").userId)
-        .done(function(data) {
+        .then(function(data) {
             localStorage.removeItem("userData");
             location.reload();
         })
-        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     });
 
 });

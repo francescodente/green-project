@@ -10,11 +10,38 @@ class APIUtilsClass {
     updateCartBadge() {
         return new Promise(function(resolve, reject) {
             API.getCartSize(localStorage.getObject("authData").userId)
-            .done(function(data) {
+            .then(function(data) {
                 $(".cart-badge").html(data != 0 ? data : "");
                 resolve(data);
             })
-            .fail(function(jqXHR) { reject(jqXHR) });
+            .catch(function(jqXHR) { reject(jqXHR) });
+        });
+    }
+
+    async getOrRefreshToken() {
+        let authData = localStorage.getObject("authData");
+        if (authData == null) {
+            //console.log("authData null");
+            return "";
+        }
+        if (Date.now() < Date.parse(authData.expiration)) {
+            //console.log("token ok");
+            return authData.token;
+        }
+        API.refreshToken({
+            "token": authData.token,
+            "refreshToken": authData.refreshToken
+        })
+        .then(function(data) {
+            localStorage.removeItem("authData");
+            localStorage.setItem("authData", data);
+            //console.log("token refreshed");
+            return data.token;
+        })
+        .catch(function(jqXHR) {
+            //console.log("token refresh failed -> logout");
+            logout();
+            return "";
         });
     }
 
@@ -30,12 +57,12 @@ class APIUtilsClass {
                 return;
             }
             API.getUserInfo(authData.userId)
-            .done(function(data) {
+            .then(function(data) {
                 data.expiration = now;
                 localStorage.setObject("userData", data);
                 resolve(data);
             })
-            .fail(function(jqXHR) { reject(jqXHR) });
+            .catch(function(jqXHR) { reject(jqXHR) });
         });
     }
 
@@ -49,12 +76,12 @@ class APIUtilsClass {
                 return;
             }
             API.getCategories()
-            .done(function(data) {
+            .then(function(data) {
                 data.expiration = now;
                 localStorage.setObject("categories", data);
                 resolve(data);
             })
-            .fail(function(jqXHR) { reject(jqXHR) });
+            .catch(function(jqXHR) { reject(jqXHR) });
         });
     }
 
@@ -68,7 +95,7 @@ class APIUtilsClass {
                 return;
             }
             API.getZones()
-            .done(function(data) {
+            .then(function(data) {
                 zones = {
                     children: data,
                     expiration: now
@@ -76,7 +103,7 @@ class APIUtilsClass {
                 localStorage.setObject("zones", zones);
                 resolve(zones);
             })
-            .fail(function(jqXHR) { reject(jqXHR) });
+            .catch(function(jqXHR) { reject(jqXHR) });
         });
     }
 

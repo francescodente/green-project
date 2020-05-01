@@ -27,7 +27,7 @@ $(document).ready(function() {
     let categories = url.searchParams.getAll("Categories");
     let isCrate = categories[0] == 1;
     API.getProducts(categories, pageNumber, PAGE_SIZE)
-    .done(function(data) {
+    .then(function(data) {
         if (data.results.length == 0) {
             $(".search-no-results").removeClass("d-none");
         } else {
@@ -45,9 +45,9 @@ $(document).ready(function() {
         // Handle pagination
         $("#products-pagination").fillPagination(data.pageNumber, data.pageCount);
     })
-    .fail(function(jqXHR) {
+    .catch(function(jqXHR) {
         $(".search-error").removeClass("d-none");
     })
-    .always(function(data) { $("#modal-loading").fadeModal() });
+    .finally(function(data) { $("#modal-loading").fadeModal() });
 
 });

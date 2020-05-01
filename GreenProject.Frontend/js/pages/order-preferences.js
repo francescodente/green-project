@@ -6,7 +6,7 @@ $(document).ready(function() {
     $("#order-preferences-loader").show();
     $(".order-preferences-content").hide();
     API.getAddresses(localStorage.getObject("userData").userId)
-    .done(function(data) {
+    .then(function(data) {
         if (data.addresses.length == 0) {
             $(".addresses-no-results").removeClass("d-none");
         } else {
@@ -22,10 +22,10 @@ $(document).ready(function() {
             });
         }
     })
-    .fail(function(data) {
+    .catch(function(data) {
         $(".addresses-error").removeClass("d-none");
     })
-    .always(function(data) {
+    .finally(function(data) {
         $("#order-preferences-loader").hide();
         $(".order-preferences-content").show();
     });

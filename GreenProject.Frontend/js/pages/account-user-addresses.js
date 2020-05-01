@@ -3,7 +3,7 @@ var addresses = [];
 // Show addresses
 $("#modal-loading").showModal();
 API.getAddresses(localStorage.getObject("userData").userId)
-.done(function(data) {
+.then(function(data) {
     if (data.addresses.length == 0) {
         $(".addresses-no-results").removeClass("d-none");
     } else {
@@ -19,5 +19,5 @@ API.getAddresses(localStorage.getObject("userData").userId)
         });
     }
 })
-.fail(function(data) { $(".addresses-error").removeClass("d-none") })
-.always(function(data) { $("#modal-loading").fadeModal() });
+.catch(function(data) { $(".addresses-error").removeClass("d-none") })
+.finally(function(data) { $("#modal-loading").fadeModal() });

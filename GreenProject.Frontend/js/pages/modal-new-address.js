@@ -78,10 +78,6 @@ $("body").on("submit", "#modal-new-address", function(event) {
         "telephone": $("#address-telephone").val(),
         "zipCode": $("[name='select-zipcode']:checked").val()
     })
-    .done(function(data) {
-        location.reload();
-    })
-    .fail(function(jqXHR) {
-        new ErrorModal(jqXHR).show();
-    });
+    .then(function(data) { location.reload() })
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
 });

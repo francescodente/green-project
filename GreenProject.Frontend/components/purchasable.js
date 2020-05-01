@@ -90,8 +90,8 @@ class Product extends Purchasable {
             $(product.html[k]).find(".product-modal-link").click(function() { product.showDetailsModal(); });
             $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
             $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
-            $(product.html[k]).find(".add-to-cart").click(function() { product.API.addToCart(); });
-            $(product.html[k]).find(".remove-from-cart").click(function() { product.API.removeFromCart(); });
+            $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
+            $(product.html[k]).find(".remove-from-cart").click(function() { product.removeFromCart(); });
             $(product.html[k]).on("change paste keyup", "[name='quantity']", function() {
                 product.reactToQuantityChange();
             });
@@ -156,18 +156,18 @@ class Product extends Purchasable {
         quantityModal.find(".add-to-cart").attr("disabled", true);
         if (isFromCart) {
             API.editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
-            .done(function(data) { location.reload(); })
-            .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+            .then(function(data) { location.reload(); })
+            .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
         } else {
             API.addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
-            .done(function(data) {
+            .then(function(data) {
                 APIUtils.updateCartBadge()
                 .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
                 quantityModal.modal("hide");
                 quantityModal.find(".loader").hide();
                 quantityModal.find(".add-to-cart").attr("disabled", false);
             })
-            .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+            .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
         }
     }
 
@@ -181,8 +181,8 @@ class Product extends Purchasable {
 
     removeFromCart() {
         API.removeFromCart(localStorage.getObject("userData").userId, this.productId)
-        .done(function(data) { location.reload(); })
-        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .then(function(data) { location.reload(); })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
     }
 
     removeFromCrate() {

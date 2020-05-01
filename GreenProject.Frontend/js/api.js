@@ -13,18 +13,22 @@ class APIClass {
         this.apiPath = this.basePath + "api/" + this.apiVer + "/";
     }
 
-    ajax(method, url, data) {
-        let authData = localStorage.getObject("authData");
-        let token = authData != null ? authData.token : "";
-        return $.ajax({
-            headers: {
-                "authorization" : "bearer " + token,
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            method: method,
-            url: this.apiPath + url,
-            data: data
+    async ajax(method, path, data) {
+        let token = await APIUtils.getOrRefreshToken();
+        let url = this.apiPath + path;
+        return new Promise(function(resolve, reject) {
+            $.ajax({
+                headers: {
+                    "authorization" : "bearer " + token,
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                method: method,
+                url: url,
+                data: data
+            })
+            .done(function(data) { resolve(data) })
+            .catch(function (jqXHR) { reject(jqXHR) });
         });
     }
 
@@ -66,6 +70,10 @@ class APIClass {
 
     authToken(data) {
         return this.post("auth/token", data);
+    }
+
+    refreshToken(data) {
+        return this.post("auth/refresh", data);
     }
 
     changePsw() {

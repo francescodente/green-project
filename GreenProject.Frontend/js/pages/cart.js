@@ -11,7 +11,7 @@ $(document).ready(function() {
     // Get cart content
     $("#modal-loading").showModal();
     API.getCart(localStorage.getObject("userData").userId)
-    .done(function(data) {
+    .then(function(data) {
         if (data.cartItems.length == 0) {
             $(".cart-empty").removeClass("d-none");
             $(".cart-not-empty").addClass("d-none");
@@ -35,8 +35,8 @@ $(document).ready(function() {
             $(".total").html(Utils.formatCurrency(data.prices.total));
         }
     })
-    .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); })
-    .always(function(data) { $("#modal-loading").fadeModal() });
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); })
+    .finally(function(data) { $("#modal-loading").fadeModal() });
 
     // Cart confirm
     $(".confirm-cart").click(function() {
@@ -51,11 +51,11 @@ $(document).ready(function() {
         // Get expected delivery date
         $("#modal-loading").showModal();
         API.getZoneSchedule(zipCode)
-        .done(function(data) {
+        .then(function(data) {
             $("#expected-date-modal .expected-date").html(Utils.formatDate(data));
             $("#expected-date-modal").showModal();
         })
-        .fail(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
 
     // Cart submission
@@ -65,12 +65,12 @@ $(document).ready(function() {
             addressId: selectedAddress.addressId,
             notes: $("#notes").val()
         })
-        .done(function(data) {
+        .then(function(data) {
             $(".cart-not-empty").addClass("d-none");
             $(".cart-empty").removeClass("d-none");
             $("#order-placed-modal").showModal();
         })
-        .fail(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
 
 });

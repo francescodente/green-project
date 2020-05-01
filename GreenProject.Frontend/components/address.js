@@ -43,7 +43,7 @@ class Address extends Entity {
             // Add event listeners
             address.html[k].find(".address-set-default").click(function() { address.setDefault(); });
             address.html[k].find(".address-show-delete-modal").click(function() { address.showDeleteModal(); });
-            address.html[k].find(".address-delete").click(function() { address.API.deleteAddress(); });
+            address.html[k].find(".address-delete").click(function() { address.deleteAddress(); });
             address.html[k].find("input").change(function() {
                 if (!address.isDefaultAddress) {
                     address.showSetDefaultModal();
@@ -64,8 +64,8 @@ class Address extends Entity {
     deleteAddress() {
         $("#modal-loading").showModal();
         API.deleteAddress(localStorage.getObject("userData").userId, this.addressId)
-        .done(function(data) { location.reload(); })
-        .fail(function(jqXHR) {
+        .then(function(data) { location.reload(); })
+        .catch(function(jqXHR) {
             $("#modal-loading").fadeModal();
             new ErrorModal(jqXHR).show();
         });
@@ -74,10 +74,10 @@ class Address extends Entity {
     setDefault() {
         $("#modal-loading").showModal();
         API.setDefaultAddress(localStorage.getObject("userData").userId, this.addressId)
-        .done(function(data) {
+        .then(function(data) {
             location.reload();
         })
-        .fail(function(jqXHR) {
+        .catch(function(jqXHR) {
             $("#modal-loading").fadeModal();
             new ErrorModal(jqXHR).show();
         });
