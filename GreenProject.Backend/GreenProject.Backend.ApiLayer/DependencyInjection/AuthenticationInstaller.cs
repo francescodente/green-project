@@ -25,6 +25,17 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
             services.AddSingleton(authSettings);
 
             byte[] key = Encoding.ASCII.GetBytes(authSettings.SecretKey);
+            TokenValidationParameters validationParameters = new TokenValidationParameters
+            {
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuerSigningKey = true,
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.FromMinutes(1)
+            };
+            services.AddSingleton(validationParameters);
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -32,15 +43,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
             })
             .AddJwtBearer(options =>
             {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuerSigningKey = true,
-                    ValidateAudience = false,
-                    ValidateIssuer = false,
-                    ValidateLifetime = true,
-                    ClockSkew = TimeSpan.FromMinutes(1)
-                };
+                options.TokenValidationParameters = validationParameters;
             });
 
             services.AddAuthorization();

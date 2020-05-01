@@ -24,6 +24,7 @@ namespace GreenProject.Backend.Core.Utils.Session
         DbSet<Person> People { get; }
         DbSet<Product> Products { get; }
         DbSet<PurchasableItem> PurchasableItems { get; }
+        DbSet<RefreshToken> RefreshTokens { get; }
         DbSet<User> Users { get; }
         DbSet<Zone> Zones { get; }
         DbSet<ZoneAvailability> ZoneAvailabilities { get; }

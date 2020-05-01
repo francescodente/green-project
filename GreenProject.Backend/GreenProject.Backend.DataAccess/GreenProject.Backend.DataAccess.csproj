@@ -37,6 +37,8 @@
     <Compile Remove="Migrations\20200408215450_AddOrderDetailId.Designer.cs" />
     <Compile Remove="Migrations\20200421230349_AddPersonFields.cs" />
     <Compile Remove="Migrations\20200421230349_AddPersonFields.Designer.cs" />
+    <Compile Remove="Migrations\20200430125214_AddRefreshTokens.cs" />
+    <Compile Remove="Migrations\20200430125214_AddRefreshTokens.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

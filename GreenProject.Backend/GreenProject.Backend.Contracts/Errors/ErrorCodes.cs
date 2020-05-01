@@ -39,6 +39,8 @@ namespace GreenProject.Backend.Contracts.Errors
             public static readonly string MissingPermission = $"{AuthBase}.MissingPermission";
 
             public static readonly string UnauthorizedAccess = $"{AuthBase}.UnauthorizedAccess";
+
+            public static readonly string RefreshFailed = $"{AuthBase}.RefreshFailed";
         }
 
         public static class Cart

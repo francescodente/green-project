@@ -62,7 +62,38 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
             this.EnsurePasswordIsCorrect(user, credentials.Password);
-            return await this.handler.OnUserAuthenticated(user);
+            AuthenticationResultDto result = await this.GenerateAuthenticationResult(user);
+            await this.Data.SaveChangesAsync();
+            return result;
+        }
+
+        public async Task<AuthenticationResultDto> RefreshToken(RefreshTokenRequestDto request)
+        {
+            IOptional<RefreshToken> refreshToken = await this.Data
+                .RefreshTokens
+                .SingleOptionalAsync(r => r.Token == request.RefreshToken);
+
+            RefreshToken token = refreshToken
+                .Filter(t => this.handler.CanBeRefreshed(request.Token, t))
+                .OrElseThrow(() => new TokenRefreshFailedException());
+
+            AuthenticationResultDto result = await this.Data
+                .Users
+                .IncludingRoles()
+                .SingleAsync(u => u.UserId == token.UserId)
+                .FlatMap(this.GenerateAuthenticationResult);
+
+            refreshToken.IfPresent(t => t.IsUsed = true);
+            await this.Data.SaveChangesAsync();
+
+            return result;
+        }
+
+        private async Task<AuthenticationResultDto> GenerateAuthenticationResult(User user)
+        {
+            var (result, refreshToken) = await this.handler.OnUserAuthenticated(user);
+            this.Data.RefreshTokens.Add(refreshToken);
+            return result;
         }
 
         public async Task ChangePassword(int userId, PasswordChangeRequestDto request)
