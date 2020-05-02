@@ -11,10 +11,12 @@ class APIClass {
         this.apiVer = "v1";
         this.basePath = this.protocol + this.serverAddress + "/";
         this.apiPath = this.basePath + "api/" + this.apiVer + "/";
+
+        this.isTokenRefreshing = false;
+        this.tokenPromise = Promise.resolve(null);
     }
 
-    async ajax(method, path, data) {
-        let token = await APIUtils.getOrRefreshToken();
+    ajax(method, path, data, token) {
         let url = this.apiPath + path;
         return new Promise(function(resolve, reject) {
             $.ajax({
@@ -28,24 +30,30 @@ class APIClass {
                 data: data
             })
             .done(function(data) { resolve(data) })
-            .catch(function (jqXHR) { reject(jqXHR) });
+            .fail(function (jqXHR) { reject(jqXHR) });
         });
     }
 
+    async request(method, path, data) {
+        let authData = await APIUtils.getOrRefreshAuth();
+        let token = authData == null ? "" : authData.token;
+        return this.ajax(method, path, data, token);
+    }
+
     get(url, data) {
-        return this.ajax("GET", url, data);
+        return this.request("GET", url, data);
     }
 
     put(url, data) {
-        return this.ajax("PUT", url, JSON.stringify(data));
+        return this.request("PUT", url, JSON.stringify(data));
     }
 
     post(url, data) {
-        return this.ajax("POST", url, JSON.stringify(data));
+        return this.request("POST", url, JSON.stringify(data));
     }
 
     del(url, data) {
-        return this.ajax("DELETE", url, data);
+        return this.request("DELETE", url, data);
     }
 
     // Addresses
@@ -73,7 +81,7 @@ class APIClass {
     }
 
     refreshToken(data) {
-        return this.post("auth/refresh", data);
+        return this.ajax("POST", "auth/refresh", JSON.stringify(data), "");
     }
 
     changePsw() {
@@ -91,11 +99,11 @@ class APIClass {
     // Cart
 
     getCart(userId) {
-        return this.get("customers/" + localStorage.getObject("authData").userId + "/cart");
+        return this.get("customers/" + userId + "/cart");
     }
 
     getCartSize(userId) {
-        return this.get("customers/" + localStorage.getObject("authData").userId + "/cart/size");
+        return this.get("customers/" + userId + "/cart/size");
     }
 
     addToCart(userId, productId, quantity) {
@@ -103,7 +111,7 @@ class APIClass {
             productId: productId,
             quantity: quantity
         };
-        return this.post("customers/" + localStorage.getObject("authData").userId + "/cart/details", data);
+        return this.post("customers/" + userId + "/cart/details", data);
     }
 
     editCartQuantity(userId, productId, quantity) {
@@ -111,15 +119,15 @@ class APIClass {
             productId: productId,
             quantity: quantity
         };
-        return this.put("customers/" + localStorage.getObject("authData").userId + "/cart/details", data);
+        return this.put("customers/" + userId + "/cart/details", data);
     }
 
     removeFromCart(userId, productId) {
-        return this.del("customers/" + localStorage.getObject("authData").userId + "/cart/details/" + productId);
+        return this.del("customers/" + userId + "/cart/details/" + productId);
     }
 
     confirmCart(userId, data) {
-        return this.put("customers/" + localStorage.getObject("authData").userId + "/cart/confirm", data);
+        return this.put("customers/" + userId + "/cart/confirm", data);
     }
 
 
@@ -178,7 +186,7 @@ class APIClass {
         let searchParams = new URLSearchParams();
         searchParams.append("PageNumber", pageNumber);
         searchParams.append("PageSize", pageSize);
-        return this.get("customers/" + localStorage.getObject("authData").userId + "/orders?" + searchParams.toString());
+        return this.get("customers/" + userId + "/orders?" + searchParams.toString());
     }
 
     getOrders() {
@@ -248,4 +256,4 @@ class APIClass {
 
 }
 
-var API = Object.freeze(new APIClass());
+var API = new APIClass();

@@ -18,31 +18,41 @@ class APIUtilsClass {
         });
     }
 
-    async getOrRefreshToken() {
+    async getOrRefreshAuth() {
+        if (API.isTokenRefreshing) {
+            console.log("token is refreshing...");
+            return API.tokenPromise;
+        }
         let authData = localStorage.getObject("authData");
         if (authData == null) {
-            //console.log("authData null");
-            return "";
+            console.log("authData null");
+            return null;
         }
         if (Date.now() < Date.parse(authData.expiration)) {
-            //console.log("token ok");
-            return authData.token;
+            console.log("token ok");
+            return authData;
         }
-        API.refreshToken({
+        console.log("token expired");
+        let data = {
             "token": authData.token,
             "refreshToken": authData.refreshToken
-        })
-        .then(function(data) {
-            localStorage.removeItem("authData");
-            localStorage.setItem("authData", data);
-            //console.log("token refreshed");
-            return data.token;
-        })
-        .catch(function(jqXHR) {
-            //console.log("token refresh failed -> logout");
-            logout();
-            return "";
-        });
+        };
+        console.log(data);
+        API.isTokenRefreshing = true;
+        API.tokenPromise = API.refreshToken(data);
+        try {
+            authData = await API.tokenPromise;
+            localStorage.setObject("authData", authData);
+            console.log("token refreshed");
+            return authData;
+        } catch (e) {
+            console.log(e);
+            console.log("token refresh failed -> logout");
+            API.logout();
+            return null;
+        } finally {
+            API.isTokenRefreshing = false;
+        }
     }
 
     getOrUpdateCurrentUserInfo() {
