@@ -61,7 +61,7 @@
                     </div>
 
                     <!-- <div class="empty-state m-5">
-                        <img src="images/empty.png"/>
+                        <img src="images/empty.png" alt="Nessun prodotto da ritirare"/>
                         <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun prodotto da ritirare</h6>
                         <p class="text-center text-dis-dark m-0">In questa sezione sono visualizzati i fornitori da visitare per il carico di ogni giorno.</p>
                     </div> -->
@@ -102,7 +102,7 @@
                                                 ?>
                                                 <tr>
                                                     <td class="nowrap">
-                                                        <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                                        <img class="product-image img-fluid" src="images/example_product.jpg" alt="Immagine del prodotto"/>
                                                     </td>
                                                     <td style="padding-right: 12px;">
                                                         <p class="product-name m-0">Product name</p>

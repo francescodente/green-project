@@ -16,7 +16,7 @@
 
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-6 mb-5 mb-md-0">
-                        <a href="index.php"><img class="img-fluid" src="images/logo/greenproject_logo_light.png"></a>
+                        <a href="index.php"><img class="img-fluid" src="images/logo/greenproject_logo_light.png" alt="Logo Green Project"></a>
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
         <section id="about-content" class="container pt-5 pb-4" data-section="about">
             <div class="row">
                 <div class="col-12 col-md-6 d-flex justofy-content-center align-items-center mb-4">
-                    <a href="index.php"><img class="img-fluid" src="images/logo/greenproject_logo_caption.png"/></a>
+                    <a href="index.php"><img class="img-fluid" src="images/logo/greenproject_logo_caption.png" alt="Logo Green Project"/></a>
                 </div>
                 <div class="col-12 col-md-6 d-flex flex-column justify-content-center mb-4">
                     <p>Green Project SS.</p>
@@ -117,7 +117,7 @@
                 <div class="col-12 col-md-4">
                     <div class="px-5 px-md-4 mb-3">
                         <div class="fixed-ratio fr-1-1">
-                            <img class="img-fluid" src="images/about/about_filippo_casali.jpg"/>
+                            <img class="img-fluid" src="images/about/about_filippo_casali.jpg" alt="Filippo Casali"/>
                         </div>
                     </div>
                     <p class="font-weight-bold text-center mb-2">Filippo Casali</p>
@@ -130,7 +130,7 @@
                 <div class="col-12 col-md-4">
                     <div class="px-5 px-md-4 mb-3">
                         <div class="fixed-ratio fr-1-1">
-                            <img class="img-fluid" src="images/about/about_samuele_lombardi.jpg"/>
+                            <img class="img-fluid" src="images/about/about_samuele_lombardi.jpg" alt="Samuele Lombardi"/>
                         </div>
                     </div>
                     <p class="font-weight-bold text-center mb-2">Samuele Lombardi</p>
@@ -143,7 +143,7 @@
                 <div class="col-12 col-md-4">
                     <div class="px-5 px-md-4 mb-3">
                         <div class="fixed-ratio fr-1-1">
-                            <img class="img-fluid" src="images/about/about_riccardo_brandolini.jpg"/>
+                            <img class="img-fluid" src="images/about/about_riccardo_brandolini.jpg" alt="Riccardo Brandolini"/>
                         </div>
                     </div>
                     <p class="font-weight-bold text-center mb-2">Riccardo Brandolini</p>

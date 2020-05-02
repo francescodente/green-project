@@ -29,7 +29,7 @@
                     <div class="order-list">
 
                         <div class="orders-no-results empty-state m-5 d-none">
-                            <img src="images/empty.png"/>
+                            <img src="images/empty.png" alt="Nessun ordine"/>
                             <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Non hai effettuato ordini</h6>
                             <p class="text-center text-dis-dark m-0">Visualizza il nostro <a href="index.php#products_">catalogo</a> e comincia con gli acquisti!</p>
                         </div>

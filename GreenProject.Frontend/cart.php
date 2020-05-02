@@ -19,7 +19,7 @@
         <section id="cart-content" class="container py-4">
 
             <div class="cart-empty empty-state m-5 d-none">
-                <img src="images/empty.png"/>
+                <img src="images/empty.png" alt="Carrello vuoto"/>
                 <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Il carrello è vuoto</h6>
                 <p class="text-center text-dis-dark m-0">Visualizza il nostro <a href="index.php#products_">catalogo</a> e comincia con gli acquisti!</p>
             </div>

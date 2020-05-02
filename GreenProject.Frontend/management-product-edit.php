@@ -27,7 +27,7 @@
 
                     <!-- Image -->
                     <div class="edit-product-img mx-auto mb-4" style="border: 1px solid rgba(0, 0, 0, 0.08);">
-                        <img class="card-bg" src="images/default_product.png"/>
+                        <img class="card-bg" src="images/default_product.png" alt="Immagine del prodotto"/>
                         <div>
                             <input id="product-image" type="file" name="product-image"/>
                             <label for="product-image" class="ripple">

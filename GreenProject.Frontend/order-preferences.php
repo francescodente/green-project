@@ -47,7 +47,7 @@
         <div class="pt-4"></div>
 
         <div class="addresses-no-results empty-state m-5 d-none">
-            <img src="images/empty.png"/>
+            <img src="images/empty.png" alt="Nessun indirizzo"/>
             <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun indirizzo</h6>
             <p class="text-center text-dis-dark m-0">
                 In questa sezione sono elencati i tuoi indirizzi.

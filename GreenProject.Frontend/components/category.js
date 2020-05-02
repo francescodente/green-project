@@ -24,6 +24,7 @@ class Category extends Entity {
             }
             if (this.imageUrl != null) {
                 $(category.html[k]).find(".category-image").attr("src", imageUrl);
+                $(category.html[k]).find(".category-image").attr("alt", this.name);
             }
             $(category.html[k]).find(".products-url").attr("href", productsUrl);
 

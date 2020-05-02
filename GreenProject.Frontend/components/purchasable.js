@@ -84,6 +84,7 @@ class Product extends Purchasable {
             $(product.html[k]).find(".product-description").html(this.description);
             if (product.imageUrl != null) {
                 $(product.html[k]).find(".product-image").attr("src", imageUrl);
+                $(product.html[k]).find(".product-image").attr("alt", this.name);
             }
             $(product.html[k]).find(".multiplier").html(product.formattedMultiplier);
             $(product.html[k]).find(".unit").html(product.formattedUnit);
@@ -221,6 +222,7 @@ class Crate extends Purchasable {
             $(crate.html[k]).find(".crate-description").html(this.description);
             if (this.imageUrl != null) {
                 $(crate.html[k]).find(".crate-image").attr("src", imageUrl);
+                $(crate.html[k]).find(".crate-image").attr("alt", this.name);
             }
             $(crate.html[k]).find(".capacity").html(capacity);
             $(crate.html[k]).find(".price").html(price);
@@ -232,7 +234,7 @@ class Crate extends Purchasable {
     }
 
     showDetailsModal() {
-        this.html.detailsModalshowModal();
+        this.html.detailsModal.showModal();
     }
 
     addToPreferences() {
