@@ -161,17 +161,17 @@ class Product extends Purchasable {
         if (isFromCart) {
             API.editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
             .then(function(data) { location.reload(); })
-            .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+            .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
         } else {
             API.addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
             .then(function(data) {
                 APIUtils.updateCartBadge()
-                .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+                .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
                 quantityModal.modal("hide");
                 quantityModal.find(".loader").hide();
                 quantityModal.find(".add-to-cart").attr("disabled", false);
             })
-            .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+            .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
         }
     }
 
@@ -186,7 +186,7 @@ class Product extends Purchasable {
     removeFromCart() {
         API.removeFromCart(localStorage.getObject("userData").userId, this.productId)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
 
     removeFromCrate() {
@@ -208,14 +208,18 @@ class Crate extends Purchasable {
 
         // Add templates
         this.html.main = Entity.getTemplate("CrateCard");
+        this.html.weeklyEntry = Entity.getTemplate("CrateWeeklyEntry");
         this.html.detailsModal = Entity.getTemplate("CrateDetailsModal");
 
         let crate = this;
         let imageUrl = API.basePath + this.imageUrl;
-        let capacity = this.capacity.toString().replace(".", ",");
+        let capacity = Utils.formatDecimal(this.capacity, 2);
         let price = Utils.formatCurrency(this.price);
 
         for (let k in crate.html) {
+
+            // Init tooltips
+            $(crate.html[k]).find('[data-tooltip="tooltip"]').tooltip();
 
             // Replace values in templates
             $(crate.html[k]).find(".crate-name").html(this.name);
@@ -230,6 +234,7 @@ class Crate extends Purchasable {
             // Add event listeners
             $(crate.html[k]).find(".crate-modal-link").click(function() { crate.showDetailsModal(); });
             $(crate.html[k]).find(".subscribe").click(function() { crate.addToPreferences(); });
+            $(crate.html[k]).find(".show-remove-modal").click(function() { crate.showRemoveModal(); });
         }
     }
 
@@ -238,11 +243,21 @@ class Crate extends Purchasable {
     }
 
     addToPreferences() {
-        if (localStorage.getObject("authData") === null) {
+        let authData = localStorage.getObject("authData");
+        if (authData === null) {
             new InfoModal("Devi essere registrato e aver effettuato l'accesso per abbonarti a una cassetta settimanale.").show();
             return;
         }
         console.log("add to preferences " + this.crateId);
+        $("#modal-loading").showModal();
+        API.addWeeklyCrate(authData.userId, this.crateId)
+        .then(function(data) { console.log(data); $("#crate-added-modal").showModal() })
+        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() })
+        .finally(function(data) { $("#modal-loading").fadeModal(); });
+    }
+
+    showRemoveModal() {
+        console.log("show remove modal " + this.crateId);
     }
 
     removeFromPreferences() {

@@ -152,7 +152,7 @@
                 <button type="button" class="show-quantity-modal btn icon ripple mr-2" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
                     <i class="mdi dark mdi-pencil"></i>
                 </button>
-                <button type="button" class="show-remove-modal btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">
+                <button type="button" class="show-remove-modal btn icon ripple" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">
                     <i class="mdi dark mdi-close"></i>
                 </button>
             </div>
@@ -173,3 +173,35 @@
         </div>
     </div>
 </div>
+
+<!-- CRATE WEEKLY ENTRY -->
+<table class="d-none">
+    <tr data-template-name="CrateWeeklyEntry" data-class="bg-primary-dark" class="d-none">
+        <th class="nowrap">
+            <a href="#" class="crate-modal-link">
+                <img class="crate-image img-fluid" src="images/default_product.png"/>
+            </a>
+        </th>
+        <th>
+            <p class="crate-name text-sec-dark m-0"></p>
+            <p class="text-sec-dark font-weight-normal m-0">
+                <span class="capacity"></span> <span class="crate-um">Kg</span> - <span class="price"></span>
+            </p>
+        </th>
+        <th class="nowrap actions">
+            <div class="dropdown">
+                <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="mdi dark mdi-dots-vertical"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="#" class="show-remove-modal dropdown-item">Elimina</a>
+                </div>
+            </div>
+        </th>
+    </tr>
+</table>
+
+<!-- PRODUCT WEEKLY ENTRY -->
+<table class="d-none">
+
+</table>

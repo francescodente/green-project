@@ -244,6 +244,60 @@ class APIClass {
 
     }
 
+    // Weekly orders
+
+    subscribe(userId, data) {
+        return this.post("customers/" + userId + "/weeklyorder/subscription", data);
+    }
+
+    unsubscribe(userId) {
+        return this.del("customers/" + userId + "/weeklyorder/subscription");
+    }
+
+    getWeeklyOrder(userId) {
+        return this.get("customers/" + userId + "/weeklyorder");
+    }
+
+    addWeeklyCrate(userId, crateId) {
+        return this.post("customers/" + userId + "/weeklyorder/crates", crateId);
+    }
+
+    addExtraProduct(userId, productId, quantity) {
+        let data = {
+            productId: productId,
+            quantity: quantity
+        };
+        return this.post("customers/" + userId + "/weeklyorder/extras", data);
+    }
+
+    removeFromWeeklyOrder(userId, orderDetailId) {
+        return this.del("customers/" + userId + "/weeklyorder/details/" + orderDetailId);
+    }
+
+    editExtraProductQuantity(userId) {
+
+    }
+
+    addProductToWeeklyCrate(userId, orderDetailId, productId, quantity) {
+        let data = {
+            productId: productId,
+            quantity: quantity
+        };
+        return this.post("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts", data);
+    }
+
+    removeProductFromWeeklyCrate(userId, orderDetailId, productId) {
+        return this.del("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts/" + productId);
+    }
+
+    editWeeklyCrateProductQuantity(userId, orderDetailId, productId, quantity) {
+        let data = {
+            productId: productId,
+            quantity: quantity
+        };
+        return this.put("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts", data);
+    }
+
     // Zones
 
     getZones() {

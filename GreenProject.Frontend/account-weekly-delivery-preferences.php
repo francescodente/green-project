@@ -28,7 +28,7 @@
 
                     <div class="alert alert-accent" role="alert">
                         <p class="summary-preferences text-sec-dark m-0">
-                            La prossima consegna include <span class="crate-count">1</span> cassette e <span class="product-count">2</span> prodotti sfusi, per un totale di <span class="total">0.00€</span>.<br/>Sarà effettuata il giorno <span class="delivery-date">1 Gen 2020</span> all'indirizzo <span class="delivery-address">Viale della Via 123, 47522 Cesena (FC)</span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>48 ore</span> prima della consegna prestabilita.
+                            La prossima consegna include <span class="crate-count">1</span> cassette e <span class="product-count">2</span> prodotti sfusi, per un totale di <span class="total">0.00€</span>.<br/>Sarà effettuata il <span class="delivery-date">1 Gen 2020</span> all'indirizzo <span class="delivery-address">Viale della Via 123, 47522 Cesena (FC)</span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
                         </p>
                     </div>
 
@@ -38,8 +38,8 @@
                     </p>
                     <div class="product-group-table table-wrapper table-responsive">
                         <table class="table">
-                            <thead>
-                                <tr class="bg-primary-dark">
+                            <thead class="crate-test">
+                                <!-- <tr class="bg-primary-dark">
                                     <th class="nowrap">
                                         <a href="#" data-toggle="modal" data-target="#modal-product">
                                             <img class="product-image img-fluid" src="images/example_crate.jpg"/>
@@ -61,10 +61,10 @@
                                             </div>
                                         </div>
                                     </th>
-                                </tr>
+                                </tr> -->
                             </thead>
                             <tbody>
-                                <tr>
+                                <!-- <tr>
                                     <td class="nowrap">
                                         <a href="#" data-toggle="modal" data-target="#modal-product">
                                             <img class="product-image img-fluid" src="images/example_product.jpg"/>
@@ -84,28 +84,7 @@
                                             </button>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="nowrap">
-                                        <a href="#" data-toggle="modal" data-target="#modal-product">
-                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p class="product-name m-0">Product name</p>
-                                        <p class="product-weight text-sec-dark m-0">0.5Kg</p>
-                                    </td>
-                                    <td class="nowrap actions">
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
-                                                <i class="mdi dark mdi-pencil"></i>
-                                            </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
-                                                <i class="mdi dark mdi-close"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td colspan="4" class="p-0">
                                         <button class="btn add-product ripple" data-toggle="modal" data-target="#modal-weekly-product-add">
@@ -127,7 +106,7 @@
                     <div class="product-group-table products table-wrapper table-responsive">
                         <table class="table">
                             <tbody>
-                                <tr>
+                                <!-- <tr>
                                     <td class="nowrap">
                                         <a href="#" data-toggle="modal" data-target="#modal-product">
                                             <img class="product-image img-fluid" src="images/example_product.jpg"/>
@@ -149,30 +128,7 @@
                                             </button>
                                         </div>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td class="nowrap">
-                                        <a href="#" data-toggle="modal" data-target="#modal-product">
-                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p class="product-name m-0">Product name</p>
-                                        <p class="text-sec-dark m-0">
-                                            <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
-                                        </p>
-                                    </td>
-                                    <td class="nowrap actions">
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
-                                                <i class="mdi dark mdi-pencil"></i>
-                                            </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
-                                                <i class="mdi dark mdi-close"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td colspan="4" class="p-0">
                                         <button class="btn add-product ripple" data-toggle="modal" data-target="#modal-weekly-product-add">
@@ -198,15 +154,15 @@
                                         IVA<br/>
                                         SPEDIZIONE
                                     </td>
-                                    <td class="nowrap">
-                                        <span class="subtotal">0,00€</span><br/>
-                                        <span class="iva">0,00€</span><br/>
-                                        <span class="shipping">0,00€</span>
+                                    <td class="nowrap text-right">
+                                        <span class="subtotal"></span><br/>
+                                        <span class="iva"></span><br/>
+                                        <span class="shipping"></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>TOTALE</td>
-                                    <td class="nowrap"><span class="total">0,00€</span></td>
+                                    <td class="nowrap"><span class="total"></span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -250,8 +206,9 @@
     </div>
 
     <?php include("footer.php"); ?>
-
     <?php include("resources.php"); ?>
+
+    <script src="js/pages/account-weekly-delivery-preferences.js"></script>
 
     <?php include("modal-new-address.php"); ?>
 

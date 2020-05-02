@@ -117,6 +117,56 @@ class APIUtilsClass {
         });
     }
 
+    // Weekly orders
+
+    get isCurrentUserSubscribed() {
+        let userData = localStorage.getObject("userData");
+        return userData.isSubscribed;
+    }
+
+    subscribe(userId, data) {
+        API.subscribe(userId, data)
+        .then(function(data) {
+            // TODO send all locally stored items
+        })
+    }
+
+    unsubscribe(userId) {
+
+    }
+
+    getWeeklyOrder(userId) {
+
+    }
+
+    addWeeklyCrate(userId, crateId) {
+
+    }
+
+    addExtraProduct(userId, productId, quantity) {
+
+    }
+
+    removeFromWeeklyOrder(userId, orderDetailId) {
+
+    }
+
+    editExtraProductQuantity(userId) {
+
+    }
+
+    addProductToWeeklyCrate(userId, orderDetailId, productId, quantity) {
+
+    }
+
+    removeProductFromWeeklyCrate(userId, orderDetailId, productId) {
+
+    }
+
+    editWeeklyCrateProductQuantity(userId, orderDetailId, productId, quantity) {
+
+    }
+
 }
 
 var APIUtils = Object.freeze(new APIUtilsClass());
