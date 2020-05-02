@@ -16,6 +16,6 @@ namespace GreenProject.Backend.Infrastructure.Notifications
         UserSubscribed,
         UserUnsubscribed,
         SubscriptionReminder,
-        SupportRequested
+        SupportRequest
     }
 }

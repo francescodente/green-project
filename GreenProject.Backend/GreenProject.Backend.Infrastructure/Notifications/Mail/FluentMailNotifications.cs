@@ -131,7 +131,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
 
             string recipient = this.settings.EmailAddresses[MailContext.Support].Address;
 
-            return this.SendNotification(NotificationType.SupportRequested, model, recipient);
+            return this.SendNotification(NotificationType.SupportRequest, model, recipient);
         }
     }
 }
