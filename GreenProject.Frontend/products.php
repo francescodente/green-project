@@ -73,9 +73,13 @@
             <div class="divider dark mb-4"></div>
             <div class="row justify-content-center">
                 <ul id="products-pagination" class="pagination">
-                    <li><a href="#" class="page-prev btn icon ripple" title="Pagina precedente"><i class="mdi dark mdi-chevron-left"></i></a></li>
+                    <li><a href="#" class="page-prev btn icon ripple" data-tooltip="tooltip" title="Pagina precedente">
+                        <i class="mdi dark mdi-chevron-left"></i>
+                    </a></li>
                     <div class="pages d-flex align-items-center"><li class="d-none"><a href="#">1</a></li></div>
-                    <li><a href="#" class="page-next btn icon ripple" title="Pagina successiva"><i class="mdi dark mdi-chevron-right"></i></a></li>
+                    <li><a href="#" class="page-next btn icon ripple" data-tooltip="tooltip" title="Pagina successiva">
+                        <i class="mdi dark mdi-chevron-right"></i>
+                    </a></li>
                 </ul>
             </div>
         </section>
@@ -84,7 +88,26 @@
 
     <?php include("footer.php"); ?>
     <?php include("resources.php") ?>
-    <script src="js/products.js"></script>
+    <script src="js/pages/products.js"></script>
+
+    <div id="crate-added-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="width: 360px;">
+                <div class="modal-top text-center">
+                    <i class="modal-top-icon mdi mdi-information-outline"></i>
+                </div>
+                <div class="modal-body">
+                    <p class="info-text m-0">
+                        Hai aggiunto una cassetta alla tua consegna settimanale!<br/>
+                        Passa alla sezione <a href="account-weekly-delivery-preferences.php">Cassette</a> per selezionarne il contenuto.
+                    </p>
+                </div>
+                <div class="modal-bottom bg-primary d-flex justify-content-center">
+                    <button class="btn outline ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

@@ -6,12 +6,12 @@
     <!-- PAYMENT METHOD -->
     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-payment-method" aria-expanded="false">
         <h4 class="m-0">Modalità di pagamento</h4>
-        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-payment-method" aria-expanded="false" title="Nascondi">
+        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-payment-method" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
             <i class="mdi dark mdi-chevron-down"></i>
         </button>
     </div>
     <div id="order-payment-method" class="collapse">
-        <div class="pt-3"></div>
+        <div class="pt-4"></div>
 
         <input id="pm1" type="radio" class="rich-radio" name="payment-method" value="1" checked/>
         <label for="pm1" class="payment-item d-flex align-items-center p-2">
@@ -39,15 +39,15 @@
     <!-- DELIVERY ADDRESS -->
     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-delivery-address" aria-expanded="false">
         <h4 class="m-0">Indirizzo di consegna</h4>
-        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-delivery-address" aria-expanded="false" title="Nascondi">
+        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-delivery-address" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
             <i class="mdi dark mdi-chevron-down"></i>
         </button>
     </div>
     <div id="order-delivery-address" class="collapse">
-        <div class="pt-3"></div>
+        <div class="pt-4"></div>
 
         <div class="addresses-no-results empty-state m-5 d-none">
-            <img src="images/empty.png"/>
+            <img src="images/empty.png" alt="Nessun indirizzo"/>
             <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun indirizzo</h6>
             <p class="text-center text-dis-dark m-0">
                 In questa sezione sono elencati i tuoi indirizzi.
@@ -69,7 +69,7 @@
                 <span class="text-sec-dark">Gestisci</span>
                 <i class="mdi dark mdi-map-marker"></i>
             </a>
-            <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-address-add">
+            <button type="button" class="btn outline ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-new-address">
                 <span class="text-sec-dark">Aggiungi</span>
                 <i class="mdi dark mdi-plus"></i>
             </button>
@@ -82,7 +82,7 @@
     <!-- NOTES -->
     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-notes" aria-expanded="false">
         <h4 class="m-0">Note</h4>
-        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-notes" aria-expanded="false" title="Nascondi">
+        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-notes" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
             <i class="mdi dark mdi-chevron-down"></i>
         </button>
     </div>
@@ -95,4 +95,4 @@
     </div>
 </div>
 
-<script defer src="js/order-preferences.js"></script>
+<script defer src="js/pages/order-preferences.js"></script>

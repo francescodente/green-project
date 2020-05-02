@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-top d-flex justify-content-center">
                 <i class="modal-top-icon mdi mdi-key-variant"></i>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form class="modal-body">
 

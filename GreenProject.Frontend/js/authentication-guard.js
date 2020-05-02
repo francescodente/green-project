@@ -26,20 +26,20 @@ $(document).ready(function() {
         }
 
         $(".req-logout").remove();
-        getOrUpdateCurrentUserInfo()
+        APIUtils.getOrUpdateCurrentUserInfo()
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
-        updateCartBadge()
+        APIUtils.updateCartBadge()
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
 
     }
 
-    getOrUpdateCategories()
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
-    getOrUpdateZones()
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+    APIUtils.getOrUpdateCategories()
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    APIUtils.getOrUpdateZones()
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
 
     $(document).on("click", ".btn-logout", function() {
-        logout();
+        API.logout();
         location.reload();
     });
 });

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-top d-flex justify-content-center">
                 <i class="modal-top-icon mdi mdi-account-circle"></i>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form id="form-login" class="modal-body">
 
@@ -53,9 +53,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-top d-flex justify-content-center">
-                <button class="modal-back btn icon ripple" title="Indietro" data-toggle="modal" data-target="#modal-login" data-dismiss="modal"><i class="mdi dark mdi-arrow-left"></i></button>
+                <button class="modal-back btn icon ripple" data-tooltip="tooltip" title="Indietro" data-toggle="modal" data-target="#modal-login" data-dismiss="modal"><i class="mdi dark mdi-arrow-left"></i></button>
                 <i class="modal-top-icon mdi mdi-account-circle"></i>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form id="form-sign-up" method="POST" class="modal-body">
 
@@ -110,9 +110,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-top d-flex justify-content-center">
-                <button class="modal-back btn icon ripple" title="Indietro" data-toggle="modal" data-target="#modal-login" data-dismiss="modal"><i class="mdi dark mdi-arrow-left"></i></button>
+                <button class="modal-back btn icon ripple" data-tooltip="tooltip" title="Indietro" data-toggle="modal" data-target="#modal-login" data-dismiss="modal"><i class="mdi dark mdi-arrow-left"></i></button>
                 <i class="modal-top-icon mdi mdi-key-variant"></i>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <form id="form-pwd-recovery" class="modal-body">
 
@@ -137,83 +137,4 @@
     </div>
 </div>
 
-<script>
-
-    // Prepares form for validation: removes previous errors, disables submit button
-    function prepForValidation(form) {
-        form.find("[type='submit']").prop("disabled", true);
-        form.find("input").removeClass("error");
-        form.find(".error-message").hide();
-    }
-
-    $(document).ready(function() {
-
-        // LOGIN
-        $("#form-login").submit(function(event) {
-            event.preventDefault();
-            $("#login-loader").show();
-            prepForValidation($(this));
-            authToken({
-                email: $("#login-email").val(),
-                password: $("#login-password").val()
-            })
-            .done(function(data) {
-                localStorage.setObject("authData", data);
-                location.reload();
-            })
-            .fail(function(jqXHR) {
-                let errCode = jqXHR.responseJSON.globalErrors[0].code;
-                if (errCode == "Err.Auth.LoginFailed") {
-                    $("#login-email").addClass("error");
-                    $("#login-password").addClass("error");
-                    $("#login-failed-error").show();
-                } else {
-                    $("#generic-login-error").show();
-                }
-                $("#login-loader").hide();
-                $(".btn-login").prop("disabled", false);
-            });
-        });
-
-        // REGISTRATION
-        $("#form-sign-up").submit(function(event) {
-            event.preventDefault();
-            $("#form-sign-up .error-message").hide();
-            // Check password fields
-            let password = $("#sign-up-password").val();
-            if (password != $("#confirm-password").val()) {
-                $("#sign-up-password").addClass("error");
-                $("#confirm-password").addClass("error");
-                $("#sign-up-password-error").show();
-                $(".btn-sign-up").prop("disabled", false);
-                return;
-            }
-            // Perform registration
-            $("#sign-up-loader").show();
-            prepForValidation($(this));
-            signup({
-                user: {
-                    email: $("#sign-up-email").val(),
-                    marketingConsent: $("#marketing-consent").is(":checked")
-                },
-                password: password
-            })
-            .done(function(data) {
-                console.log("done");
-                console.log(data);
-            })
-            .fail(function(jqXHR) {
-                if (jqXHR.responseJSON.propertyErrors.length &&
-                    jqXHR.responseJSON.propertyErrors[0].code == "Err.DuplicateField") {
-                    console.log(jqXHR.responseJSON.propertyErrors[0]);
-                    $("#sign-up-email").addClass("error");
-                } else {
-                    $("#generic-sign-up-error").show();
-                }
-                $("#sign-up-loader").hide();
-                $(".btn-sign-up").prop("disabled", false);
-            });
-        });
-
-    });
-</script>
+<script src="js/pages/modals-authentication.js"></script>

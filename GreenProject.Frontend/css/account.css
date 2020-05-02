@@ -136,7 +136,8 @@
     border-top: none;
 }
 
-.product-group-table .product-image {
+.product-group-table .product-image,
+.product-group-table .crate-image {
     height: 56px;
     width: 56px;
     min-width: 56px;

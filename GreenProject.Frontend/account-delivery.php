@@ -61,7 +61,7 @@
                     </div>
 
                     <!-- <div class="empty-state m-5">
-                        <img src="images/empty.png"/>
+                        <img src="images/empty.png" alt="Nessun prodotto da ritirare"/>
                         <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun prodotto da ritirare</h6>
                         <p class="text-center text-dis-dark m-0">In questa sezione sono visualizzati i fornitori da visitare per il carico di ogni giorno.</p>
                     </div> -->
@@ -82,7 +82,7 @@
                                             <span class="text-sec-dark"><a href="#" class="order-delivery-address text-sec-dark">Viale della Via 123, 47522 - Cesena (FC)</a></span>
                                         </div>
                                     </div>
-                                    <button class="btn-collapse btn icon ripple flex-shrink-0" data-toggle="collapse" data-target="#order-1" aria-expanded="false">
+                                    <button class="btn-collapse btn icon ripple flex-shrink-0" data-toggle="collapse" data-target="#order-1" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
                                         <i class="mdi dark mdi-chevron-down"></i>
                                     </button>
                                 </div>
@@ -102,7 +102,7 @@
                                                 ?>
                                                 <tr>
                                                     <td class="nowrap">
-                                                        <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                                        <img class="product-image img-fluid" src="images/example_product.jpg" alt="Immagine del prodotto"/>
                                                     </td>
                                                     <td style="padding-right: 12px;">
                                                         <p class="product-name m-0">Product name</p>
@@ -155,15 +155,15 @@
 
     <?php include("resources.php") ?>
 
-    <?php include("modals-product.php"); ?>
-
     <!-- USER INFO -->
     <div id="modal-client-info-1" class="modal-client-info modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="width: 360px;">
                 <div class="modal-top d-flex justify-content-center">
                     <i class="modal-top-icon mdi mdi-account-circle"></i>
-                    <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                    <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi">
+                        <i class="mdi dark mdi-close"></i>
+                    </button>
                 </div>
                 <div class="modal-body">
 

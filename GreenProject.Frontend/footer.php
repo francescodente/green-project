@@ -5,11 +5,14 @@
             <!-- Social -->
             <div class="col12 col-md-3 d-flex justify-content-center justify-content-md-end align-items-center mb-3 mb-md-0 order-1 order-md-2">
                 <div>
-                    <a href="https://www.facebook.com/Green-Project-SS-417945002127818/" target="_blank" class="facebook btn icon dark ripple" title="Facebook">
+                    <a href="https://www.facebook.com/Green-Project-SS-417945002127818/" target="_blank" class="facebook btn icon dark ripple" data-tooltip="tooltip" title="Facebook">
                         <i class="mdi mdi-facebook-box"></i>
                     </a>
-                    <a href="https://www.instagram.com/_green.project_/" target="_blank" class="instagram btn icon dark ripple" title="Instagram">
+                    <a href="https://www.instagram.com/_green.project_/" target="_blank" class="instagram btn icon dark ripple" data-tooltip="tooltip" title="Instagram">
                         <i class="mdi mdi-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCP0QAAzgf1dSarqwOf0ByKg" target="_blank" class="youtube btn icon dark ripple" data-tooltip="tooltip" title="Youtube">
+                        <i class="mdi mdi-youtube"></i>
                     </a>
                 </div>
             </div>

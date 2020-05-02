@@ -1,228 +1,267 @@
 // Measurement units
-var Units = {
-    Piece: "pezzi",
-    Kilogram: "Kg"
-}
+const Units = [
+    {
+        name: "Piece",
+        singular: "pezzo",
+        plural: "pezzi"
+    },
+    {
+        name: "Kilogram",
+        singular: "Kg",
+        plural: "Kg"
+    }
+]
 
 // Purchasable item
-var Purchasable = function(json) {
-    for (let k in json) this[k] = json[k];
-    this.html = {};
+class Purchasable extends Entity {
+
+    constructor(json) {
+        super(json);
+    }
+
+    static getFormattedUnit(unitName, plural = false) {
+        return Units.filter(unit => unit.name == unitName)
+                    .map(unit => plural ? unit.plural : unit.singular)[0];
+    }
+
+    showRemoveModal() {
+        console.log("show remove modal " + this.productId);
+    }
+
+    showDisableModal() {
+        console.log("show disable modal " + this.productId);
+    }
+
+    showDeleteModal() {
+        console.log("show delete modal " + this.productId);
+    }
+
+    disable() {
+        console.log("disable " + this.productId);
+    }
+
+    delete() {
+        console.log("delete " + this.productId);
+    }
+
+    edit() {
+        console.log("edit " + this.productId);
+    }
+
 }
 
-Purchasable.prototype.showRemoveModal = function() {
-    console.log("show remove modal " + this.productId);
-}
-
-Purchasable.prototype.showDisableModal = function() {
-    console.log("show disable modal " + this.productId);
-}
-
-Purchasable.prototype.showDeleteModal = function() {
-    console.log("show delete modal " + this.productId);
-}
-
-Purchasable.prototype.disable = function() {
-    console.log("disable " + this.productId);
-}
-
-Purchasable.prototype.delete = function() {
-    console.log("delete " + this.productId);
-}
-
-Purchasable.prototype.edit = function() {
-    console.log("edit " + this.productId);
-}
 
 // Product
-function Product(json, quantity = 1) {
-    Purchasable.call(this, json);
-    this.quantity = quantity;
+class Product extends Purchasable {
 
-    // Add templates
-    this.html.main = getTemplate("ProductCard");
-    this.html.detailsModal = getTemplate("ProductDetailsModal");
-    this.html.quantityModal = getTemplate("ProductQuantityModal");
-    this.html.removeModal = getTemplate("ProductRemoveModal");
-    this.html.cartEntry = getTemplate("ProductCartEntry");
+    constructor(json, quantity = 1) {
+        super(json);
+        this.quantity = quantity;
 
-    // Save formatted fields
-    this.formattedMultiplier = (this.price.unitMultiplier * this.quantity).toString().replace(".", ",");
-    this.formattedUnit = Units[this.price.unitName];
-    this.formattedPrice = formatCurrency(this.price.value * this.quantity);
+        // Add templates
+        this.html.main = Entity.getTemplate("ProductCard");
+        this.html.detailsModal = Entity.getTemplate("ProductDetailsModal");
+        this.html.quantityModal = Entity.getTemplate("ProductQuantityModal");
+        this.html.removeModal = Entity.getTemplate("ProductRemoveModal");
+        this.html.cartEntry = Entity.getTemplate("ProductCartEntry");
+        this.html.orderEntry = Entity.getTemplate("ProductOrderEntry");
 
-    let product = this;
-    let imageUrl = getBasePath() + this.imageUrl;
+        // Save formatted fields
+        this.formattedMultiplier = (this.unitMultiplier * this.quantity).toString().replace(".", ",");
+        this.formattedUnit = Purchasable.getFormattedUnit(this.unitName, this.quantity != 1);
+        this.formattedPrice = Utils.formatCurrency(this.price * this.quantity);
 
-    for (let k in product.html) {
+        let product = this;
+        let imageUrl = API.basePath + this.imageUrl;
 
-        // Replace values in templates
-        $(product.html[k]).find(".product-name").html(this.name);
-        $(product.html[k]).find(".product-description").html(this.description);
-        if (product.imageUrl != null) {
-            $(product.html[k]).find(".product-image").attr("src", imageUrl);
+        for (let k in product.html) {
+
+            // Init tooltips
+            $(product.html[k]).find('[data-tooltip="tooltip"]').tooltip();
+
+            // Replace values in templates
+            $(product.html[k]).find(".product-name").html(this.name);
+            $(product.html[k]).find(".product-description").html(this.description);
+            if (product.imageUrl != null) {
+                $(product.html[k]).find(".product-image").attr("src", imageUrl);
+                $(product.html[k]).find(".product-image").attr("alt", this.name);
+            }
+            $(product.html[k]).find(".multiplier").html(product.formattedMultiplier);
+            $(product.html[k]).find(".unit").html(product.formattedUnit);
+            $(product.html[k]).find(".price").html(product.formattedPrice);
+
+            // Add event listeners
+            $(product.html[k]).find(".product-modal-link").click(function() { product.showDetailsModal(); });
+            $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
+            $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
+            $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
+            $(product.html[k]).find(".remove-from-cart").click(function() { product.removeFromCart(); });
+            $(product.html[k]).on("change paste keyup", "[name='quantity']", function() {
+                product.reactToQuantityChange();
+            });
         }
-        $(product.html[k]).find(".multiplier").html(product.formattedMultiplier);
-        $(product.html[k]).find(".unit").html(product.formattedUnit);
-        $(product.html[k]).find(".price").html(product.formattedPrice);
-
-        // Add event listeners
-        $(product.html[k]).find(".product-image").click(function() { product.showDetailsModal(); });
-        $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
-        $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
-        $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
-        $(product.html[k]).find(".remove-from-cart").click(function() { product.removeFromCart(); });
-        $(product.html[k]).on("change paste keyup", "[name='quantity']", function() {
-            product.reactToQuantityChange();
-        });
     }
-}
 
-Product.prototype = Object.create(Purchasable.prototype);
-Product.prototype.constructor = Product;
-
-Product.prototype.showDetailsModal = function() {
-    showModal(this.html.detailsModal);
-}
-
-Product.prototype.showQuantityModal = function() {
-    if (localStorage.getObject("authData") === null) {
-        new InfoModal("Devi essere registrato e aver effettuato l'accesso per aggiungere prodotti al carrello.").show();
-        return;
+    showDetailsModal() {
+        this.html.detailsModal.showModal();
     }
-    this.html.quantityModal.find("[name='quantity']").val(this.quantity);
-    this.reactToQuantityChange();
-    showModal(this.html.quantityModal);
-}
 
-Product.prototype.showCrateQuantityModal = function() {
-    console.log("show crate quantity modal");
-    //showModal($(this.html.quantityModal));
-}
-
-Product.prototype.showRemoveModal = function() {
-    showModal(this.html.removeModal);
-}
-
-Product.prototype.showCrateRemoveModal = function() {
-    console.log("show crate remove modal");
-    //showModal($(this.html.quantityModal));
-}
-
-Product.prototype.reactToQuantityChange = function() {
-    let quantityModal = this.html.quantityModal
-    let quantity = quantityModal.find("[name='quantity']").val();
-    let multiplier = 0;
-    let price = formatCurrency(0);
-    if (quantity != null && quantity != "") {
-        multiplier = (this.price.unitMultiplier * quantity).toString().replace(".", ",");
-        price = formatCurrency(this.price.value * quantity);
-        quantityModal.find(".add-to-cart").prop("disabled", false);
-    } else {
-        quantityModal.find(".add-to-cart").prop("disabled", true);
+    showQuantityModal() {
+        if (localStorage.getObject("authData") === null) {
+            new InfoModal("Devi essere registrato e aver effettuato l'accesso per aggiungere prodotti al carrello.").show();
+            return;
+        }
+        this.html.quantityModal.find("[name='quantity']").val(this.quantity);
+        this.reactToQuantityChange();
+        this.html.quantityModal.showModal();
     }
-    quantityModal.find(".multiplier").html(multiplier);
-    quantityModal.find(".price").html(price);
-}
 
-Product.prototype.addToCart = function() {
-    let quantityModal = this.html.quantityModal
-    // Detect if request comes from cart
-    let page = new URL(window.location.href).pathname;
-    page = page.substring(page.lastIndexOf("/") + 1);
-    let isFromCart = page == "cart.php";
-    // Get quantity
-    let quantity = quantityModal.find("[name='quantity']").val();
-    if (quantity == null || quantity == "") return;
-    // Perform request
-    quantityModal.find(".loader").show();
-    quantityModal.find(".add-to-cart").attr("disabled", true);
-    if (isFromCart) {
-        editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
-        .done(function(data) { location.reload(); })
-        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
-    } else {
-        addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
-        .done(function(data) {
-            updateCartBadge()
-            .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
-            quantityModal.modal("hide");
-            quantityModal.find(".loader").hide();
-            quantityModal.find(".add-to-cart").attr("disabled", false);
-        })
-        .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+    showCrateQuantityModal() {
+        console.log("show crate quantity modal");
+        //showModal($(this.html.quantityModal));
     }
+
+    showRemoveModal() {
+        this.html.removeModal.showModal();
+    }
+
+    showCrateRemoveModal() {
+        console.log("show crate remove modal");
+        //showModal($(this.html.quantityModal));
+    }
+
+    reactToQuantityChange() {
+        let quantityModal = this.html.quantityModal
+        let quantity = quantityModal.find("[name='quantity']").val();
+        let multiplier = 0;
+        let price = Utils.formatCurrency(0);
+        if (quantity != null && quantity != "") {
+            multiplier = (this.unitMultiplier * quantity).toString().replace(".", ",");
+            price = Utils.formatCurrency(this.price * quantity);
+            quantityModal.find(".add-to-cart").prop("disabled", false);
+        } else {
+            quantityModal.find(".add-to-cart").prop("disabled", true);
+        }
+        quantityModal.find(".multiplier").html(multiplier);
+        quantityModal.find(".price").html(price);
+    }
+
+    addToCart() {
+        let quantityModal = this.html.quantityModal
+        // Detect if request comes from cart
+        let page = new URL(window.location.href).pathname;
+        page = page.substring(page.lastIndexOf("/") + 1);
+        let isFromCart = page == "cart.php";
+        // Get quantity
+        let quantity = quantityModal.find("[name='quantity']").val();
+        if (quantity == null || quantity == "") return;
+        // Perform request
+        quantityModal.find(".loader").show();
+        quantityModal.find(".add-to-cart").attr("disabled", true);
+        if (isFromCart) {
+            API.editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
+            .then(function(data) { location.reload(); })
+            .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        } else {
+            API.addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
+            .then(function(data) {
+                APIUtils.updateCartBadge()
+                .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+                quantityModal.modal("hide");
+                quantityModal.find(".loader").hide();
+                quantityModal.find(".add-to-cart").attr("disabled", false);
+            })
+            .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        }
+    }
+
+    addToCrate() {
+        console.log("add to crate " + this.productId);
+    }
+
+    addToOrder() {
+        console.log("edit " + this.productId);
+    }
+
+    removeFromCart() {
+        API.removeFromCart(localStorage.getObject("userData").userId, this.productId)
+        .then(function(data) { location.reload(); })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    }
+
+    removeFromCrate() {
+        console.log("remove from crate " + this.productId);
+    }
+
+    removeFromOrder() {
+        console.log("remove from order " + this.productId);
+    }
+
 }
 
-Product.prototype.addToCrate = function() {
-    console.log("add to crate " + this.productId);
-}
-
-Product.prototype.addToOrder = function() {
-    console.log("edit " + this.productId);
-}
-
-Product.prototype.removeFromCart = function() {
-    console.log("remove from cart " + this.productId);
-    removeFromCart(localStorage.getObject("userData").userId, this.productId)
-    .done(function(data) { location.reload(); })
-    .fail(function(jqXHR) { new ErrorModal(jqXHR).show(); });
-}
-
-Product.prototype.removeFromCrate = function() {
-    console.log("remove from crate " + this.productId);
-}
-
-Product.prototype.removeFromOrder = function() {
-    console.log("remove from order " + this.productId);
-}
 
 // Crate
-function Crate(json) {
-    Purchasable.call(this, json);
+class Crate extends Purchasable {
 
-    // Add templates
-    this.html.main = getTemplate("CrateCard");
-    this.html.detailsModal = getTemplate("CrateDetailsModal");
+    constructor(json) {
+        super(json);
 
-    let crate = this;
-    let imageUrl = getBasePath() + this.imageUrl;
-    let capacity = this.capacity.toString().replace(".", ",");
-    let price = formatCurrency(this.price);
+        // Add templates
+        this.html.main = Entity.getTemplate("CrateCard");
+        this.html.weeklyEntry = Entity.getTemplate("CrateWeeklyEntry");
+        this.html.detailsModal = Entity.getTemplate("CrateDetailsModal");
 
-    for (let k in crate.html) {
+        let crate = this;
+        let imageUrl = API.basePath + this.imageUrl;
+        let capacity = Utils.formatDecimal(this.capacity, 2);
+        let price = Utils.formatCurrency(this.price);
 
-        // Replace values in templates
-        $(crate.html[k]).find(".crate-name").html(this.name);
-        $(crate.html[k]).find(".crate-description").html(this.description);
-        if (this.imageUrl != null) {
-            $(crate.html[k]).find(".crate-image").attr("src", imageUrl);
+        for (let k in crate.html) {
+
+            // Init tooltips
+            $(crate.html[k]).find('[data-tooltip="tooltip"]').tooltip();
+
+            // Replace values in templates
+            $(crate.html[k]).find(".crate-name").html(this.name);
+            $(crate.html[k]).find(".crate-description").html(this.description);
+            if (this.imageUrl != null) {
+                $(crate.html[k]).find(".crate-image").attr("src", imageUrl);
+                $(crate.html[k]).find(".crate-image").attr("alt", this.name);
+            }
+            $(crate.html[k]).find(".capacity").html(capacity);
+            $(crate.html[k]).find(".price").html(price);
+
+            // Add event listeners
+            $(crate.html[k]).find(".crate-modal-link").click(function() { crate.showDetailsModal(); });
+            $(crate.html[k]).find(".subscribe").click(function() { crate.addToPreferences(); });
+            $(crate.html[k]).find(".show-remove-modal").click(function() { crate.showRemoveModal(); });
         }
-        $(crate.html[k]).find(".capacity").html(capacity);
-        $(crate.html[k]).find(".price").html(price);
-
-        // Add event listeners
-        $(crate.html[k]).find(".crate-image").click(function() { crate.showDetailsModal(); });
-        $(crate.html[k]).find(".subscribe").click(function() { crate.addToPreferences(); });
     }
-}
 
-Crate.prototype = Object.create(Purchasable.prototype);
-Crate.prototype.constructor = Crate;
-
-Crate.prototype.showDetailsModal = function() {
-    console.log("show details modal " + this.crateId);
-    showModal($(this.html.detailsModal));
-}
-
-Crate.prototype.addToPreferences = function() {
-    if (localStorage.getObject("authData") === null) {
-        new InfoModal("Devi essere registrato e aver effettuato l'accesso per abbonarti a una cassetta settimanale.").show();
-        return;
+    showDetailsModal() {
+        this.html.detailsModal.showModal();
     }
-    console.log("add to preferences " + this.crateId);
-}
 
-Crate.prototype.removeFromPreferences = function() {
-    console.log("remove from preferences " + this.crateId);
+    addToPreferences() {
+        let authData = localStorage.getObject("authData");
+        if (authData === null) {
+            new InfoModal("Devi essere registrato e aver effettuato l'accesso per abbonarti a una cassetta settimanale.").show();
+            return;
+        }
+        console.log("add to preferences " + this.crateId);
+        $("#modal-loading").showModal();
+        API.addWeeklyCrate(authData.userId, this.crateId)
+        .then(function(data) { console.log(data); $("#crate-added-modal").showModal() })
+        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() })
+        .finally(function(data) { $("#modal-loading").fadeModal(); });
+    }
+
+    showRemoveModal() {
+        console.log("show remove modal " + this.crateId);
+    }
+
+    removeFromPreferences() {
+        console.log("remove from preferences " + this.crateId);
+    }
+
 }

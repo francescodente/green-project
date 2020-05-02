@@ -31,7 +31,7 @@
                     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true">
                         <h4 class="m-0">Generali</h4>
                         <span id="general" class="anchor"></span>
-                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" title="Nascondi">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" data-tooltip="tooltip" title="Nascondi">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -42,13 +42,15 @@
                         <h6>E-mail</h6>
                         <div class="text-input mb-3">
                             <input id="email" type="email" name="email" value="" disabled/>
-                            <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
+                            <button type="button" class="edit-field btn icon ripple" data-tooltip="tooltip" title="Modifica">
+                                <i class="mdi dark mdi-pencil"></i>
+                            </button>
                         </div>
 
                         <h6>Password</h6>
                         <div class="text-input mb-3">
                             <input id="password" type="password" name="password" value="aaaaaaaa" disabled/>
-                            <button class="btn icon ripple" title="Modifica" data-toggle="modal" data-target="#modal-pwd-change">
+                            <button class="btn icon ripple" data-toggle="modal" data-target="#modal-pwd-change" data-tooltip="tooltip" title="Modifica">
                                 <i class="mdi dark mdi-pencil"></i>
                             </button>
                         </div>
@@ -62,10 +64,10 @@
                     <div class="divider dark my-4"></div>
 
                     <!-- PERSONAL -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="true">
+                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true">
                         <h4 class="m-0">Dati personali</h4>
                         <span id="personal" class="anchor"></span>
-                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="true" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true" data-tooltip="tooltip" title="Nascondi">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -140,26 +142,9 @@
     <?php include("resources.php"); ?>
     <script src="js/validators/CFValidator.js"></script>
     <script src="js/validators/PIValidator.js"></script>
-    <script src="js/account-user-data.js"></script>
+    <script src="js/pages/account-user-data.js"></script>
 
     <?php include("modal-pwd-change.php"); ?>
-
-    <div id="modal-address-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="width: 360px;">
-                <div class="modal-top text-center">
-                    <i class="modal-top-icon mdi mdi-delete-empty"></i>
-                </div>
-                <div class="modal-body">
-                    <p class="m-0">Sei sicuro di voler eliminare questo indirizzo?</p>
-                </div>
-                <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Ok</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div id="modal-person-role-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
