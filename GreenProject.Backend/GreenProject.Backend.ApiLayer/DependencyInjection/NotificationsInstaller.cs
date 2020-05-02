@@ -8,6 +8,7 @@ using GreenProject.Backend.Infrastructure.Notifications.Mail;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RazorLight;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,7 +22,11 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
         {
             services.AddFluentEmail(null);
 
-            services.AddSingleton<ITemplateRenderer>(new RazorRenderer(typeof(Startup)));
+            services.AddSingleton<IRazorLightEngine>(_ =>
+                new RazorLightEngineBuilder()
+                    .UseMemoryCachingProvider()
+                    .UseFileSystemProject(Path.Combine(env.ContentRootPath, "MailTemplates"))
+                    .Build());
 
             services
                 .AddSingleton(this.CreateNotificationsService)
@@ -41,6 +46,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
         {
             return new FluentMailNotifications(
                 provider.GetRequiredService<IFluentEmailFactory>(),
+                provider.GetRequiredService<IRazorLightEngine>(),
                 provider.GetRequiredService<MailSettings>());
         }
     }

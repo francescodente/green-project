@@ -13,7 +13,6 @@
     <None Include="MailTemplates\AccountConfirmation.cshtml" />
     <None Include="MailTemplates\OrderCanceled.cshtml" />
     <None Include="MailTemplates\OrderCompleted.cshtml" />
-    <None Include="MailTemplates\OrderReceived.cshtml" />
     <None Include="MailTemplates\OrderShipped.cshtml" />
     <None Include="MailTemplates\OrderSummary.cshtml" />
     <None Include="MailTemplates\PasswordRecovery.cshtml" />

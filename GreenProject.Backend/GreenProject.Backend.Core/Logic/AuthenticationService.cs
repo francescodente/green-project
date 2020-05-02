@@ -25,18 +25,18 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<UserOutputDto> RegisterCustomer(RegistrationDto registration)
         {
-            bool emailInUse = await this.Data
-                .Users
-                .AnyAsync(u => u.Email == registration.User.Email);
+            //bool emailInUse = await this.Data
+            //    .Users
+            //    .AnyAsync(u => u.Email == registration.User.Email);
 
-            if (emailInUse)
-            {
-                throw new EmailAlreadyInUseException();
-            }
+            //if (emailInUse)
+            //{
+            //    throw new EmailAlreadyInUseException();
+            //}
 
             User userEntity = this.CreateUserFromUserDto(registration.User);
-            this.handler.AssignPassword(userEntity, registration.Password);
-            this.Data.Users.Add(userEntity);
+            //this.handler.AssignPassword(userEntity, registration.Password);
+            //this.Data.Users.Add(userEntity);
             //await this.Data.SaveChangesAsync();
 
             await this.Notifications.AccountConfirmation(userEntity);

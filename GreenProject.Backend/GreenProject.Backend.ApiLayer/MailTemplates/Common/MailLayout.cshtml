@@ -1,0 +1,17 @@
+﻿@using RazorLight
+@inherits TemplatePage<dynamic>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Green Project - @ViewBag.Title</title>
+</head>
+<body>
+    <table style="width: 480px; border-collapse: collapse; margin: 0 auto;">
+        @{ await IncludeAsync("Common/Header.cshtml", Model); }
+        @{ await IncludeAsync($"{ViewBag.EmailContent}.cshtml", Model); }
+        @{ await IncludeAsync("Common/Footer.cshtml", Model); }
+    </table>
+</body>
+</html>

@@ -13,17 +13,17 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
     {
 		private readonly IRazorLightEngine engine;
 
-		public RazorRenderer(Type type)
+		public RazorRenderer(string path)
 		{
 			engine = new RazorLightEngineBuilder()
-				.UseEmbeddedResourcesProject(type)
+				.UseFileSystemProject(path)
 				.UseMemoryCachingProvider()
 				.Build();
 		}
 
 		public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
 		{
-			string result = await engine.CompileRenderStringAsync(Guid.NewGuid().ToString(), template, model);
+			string result = await engine.CompileRenderStringAsync(template, template, model, new System.Dynamic.ExpandoObject());
 			return result;
 		}
 

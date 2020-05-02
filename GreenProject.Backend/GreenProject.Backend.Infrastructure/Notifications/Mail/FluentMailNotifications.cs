@@ -4,10 +4,12 @@ using FluentEmail.Smtp;
 using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
+using RazorLight;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -18,15 +20,17 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
     public class FluentMailNotifications : INotificationsService
     {
         private readonly IFluentEmailFactory emailFactory;
+        private readonly IRazorLightEngine razorEngine;
         private readonly MailSettings settings;
 
-        public FluentMailNotifications(IFluentEmailFactory emailFactory, MailSettings settings)
+        public FluentMailNotifications(IFluentEmailFactory emailFactory, IRazorLightEngine razorEngine, MailSettings settings)
         {
             this.emailFactory = emailFactory;
+            this.razorEngine = razorEngine;
             this.settings = settings;
         }
 
-        private IFluentEmail FromNotificationType<T>(NotificationType notificationType, T model)
+        private async Task SendNotification<T>(NotificationType notificationType, T model, string recipient)
         {
             MailDescription description = this.settings.EmailDescriptions[notificationType];
             MailAddressInfo addressInfo = this.settings.EmailAddresses[description.Context];
@@ -43,35 +47,41 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
                 RequiresAuthentication = true
             });
 
-            return email
+            dynamic viewBag = new ExpandoObject();
+            viewBag.WebRoot = this.settings.WebRoot;
+            viewBag.Title = description.Title;
+            viewBag.EmailContent = description.BodyTemplateFile;
+
+            string body = await this.razorEngine.CompileRenderAsync(this.settings.MailLayoutKey, model, viewBag);
+
+            await email
                 .SetFrom(addressInfo.Address, addressInfo.DisplayName)
+                .To(recipient)
                 .Subject(description.Subject)
-                .UsingTemplateFromFile(description.BodyTemplateFile, model);
+                .Body(body, true)
+                .SendAsync()
+                .Then(result =>
+                {
+                    if (!result.Successful)
+                    {
+                        throw new Exception(result.ErrorMessages.ConcatStrings(";"));
+                    }
+                });
         }
 
         public Task AccountConfirmation(User user)
         {
-            var model = new { User = user, this.settings.WebRoot };
+            var model = new { User = user };
 
-            return this.FromNotificationType(NotificationType.AccountConfirmation, model)
-                .To(user.Email)
-                .SendAsync()
-                .Then(response =>
-                {
-                    if (!response.Successful)
-                    {
-                        throw new Exception(response.ErrorMessages.ConcatStrings(";"));
-                    }
-                });
+            return this.SendNotification(NotificationType.AccountConfirmation, model, user.Email);
+                
         }
 
         public Task OrderAccepted(Order order)
         {
             var model = new { Order = order };
 
-            return this.FromNotificationType(NotificationType.OrderSummary, model)
-                .To(order.User.Email)
-                .SendAsync();
+            return this.SendNotification(NotificationType.OrderSummary, model, order.User.Email);
         }
 
         public Task OrderStateChanged(Order order, OrderState oldState)
@@ -86,36 +96,28 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
 
             var model = new { Order = order };
 
-            return this.FromNotificationType(type, model)
-                .To(order.User.Email)
-                .SendAsync();
+            return this.SendNotification(type, model, order.User.Email);
         }
 
         public Task SubscriptionReminder(Order order)
         {
             var model = new { Order = order };
 
-            return this.FromNotificationType(NotificationType.SubscriptionReminder, model)
-                .To(order.User.Email)
-                .SendAsync();
+            return this.SendNotification(NotificationType.SubscriptionReminder, model, order.User.Email);
         }
 
         public Task UserSubscribed(User user)
         {
             var model = new { User = user };
 
-            return this.FromNotificationType(NotificationType.UserSubscribed, model)
-                .To(user.Email)
-                .SendAsync();
+            return this.SendNotification(NotificationType.UserSubscribed, model, user.Email);
         }
 
         public Task UserUnsubscribed(User user)
         {
             var model = new { User = user };
-            
-            return this.FromNotificationType(NotificationType.UserUnsubscribed, model)
-                .To(user.Email)
-                .SendAsync();
+
+            return this.SendNotification(NotificationType.UserUnsubscribed, model, user.Email);
         }
 
         public Task SupportRequested(string senderEmail, string subject, string body)
@@ -127,9 +129,9 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
                 Body = body
             };
 
-            return this.FromNotificationType(NotificationType.SupportRequested, model)
-                .To(this.settings.EmailAddresses[MailContext.Support].Address)
-                .SendAsync();
+            string recipient = this.settings.EmailAddresses[MailContext.Support].Address;
+
+            return this.SendNotification(NotificationType.SupportRequested, model, recipient);
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿@using RazorLight
+@using GreenProject.Backend.Entities;
+@using GreenProject.Backend.Core.EntitiesExtensions;
+@inherits TemplatePage<dynamic>
+
+@{
+    Order order = Model;
+}
+
+<h4 style="color: #9CBF22; margin: 16px 0 8px 0;">Ordine</h4>
+<p style="margin-bottom: 0;">
+    N° ordine: <strong>@order.OrderNumber</strong>
+    <br />
+    Data di consegna: <strong>@order.DeliveryDate.ToString()</strong>
+    <br />
+    Indirizzo di consegna: <strong>@order.Address.ToFormattedString()</strong>
+    <br />
+    Nome: <strong>@order.Address.Name</strong>
+</p>
+<p style="margin: 0 0 8px 0;">Prodotti:</p>
+<table>
+    <tr>
+        @{
+            PurchasableItem item = order.Details.Select(d => d.Item).First();
+        }
+        <td><img src="@ViewBag.WebRoot/@(item.Image?.Path ?? "/images/MailTemplates/default_product.png")" height="96" width="96" alt="Immagine del prodotto" /></td>
+        <td>
+            <strong>@item.Name</strong>
+            @if (order.Details.Count > 0)
+            {
+                @:e altri<strong>@(order.Details.Count - 1)</strong>prodotti
+            }
+        </td>
+    </tr>
+</table>
