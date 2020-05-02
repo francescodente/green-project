@@ -62,6 +62,15 @@
     opacity: 0.9;
 }
 
+.footer .btn.youtube:hover {
+    background-color: rgba(255, 0, 0, 0.12);
+}
+
+.footer .btn.youtube:hover .mdi {
+    color: #FF0000;
+    opacity: 0.9;
+}
+
 /****************************\
 |   ANCHOR FOR HASH TARGET   |
 \****************************/

@@ -80,7 +80,7 @@
                                         </p>
                                     </td>
                                     <td class="nowrap actions">
-                                        <button class="btn icon ripple" title="Prodotto in rilievo" data-toggle="tooltip"><i class="mdi mdi-star-outline"></i></button>
+                                        <button class="btn icon ripple" data-tooltip="tooltip" title="Prodotto in rilievo" data-toggle="tooltip"><i class="mdi mdi-star-outline"></i></button>
                                         <div class="dropdown">
                                             <button class="product-starred btn icon ripple" data-toggle="dropdown" data-boundary="window" aria-haspopup="true" aria-expanded="false">
                                                 <i class="mdi dark mdi-dots-vertical"></i>

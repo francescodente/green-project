@@ -76,10 +76,10 @@
                                     </td>
                                     <td class="nowrap actions">
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" title="Modifica quantità">
+                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
                                                 <i class="mdi dark mdi-pencil"></i>
                                             </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" title="Rimuovi">
+                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
                                                 <i class="mdi dark mdi-close"></i>
                                             </button>
                                         </div>
@@ -97,10 +97,10 @@
                                     </td>
                                     <td class="nowrap actions">
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" title="Modifica quantità">
+                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
                                                 <i class="mdi dark mdi-pencil"></i>
                                             </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" title="Rimuovi">
+                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
                                                 <i class="mdi dark mdi-close"></i>
                                             </button>
                                         </div>
@@ -141,10 +141,10 @@
                                     </td>
                                     <td class="nowrap actions">
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" title="Modifica quantità">
+                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
                                                 <i class="mdi dark mdi-pencil"></i>
                                             </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" title="Rimuovi">
+                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
                                                 <i class="mdi dark mdi-close"></i>
                                             </button>
                                         </div>
@@ -164,10 +164,10 @@
                                     </td>
                                     <td class="nowrap actions">
                                         <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" title="Modifica quantità">
+                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
                                                 <i class="mdi dark mdi-pencil"></i>
                                             </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" title="Rimuovi">
+                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
                                                 <i class="mdi dark mdi-close"></i>
                                             </button>
                                         </div>
@@ -221,7 +221,7 @@
                     <!-- SUBSCRIPTION OPTIONS -->
                     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false">
                         <h4 class="m-0">Opzioni abbonamento</h4>
-                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" title="Nascondi">
+                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -311,7 +311,7 @@
             <div class="modal-content" style="width: 500px;">
                 <div class="modal-top">
                     <h5 class="m-0">Seleziona un prodotto</h5>
-                    <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi">
+                    <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi">
                         <i class="mdi dark mdi-close"></i>
                     </button>
                 </div>

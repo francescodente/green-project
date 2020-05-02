@@ -5,7 +5,7 @@
                 <div class="address-thumb" style="background-image: url('images/map-thumb.png');">
                     <i class="mdi large mdi-map-marker"></i>
                 </div>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <div class="modal-body container">
 

@@ -76,6 +76,9 @@ class Product extends Purchasable {
 
         for (let k in product.html) {
 
+            // Init tooltips
+            $(product.html[k]).find('[data-tooltip="tooltip"]').tooltip();
+
             // Replace values in templates
             $(product.html[k]).find(".product-name").html(this.name);
             $(product.html[k]).find(".product-description").html(this.description);

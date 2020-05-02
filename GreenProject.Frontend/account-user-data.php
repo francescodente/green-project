@@ -31,7 +31,7 @@
                     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true">
                         <h4 class="m-0">Generali</h4>
                         <span id="general" class="anchor"></span>
-                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" title="Nascondi">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-general" aria-expanded="true" data-tooltip="tooltip" title="Nascondi">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -42,13 +42,15 @@
                         <h6>E-mail</h6>
                         <div class="text-input mb-3">
                             <input id="email" type="email" name="email" value="" disabled/>
-                            <button type="button" class="edit-field btn icon ripple" title="Modifica"><i class="mdi dark mdi-pencil"></i></button>
+                            <button type="button" class="edit-field btn icon ripple" data-tooltip="tooltip" title="Modifica">
+                                <i class="mdi dark mdi-pencil"></i>
+                            </button>
                         </div>
 
                         <h6>Password</h6>
                         <div class="text-input mb-3">
                             <input id="password" type="password" name="password" value="aaaaaaaa" disabled/>
-                            <button class="btn icon ripple" title="Modifica" data-toggle="modal" data-target="#modal-pwd-change">
+                            <button class="btn icon ripple" data-toggle="modal" data-target="#modal-pwd-change" data-tooltip="tooltip" title="Modifica">
                                 <i class="mdi dark mdi-pencil"></i>
                             </button>
                         </div>
@@ -62,10 +64,10 @@
                     <div class="divider dark my-4"></div>
 
                     <!-- PERSONAL -->
-                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="true">
+                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true">
                         <h4 class="m-0">Dati personali</h4>
                         <span id="personal" class="anchor"></span>
-                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#user-data-personal" aria-expanded="true" title="Mostra">
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true" data-tooltip="tooltip" title="Nascondi">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>

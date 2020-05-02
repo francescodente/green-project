@@ -8,7 +8,7 @@
         <h5 class="product-name mb-0">Product name</h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
-            <button class="show-quantity-modal btn icon ripple" title="Aggiungi al carrello">
+            <button class="show-quantity-modal btn icon ripple" data-tooltip="tooltip" title="Aggiungi al carrello">
                 <i class="mdi dark mdi-cart-plus"></i>
             </button>
         </div>
@@ -25,7 +25,7 @@
         <h5 class="crate-name mb-0">Product name</h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="capacity"></span> Kg - <span class="price"></span></span>
-            <button class="subscribe btn icon ripple" title="Abbonati">
+            <button class="subscribe btn icon ripple" data-tooltip="tooltip" title="Abbonati">
                 <i class="mdi dark mdi-bookmark-plus-outline"></i>
             </button>
         </div>
@@ -39,7 +39,7 @@
             <div class="card-header-image fixed-ratio fr-4-3">
                 <img class="product-image card-bg" src="images/default_product.png"/>
                 <div class="image-shade-top"></div>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi light mdi-close"></i></button>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi light mdi-close"></i></button>
             </div>
             <div class="card-body">
                 <div class="product-info">
@@ -51,7 +51,7 @@
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
                 <p class="m-0 ml-1"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
-                <button class="show-quantity-modal btn icon ripple" data-dismiss="modal" title="Aggiungi al carrello">
+                <button class="show-quantity-modal btn icon ripple" data-dismiss="modal" data-tooltip="tooltip" title="Aggiungi al carrello">
                     <i class="mdi dark mdi-cart-plus"></i>
                 </button>
             </div>
@@ -66,7 +66,7 @@
             <div class="card-header-image fixed-ratio fr-4-3">
                 <img class="crate-image card-bg" src="images/default_product.png"/>
                 <div class="image-shade-top"></div>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi light mdi-close"></i></button>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi light mdi-close"></i></button>
             </div>
             <div class="card-body">
                 <div class="crate-info">
@@ -78,7 +78,7 @@
             </div>
             <div class="card-footer d-flex justify-content-between align-items-center">
                 <p class="m-0 ml-1"><span class="capacity"></span> Kg - <span class="price"></span></p>
-                <button class="subscribe btn icon ripple" title="Abbonati">
+                <button class="subscribe btn icon ripple" data-tooltip="tooltip" title="Abbonati">
                 <i class="mdi dark mdi-bookmark-plus-outline"></i>
             </button>
             </div>
@@ -92,7 +92,7 @@
         <div class="modal-content" style="width: 360px;">
             <div class="modal-top text-center">
                 <i class="modal-top-icon mdi mdi-plus-box-outline"></i>
-                <button class="modal-close btn icon ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                <button class="modal-close btn icon ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
             <div class="modal-body">
                 <h4 class="text-center">Seleziona la quantità</h4>
@@ -149,10 +149,10 @@
         </td>
         <td class="nowrap actions">
             <div class="d-flex justify-content-end">
-                <button type="button" class="show-quantity-modal btn icon ripple mr-2" title="Modifica quantità">
+                <button type="button" class="show-quantity-modal btn icon ripple mr-2" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
                     <i class="mdi dark mdi-pencil"></i>
                 </button>
-                <button type="button" class="show-remove-modal btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" title="Rimuovi">
+                <button type="button" class="show-remove-modal btn icon ripple" data-toggle="modal" data-target="#modal-cart-delete" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">
                     <i class="mdi dark mdi-close"></i>
                 </button>
             </div>

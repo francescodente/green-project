@@ -82,7 +82,7 @@
                                             <span class="text-sec-dark"><a href="#" class="order-delivery-address text-sec-dark">Viale della Via 123, 47522 - Cesena (FC)</a></span>
                                         </div>
                                     </div>
-                                    <button class="btn-collapse btn icon ripple flex-shrink-0" data-toggle="collapse" data-target="#order-1" aria-expanded="false">
+                                    <button class="btn-collapse btn icon ripple flex-shrink-0" data-toggle="collapse" data-target="#order-1" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
                                         <i class="mdi dark mdi-chevron-down"></i>
                                     </button>
                                 </div>
@@ -161,7 +161,9 @@
             <div class="modal-content" style="width: 360px;">
                 <div class="modal-top d-flex justify-content-center">
                     <i class="modal-top-icon mdi mdi-account-circle"></i>
-                    <button class="modal-close btn icon dark ripple" data-dismiss="modal" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+                    <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi">
+                        <i class="mdi dark mdi-close"></i>
+                    </button>
                 </div>
                 <div class="modal-body">
 

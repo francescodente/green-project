@@ -160,7 +160,9 @@ $(document).ready(function() {
     \**************/
 
     $(document).on("click", "[data-toggle='collapse']", function() {
-        $(".btn-collapse[data-target='" + $(this).data("target") + "']").attr("title", $(this).attr("aria-expanded") != "true" ? "Mostra" : "Nascondi");
+        let title = $(this).attr("aria-expanded") != "true" ? "Mostra" : "Nascondi";
+        let button = $(".btn-collapse[data-target='" + $(this).data("target") + "']");
+        button.attr("title", title).attr('data-original-title', title);
     });
 
     /***************\
@@ -180,8 +182,8 @@ $(document).ready(function() {
     |   POPOVERS & TOOLTIPS   |
     \*************************/
 
-    $('[data-toggle="popover"]').popover();
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-popover="popover"]').popover();
+    $('[data-tooltip="tooltip"]').tooltip();
 
     /*********************************\
     |   CAROUSEL FULL SCREEN TOGGLE   |

@@ -6,7 +6,7 @@
     <!-- PAYMENT METHOD -->
     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-payment-method" aria-expanded="false">
         <h4 class="m-0">Modalità di pagamento</h4>
-        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-payment-method" aria-expanded="false" title="Nascondi">
+        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-payment-method" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
             <i class="mdi dark mdi-chevron-down"></i>
         </button>
     </div>
@@ -39,7 +39,7 @@
     <!-- DELIVERY ADDRESS -->
     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-delivery-address" aria-expanded="false">
         <h4 class="m-0">Indirizzo di consegna</h4>
-        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-delivery-address" aria-expanded="false" title="Nascondi">
+        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-delivery-address" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
             <i class="mdi dark mdi-chevron-down"></i>
         </button>
     </div>
@@ -82,7 +82,7 @@
     <!-- NOTES -->
     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-notes" aria-expanded="false">
         <h4 class="m-0">Note</h4>
-        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-notes" aria-expanded="false" title="Nascondi">
+        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-notes" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
             <i class="mdi dark mdi-chevron-down"></i>
         </button>
     </div>

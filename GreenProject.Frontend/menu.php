@@ -6,7 +6,7 @@ $page = basename($_SERVER['PHP_SELF']);
     <div class="container">
 
         <div class="top-bar-left">
-            <button class="menu-toggle btn icon ripple d-lg-none" title="Menu"><i class="mdi dark mdi-menu"></i></button>
+            <button class="menu-toggle btn icon ripple d-lg-none" data-tooltip="tooltip" data-trigger="hover" title="Menu"><i class="mdi dark mdi-menu"></i></button>
             <a href="index.php" class="top-bar-logo"><img src="images/logo/greenproject_logo_small.png"></a>
             <a href="index.php" class="top-bar-logo light"><img src="images/logo/greenproject_logo_light_small.png"></a>
         </div>
@@ -28,15 +28,15 @@ $page = basename($_SERVER['PHP_SELF']);
 
         <div class="top-bar-right">
 
-            <button class="btn-login btn icon ripple req-logout" title="Accedi" data-toggle="modal" data-target="#modal-login"><i class="mdi dark mdi-login-variant"></i></button>
+            <button class="btn-login btn icon ripple req-logout" data-tooltip="tooltip" title="Accedi" data-toggle="modal" data-target="#modal-login"><i class="mdi dark mdi-login-variant"></i></button>
 
             <div style="position: relative;" class="req-login">
-                <a href="cart.php" class="btn icon ripple" title="Carrello"><i class="mdi dark mdi-cart"></i></a>
+                <a href="cart.php" class="btn icon ripple" data-tooltip="tooltip" title="Carrello"><i class="mdi dark mdi-cart"></i></a>
                 <span class="cart-badge badge"></span>
             </div>
 
             <div class="dropdown d-none d-lg-block req-login">
-                <button id="dropdown-account" class="btn icon ripple" title="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="dropdown-account" class="btn icon ripple" data-tooltip="tooltip" data-trigger="hover" title="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-account-circle"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-account">
@@ -62,7 +62,7 @@ $page = basename($_SERVER['PHP_SELF']);
             </div>
 
             <div class="dropdown d-none d-lg-block req-login req-admin">
-                <button id="dropdown-admin" class="btn icon ripple" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="dropdown-admin" class="btn icon ripple" data-tooltip="tooltip" data-trigger="hover" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-pound-box"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-admin">
@@ -76,7 +76,7 @@ $page = basename($_SERVER['PHP_SELF']);
             </div>
 
             <div class="dropdown d-none d-lg-block">
-                <button id="dropdown-menu" class="btn icon ripple" title="Altro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button id="dropdown-menu" class="btn icon ripple" data-tooltip="tooltip" data-trigger="hover" title="Altro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-dots-vertical"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-menu">
@@ -99,7 +99,7 @@ $page = basename($_SERVER['PHP_SELF']);
 
         <div class="menu-header bg-primary-dark">
             <a href="index.php"><img src="images/logo/greenproject_logo_small.png"></a>
-            <button class="menu-toggle btn icon ripple" title="Nascondi"><i class="mdi dark mdi-arrow-left"></i></button>
+            <button class="menu-toggle btn icon ripple" data-tooltip="tooltip" data-trigger="hover" title="Nascondi"><i class="mdi dark mdi-arrow-left"></i></button>
         </div>
 
         <a href="index.php#home" class="menu-item ripple">

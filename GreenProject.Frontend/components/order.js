@@ -42,6 +42,9 @@ class Order extends Entity {
         let order = this;
         for (let k in order.html) {
 
+            // Init tooltips
+            $(order.html[k]).find('[data-tooltip="tooltip"]').tooltip();
+
             // Replace values in templates
             $(order.html[k]).find(".order-number").html(this.orderNumber);
             $(order.html[k]).find(".order-state").html(stateHtml);

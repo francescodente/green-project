@@ -4,7 +4,7 @@
             <p class="text-sec-dark font-weight-bold mb-2">Ordine N° <span class="order-number"></span> del <span class="order-date"></span></p>
             <div class="order-state d-flex align-items-center m-0"></div>
         </div>
-        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-OID" aria-expanded="true">
+        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#order-OID" aria-expanded="true" data-tooltip="tooltip" title="Nascondi">
             <i class="mdi dark mdi-chevron-down"></i>
         </button>
     </div>
@@ -33,7 +33,7 @@
             <div class="details-col col-12 col-lg-6 pt-3 pb-4 pb-lg-3 d-flex flex-column">
                 <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#order-details-OID" aria-expanded="false">
                     <h5 class="m-0">Dettagli</h5>
-                    <button class="btn-collapse btn icon ripple d-lg-none" data-toggle="collapse" data-target="#order-details-OID" aria-expanded="false" title="Mostra">
+                    <button class="btn-collapse btn icon ripple d-lg-none" data-toggle="collapse" data-target="#order-details-OID" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
                         <i class="mdi dark mdi-chevron-down"></i>
                     </button>
                 </div>

@@ -126,8 +126,8 @@
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="m-0">Prezzo</h4>
-                        <button class="btn icon ripple" style="height: 28px; width: 28px;" data-toggle="popover" data-placement="right"
-                        title="Aiuto" data-html="true" data-content="Il prezzo va specificato in relazione all'unità di misura selezionata e al moltiplicatore inserito.<br/>Esempio:<br/>- Unità di misura: Kg<br/>- Moltiplicatore: 1.5<br/>- Prezzo: 1€<br/>Significa che 1.5Kg di prodotto costano 1€ e che il prodotto è acquistabile in multipli di 1.5Kg.">
+                        <button type="button" class="btn icon ripple" style="height: 28px; width: 28px;" data-tooltip="tooltip" data-placement="right"
+                        data-html="true" title="<div class='text-left'>Il prezzo va specificato in relazione all'unità di misura selezionata e al moltiplicatore inserito.<br/>Esempio:<br/>- Unità di misura: Kg<br/>- Moltiplicatore: 1.5<br/>- Prezzo: 1€<br/>Significa che 1.5Kg di prodotto costano 1€ e che il prodotto è acquistabile in multipli di 1.5Kg.</div>">
                             <i class="mdi dark mdi-help-circle"></i>
                         </button>
                     </div>
