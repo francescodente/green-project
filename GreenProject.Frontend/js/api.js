@@ -158,8 +158,8 @@ class APIClass {
 
     }
 
-    getCrateCompatibilities() {
-
+    getCrateCompatibilities(crateId) {
+        return this.get("crates/" + crateId + "/compatibilities");
     }
 
     // Images

@@ -1,5 +1,5 @@
-var crates = [];
-var products = [];
+var weeklyCrates = [];
+var weeklyExtras = [];
 
 $(document).ready(function() {
 
@@ -7,11 +7,12 @@ $(document).ready(function() {
     $("#modal-loading").showModal();
     API.getWeeklyOrder(localStorage.getObject("authData").userId)
     .then(function(data) {
-        console.log(data);
 
         if (data.crates.length == 0 && data.extraProducts.length == 0) {
             // TODO handle no products in weekly order
         } else {
+
+            console.log(data);
 
             // Setup summary
             $(".crate-count").html(data.crates.length);
@@ -27,9 +28,12 @@ $(document).ready(function() {
 
             // Create crates and products
             data.crates.forEach(json => {
-                let crate = new Crate(json.crateDescription);
-                crates.push(crate);
-                crate.html.weeklyEntry.appendTo(".crate-test");
+                let weeklyCrate = new WeeklyCrate(json);
+                weeklyCrates.push(weeklyCrate);
+                weeklyCrate.html.main.appendTo(".weekly-crates");
+            });
+            data.extraProducts.forEach(json => {
+
             });
 
             // TODO select address and add notes

@@ -132,6 +132,7 @@
 }
 
 .product-group-table.products tr:first-child>td,
+.product-group-table.compatible-products tr:first-child>td,
 .summary-products tr:first-child>td {
     border-top: none;
 }

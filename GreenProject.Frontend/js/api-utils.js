@@ -20,34 +20,34 @@ class APIUtilsClass {
 
     async getOrRefreshAuth() {
         if (API.isTokenRefreshing) {
-            console.log("token is refreshing...");
+            //console.log("token is refreshing...");
             return API.tokenPromise;
         }
         let authData = localStorage.getObject("authData");
         if (authData == null) {
-            console.log("authData null");
+            //console.log("authData null");
             return null;
         }
         if (Date.now() < Date.parse(authData.expiration)) {
-            console.log("token ok");
+            //console.log("token ok");
             return authData;
         }
-        console.log("token expired");
+        //console.log("token expired");
         let data = {
             "token": authData.token,
             "refreshToken": authData.refreshToken
         };
-        console.log(data);
+        //console.log(data);
         API.isTokenRefreshing = true;
         API.tokenPromise = API.refreshToken(data);
         try {
             authData = await API.tokenPromise;
             localStorage.setObject("authData", authData);
-            console.log("token refreshed");
+            //console.log("token refreshed");
             return authData;
         } catch (e) {
-            console.log(e);
-            console.log("token refresh failed -> logout");
+            //console.log(e);
+            //console.log("token refresh failed -> logout");
             API.logout();
             return null;
         } finally {

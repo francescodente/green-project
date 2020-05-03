@@ -36,10 +36,13 @@
                     <p class="text-sec-dark mb-4">
                         Di seguito sono riportate le cassette alle quali sei abbonato.<br/>Riceverai questi prodotti ogni settimana a casa tua!
                     </p>
-                    <div class="product-group-table table-wrapper table-responsive">
+
+                    <div class="weekly-crates"></div>
+
+                    <!-- <div class="product-group-table table-wrapper table-responsive">
                         <table class="table">
                             <thead class="crate-test">
-                                <!-- <tr class="bg-primary-dark">
+                                <tr class="bg-primary-dark">
                                     <th class="nowrap">
                                         <a href="#" data-toggle="modal" data-target="#modal-product">
                                             <img class="product-image img-fluid" src="images/example_crate.jpg"/>
@@ -61,10 +64,10 @@
                                             </div>
                                         </div>
                                     </th>
-                                </tr> -->
+                                </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr>
+                                <tr>
                                     <td class="nowrap">
                                         <a href="#" data-toggle="modal" data-target="#modal-product">
                                             <img class="product-image img-fluid" src="images/example_product.jpg"/>
@@ -84,7 +87,7 @@
                                             </button>
                                         </div>
                                     </td>
-                                </tr> -->
+                                </tr>
                                 <tr>
                                     <td colspan="4" class="p-0">
                                         <button class="btn add-product ripple" data-toggle="modal" data-target="#modal-weekly-product-add">
@@ -97,14 +100,14 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
 
                     <h4 class="mt-4 bb-2">Altri prodotti</h4>
                     <p class="text-sec-dark mb-4">
                         Solo per la prossima consegna, riceverai i seguenti prodotti in aggiunta alle cassette a cui sei abbonato.
                     </p>
                     <div class="product-group-table products table-wrapper table-responsive">
-                        <table class="table">
+                        <table class="weekly-extras table">
                             <tbody>
                                 <!-- <tr>
                                     <td class="nowrap">

@@ -15,23 +15,6 @@
     </div>
 </div>
 
-<!-- CRATE ITEM -->
-<div data-template-name="CrateCard" data-class="card product-card mb-4" class="d-none">
-    <a href="#" class="crate-modal-link fixed-ratio fr-1-1 img-hover-zoom">
-        <img class="crate-image card-bg" src="images/default_product.png"/>
-        <div class="cover"><button class="btn round outline light">Visualizza</button></div>
-    </a>
-    <div class="card-body">
-        <h5 class="crate-name mb-0">Product name</h5>
-        <div class="d-flex justify-content-between align-items-center pt-2">
-            <span class="text-sec-dark"><span class="capacity"></span> Kg - <span class="price"></span></span>
-            <button class="subscribe btn icon ripple" data-tooltip="tooltip" title="Abbonati">
-                <i class="mdi dark mdi-bookmark-plus-outline"></i>
-            </button>
-        </div>
-    </div>
-</div>
-
 <!-- PRODUCT MODAL -->
 <div data-template-name="ProductDetailsModal" data-class="modal-product modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -59,34 +42,7 @@
     </div>
 </div>
 
-<!-- CRATE MODAL -->
-<div data-template-name="CrateDetailsModal" data-class="modal-product modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="card-header-image fixed-ratio fr-4-3">
-                <img class="crate-image card-bg" src="images/default_product.png"/>
-                <div class="image-shade-top"></div>
-                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi light mdi-close"></i></button>
-            </div>
-            <div class="card-body">
-                <div class="crate-info">
-                    <h4 class="crate-name mb-1">Product name</h4>
-                    <p class="crate-description text-sec-dark m-0">
-                        Some quick example text to build on the component and make up the bulk of the component's content.
-                    </p>
-                </div>
-            </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <p class="m-0 ml-1"><span class="capacity"></span> Kg - <span class="price"></span></p>
-                <button class="subscribe btn icon ripple" data-tooltip="tooltip" title="Abbonati">
-                <i class="mdi dark mdi-bookmark-plus-outline"></i>
-            </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- QUANTITY MODAL -->
+<!-- CART QUANTITY MODAL -->
 <div data-template-name="ProductQuantityModal" data-class="modal-product-quantity modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 360px;">
@@ -98,7 +54,7 @@
                 <h4 class="text-center">Seleziona la quantità</h4>
                 <div class="d-flex align-items-center mx-3 mb-2">
                     <div class="text-input flex-grow-1">
-                        <input type="number" name="quantity" min="1" placeholder=" " value="1">
+                        <input class="quantity" type="number" name="quantity" min="1" placeholder=" " value="1">
                         <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
                         <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
                     </div>
@@ -115,7 +71,36 @@
     </div>
 </div>
 
-<!-- REMOVE MODAL -->
+<!-- CRATE QUANTITY MODAL -->
+<div data-template-name="ProductCrateQuantityModal" data-class="modal-product-quantity modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-plus-box-outline"></i>
+                <button class="modal-close btn icon ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-center">Seleziona la quantità</h4>
+                <div class="d-flex align-items-center mx-3 mb-2">
+                    <div class="text-input flex-grow-1">
+                        <input class="crate-quantity" type="number" name="quantity" min="1" placeholder=" " value="1">
+                        <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
+                        <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
+                    </div>
+                </div>
+                <p class="text-center m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
+                <div class="loader text-center mt-3">
+                    <?php include("loader.php"); ?>
+                </div>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="add-to-crate btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CART REMOVE MODAL -->
 <div data-template-name="ProductRemoveModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 360px;">
@@ -133,7 +118,7 @@
     </div>
 </div>
 
-<!-- PRODUCT CART ENTRY -->
+<!-- CART ENTRY -->
 <table class="d-none">
     <tr data-template-name="ProductCartEntry" class="d-none">
         <td class="nowrap">
@@ -160,7 +145,7 @@
     </tr>
 </table>
 
-<!-- PRODUCT ORDER ENTRY -->
+<!-- ORDER ENTRY -->
 <div data-template-name="ProductOrderEntry" data-class="product d-flex align-items-center" class="d-none">
     <a href="#" class="product-modal-link">
         <img class="product-image" src="images/default_product.png"/>
@@ -174,34 +159,19 @@
     </div>
 </div>
 
-<!-- CRATE WEEKLY ENTRY -->
+<!-- WEEKLY ENTRY -->
 <table class="d-none">
-    <tr data-template-name="CrateWeeklyEntry" data-class="bg-primary-dark" class="d-none">
-        <th class="nowrap">
-            <a href="#" class="crate-modal-link">
-                <img class="crate-image img-fluid" src="images/default_product.png"/>
-            </a>
-        </th>
-        <th>
-            <p class="crate-name text-sec-dark m-0"></p>
-            <p class="text-sec-dark font-weight-normal m-0">
-                <span class="capacity"></span> <span class="crate-um">Kg</span> - <span class="price"></span>
-            </p>
-        </th>
-        <th class="nowrap actions">
-            <div class="dropdown">
-                <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="mdi dark mdi-dots-vertical"></i>
-                </button>
-                <div class="dropdown-menu">
-                    <a href="#" class="show-remove-modal dropdown-item">Elimina</a>
-                </div>
-            </div>
-        </th>
-    </tr>
+
 </table>
 
-<!-- PRODUCT WEEKLY ENTRY -->
+<!-- COMPATIBLE WITH CRATE ENTRY -->
 <table class="d-none">
-
+    <tr data-template-name="ProductCompatibleWithCrateEntry" class="d-none">
+        <td colspan="4" class="p-0">
+            <button class="show-crate-quantity-modal btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
+                <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
+                <span class="product-name font-weight-normal"></span>
+            </button>
+        </td>
+    </tr>
 </table>
