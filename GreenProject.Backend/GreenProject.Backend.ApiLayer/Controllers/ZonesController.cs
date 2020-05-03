@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Core.Services;
 using Microsoft.AspNetCore.Http;
@@ -21,6 +22,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
+        [KeepInCacheFor(60)]
         public async Task<IActionResult> GetSupportedZones()
         {
             return Ok(await this.zonesService.GetSupportedZones());
