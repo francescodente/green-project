@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Core.Utils.Notifications;
+﻿using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -59,22 +60,10 @@ namespace GreenProject.Backend.ApiLayer.HostedServices
         {
             using (IServiceScope scope = this.scopeFactory.CreateScope())
             {
-                IDataSession data = scope.ServiceProvider.GetRequiredService<IDataSession>();
-                INotificationsService notifications = scope.ServiceProvider.GetRequiredService<INotificationsService>();
+                IReminderService reminderService = scope.ServiceProvider.GetRequiredService<IReminderService>();
 
-                await this.SendAvailableNotifications(data, notifications);
+                await reminderService.CheckSubscriptionReminders(this.settings.SubscriptionReminderTime);
             }
-        }
-
-        private async Task SendAvailableNotifications(IDataSession data, INotificationsService notifications)
-        {
-            DateTime now = DateTime.Now;
-            IEnumerable<Order> ordersToBeNotified = await data.Orders
-                .Where(o => now + this.settings.SubscriptionReminderTime >= o.DeliveryDate)
-                .Where(o => now <= o.DeliveryDate)
-                .Where(o => o.OrderState == OrderState.Pending)
-                .Include(o => o.User) // TODO: check what else needs to be included or if ProjectTo<WeeklyOrderDto>() can be used.
-                .ToArrayAsync();
         }
     }
 }

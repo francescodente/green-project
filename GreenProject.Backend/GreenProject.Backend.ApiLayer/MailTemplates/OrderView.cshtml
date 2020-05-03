@@ -11,7 +11,7 @@
 <p style="margin-bottom: 0;">
     N° ordine: <strong>@order.OrderNumber</strong>
     <br />
-    Data di consegna: <strong>@order.DeliveryDate.ToString()</strong>
+    Data di consegna: <strong>@order.DeliveryDate.ToString("dddd d MMMM", ViewBag.CultureInfo)</strong>
     <br />
     Indirizzo di consegna: <strong>@order.Address.ToFormattedString()</strong>
     <br />
@@ -26,9 +26,14 @@
         <td><img src="@ViewBag.WebRoot/@(item.Image?.Path ?? "/images/MailTemplates/default_product.png")" height="96" width="96" alt="Immagine del prodotto" /></td>
         <td>
             <strong>@item.Name</strong>
-            @if (order.Details.Count > 0)
+
+            @if (order.Details.Count == 2)
             {
-                @:e altri<strong>@(order.Details.Count - 1)</strong>prodotti
+                @:e un altro prodotto
+            }
+            else if (order.Details.Count > 2)
+            {
+                @:e altri <strong>@(order.Details.Count - 1)</strong> prodotti
             }
         </td>
     </tr>

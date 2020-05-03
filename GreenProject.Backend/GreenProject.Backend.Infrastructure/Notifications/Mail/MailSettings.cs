@@ -11,6 +11,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
         public int Port { get; set; }
         public string WebRoot { get; set; }
         public string MailLayoutKey { get; set; }
+        public string CultureInfo { get; set; }
         public IDictionary<MailContext, MailAddressInfo> EmailAddresses { get; set; }
         public IDictionary<NotificationType, MailDescription> EmailDescriptions { get; set; }
     }

@@ -13,6 +13,6 @@
             Il tuo ordine N° <strong>@order.OrderNumber</strong> è stato contrassegnato come completato.
         </p>
         <h4 style="margin: 16px 0 8px 0;">Speriamo di rivederti presto!</h4>
-        @{ await IncludeAsync("MailTemplates/OrderView.cshtml", order); }
+        @{ await IncludeAsync("OrderView.cshtml", order); }
     </td>
 </tr>

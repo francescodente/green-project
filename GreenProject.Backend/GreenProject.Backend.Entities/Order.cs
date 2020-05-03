@@ -21,6 +21,7 @@ namespace GreenProject.Backend.Entities
         public Money Iva { get; set; }
         public Money ShippingCost { get; set; }
         public bool IsSubscription { get; set; }
+        public bool WasReminded { get; set; }
         public int UserId { get; set; }
         public int AddressId { get; set; }
 

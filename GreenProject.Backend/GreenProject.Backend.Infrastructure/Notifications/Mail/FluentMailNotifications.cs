@@ -8,6 +8,7 @@ using RazorLight;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -51,6 +52,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
             viewBag.WebRoot = this.settings.WebRoot;
             viewBag.Title = description.Title;
             viewBag.EmailContent = description.BodyTemplateFile;
+            viewBag.CultureInfo = CultureInfo.GetCultureInfo(this.settings.CultureInfo);
 
             string body = await this.razorEngine.CompileRenderAsync(this.settings.MailLayoutKey, model, viewBag);
 
