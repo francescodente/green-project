@@ -24,6 +24,10 @@ namespace GreenProject.Backend.Core.Logic.Utils
 
         public static IQueryable<Order> UnlockedOnly(this IQueryable<Order> orders, IDateTime dateTime, OrdersSettings settings)
         {
+            if (settings.IgnoreOrdersLock)
+            {
+                return orders;
+            }
             return orders.Where(o => dateTime.Today.AddDays(settings.LockTimeSpanInDays) <= o.DeliveryDate);
         }
     }
