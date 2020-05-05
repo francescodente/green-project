@@ -26,4 +26,5 @@ RUN dotnet publish "GreenProject.Backend.ApiLayer.csproj" -c Release -o /app/pub
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY ["GreenProject.Backend.ApiLayer/MailTemplates/", "./MailTemplates/"]
 ENTRYPOINT ["dotnet", "GreenProject.Backend.ApiLayer.dll"]
