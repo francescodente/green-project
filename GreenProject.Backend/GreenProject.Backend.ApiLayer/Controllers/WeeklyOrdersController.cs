@@ -79,13 +79,13 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpDelete("crates/{orderDetailId}/subproducts/{productId}")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> ProductProductFromCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromRoute] int productId)
+        public async Task<IActionResult> RemoveProductFromCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromRoute] int productId)
         {
             await this.weeklyOrdersService.RemoveProductFromCrate(userId, orderDetailId, productId);
             return NoContent();
         }
 
-        [HttpPut("crates/{orderDetailId}/subproducts/{productId}")]
+        [HttpPut("crates/{orderDetailId}/subproducts")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> UpdateProductInCrate([FromRoute] int userId, [FromRoute] int orderDetailId, [FromBody] QuantifiedProductDto.Input update)
         {

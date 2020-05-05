@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,6 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public interface IServiceInstaller
     {
-        void InstallServices(IServiceCollection services, IConfiguration config);
+        void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env);
     }
 }

@@ -1,0 +1,24 @@
+﻿@using RazorLight
+@using GreenProject.Backend.Entities;
+@inherits TemplatePage<dynamic>
+
+@{
+    Order order = Model.Order;
+}
+
+<tr>
+    <td colspan="12" style="padding: 16px;">
+        <h1>Promemoria settimanale</h1>
+        <p>
+            Il tuo ordine settimanale sarà consegnato il giorno <strong>@order.DeliveryDate.ToString("dddd d MMMM", ViewBag.CultureInfo)</strong>.
+            Clicca sul pulsante sottostante o su <a href="#" style="color: #9CBF22; text-decoration: none;">questo link</a> per visualizzarne e modificarne il contenuto.
+        </p>
+        <p style="text-align: center;">
+            <a href="#" style="display: inline-block; color: #FFF; background-color: #9CBF22; text-decoration: none; padding: 6px 24px; border-radius: 4px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225);">Modifica preferenze</a>
+        </p>
+        <p>
+            Ti invieremo una email quando i tuoi prodotti saranno spediti.
+        </p>
+        @{ await IncludeAsync("OrderView.cshtml", order); }
+    </td>
+</tr>

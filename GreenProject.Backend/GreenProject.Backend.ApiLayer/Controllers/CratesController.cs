@@ -21,6 +21,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
+        [KeepInCacheFor(20)]
         public async Task<IActionResult> GetCrates([FromQuery] PaginationFilter pagination, [FromQuery] PurchasableFilters filters)
         {
             return Ok(await this.cratesService.GetCrates(pagination, filters));

@@ -1,0 +1,17 @@
+﻿@using RazorLight
+@using GreenProject.Backend.Entities;
+@inherits TemplatePage<dynamic>
+
+@{
+    Order order = Model.Order;
+}
+
+<tr>
+    <td colspan="12" style="padding: 16px;">
+        <h1>Ordine in consegna</h1>
+        <p>
+            Il tuo ordine N° <strong>@order.OrderNumber</strong> è in consegna.<br />Puoi consultare le informazioni relative al tuo ordine qui sotto o alla sezione <a href="#" style="color: #9CBF22; text-decoration: none;">Ordini</a> su greenproject.store.
+        </p>
+        @{ await IncludeAsync("OrderView.cshtml", order); }
+    </td>
+</tr>

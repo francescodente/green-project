@@ -9,8 +9,13 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class ImageStorageInstaller : IServiceInstaller
     {
-        public void InstallServices(IServiceCollection services, IConfiguration config)
+        public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
+            if (env is null)
+            {
+                throw new ArgumentNullException(nameof(env));
+            }
+
             services.AddScoped(provider => this.CreateImageStorage(provider, config));
         }
 

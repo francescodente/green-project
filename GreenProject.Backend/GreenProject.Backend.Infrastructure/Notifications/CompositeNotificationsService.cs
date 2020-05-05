@@ -22,14 +22,14 @@ namespace GreenProject.Backend.Infrastructure.Notifications
             return Task.WhenAll(this.services.Select(notification));
         }
 
+        public Task AccountConfirmation(User user)
+        {
+            return this.DelegateRequest(s => s.AccountConfirmation(user));
+        }
+
         public Task OrderAccepted(Order order)
         {
             return this.DelegateRequest(s => s.OrderAccepted(order));
-        }
-
-        public Task OrderReceived(Order order)
-        {
-            return this.DelegateRequest(s => s.OrderReceived(order));
         }
 
         public Task OrderStateChanged(Order order, OrderState oldState)
@@ -47,9 +47,14 @@ namespace GreenProject.Backend.Infrastructure.Notifications
             return this.DelegateRequest(s => s.UserUnsubscribed(user));
         }
 
-        public Task WeeklyOrderReminder(User user)
+        public Task SubscriptionReminder(Order order)
         {
-            return this.DelegateRequest(s => s.WeeklyOrderReminder(user));
+            return this.DelegateRequest(s => s.SubscriptionReminder(order));
+        }
+
+        public Task SupportRequested(string senderEmail, string subject, string body)
+        {
+            return this.DelegateRequest(s => s.SupportRequested(senderEmail, subject, body));
         }
     }
 }

@@ -39,7 +39,7 @@ namespace GreenProject.Backend.Core.Logic
             this.Data.Users.Add(userEntity);
             await this.Data.SaveChangesAsync();
 
-            // TODO: Send confirmation email
+            await this.Notifications.AccountConfirmation(userEntity);
 
             return this.Mapper.Map<UserOutputDto>(userEntity);
         }

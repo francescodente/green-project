@@ -1,0 +1,17 @@
+﻿@using RazorLight
+@using GreenProject.Backend.Entities;
+@inherits TemplatePage<dynamic>
+
+@{
+    User user = Model.User;
+}
+
+<tr>
+    <td colspan="12" style="padding: 16px;">
+        <h1>Cancellazione abbonamento</h1>
+        <p>
+            Ciao @user.Person.FirstName,<br />ti informiamo che il tuo abbonamento settimanale è stato annullato.
+        </p>
+        <h4 style="margin: 16px 0 8px 0;">Speriamo di rivederti presto!</h4>
+    </td>
+</tr>

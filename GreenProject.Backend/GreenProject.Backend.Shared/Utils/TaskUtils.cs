@@ -7,6 +7,18 @@ namespace GreenProject.Backend.Shared.Utils
 {
     public static class TaskUtils
     {
+        public static async Task Then(this Task task, Action taskContinuation)
+        {
+            await task;
+            taskContinuation();
+        }
+
+        public static async Task Then(this Task task, Func<Task> taskContinuation)
+        {
+            await task;
+            await taskContinuation();
+        }
+
         public static async Task Then<T>(this Task<T> task, Action<T> taskContinuation)
         {
             taskContinuation(await task);

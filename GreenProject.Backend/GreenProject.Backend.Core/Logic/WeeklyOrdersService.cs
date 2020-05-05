@@ -1,6 +1,4 @@
 ﻿using AutoMapper.QueryableExtensions;
-using GreenProject.Backend.Contracts.Cart;
-using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.Orders.Delivery;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.WeeklyOrders;
@@ -173,21 +171,20 @@ namespace GreenProject.Backend.Core.Logic
         {
             return this.UpdateDetailsForWeeklyOrder(userId, async order =>
             {
-                Money price = await this.Data
+                Product productEntity = await this.Data
                     .Products
                     .Where(c => c.ItemId == product.ProductId)
-                    .Select(c => new { c.Price })
                     .SingleOptionalAsync()
-                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId)).Price);
+                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId)));
 
                 order.Details
                     .SingleOptional(d => d.ItemId == product.ProductId)
                     .IfPresent(d => d.Quantity += product.Quantity)
                     .IfAbsent(() => order.Details.Add(new OrderDetail
                     {
-                        ItemId = product.ProductId,
+                        Item = productEntity,
                         Quantity = product.Quantity,
-                        Price = price
+                        Price = productEntity.Price
                     }));
             });
         }

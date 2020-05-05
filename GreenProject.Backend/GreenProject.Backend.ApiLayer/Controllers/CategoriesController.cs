@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Categories;
 using GreenProject.Backend.Core.Services;
@@ -18,6 +19,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet]
+        [KeepInCacheFor(60)]
         public async Task<IActionResult> GetCategoryTree()
         {
             return Ok(await this.categoriesService.GetCategoryTree());

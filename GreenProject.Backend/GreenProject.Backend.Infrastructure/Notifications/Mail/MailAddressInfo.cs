@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GreenProject.Backend.Infrastructure.Email
+namespace GreenProject.Backend.Infrastructure.Notifications.Mail
 {
     public class MailAddressInfo
     {
