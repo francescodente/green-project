@@ -17,6 +17,7 @@ namespace GreenProject.Backend.Entities
         public string Description { get; set; }
         public Money Price { get; set; }
         public decimal IvaPercentage { get; set; }
+        public bool IsStarred { get; set; }
         public bool IsEnabled { get; set; }
         public bool IsDeleted { get; set; }
         public int CategoryId { get; set; }

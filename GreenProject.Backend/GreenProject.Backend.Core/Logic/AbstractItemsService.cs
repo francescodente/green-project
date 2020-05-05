@@ -37,9 +37,15 @@ namespace GreenProject.Backend.Core.Logic
             IQueryable<T> items = this.GetDefaultQuery()
                 .VisibleToCustomers();
 
-            items = filters.Categories != null && filters.Categories.Any()
-                ? items.Where(p => filters.Categories.Contains(p.CategoryId))
-                : items;
+            if (filters.Categories != null && filters.Categories.Any())
+            {
+                items = items.Where(p => filters.Categories.Contains(p.CategoryId));
+            }
+
+            if (filters.Starred.HasValue)
+            {
+                items = items.Where(p => p.IsStarred == filters.Starred.Value);
+            }
 
             return items
                 .ProjectTo<TOutput>(this.Mapper.ConfigurationProvider)

@@ -15,7 +15,6 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
         public class Input
         {
             public int CrateId { get; set; }
-            public int Multiplier { get; set; }
             public int? Maximum { get; set; }
         }
     }

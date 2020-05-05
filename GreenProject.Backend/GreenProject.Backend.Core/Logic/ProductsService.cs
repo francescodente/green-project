@@ -40,6 +40,7 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.UnitName = product.UnitName;
                 productEntity.UnitMultiplier = product.UnitMultiplier;
                 productEntity.IvaPercentage = product.IvaPercentage;
+                productEntity.IsStarred = product.IsStarred;
 
                 this.AddCompatibleCrates(productEntity, product.CompatibleCrates);
             });
@@ -62,6 +63,7 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.Name = product.Name;
                 productEntity.Description = product.Description;
                 productEntity.CategoryId = product.CategoryId;
+                productEntity.IsStarred = product.IsStarred;
 
                 productEntity.Price = product.Price.Value;
                 productEntity.IvaPercentage = product.IvaPercentage;
