@@ -24,6 +24,9 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
             entity.Property(e => e.City)
                 .IsRequired()
                 .HasMaxLength(30);
+
+            entity.Property(e => e.ShippingSurcharge)
+                .HasTypeMoney();
         }
     }
 }

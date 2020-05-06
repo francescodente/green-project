@@ -106,21 +106,22 @@ namespace GreenProject.Backend.Core.Logic
 
         private async Task RenewWeeklyOrder(Order order)
         {
-            var destinationData = await this.Data
-                .Users
-                .Where(u => u.UserId == order.UserId)
-                .Select(u => new { AddressId = u.DefaultAddressId.Value, u.DefaultAddress.ZipCode })
+            Address address = await this.Data
+                .Addresses
+                .Where(a => a.UserId == order.UserId)
+                .Where(a => a.User.DefaultAddressId == a.AddressId)
+                .Include(a => a.Zone)
                 .SingleAsync();
 
             DateTime scheduleDate = await scheduler.FindNextAvailableDate(
                 order.DeliveryDate.AddDays(this.settings.WeeklyOrderRenewTimeInDays),
-                destinationData.ZipCode);
+                address.ZipCode);
 
             Order newOrder = new Order
             {
                 UserId = order.UserId,
                 DeliveryDate = scheduleDate,
-                AddressId = destinationData.AddressId,
+                Address = address,
                 Timestamp = this.DateTime.Now,
                 OrderState = OrderState.Pending,
                 IsSubscription = true
@@ -129,6 +130,7 @@ namespace GreenProject.Backend.Core.Logic
             newOrder
                 .Details
                 .Where(d => d.Item is Crate)
+                .Where(d => d.Item.IsEnabled && !d.Item.IsDeleted)
                 .Select(d => d.CreateCopy())
                 .ForEach(newOrder.Details.Add);
 

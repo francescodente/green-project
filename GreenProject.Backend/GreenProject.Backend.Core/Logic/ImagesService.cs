@@ -67,7 +67,7 @@ namespace GreenProject.Backend.Core.Logic
         public async Task<IImageResource> PurchasableImage(int itemId)
         {
             PurchasableItem item = await this.Data
-                .PurchasableItems
+                .ActivePurchasableItems()
                 .Include(p => p.Image)
                 .SingleOptionalAsync(p => p.ItemId == itemId)
                 .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(itemId)));

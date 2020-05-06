@@ -38,6 +38,14 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             return NoContent();
         }
 
+        [HttpPut]
+        [OwnerOrAdminOnly]
+        public async Task<IActionResult> UpdateWeeklyOrderDeliveryInfo([FromRoute] int userId, [FromBody] DeliveryInfoDto.Input deliveryInfo)
+        {
+            await this.weeklyOrdersService.UpdateDeliveryInfo(userId, deliveryInfo);
+            return NoContent();
+        }
+
         [HttpGet]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> GetWeeklyOrderData([FromRoute] int userId)

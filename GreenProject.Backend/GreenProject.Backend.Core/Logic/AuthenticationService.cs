@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Contracts.Users;
@@ -25,6 +26,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<UserOutputDto> RegisterCustomer(RegistrationDto registration)
         {
+            // TODO: what happens if a user deletes his account and registers again with the same email?
             bool emailInUse = await this.Data
                 .Users
                 .AnyAsync(u => u.Email == registration.User.Email);
@@ -57,7 +59,7 @@ namespace GreenProject.Backend.Core.Logic
         public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)
         {
             User user = await this.Data
-                .Users
+                .EnabledUsers()
                 .IncludingRoles()
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
@@ -78,7 +80,7 @@ namespace GreenProject.Backend.Core.Logic
                 .OrElseThrow(() => new TokenRefreshFailedException());
 
             AuthenticationResultDto result = await this.Data
-                .Users
+                .EnabledUsers()
                 .IncludingRoles()
                 .SingleAsync(u => u.UserId == token.UserId)
                 .FlatMap(this.GenerateAuthenticationResult);
@@ -99,7 +101,7 @@ namespace GreenProject.Backend.Core.Logic
         public async Task ChangePassword(int userId, PasswordChangeRequestDto request)
         {
             User user = await this.Data
-                .Users
+                .ActiveUsers()
                 .SingleOptionalAsync(u => u.UserId == userId)
                 .Map(u => u.OrElseThrow(() => NotFoundException.UserWithId(userId)));
 

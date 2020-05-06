@@ -119,7 +119,6 @@ namespace GreenProject.Backend.Core.Logic
         {
             var products = await this.Data
                 .Products
-                .Where(p => !p.IsDeleted)
                 .Where(p => categories.Contains(p.CategoryId))
                 .Select(p => new
                 {
@@ -138,6 +137,7 @@ namespace GreenProject.Backend.Core.Logic
                 .ToArrayAsync();
 
             return products
+                .Where(p => (p.OrderDetailQuantity + p.CrateQuantity) > 0 || !p.Product.IsDeleted)
                 .Select(p => new SupplierProductReportModel
                 {
                     ProductName = p.Product.Name,

@@ -148,7 +148,11 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.Products, o => o.MapFrom(src => src.SubProducts))
                     .ForMember(dst => dst.CrateDescription, o => o.MapFrom(src => (Crate)src.Item));
 
-                CreateMap<OrderDetailSubProduct, QuantifiedProductDto.Output>();
+                CreateMap<OrderDetailSubProduct, BookedCrateProduct>()
+                    .ForMember(dst => dst.Maximum, o => o.MapFrom(src => ((Crate)src.OrderDetail.Item)
+                        .Compatibilities
+                        .Single(c => c.ProductId == src.ProductId)
+                        .Maximum));
             }
         }
     }

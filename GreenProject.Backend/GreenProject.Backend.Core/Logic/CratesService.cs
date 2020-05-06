@@ -2,6 +2,7 @@
 using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Contracts.PurchasableItems;
+using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
@@ -61,7 +62,7 @@ namespace GreenProject.Backend.Core.Logic
 
         protected override IQueryable<Crate> GetDefaultQuery()
         {
-            return this.Data.Crates;
+            return this.Data.ActiveCrates();
         }
 
         public async Task<IEnumerable<CompatibilityDto.Output>> GetCompatibleProducts(int crateId)

@@ -46,26 +46,26 @@ namespace GreenProject.Backend.Core.Logic
         {
             User user = await this.RequireUserById(userId, q => q
                 .IncludingCart()
-                .IncludingCustomerRoles());
+                .IncludingCustomerRoles()
+                .Include(u => u.Addresses)
+                    .ThenInclude(a => a.Zone));
 
             if (!user.CartItems.Any())
             {
                 throw new CartEmptyException();
             }
 
-            string zipCode = await this.Data
+            Address address = user
                 .Addresses
-                .Where(a => a.AddressId == deliveryInfo.AddressId)
-                .Where(a => a.UserId == userId)
-                .Select(a => a.ZipCode)
-                .SingleOptionalAsync()
-                .Map(z => z.OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId)));
+                .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
+                .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
+
             DateTime scheduleDate = await this.scheduler
-                .FindNextAvailableDate(this.DateTime.Today.AddDays(this.settings.LockTimeSpanInDays), zipCode);
+                .FindNextAvailableDate(this.DateTime.Today.AddDays(this.settings.LockTimeSpanInDays), address.ZipCode);
             
             Order order = new Order
             {
-                AddressId = deliveryInfo.AddressId,
+                Address = address,
                 DeliveryDate = scheduleDate,
                 IsSubscription = false,
                 Notes = deliveryInfo.Notes,
@@ -75,9 +75,9 @@ namespace GreenProject.Backend.Core.Logic
 
             CustomerType customerType = user.GetCustomerType().Value;
             user.CartItems.Select(c => c.CreateOrderDetail(customerType)).ForEach(order.Details.Add);
-            this.pricing.AssignPricesToOrder(order);
             user.CartItems.Clear();
 
+            this.pricing.AssignPricesToOrder(order);
             user.Orders.Add(order);
 
             await this.Data.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace GreenProject.Backend.Core.Logic
         public async Task<CartDto> GetCartDetails(int userId)
         {
             CartDto output = await this.Data
-                .Users
+                .ActiveUsers()
                 .Where(u => u.UserId == userId)
                 .ProjectTo<CartDto>(this.Mapper.ConfigurationProvider)
                 .SingleOptionalAsync()
@@ -104,7 +104,7 @@ namespace GreenProject.Backend.Core.Logic
         public async Task InsertCartItem(int userId, QuantifiedProductDto.Input item)
         {
             Product product = await this.Data
-                .Products
+                .VisibleProducts()
                 .SingleOptionalAsync(p => p.ItemId == item.ProductId)
                 .Map(op => op.OrElseThrow(() => NotFoundException.PurchasableItemWithId(item.ProductId)));
 
@@ -136,7 +136,7 @@ namespace GreenProject.Backend.Core.Logic
         public Task<int> GetCartSize(int userId)
         {
             return this.Data
-                .Users
+                .ActiveUsers()
                 .Where(u => u.UserId == userId)
                 .Select(u => new { Size = u.CartItems.Count() })
                 .SingleOptionalAsync()

@@ -25,12 +25,11 @@ namespace GreenProject.Backend.Core.Logic.Utils
             this.Request = request;
         }
 
-        protected Task<IOptional<User>> FindUserById(int userId, QueryWrapper<User> queryWrapper = null)
+        private Task<IOptional<User>> FindUserById(int userId, QueryWrapper<User> queryWrapper = null)
         {
             return this.Data
-                .Users
+                .ActiveUsers()
                 .WrapIfPresent(queryWrapper)
-                .Where(u => !u.IsDeleted)
                 .SingleOptionalAsync(u => u.UserId == userId);
         }
 

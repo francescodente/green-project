@@ -9,7 +9,6 @@ using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
-using GreenProject.Backend.Entities.Utils;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -36,7 +35,7 @@ namespace GreenProject.Backend.Core.Logic
         private Task<bool> IsSubscribed(int userId)
         {
             return this.Data
-                .Users
+                .ActiveUsers()
                 .Where(u => u.UserId == userId)
                 .Select(u => new { u.IsSubscribed })
                 .SingleOptionalAsync()
@@ -75,7 +74,11 @@ namespace GreenProject.Backend.Core.Logic
         {
             await this.RequireSubscription(userId);
 
-            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q.Include(o => o.Details).ThenInclude(d => d.Item));
+            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q
+                .Include(o => o.Details)
+                    .ThenInclude(d => d.Item)
+                .Include(o => o.Address)
+                    .ThenInclude(a => a.Zone));
 
             await updateAction(order);
 
@@ -87,7 +90,8 @@ namespace GreenProject.Backend.Core.Logic
         public async Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
             User user = await this.RequireUserById(userId, q => q
-                .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));
+                .Include(u => u.Addresses)
+                    .ThenInclude(a => a.Zone));
 
             if (user.IsSubscribed)
             {
@@ -95,7 +99,9 @@ namespace GreenProject.Backend.Core.Logic
             }
             user.IsSubscribed = true;
 
-            Address address = user.Addresses.SingleOptional().OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
+            Address address = user.Addresses
+                .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
+                .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
 
             Order order = new Order
             {
@@ -285,20 +291,28 @@ namespace GreenProject.Backend.Core.Logic
         public async Task UpdateDeliveryInfo(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
             User user = await this.RequireUserById(userId, q => q
-               .IncludeFilter(u => u.Addresses.Where(a => a.AddressId == deliveryInfo.AddressId)));
+               .Include(u => u.Addresses)
+                    .ThenInclude(a => a.Zone));
 
             if (!user.IsSubscribed)
             {
                 throw new NotSubscribedException();
             }
 
-            Address address = user.Addresses.SingleOptional().OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
+            Address address = user
+                .Addresses
+                .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
+                .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
 
-            Order order = await this.FindUnlockedSubscriptionOrder(userId);
+            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q
+                .Include(o => o.Details)
+                    .ThenInclude(d => d.Item));
 
             order.DeliveryDate = await this.scheduler.FindNextAvailableDate(order.DeliveryDate, address.ZipCode);
             order.Address = address;
             order.Notes = deliveryInfo.Notes;
+
+            this.pricing.AssignPricesToOrder(order);
 
             await this.Data.SaveChangesAsync();
         }
