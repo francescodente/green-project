@@ -176,7 +176,7 @@
 
 #user-weekly-delivery .summary-preferences span {
     font-weight: bold;
-    color: var(--col-text-dark);
+    color: var(--col-text-sec-dark);
 }
 
 #modal-product-add .table-wrapper {

@@ -27,8 +27,8 @@
                 <div id="account-content-col" class="col-12 col-lg-9">
 
                     <div class="alert alert-accent" role="alert">
-                        <p class="summary-preferences text-sec-dark m-0">
-                            La prossima consegna include <span class="crate-count">1</span> cassette e <span class="product-count">2</span> prodotti sfusi, per un totale di <span class="total">0.00€</span>.<br/>Sarà effettuata il <span class="delivery-date">1 Gen 2020</span> all'indirizzo <span class="delivery-address">Viale della Via 123, 47522 Cesena (FC)</span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
+                        <p class="summary-preferences text-dis-dark m-0">
+                            La prossima consegna include <span class="crate-count"></span> cassette e <span class="product-count"></span> prodotti sfusi, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method"></span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
                         </p>
                     </div>
 
@@ -180,7 +180,7 @@
                     <!-- SUBSCRIPTION OPTIONS -->
                     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false">
                         <h4 class="m-0">Opzioni abbonamento</h4>
-                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
+                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>

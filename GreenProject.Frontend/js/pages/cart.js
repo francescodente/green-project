@@ -35,7 +35,7 @@ $(document).ready(function() {
             $(".total").html(Utils.formatCurrency(data.prices.total));
         }
     })
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); })
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() })
     .finally(function(data) { $("#modal-loading").fadeModal() });
 
     // Cart confirm

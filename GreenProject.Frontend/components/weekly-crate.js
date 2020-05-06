@@ -12,7 +12,7 @@ class WeeklyCrate extends Entity {
 
         // Create product entries
         for (let i = 0; i < this.products.length; i++) {
-            this.products[i] = new Product(this.products[i], this.products[i].quantity);
+            this.products[i] = new Product(this.products[i].product, this.products[i].quantity);
         }
 
         let weeklyCrate = this;
@@ -26,11 +26,15 @@ class WeeklyCrate extends Entity {
             $(weeklyCrate.html[k]).find("thead").append($(weeklyCrate.crateDescription.html.weeklyEntry));
 
             // Add product entries
-            //this.details.forEach(product => product.html.orderEntry.appendTo($(order.html[k]).find(".order-products-list")));
+            for (let i = weeklyCrate.products.length - 1; i >= 0; i--) {
+                weeklyCrate.products[i].html.inCrateEntry.prependTo($(weeklyCrate.html[k]).find(".crate-products"));
+            }
 
             // Add event listeners
             $(weeklyCrate.html[k]).find(".add-product").click(function() { weeklyCrate.showAddProductModal(); });
         }
+
+        console.log(this);
 
         this.addCompatibleProducts();
     }
@@ -38,6 +42,7 @@ class WeeklyCrate extends Entity {
     // Get and add crate compatible products to modal
     addCompatibleProducts() {
         let weeklyCrate = this;
+        $(weeklyCrate.html.addProductModal).find(".compatible-products-loader").addClass("d-block");
         API.getCrateCompatibilities(weeklyCrate.crateDescription.crateId)
         .then(function(data) {
             weeklyCrate.compatibleProducts = [];
@@ -48,7 +53,10 @@ class WeeklyCrate extends Entity {
                 product.html.compatibleWithCrateEntry.appendTo($(weeklyCrate.html.addProductModal).find(".compatible-products tbody"));
             });
         })
-        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() })
+        .finally(function(data) {
+            $(weeklyCrate.html.addProductModal).find(".compatible-products-loader").removeClass("d-block");
+        });
     }
 
     showAddProductModal() {

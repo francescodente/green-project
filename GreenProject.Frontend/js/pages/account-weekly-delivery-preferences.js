@@ -12,13 +12,15 @@ $(document).ready(function() {
             // TODO handle no products in weekly order
         } else {
 
+            data.deliveryInfo.address = new Address(data.deliveryInfo.address);
+
             console.log(data);
 
             // Setup summary
             $(".crate-count").html(data.crates.length);
             $(".product-count").html(data.extraProducts.length);
-            $(".delivery-date").html("data");
-            $(".delivery-address").html("indirizzo");
+            $(".delivery-date").html(Utils.formatDate(data.deliveryInfo.deliveryDate));
+            $(".delivery-address").html(data.deliveryInfo.address.addressString);
 
             // Set prices
             $(".subtotal").html(Utils.formatCurrency(data.prices.subtotal));

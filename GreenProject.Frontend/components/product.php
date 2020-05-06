@@ -5,7 +5,7 @@
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
     <div class="card-body">
-        <h5 class="product-name mb-0">Product name</h5>
+        <h5 class="product-name mb-0"></h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
             <button class="show-quantity-modal btn icon ripple" data-tooltip="tooltip" title="Aggiungi al carrello">
@@ -26,17 +26,16 @@
             </div>
             <div class="card-body">
                 <div class="product-info">
-                    <h4 class="product-name mb-1">Product name</h4>
-                    <p class="product-description text-sec-dark m-0">
-                        Some quick example text to build on the component and make up the bulk of the component's content.
-                    </p>
+                    <h4 class="product-name mb-1"></h4>
+                    <p class="product-description text-sec-dark mb-2"></p>
+                    <p class="m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
                 </div>
             </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <p class="m-0 ml-1"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
-                <button class="show-quantity-modal btn icon ripple" data-dismiss="modal" data-tooltip="tooltip" title="Aggiungi al carrello">
-                    <i class="mdi dark mdi-cart-plus"></i>
-                </button>
+            <div class="card-footer">
+                <div class="d-flex flex-column m-0">
+                    <button class="show-quantity-modal btn accent ripple">Aggiungi al carrello</button>
+                    <button class="req-subscription show-crate-quantity-modal btn outline ripple mt-2">Aggiungi all'ordine settimanale</button>
+                </div>
             </div>
         </div>
     </div>
@@ -118,6 +117,24 @@
     </div>
 </div>
 
+<!-- CRATE REMOVE MODAL -->
+<div data-template-name="ProductCrateRemoveModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-delete-empty"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Sei sicuro di voler rimuovere questo prodotto dalla cassetta?</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                <button class="remove-from-crate btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- CART ENTRY -->
 <table class="d-none">
     <tr data-template-name="ProductCartEntry" class="d-none">
@@ -159,9 +176,31 @@
     </div>
 </div>
 
-<!-- WEEKLY ENTRY -->
+<!-- PRODUCT IN CRATE ENTRY -->
 <table class="d-none">
-
+    <tr data-template-name="ProductInCrateEntry" class="d-none">
+        <td class="nowrap">
+            <a href="#" class="product-modal-link">
+                <img class="product-image img-fluid" src="images/default_product.png"/>
+            </a>
+        </td>
+        <td>
+            <p class="product-name m-0">Product name</p>
+            <p class="text-sec-dark m-0">
+                <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
+            </p>
+        </td>
+        <td class="nowrap actions">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="show-crate-quantity-modal btn icon ripple mr-2" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
+                    <i class="mdi dark mdi-pencil"></i>
+                </button>
+                <button type="button" class="show-crate-remove-modal btn icon ripple" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">
+                    <i class="mdi dark mdi-close"></i>
+                </button>
+            </div>
+        </td>
+    </tr>
 </table>
 
 <!-- COMPATIBLE WITH CRATE ENTRY -->

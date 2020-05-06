@@ -32,23 +32,23 @@ class APIUtilsClass {
             //console.log("token ok");
             return authData;
         }
-        //console.log("token expired");
+        console.log("token expired");
         let data = {
             "token": authData.token,
             "refreshToken": authData.refreshToken
         };
-        //console.log(data);
+        console.log(data);
         API.isTokenRefreshing = true;
         API.tokenPromise = API.refreshToken(data);
         try {
             authData = await API.tokenPromise;
             localStorage.setObject("authData", authData);
-            //console.log("token refreshed");
+            console.log("token refreshed");
             return authData;
         } catch (e) {
-            //console.log(e);
-            //console.log("token refresh failed -> logout");
-            API.logout();
+            console.log(e);
+            console.log("token refresh failed -> logout");
+            //API.logout();
             return null;
         } finally {
             API.isTokenRefreshing = false;

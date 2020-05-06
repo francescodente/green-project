@@ -10,8 +10,10 @@ class Product extends Purchasable {
         this.html.detailsModal = Entity.getTemplate("ProductDetailsModal");
         this.html.quantityModal = Entity.getTemplate("ProductQuantityModal");
         this.html.removeModal = Entity.getTemplate("ProductRemoveModal");
+        this.html.crateRemoveModal = Entity.getTemplate("ProductCrateRemoveModal");
         this.html.cartEntry = Entity.getTemplate("ProductCartEntry");
         this.html.orderEntry = Entity.getTemplate("ProductOrderEntry");
+        this.html.inCrateEntry = Entity.getTemplate("ProductInCrateEntry");
         this.html.compatibleWithCrateEntry = Entity.getTemplate("ProductCompatibleWithCrateEntry");
         this.html.crateQuantityModal = Entity.getTemplate("ProductCrateQuantityModal");
 
@@ -22,6 +24,8 @@ class Product extends Purchasable {
 
         let product = this;
         let imageUrl = API.basePath + this.imageUrl;
+        let userData = localStorage.getObject("userData");
+        let isSubscribed = userData == null ? false : userData.isSubscribed;
 
         for (let k in product.html) {
 
@@ -42,13 +46,20 @@ class Product extends Purchasable {
                 $(product.html[k]).find("[name='quantity']").attr("max", product.maxQuantity);
             }
 
+            // Remove items that require subscription if user is not subscribed
+            if (!isSubscribed) {
+                $(product.html[k]).find(".req-subscription").remove();
+            }
+
             // Add event listeners
             $(product.html[k]).find(".product-modal-link").click(function() { product.showDetailsModal(); });
             $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
             $(product.html[k]).find(".show-crate-quantity-modal").click(function() { product.showCrateQuantityModal(); });
             $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
+            $(product.html[k]).find(".show-crate-remove-modal").click(function() { product.showCrateRemoveModal(); });
             $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
             $(product.html[k]).find(".remove-from-cart").click(function() { product.removeFromCart(); });
+            $(product.html[k]).find(".remove-from-crate").click(function() { product.removeFromCrate(); });
             $(product.html[k]).find(".add-to-crate").click(function() { product.addToCrate(); });
             $(product.html[k]).on("change paste keyup", "input.quantity", function() {
                 product.reactToQuantityChange(product.html.quantityModal);
@@ -84,7 +95,7 @@ class Product extends Purchasable {
 
     showCrateRemoveModal() {
         console.log("show crate remove modal");
-        //showModal($(this.html.quantityModal));
+        this.html.crateRemoveModal.showModal();
     }
 
     reactToQuantityChange(quantityModal) {

@@ -5,7 +5,7 @@
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
     <div class="card-body">
-        <h5 class="crate-name mb-0">Product name</h5>
+        <h5 class="crate-name mb-0"></h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="capacity"></span> Kg - <span class="price"></span></span>
             <button class="subscribe btn icon ripple" data-tooltip="tooltip" title="Abbonati">
@@ -26,17 +26,13 @@
             </div>
             <div class="card-body">
                 <div class="crate-info">
-                    <h4 class="crate-name mb-1">Product name</h4>
-                    <p class="crate-description text-sec-dark m-0">
-                        Some quick example text to build on the component and make up the bulk of the component's content.
-                    </p>
+                    <h4 class="crate-name mb-1"></h4>
+                    <p class="crate-description text-sec-dark mb-2"></p>
+                    <p class="m-0"><span class="capacity"></span> Kg - <span class="price"></span></p>
                 </div>
             </div>
-            <div class="card-footer d-flex justify-content-between align-items-center">
-                <p class="m-0 ml-1"><span class="capacity"></span> Kg - <span class="price"></span></p>
-                <button class="subscribe btn icon ripple" data-tooltip="tooltip" title="Abbonati">
-                <i class="mdi dark mdi-bookmark-plus-outline"></i>
-            </button>
+            <div class="card-footer d-flex flex-column">
+                <button class="subscribe btn accent ripple">Abbonati</button>
             </div>
         </div>
     </div>

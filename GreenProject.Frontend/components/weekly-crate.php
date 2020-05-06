@@ -2,7 +2,7 @@
 <div data-template-name="WeeklyCrateTable" data-class="product-group-table table-wrapper table-responsive" class="d-none">
     <table class="table">
         <thead></thead>
-        <tbody>
+        <tbody class="crate-products">
             <tr>
                 <td colspan="4" class="p-0">
                     <button class="btn add-product ripple">
@@ -28,6 +28,11 @@
                 </button>
             </div>
             <div class="modal-body p-0">
+
+                <div class="compatible-products-loader loader text-center my-5">
+                    <?php include("loader.php"); ?>
+                </div>
+
                 <div class="compatible-products product-group-table table-wrapper table-responsive">
                     <table class="table">
                         <tbody></tbody>
