@@ -16,6 +16,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public decimal IvaPercentage { get; set; }
             public int Capacity { get; set; }
             public string ImageUrl { get; set; }
+            public bool IsStarred { get; set; }
             public int CategoryId { get; set; }
         }
 
@@ -26,6 +27,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public Money Price { get; set; }
             public decimal IvaPercentage { get; set; }
             public int Capacity { get; set; }
+            public bool IsStarred { get; set; }
         }
     }
 }

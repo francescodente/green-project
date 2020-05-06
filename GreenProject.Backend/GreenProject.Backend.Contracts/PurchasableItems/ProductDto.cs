@@ -18,6 +18,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public decimal UnitMultiplier { get; set; }
             public decimal IvaPercentage { get; set; }
             public string ImageUrl { get; set; }
+            public bool IsStarred { get; set; }
             public int CategoryId { get; set; }
         }
 
@@ -29,6 +30,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public UnitName UnitName { get; set; }
             public decimal UnitMultiplier { get; set; }
             public decimal IvaPercentage { get; set; }
+            public bool IsStarred { get; set; }
             public int CategoryId { get; set; }
             public IEnumerable<CompatibilityDto.Input> CompatibleCrates { get; set; }
         }
@@ -39,6 +41,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public string Description { get; set; }
             public Money Price { get; set; }
             public decimal IvaPercentage { get; set; }
+            public bool IsStarred { get; set; }
             public int CategoryId { get; set; }
             public IEnumerable<CompatibilityDto.Input> CompatibleCrates { get; set; }
         }

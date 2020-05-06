@@ -23,6 +23,14 @@ namespace GreenProject.Backend.ApiLayer.Filters
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
+            CacheSettings cacheSettings = context.HttpContext.RequestServices.GetRequiredService<CacheSettings>();
+
+            if (!cacheSettings.IsEnabled)
+            {
+                await next();
+                return;
+            }
+
             ICacheService cacheService = context.HttpContext.RequestServices.GetRequiredService<ICacheService>();
 
             string key = this.GenerateKeyFromRequest(context.HttpContext.Request);

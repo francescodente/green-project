@@ -22,6 +22,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
             this.InstallConfiguration<NotificationsDaemonSettings>(services, config);
             this.InstallConfiguration<OrdersSettings>(services, config);
             this.InstallConfiguration<CsvSettings>(services, config);
+            this.InstallConfiguration<CacheSettings>(services, config);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config)
