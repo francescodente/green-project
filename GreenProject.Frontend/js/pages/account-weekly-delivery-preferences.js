@@ -1,9 +1,11 @@
 var weeklyCrates = [];
 var weeklyExtras = [];
+var deliveryInfo = [];
+var starredProducts = [];
 
 $(document).ready(function() {
 
-    // Get orders
+    // Get weekly order
     $("#modal-loading").showModal();
     API.getWeeklyOrder(localStorage.getObject("authData").userId)
     .then(function(data) {
@@ -13,6 +15,7 @@ $(document).ready(function() {
         } else {
 
             data.deliveryInfo.address = new Address(data.deliveryInfo.address);
+            deliveryInfo = data.deliveryInfo;
 
             console.log(data);
 
@@ -38,8 +41,9 @@ $(document).ready(function() {
 
             });
 
-            // TODO select address and add notes
+            selectAddress();
 
+            // TODO add notes
         }
 
         /*if (data.results.length == 0) {
@@ -55,8 +59,49 @@ $(document).ready(function() {
     })
     .catch(function(jqXHR) {
         console.log(jqXHR);
-        //$(".orders-error").removeClass("d-none");
+        new ErrorModal(jqXHR).show();
     })
     .finally(function(data) { $("#modal-loading").fadeModal() });
 
+    // Get starred products
+    $("#starred-products-loader").show();
+    $(".starred-products").hide();
+    API.getProducts(null, 0, 30, true)
+    .then(function(data) {
+        console.log(data);
+
+        if (data.results.length == 0) {
+
+        } else {
+            // Create product objects
+            data.results.forEach(json => {
+                let product = new Product(json);
+                starredProducts.push(product);
+                product.html.starredEntry.appendTo(".starred-products tbody");
+            });
+
+            console.log(starredProducts);
+        }
+    })
+    .catch(function(jqXHR) {
+        console.log(jqXHR);
+        new ErrorModal(jqXHR).show();
+    })
+    .finally(function(data) {
+        $("#starred-products-loader").hide();
+        $(".starred-products").show();
+    });
+
 });
+
+async function selectAddress() {
+    let addresses = await addressesPromise;
+    // Uncheck default address
+    addresses.map(address => address.html.richRadio)
+             .filter(address => address.hasClass("default"))[0]
+             .removeClass("default")
+             .find("[type='radio']").prop("checked", false);
+    // Check delivery address
+    addresses.filter(address => address.addressId == deliveryInfo.address.addressId)[0]
+             .html.richRadio.find("[type='radio']").prop("checked", true);
+}

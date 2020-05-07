@@ -7,13 +7,15 @@ class WeeklyCrate extends Entity {
         this.html.main = Entity.getTemplate("WeeklyCrateTable");
         this.html.addProductModal = Entity.getTemplate("WeeklyCrateAddProductModal");
 
-        // Create crate entry
-        this.crateDescription = new Crate(this.crateDescription);
-
         // Create product entries
+        let crateQuantity = 0;
         for (let i = 0; i < this.products.length; i++) {
-            this.products[i] = new Product(this.products[i].product, this.products[i].quantity);
+            crateQuantity += this.products[i].quantity;
+            this.products[i] = new Product(this.products[i].product, this.products[i].quantity / 2);
         }
+
+        // Create crate entry
+        this.crateDescription = new Crate(this.crateDescription, crateQuantity);
 
         let weeklyCrate = this;
 
@@ -34,8 +36,6 @@ class WeeklyCrate extends Entity {
             $(weeklyCrate.html[k]).find(".add-product").click(function() { weeklyCrate.showAddProductModal(); });
         }
 
-        console.log(this);
-
         this.addCompatibleProducts();
     }
 
@@ -43,6 +43,7 @@ class WeeklyCrate extends Entity {
     addCompatibleProducts() {
         let weeklyCrate = this;
         $(weeklyCrate.html.addProductModal).find(".compatible-products-loader").addClass("d-block");
+        $(weeklyCrate.html.addProductModal).find(".compatible-products").hide();
         API.getCrateCompatibilities(weeklyCrate.crateDescription.crateId)
         .then(function(data) {
             weeklyCrate.compatibleProducts = [];
@@ -56,6 +57,7 @@ class WeeklyCrate extends Entity {
         .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() })
         .finally(function(data) {
             $(weeklyCrate.html.addProductModal).find(".compatible-products-loader").removeClass("d-block");
+            $(weeklyCrate.html.addProductModal).find(".compatible-products").show();
         });
     }
 

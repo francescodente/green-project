@@ -42,9 +42,7 @@
 <table class="d-none">
     <tr data-template-name="CrateWeeklyEntry" data-class="bg-primary-dark" class="d-none">
         <th class="nowrap">
-            <a href="#" class="crate-modal-link">
-                <img class="crate-image img-fluid" src="images/default_product.png"/>
-            </a>
+            <img class="crate-image img-fluid" src="images/default_product.png"/>
         </th>
         <th>
             <p class="crate-name text-sec-dark m-0"></p>

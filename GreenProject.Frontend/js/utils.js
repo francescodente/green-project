@@ -125,6 +125,9 @@ class UtilsClass {
 
     // Format the given decimal number
     formatDecimal(value, nPlaces) {
+        if (nPlaces == "auto") {
+            return value.toString().replace(".", ",");
+        }
         return value.toFixed(nPlaces).replace(".", ",");
     }
 

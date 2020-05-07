@@ -1,7 +1,8 @@
 class Crate extends Purchasable {
 
-    constructor(json) {
+    constructor(json, occupiedSlots) {
         super(json);
+        this.occupiedSlots = occupiedSlots;
 
         // Add templates
         this.html.main = Entity.getTemplate("CrateCard");
@@ -11,8 +12,11 @@ class Crate extends Purchasable {
 
         let crate = this;
         let imageUrl = API.basePath + this.imageUrl;
-        let capacity = Utils.formatDecimal(this.capacity, 2);
         let price = Utils.formatCurrency(this.price);
+        let capacity = Utils.formatDecimal(this.capacity / 2, "auto");
+        if (occupiedSlots != null) {
+            capacity = Utils.formatDecimal(occupiedSlots / 2, "auto") + "/" + capacity;
+        }
 
         for (let k in crate.html) {
 
@@ -20,7 +24,11 @@ class Crate extends Purchasable {
             $(crate.html[k]).find('[data-tooltip="tooltip"]').tooltip();
 
             // Replace values in templates
-            $(crate.html[k]).find(".crate-name").html(this.name);
+            if (occupiedSlots == 0) {
+                $(crate.html[k]).find(".crate-name").html(this.name + " (vuota)");
+            } else {
+                $(crate.html[k]).find(".crate-name").html(this.name);
+            }
             $(crate.html[k]).find(".crate-description").html(this.description);
             if (this.imageUrl != null) {
                 $(crate.html[k]).find(".crate-image").attr("src", imageUrl);
@@ -30,7 +38,10 @@ class Crate extends Purchasable {
             $(crate.html[k]).find(".price").html(price);
 
             // Add event listeners
-            $(crate.html[k]).find(".crate-modal-link").click(function() { crate.showDetailsModal(); });
+            $(crate.html[k]).find(".crate-modal-link").click(function(e) {
+                e.preventDefault();
+                crate.showDetailsModal();
+            });
             $(crate.html[k]).find(".subscribe").click(function() { crate.addToPreferences(); });
             $(crate.html[k]).find(".show-remove-modal").click(function() { crate.showRemoveModal(); });
             $(crate.html[k]).find(".remove-from-preferences").click(function() { crate.removeFromPreferences(); });

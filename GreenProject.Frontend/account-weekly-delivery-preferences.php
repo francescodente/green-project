@@ -28,7 +28,7 @@
 
                     <div class="alert alert-accent" role="alert">
                         <p class="summary-preferences text-dis-dark m-0">
-                            La prossima consegna include <span class="crate-count"></span> cassette e <span class="product-count"></span> prodotti sfusi, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method"></span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
+                            La prossima consegna include <span class="crate-count"></span> cassette e <span class="product-count"></span> prodotti sfusi, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
                         </p>
                     </div>
 
@@ -276,25 +276,14 @@
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="product-group-table products table-wrapper table-responsive">
+
+                    <div id="starred-products-loader" class="loader text-center my-5">
+                        <?php include("loader.php"); ?>
+                    </div>
+
+                    <div class="starred-products product-group-table products table-wrapper table-responsive">
                         <table class="table">
-                            <tbody>
-                                <?php
-                                for ($i = 0; $i < 20; $i++) {
-                                    ?>
-                                    <tr>
-                                        <td colspan="4" class="p-0">
-                                            <button class="btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
-                                                <img class="product-image img-fluid mr-3" src="images/example_product.jpg"/>
-                                                <span class="font-weight-normal mr-auto">Product name</span>
-                                                <span class="font-weight-normal text-sec-dark mr-3">0.00€/Kg</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>

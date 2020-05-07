@@ -180,9 +180,7 @@
 <table class="d-none">
     <tr data-template-name="ProductInCrateEntry" class="d-none">
         <td class="nowrap">
-            <a href="#" class="product-modal-link">
-                <img class="product-image img-fluid" src="images/default_product.png"/>
-            </a>
+            <img class="product-image img-fluid" src="images/default_product.png"/>
         </td>
         <td>
             <p class="product-name m-0">Product name</p>
@@ -206,10 +204,23 @@
 <!-- COMPATIBLE WITH CRATE ENTRY -->
 <table class="d-none">
     <tr data-template-name="ProductCompatibleWithCrateEntry" class="d-none">
-        <td colspan="4" class="p-0">
+        <td class="p-0">
             <button class="show-crate-quantity-modal btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
                 <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
                 <span class="product-name font-weight-normal"></span>
+            </button>
+        </td>
+    </tr>
+</table>
+
+<!-- STARRED WEEKLY ENTRY -->
+<table class="d-none">
+    <tr data-template-name="StarredProductEntry" class="d-none">
+        <td class="p-0">
+            <button class="btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
+                <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
+                <span class="product-name font-weight-normal mr-auto"></span>
+                <span class="font-weight-normal text-sec-dark mr-3"><span class="multiplier font-weight-normal"></span> <span class="unit font-weight-normal"></span> - <span class="price font-weight-normal"></span></span>
             </button>
         </td>
     </tr>

@@ -16,6 +16,7 @@ class Product extends Purchasable {
         this.html.inCrateEntry = Entity.getTemplate("ProductInCrateEntry");
         this.html.compatibleWithCrateEntry = Entity.getTemplate("ProductCompatibleWithCrateEntry");
         this.html.crateQuantityModal = Entity.getTemplate("ProductCrateQuantityModal");
+        this.html.starredEntry = Entity.getTemplate("StarredProductEntry");
 
         // Save formatted fields
         this.formattedMultiplier = (this.unitMultiplier * this.quantity).toString().replace(".", ",");
@@ -52,7 +53,10 @@ class Product extends Purchasable {
             }
 
             // Add event listeners
-            $(product.html[k]).find(".product-modal-link").click(function() { product.showDetailsModal(); });
+            $(product.html[k]).find(".product-modal-link").click(function(e) {
+                e.preventDefault();
+                product.showDetailsModal();
+            });
             $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
             $(product.html[k]).find(".show-crate-quantity-modal").click(function() { product.showCrateQuantityModal(); });
             $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });

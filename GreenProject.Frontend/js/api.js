@@ -199,16 +199,21 @@ class APIClass {
 
     // Products
 
-    getProducts(categories, pageNumber = 0, pageSize = 30) {
-        if (categories[0] == 1) {
-            return this.getCrates(pageNumber, pageSize);
-        }
+    getProducts(categories, pageNumber = 0, pageSize = 30, isStarred = null) {
         let searchParams = new URLSearchParams();
+        if (categories) {
+            if (categories[0] == 1) {
+                return this.getCrates(pageNumber, pageSize);
+            }
+            categories.forEach(category => {
+                searchParams.append("Categories", category);
+            });
+        }
         searchParams.append("PageNumber", pageNumber);
         searchParams.append("PageSize", pageSize);
-        categories.forEach(category => {
-            searchParams.append("Categories", category);
-        });
+        if (isStarred != null) {
+            searchParams.append("Starred", isStarred);
+        }
         return this.get("products?" + searchParams.toString());
     }
 
