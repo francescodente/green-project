@@ -9,11 +9,14 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class ProductModel : IEntityTypeConfiguration<Product>
     {
+        private const int UnitMultiplierPrecision = 8;
+        private const int UnitMultiplierScale = 4;
+
         public void Configure(EntityTypeBuilder<Product> entity)
         {
             entity.HasBaseType<PurchasableItem>();
 
-            entity.Property(e => e.UnitMultiplier).HasColumnType("decimal(8, 4)");
+            entity.Property(e => e.UnitMultiplier).HasTypeDecimal(UnitMultiplierPrecision, UnitMultiplierScale);
         }
     }
 }

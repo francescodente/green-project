@@ -32,7 +32,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .HasMaxLength(CodeSize);
 
             entity.Property(e => e.DateOfBirth)
-                .HasColumnType("date");
+                .HasTypeDate();
 
             entity.HasOne(d => d.User)
                 .WithOne(p => p.Person)

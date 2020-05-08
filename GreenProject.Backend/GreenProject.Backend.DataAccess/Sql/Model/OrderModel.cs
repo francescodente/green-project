@@ -30,11 +30,11 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .ValueGeneratedOnAdd()
                 .HasComputedColumnSql($"{YearFormat} + {DayFormat} + {IdFormat}");
 
-            entity.Property(e => e.DeliveryDate).HasColumnType("date");
+            entity.Property(e => e.DeliveryDate).HasTypeDate();
 
             entity.Property(e => e.Notes).HasMaxLength(NotesSize);
 
-            entity.Property(e => e.Timestamp).HasColumnType("datetime");
+            entity.Property(e => e.Timestamp).HasTypeDateTime();
 
             entity.Property(e => e.Subtotal).HasTypeMoney();
 

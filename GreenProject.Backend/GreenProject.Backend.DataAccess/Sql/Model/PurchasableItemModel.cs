@@ -11,6 +11,8 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
     {
         public const int DescriptionSize = 1000;
         public const int NameSize = 100;
+        private const int IvaPercentagePrecision = 4;
+        private const int IvaPercentageScale = 3;
 
         public void Configure(EntityTypeBuilder<PurchasableItem> entity)
         {
@@ -23,7 +25,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .HasMaxLength(NameSize);
 
             entity.Property(e => e.IvaPercentage)
-                .HasColumnType("decimal(4, 3)");
+                .HasTypeDecimal(IvaPercentagePrecision, IvaPercentageScale);
 
             entity.Property(e => e.Price)
                 .HasTypeMoney();

@@ -25,10 +25,10 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .HasMaxLength(AccessTokenIdSize);
 
             entity.Property(e => e.CreationDate)
-                .HasColumnType("datetime");
+                .HasTypeDateTime();
 
             entity.Property(e => e.Expiration)
-                .HasColumnType("datetime");
+                .HasTypeDateTime();
 
             entity.HasOne(d => d.User)
                 .WithMany(p => p.RefreshTokens)
