@@ -12,7 +12,7 @@ namespace GreenProject.Backend.ApiLayer.Validation
         {
             if (!result.IsValid)
             {
-                controllerContext.HttpContext.Items.Add(ValidationFilter.VALIDATION_RESULT_KEY, result);
+                controllerContext.HttpContext.Items.Add(ValidationFilter.ValidationResultKey, result);
             }
             return result;
         }

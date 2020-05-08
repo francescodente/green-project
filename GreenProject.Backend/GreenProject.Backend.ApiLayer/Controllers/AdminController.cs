@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE)]
+    [Route(ApiRoutes.BaseRoute)]
     [ApiController]
     [RequireLogin(RoleType.Administrator)]
     public class AdminController : ControllerBase

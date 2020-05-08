@@ -9,7 +9,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
 {
     public class ValidationFilter : IActionFilter
     {
-        public const string VALIDATION_RESULT_KEY = "validation";
+        public const string ValidationResultKey = "validation";
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
@@ -23,7 +23,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
                 return;
             }
 
-            ValidationResult result = context.HttpContext.Items[VALIDATION_RESULT_KEY] as ValidationResult;
+            ValidationResult result = context.HttpContext.Items[ValidationResultKey] as ValidationResult;
 
             ErrorResponseDto errorResponse = new ErrorResponseDto
             {

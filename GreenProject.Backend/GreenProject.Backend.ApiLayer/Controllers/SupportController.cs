@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/support")]
+    [Route(ApiRoutes.BaseRoute + "/support")]
     [ApiController]
     public class SupportController : ControllerBase
     {

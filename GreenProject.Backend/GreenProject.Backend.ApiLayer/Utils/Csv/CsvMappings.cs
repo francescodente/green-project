@@ -94,7 +94,7 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
 
         public class DailyRevenueModelMap : OrderedClassMap<DailyRevenueModel>
         {
-            private const string KEY_FORMAT = "Total{0}Percent";
+            private const string KeyFormat = "Total{0}Percent";
             
             public DailyRevenueModelMap(CsvReportSettings settings, IEnumerable<int> ivaValues, IFormatProvider valueFormat)
                 : base(settings)
@@ -103,7 +103,7 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
                 ivaValues.ForEach(iva =>
                 {
                     Map()
-                        .Name(settings.HeaderNames[string.Format(KEY_FORMAT, iva)])
+                        .Name(settings.HeaderNames[string.Format(KeyFormat, iva)])
                         .ConvertUsing(r => ((DailyRevenueModel)r).IvaValues.GetValueAsOptional(iva / 100m).OrElse(0).ToString(valueFormat));
                 });
                 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/customers/{userId}/addresses")]
+    [Route(ApiRoutes.BaseRoute + "/customers/{userId}/addresses")]
     [ApiController]
     [RequireLogin(RoleType.Person, RoleType.CustomerBusiness)]
     public class AddressesController : ControllerBase

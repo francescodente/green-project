@@ -13,7 +13,7 @@ namespace GreenProject.Backend.Core.Logic
 {
     public class CategoriesService : AbstractService, ICategoriesService
     {
-        private const string ROOT_CATEGORY_NAME = "<root>";
+        private const string RootCategoryName = "<root>";
 
         public CategoriesService(IRequestSession request)
             : base(request)
@@ -50,7 +50,7 @@ namespace GreenProject.Backend.Core.Logic
 
             return new CategoryDto.Tree
             {
-                Name = ROOT_CATEGORY_NAME,
+                Name = RootCategoryName,
                 Children = roots
             };
         }

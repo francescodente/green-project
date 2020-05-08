@@ -6,13 +6,13 @@ namespace GreenProject.Backend.Entities.Utils
 {
     public readonly struct Money
     {
-        public const int DECIMALS = 2;
+        public const int Decimals = 2;
 
         public decimal Value { get; }
 
         public Money(decimal value)
         {
-            this.Value = decimal.Round(value, DECIMALS);
+            this.Value = decimal.Round(value, Decimals);
         }
 
         public static implicit operator decimal(Money money)

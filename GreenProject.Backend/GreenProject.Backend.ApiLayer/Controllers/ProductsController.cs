@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/products")]
+    [Route(ApiRoutes.BaseRoute + "/products")]
     [ApiController]
     public class ProductsController : ControllerBase
     {

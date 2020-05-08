@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/customers/{userId}/cart")]
+    [Route(ApiRoutes.BaseRoute + "/customers/{userId}/cart")]
     [ApiController]
     [RequireLogin(RoleType.CustomerBusiness, RoleType.Person)]
     public class CartController : ControllerBase

@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/customers/{userId}/weeklyorder")]
+    [Route(ApiRoutes.BaseRoute + "/customers/{userId}/weeklyorder")]
     [ApiController]
     [RequireLogin(RoleType.Person, RoleType.CustomerBusiness)]
     public class WeeklyOrdersController : ControllerBase

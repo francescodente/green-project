@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/auth")]
+    [Route(ApiRoutes.BaseRoute + "/auth")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {

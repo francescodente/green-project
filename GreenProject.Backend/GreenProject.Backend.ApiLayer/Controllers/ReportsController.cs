@@ -16,11 +16,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/reports")]
+    [Route(ApiRoutes.BaseRoute + "/reports")]
     [ApiController]
     public class ReportsController : ControllerBase
     {
-        private const string CSV_MIME_TYPE = "text/csv";
+        private const string CsvMimeType = "text/csv";
 
         private readonly IReportsService reportsService;
         private readonly ICsvFactory csvFactory;
@@ -77,7 +77,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         private IActionResult CsvFile(CsvReport report)
         {
-            return File(report.Content, CSV_MIME_TYPE, report.FileName);
+            return File(report.Content, CsvMimeType, report.FileName);
         }
     }
 }

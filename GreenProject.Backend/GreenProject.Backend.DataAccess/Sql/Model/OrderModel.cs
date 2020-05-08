@@ -11,13 +11,13 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class OrderModel : IEntityTypeConfiguration<Order>
     {
-        private const int YEAR_LENGTH = 4;
-        private const int DAY_LENGTH = 3;
-        private const int ID_LENGTH = 4;
+        private const int YearLength = 4;
+        private const int DayLength = 3;
+        private const int IdLength = 4;
 
-        private static readonly string YEAR_FORMAT = $"FORMAT(YEAR([{nameof(Order.Timestamp)}]), 'D{YEAR_LENGTH}')";
-        private static readonly string DAY_FORMAT = $"FORMAT(DATEPART(dayofyear, [{nameof(Order.Timestamp)}]), 'D{DAY_LENGTH}')";
-        private static readonly string ID_FORMAT = $"FORMAT([{nameof(Order.OrderId)}] % {Math.Pow(10, ID_LENGTH)}, 'D{ID_LENGTH}')";
+        private static readonly string YearFormat = $"FORMAT(YEAR([{nameof(Order.Timestamp)}]), 'D{YearLength}')";
+        private static readonly string DayFormat = $"FORMAT(DATEPART(dayofyear, [{nameof(Order.Timestamp)}]), 'D{DayLength}')";
+        private static readonly string IdFormat = $"FORMAT([{nameof(Order.OrderId)}] % {Math.Pow(10, IdLength)}, 'D{IdLength}')";
 
         public void Configure(EntityTypeBuilder<Order> entity)
         {
@@ -25,9 +25,9 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.OrderNumber)
                 .IsRequired()
-                .HasColumnType($"nchar({YEAR_LENGTH + DAY_LENGTH + ID_LENGTH})")
+                .HasColumnType($"nchar({YearLength + DayLength + IdLength})")
                 .ValueGeneratedOnAdd()
-                .HasComputedColumnSql($"{YEAR_FORMAT} + {DAY_FORMAT} + {ID_FORMAT}");
+                .HasComputedColumnSql($"{YearFormat} + {DayFormat} + {IdFormat}");
 
             entity.Property(e => e.DeliveryDate).HasColumnType("date");
 

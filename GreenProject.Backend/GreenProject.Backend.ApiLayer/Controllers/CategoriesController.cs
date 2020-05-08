@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/categories")]
+    [Route(ApiRoutes.BaseRoute + "/categories")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {

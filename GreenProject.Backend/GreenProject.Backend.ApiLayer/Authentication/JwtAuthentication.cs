@@ -19,7 +19,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 {
     public class JwtAuthentication : IAuthenticationHandler
     {
-        private const int HASH_LENGTH = 128;
+        private const int HashLength = 128;
 
         private readonly IHashCalculator hashCalculator;
         private readonly ISaltGenerator saltGenerator;
@@ -46,8 +46,8 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         public void AssignPassword(User user, string password)
         {
-            byte[] salt = this.saltGenerator.NewSalt(HASH_LENGTH);
-            byte[] passwordHash = this.hashCalculator.Hash(password, salt, HASH_LENGTH);
+            byte[] salt = this.saltGenerator.NewSalt(HashLength);
+            byte[] passwordHash = this.hashCalculator.Hash(password, salt, HashLength);
 
             user.Password = this.encoding.BytesToString(passwordHash);
             user.Salt = this.encoding.BytesToString(salt);
@@ -57,7 +57,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         {
             byte[] salt = this.encoding.StringToBytes(user.Salt);
             byte[] expectedHash = this.encoding.StringToBytes(user.Password);
-            byte[] actualHash = this.hashCalculator.Hash(password, salt, HASH_LENGTH);
+            byte[] actualHash = this.hashCalculator.Hash(password, salt, HashLength);
 
             return CompareSlow(expectedHash, actualHash);
         }

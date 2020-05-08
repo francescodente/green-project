@@ -9,9 +9,9 @@ namespace GreenProject.Backend.ApiLayer.Filters
 {
     public class OwnerOrAdminOnlyAttribute : Attribute, IAuthorizationFilter
     {
-        private const string DEFAULT_KEY = "userId";
+        private const string DefaultKey = "userId";
 
-        public string PropertyName { get; set; } = DEFAULT_KEY;
+        public string PropertyName { get; set; } = DefaultKey;
 
         public virtual void OnAuthorization(AuthorizationFilterContext context)
         {

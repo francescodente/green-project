@@ -15,13 +15,13 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class DataAccessInstaller : IServiceInstaller
     {
-        private const string CONNECTION_STRING_KEY = "GreenProjectDb";
+        private const string ConnectionStringKey = "GreenProjectDb";
 
         public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
             services.AddDbContext<GreenProjectContext>(options =>
             {
-                options.UseSqlServer(config.GetConnectionString(CONNECTION_STRING_KEY));
+                options.UseSqlServer(config.GetConnectionString(ConnectionStringKey));
             });
 
             services.AddScoped<IDataSession>(p => p.GetRequiredService<GreenProjectContext>());

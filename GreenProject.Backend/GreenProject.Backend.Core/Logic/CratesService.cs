@@ -16,7 +16,7 @@ namespace GreenProject.Backend.Core.Logic
 {
     public class CratesService : AbstractItemsService<Crate>, ICratesService
     {
-        private const int CRATE_CATEGORY_ID = 1;
+        private const int CrateCategoryId = 1;
 
         public CratesService(IRequestSession request)
             : base(request)
@@ -35,7 +35,7 @@ namespace GreenProject.Backend.Core.Logic
                 crateEntity.Name = crate.Name;
                 crateEntity.Description = crate.Description;
                 crateEntity.Capacity = crate.Capacity;
-                crateEntity.CategoryId = CRATE_CATEGORY_ID;
+                crateEntity.CategoryId = CrateCategoryId;
                 crateEntity.IsStarred = crate.IsStarred;
                 crateEntity.Price = crate.Price;
                 crateEntity.IvaPercentage = crate.IvaPercentage;
