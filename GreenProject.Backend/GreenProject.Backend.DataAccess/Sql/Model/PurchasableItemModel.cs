@@ -9,15 +9,18 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class PurchasableItemModel : IEntityTypeConfiguration<PurchasableItem>
     {
+        public const int DescriptionSize = 1000;
+        public const int NameSize = 100;
+
         public void Configure(EntityTypeBuilder<PurchasableItem> entity)
         {
             entity.HasKey(e => e.ItemId);
             
-            entity.Property(e => e.Description).HasMaxLength(1000);
+            entity.Property(e => e.Description).HasMaxLength(DescriptionSize);
 
             entity.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(NameSize);
 
             entity.Property(e => e.IvaPercentage)
                 .HasColumnType("decimal(4, 3)");

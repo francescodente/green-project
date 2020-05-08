@@ -9,16 +9,19 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class CategoryModel : IEntityTypeConfiguration<Category>
     {
+        public const int NameSize = 30;
+        public const int DescriptionSize = 100;
+
         public void Configure(EntityTypeBuilder<Category> entity)
         {
             entity.HasKey(e => e.CategoryId);
 
             entity.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(30);
+                .HasMaxLength(NameSize);
 
             entity.Property(e => e.Description)
-                .HasMaxLength(100);
+                .HasMaxLength(DescriptionSize);
 
             entity.HasOne(d => d.Image)
                 .WithOne(p => p.Category)

@@ -9,13 +9,15 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class ImageModel : IEntityTypeConfiguration<Image>
     {
+        public const int PathSize = 100;
+
         public void Configure(EntityTypeBuilder<Image> entity)
         {
             entity.HasKey(e => e.ImageId);
             
             entity.Property(e => e.Path)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(PathSize);
         }
     }
 }

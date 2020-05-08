@@ -11,10 +11,11 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class OrderModel : IEntityTypeConfiguration<Order>
     {
+        public const int NotesSize = 1000;
+
         private const int YearLength = 4;
         private const int DayLength = 3;
         private const int IdLength = 4;
-
         private static readonly string YearFormat = $"FORMAT(YEAR([{nameof(Order.Timestamp)}]), 'D{YearLength}')";
         private static readonly string DayFormat = $"FORMAT(DATEPART(dayofyear, [{nameof(Order.Timestamp)}]), 'D{DayLength}')";
         private static readonly string IdFormat = $"FORMAT([{nameof(Order.OrderId)}] % {Math.Pow(10, IdLength)}, 'D{IdLength}')";
@@ -31,7 +32,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.DeliveryDate).HasColumnType("date");
 
-            entity.Property(e => e.Notes).HasMaxLength(1000);
+            entity.Property(e => e.Notes).HasMaxLength(NotesSize);
 
             entity.Property(e => e.Timestamp).HasColumnType("datetime");
 
