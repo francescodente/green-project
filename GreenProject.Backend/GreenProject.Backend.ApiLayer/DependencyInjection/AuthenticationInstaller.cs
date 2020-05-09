@@ -1,5 +1,6 @@
 ﻿using GreenProject.Backend.ApiLayer.Authentication;
 using GreenProject.Backend.Core.Utils;
+using GreenProject.Backend.Core.Utils.Authentication;
 using GreenProject.Backend.Infrastructure.PasswordHashing;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting;

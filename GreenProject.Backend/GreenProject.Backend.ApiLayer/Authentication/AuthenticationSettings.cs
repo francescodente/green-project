@@ -8,5 +8,6 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         public TimeSpan TokenDuration { get; set; }
         public TimeSpan RefreshTokenDuration { get; set; }
         public PasswordGenerationSettings PasswordGeneration { get; set; }
+        public CookieSettings CookieSettings { get; set; }
     }
 }

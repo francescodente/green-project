@@ -1,10 +1,12 @@
 ﻿using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Utils;
+using GreenProject.Backend.Core.Utils.Authentication;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Core.Utils.Time;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
+using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -20,10 +22,12 @@ namespace GreenProject.Backend.ApiLayer.Authentication
     public class JwtAuthentication : IAuthenticationHandler
     {
         private const int HashLength = 128;
+        private const string RefreshTokenCookieName = "refresh_token";
 
         private readonly IHashCalculator hashCalculator;
         private readonly ISaltGenerator saltGenerator;
         private readonly IStringEncoding encoding;
+        private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IDateTime dateTime;
         private readonly AuthenticationSettings settings;
         private readonly TokenValidationParameters refreshValidation;
@@ -32,6 +36,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
                                  IHashCalculator hashCalculator,
                                  ISaltGenerator saltGenerator,
                                  IStringEncoding encoding,
+                                 IHttpContextAccessor httpContextAccessor,
                                  AuthenticationSettings settings,
                                  TokenValidationParameters tokenValidationParameters)
         {
@@ -39,6 +44,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
             this.hashCalculator = hashCalculator;
             this.saltGenerator = saltGenerator;
             this.encoding = encoding;
+            this.httpContextAccessor = httpContextAccessor;
             this.settings = settings;
             this.refreshValidation = tokenValidationParameters.Clone();
             this.refreshValidation.ValidateLifetime = false;
@@ -59,35 +65,12 @@ namespace GreenProject.Backend.ApiLayer.Authentication
             byte[] expectedHash = this.encoding.StringToBytes(user.Password);
             byte[] actualHash = this.hashCalculator.Hash(password, salt, HashLength);
 
-            return CompareSlow(expectedHash, actualHash);
+            return expectedHash.SequenceEqual(actualHash);
         }
 
-        private bool CompareSlow(byte[] a, byte[] b)
+        public (AuthenticationResult, RefreshToken) OnUserAuthenticated(User user)
         {
-            if (a.Length != b.Length)
-            {
-                return false;
-            }
-            int result = 0;
-            for (int i = 0; i < a.Length; i++)
-            {
-                result |= a[i] ^ b[i];
-            }
-
-            return result == 0;
-        }
-
-        public Task<(AuthenticationResultDto, RefreshToken)> OnUserAuthenticated(User user)
-        {
-            byte[] key = Encoding.ASCII.GetBytes(this.settings.SecretKey);
-            IEnumerable<Claim> claims = CreateClaimsList(user);
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                NotBefore = this.dateTime.Now,
-                Expires = this.dateTime.Now.Add(this.settings.TokenDuration),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
+            SecurityTokenDescriptor tokenDescriptor = this.GenerateTokenDescriptor(user);
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
@@ -101,16 +84,47 @@ namespace GreenProject.Backend.ApiLayer.Authentication
                 Expiration = this.dateTime.Now.Add(this.settings.RefreshTokenDuration)
             };
 
-            AuthenticationResultDto result = new AuthenticationResultDto
+            this.SetRefreshTokenCookie(refreshToken);
+
+            AuthenticationResult result = new AuthenticationResult
             {
-                UserId = user.UserId,
                 Token = tokenHandler.WriteToken(token),
                 RefreshToken = refreshToken.Token,
-                Expiration = tokenDescriptor.Expires.Value,
-                Roles = user.GetRoleTypes()
+                Expiration = tokenDescriptor.Expires.Value
             };
 
-            return Task.FromResult((result, refreshToken));
+            return (result, refreshToken);
+        }
+
+        private void SetRefreshTokenCookie(RefreshToken refreshToken)
+        {
+            CookieOptions cookieOptions = new CookieOptions
+            {
+                HttpOnly = this.settings.CookieSettings.HttpOnly,
+                Secure = this.settings.CookieSettings.Secure,
+                Path = this.settings.CookieSettings.Path,
+                MaxAge = this.settings.RefreshTokenDuration
+            };
+
+            this.httpContextAccessor
+                .HttpContext
+                .Response
+                .Cookies
+                .Append(RefreshTokenCookieName, refreshToken.Token, cookieOptions);
+        }
+
+        private SecurityTokenDescriptor GenerateTokenDescriptor(User user)
+        {
+            byte[] key = Encoding.ASCII.GetBytes(this.settings.SecretKey);
+            IEnumerable<Claim> claims = CreateClaimsList(user);
+            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                NotBefore = this.dateTime.Now,
+                Expires = this.dateTime.Now.Add(this.settings.TokenDuration),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            return tokenDescriptor;
         }
 
         private IEnumerable<Claim> CreateClaimsList(User user)
@@ -124,6 +138,15 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         private Claim CreateRoleClaim(RoleType role)
         {
             return new Claim(ClaimTypes.Role, role.ToString());
+        }
+
+        public IOptional<string> FindCurrentRefreshToken()
+        {
+            if (this.httpContextAccessor.HttpContext.Request.Cookies.TryGetValue(RefreshTokenCookieName, out string refreshToken))
+            {
+                return Optional.Of(refreshToken);
+            }
+            return Optional.Empty<string>();
         }
 
         public string GenerateRandomPassword()
