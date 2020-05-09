@@ -40,7 +40,7 @@
 
 <!-- WEEKLY ENTRY -->
 <table class="d-none">
-    <tr data-template-name="CrateWeeklyEntry" data-class="bg-primary-dark" class="d-none">
+    <tr data-template-name="CrateWeeklyEntry" data-class="area-collapse bg-primary-dark" data-toggle="collapse" data-target="#collapse-ODID" class="d-none">
         <th class="nowrap">
             <img class="crate-image img-fluid" src="images/default_product.png"/>
         </th>
@@ -50,16 +50,19 @@
                 <span class="capacity"></span> <span class="crate-um">Kg</span> - <span class="price"></span>
             </p>
         </th>
-        <th class="nowrap actions">
+        <td class="nowrap actions" style="border-top: none!important;">
+            <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#collapse-ODID" aria-expanded="false">
+                <i class="mdi mdi-chevron-down"></i>
+            </button>
             <div class="dropdown">
-                <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-boundary="viewport">
                     <i class="mdi dark mdi-dots-vertical"></i>
                 </button>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu dropdown-menu-right">
                     <a href="#" type="button" class="show-remove-modal dropdown-item">Elimina</a>
                 </div>
             </div>
-        </th>
+        </td>
     </tr>
 </table>
 

@@ -20,7 +20,14 @@ $(document).ready(function() {
             console.log(data);
 
             // Setup summary
-            $(".crate-count").html(data.crates.length);
+            $(".crate-count").html(data.crates.length + " cassette");
+            if (data.extraProducts.length) {
+                $(".extra-products-text").removeClass("d-none");
+                $(".product-count").html(data.extraProducts.length);
+                if (data.extraProducts.length == 1) {
+                    $(".extra-product-count-text").html("prodotto extra");
+                }
+            }
             $(".product-count").html(data.extraProducts.length);
             $(".delivery-date").html(Utils.formatDate(data.deliveryInfo.deliveryDate));
             $(".delivery-address").html(data.deliveryInfo.address.addressString);

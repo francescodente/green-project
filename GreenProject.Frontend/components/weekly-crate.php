@@ -1,20 +1,26 @@
 <!-- WEEKLY CRATE ENTRY -->
 <div data-template-name="WeeklyCrateTable" data-class="product-group-table table-wrapper table-responsive" class="d-none">
-    <table class="table">
-        <thead></thead>
-        <tbody class="crate-products">
-            <tr>
-                <td colspan="4" class="p-0">
-                    <button class="btn add-product ripple">
-                        <div class="add-product-icon mr-3">
-                            <i class="mdi dark mdi-plus"></i>
-                        </div>
-                        <span class="text-sec-dark">Aggiungi un prodotto</span>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="d-inline-flex flex-column" style="min-width: 100%;">
+        <table class="table">
+            <thead></thead>
+        </table>
+        <div id="collapse-ODID" class="collapse">
+            <table class="table">
+                <tbody class="crate-products">
+                    <tr>
+                        <td colspan="4" class="p-0">
+                            <button class="btn add-product ripple">
+                                <div class="add-product-icon mr-3">
+                                    <i class="mdi dark mdi-plus"></i>
+                                </div>
+                                <span class="text-sec-dark">Aggiungi un prodotto</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <!-- ADD PRODUCT MODAL -->

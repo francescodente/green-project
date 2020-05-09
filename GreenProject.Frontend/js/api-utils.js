@@ -20,7 +20,7 @@ class APIUtilsClass {
 
     async getOrRefreshAuth() {
         if (API.isTokenRefreshing) {
-            //console.log("token is refreshing...");
+            console.log("token is refreshing...");
             return API.tokenPromise;
         }
         let authData = localStorage.getObject("authData");

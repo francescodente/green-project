@@ -37,7 +37,7 @@ class APIClass {
     async request(method, path, data) {
         let authData = await APIUtils.getOrRefreshAuth();
         let token = authData == null ? "" : authData.token;
-        return this.ajax(method, path, data, token);
+        return await this.ajax(method, path, data, token);
     }
 
     get(url, data) {

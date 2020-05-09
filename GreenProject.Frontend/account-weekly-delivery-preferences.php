@@ -28,7 +28,7 @@
 
                     <div class="alert alert-accent" role="alert">
                         <p class="summary-preferences text-dis-dark m-0">
-                            La prossima consegna include <span class="crate-count"></span> cassette e <span class="product-count"></span> prodotti sfusi, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
+                            La prossima consegna include <span class="crate-count"></span><span class="extra-products-text d-none" style="font-weight: normal;"> e <span class="product-count"></span> <span class="extra-product-count-text">prodotti extra</span></span>, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
                         </p>
                     </div>
 

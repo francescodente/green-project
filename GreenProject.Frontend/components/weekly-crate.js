@@ -15,14 +15,14 @@ class WeeklyCrate extends Entity {
         }
 
         // Create crate entry
-        this.crateDescription = new Crate(this.crateDescription, crateQuantity);
+        this.crateDescription = new Crate(this.crateDescription, crateQuantity, this.orderDetailId);
 
         let weeklyCrate = this;
 
         for (let k in weeklyCrate.html) {
 
             // Init tooltips
-            $(weeklyCrate.html[k]).find('[data-tooltip="tooltip"]').tooltip();
+            $(weeklyCrate.html[k]).find("[data-tooltip='tooltip']").tooltip();
 
             // Add crate entry
             $(weeklyCrate.html[k]).find("thead").append($(weeklyCrate.crateDescription.html.weeklyEntry));
@@ -32,10 +32,13 @@ class WeeklyCrate extends Entity {
                 weeklyCrate.products[i].html.inCrateEntry.prependTo($(weeklyCrate.html[k]).find(".crate-products"));
             }
 
+            // Set IDs to make collapses work
+            $(weeklyCrate.html[k]).find("[id=collapse-ODID]").attr("id", "collapse-odid" + weeklyCrate.orderDetailId);
+            $(weeklyCrate.html[k]).find("[data-target='#collapse-ODID']").attr("data-target", "#collapse-odid" + weeklyCrate.orderDetailId);
+
             // Add event listeners
             $(weeklyCrate.html[k]).find(".add-product").click(function() { weeklyCrate.showAddProductModal(); });
         }
-
         this.addCompatibleProducts();
     }
 
