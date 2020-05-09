@@ -25,7 +25,7 @@ namespace GreenProject.Backend.Core.Logic
             this.handler = handler;
         }
 
-        public async Task<UserOutputDto> RegisterCustomer(RegistrationDto registration)
+        public async Task<UserDto.Output> RegisterCustomer(RegistrationDto registration)
         {
             // TODO: what happens if a user deletes his account and registers again with the same email?
             bool emailInUse = await this.Data
@@ -44,10 +44,10 @@ namespace GreenProject.Backend.Core.Logic
 
             await this.Notifications.AccountConfirmation(userEntity);
 
-            return this.Mapper.Map<UserOutputDto>(userEntity);
+            return this.Mapper.Map<UserDto.Output>(userEntity);
         }
 
-        private User CreateUserFromUserDto(UserInputDto userInput)
+        private User CreateUserFromUserDto(UserDto.Input userInput)
         {
             return new User
             {

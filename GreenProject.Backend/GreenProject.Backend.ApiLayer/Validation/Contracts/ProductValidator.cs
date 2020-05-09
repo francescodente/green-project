@@ -38,9 +38,8 @@ namespace GreenProject.Backend.ApiLayer.Validation.Contracts
                 .ShouldBeGreaterThan(0)
                 .ShouldHaveScalePrecision(ProductModel.UnitMultiplierScale, ProductModel.UnitMultiplierPrecision);
 
-            RuleForEach(x => x.CompatibleCrates)
-                .SetValidator(new CompatibilityValidator())
-                .When(x => x.CompatibleCrates != null);
+            RuleFor(x => x.CrateMultiplier)
+                .ShouldBeGreaterThan(0);
         }
     }
 
@@ -65,10 +64,6 @@ namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 
             RuleFor(x => x.CategoryId)
                 .ShouldBeGreaterThan(0);
-
-            RuleForEach(x => x.CompatibleCrates)
-                .SetValidator(new CompatibilityValidator())
-                .When(x => x.CompatibleCrates != null);
         }
     }
 }

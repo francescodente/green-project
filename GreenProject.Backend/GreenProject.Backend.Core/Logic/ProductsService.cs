@@ -40,6 +40,7 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.Price = product.Price;
                 productEntity.UnitName = product.UnitName;
                 productEntity.UnitMultiplier = product.UnitMultiplier;
+                productEntity.CrateMultiplier = product.CrateMultiplier;
                 productEntity.IvaPercentage = product.IvaPercentage;
                 productEntity.IsStarred = product.IsStarred;
 
