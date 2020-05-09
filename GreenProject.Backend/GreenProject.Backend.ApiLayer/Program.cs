@@ -20,7 +20,6 @@ namespace GreenProject.Backend.ApiLayer
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseWebRoot("wwwroot");
                     webBuilder.UseStartup<Startup>();
                 });
         }

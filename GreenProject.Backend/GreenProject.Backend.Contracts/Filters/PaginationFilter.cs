@@ -1,17 +1,27 @@
-﻿namespace GreenProject.Backend.Contracts.Filters
+﻿using System;
+
+namespace GreenProject.Backend.Contracts.Filters
 {
     public class PaginationFilter
     {
-        public static int DEFAULT_PAGE_SIZE = 30;
-        public static int DEFAULT_PAGE_NUMBER = 0;
+        public const int MaxPageSize = 50;
+        public const int DefaultPageSize = 30;
+        public const int DefaultPageNumber = 0;
+
+        private int pageSize;
 
         public int PageNumber { get; set; }
-        public int PageSize { get; set; }
+
+        public int PageSize
+        {
+            get => this.pageSize;
+            set => this.pageSize = Math.Min(MaxPageSize, value);
+        }
 
         public PaginationFilter()
         {
-            this.PageNumber = DEFAULT_PAGE_NUMBER;
-            this.PageSize = DEFAULT_PAGE_SIZE;
+            this.PageNumber = DefaultPageNumber;
+            this.PageSize = DefaultPageSize;
         }
 
         public PaginationFilter NextPage()

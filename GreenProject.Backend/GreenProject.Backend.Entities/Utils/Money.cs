@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace GreenProject.Backend.Entities.Utils
 {
-    public readonly struct Money
+    public readonly struct Money : IComparable<Money>, IComparable
     {
         public const int Decimals = 2;
 
@@ -58,6 +59,20 @@ namespace GreenProject.Backend.Entities.Utils
         public string ToString(IFormatProvider format)
         {
             return this.Value.ToString(format);
+        }
+
+        public int CompareTo(Money other)
+        {
+            return this.Value.CompareTo(other.Value);
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj is Money)
+            {
+                return this.CompareTo((Money)obj);
+            }
+            throw new ArgumentException(nameof(obj));
         }
     }
 }

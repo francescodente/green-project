@@ -5,13 +5,13 @@ using GreenProject.Backend.Contracts.Users.Roles;
 
 namespace GreenProject.Backend.ApiLayer.Validation
 {
-    public class UserInputValidator : AbstractValidator<UserInputDto>
+    public class UserValidator : AbstractValidator<UserDto.Input>
     {
-        public UserInputValidator()
+        public UserValidator()
         {
             RuleFor(x => x.Email)
-                .NotEmpty().WithErrorCode(ErrorCodes.Common.MissingValue)
-                .EmailAddress().WithErrorCode(ErrorCodes.Common.IncorrectFormat);
+                .ShouldNotBeEmpty()
+                .ShouldBeAnEmailAddress();
         }
     }
 }

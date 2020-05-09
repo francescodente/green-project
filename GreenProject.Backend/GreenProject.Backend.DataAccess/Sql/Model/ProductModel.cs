@@ -9,8 +9,8 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class ProductModel : IEntityTypeConfiguration<Product>
     {
-        private const int UnitMultiplierPrecision = 8;
-        private const int UnitMultiplierScale = 4;
+        public const int UnitMultiplierPrecision = 8;
+        public const int UnitMultiplierScale = 4;
 
         public void Configure(EntityTypeBuilder<Product> entity)
         {

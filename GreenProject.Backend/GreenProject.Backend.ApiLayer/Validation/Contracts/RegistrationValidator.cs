@@ -10,8 +10,7 @@ namespace GreenProject.Backend.ApiLayer.Validation
         public RegistrationValidator(PasswordValidationSettings passwordSettings)
         {
             RuleFor(x => x.Password)
-                .NotEmpty().WithErrorCode(ErrorCodes.Common.MissingValue)
-                .Length(passwordSettings.MinimumLength, passwordSettings.MaximumLength).WithErrorCode(ErrorCodes.Common.IncorrectFormat);
+                .ShouldBeAValidPassword(passwordSettings);
         }
     }
 }
