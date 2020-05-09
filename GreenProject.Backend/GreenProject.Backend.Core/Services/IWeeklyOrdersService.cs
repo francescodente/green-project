@@ -1,6 +1,4 @@
-﻿using GreenProject.Backend.Contracts.Cart;
-using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Contracts.Orders.Delivery;
+﻿using GreenProject.Backend.Contracts.Orders.Delivery;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.WeeklyOrders;
 using System.Threading.Tasks;
@@ -18,6 +16,8 @@ namespace GreenProject.Backend.Core.Services
         Task AddCrate(int userId, int crateId);
 
         Task AddExtraProduct(int userId, QuantifiedProductDto.Input product);
+
+        Task UpdateExtraProduct(int userId, QuantifiedProductDto.Input product);
 
         Task RemoveItem(int userId, int orderDetailId);
 
