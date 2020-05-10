@@ -25,7 +25,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpGet("customers/{customerId}/orders")]
-        [RequireLogin(RoleType.CustomerBusiness, RoleType.Person, RoleType.Administrator)]
+        [RequireLogin(RoleType.Administrator, RoleType.Person)]
         [OwnerOrAdminOnly(PropertyName = "customerId")]
         public async Task<IActionResult> GetCustomerOrders([FromRoute] int customerId, [FromQuery] OrderFilters filters, [FromQuery] PaginationFilter pagination)
         {

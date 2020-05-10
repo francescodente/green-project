@@ -11,7 +11,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 {
     [Route(ApiRoutes.BaseRoute + "/customers/{userId}/weeklyorder")]
     [ApiController]
-    [RequireLogin(RoleType.Person, RoleType.CustomerBusiness)]
+    [RequireLogin(RoleType.Person)]
     [OwnerOrAdminOnly]
     public class WeeklyOrdersController : ControllerBase
     {

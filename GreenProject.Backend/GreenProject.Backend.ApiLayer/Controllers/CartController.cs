@@ -13,7 +13,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 {
     [Route(ApiRoutes.BaseRoute + "/customers/{userId}/cart")]
     [ApiController]
-    [RequireLogin(RoleType.CustomerBusiness, RoleType.Person)]
+    [RequireLogin]
     public class CartController : ControllerBase
     {
         private readonly ICartService cartService;
@@ -54,6 +54,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpDelete("details/{productId}")]
+        [RequireLogin(RoleType.Person)]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteCartItem([FromRoute] int userId, [FromRoute] int productId)
         {

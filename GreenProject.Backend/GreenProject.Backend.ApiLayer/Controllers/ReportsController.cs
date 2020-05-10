@@ -7,16 +7,19 @@ using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration;
+using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.ApiLayer.Utils.Csv;
 using GreenProject.Backend.Contracts.Reports;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
     [Route(ApiRoutes.BaseRoute + "/reports")]
+    [RequireLogin(RoleType.Administrator)]
     [ApiController]
     public class ReportsController : ControllerBase
     {
