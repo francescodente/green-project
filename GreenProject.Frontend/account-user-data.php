@@ -144,8 +144,6 @@
     <script src="js/validators/PIValidator.js"></script>
     <script src="js/pages/account-user-data.js"></script>
 
-    <?php include("modal-pwd-change.php"); ?>
-
     <div id="modal-person-role-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="width: 360px;">

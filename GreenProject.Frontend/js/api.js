@@ -84,8 +84,11 @@ class APIClass {
         return this.ajax("POST", "auth/refresh", JSON.stringify(data), "");
     }
 
-    changePsw() {
-
+    changePsw(oldPsw, newPsw) {
+        return this.post("auth/changepsw", {
+            oldPassword: oldPsw,
+            newPassword: newPsw
+        });
     }
 
     signup(data) {

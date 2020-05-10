@@ -20,6 +20,7 @@
     <?php
     include("components/objects.php");
     include("modals-authentication.php");
+    include("modal-pwd-change.php");
     include("cookie-banner.php");
     ?>
 
