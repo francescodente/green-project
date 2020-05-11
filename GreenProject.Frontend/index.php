@@ -5,6 +5,9 @@
     <title>Green Project - Home</title>
 </head>
 <body>
+    <div class="fallback-wallpaper-parent">
+        <div class="fallback-wallpaper parallax-shade" style="background-image: url('images/home.jpg')"></div>
+    </div>
 
     <?php include("menu.php"); ?>
 

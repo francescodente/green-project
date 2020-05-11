@@ -6,6 +6,27 @@
     --font-normal: 'Work Sans', sans-serif!important;
 }
 
+.fallback-wallpaper-parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -200;
+}
+
+.fallback-wallpaper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .alert-accent {
     border: 1px solid var(--col-accent);
     background-color: rgba(156, 191, 34, 0.4);
