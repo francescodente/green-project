@@ -33,7 +33,10 @@ namespace GreenProject.Backend.DataAccess.Sql
         public DbSet<Person> People { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<PurchasableItem> PurchasableItems { get; set; }
+        public DbSet<UserToken> UserTokens { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<PasswordRecoveryToken> PasswordRecoveryTokens { get; set; }
+        public DbSet<ConfirmationToken> ConfirmationTokens { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Zone> Zones { get; set; }
         public DbSet<ZoneAvailability> ZoneAvailabilities { get; set; }

@@ -71,9 +71,9 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
                 });
         }
 
-        public Task AccountConfirmation(User user)
+        public Task AccountConfirmation(User user, string token)
         {
-            var model = new { User = user };
+            var model = new { User = user, Token = token };
 
             return this.SendNotification(NotificationType.AccountConfirmation, model, user.Email);
                 

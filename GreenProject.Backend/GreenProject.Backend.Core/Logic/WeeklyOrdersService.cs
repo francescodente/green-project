@@ -284,6 +284,7 @@ namespace GreenProject.Backend.Core.Logic
             Order order = await this.FindUnlockedSubscriptionOrder(userId);
 
             order.DeliveryDate += TimeSpan.FromDays(7 * weeks);
+            order.WasReminded = false;
 
             await this.Data.SaveChangesAsync();
         }

@@ -1,17 +1,25 @@
 ﻿@using RazorLight
+@using GreenProject.Backend.Entities;
 @inherits TemplatePage<dynamic>
+
+@{ 
+    User user = Model.User;
+
+    string token = Model.Token;
+    string confirmationUrl = $"{ViewBag.WebRoot}/something.php?token={token}"; // TODO: use correct URL
+}
 
 <tr>
     <td colspan="12" style="padding: 16px;">
         <h1>Benvenuto su Green Project!</h1>
         <p>
-            Ciao @(Model.User.Email.Split("@")[0]), grazie per esserti registrato.<br />Il tuo account è stato creato. Clicca sul pulsante sottostante o su <a href="#" style="color: #9CBF22; text-decoration: none;">questo link</a> per terminare la registrazione.
+            Ciao @(user.Email.Split("@")[0]), grazie per esserti registrato.<br />Il tuo account è stato creato. Clicca sul pulsante sottostante o su <a href="@confirmationUrl" style="color: #9CBF22; text-decoration: none;">questo link</a> per terminare la registrazione.
         </p>
         <p>
             Speriamo di vederti presto sul nostro sito!
         </p>
         <p style="text-align: center; margin-bottom: 8px;">
-            <a href="#" style="display: inline-block; color: #FFF; background-color: #9CBF22; text-decoration: none; padding: 6px 24px; border-radius: 4px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225);">Attiva account</a>
+            <a href="@confirmationUrl" style="display: inline-block; color: #FFF; background-color: #9CBF22; text-decoration: none; padding: 6px 24px; border-radius: 4px; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.225);">Attiva account</a>
         </p>
     </td>
 </tr>

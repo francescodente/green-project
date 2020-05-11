@@ -166,9 +166,6 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         public bool CanBeRefreshed(string accessToken, RefreshToken refreshToken)
         {
             return this.GetPrincipalFromToken(accessToken)
-                .Filter(p => refreshToken.Expiration > this.dateTime.Now)
-                .Filter(p => !refreshToken.IsInvalid)
-                .Filter(p => !refreshToken.IsUsed)
                 .Filter(p => refreshToken.AccessTokenId == p.FindFirstValue(JwtRegisteredClaimNames.Jti))
                 .IsPresent();
         }

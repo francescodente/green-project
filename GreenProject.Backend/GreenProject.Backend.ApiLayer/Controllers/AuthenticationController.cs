@@ -46,5 +46,12 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         {
             return Ok(await this.authenticationService.RegisterCustomer(registration));
         }
+
+        [HttpPost("confirm")]
+        public async Task<IActionResult> ConfirmAccount([FromBody] AccountConfirmationDto confirmation)
+        {
+            await this.authenticationService.ConfirmAccount(confirmation);
+            return NoContent();
+        }
     }
 }

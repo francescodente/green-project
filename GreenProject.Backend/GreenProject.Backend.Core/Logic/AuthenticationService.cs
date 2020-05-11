@@ -39,10 +39,22 @@ namespace GreenProject.Backend.Core.Logic
 
             User userEntity = this.CreateUserFromUserDto(registration.User);
             this.handler.AssignPassword(userEntity, registration.Password);
+
+            ConfirmationToken token = new ConfirmationToken
+            {
+                Token = Guid.NewGuid().ToString(),
+                CreationDate = this.DateTime.Now,
+                Expiration = this.DateTime.Now.AddHours(1) // TODO: use a value from config
+            };
+
+            userEntity.Tokens.Add(token);
+
             this.Data.Users.Add(userEntity);
             await this.Data.SaveChangesAsync();
 
-            await this.Notifications.AccountConfirmation(userEntity);
+            this.Notifications
+                .AccountConfirmation(userEntity, token.Token)
+                .FireAndForget();
 
             return this.Mapper.Map<UserDto.Output>(userEntity);
         }
@@ -52,7 +64,6 @@ namespace GreenProject.Backend.Core.Logic
             return new User
             {
                 Email = userInput.Email,
-                IsEnabled = true,
                 MarketingConsent = userInput.MarketingConsent
             };
         }
@@ -62,6 +73,7 @@ namespace GreenProject.Backend.Core.Logic
             User user = await this.Data
                 .EnabledUsers()
                 .IncludingRoles()
+                .Where(u => u.IsConfirmed)
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
             this.EnsurePasswordIsCorrect(user, credentials.Password);
@@ -81,6 +93,7 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptionalAsync(r => r.Token == refreshToken);
 
             RefreshToken validatedToken = optionalToken
+                .Filter(this.IsTokenValid)
                 .Filter(t => this.handler.CanBeRefreshed(request.Token, t))
                 .OrElseThrow(() => new TokenRefreshFailedException());
 
@@ -130,9 +143,32 @@ namespace GreenProject.Backend.Core.Logic
             }
         }
 
+        public async Task ConfirmAccount(AccountConfirmationDto confirmation)
+        {
+            IOptional<ConfirmationToken> token = await this.Data
+                .ConfirmationTokens
+                .Include(t => t.User)
+                .SingleOptionalAsync(t => t.Token == confirmation.Token);
+
+            ConfirmationToken validatedToken = token
+                .Filter(this.IsTokenValid)
+                .Filter(t => !t.User.IsConfirmed)
+                .OrElseThrow(() => new ConfirmationFailedException());
+
+            validatedToken.IsUsed = true;
+            validatedToken.User.IsConfirmed = true;
+
+            await this.Data.SaveChangesAsync();
+        }
+
         public Task SendPasswordRecovery(PasswordRecoveryRequestDto request)
         {
             throw new NotImplementedException();
+        }
+
+        private bool IsTokenValid(UserToken token)
+        {
+            return !(token.IsUsed || token.IsInvalid || token.Expiration < this.DateTime.Now);
         }
     }
 }

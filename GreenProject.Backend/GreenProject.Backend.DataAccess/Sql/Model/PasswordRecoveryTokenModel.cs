@@ -7,17 +7,11 @@ using System.Text;
 
 namespace GreenProject.Backend.DataAccess.Sql.Model
 {
-    public class RefreshTokenModel : IEntityTypeConfiguration<RefreshToken>
+    public class PasswordRecoveryTokenModel : IEntityTypeConfiguration<PasswordRecoveryToken>
     {
-        public const int AccessTokenIdSize = 50;
-
-        public void Configure(EntityTypeBuilder<RefreshToken> entity)
+        public void Configure(EntityTypeBuilder<PasswordRecoveryToken> entity)
         {
             entity.HasBaseType<UserToken>();
-
-            entity.Property(e => e.AccessTokenId)
-                .IsRequired()
-                .HasMaxLength(AccessTokenIdSize);
         }
     }
 }

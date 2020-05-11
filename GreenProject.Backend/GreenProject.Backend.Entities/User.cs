@@ -11,6 +11,7 @@ namespace GreenProject.Backend.Entities
             Orders = new HashSet<Order>();
             CartItems = new HashSet<CartItem>();
             BookedCrates = new HashSet<BookedCrate>();
+            Tokens = new HashSet<UserToken>();
         }
 
         public int UserId { get; set; }
@@ -22,6 +23,7 @@ namespace GreenProject.Backend.Entities
         public bool IsDeleted { get; set; }
         public bool IsAdministrator { get; set; }
         public bool IsSubscribed { get; set; }
+        public bool IsConfirmed { get; set; }
         public bool ShouldChangePassword { get; set; }
         public int? DefaultAddressId { get; set; }
 
@@ -33,6 +35,6 @@ namespace GreenProject.Backend.Entities
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<CartItem> CartItems { get; set; }
         public virtual ICollection<BookedCrate> BookedCrates { get; set; }
-        public virtual ICollection<RefreshToken> RefreshTokens { get; set; }
+        public virtual ICollection<UserToken> Tokens { get; set; }
     }
 }

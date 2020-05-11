@@ -41,6 +41,8 @@ namespace GreenProject.Backend.Contracts.Errors
             public static readonly string UnauthorizedAccess = $"{AuthBase}.UnauthorizedAccess";
 
             public static readonly string RefreshFailed = $"{AuthBase}.RefreshFailed";
+
+            public static readonly string ConfirmationFailed = $"{AuthBase}.ConfirmationFailed";
         }
 
         public static class Cart

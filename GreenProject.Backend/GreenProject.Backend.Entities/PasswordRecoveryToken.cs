@@ -4,8 +4,7 @@ using System.Text;
 
 namespace GreenProject.Backend.Entities
 {
-    public class RefreshToken : UserToken
+    public class PasswordRecoveryToken : UserToken
     {
-        public string AccessTokenId { get; set; }
     }
 }
