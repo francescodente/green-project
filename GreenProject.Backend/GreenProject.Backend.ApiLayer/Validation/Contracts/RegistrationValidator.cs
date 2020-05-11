@@ -3,7 +3,7 @@ using GreenProject.Backend.ApiLayer.Validation.Configuration;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Contracts.Errors;
 
-namespace GreenProject.Backend.ApiLayer.Validation
+namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 {
     public class RegistrationValidator : AbstractValidator<RegistrationDto>
     {

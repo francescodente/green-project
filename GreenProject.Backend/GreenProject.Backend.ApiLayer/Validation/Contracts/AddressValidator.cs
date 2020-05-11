@@ -3,7 +3,7 @@ using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Contracts.Errors;
 using GreenProject.Backend.DataAccess.Sql.Model;
 
-namespace GreenProject.Backend.ApiLayer.Validation
+namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 {
     public class AddressValidator : AbstractValidator<AddressDto.Input>
     {

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
-using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;

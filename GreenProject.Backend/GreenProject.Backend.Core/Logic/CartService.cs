@@ -1,7 +1,6 @@
 ﻿using AutoMapper.QueryableExtensions;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Contracts.Orders.Delivery;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Exceptions;

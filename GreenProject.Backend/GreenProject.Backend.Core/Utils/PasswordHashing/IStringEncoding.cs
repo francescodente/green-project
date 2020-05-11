@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GreenProject.Backend.Core.Utils
+namespace GreenProject.Backend.Core.Utils.PasswordHashing
 {
     public interface IStringEncoding
     {

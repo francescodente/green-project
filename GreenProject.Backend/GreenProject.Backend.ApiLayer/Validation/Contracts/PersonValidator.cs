@@ -5,7 +5,7 @@ using GreenProject.Backend.Core.Utils.Time;
 using GreenProject.Backend.DataAccess.Sql.Model;
 using System;
 
-namespace GreenProject.Backend.ApiLayer.Validation
+namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 {
     public class PersonValidator : AbstractValidator<PersonDto>
     {

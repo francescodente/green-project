@@ -1,5 +1,5 @@
 ﻿using AutoMapper.QueryableExtensions;
-using GreenProject.Backend.Contracts.Orders.Delivery;
+using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.WeeklyOrders;
 using GreenProject.Backend.Core.EntitiesExtensions;
