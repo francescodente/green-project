@@ -23,6 +23,7 @@ $(document).ready(function() {
             password: $("#login-password").val()
         })
         .then(function(data) {
+            localStorage.removeItem("userData");
             localStorage.setObject("authData", data);
             removeGetModal();
             location.reload();
