@@ -12,7 +12,7 @@ $(document).ready(function() {
     API.getCustomerOrders(localStorage.getObject("authData").userId, pageNumber, PAGE_SIZE)
     .then(function(data) {
         if (data.results.length == 0) {
-            $(".search-no-results").removeClass("d-none");
+            $(".orders-no-results").removeClass("d-none");
         } else {
             // Create product objects
             data.results.forEach((json) => {
@@ -25,7 +25,12 @@ $(document).ready(function() {
         $("#orders-pagination").fillPagination(data.pageNumber, data.pageCount);
     })
     .catch(function(jqXHR) {
-        $(".orders-error").removeClass("d-none");
+        if (jqXHR.status == 403) {
+            $(".orders-no-results").removeClass("d-none");
+            $("#orders-pagination").fillPagination(0, 0);
+        } else {
+            $(".orders-error").removeClass("d-none");
+        }
     })
     .finally(function(data) { $("#modal-loading").fadeModal() });
 
