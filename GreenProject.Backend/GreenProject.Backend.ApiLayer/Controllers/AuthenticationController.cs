@@ -53,5 +53,12 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             await this.authenticationService.ConfirmAccount(confirmation);
             return NoContent();
         }
+
+        [HttpPost("reactivate")]
+        public async Task<IActionResult> ReactivateConfirmation([FromBody] string email)
+        {
+            await this.authenticationService.ReactivateConfirmation(email);
+            return NoContent();
+        }
     }
 }

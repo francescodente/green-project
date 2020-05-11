@@ -10,6 +10,8 @@ namespace GreenProject.Backend.Core.Services
 
         Task ConfirmAccount(AccountConfirmationDto confirmation);
 
+        Task ReactivateConfirmation(string email);
+
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 
         Task<AuthenticationResultDto> RefreshToken(RefreshTokenRequestDto request);

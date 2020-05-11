@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Authentication;
@@ -40,12 +41,7 @@ namespace GreenProject.Backend.Core.Logic
             User userEntity = this.CreateUserFromUserDto(registration.User);
             this.handler.AssignPassword(userEntity, registration.Password);
 
-            ConfirmationToken token = new ConfirmationToken
-            {
-                Token = Guid.NewGuid().ToString(),
-                CreationDate = this.DateTime.Now,
-                Expiration = this.DateTime.Now.AddHours(1) // TODO: use a value from config
-            };
+            ConfirmationToken token = this.handler.NewConfirmationToken();
 
             userEntity.Tokens.Add(token);
 
@@ -57,6 +53,32 @@ namespace GreenProject.Backend.Core.Logic
                 .FireAndForget();
 
             return this.Mapper.Map<UserDto.Output>(userEntity);
+        }
+
+        public async Task ReactivateConfirmation(string email)
+        {
+            var userData = await this.Data
+                .Users
+                .Where(u => u.Email == email)
+                .Where(u => !u.IsConfirmed)
+                .Select(u => new
+                {
+                    User = u,
+                    Tokens = u.Tokens.OfType<ConfirmationToken>()
+                })
+                .SingleOptionalAsync()
+                .Map(u => u.OrElseThrow(() => NotFoundException.UserWithEmail(email)));
+
+            userData.Tokens.ForEach(t => t.IsInvalid = true);
+
+            ConfirmationToken newToken = this.handler.NewConfirmationToken();
+            userData.User.Tokens.Add(newToken);
+
+            await this.Data.SaveChangesAsync();
+
+            this.Notifications
+                .AccountConfirmation(userData.User, newToken.Token)
+                .FireAndForget();
         }
 
         private User CreateUserFromUserDto(UserDto.Input userInput)

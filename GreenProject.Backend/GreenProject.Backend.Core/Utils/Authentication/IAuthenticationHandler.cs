@@ -10,6 +10,8 @@ namespace GreenProject.Backend.Core.Utils.Authentication
     {
         (AuthenticationResult, RefreshToken) OnUserAuthenticated(User user);
 
+        ConfirmationToken NewConfirmationToken();
+
         IOptional<string> FindCurrentRefreshToken();
 
         bool CanBeRefreshed(string accessToken, RefreshToken refreshToken);

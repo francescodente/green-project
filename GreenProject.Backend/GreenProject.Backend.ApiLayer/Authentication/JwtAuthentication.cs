@@ -202,5 +202,15 @@ namespace GreenProject.Backend.ApiLayer.Authentication
                 .Alg
                 .Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase);
         }
+
+        public ConfirmationToken NewConfirmationToken()
+        {
+            return new ConfirmationToken
+            {
+                Token = Guid.NewGuid().ToString(),
+                CreationDate = this.dateTime.Now,
+                Expiration = this.dateTime.Now.Add(this.settings.ConfirmationTokenDuration)
+            };
+        }
     }
 }
