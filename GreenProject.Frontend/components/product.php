@@ -34,7 +34,7 @@
             <div class="card-footer">
                 <div class="d-flex flex-column m-0">
                     <button class="show-quantity-modal btn accent ripple">Aggiungi al carrello</button>
-                    <button class="req-subscription show-crate-quantity-modal btn outline ripple mt-2">Aggiungi all'ordine settimanale</button>
+                    <button class="req-subscription show-extra-quantity-modal btn outline ripple mt-2">Aggiungi all'ordine settimanale</button>
                 </div>
             </div>
         </div>
@@ -99,6 +99,35 @@
     </div>
 </div>
 
+<!-- EXTRA QUANTITY MODAL -->
+<div data-template-name="ProductExtraQuantityModal" data-class="modal-product-quantity modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-plus-box-outline"></i>
+                <button class="modal-close btn icon ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-center">Seleziona la quantità</h4>
+                <div class="d-flex align-items-center mx-3 mb-2">
+                    <div class="text-input flex-grow-1">
+                        <input class="extra-quantity" type="number" name="quantity" min="1" placeholder=" " value="1">
+                        <button class="inc btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-up"></i></button>
+                        <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
+                    </div>
+                </div>
+                <p class="text-center m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
+                <div class="loader text-center mt-3">
+                    <?php include("loader.php"); ?>
+                </div>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="add-to-extras btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- CART REMOVE MODAL -->
 <div data-template-name="ProductRemoveModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -130,6 +159,24 @@
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
                 <button class="remove-from-crate btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EXTRA REMOVE MODAL -->
+<div data-template-name="ProductExtraRemoveModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-delete-empty"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Sei sicuro di voler rimuovere questo prodotto dalla consegna?</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                <button class="remove-from-extras btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
             </div>
         </div>
     </div>
@@ -217,11 +264,38 @@
 <table class="d-none">
     <tr data-template-name="StarredProductEntry" class="d-none">
         <td class="p-0">
-            <button class="btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
+            <button class="show-extra-quantity-modal btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
                 <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
                 <span class="product-name font-weight-normal mr-auto"></span>
                 <span class="font-weight-normal text-sec-dark mr-3"><span class="multiplier font-weight-normal"></span> <span class="unit font-weight-normal"></span> - <span class="price font-weight-normal"></span></span>
             </button>
+        </td>
+    </tr>
+</table>
+
+<!-- WEEKLY EXTRA ENTRY -->
+<table class="d-none">
+    <tr data-template-name="ExtraProductEntry" class="d-none">
+        <td class="nowrap">
+            <a href="#" class="product-modal-link">
+                <img class="product-image img-fluid" src="images/default_product.png"/>
+            </a>
+        </td>
+        <td>
+            <p class="product-name m-0">Product name</p>
+            <p class="text-sec-dark m-0">
+                <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
+            </p>
+        </td>
+        <td class="nowrap actions">
+            <div class="d-flex justify-content-end">
+                <button type="button" class="show-extra-quantity-modal btn icon ripple mr-2" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
+                    <i class="mdi dark mdi-pencil"></i>
+                </button>
+                <button type="button" class="show-extra-remove-modal btn icon ripple" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">
+                    <i class="mdi dark mdi-close"></i>
+                </button>
+            </div>
         </td>
     </tr>
 </table>

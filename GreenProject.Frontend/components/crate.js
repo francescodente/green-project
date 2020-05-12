@@ -1,8 +1,9 @@
 class Crate extends Purchasable {
 
-    constructor(json, occupiedSlots) {
+    constructor(json, occupiedSlots, orderDetailId) {
         super(json);
         this.occupiedSlots = occupiedSlots;
+        this.orderDetailId = orderDetailId;
 
         // Add templates
         this.html.main = Entity.getTemplate("CrateCard");
@@ -43,7 +44,11 @@ class Crate extends Purchasable {
                 crate.showDetailsModal();
             });
             $(crate.html[k]).find(".subscribe").click(function() { crate.addToPreferences(); });
-            $(crate.html[k]).find(".show-remove-modal").click(function() { crate.showRemoveModal(); });
+            $(crate.html[k]).find(".show-remove-modal").click(function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                crate.showRemoveModal();
+            });
             $(crate.html[k]).find(".remove-from-preferences").click(function() { crate.removeFromPreferences(); });
         }
     }
@@ -72,6 +77,9 @@ class Crate extends Purchasable {
 
     removeFromPreferences() {
         console.log("remove from preferences " + this.crateId);
+        API.removeFromWeeklyOrder(localStorage.getObject("authData").userId, this.orderDetailId)
+        .then(function(data) { location.reload(); })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
 
 }

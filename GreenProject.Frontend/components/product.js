@@ -9,14 +9,17 @@ class Product extends Purchasable {
         this.html.main = Entity.getTemplate("ProductCard");
         this.html.detailsModal = Entity.getTemplate("ProductDetailsModal");
         this.html.quantityModal = Entity.getTemplate("ProductQuantityModal");
+        this.html.crateQuantityModal = Entity.getTemplate("ProductCrateQuantityModal");
+        this.html.extraQuantityModal = Entity.getTemplate("ProductExtraQuantityModal");
         this.html.removeModal = Entity.getTemplate("ProductRemoveModal");
         this.html.crateRemoveModal = Entity.getTemplate("ProductCrateRemoveModal");
+        this.html.extraRemoveModal = Entity.getTemplate("ProductExtraRemoveModal");
         this.html.cartEntry = Entity.getTemplate("ProductCartEntry");
         this.html.orderEntry = Entity.getTemplate("ProductOrderEntry");
         this.html.inCrateEntry = Entity.getTemplate("ProductInCrateEntry");
         this.html.compatibleWithCrateEntry = Entity.getTemplate("ProductCompatibleWithCrateEntry");
-        this.html.crateQuantityModal = Entity.getTemplate("ProductCrateQuantityModal");
         this.html.starredEntry = Entity.getTemplate("StarredProductEntry");
+        this.html.extraEntry = Entity.getTemplate("ExtraProductEntry");
 
         // Save formatted fields
         this.formattedMultiplier = (this.unitMultiplier * this.quantity).toString().replace(".", ",");
@@ -29,47 +32,55 @@ class Product extends Purchasable {
         let isSubscribed = userData == null ? false : userData.isSubscribed;
 
         for (let k in product.html) {
+            let productHtml = product.html[k];
 
             // Init tooltips
-            $(product.html[k]).find('[data-tooltip="tooltip"]').tooltip();
+            $(productHtml).find('[data-tooltip="tooltip"]').tooltip();
 
             // Replace values in templates
-            $(product.html[k]).find(".product-name").html(this.name);
-            $(product.html[k]).find(".product-description").html(this.description);
+            $(productHtml).find(".product-name").html(this.name);
+            $(productHtml).find(".product-description").html(this.description);
             if (product.imageUrl != null) {
-                $(product.html[k]).find(".product-image").attr("src", imageUrl);
-                $(product.html[k]).find(".product-image").attr("alt", this.name);
+                $(productHtml).find(".product-image").attr("src", imageUrl);
+                $(productHtml).find(".product-image").attr("alt", this.name);
             }
-            $(product.html[k]).find(".multiplier").html(product.formattedMultiplier);
-            $(product.html[k]).find(".unit").html(product.formattedUnit);
-            $(product.html[k]).find(".price").html(product.formattedPrice);
+            $(productHtml).find(".multiplier").html(product.formattedMultiplier);
+            $(productHtml).find(".unit").html(product.formattedUnit);
+            $(productHtml).find(".price").html(product.formattedPrice);
             if (product.maxQuantity != null) {
-                $(product.html[k]).find("[name='quantity']").attr("max", product.maxQuantity);
+                $(productHtml).find("[name='quantity']").attr("max", product.maxQuantity);
             }
 
             // Remove items that require subscription if user is not subscribed
             if (!isSubscribed) {
-                $(product.html[k]).find(".req-subscription").remove();
+                $(productHtml).find(".req-subscription").remove();
             }
 
             // Add event listeners
-            $(product.html[k]).find(".product-modal-link").click(function(e) {
+            $(productHtml).find(".product-modal-link").click(function(e) {
                 e.preventDefault();
                 product.showDetailsModal();
             });
-            $(product.html[k]).find(".show-quantity-modal").click(function() { product.showQuantityModal(); });
-            $(product.html[k]).find(".show-crate-quantity-modal").click(function() { product.showCrateQuantityModal(); });
-            $(product.html[k]).find(".show-remove-modal").click(function() { product.showRemoveModal(); });
-            $(product.html[k]).find(".show-crate-remove-modal").click(function() { product.showCrateRemoveModal(); });
-            $(product.html[k]).find(".add-to-cart").click(function() { product.addToCart(); });
-            $(product.html[k]).find(".remove-from-cart").click(function() { product.removeFromCart(); });
-            $(product.html[k]).find(".remove-from-crate").click(function() { product.removeFromCrate(); });
-            $(product.html[k]).find(".add-to-crate").click(function() { product.addToCrate(); });
-            $(product.html[k]).on("change paste keyup", "input.quantity", function() {
+            $(productHtml).find(".show-quantity-modal").click(function() { product.showQuantityModal() });
+            $(productHtml).find(".show-crate-quantity-modal").click(function() { product.showCrateQuantityModal() });
+            $(productHtml).find(".show-extra-quantity-modal").click(function() { product.showExtraQuantityModal() });
+            $(productHtml).find(".show-remove-modal").click(function() { product.showRemoveModal() });
+            $(productHtml).find(".show-crate-remove-modal").click(function() { product.showCrateRemoveModal() });
+            $(productHtml).find(".show-extra-remove-modal").click(function() { product.showExtraRemoveModal() });
+            $(productHtml).find(".add-to-cart").click(function() { product.addToCart() });
+            $(productHtml).find(".remove-from-cart").click(function() { product.removeFromCart() });
+            $(productHtml).find(".remove-from-crate").click(function() { product.removeFromCrate() });
+            $(productHtml).find(".remove-from-extras").click(function() { product.removeFromExtras() });
+            $(productHtml).find(".add-to-crate").click(function() { product.addToCrate() });
+            $(productHtml).find(".add-to-extras").click(function() { product.addToExtras() });
+            $(productHtml).on("change paste keyup", "input.quantity", function() {
                 product.reactToQuantityChange(product.html.quantityModal);
             });
-            $(product.html[k]).on("change paste keyup", "input.crate-quantity", function() {
+            $(productHtml).on("change paste keyup", "input.crate-quantity", function() {
                 product.reactToQuantityChange(product.html.crateQuantityModal);
+            });
+            $(productHtml).on("change paste keyup", "input.extra-quantity", function() {
+                product.reactToQuantityChange(product.html.extraQuantityModal);
             });
         }
     }
@@ -93,6 +104,11 @@ class Product extends Purchasable {
         this.html.crateQuantityModal.showModal();
     }
 
+    showExtraQuantityModal() {
+        console.log("show extra quantity modal");
+        this.html.extraQuantityModal.showModal();
+    }
+
     showRemoveModal() {
         this.html.removeModal.showModal();
     }
@@ -100,6 +116,11 @@ class Product extends Purchasable {
     showCrateRemoveModal() {
         console.log("show crate remove modal");
         this.html.crateRemoveModal.showModal();
+    }
+
+    showExtraRemoveModal() {
+        console.log("show extra remove modal");
+        this.html.extraRemoveModal.showModal();
     }
 
     reactToQuantityChange(quantityModal) {
@@ -118,7 +139,7 @@ class Product extends Purchasable {
     }
 
     addToCart() {
-        let quantityModal = this.html.quantityModal
+        let quantityModal = this.html.quantityModal;
         // Detect if request comes from cart
         let page = new URL(window.location.href).pathname;
         page = page.substring(page.lastIndexOf("/") + 1);
@@ -150,8 +171,18 @@ class Product extends Purchasable {
         console.log("add to crate " + this.productId + " " + this.orderDetailId);
     }
 
-    addToOrder() {
-        console.log("edit " + this.productId);
+    addToExtras() {
+        console.log("add to extras " + this.productId);
+        let quantityModal = this.html.extraQuantityModal;
+        // Get quantity
+        let quantity = quantityModal.find("[name='quantity']").val();
+        if (quantity == null || quantity == "") return;
+        // Perform request
+        quantityModal.find(".loader").show();
+        quantityModal.find(".add-to-extras").attr("disabled", true);
+        API.addExtraProduct(localStorage.getObject("authData").userId, this.productId, quantity)
+        .then(function(data) { location.reload(); })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
 
     removeFromCart() {
@@ -164,8 +195,8 @@ class Product extends Purchasable {
         console.log("remove from crate " + this.productId);
     }
 
-    removeFromOrder() {
-        console.log("remove from order " + this.productId);
+    removeFromExtras() {
+        console.log("remove from extras " + this.orderDetailId);
     }
 
 }

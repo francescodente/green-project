@@ -44,9 +44,11 @@ $(document).ready(function() {
                 weeklyCrates.push(weeklyCrate);
                 weeklyCrate.html.main.appendTo(".weekly-crates");
             });
-            data.extraProducts.forEach(json => {
-
-            });
+            for (let i = data.extraProducts.length - 1; i >= 0; i--) {
+                let extraProduct = new Product(data.extraProducts[i], data.extraProducts[i].quantity);
+                weeklyExtras.push(extraProduct);
+                extraProduct.html.extraEntry.prependTo(".weekly-extras>tbody");
+            }
 
             selectAddress();
 
@@ -75,8 +77,6 @@ $(document).ready(function() {
     $(".starred-products").hide();
     API.getProducts(null, 0, 30, true)
     .then(function(data) {
-        console.log(data);
-
         if (data.results.length == 0) {
 
         } else {
@@ -86,8 +86,6 @@ $(document).ready(function() {
                 starredProducts.push(product);
                 product.html.starredEntry.appendTo(".starred-products tbody");
             });
-
-            console.log(starredProducts);
         }
     })
     .catch(function(jqXHR) {
