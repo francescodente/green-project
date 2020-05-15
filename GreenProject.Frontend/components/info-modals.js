@@ -15,6 +15,8 @@ class ErrorModal extends Modal {
         super(json);
         this.html.main = Entity.getTemplate("ErrorModal");
 
+        console.log(json);
+
         if (json.responseJSON != null) {
             let propertyErrors = this.responseJSON.propertyErrors.map(err => err.code + " [" + err.property + "]");
             let globalErrors = this.responseJSON.globalErrors.map(err => err.code);
