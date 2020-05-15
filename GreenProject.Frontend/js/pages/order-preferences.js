@@ -9,7 +9,7 @@ $(document).ready(function() {
     // Show addresses
     $("#order-preferences-loader").show();
     $(".order-preferences-content").hide();
-    API.getAddresses(localStorage.getObject("userData").userId)
+    API.getAddresses(localStorage.getObject("authData").userId)
     .then(function(data) {
         if (data.addresses.length == 0) {
             $(".addresses-no-results").removeClass("d-none");

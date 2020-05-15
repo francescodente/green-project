@@ -151,11 +151,11 @@ class Product extends Purchasable {
         quantityModal.find(".loader").show();
         quantityModal.find(".add-to-cart").attr("disabled", true);
         if (isFromCart) {
-            API.editCartQuantity(localStorage.getObject("userData").userId, this.productId, quantity)
+            API.editCartQuantity(localStorage.getObject("authData").userId, this.productId, quantity)
             .then(function(data) { location.reload(); })
             .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
         } else {
-            API.addToCart(localStorage.getObject("userData").userId, this.productId, quantity)
+            API.addToCart(localStorage.getObject("authData").userId, this.productId, quantity)
             .then(function(data) {
                 APIUtils.updateCartBadge()
                 .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
@@ -186,7 +186,7 @@ class Product extends Purchasable {
     }
 
     removeFromCart() {
-        API.removeFromCart(localStorage.getObject("userData").userId, this.productId)
+        API.removeFromCart(localStorage.getObject("authData").userId, this.productId)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }

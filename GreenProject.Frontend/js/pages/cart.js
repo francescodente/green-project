@@ -10,7 +10,7 @@ $(document).ready(function() {
 
     // Get cart content
     $("#modal-loading").showModal();
-    API.getCart(localStorage.getObject("userData").userId)
+    API.getCart(localStorage.getObject("authData").userId)
     .then(function(data) {
         if (data.cartItems.length == 0) {
             $(".cart-empty").removeClass("d-none");
@@ -43,7 +43,11 @@ $(document).ready(function() {
         // Check if and address is selected
         selectedAddress = $("[name='delivery-address']:checked");
         if (!selectedAddress.length) {
-            new InfoModal("Seleziona un indirizzo di consegna per procedere con la creazione dell'ordine").show();
+            $("#missing-address-modal").showModal();
+            return;
+        }
+        if (!localStorage.getObject("authData").roles.includes("Person")) {
+            $("#missing-role-modal").showModal();
             return;
         }
         selectedAddress = addresses.filter(address => address.addressId == selectedAddress.val())[0];
@@ -61,7 +65,7 @@ $(document).ready(function() {
     // Cart submission
     $(".submit-cart").click(function() {
         $("#modal-loading").showModal();
-        API.confirmCart(localStorage.getObject("userData").userId, {
+        API.confirmCart(localStorage.getObject("authData").userId, {
             addressId: selectedAddress.addressId,
             notes: $("#notes").val()
         })
