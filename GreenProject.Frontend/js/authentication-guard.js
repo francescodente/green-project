@@ -46,11 +46,6 @@ $(document).ready(function() {
 
     }
 
-    APIUtils.getOrUpdateCategories()
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
-    APIUtils.getOrUpdateZones()
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
-
     $(document).on("click", ".btn-logout", function() {
         API.logout();
         location.reload();

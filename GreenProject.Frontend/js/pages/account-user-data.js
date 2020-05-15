@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
-    function fillFormFields() {
-        let userData = localStorage.getObject("userData");
+    function fillFormFields(userData) {
         $("#email").val(userData.email);
         $("#marketing-consent").prop("checked", userData.marketingConsent);
         if ("Person" in userData.rolesData) {
@@ -44,8 +43,8 @@ $(document).ready(function() {
 
     // Get user data
     $("#modal-loading").showModal();
-    APIUtils.getOrUpdateCurrentUserInfo()
-    .then(function(data) { fillFormFields(); })
+    APIUtils.getOrUpdateCurrentUserInfo(true)
+    .then(function(data) { fillFormFields(data); })
     .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); })
     .finally(function(data) { $("#modal-loading").fadeModal() });
 

@@ -80,7 +80,9 @@ class APIClass {
         return this.post("auth/token", data);
     }
 
-    refreshToken(data) {
+    refreshToken(accessToken) {
+        console.log(accessToken);
+        let data = { token: accessToken };
         return this.ajax("POST", "auth/refresh", JSON.stringify(data), "");
     }
 

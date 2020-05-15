@@ -29,6 +29,10 @@ $(document).ready(function() {
             location.reload();
         })
         .catch(function(jqXHR) {
+            if (jqXHR.responseJSON == null) {
+                new ErrorModal(jqXHR).show();
+                return;
+            }
             let errCode = jqXHR.responseJSON.globalErrors[0].code;
             if (errCode == "Err.Auth.LoginFailed") {
                 $("#login-email").addClass("error");
