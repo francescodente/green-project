@@ -6,7 +6,11 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface IAuthenticationService
     {
-        Task<UserOutputDto> RegisterCustomer(RegistrationDto registration);
+        Task<UserDto.Output> RegisterCustomer(RegistrationDto registration);
+
+        Task ConfirmAccount(AccountConfirmationDto confirmation);
+
+        Task ReactivateConfirmation(string email);
 
         Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials);
 

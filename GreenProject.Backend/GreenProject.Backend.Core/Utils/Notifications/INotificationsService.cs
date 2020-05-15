@@ -5,7 +5,7 @@ namespace GreenProject.Backend.Core.Utils.Notifications
 {
     public interface INotificationsService
     {
-        Task AccountConfirmation(User user);
+        Task AccountConfirmation(User user, string token);
 
         Task SupportRequested(string senderEmail, string subject, string body);
 

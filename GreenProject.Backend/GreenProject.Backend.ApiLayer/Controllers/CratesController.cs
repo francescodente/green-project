@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/crates")]
+    [Route(ApiRoutes.BaseRoute + "/crates")]
     [ApiController]
     public class CratesController : ControllerBase
     {

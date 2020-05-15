@@ -6,23 +6,23 @@ namespace GreenProject.Backend.Contracts.Errors
 {
     public static class ErrorCodes
     {
-        private const string BASE = "Err";
+        private const string Base = "Err";
 
         public static class Common
         {
-            public static readonly string Generic = $"{BASE}.Generic";
+            public static readonly string Generic = $"{Base}.Generic";
 
-            public static readonly string MissingValue = $"{BASE}.MissingValue";
+            public static readonly string MissingValue = $"{Base}.MissingValue";
 
-            public static readonly string IncorrectFormat = $"{BASE}.IncorrectFormat";
+            public static readonly string IncorrectFormat = $"{Base}.IncorrectFormat";
 
-            public static readonly string ValueOutOfRange = $"{BASE}.ValueOutOfRange";
+            public static readonly string ValueOutOfRange = $"{Base}.ValueOutOfRange";
 
-            public static readonly string DuplicateField = $"{BASE}.DuplicateField";
+            public static readonly string DuplicateField = $"{Base}.DuplicateField";
 
-            public static readonly string UnsupportedValue = $"{BASE}.UnsupportedValue";
+            public static readonly string UnsupportedValue = $"{Base}.UnsupportedValue";
 
-            public static readonly string NotFound = $"{BASE}.NotFound";
+            public static readonly string NotFound = $"{Base}.NotFound";
 
             public static string ResourceNotFound(string resourceName)
             {
@@ -32,7 +32,7 @@ namespace GreenProject.Backend.Contracts.Errors
 
         public static class Auth
         {
-            private static readonly string AuthBase = $"{BASE}.Auth";
+            private static readonly string AuthBase = $"{Base}.Auth";
 
             public static readonly string LoginFailed = $"{AuthBase}.LoginFailed";
 
@@ -41,18 +41,20 @@ namespace GreenProject.Backend.Contracts.Errors
             public static readonly string UnauthorizedAccess = $"{AuthBase}.UnauthorizedAccess";
 
             public static readonly string RefreshFailed = $"{AuthBase}.RefreshFailed";
+
+            public static readonly string ConfirmationFailed = $"{AuthBase}.ConfirmationFailed";
         }
 
         public static class Cart
         {
-            private static readonly string CartBase = $"{BASE}.Cart";
+            private static readonly string CartBase = $"{Base}.Cart";
 
             public static readonly string Empty = $"{CartBase}.EmptyCart";
         }
 
         public static class Orders
         {
-            private static readonly string OrdersBase = $"{BASE}.Orders";
+            private static readonly string OrdersBase = $"{Base}.Orders";
 
             public static readonly string InvalidStateTransition = $"{OrdersBase}.InvalidStateTransition";
 
@@ -65,14 +67,14 @@ namespace GreenProject.Backend.Contracts.Errors
 
         public static class Addresses
         {
-            private static readonly string AddressesBase = $"{BASE}.Addresses";
+            private static readonly string AddressesBase = $"{Base}.Addresses";
 
             public static readonly string DeletingDefaultAddress = $"{AddressesBase}.DeletingDefault";
         }
 
         public static class WeeklyOrders
         {
-            private static readonly string WeeklyOrdersBase = $"{BASE}.WeeklyOrders";
+            private static readonly string WeeklyOrdersBase = $"{Base}.WeeklyOrders";
 
             public static readonly string NotSubscribed = $"{WeeklyOrdersBase}.NotSubscribed";
 

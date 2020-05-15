@@ -3,12 +3,10 @@ using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Categories;
 using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Contracts.Orders.Delivery;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Contracts.Users.Roles;
 using GreenProject.Backend.Contracts.WeeklyOrders;
-using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,7 +97,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
 
                 CreateMap<DeliveryMan, DeliveryManDto>();
 
-                CreateMap<User, UserOutputDto>()
+                CreateMap<User, UserDto.Output>()
                     .ForMember(dst => dst.RolesData, o => o.MapFrom((src, dst, m, context) => CreateRoleDictionary(src, context)));
             }
 
@@ -148,7 +146,11 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.Products, o => o.MapFrom(src => src.SubProducts))
                     .ForMember(dst => dst.CrateDescription, o => o.MapFrom(src => (Crate)src.Item));
 
-                CreateMap<OrderDetailSubProduct, QuantifiedProductDto.Output>();
+                CreateMap<OrderDetailSubProduct, BookedCrateProduct>()
+                    .ForMember(dst => dst.Maximum, o => o.MapFrom(src => ((Crate)src.OrderDetail.Item)
+                        .Compatibilities
+                        .Single(c => c.ProductId == src.ProductId)
+                        .Maximum));
             }
         }
     }

@@ -9,6 +9,12 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class CustomerBusinessModel : IEntityTypeConfiguration<CustomerBusiness>
     {
+        public const int BusinessNameSize = 100;
+        public const int LegalFormSize = 10;
+        public const int PecSize = 60;
+        public const int SdiSize = 7;
+        public const int VatNumberSize = 16;
+
         public void Configure(EntityTypeBuilder<CustomerBusiness> entity)
         {
             entity.HasKey(e => e.UserId);
@@ -20,19 +26,21 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.BusinessName)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(BusinessNameSize);
 
             entity.Property(e => e.LegalForm)
                 .IsRequired()
-                .HasMaxLength(10);
+                .HasMaxLength(LegalFormSize);
 
-            entity.Property(e => e.Pec).HasMaxLength(60);
+            entity.Property(e => e.Pec)
+                .HasMaxLength(PecSize);
 
-            entity.Property(e => e.Sdi).HasMaxLength(7);
+            entity.Property(e => e.Sdi)
+                .HasMaxLength(SdiSize);
 
             entity.Property(e => e.VatNumber)
                 .IsRequired()
-                .HasMaxLength(16);
+                .HasMaxLength(VatNumberSize);
 
             entity.HasOne(d => d.User)
                 .WithOne(p => p.CustomerBusiness)

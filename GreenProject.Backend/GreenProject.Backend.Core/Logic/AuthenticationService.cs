@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Contracts.Users;
+using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
-using GreenProject.Backend.Core.Utils;
+using GreenProject.Backend.Core.Utils.Authentication;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
@@ -23,8 +26,9 @@ namespace GreenProject.Backend.Core.Logic
             this.handler = handler;
         }
 
-        public async Task<UserOutputDto> RegisterCustomer(RegistrationDto registration)
+        public async Task<UserDto.Output> RegisterCustomer(RegistrationDto registration)
         {
+            // TODO: what happens if a user deletes his account and registers again with the same email?
             bool emailInUse = await this.Data
                 .Users
                 .AnyAsync(u => u.Email == registration.User.Email);
@@ -36,20 +40,52 @@ namespace GreenProject.Backend.Core.Logic
 
             User userEntity = this.CreateUserFromUserDto(registration.User);
             this.handler.AssignPassword(userEntity, registration.Password);
+
+            ConfirmationToken token = this.handler.NewConfirmationToken();
+
+            userEntity.Tokens.Add(token);
+
             this.Data.Users.Add(userEntity);
             await this.Data.SaveChangesAsync();
 
-            await this.Notifications.AccountConfirmation(userEntity);
+            this.Notifications
+                .AccountConfirmation(userEntity, token.Token)
+                .FireAndForget();
 
-            return this.Mapper.Map<UserOutputDto>(userEntity);
+            return this.Mapper.Map<UserDto.Output>(userEntity);
         }
 
-        private User CreateUserFromUserDto(UserInputDto userInput)
+        public async Task ReactivateConfirmation(string email)
+        {
+            var userData = await this.Data
+                .Users
+                .Where(u => u.Email == email)
+                .Where(u => !u.IsConfirmed)
+                .Select(u => new
+                {
+                    User = u,
+                    Tokens = u.Tokens.OfType<ConfirmationToken>()
+                })
+                .SingleOptionalAsync()
+                .Map(u => u.OrElseThrow(() => NotFoundException.UserWithEmail(email)));
+
+            userData.Tokens.ForEach(t => t.IsInvalid = true);
+
+            ConfirmationToken newToken = this.handler.NewConfirmationToken();
+            userData.User.Tokens.Add(newToken);
+
+            await this.Data.SaveChangesAsync();
+
+            this.Notifications
+                .AccountConfirmation(userData.User, newToken.Token)
+                .FireAndForget();
+        }
+
+        private User CreateUserFromUserDto(UserDto.Input userInput)
         {
             return new User
             {
                 Email = userInput.Email,
-                IsEnabled = true,
                 MarketingConsent = userInput.MarketingConsent
             };
         }
@@ -57,49 +93,61 @@ namespace GreenProject.Backend.Core.Logic
         public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)
         {
             User user = await this.Data
-                .Users
+                .EnabledUsers()
                 .IncludingRoles()
+                .Where(u => u.IsConfirmed)
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
             this.EnsurePasswordIsCorrect(user, credentials.Password);
-            AuthenticationResultDto result = await this.GenerateAuthenticationResult(user);
+            AuthenticationResultDto result = this.GenerateAuthenticationResult(user);
             await this.Data.SaveChangesAsync();
             return result;
         }
 
         public async Task<AuthenticationResultDto> RefreshToken(RefreshTokenRequestDto request)
         {
-            IOptional<RefreshToken> refreshToken = await this.Data
-                .RefreshTokens
-                .SingleOptionalAsync(r => r.Token == request.RefreshToken);
+            string refreshToken = this.handler
+                .FindCurrentRefreshToken()
+                .OrElseThrow(() => new TokenRefreshFailedException());
 
-            RefreshToken token = refreshToken
+            IOptional<RefreshToken> optionalToken = await this.Data
+                .RefreshTokens
+                .SingleOptionalAsync(r => r.Token == refreshToken);
+
+            RefreshToken validatedToken = optionalToken
+                .Filter(this.IsTokenValid)
                 .Filter(t => this.handler.CanBeRefreshed(request.Token, t))
                 .OrElseThrow(() => new TokenRefreshFailedException());
 
             AuthenticationResultDto result = await this.Data
-                .Users
+                .EnabledUsers()
                 .IncludingRoles()
-                .SingleAsync(u => u.UserId == token.UserId)
-                .FlatMap(this.GenerateAuthenticationResult);
+                .SingleAsync(u => u.UserId == validatedToken.UserId)
+                .Map(this.GenerateAuthenticationResult);
 
-            refreshToken.IfPresent(t => t.IsUsed = true);
+            validatedToken.IsUsed = true;
             await this.Data.SaveChangesAsync();
 
             return result;
         }
 
-        private async Task<AuthenticationResultDto> GenerateAuthenticationResult(User user)
+        private AuthenticationResultDto GenerateAuthenticationResult(User user)
         {
-            var (result, refreshToken) = await this.handler.OnUserAuthenticated(user);
+            var (result, refreshToken) = this.handler.OnUserAuthenticated(user);
             this.Data.RefreshTokens.Add(refreshToken);
-            return result;
+            return new AuthenticationResultDto
+            {
+                Expiration = result.Expiration,
+                Token = result.Token,
+                UserId = user.UserId,
+                Roles = user.GetRoleTypes()
+            };
         }
 
         public async Task ChangePassword(int userId, PasswordChangeRequestDto request)
         {
             User user = await this.Data
-                .Users
+                .ActiveUsers()
                 .SingleOptionalAsync(u => u.UserId == userId)
                 .Map(u => u.OrElseThrow(() => NotFoundException.UserWithId(userId)));
 
@@ -117,9 +165,32 @@ namespace GreenProject.Backend.Core.Logic
             }
         }
 
+        public async Task ConfirmAccount(AccountConfirmationDto confirmation)
+        {
+            IOptional<ConfirmationToken> token = await this.Data
+                .ConfirmationTokens
+                .Include(t => t.User)
+                .SingleOptionalAsync(t => t.Token == confirmation.Token);
+
+            ConfirmationToken validatedToken = token
+                .Filter(this.IsTokenValid)
+                .Filter(t => !t.User.IsConfirmed)
+                .OrElseThrow(() => new ConfirmationFailedException());
+
+            validatedToken.IsUsed = true;
+            validatedToken.User.IsConfirmed = true;
+
+            await this.Data.SaveChangesAsync();
+        }
+
         public Task SendPasswordRecovery(PasswordRecoveryRequestDto request)
         {
             throw new NotImplementedException();
+        }
+
+        private bool IsTokenValid(UserToken token)
+        {
+            return !(token.IsUsed || token.IsInvalid || token.Expiration < this.DateTime.Now);
         }
     }
 }

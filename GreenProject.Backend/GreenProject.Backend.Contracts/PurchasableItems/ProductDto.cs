@@ -29,6 +29,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public Money Price { get; set; }
             public UnitName UnitName { get; set; }
             public decimal UnitMultiplier { get; set; }
+            public int CrateMultiplier { get; set; }
             public decimal IvaPercentage { get; set; }
             public bool IsStarred { get; set; }
             public int CategoryId { get; set; }

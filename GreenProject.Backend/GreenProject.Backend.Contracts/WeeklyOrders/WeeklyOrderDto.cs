@@ -1,6 +1,4 @@
-﻿using GreenProject.Backend.Contracts.Cart;
-using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Contracts.Orders.Delivery;
+﻿using GreenProject.Backend.Contracts.Orders;
 using System.Collections.Generic;
 
 namespace GreenProject.Backend.Contracts.WeeklyOrders

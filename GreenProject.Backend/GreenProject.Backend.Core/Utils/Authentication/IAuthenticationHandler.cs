@@ -1,13 +1,18 @@
 ﻿using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Core.Utils.Time;
 using GreenProject.Backend.Entities;
+using GreenProject.Backend.Shared.Utils;
 using System.Threading.Tasks;
 
-namespace GreenProject.Backend.Core.Utils
+namespace GreenProject.Backend.Core.Utils.Authentication
 {
     public interface IAuthenticationHandler
     {
-        Task<(AuthenticationResultDto, RefreshToken)> OnUserAuthenticated(User user);
+        (AuthenticationResult, RefreshToken) OnUserAuthenticated(User user);
+
+        ConfirmationToken NewConfirmationToken();
+
+        IOptional<string> FindCurrentRefreshToken();
 
         bool CanBeRefreshed(string accessToken, RefreshToken refreshToken);
 

@@ -22,9 +22,9 @@ namespace GreenProject.Backend.Infrastructure.Notifications
             return Task.WhenAll(this.services.Select(notification));
         }
 
-        public Task AccountConfirmation(User user)
+        public Task AccountConfirmation(User user, string token)
         {
-            return this.DelegateRequest(s => s.AccountConfirmation(user));
+            return this.DelegateRequest(s => s.AccountConfirmation(user, token));
         }
 
         public Task OrderAccepted(Order order)

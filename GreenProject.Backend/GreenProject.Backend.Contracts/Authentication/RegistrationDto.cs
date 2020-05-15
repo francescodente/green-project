@@ -5,7 +5,7 @@ namespace GreenProject.Backend.Contracts.Authentication
 {
     public class RegistrationDto
     {
-        public UserInputDto User { get; set; }
+        public UserDto.Input User { get; set; }
         public string Password { get; set; }
     }
 }

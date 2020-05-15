@@ -2,8 +2,8 @@
 {
     public static class ApiRoutes
     {
-        private const string VERSION = "v1";
-        private const string ROOT = "api";
-        public const string BASE_ROUTE = ROOT + "/" + VERSION;
+        private const string Version = "v1";
+        private const string Root = "api";
+        public const string BaseRoute = Root + "/" + Version;
     }
 }

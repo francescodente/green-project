@@ -178,16 +178,21 @@ namespace GreenProject.Backend.Shared.Utils
             return optional.IsPresent() ? optional.Value : supplier();
         }
 
-        public static T OrElseThrow<T>(this IOptional<T> optional, Func<Exception> exceptionSupplier)
+        public static IOptional<T> ThrowIfAbsent<T>(this IOptional<T> optional, Func<Exception> exceptionSupplier)
         {
             if (optional.IsPresent())
             {
-                return optional.Value;
+                return optional;
             }
             else
             {
                 throw exceptionSupplier();
             }
+        }
+
+        public static T OrElseThrow<T>(this IOptional<T> optional, Func<Exception> exceptionSupplier)
+        {
+            return optional.ThrowIfAbsent(exceptionSupplier).Value;
         }
     }
 }

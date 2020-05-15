@@ -18,7 +18,7 @@ namespace GreenProject.Backend.Core.Logic
         public async Task SetUserEnabledState(int userId, bool enabled)
         {
             User user = await this.Data
-                .Users
+                .ActiveUsers()
                 .SingleOptionalAsync(s => s.UserId == userId)
                 .Map(s => s.OrElseThrow(() => NotFoundException.UserWithId(userId)));
 

@@ -7,7 +7,7 @@ namespace GreenProject.Backend.Core.Utils.Uploads
 {
     public class Size
     {
-        private const string SEPARATOR = "x";
+        private const string Separator = "x";
 
         public int Width { get; set; }
         public int Height { get; set; }
@@ -25,12 +25,12 @@ namespace GreenProject.Backend.Core.Utils.Uploads
 
         public override string ToString()
         {
-            return string.Format("{0}{2}{1}", this.Width, this.Height, SEPARATOR);
+            return string.Format("{0}{2}{1}", this.Width, this.Height, Separator);
         }
 
         public static IOptional<Size> TryParse(string sizeString)
         {
-            string[] dimensions = sizeString.Split(SEPARATOR);
+            string[] dimensions = sizeString.Split(Separator);
 
             if (dimensions.Length != 2)
             {

@@ -9,6 +9,10 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class PersonModel : IEntityTypeConfiguration<Person>
     {
+        public const int FirstNameSize = 50;
+        public const int LastNameSize = 50;
+        public const int CodeSize = 20;
+
         public void Configure(EntityTypeBuilder<Person> entity)
         {
             entity.HasKey(e => e.UserId);
@@ -17,18 +21,18 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.FirstName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(FirstNameSize);
 
             entity.Property(e => e.LastName)
                 .IsRequired()
-                .HasMaxLength(50);
+                .HasMaxLength(LastNameSize);
 
             entity.Property(e => e.Code)
                 .IsRequired()
-                .HasMaxLength(20);
+                .HasMaxLength(CodeSize);
 
             entity.Property(e => e.DateOfBirth)
-                .HasColumnType("date");
+                .HasTypeDate();
 
             entity.HasOne(d => d.User)
                 .WithOne(p => p.Person)

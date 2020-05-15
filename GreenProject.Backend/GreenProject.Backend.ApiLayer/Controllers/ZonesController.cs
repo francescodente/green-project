@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/zones")]
+    [Route(ApiRoutes.BaseRoute + "/zones")]
     [ApiController]
     public class ZonesController : ControllerBase
     {

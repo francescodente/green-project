@@ -8,6 +8,6 @@ namespace GreenProject.Backend.Contracts.WeeklyOrders
     {
         public int OrderDetailId { get; set; }
         public CrateDto.Output CrateDescription { get; set; }
-        public IEnumerable<QuantifiedProductDto.Output> Products { get; set; }
+        public IEnumerable<BookedCrateProduct> Products { get; set; }
     }
 }

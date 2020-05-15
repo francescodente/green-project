@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Contracts.PurchasableItems;
+using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
@@ -39,6 +40,7 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.Price = product.Price;
                 productEntity.UnitName = product.UnitName;
                 productEntity.UnitMultiplier = product.UnitMultiplier;
+                productEntity.CrateMultiplier = product.CrateMultiplier;
                 productEntity.IvaPercentage = product.IvaPercentage;
                 productEntity.IsStarred = product.IsStarred;
 
@@ -67,15 +69,17 @@ namespace GreenProject.Backend.Core.Logic
 
                 productEntity.Price = product.Price.Value;
                 productEntity.IvaPercentage = product.IvaPercentage;
-
-                productEntity.Compatibilities.Clear();
-                this.AddCompatibleCrates(productEntity, product.CompatibleCrates);
+                if (product.CompatibleCrates != null)
+                {
+                    productEntity.Compatibilities.Clear();
+                    this.AddCompatibleCrates(productEntity, product.CompatibleCrates);
+                }
             }, q => q.Include(p => p.Compatibilities));
         }
 
         protected override IQueryable<Product> GetDefaultQuery()
         {
-            return this.Data.Products;
+            return this.Data.ActiveProducts();
         }
     }
 }

@@ -9,6 +9,10 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class UserModel : IEntityTypeConfiguration<User>
     {
+        public const int EmailSize = 60;
+        public const int PasswordSize = 256;
+        public const int SaltSize = 256;
+
         public void Configure(EntityTypeBuilder<User> entity)
         {
             entity.HasKey(e => e.UserId);
@@ -18,15 +22,15 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
             entity.Property(e => e.Email)
                 .IsRequired()
-                .HasMaxLength(60);
+                .HasMaxLength(EmailSize);
 
             entity.Property(e => e.Password)
                 .IsRequired()
-                .HasMaxLength(256);
+                .HasMaxLength(PasswordSize);
 
             entity.Property(e => e.Salt)
                 .IsRequired()
-                .HasMaxLength(256);
+                .HasMaxLength(SaltSize);
 
             entity.HasOne(e => e.DefaultAddress)
                 .WithOne()

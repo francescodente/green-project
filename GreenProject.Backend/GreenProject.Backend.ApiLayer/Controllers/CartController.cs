@@ -1,9 +1,7 @@
 ﻿using System.Threading.Tasks;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
-using GreenProject.Backend.Contracts.Cart;
 using GreenProject.Backend.Contracts.Orders;
-using GreenProject.Backend.Contracts.Orders.Delivery;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
@@ -11,9 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/customers/{userId}/cart")]
+    [Route(ApiRoutes.BaseRoute + "/customers/{userId}/cart")]
     [ApiController]
-    [RequireLogin(RoleType.CustomerBusiness, RoleType.Person)]
+    [RequireLogin]
     public class CartController : ControllerBase
     {
         private readonly ICartService cartService;
@@ -54,6 +52,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpDelete("details/{productId}")]
+        [RequireLogin(RoleType.Person)]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteCartItem([FromRoute] int userId, [FromRoute] int productId)
         {

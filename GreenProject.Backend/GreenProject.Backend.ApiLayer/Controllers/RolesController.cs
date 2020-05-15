@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/users/{userId}/roles")]
+    [Route(ApiRoutes.BaseRoute + "/users/{userId}/roles")]
     [RequireLogin]
     [ApiController]
     public class RolesController : ControllerBase

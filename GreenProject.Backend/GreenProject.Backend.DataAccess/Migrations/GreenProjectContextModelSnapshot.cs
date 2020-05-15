@@ -436,39 +436,6 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("PurchasableItem");
                 });
 
-            modelBuilder.Entity("GreenProject.Backend.Entities.RefreshToken", b =>
-                {
-                    b.Property<string>("Token")
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<string>("AccessTokenId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("Expiration")
-                        .HasColumnType("datetime");
-
-                    b.Property<bool>("IsInvalid")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsUsed")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Token");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RefreshTokens");
-                });
-
             modelBuilder.Entity("GreenProject.Backend.Entities.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -485,6 +452,9 @@ namespace GreenProject.Backend.DataAccess.Migrations
                         .HasMaxLength(60);
 
                     b.Property<bool>("IsAdministrator")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsConfirmed")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
@@ -524,6 +494,40 @@ namespace GreenProject.Backend.DataAccess.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("GreenProject.Backend.Entities.UserToken", b =>
+                {
+                    b.Property<string>("Token")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Expiration")
+                        .HasColumnType("datetime");
+
+                    b.Property<bool>("IsInvalid")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Token");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTokens");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("UserToken");
+                });
+
             modelBuilder.Entity("GreenProject.Backend.Entities.Zone", b =>
                 {
                     b.Property<string>("ZipCode")
@@ -539,6 +543,9 @@ namespace GreenProject.Backend.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(25)")
                         .HasMaxLength(25);
+
+                    b.Property<decimal>("ShippingSurcharge")
+                        .HasColumnType("money");
 
                     b.HasKey("ZipCode");
 
@@ -584,6 +591,32 @@ namespace GreenProject.Backend.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasDiscriminator().HasValue("Product");
+                });
+
+            modelBuilder.Entity("GreenProject.Backend.Entities.ConfirmationToken", b =>
+                {
+                    b.HasBaseType("GreenProject.Backend.Entities.UserToken");
+
+                    b.HasDiscriminator().HasValue("ConfirmationToken");
+                });
+
+            modelBuilder.Entity("GreenProject.Backend.Entities.PasswordRecoveryToken", b =>
+                {
+                    b.HasBaseType("GreenProject.Backend.Entities.UserToken");
+
+                    b.HasDiscriminator().HasValue("PasswordRecoveryToken");
+                });
+
+            modelBuilder.Entity("GreenProject.Backend.Entities.RefreshToken", b =>
+                {
+                    b.HasBaseType("GreenProject.Backend.Entities.UserToken");
+
+                    b.Property<string>("AccessTokenId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.HasDiscriminator().HasValue("RefreshToken");
                 });
 
             modelBuilder.Entity("GreenProject.Backend.Entities.Address", b =>
@@ -755,21 +788,21 @@ namespace GreenProject.Backend.DataAccess.Migrations
                         .HasForeignKey("GreenProject.Backend.Entities.PurchasableItem", "ImageId");
                 });
 
-            modelBuilder.Entity("GreenProject.Backend.Entities.RefreshToken", b =>
-                {
-                    b.HasOne("GreenProject.Backend.Entities.User", "User")
-                        .WithMany("RefreshTokens")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("GreenProject.Backend.Entities.User", b =>
                 {
                     b.HasOne("GreenProject.Backend.Entities.Address", "DefaultAddress")
                         .WithOne()
                         .HasForeignKey("GreenProject.Backend.Entities.User", "DefaultAddressId")
                         .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("GreenProject.Backend.Entities.UserToken", b =>
+                {
+                    b.HasOne("GreenProject.Backend.Entities.User", "User")
+                        .WithMany("Tokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("GreenProject.Backend.Entities.ZoneAvailability", b =>

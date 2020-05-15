@@ -1,5 +1,4 @@
-﻿using GreenProject.Backend.Contracts.Orders.Delivery;
-using GreenProject.Backend.Entities;
+﻿using GreenProject.Backend.Entities;
 using System;
 using System.Collections.Generic;
 

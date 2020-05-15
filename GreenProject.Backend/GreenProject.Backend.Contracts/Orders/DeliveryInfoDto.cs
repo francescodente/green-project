@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GreenProject.Backend.Contracts.Orders.Delivery
+namespace GreenProject.Backend.Contracts.Orders
 {
     public static class DeliveryInfoDto
     {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/auth")]
+    [Route(ApiRoutes.BaseRoute + "/auth")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -45,6 +45,20 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         public async Task<IActionResult> RegisterCustomer([FromBody] RegistrationDto registration)
         {
             return Ok(await this.authenticationService.RegisterCustomer(registration));
+        }
+
+        [HttpPost("confirm")]
+        public async Task<IActionResult> ConfirmAccount([FromBody] AccountConfirmationDto confirmation)
+        {
+            await this.authenticationService.ConfirmAccount(confirmation);
+            return NoContent();
+        }
+
+        [HttpPost("reactivate")]
+        public async Task<IActionResult> ReactivateConfirmation([FromBody] string email)
+        {
+            await this.authenticationService.ReactivateConfirmation(email);
+            return NoContent();
         }
     }
 }

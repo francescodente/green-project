@@ -1,4 +1,4 @@
-﻿namespace GreenProject.Backend.ApiLayer
+﻿namespace GreenProject.Backend.ApiLayer.Filters
 {
     public class CacheSettings
     {

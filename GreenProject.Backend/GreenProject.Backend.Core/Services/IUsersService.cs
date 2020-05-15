@@ -7,7 +7,7 @@ namespace GreenProject.Backend.Core.Services
 {
     public interface IUsersService
     {
-        Task<UserOutputDto> GetUserData(int userId);
+        Task<UserDto.Output> GetUserData(int userId);
 
         Task DeleteUser(int userId);
     }

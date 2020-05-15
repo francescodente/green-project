@@ -1,4 +1,4 @@
-﻿using GreenProject.Backend.Core.Utils;
+﻿using GreenProject.Backend.Core.Utils.PasswordHashing;
 using System;
 using System.Linq;
 using System.Text;

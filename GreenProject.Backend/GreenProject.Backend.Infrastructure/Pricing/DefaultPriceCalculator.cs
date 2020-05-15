@@ -28,7 +28,11 @@ namespace GreenProject.Backend.Infrastructure.Pricing
                 .Select(d => d.Price * d.Quantity * d.Item.IvaPercentage)
                 .Sum(d => d.Value);
 
-            prices.ShippingCost = order.Details.Any(d => d.Item is Product) ? this.settings.ShippingCost : 0;
+            prices.ShippingCost = order.Address.Zone.ShippingSurcharge;
+            if (order.Details.Any(d => d.Item is Product))
+            {
+                prices.ShippingCost += this.settings.ShippingCost;
+            }
 
             return prices;
         }

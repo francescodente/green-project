@@ -1,7 +1,9 @@
 ﻿using FluentValidation.Results;
 using GreenProject.Backend.Contracts.Errors;
+using GreenProject.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +11,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
 {
     public class ValidationFilter : IActionFilter
     {
-        public const string VALIDATION_RESULT_KEY = "validation";
+        public const string ValidationResultKey = "validation";
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
@@ -23,9 +25,23 @@ namespace GreenProject.Backend.ApiLayer.Filters
                 return;
             }
 
-            ValidationResult result = context.HttpContext.Items[VALIDATION_RESULT_KEY] as ValidationResult;
+            ValidationResult result = context.HttpContext.Items[ValidationResultKey] as ValidationResult;
 
-            ErrorResponseDto errorResponse = new ErrorResponseDto
+            context.Result = new BadRequestObjectResult(this.CreateErrorResponse(result));
+        }
+
+        private ErrorResponseDto CreateErrorResponse(ValidationResult result)
+        {
+            if (result == null)
+            {
+                return new ErrorResponseDto
+                {
+                    GlobalErrors = this.GetDefaultGlobalError(),
+                    PropertyErrors = Enumerable.Empty<PropertyErrorDto>()
+                };
+            }
+
+            return new ErrorResponseDto
             {
                 GlobalErrors = Enumerable.Empty<GlobalErrorDto>(),
                 PropertyErrors = result.Errors.Select(f => new PropertyErrorDto
@@ -35,8 +51,15 @@ namespace GreenProject.Backend.ApiLayer.Filters
                     Property = f.PropertyName
                 })
             };
+        }
 
-            context.Result = new BadRequestObjectResult(errorResponse);
+        private IEnumerable<GlobalErrorDto> GetDefaultGlobalError()
+        {
+            yield return new GlobalErrorDto
+            {
+                Code = ErrorCodes.Common.UnsupportedValue,
+                Message = "The supplied json body is not supported"
+            };
         }
     }
 }

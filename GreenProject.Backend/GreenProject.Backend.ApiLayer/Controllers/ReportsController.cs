@@ -7,20 +7,23 @@ using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
 using CsvHelper.Configuration;
+using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.ApiLayer.Utils.Csv;
 using GreenProject.Backend.Contracts.Reports;
 using GreenProject.Backend.Core.Services;
+using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE + "/reports")]
+    [Route(ApiRoutes.BaseRoute + "/reports")]
+    [RequireLogin(RoleType.Administrator)]
     [ApiController]
     public class ReportsController : ControllerBase
     {
-        private const string CSV_MIME_TYPE = "text/csv";
+        private const string CsvMimeType = "text/csv";
 
         private readonly IReportsService reportsService;
         private readonly ICsvFactory csvFactory;
@@ -77,7 +80,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         private IActionResult CsvFile(CsvReport report)
         {
-            return File(report.Content, CSV_MIME_TYPE, report.FileName);
+            return File(report.Content, CsvMimeType, report.FileName);
         }
     }
 }

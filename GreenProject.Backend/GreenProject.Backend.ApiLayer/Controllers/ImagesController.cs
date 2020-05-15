@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
-    [Route(ApiRoutes.BASE_ROUTE)]
+    [Route(ApiRoutes.BaseRoute)]
     [RequireLogin(RoleType.Administrator)]
     [ApiController]
     public class ImagesController : ControllerBase

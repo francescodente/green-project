@@ -66,7 +66,7 @@ namespace GreenProject.Backend.Core.Logic
         public Task<AddressCollectionDto> GetAddresses(int userId)
         {
             return this.Data
-                .Users
+                .ActiveUsers()
                 .Where(u => u.UserId == userId)
                 .ProjectTo<AddressCollectionDto>(this.Mapper.ConfigurationProvider)
                 .SingleOptionalAsync()

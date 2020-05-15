@@ -18,7 +18,7 @@ namespace GreenProject.Backend.Core.Logic
 {
     public class ReportsService : AbstractService, IReportsService
     {
-        private const decimal KILOGRAMS_PER_SLOT = 0.5m;
+        private const decimal KilogramsPerSlot = 0.5m;
         private readonly PricingSettings pricingSettings;
 
         public ReportsService(IRequestSession request, PricingSettings pricingSettings)
@@ -75,7 +75,7 @@ namespace GreenProject.Backend.Core.Logic
                     ProductQuantities = detail
                         .SubProducts
                         .ToDictionary(s => this.GetProductHeaderString(s.Product), this.GetActualCrateQuantityInMainUnit),
-                    Weight = (detail.Item as Crate).Capacity * KILOGRAMS_PER_SLOT
+                    Weight = (detail.Item as Crate).Capacity * KilogramsPerSlot
                 })
                 .ToList();
 
@@ -109,7 +109,7 @@ namespace GreenProject.Backend.Core.Logic
         {
             return subProduct.Product.UnitName switch
             {
-                UnitName.Kilogram => subProduct.Quantity * subProduct.Product.CrateMultiplier * KILOGRAMS_PER_SLOT,
+                UnitName.Kilogram => subProduct.Quantity * subProduct.Product.CrateMultiplier * KilogramsPerSlot,
                 UnitName.Piece => subProduct.Quantity,
                 _ => throw new FormatException("Unrecognized unit name")
             };
@@ -119,7 +119,6 @@ namespace GreenProject.Backend.Core.Logic
         {
             var products = await this.Data
                 .Products
-                .Where(p => !p.IsDeleted)
                 .Where(p => categories.Contains(p.CategoryId))
                 .Select(p => new
                 {
@@ -138,6 +137,7 @@ namespace GreenProject.Backend.Core.Logic
                 .ToArrayAsync();
 
             return products
+                .Where(p => (p.OrderDetailQuantity + p.CrateQuantity) > 0 || !p.Product.IsDeleted)
                 .Select(p => new SupplierProductReportModel
                 {
                     ProductName = p.Product.Name,

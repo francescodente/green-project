@@ -9,21 +9,28 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 {
     public class ZoneModel : IEntityTypeConfiguration<Zone>
     {
+        public const int ZipCodeSize = 5;
+        public const int ProvinceSize = 25;
+        public const int CitySize = 30;
+
         public void Configure(EntityTypeBuilder<Zone> entity)
         {
             entity.HasKey(e => e.ZipCode);
 
             entity.Property(e => e.ZipCode)
                 .IsRequired()
-                .HasMaxLength(5);
+                .HasMaxLength(ZipCodeSize);
 
             entity.Property(e => e.Province)
                 .IsRequired()
-                .HasMaxLength(25);
+                .HasMaxLength(ProvinceSize);
 
             entity.Property(e => e.City)
                 .IsRequired()
-                .HasMaxLength(30);
+                .HasMaxLength(CitySize);
+
+            entity.Property(e => e.ShippingSurcharge)
+                .HasTypeMoney();
         }
     }
 }

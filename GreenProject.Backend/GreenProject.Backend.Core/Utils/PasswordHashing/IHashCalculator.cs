@@ -1,4 +1,4 @@
-﻿namespace GreenProject.Backend.Core.Utils
+﻿namespace GreenProject.Backend.Core.Utils.PasswordHashing
 {
     public interface IHashCalculator
     {
