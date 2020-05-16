@@ -139,6 +139,18 @@ class APIUtilsClass {
 
     }
 
+    setWeeklyDeliveryInfo(addressId, notes) {
+        let data = {
+            addressId: addressId,
+            notes: notes
+        };
+        return new Promise(function(resolve, reject) {
+            API.editSubscription(localStorage.getObject("authData").userId, data)
+            .then(function(data) { resolve(data) })
+            .catch(function(jqXHR) { reject(jqXHR) });
+        });
+    }
+
     getWeeklyOrder(userId) {
 
     }

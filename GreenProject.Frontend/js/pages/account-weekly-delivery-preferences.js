@@ -1,6 +1,7 @@
 var weeklyCrates = [];
 var weeklyExtras = [];
 var deliveryInfo;
+var addresses;
 var starredProducts = [];
 
 $(document).ready(function() {
@@ -87,29 +88,59 @@ $(document).ready(function() {
         $(".starred-products").show();
     });
 
+    async function prepareAddresses() {
+        addresses = await addressesPromise;
+        // Uncheck default address, add listeners
+        addresses.forEach(address => {
+            address.html.button.removeClass("default");
+            address.html.setWeeklyModal.find(".weekly-set").click(function() {
+                saveAddress(address, false);
+            });
+            address.html.setWeeklyModal.find(".weekly-set-default").click(function() {
+                saveAddress(address, true);
+            });
+        });
+        // Remove selected address from address list
+        addresses.filter(address => address.addressId == deliveryInfo.address.addressId)[0]
+                 .html.button.remove();
+        // Properly add back selected address
+        deliveryInfo.address.html.button.addClass("default");
+        deliveryInfo.address.html.button.prependTo(".address-list");
+    }
+
+    // Enable save button when notes field changes
+    $("body").on("change paste keyup", "#notes", function() {
+        $("#save-notes").prop("disabled", false);
+    });
+
+    // Save notes
+    $("#save-notes").click(function() {
+        console.log("save notes");
+        $("#modal-loading").showModal();
+        APIUtils.setWeeklyDeliveryInfo(deliveryInfo.address.addressId, $("#notes").val())
+        .then(function(data) { location.reload() })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    });
+
+    // Save address (also optionally make it default)
+    function saveAddress(address, setDefault) {
+        $("#modal-loading").showModal();
+        let promises = [];
+        promises.push(APIUtils.setWeeklyDeliveryInfo(address.addressId, $("#notes").val()));
+        if (setDefault) {
+            promises.push(API.setDefaultAddress(localStorage.getObject("authData").userId, address.addressId));
+        }
+        Promise.all(promises)
+        .then(function(data) { location.reload() })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    }
+
+    // Skip weekly delivery
+    $(".btn.skip-delivery").click(function() {
+        $("#modal-loading").showModal();
+        API.skipWeeklyOrder(localStorage.getObject("authData").userId)
+        .then(function(data) { location.reload() })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    });
+
 });
-
-async function prepareAddresses() {
-    let addresses = await addressesPromise;
-    // Uncheck default address
-    addresses.map(address => address.html.button)
-        .forEach(address => address.removeClass("default"));
-    // Remove selected address from address list
-    addresses.filter(address => address.addressId == deliveryInfo.address.addressId)[0]
-             .html.button.remove();
-    // Properly add back selected address
-    deliveryInfo.address.html.button.addClass("default");
-    deliveryInfo.address.html.button.prependTo(".address-list");
-}
-
-// Enable save button when notes field changes
-$("body").on("change paste keyup", "#notes", function() {
-    $("#save-notes").prop("disabled", false);
-});
-
-// Save notes
-$("#save-notes").click(function() {
-    console.log("save notes");
-    console.log($("#notes").val());
-    $("#save-notes").prop("disabled", true);
-})

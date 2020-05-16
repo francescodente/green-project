@@ -202,6 +202,12 @@
 |   ADDRESS MANAGEMENT AND PAYMENT METHOD   |
 \*******************************************/
 
+.address-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .address-item, .payment-item {
     border-radius: 4px;
     border: 2px solid transparent;

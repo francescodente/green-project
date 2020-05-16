@@ -129,23 +129,6 @@
 
     <?php include("modal-new-address.php"); ?>
 
-    <div id="modal-product-remove" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content" style="width: 360px;">
-                <div class="modal-top text-center">
-                    <i class="modal-top-icon mdi mdi-delete-empty"></i>
-                </div>
-                <div class="modal-body">
-                    <p class="m-0">Sei sicuro di voler rimuovere questo prodotto dalla consegna settimanale?</p>
-                </div>
-                <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Rimuovi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div id="modal-skip-delivery" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content" style="width: 360px;">
@@ -153,11 +136,11 @@
                     <i class="modal-top-icon mdi mdi-help-circle-outline"></i>
                 </div>
                 <div class="modal-body">
-                    <p class="m-0">Sei sicuro di voler annullare la consegna settimanale prevista per il giorno <span class="delivery-date font-weight-bold">1 Gen 2020</span>?<br/>Se confermi, la prossima consegna sarà effettuata il giorno <span class="delivery-date-new font-weight-bold">8 Gen 2020</span>.</p>
+                    <p class="m-0">Sei sicuro di voler saltare la consegna settimanale prevista per il giorno <span class="delivery-date font-weight-bold">1 Gen 2020</span>?</p>
                 </div>
                 <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Conferma</button>
+                    <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="skip-delivery btn accent ripple flex-grow-1" style="width: 100px;">Conferma</button>
                 </div>
             </div>
         </div>
@@ -173,8 +156,8 @@
                     <p class="m-0">Sei sicuro di voler disdire il tuo abbonamento?</p>
                 </div>
                 <div class="modal-bottom bg-primary d-flex justify-content-center">
-                    <button class="modal-cancel btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                    <button class="modal-cancel btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Conferma</button>
+                    <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                    <button class="delete-subscription btn accent ripple flex-grow-1" style="width: 100px;">Conferma</button>
                 </div>
             </div>
         </div>

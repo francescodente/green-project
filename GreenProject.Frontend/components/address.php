@@ -1,5 +1,5 @@
 <!-- ADDRESS CARD -->
-<div data-template-name="AddressCard" data-class="address-item d-flex justify-content-between align-items-center p-2" class="d-none">
+<div data-template-name="AddressCard" data-class="address-item address-card p-2" class="d-none">
     <div class="d-flex flex-column">
         <div class="d-flex align-items-center">
             <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
@@ -59,7 +59,7 @@
 </div>
 
 <!-- ADDRESS BUTTON -->
-<button data-template-name="AddressButton" data-class="address-item btn ripple d-flex justify-content-between align-items-center p-2" class="d-none">
+<button data-template-name="AddressButton" data-class="address-item address-card btn ripple p-2" class="d-none">
     <div class="d-flex flex-column">
         <div class="d-flex align-items-center">
             <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
@@ -128,8 +128,8 @@
                 <p class="m-0">Riceverai la tua prossima consegna a questo indirizzo.<br/>Vuoi impostare l'indirizzo come predefinito anche per le consegne future?</p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="weekly-set btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">No</button>
-                <button class="weekly-set-default btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Sì</button>
+                <button class="weekly-set btn outline ripple flex-grow-1" style="width: 100px;">No</button>
+                <button class="weekly-set-default btn accent ripple flex-grow-1" style="width: 100px;">Sì</button>
             </div>
         </div>
     </div>
