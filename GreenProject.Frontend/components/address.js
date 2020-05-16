@@ -5,9 +5,11 @@ class Address extends Entity {
 
         // Get HTML templates
         this.html.main = Entity.getTemplate("AddressCard");
+        this.html.richRadio = Entity.getTemplate("AddressRadio");
+        this.html.button = Entity.getTemplate("AddressButton");
         this.html.deleteModal = Entity.getTemplate("DeleteAddressModal");
         this.html.setDefaultModal = Entity.getTemplate("SetDefaultAddressModal");
-        this.html.richRadio = Entity.getTemplate("AddressRadio");
+        this.html.setWeeklyModal = Entity.getTemplate("SetWeeklyAddressModal");
 
         // Get province and city
         let zones = localStorage.getObject("zones").children;
@@ -26,6 +28,9 @@ class Address extends Entity {
 
         let address = this;
         for (let k in address.html) {
+
+            // Init tooltips
+            $( address.html[k]).find('[data-tooltip="tooltip"]').tooltip();
 
             // Replace values in templates
             address.html[k].find(".address-string").html(address.addressString);
@@ -49,8 +54,13 @@ class Address extends Entity {
                     address.showSetDefaultModal();
                 }
             });
-
         }
+
+        address.html.button.click(function() {
+            if (!$(this).hasClass("default")) {
+                address.showSetWeeklyModal();
+            }
+        });
     }
 
     showDeleteModal() {
@@ -61,10 +71,14 @@ class Address extends Entity {
         this.html.setDefaultModal.showModal();
     }
 
+    showSetWeeklyModal() {
+        this.html.setWeeklyModal.showModal();
+    }
+
     deleteAddress() {
         $("#modal-loading").showModal();
         API.deleteAddress(localStorage.getObject("authData").userId, this.addressId)
-        .then(function(data) { location.reload(); })
+        .then(function(data) { location.reload() })
         .catch(function(jqXHR) {
             $("#modal-loading").fadeModal();
             new ErrorModal(jqXHR).show();
@@ -74,9 +88,7 @@ class Address extends Entity {
     setDefault() {
         $("#modal-loading").showModal();
         API.setDefaultAddress(localStorage.getObject("authData").userId, this.addressId)
-        .then(function(data) {
-            location.reload();
-        })
+        .then(function(data) { location.reload() })
         .catch(function(jqXHR) {
             $("#modal-loading").fadeModal();
             new ErrorModal(jqXHR).show();

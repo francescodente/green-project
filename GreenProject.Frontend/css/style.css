@@ -238,6 +238,18 @@
     font-size: 14px;
 }
 
+.address-item.btn {
+    width: 100%;
+}
+
+.address-item.btn * {
+    font-weight: normal;
+}
+
+.address-item.btn:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
 /***********************\
 |   EDIT FIELD BUTTON   |
 \***********************/

@@ -260,8 +260,17 @@ class APIClass {
         return this.post("customers/" + userId + "/weeklyorder/subscription", data);
     }
 
+    editSubscription(userId, data) {
+        return this.put("customers/" + userId + "/weeklyorder", data);
+    }
+
     unsubscribe(userId) {
         return this.del("customers/" + userId + "/weeklyorder/subscription");
+    }
+
+    skipWeeklyOrder(userId) {
+        let weeks = 1;
+        return this.put("customers/" + userId + "/weeklyorder/skip", weeks);
     }
 
     getWeeklyOrder(userId) {
@@ -280,12 +289,16 @@ class APIClass {
         return this.post("customers/" + userId + "/weeklyorder/extras", data);
     }
 
-    removeFromWeeklyOrder(userId, orderDetailId) {
-        return this.del("customers/" + userId + "/weeklyorder/details/" + orderDetailId);
+    editExtraProductQuantity(userId, productId, quantity) {
+        let data = {
+            productId: productId,
+            quantity: quantity
+        };
+        return this.put("customers/" + userId + "/weeklyorder/extras", data);
     }
 
-    editExtraProductQuantity(userId) {
-
+    removeFromWeeklyOrder(userId, orderDetailId) {
+        return this.del("customers/" + userId + "/weeklyorder/details/" + orderDetailId);
     }
 
     addProductToWeeklyCrate(userId, orderDetailId, productId, quantity) {
@@ -295,11 +308,6 @@ class APIClass {
         };
         return this.post("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts", data);
     }
-
-    removeProductFromWeeklyCrate(userId, orderDetailId, productId) {
-        return this.del("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts/" + productId);
-    }
-
     editWeeklyCrateProductQuantity(userId, orderDetailId, productId, quantity) {
         let data = {
             productId: productId,
@@ -307,6 +315,11 @@ class APIClass {
         };
         return this.put("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts", data);
     }
+
+    removeProductFromWeeklyCrate(userId, orderDetailId, productId) {
+        return this.del("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts/" + productId);
+    }
+
 
     // Zones
 

@@ -39,69 +39,6 @@
 
                     <div class="weekly-crates"></div>
 
-                    <!-- <div class="product-group-table table-wrapper table-responsive">
-                        <table class="table">
-                            <thead class="crate-test">
-                                <tr class="bg-primary-dark">
-                                    <th class="nowrap">
-                                        <a href="#" data-toggle="modal" data-target="#modal-product">
-                                            <img class="product-image img-fluid" src="images/example_crate.jpg"/>
-                                        </a>
-                                    </th>
-                                    <th>
-                                        <p class="product-name text-sec-dark m-0">Cassetta 10Kg</p>
-                                        <p class="text-sec-dark font-weight-normal m-0">
-                                            <span class="product-quantity">9.5/10</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
-                                        </p>
-                                    </th>
-                                    <th class="nowrap actions">
-                                        <div class="dropdown">
-                                            <button class="btn icon ripple" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <i class="mdi dark mdi-dots-vertical"></i>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-remove">Elimina</a>
-                                            </div>
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="nowrap">
-                                        <a href="#" data-toggle="modal" data-target="#modal-product">
-                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p class="product-name m-0">Product name</p>
-                                        <p class="product-weight text-sec-dark m-0">0.5Kg</p>
-                                    </td>
-                                    <td class="nowrap actions">
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
-                                                <i class="mdi dark mdi-pencil"></i>
-                                            </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
-                                                <i class="mdi dark mdi-close"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="p-0">
-                                        <button class="btn add-product ripple" data-toggle="modal" data-target="#modal-weekly-product-add">
-                                            <div class="add-product-icon mr-3">
-                                                <i class="mdi dark mdi-plus"></i>
-                                            </div>
-                                            <span class="text-sec-dark">Aggiungi un prodotto</span>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> -->
-
                     <h4 class="mt-4 bb-2">Altri prodotti</h4>
                     <p class="text-sec-dark mb-4">
                         Solo per la prossima consegna, riceverai i seguenti prodotti in aggiunta alle cassette a cui sei abbonato.
@@ -109,29 +46,6 @@
                     <div class="product-group-table products table-wrapper table-responsive">
                         <table class="weekly-extras table">
                             <tbody>
-                                <!-- <tr>
-                                    <td class="nowrap">
-                                        <a href="#" data-toggle="modal" data-target="#modal-product">
-                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <p class="product-name m-0">Product name</p>
-                                        <p class="text-sec-dark m-0">
-                                            <span class="product-quantity">0</span> <span class="product-um">Kg</span> - <span class="product-total-price">0,00</span><span class="currency">€</span>
-                                        </p>
-                                    </td>
-                                    <td class="nowrap actions">
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn icon ripple mr-2" data-toggle="modal" data-target="#modal-product-add" data-tooltip="tooltip" title="Modifica quantità">
-                                                <i class="mdi dark mdi-pencil"></i>
-                                            </button>
-                                            <button type="button" class="btn icon ripple" data-toggle="modal" data-target="#modal-product-remove" data-tooltip="tooltip" title="Rimuovi">
-                                                <i class="mdi dark mdi-close"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr> -->
                                 <tr>
                                     <td colspan="4" class="p-0">
                                         <button class="btn add-product ripple" data-toggle="modal" data-target="#modal-weekly-product-add">

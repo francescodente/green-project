@@ -125,7 +125,7 @@
                     <i class="modal-top-icon mdi mdi-calendar"></i>
                 </div>
                 <div class="modal-body">
-                    <p class="m-0">La data di consegna prevista per il tuo ordine è il giorno <span class="expected-date"></span>.<br/>Proseguire?</p>
+                    <p class="m-0">La data di consegna prevista per il tuo ordine è il giorno <span class="expected-date font-weight-bold"></span>.<br/>Proseguire?</p>
                 </div>
                 <div class="modal-bottom bg-primary d-flex">
                     <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="flex-basis: 100px;">Annulla</button>

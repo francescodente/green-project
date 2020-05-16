@@ -1,6 +1,6 @@
 var weeklyCrates = [];
 var weeklyExtras = [];
-var deliveryInfo = [];
+var deliveryInfo;
 var starredProducts = [];
 
 $(document).ready(function() {
@@ -16,7 +16,6 @@ $(document).ready(function() {
 
             data.deliveryInfo.address = new Address(data.deliveryInfo.address);
             deliveryInfo = data.deliveryInfo;
-
             console.log(data);
 
             // Setup summary
@@ -29,8 +28,8 @@ $(document).ready(function() {
                 }
             }
             $(".product-count").html(data.extraProducts.length);
-            $(".delivery-date").html(Utils.formatDate(data.deliveryInfo.deliveryDate));
-            $(".delivery-address").html(data.deliveryInfo.address.addressString);
+            $(".delivery-date").html(Utils.formatDate(deliveryInfo.deliveryDate));
+            $(".delivery-address").html(deliveryInfo.address.addressString);
 
             // Set prices
             $(".subtotal").html(Utils.formatCurrency(data.prices.subtotal));
@@ -50,21 +49,12 @@ $(document).ready(function() {
                 extraProduct.html.extraEntry.prependTo(".weekly-extras>tbody");
             }
 
-            selectAddress();
+            prepareAddresses();
+            $("#notes").val(deliveryInfo.notes);
 
-            // TODO add notes
+            // Show weekly delivery items from order-preferences.php
+            $(".req-weekly-delivery").removeClass("d-none");
         }
-
-        /*if (data.results.length == 0) {
-            $(".search-no-results").removeClass("d-none");
-        } else {
-            // Create product objects
-            data.results.forEach((json) => {
-                let order = new Order(json)
-                orders.push(order);
-                $(".order-list").append(order.html.main);
-            });
-        }*/
     })
     .catch(function(jqXHR) {
         console.log(jqXHR);
@@ -99,14 +89,27 @@ $(document).ready(function() {
 
 });
 
-async function selectAddress() {
+async function prepareAddresses() {
     let addresses = await addressesPromise;
     // Uncheck default address
-    addresses.map(address => address.html.richRadio)
-             .filter(address => address.hasClass("default"))[0]
-             .removeClass("default")
-             .find("[type='radio']").prop("checked", false);
-    // Check delivery address
+    addresses.map(address => address.html.button)
+        .forEach(address => address.removeClass("default"));
+    // Remove selected address from address list
     addresses.filter(address => address.addressId == deliveryInfo.address.addressId)[0]
-             .html.richRadio.find("[type='radio']").prop("checked", true);
+             .html.button.remove();
+    // Properly add back selected address
+    deliveryInfo.address.html.button.addClass("default");
+    deliveryInfo.address.html.button.prependTo(".address-list");
 }
+
+// Enable save button when notes field changes
+$("body").on("change paste keyup", "#notes", function() {
+    $("#save-notes").prop("disabled", false);
+});
+
+// Save notes
+$("#save-notes").click(function() {
+    console.log("save notes");
+    console.log($("#notes").val());
+    $("#save-notes").prop("disabled", true);
+})

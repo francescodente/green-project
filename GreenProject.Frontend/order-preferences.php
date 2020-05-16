@@ -92,6 +92,12 @@
             <textarea id="notes" class="w-100" placeholder=" "></textarea>
             <span>Inserisci qui il tuo buono sconto!</span>
         </div>
+        <div class="d-flex justify-content-end">
+            <button id="save-notes" class="btn outline ripple req-weekly-delivery d-none" style="width: 120px;" disabled>
+                <span class="text-sec-dark">Salva</span>
+                <i class="mdi dark mdi-content-save"></i>
+            </button>
+        </div>
     </div>
 </div>
 

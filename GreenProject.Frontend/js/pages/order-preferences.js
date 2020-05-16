@@ -6,6 +6,9 @@ var addressesPromise = new Promise(function(resolve, reject){
 
 $(document).ready(function() {
 
+    let page = new URL(window.location.href).pathname;
+    page = page.substring(page.lastIndexOf("/") + 1);
+
     // Show addresses
     $("#order-preferences-loader").show();
     $(".order-preferences-content").hide();
@@ -18,7 +21,9 @@ $(document).ready(function() {
                 json.isDefaultAddress = json.addressId == data.defaultAddressId;
                 let address = new Address(json);
                 addresses.push(address);
-                if (address.isDefaultAddress) {
+                if (page == "account-weekly-delivery-preferences.php") {
+                    $(".address-list").append(address.html.button);
+                } else if (address.isDefaultAddress) {
                     $(".address-list").prepend(address.html.richRadio);
                 } else {
                     $(".address-list").append(address.html.richRadio);

@@ -35,24 +35,6 @@
     </div>
 </div>
 
-<!-- DELETE ADDRESS MODAL -->
-<div data-template-name="DeleteAddressModal" data-class="modal-address-delete modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="width: 360px;">
-            <div class="modal-top text-center">
-                <i class="modal-top-icon mdi mdi-delete-empty"></i>
-            </div>
-            <div class="modal-body">
-                <p class="m-0">Sei sicuro di voler eliminare questo indirizzo?</p>
-            </div>
-            <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                <button class="address-delete btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Ok</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- ADDRESS RICH RADIO BUTTON -->
 <div data-template-name="AddressRadio" class="d-none">
     <input type="radio" class="rich-radio" name="delivery-address"/>
@@ -76,6 +58,46 @@
     </label>
 </div>
 
+<!-- ADDRESS BUTTON -->
+<button data-template-name="AddressButton" data-class="address-item btn ripple d-flex justify-content-between align-items-center p-2" class="d-none">
+    <div class="d-flex flex-column">
+        <div class="d-flex align-items-center">
+            <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+                <i class="mdi mdi-map-marker"></i>
+            </div>
+            <p class="address-string mb-0"></p>
+        </div>
+        <div style="margin-left: 64px;">
+            <div class="d-flex align-items-center mb-1">
+                <i class="mdi small dark mdi-account mr-2"></i>
+                <span class="address-name text-sec-dark"></span>
+            </div>
+            <div class="d-flex align-items-center">
+                <i class="mdi small dark mdi-phone mr-2"></i>
+                <span class="address-telephone text-sec-dark"></span>
+            </div>
+        </div>
+    </div>
+</button>
+
+<!-- DELETE ADDRESS MODAL -->
+<div data-template-name="DeleteAddressModal" data-class="modal-address-delete modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-delete-empty"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Sei sicuro di voler eliminare questo indirizzo?</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
+                <button class="address-delete btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- SET DEFAULT ADDRESS MODAL -->
 <div data-template-name="SetDefaultAddressModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -89,6 +111,25 @@
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">No</button>
                 <button class="address-set-default btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Sì</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SET WEEKLY ADDRESS MODAL -->
+<div data-template-name="SetWeeklyAddressModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-help-circle-outline"></i>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Riceverai la tua prossima consegna a questo indirizzo.<br/>Vuoi impostare l'indirizzo come predefinito anche per le consegne future?</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="weekly-set btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">No</button>
+                <button class="weekly-set-default btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Sì</button>
             </div>
         </div>
     </div>
