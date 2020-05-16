@@ -306,18 +306,19 @@ class APIClass {
             productId: productId,
             quantity: quantity
         };
-        return this.post("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts", data);
+        return this.post("customers/" + userId + "/weeklyorder/crates/" + orderDetailId + "/subproducts", data);
     }
+
     editWeeklyCrateProductQuantity(userId, orderDetailId, productId, quantity) {
         let data = {
             productId: productId,
             quantity: quantity
         };
-        return this.put("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts", data);
+        return this.put("customers/" + userId + "/weeklyorder/crates/" + orderDetailId + "/subproducts", data);
     }
 
     removeProductFromWeeklyCrate(userId, orderDetailId, productId) {
-        return this.del("customers/" + userId + "/weeklyorder/crates" + orderDetailId + "/subproducts/" + productId);
+        return this.del("customers/" + userId + "/weeklyorder/crates/" + orderDetailId + "/subproducts/" + productId);
     }
 
 

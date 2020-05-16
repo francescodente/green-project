@@ -12,6 +12,7 @@ class WeeklyCrate extends Entity {
         for (let i = 0; i < this.products.length; i++) {
             crateQuantity += this.products[i].quantity;
             this.products[i] = new Product(this.products[i].product, this.products[i].quantity / 2);
+            this.products[i].weeklyCrateId = this.orderDetailId;
         }
 
         // Create crate entry
@@ -52,7 +53,7 @@ class WeeklyCrate extends Entity {
             weeklyCrate.compatibleProducts = [];
             data.forEach(json => {
                 let product = new Product(json.product, 1, json.maximum);
-                product.orderDetailId = weeklyCrate.orderDetailId;
+                product.weeklyCrateId = weeklyCrate.orderDetailId;
                 weeklyCrate.compatibleProducts.push(product);
                 product.html.compatibleWithCrateEntry.appendTo($(weeklyCrate.html.addProductModal).find(".compatible-products tbody"));
             });

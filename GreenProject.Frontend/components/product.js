@@ -114,12 +114,10 @@ class Product extends Purchasable {
     }
 
     showCrateRemoveModal() {
-        console.log("show crate remove modal");
         this.html.crateRemoveModal.showModal();
     }
 
     showExtraRemoveModal() {
-        console.log("show extra remove modal");
         this.html.extraRemoveModal.showModal();
     }
 
@@ -168,7 +166,7 @@ class Product extends Purchasable {
     }
 
     addToCrate() {
-        console.log("add to crate " + this.productId + " " + this.orderDetailId);
+        console.log("add to crate " + this.productId + " " + this.weeklyCrateId);
     }
 
     addToExtras() {
@@ -186,17 +184,24 @@ class Product extends Purchasable {
     }
 
     removeFromCart() {
+        $("#modal-loading").showModal();
         API.removeFromCart(localStorage.getObject("authData").userId, this.productId)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
 
     removeFromCrate() {
-        console.log("remove from crate " + this.productId);
+        $("#modal-loading").showModal();
+        API.removeProductFromWeeklyCrate(localStorage.getObject("authData").userId, this.weeklyCrateId, this.productId)
+        .then(function(data) { location.reload(); })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
 
     removeFromExtras() {
-        console.log("remove from extras " + this.orderDetailId);
+        $("#modal-loading").showModal();
+        API.removeFromWeeklyOrder(localStorage.getObject("authData").userId, this.orderDetailId)
+        .then(function(data) { location.reload(); })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
 
 }
