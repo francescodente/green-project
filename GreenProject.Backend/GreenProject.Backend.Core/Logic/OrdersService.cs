@@ -58,10 +58,17 @@ namespace GreenProject.Backend.Core.Logic
                 .Orders
                 .Where(o => states.Contains(o.OrderState));
 
-            return filters.DeliveryDate
-                .AsOptional()
-                .Map(d => query.Where(o => o.DeliveryDate == d))
-                .OrElse(query);
+            if (filters.DeliveryDate.HasValue)
+            {
+                query = query.Where(o => o.DeliveryDate == filters.DeliveryDate.Value);
+            }
+
+            if (filters.ZipCode != null)
+            {
+                query = query.Where(o => o.Address.ZipCode == filters.ZipCode);
+            }
+
+            return query;
         }
 
         private IEnumerable<OrderState> GetRequestedStates(OrderFilters filters)
@@ -101,7 +108,7 @@ namespace GreenProject.Backend.Core.Logic
 
             await this.Data.SaveChangesAsync();
 
-            await this.Notifications.OrderStateChanged(order, oldState);
+            this.Notifications.OrderStateChanged(order, oldState).FireAndForget();
         }
 
         private async Task RenewWeeklyOrder(Order order)
