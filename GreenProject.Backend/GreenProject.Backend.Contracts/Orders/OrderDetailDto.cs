@@ -12,6 +12,7 @@ namespace GreenProject.Backend.Contracts.Orders
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public int Quantity { get; set; }
+        public int? Capacity { get; set; }
         public Money Price { get; set; }
         public UnitName? UnitName { get; set; }
         public decimal? UnitMultiplier { get; set; }

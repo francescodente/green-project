@@ -10,5 +10,6 @@ namespace GreenProject.Backend.Contracts.Filters
         public bool IgnoreCompleted { get; set; }
         public bool IgnorePending { get; set; }
         public DateTime? DeliveryDate { get; set; }
+        public string ZipCode { get; set; }
     }
 }
