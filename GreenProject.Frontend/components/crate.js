@@ -8,6 +8,7 @@ class Crate extends Purchasable {
         // Add templates
         this.html.main = Entity.getTemplate("CrateCard");
         this.html.weeklyEntry = Entity.getTemplate("CrateWeeklyEntry");
+        this.html.orderEntry = Entity.getTemplate("CrateOrderEntry");
         this.html.detailsModal = Entity.getTemplate("CrateDetailsModal");
         this.html.removeModal = Entity.getTemplate("CrateRemoveModal");
 

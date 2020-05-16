@@ -66,6 +66,20 @@
     </tr>
 </table>
 
+<!-- ORDER ENTRY -->
+<div data-template-name="CrateOrderEntry" data-class="product d-flex align-items-center" class="d-none">
+    <a href="#" class="crate-modal-link">
+        <img class="crate-image" src="images/default_product.png"/>
+    </a>
+    <div class="d-flex flex-column w-100">
+        <p class="crate-name m-0"></p>
+        <div class="d-flex justify-content-between">
+            <span class="capacity"></span> <span class="crate-um">Kg</span>
+            <span class="price text-sec-dark"></span>
+        </div>
+    </div>
+</div>
+
 <!-- REMOVE MODAL -->
 <div data-template-name="CrateRemoveModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

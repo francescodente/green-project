@@ -30,8 +30,9 @@ class Order extends Entity {
             this.prices[formattedK] = Utils.formatCurrency(this.prices[k]);
         }
 
-        // Create product entries
+        // Create product/crate entries
         for (let i = 0; i < this.details.length; i++) {
+
             this.details[i] = new Product(this.details[i], this.details[i].quantity);
         }
 
