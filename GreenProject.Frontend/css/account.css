@@ -132,6 +132,7 @@
 }
 
 .product-group-table.products tr:first-child>td,
+.product-group-table.compatible-products tr:first-child>td,
 .summary-products tr:first-child>td {
     border-top: none;
 }
@@ -175,7 +176,7 @@
 
 #user-weekly-delivery .summary-preferences span {
     font-weight: bold;
-    color: var(--col-text-dark);
+    color: var(--col-text-sec-dark);
 }
 
 #modal-product-add .table-wrapper {

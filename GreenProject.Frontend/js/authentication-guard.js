@@ -26,17 +26,25 @@ $(document).ready(function() {
         }
 
         $(".req-logout").remove();
+
         APIUtils.getOrUpdateCurrentUserInfo()
+        .then(function(data) {
+            // Show change password modal if user must change password
+            if (data.shouldChangePassword) {
+                $("#modal-pwd-change").attr("data-backdrop", "static");
+                $("#modal-pwd-change").attr("data-keyboard", "false");
+                $("#modal-pwd-change [data-dismiss='modal']").remove();
+                $("#modal-pwd-change .btn-logout").removeClass("d-none");
+                $("#modal-pwd-change .change-pwd-msg").removeClass("d-none");
+                $("#modal-pwd-change").showModal();
+            }
+        })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+
         APIUtils.updateCartBadge()
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
 
     }
-
-    APIUtils.getOrUpdateCategories()
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
-    APIUtils.getOrUpdateZones()
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
 
     $(document).on("click", ".btn-logout", function() {
         API.logout();

@@ -27,8 +27,8 @@
                 <div id="account-content-col" class="col-12 col-lg-9">
 
                     <div class="alert alert-accent" role="alert">
-                        <p class="summary-preferences text-sec-dark m-0">
-                            La prossima consegna include <span class="crate-count">1</span> cassette e <span class="product-count">2</span> prodotti sfusi, per un totale di <span class="total">0.00€</span>.<br/>Sarà effettuata il <span class="delivery-date">1 Gen 2020</span> all'indirizzo <span class="delivery-address">Viale della Via 123, 47522 Cesena (FC)</span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
+                        <p class="summary-preferences text-dis-dark m-0">
+                            La prossima consegna include <span class="crate-count"></span><span class="extra-products-text d-none" style="font-weight: normal;"> e <span class="product-count"></span> <span class="extra-product-count-text">prodotti extra</span></span>, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
                         </p>
                     </div>
 
@@ -36,10 +36,13 @@
                     <p class="text-sec-dark mb-4">
                         Di seguito sono riportate le cassette alle quali sei abbonato.<br/>Riceverai questi prodotti ogni settimana a casa tua!
                     </p>
-                    <div class="product-group-table table-wrapper table-responsive">
+
+                    <div class="weekly-crates"></div>
+
+                    <!-- <div class="product-group-table table-wrapper table-responsive">
                         <table class="table">
                             <thead class="crate-test">
-                                <!-- <tr class="bg-primary-dark">
+                                <tr class="bg-primary-dark">
                                     <th class="nowrap">
                                         <a href="#" data-toggle="modal" data-target="#modal-product">
                                             <img class="product-image img-fluid" src="images/example_crate.jpg"/>
@@ -61,10 +64,10 @@
                                             </div>
                                         </div>
                                     </th>
-                                </tr> -->
+                                </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr>
+                                <tr>
                                     <td class="nowrap">
                                         <a href="#" data-toggle="modal" data-target="#modal-product">
                                             <img class="product-image img-fluid" src="images/example_product.jpg"/>
@@ -84,7 +87,7 @@
                                             </button>
                                         </div>
                                     </td>
-                                </tr> -->
+                                </tr>
                                 <tr>
                                     <td colspan="4" class="p-0">
                                         <button class="btn add-product ripple" data-toggle="modal" data-target="#modal-weekly-product-add">
@@ -97,14 +100,14 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div> -->
 
                     <h4 class="mt-4 bb-2">Altri prodotti</h4>
                     <p class="text-sec-dark mb-4">
                         Solo per la prossima consegna, riceverai i seguenti prodotti in aggiunta alle cassette a cui sei abbonato.
                     </p>
                     <div class="product-group-table products table-wrapper table-responsive">
-                        <table class="table">
+                        <table class="weekly-extras table">
                             <tbody>
                                 <!-- <tr>
                                     <td class="nowrap">
@@ -177,7 +180,7 @@
                     <!-- SUBSCRIPTION OPTIONS -->
                     <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false">
                         <h4 class="m-0">Opzioni abbonamento</h4>
-                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" data-tooltip="tooltip" title="Nascondi">
+                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
                             <i class="mdi dark mdi-chevron-down"></i>
                         </button>
                     </div>
@@ -273,25 +276,14 @@
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    <div class="product-group-table products table-wrapper table-responsive">
+
+                    <div id="starred-products-loader" class="loader text-center my-5">
+                        <?php include("loader.php"); ?>
+                    </div>
+
+                    <div class="starred-products product-group-table products table-wrapper table-responsive">
                         <table class="table">
-                            <tbody>
-                                <?php
-                                for ($i = 0; $i < 20; $i++) {
-                                    ?>
-                                    <tr>
-                                        <td colspan="4" class="p-0">
-                                            <button class="btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
-                                                <img class="product-image img-fluid mr-3" src="images/example_product.jpg"/>
-                                                <span class="font-weight-normal mr-auto">Product name</span>
-                                                <span class="font-weight-normal text-sec-dark mr-3">0.00€/Kg</span>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>

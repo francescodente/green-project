@@ -25,21 +25,16 @@ class APIUtilsClass {
         }
         let authData = localStorage.getObject("authData");
         if (authData == null) {
-            console.log("authData null");
+            //console.log("authData null");
             return null;
         }
         if (Date.now() < Date.parse(authData.expiration)) {
-            console.log("token ok");
+            //console.log("token ok");
             return authData;
         }
         console.log("token expired");
-        let data = {
-            "token": authData.token,
-            "refreshToken": authData.refreshToken
-        };
-        console.log(data);
         API.isTokenRefreshing = true;
-        API.tokenPromise = API.refreshToken(data);
+        API.tokenPromise = API.refreshToken(authData.token);
         try {
             authData = await API.tokenPromise;
             localStorage.setObject("authData", authData);
@@ -48,28 +43,37 @@ class APIUtilsClass {
         } catch (e) {
             console.log(e);
             console.log("token refresh failed -> logout");
-            API.logout();
+            //API.logout();
             return null;
         } finally {
             API.isTokenRefreshing = false;
         }
     }
 
-    getOrUpdateCurrentUserInfo() {
+    getOrUpdateCurrentUserInfo(fullResponse = false) {
         const UPDATE_INTERVAL_MINUTES = 10;
         return new Promise(function(resolve, reject) {
             let authData = localStorage.getObject("authData");
-            if (authData == null) reject(null);
-            let now = Date.now();
+            if (authData == null) {
+                reject(null);
+                return;
+            }
             let userData = localStorage.getObject("userData");
-            if (userData != null && parseInt((now - userData.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
+            let now = Date.now();
+            let expired = userData == null ? true : parseInt((now - userData.expiration) / 60000) < UPDATE_INTERVAL_MINUTES;
+            if (!fullResponse && !expired) {
                 resolve(userData);
                 return;
             }
             API.getUserInfo(authData.userId)
             .then(function(data) {
                 data.expiration = now;
-                localStorage.setObject("userData", data);
+                localStorage.setObject("userData", {
+                    expiration: data.expiration,
+                    isSubscribed: data.isSubscribed,
+                    marketingConsent: data.marketingConsent,
+                    shouldChangePassword: data.shouldChangePassword
+                });
                 resolve(data);
             })
             .catch(function(jqXHR) { reject(jqXHR) });

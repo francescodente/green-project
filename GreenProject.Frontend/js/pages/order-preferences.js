@@ -1,11 +1,15 @@
 var addresses = [];
+var deferreds = [];
+var addressesPromise = new Promise(function(resolve, reject){
+    deferreds.push({resolve: resolve, reject: reject});
+});
 
 $(document).ready(function() {
 
     // Show addresses
     $("#order-preferences-loader").show();
     $(".order-preferences-content").hide();
-    API.getAddresses(localStorage.getObject("userData").userId)
+    API.getAddresses(localStorage.getObject("authData").userId)
     .then(function(data) {
         if (data.addresses.length == 0) {
             $(".addresses-no-results").removeClass("d-none");
@@ -20,6 +24,7 @@ $(document).ready(function() {
                     $(".address-list").append(address.html.richRadio);
                 }
             });
+            deferreds[0].resolve(addresses);
         }
     })
     .catch(function(data) {

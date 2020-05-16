@@ -14,3 +14,10 @@ APIUtils.getOrUpdateCategories()
 .finally(function(data) {
     $("#categories-loader").hide();
 });
+
+// Can provide a modal ID via GET to show it
+let url = new URL(window.location.href);
+let modalId = url.searchParams.get("showmod");
+if (modalId != null) {
+    $("#" + modalId).showModal();
+}

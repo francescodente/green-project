@@ -37,7 +37,7 @@ class APIClass {
     async request(method, path, data) {
         let authData = await APIUtils.getOrRefreshAuth();
         let token = authData == null ? "" : authData.token;
-        return this.ajax(method, path, data, token);
+        return await this.ajax(method, path, data, token);
     }
 
     get(url, data) {
@@ -80,12 +80,17 @@ class APIClass {
         return this.post("auth/token", data);
     }
 
-    refreshToken(data) {
+    refreshToken(accessToken) {
+        console.log(accessToken);
+        let data = { token: accessToken };
         return this.ajax("POST", "auth/refresh", JSON.stringify(data), "");
     }
 
-    changePsw() {
-
+    changePsw(oldPsw, newPsw) {
+        return this.post("auth/changepsw", {
+            oldPassword: oldPsw,
+            newPassword: newPsw
+        });
     }
 
     signup(data) {
@@ -158,8 +163,8 @@ class APIClass {
 
     }
 
-    getCrateCompatibilities() {
-
+    getCrateCompatibilities(crateId) {
+        return this.get("crates/" + crateId + "/compatibilities");
     }
 
     // Images
@@ -199,16 +204,21 @@ class APIClass {
 
     // Products
 
-    getProducts(categories, pageNumber = 0, pageSize = 30) {
-        if (categories[0] == 1) {
-            return this.getCrates(pageNumber, pageSize);
-        }
+    getProducts(categories, pageNumber = 0, pageSize = 30, isStarred = null) {
         let searchParams = new URLSearchParams();
+        if (categories) {
+            if (categories[0] == 1) {
+                return this.getCrates(pageNumber, pageSize);
+            }
+            categories.forEach(category => {
+                searchParams.append("Categories", category);
+            });
+        }
         searchParams.append("PageNumber", pageNumber);
         searchParams.append("PageSize", pageSize);
-        categories.forEach(category => {
-            searchParams.append("Categories", category);
-        });
+        if (isStarred != null) {
+            searchParams.append("Starred", isStarred);
+        }
         return this.get("products?" + searchParams.toString());
     }
 

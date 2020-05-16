@@ -63,7 +63,7 @@ class Address extends Entity {
 
     deleteAddress() {
         $("#modal-loading").showModal();
-        API.deleteAddress(localStorage.getObject("userData").userId, this.addressId)
+        API.deleteAddress(localStorage.getObject("authData").userId, this.addressId)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) {
             $("#modal-loading").fadeModal();
@@ -73,7 +73,7 @@ class Address extends Entity {
 
     setDefault() {
         $("#modal-loading").showModal();
-        API.setDefaultAddress(localStorage.getObject("userData").userId, this.addressId)
+        API.setDefaultAddress(localStorage.getObject("authData").userId, this.addressId)
         .then(function(data) {
             location.reload();
         })

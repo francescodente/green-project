@@ -52,13 +52,14 @@ $("body").on("change", "[name='select-city']", function() {
 
 // Check if submit button can be enabled
 $("body").on("change", "#modal-new-address input", function() {
+    let phoneLength = $("#address-telephone").val().length;
     if ($("[name='select-province']:checked").length &&
         $("[name='select-city']:checked").length &&
         $("[name='select-zipcode']:checked").length &&
         $("#street").val().length &&
         $("#house-number").val().length &&
         $("#address-name").val().length &&
-        $("#address-telephone").val().length) {
+        (phoneLength >=8 && phoneLength <= 20)) {
         $(".submit-address").attr("disabled", false);
     } else {
         $(".submit-address").attr("disabled", true);
@@ -71,7 +72,7 @@ $("body").on("submit", "#modal-new-address", function(event) {
     $("#address-form-loader").show();
     $(".form-fields").hide();
     $(".submit-address").attr("disabled", true);
-    API.createAddress(localStorage.getObject("userData").userId, {
+    API.createAddress(localStorage.getObject("authData").userId, {
         "street": $("#street").val(),
         "houseNumber": $("#house-number").val(),
         "name": $("#address-name").val(),

@@ -5,6 +5,12 @@ function prepForValidation(form) {
     form.find(".error-message").hide();
 }
 
+function removeGetModal() {
+    let url = new URL(window.location.href);
+    url.searchParams.delete("showmod");
+    history.replaceState({}, "", url.href);
+}
+
 $(document).ready(function() {
 
     // LOGIN
@@ -17,10 +23,16 @@ $(document).ready(function() {
             password: $("#login-password").val()
         })
         .then(function(data) {
+            localStorage.removeItem("userData");
             localStorage.setObject("authData", data);
+            removeGetModal();
             location.reload();
         })
         .catch(function(jqXHR) {
+            if (jqXHR.responseJSON == null) {
+                new ErrorModal(jqXHR).show();
+                return;
+            }
             let errCode = jqXHR.responseJSON.globalErrors[0].code;
             if (errCode == "Err.Auth.LoginFailed") {
                 $("#login-email").addClass("error");
@@ -60,6 +72,7 @@ $(document).ready(function() {
         .then(function(data) {
             console.log("done");
             console.log(data);
+            removeGetModal();
         })
         .catch(function(jqXHR) {
             if (jqXHR.responseJSON.propertyErrors.length &&
