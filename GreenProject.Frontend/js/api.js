@@ -29,7 +29,7 @@ class APIClass {
                 url: url,
                 data: data
             })
-            .done(function(data) { resolve(data) })
+            .done(function(data, textStatus, jqXHR) { resolve(data) })
             .fail(function (jqXHR) { reject(jqXHR) });
         });
     }
@@ -194,8 +194,16 @@ class APIClass {
         return this.get("customers/" + userId + "/orders?" + searchParams.toString());
     }
 
-    getOrders() {
-
+    getOrders(deliveryDate, zipCodes, inculdeCanceled = false, ignoreCompleted = true, ignorePending = false) {
+        let searchParams = new URLSearchParams();
+        searchParams.append("DeliveryDate", deliveryDate);
+        searchParams.append("InculdeCanceled", inculdeCanceled);
+        searchParams.append("IgnoreCompleted", ignoreCompleted);
+        searchParams.append("IgnorePending", ignorePending);
+        /*zipCodes.forEach(zipCode => {
+            searchParams.append("ZipCode", zipCode);
+        });*/
+        return this.get("orders?" + searchParams.toString());
     }
 
     changeOrderState() {

@@ -27,47 +27,62 @@
                 <div id="account-content-col" class="col-12 col-lg-9">
 
                     <div class="chip-container d-flex flex-wrap mb-2">
-                        <a href="#" class="chip px-2 selected">
+                        <a href="#" class="date-old chip px-2">
+                            <span>Vecchie</span>
+                        </a>
+                        <a href="#" class="date-0 chip px-2 selected">
                             <span>Oggi</span>
                         </a>
-                        <a href="#" class="chip px-2">
+                        <a href="#" class="date-1 chip px-2">
                             <span>Domani</span>
                         </a>
-                        <a href="#" class="chip px-2">
-                            <span>1 Marzo</span>
+                        <a href="#" class="date-2 chip px-2">
+                            <span></span>
+                        </a>
+                        <a href="#" class="date-3 chip px-2">
+                            <span></span>
+                        </a>
+                        <a href="#" class="date-4 chip px-2">
+                            <span></span>
                         </a>
                     </div>
 
-                    <div class="dropdown select mb-3">
+                    <div id="select-zipcode" class="dropdown select mb-3">
                         <div class="text-input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="trailing-icon arrow mdi dark mdi-menu-down"></i>
                             <input id="cap-select-toggle" type="text" placeholder=" " readonly/>
                             <label for="cap-select-toggle">CAP</label>
                         </div>
                         <div class="dropdown-menu" aria-labelledby="select-toggle">
-                            <input id="cap-toggle" type="checkbox" class="checkbox toggle-all" data-toggle-all="cap-select"/>
-                            <label for="cap-toggle">All</label>
-                            <input id="cap1" type="checkbox" class="checkbox" name="cap-select" value="1"/>
-                            <label for="cap1">First option</label>
-                            <input id="cap2" type="checkbox" class="checkbox" name="cap-select" value="2"/>
-                            <label for="cap2">Second option</label>
-                            <input id="cap3" type="checkbox" class="checkbox" name="cap-select" value="3"/>
-                            <label for="cap3">Third option</label>
-                            <input id="cap4" type="checkbox" class="checkbox" name="cap-select" value="4"/>
-                            <label for="cap4">Fourth option</label>
-                            <input id="cap5" type="checkbox" class="checkbox" name="cap-select" value="5"/>
-                            <label for="cap5">Fifth option</label>
+                            <input id="select-zipcode-toggle" type="checkbox" class="checkbox toggle-all" data-toggle-all="select-zipcode"/>
+                            <label for="select-zipcode-toggle" class="toggle-all">Tutti</label>
+                        </div>
+                        <div class="select-item-template d-none">
+                            <input id="select-zipcode-tmp" type="checkbox" class="checkbox" name="select-zipcode" data-required="true"/>
+                            <label for="select-zipcode-tmp"></label>
                         </div>
                     </div>
 
-                    <!-- <div class="empty-state m-5">
-                        <img src="images/empty.png" alt="Nessun prodotto da ritirare"/>
-                        <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun prodotto da ritirare</h6>
-                        <p class="text-center text-dis-dark m-0">In questa sezione sono visualizzati i fornitori da visitare per il carico di ogni giorno.</p>
-                    </div> -->
+                    <div class="order-list">
+
+                        <div class="orders-no-results empty-state m-5 d-none">
+                            <img src="images/empty.png" alt="Nessun ordine"/>
+                            <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun ordine</h6>
+                            <p class="text-center text-dis-dark m-0">La ricerca non ha restituito alcun risultato.</p>
+                        </div>
+
+                        <div class="orders-error empty-state m-5 d-none">
+                            <i class="mdi mdi-emoticon-sad-outline"></i>
+                            <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Oops! Qualcosa è andato storto</h6>
+                            <p class="text-center text-dis-dark m-0">
+                                C'è stato un errore, ti preghiamo di riprovare.
+                            </p>
+                        </div>
+
+                    </div>
 
                     <!-- Order -->
-                    <div class="order mb-4">
+                    <!-- <div class="order mb-4">
                         <div class="order-header container p-3" data-toggle="collapse" data-target="#order-1" aria-expanded="true">
                             <div class="row">
                                 <div class="col-12 d-flex justify-content-between align-items-center">
@@ -93,7 +108,6 @@
                         </div>
                         <div id="order-1" class="order-content container collapse">
                             <div class="row">
-                                <!-- Order products -->
                                 <div class="product-group-table products table-responsive">
                                     <table class="table m-0">
                                         <tbody>
@@ -143,7 +157,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -152,8 +166,8 @@
     </div>
 
     <?php include("footer.php"); ?>
-
     <?php include("resources.php") ?>
+    <script src="js/pages/account-delivery.js"></script>
 
     <!-- USER INFO -->
     <div id="modal-client-info-1" class="modal-client-info modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -232,14 +246,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $(document).on("click", ".order-ship, .order-deliver, .show-client-info", function(event) {
-                event.stopPropagation();
-            });
-        });
-    </script>
 
 </body>
 </html>

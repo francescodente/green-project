@@ -1512,7 +1512,8 @@ textarea {
 }
 
 button.chip:hover, a.chip:hover, .chip.selected {
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: rgba(156, 191, 34, 0.4);
+    border: 1px solid var(--col-accent);
 }
 
 button.chip.light:hover, a.chip.light:hover, .chip.light.selected {

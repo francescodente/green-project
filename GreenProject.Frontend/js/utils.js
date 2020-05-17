@@ -83,7 +83,7 @@ jQuery.fn.extend({
         let dropdownMenu = this.find(".dropdown-menu");
         let inputTemplate = this.find(".select-item-template>input");
         let labelTemplate = this.find(".select-item-template>label");
-        dropdownMenu.empty();
+        dropdownMenu.find(":not(.toggle-all)").remove();
         this.find(".text-input>input").val("");
         items.forEach(item => {
             let input = inputTemplate.clone();
