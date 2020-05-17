@@ -67,18 +67,19 @@
 
 <!-- DELIVERY ORDER -->
 <div data-template-name="DeliveryOrderCard" data-class="order mb-4" class="d-none">
-    <div class="order-header container p-3" data-toggle="collapse" data-target="#order-OID" aria-expanded="true">
+    <div class="order-header area-collapse container p-3" data-toggle="collapse" data-target="#order-OID" aria-expanded="true">
         <div class="row">
             <div class="col-12 d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-sec-dark font-weight-bold mb-2">Ordine N° <span class="order-number"></span> (<span class="product-count"></span> <span class="product-count-label-1">prodotto</span><span class="product-count-label">prodotti</span>)</p>
+                    <div class="order-state d-flex align-items-center mb-2"></div>
                     <div class="d-flex align-items-center mb-1">
                         <i class="mdi dark small mdi-account mr-2"></i>
                         <a href=# class="show-client-modal client-name text-sec-dark"></a>
                     </div>
                     <div class="d-flex align-items-center">
                         <i class="mdi dark small mdi-map-marker mr-2"></i>
-                        <span class="text-sec-dark"><a href="#" class="address text-sec-dark"></a></span>
+                        <span class="text-sec-dark"><a href="#" target="_blank" class="address text-sec-dark"></a></span>
                     </div>
                 </div>
                 <button class="btn-collapse btn icon ripple flex-shrink-0" data-toggle="collapse" data-target="#order-OID" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
@@ -86,8 +87,8 @@
                 </button>
             </div>
             <div class="col-12 pt-3 order-actions">
-                <button class="show-shipped-modal btn outline ripple w-100">Spedito</button>
-                <button class="show-completed-modal btn outline ripple w-100">Consegnato</button>
+                <button class="show-shipped-modal btn outline ripple w-100">Spedisci</button>
+                <button class="show-completed-modal btn outline ripple w-100">Consegna</button>
             </div>
         </div>
     </div>
@@ -95,7 +96,7 @@
         <div class="row">
             <div class="product-group-table products table-responsive">
                 <table class="table m-0">
-                    <tbody class="order-product-list"></tbody>
+                    <tbody class="order-products-list"></tbody>
                 </table>
             </div>
             <div class="divider dark m-0"></div>
@@ -134,10 +135,13 @@
             </div>
             <div class="modal-body">
                 <p class="m-0">Contrassegnare questo ordine come <strong>spedito</strong>?<br/>Il cliente sarà notificato del cambio di stato.</p>
+                <div class="loader text-center mt-3">
+                    <?php include("loader.php"); ?>
+                </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                <button class="advance-state btn accent ripple flex-grow-1" style="width: 100px;">Conferma</button>
+                <button class="set-state-shipped btn accent ripple flex-grow-1" style="width: 100px;">Conferma</button>
             </div>
         </div>
     </div>
@@ -152,10 +156,51 @@
             </div>
             <div class="modal-body">
                 <p class="m-0">Contrassegnare questo ordine come <strong>completato</strong>?</p>
+                <div class="loader text-center mt-3">
+                    <?php include("loader.php"); ?>
+                </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
-                <button class="advance-state btn accent ripple flex-grow-1" style="width: 100px;">Conferma</button>
+                <button class="set-state-completed btn accent ripple flex-grow-1" style="width: 100px;">Conferma</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- USER INFO -->
+<div data-template-name="ClientInfoModal" data-class="modal-client-info modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top d-flex justify-content-center">
+                <i class="modal-top-icon mdi mdi-account-circle"></i>
+                <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi">
+                    <i class="mdi dark mdi-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h4 class="client-name text-center mb-3"></h4>
+                <!-- <div class="d-flex align-items-center mb-2">
+                    <i class="mdi dark mdi-email mr-3"></i>
+                    <span>
+                        <span class="text-sec-dark" style="font-size: 14px;">Email</span><br/>
+                        <a href="mailto:info@fruitracers.com" target="_top">mail@domain.com</a>
+                    </span>
+                </div> -->
+                <div class="d-flex align-items-center mb-2">
+                    <i class="mdi dark mdi-phone mr-3"></i>
+                    <span>
+                        <span class="text-sec-dark" style="font-size: 14px;">Telefono</span><br/>
+                        <a href="#" class="telephone"></a>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="mdi dark mdi-map-marker mr-3"></i>
+                    <span>
+                        <span class="text-sec-dark" style="font-size: 14px;">Indirizzo</span><br/>
+                        <a href="#" class="address"></a>
+                    </span>
+                </div>
             </div>
         </div>
     </div>

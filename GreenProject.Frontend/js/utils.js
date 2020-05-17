@@ -144,6 +144,19 @@ class UtilsClass {
         return dd + "/" + mm + "/" + yyyy;
     }
 
+    createGoogleMapsLink(addressString) {
+        return "https://www.google.it/maps?q=" + encodeURIComponent(addressString);
+    }
+
+    wait(ms, success = true) {
+        return new Promise((resolve, reject) => setTimeout(() => {
+            if (success)
+                resolve();
+            else
+                reject();
+        }, ms));
+    }
+
 }
 
 var Utils = Object.freeze(new UtilsClass());

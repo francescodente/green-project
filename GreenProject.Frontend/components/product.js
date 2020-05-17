@@ -16,6 +16,7 @@ class Product extends Purchasable {
         this.html.extraRemoveModal = Entity.getTemplate("ProductExtraRemoveModal");
         this.html.cartEntry = Entity.getTemplate("ProductCartEntry");
         this.html.orderEntry = Entity.getTemplate("ProductOrderEntry");
+        this.html.deliveryEntry = Entity.getTemplate("ProductDeliveryEntry");
         this.html.inCrateEntry = Entity.getTemplate("ProductInCrateEntry");
         this.html.compatibleWithCrateEntry = Entity.getTemplate("ProductCompatibleWithCrateEntry");
         this.html.starredEntry = Entity.getTemplate("StarredProductEntry");

@@ -32,12 +32,14 @@ APIUtils.getOrUpdateZones()
         });
     $("#select-zipcode").fillSelect(zipCodes);
     $("#select-zipcode").setSelectEnabled(true);
-    setTimeout(() => { $("#select-zipcode label.toggle-all").click() }, 10);
 })
 .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
 
 // Get orders
-API.getOrders(moment("20200511").format("YYYY-MM-DD"), [])
+$("#modal-loading").showModal();
+let url = new URL(window.location.href);
+let deliveryDate = url.searchParams.get("DeliveryDate");
+API.getOrders(deliveryDate, [])
 .then(function(data) {
     console.log(data);
     if (data.results.length == 0) {
@@ -51,4 +53,8 @@ API.getOrders(moment("20200511").format("YYYY-MM-DD"), [])
         });
     }
 })
-.catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+.catch(function(jqXHR) {
+    $(".orders-error").removeClass("d-none");
+    new ErrorModal(jqXHR).show();
+})
+.finally(function(data) { $("#modal-loading").fadeModal() });

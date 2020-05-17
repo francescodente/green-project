@@ -80,6 +80,22 @@
     </div>
 </div>
 
+<!-- DELIVERY ENTRY -->
+<table class="d-none">
+    <tr data-template-name="CrateDeliveryEntry" class="d-none">
+        <td class="nowrap">
+            <img class="crate-image img-fluid" src="images/default_product.png" alt="Immagine del prodotto"/>
+        </td>
+        <td style="padding-right: 12px;">
+            <p class="crate-name m-0"></p>
+            <div class="text-sec-dark d-flex justify-content-between">
+                <span class="text-sec-dark"><span class="capacity"></span> <span class="crate-um">Kg</span></span>
+                <span class="price text-sec-dark"></span>
+            </div>
+        </td>
+    </tr>
+</table>
+
 <!-- REMOVE MODAL -->
 <div data-template-name="CrateRemoveModal" data-class="modal fade" class="d-none" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

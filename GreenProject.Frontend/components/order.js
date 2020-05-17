@@ -8,6 +8,7 @@ class Order extends Entity {
         this.html.delivery = Entity.getTemplate("DeliveryOrderCard");
         this.html.shippedModal = Entity.getTemplate("OrderShippedModal");
         this.html.completedModal = Entity.getTemplate("OrderCompletedModal");
+        this.html.clientInfoModal = Entity.getTemplate("ClientInfoModal");
         this.html.products = [];
 
         // Format address fields
@@ -24,6 +25,7 @@ class Order extends Entity {
             })
         });
         address.addressString = address.street + " " + address.houseNumber + ", " + address.zipCode + " " + address.city + " (" + address.province + ")";
+        address.googleMapsLink = Utils.createGoogleMapsLink(address.addressString);
         // Format date fields
         this.deliveryInfo.formattedDeliveryDate = Utils.formatDate(this.deliveryInfo.deliveryDate);
         this.formattedTimestamp = Utils.formatDate(this.timestamp);
@@ -57,6 +59,9 @@ class Order extends Entity {
             $(order.html[k]).find(".order-state").html(stateHtml);
             $(order.html[k]).find(".order-date").html(this.formattedTimestamp);
             $(order.html[k]).find(".product-count").html(this.details.length);
+            $(order.html[k]).find(".address").attr("href", address.googleMapsLink);
+            $(order.html[k]).find(".telephone").html(address.telephone);
+            $(order.html[k]).find(".telephone").attr("href", "tel:" + address.telephone);
             if (this.details.length == 1) {
                 $(order.html[k]).find(".product-count-label").addClass("d-none");
             } else {
@@ -75,8 +80,13 @@ class Order extends Entity {
                 $(order.html[k]).find(".notes").html("-");
             }
 
-            // Add product entries
-            this.details.forEach(product => product.html.orderEntry.appendTo($(order.html[k]).find(".order-products-list")));
+            // Only show appropriate state button
+            if (order.orderState != "Pending") {
+                $(order.html[k]).find(".show-shipped-modal").remove();
+            }
+            if (order.orderState != "Shipping") {
+                $(order.html[k]).find(".show-completed-modal").remove();
+            }
 
             // Set IDs to make collapses work
             $(order.html[k]).find("[id=order-OID]").attr("id", "order-" + this.orderId);
@@ -97,26 +107,48 @@ class Order extends Entity {
                 event.stopPropagation();
                 order.showCompletedModal();
             });
-            $(order.html[k]).find(".advance-state").click(function(event) { order.advanceState() });
+            $(order.html[k]).find(".set-state-shipped").click(function() {
+                order.setState($(this).closest(".modal"), "Shipping");
+            });
+            $(order.html[k]).find(".set-state-completed").click(function() {
+                order.setState($(this).closest(".modal"), "Completed");
+            });
+            $(order.html[k]).find(".address").click(function(event) { event.stopPropagation() });
         }
+
+        // Add product entries
+        this.details.forEach(product => product.html.orderEntry.appendTo(this.html.main.find(".order-products-list")));
+        this.details.forEach(product => product.html.deliveryEntry.appendTo(this.html.delivery.find(".order-products-list")));
     }
 
     showClientModal() {
         console.log("showClientModal");
+        this.html.clientInfoModal.showModal();
     }
 
     showShippedModal() {
-        console.log("showShippedModal");
         this.html.shippedModal.showModal();
     }
 
     showCompletedModal() {
-        console.log("showCompletedModal");
         this.html.completedModal.showModal();
     }
 
-    advanceState() {
+    setState(modal, orderState) {
         console.log("advanceState");
+        modal.find(".loader").show();
+        modal.find(".modal-bottom .btn").prop("disabled", true);
+        Utils.wait(2000, true)
+        .then(function() {
+            console.log("success");
+            location.reload();
+        })
+        .catch(function() {
+            console.log("failure");
+            modal.find(".loader").hide();
+            modal.find(".modal-bottom .btn").prop("disabled", false);
+            new ErrorModal({}).show();
+        });
     }
 
 }

@@ -223,6 +223,22 @@
     </div>
 </div>
 
+<!-- DELIVERY ENTRY -->
+<table class="d-none">
+    <tr data-template-name="ProductDeliveryEntry" class="d-none">
+        <td class="nowrap">
+            <img class="product-image img-fluid" src="images/default_product.png" alt="Immagine del prodotto"/>
+        </td>
+        <td style="padding-right: 12px;">
+            <p class="product-name m-0"></p>
+            <div class="text-sec-dark d-flex justify-content-between">
+                <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span></span>
+                <span class="price text-sec-dark"></span>
+            </div>
+        </td>
+    </tr>
+</table>
+
 <!-- PRODUCT IN CRATE ENTRY -->
 <table class="d-none">
     <tr data-template-name="ProductInCrateEntry" class="d-none">

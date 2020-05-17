@@ -25,6 +25,7 @@ class Address extends Entity {
         });
         let id = "address-radio-" + this.addressId;
         this.addressString = this.street + " " + this.houseNumber + ", " + this.zipCode + " " + this.city + " (" + this.province + ")";
+        this.googleMapsLink = Utils.createGoogleMapsLink(this.addressString);
 
         let address = this;
         for (let k in address.html) {

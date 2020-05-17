@@ -206,8 +206,8 @@ class APIClass {
         return this.get("orders?" + searchParams.toString());
     }
 
-    changeOrderState() {
-
+    changeOrderState(orderId, orderState) {
+        return this.put("orders/" + orderId + "/state", orderState);
     }
 
     // Products
