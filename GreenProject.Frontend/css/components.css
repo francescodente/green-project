@@ -349,6 +349,8 @@ button {
 
 .radio {
     position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
     pointer-events: none;
 }
@@ -459,6 +461,8 @@ button {
 
 .checkbox {
     position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
     pointer-events: none;
 }
@@ -1490,6 +1494,8 @@ textarea {
 
 .chip-container {
     margin: -4px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .chip {
@@ -1511,12 +1517,13 @@ textarea {
     border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-button.chip:hover, a.chip:hover, .chip.selected {
+button.chip:hover, a.chip:hover, .chip.selected,
+label.chip:hover, .chip-radio:checked + label.chip, .chip-checkbox:checked + label.chip {
     background-color: rgba(156, 191, 34, 0.4);
-    border: 1px solid var(--col-accent);
 }
 
-button.chip.light:hover, a.chip.light:hover, .chip.light.selected {
+button.chip.light:hover, a.chip.light:hover, .chip.light.selected,
+label.chip.light:hover, .chip-radio:checked + label.chip.light, .chip-checkbox:checked + label.chip.light {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -1524,15 +1531,20 @@ button.chip {
     cursor: pointer;
 }
 
-.chip>span {
+.chip>span, label.chip {
+    font-weight: bold;
+    color: var(--col-text-sec-dark);
     font-size: 14px;
     line-height: 20px;
-    margin: 0 8px;
     white-space: nowrap;
+}
+
+.chip>span {
+    margin: 0 8px;
     pointer-events: none;
 }
 
-.chip.light>span {
+.chip.light>span, label.chip.light {
     color: var(--col-text-light);
 }
 
@@ -1567,6 +1579,22 @@ button.chip {
     height: 20px;
     font-size: 20px;
     line-height: 20px;
+}
+
+.chip-radio, .chip-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+label.chip {
+    padding: 0 14px;
+    cursor: pointer;
+}
+
+.chip-radio:disabled + label.chip,
+.chip-checkbox:disabled + label.chip {
+    pointer-events: none;
 }
 
 /*******************\

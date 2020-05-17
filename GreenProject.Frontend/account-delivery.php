@@ -27,24 +27,30 @@
                 <div id="account-content-col" class="col-12 col-lg-9">
 
                     <div class="chip-container d-flex flex-wrap mb-2">
-                        <a href="#" class="date-old chip px-2">
-                            <span>Precedenti</span>
-                        </a>
-                        <a href="#" class="date-0 chip px-2 selected">
-                            <span>Oggi</span>
-                        </a>
-                        <a href="#" class="date-1 chip px-2">
-                            <span>Domani</span>
-                        </a>
-                        <a href="#" class="date-2 chip px-2">
-                            <span></span>
-                        </a>
-                        <a href="#" class="date-3 chip px-2">
-                            <span></span>
-                        </a>
-                        <a href="#" class="date-4 chip px-2">
-                            <span></span>
-                        </a>
+                        <div>
+                            <input id="date-old" type="radio" class="chip-radio" name="delivery-date" value=""/>
+                            <label for="date-old" class="chip ripple px-3">Precedenti</label>
+                        </div>
+                        <div>
+                            <input id="date-0" type="radio" class="chip-radio" name="delivery-date" value="" checked/>
+                            <label for="date-0" class="chip ripple px-3">Oggi</label>
+                        </div>
+                        <div>
+                            <input id="date-1" type="radio" class="chip-radio" name="delivery-date" value=""/>
+                            <label for="date-1" class="chip ripple px-3">Domani</label>
+                        </div>
+                        <div>
+                            <input id="date-2" type="radio" class="chip-radio" name="delivery-date" value=""/>
+                            <label for="date-2" class="chip ripple px-3"></label>
+                        </div>
+                        <div>
+                            <input id="date-3" type="radio" class="chip-radio" name="delivery-date" value=""/>
+                            <label for="date-3" class="chip ripple px-3"></label>
+                        </div>
+                        <div>
+                            <input id="date-4" type="radio" class="chip-radio" name="delivery-date" value=""/>
+                            <label for="date-4" class="chip ripple px-3"></label>
+                        </div>
                     </div>
 
                     <div id="select-zipcode" class="dropdown select mb-3">
@@ -62,6 +68,8 @@
                             <label for="select-zipcode-tmp"></label>
                         </div>
                     </div>
+
+                    <button class="apply-filters btn accent ripple w-100 mb-4">Applica</button>
 
                     <div class="order-list">
 
