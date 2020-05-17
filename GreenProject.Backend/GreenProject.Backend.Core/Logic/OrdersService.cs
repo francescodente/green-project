@@ -58,9 +58,14 @@ namespace GreenProject.Backend.Core.Logic
                 .Orders
                 .Where(o => states.Contains(o.OrderState));
 
-            if (filters.DeliveryDate.HasValue)
+            if (filters.From.HasValue)
             {
-                query = query.Where(o => o.DeliveryDate == filters.DeliveryDate.Value);
+                query = query.Where(o => o.DeliveryDate >= filters.From.Value);
+            }
+
+            if (filters.To.HasValue)
+            {
+                query = query.Where(o => o.DeliveryDate <= filters.From.Value);
             }
 
             if (filters.ZipCodes != null)
