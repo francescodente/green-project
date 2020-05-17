@@ -56,5 +56,15 @@ namespace GreenProject.Backend.Infrastructure.Notifications
         {
             return this.DelegateRequest(s => s.SupportRequested(senderEmail, subject, body));
         }
+
+        public Task PasswordRecovery(User user, string token)
+        {
+            return this.DelegateRequest(s => s.PasswordRecovery(user, token));
+        }
+
+        public Task PasswordRecoveryAlt(string email)
+        {
+            return this.DelegateRequest(s => s.PasswordRecoveryAlt(email));
+        }
     }
 }

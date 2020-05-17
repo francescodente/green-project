@@ -7,6 +7,10 @@ namespace GreenProject.Backend.Core.Utils.Notifications
     {
         Task AccountConfirmation(User user, string token);
 
+        Task PasswordRecovery(User user, string token);
+
+        Task PasswordRecoveryAlt(string email);
+
         Task SupportRequested(string senderEmail, string subject, string body);
 
         Task OrderAccepted(Order order);

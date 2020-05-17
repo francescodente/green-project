@@ -19,5 +19,7 @@ namespace GreenProject.Backend.Core.Services
         Task ChangePassword(int userId, PasswordChangeRequestDto request);
 
         Task SendPasswordRecovery(PasswordRecoveryRequestDto request);
+
+        Task AcceptPasswordRecovery(PasswordRecoveryChangeDto request);
     }
 }

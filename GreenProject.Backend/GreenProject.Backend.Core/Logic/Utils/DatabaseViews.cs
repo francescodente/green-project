@@ -16,7 +16,9 @@ namespace GreenProject.Backend.Core.Logic.Utils
 
         public static IQueryable<User> EnabledUsers(this IDataSession data)
         {
-            return data.ActiveUsers().Where(u => u.IsEnabled);
+            return data.ActiveUsers()
+                .Where(u => u.IsEnabled)
+                .Where(u => u.IsConfirmed);
         }
 
         public static IQueryable<PurchasableItem> ActivePurchasableItems(this IDataSession data)

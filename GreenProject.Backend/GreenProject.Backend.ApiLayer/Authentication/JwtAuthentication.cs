@@ -212,5 +212,15 @@ namespace GreenProject.Backend.ApiLayer.Authentication
                 Expiration = this.dateTime.Now.Add(this.settings.ConfirmationTokenDuration)
             };
         }
+
+        public PasswordRecoveryToken NewPasswordRecoveryToken()
+        {
+            return new PasswordRecoveryToken
+            {
+                Token = Guid.NewGuid().ToString(),
+                CreationDate = this.dateTime.Now,
+                Expiration = this.dateTime.Now.Add(this.settings.PasswordRecoveryTokenDuration)
+            };
+        }
     }
 }
