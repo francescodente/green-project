@@ -74,7 +74,7 @@
     <div class="d-flex flex-column w-100">
         <p class="crate-name m-0"></p>
         <div class="d-flex justify-content-between">
-            <span class="capacity"></span> <span class="crate-um">Kg</span>
+            <span class="text-sec-dark"><span class="capacity"></span> <span class="crate-um">Kg</span></span>
             <span class="price text-sec-dark"></span>
         </div>
     </div>

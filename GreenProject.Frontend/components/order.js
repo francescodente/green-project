@@ -32,8 +32,11 @@ class Order extends Entity {
 
         // Create product/crate entries
         for (let i = 0; i < this.details.length; i++) {
-
-            this.details[i] = new Product(this.details[i], this.details[i].quantity);
+            if (this.details[i].capacity == null) {
+                this.details[i] = new Product(this.details[i], this.details[i].quantity);
+            } else {
+                this.details[i] = new Crate(this.details[i]);
+            }
         }
 
         // Retrieve state HTML

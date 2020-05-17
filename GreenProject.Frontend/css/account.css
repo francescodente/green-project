@@ -71,7 +71,8 @@
 |   CLIENT ORDERS   |
 \*******************/
 
-#client-orders  .product-image {
+#client-orders  .product-image,
+#client-orders  .crate-image {
     object-fit: cover;
     height: 56px;
     width: 56px;
