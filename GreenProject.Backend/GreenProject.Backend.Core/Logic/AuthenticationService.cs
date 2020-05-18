@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GreenProject.Backend.Contracts.Authentication;
@@ -64,7 +63,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Select(u => new
                 {
                     User = u,
-                    Tokens = u.Tokens.OfType<ConfirmationToken>()
+                    Tokens = u.Tokens.OfType<ConfirmationToken>().Where(t => !t.IsInvalid)
                 })
                 .SingleOptionalAsync()
                 .Map(u => u.OrElseThrow(() => NotFoundException.UserWithEmail(email)));
@@ -95,7 +94,6 @@ namespace GreenProject.Backend.Core.Logic
             User user = await this.Data
                 .EnabledUsers()
                 .IncludingRoles()
-                .Where(u => u.IsConfirmed)
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
             this.EnsurePasswordIsCorrect(user, credentials.Password);
@@ -165,32 +163,73 @@ namespace GreenProject.Backend.Core.Logic
             }
         }
 
-        public async Task ConfirmAccount(AccountConfirmationDto confirmation)
+        public Task ConfirmAccount(AccountConfirmationDto confirmation)
         {
-            IOptional<ConfirmationToken> token = await this.Data
-                .ConfirmationTokens
-                .Include(t => t.User)
-                .SingleOptionalAsync(t => t.Token == confirmation.Token);
-
-            ConfirmationToken validatedToken = token
-                .Filter(this.IsTokenValid)
-                .Filter(t => !t.User.IsConfirmed)
-                .OrElseThrow(() => new ConfirmationFailedException());
-
-            validatedToken.IsUsed = true;
-            validatedToken.User.IsConfirmed = true;
-
-            await this.Data.SaveChangesAsync();
+            return this.ConsumeToken(this.Data.ConfirmationTokens, confirmation.Token, user =>
+            {
+                user.IsConfirmed = true;
+            });
         }
 
-        public Task SendPasswordRecovery(PasswordRecoveryRequestDto request)
+        public async Task SendPasswordRecovery(PasswordRecoveryRequestDto request)
         {
-            throw new NotImplementedException();
+            var requestingUser = await this.Data
+                .EnabledUsers()
+                .Where(u => u.Email == request.Email)
+                .Select(u => new
+                {
+                    User = u,
+                    Tokens = u.Tokens.OfType<PasswordRecoveryToken>().Where(t => !t.IsInvalid)
+                })
+                .SingleOptionalAsync();
+
+            if (requestingUser.IsPresent())
+            {
+                requestingUser.Value.Tokens.ForEach(t => t.IsInvalid = true);
+
+                User user = requestingUser.Value.User;
+                PasswordRecoveryToken token = this.handler.NewPasswordRecoveryToken();
+                user.Tokens.Add(token);
+
+                await this.Data.SaveChangesAsync();
+
+                this.Notifications.PasswordRecovery(user, token.Token).FireAndForget();
+            }
+            else
+            {
+                this.Notifications.PasswordRecoveryAlt(request.Email).FireAndForget();
+            }
+        }
+
+        public Task AcceptPasswordRecovery(PasswordRecoveryChangeDto request)
+        {
+            return this.ConsumeToken(this.Data.PasswordRecoveryTokens, request.Token, user =>
+            {
+                this.handler.AssignPassword(user, request.NewPassword);
+            });
         }
 
         private bool IsTokenValid(UserToken token)
         {
             return !(token.IsUsed || token.IsInvalid || token.Expiration < this.DateTime.Now);
+        }
+
+        private async Task ConsumeToken<T>(IQueryable<T> tokensQuery, string rawToken, Action<User> action)
+            where T : UserToken
+        {
+            IOptional<T> token = await tokensQuery
+                .Include(t => t.User)
+                .SingleOptionalAsync(t => t.Token == rawToken);
+
+            T validatedToken = token
+                .Filter(this.IsTokenValid)
+                .Filter(t => !t.User.IsConfirmed)
+                .OrElseThrow(() => new ConfirmationFailedException());
+
+            validatedToken.IsUsed = true;
+            action(validatedToken.User);
+
+            await this.Data.SaveChangesAsync();
         }
     }
 }

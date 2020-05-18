@@ -52,7 +52,6 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpDelete("details/{productId}")]
-        [RequireLogin(RoleType.Person)]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteCartItem([FromRoute] int userId, [FromRoute] int productId)
         {
@@ -62,6 +61,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("confirm")]
         [OwnerOrAdminOnly]
+        [RequireLogin(RoleType.Person)]
         public async Task<IActionResult> ConfirmCart([FromRoute] int userId, [FromBody] DeliveryInfoDto.Input deliveryInfo)
         {
             return Ok(await this.cartService.ConfirmCart(userId, deliveryInfo));

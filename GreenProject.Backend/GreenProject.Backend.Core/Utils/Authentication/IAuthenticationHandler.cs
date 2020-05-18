@@ -12,6 +12,8 @@ namespace GreenProject.Backend.Core.Utils.Authentication
 
         ConfirmationToken NewConfirmationToken();
 
+        PasswordRecoveryToken NewPasswordRecoveryToken();
+
         IOptional<string> FindCurrentRefreshToken();
 
         bool CanBeRefreshed(string accessToken, RefreshToken refreshToken);

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
 
 namespace GreenProject.Backend.DataAccess.Sql.Model
 {
@@ -15,7 +11,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
 
         private const int YearLength = 4;
         private const int DayLength = 3;
-        private const int IdLength = 4;
+        private const int IdLength = 5;
         private static readonly string YearFormat = $"FORMAT(YEAR([{nameof(Order.Timestamp)}]), 'D{YearLength}')";
         private static readonly string DayFormat = $"FORMAT(DATEPART(dayofyear, [{nameof(Order.Timestamp)}]), 'D{DayLength}')";
         private static readonly string IdFormat = $"FORMAT([{nameof(Order.OrderId)}] % {Math.Pow(10, IdLength)}, 'D{IdLength}')";
@@ -28,7 +24,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
                 .IsRequired()
                 .HasColumnType($"nchar({YearLength + DayLength + IdLength})")
                 .ValueGeneratedOnAdd()
-                .HasComputedColumnSql($"{YearFormat} + {DayFormat} + {IdFormat}");
+                .HasComputedColumnSql($"{YearFormat} + {DayFormat} + '-' + {IdFormat}");
 
             entity.Property(e => e.DeliveryDate).HasTypeDate();
 

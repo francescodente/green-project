@@ -1,19 +1,12 @@
 ﻿using FluentEmail.Core;
 using FluentEmail.MailKitSmtp;
-using FluentEmail.Smtp;
 using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using RazorLight;
 using System;
-using System.Collections.Generic;
 using System.Dynamic;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Infrastructure.Notifications.Mail
@@ -134,6 +127,20 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
             string recipient = this.settings.EmailAddresses[MailContext.Support].Address;
 
             return this.SendNotification(NotificationType.SupportRequest, model, recipient);
+        }
+
+        public Task PasswordRecovery(User user, string token)
+        {
+            var model = new { User = user, Token = token };
+
+            return this.SendNotification(NotificationType.PasswordRecovery, model, user.Email);
+        }
+
+        public Task PasswordRecoveryAlt(string email)
+        {
+            var model = new { Email = email };
+
+            return this.SendNotification(NotificationType.PasswordRecoveryAlt, model, email);
         }
     }
 }

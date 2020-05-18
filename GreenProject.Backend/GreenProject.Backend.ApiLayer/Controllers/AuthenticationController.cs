@@ -60,5 +60,19 @@ namespace GreenProject.Backend.ApiLayer.Controllers
             await this.authenticationService.ReactivateConfirmation(email);
             return NoContent();
         }
+
+        [HttpPost("passwordrecovery")]
+        public async Task<IActionResult> SendPasswordRecovery([FromBody] PasswordRecoveryRequestDto request)
+        {
+            await this.authenticationService.SendPasswordRecovery(request);
+            return NoContent();
+        }
+
+        [HttpPost("passwordrecovery/accept")]
+        public async Task<IActionResult> AcceptPasswordRecovery([FromBody] PasswordRecoveryChangeDto request)
+        {
+            await this.authenticationService.AcceptPasswordRecovery(request);
+            return NoContent();
+        }
     }
 }
