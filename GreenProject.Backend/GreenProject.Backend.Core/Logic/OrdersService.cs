@@ -65,7 +65,7 @@ namespace GreenProject.Backend.Core.Logic
 
             if (filters.To.HasValue)
             {
-                query = query.Where(o => o.DeliveryDate <= filters.From.Value);
+                query = query.Where(o => o.DeliveryDate <= filters.To.Value);
             }
 
             if (filters.ZipCodes != null)
