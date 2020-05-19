@@ -34,7 +34,6 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task<PagedCollection<OrderDto>> GetCustomerOrders(int customerId, OrderFilters filters, PaginationFilter pagination)
         {
-            IEnumerable<OrderState> states = this.GetRequestedStates(filters);
             return this.GetOrdersFilteredBy(filters)
                 .Where(o => o.UserId == customerId)
                 .OrderByDescending(o => o.Timestamp)
@@ -52,11 +51,12 @@ namespace GreenProject.Backend.Core.Logic
 
         private IQueryable<Order> GetOrdersFilteredBy(OrderFilters filters)
         {
-            IEnumerable<OrderState> states = this.GetRequestedStates(filters);
+            IQueryable<Order> query = this.Data.Orders;
 
-            IQueryable<Order> query = this.Data
-                .Orders
-                .Where(o => states.Contains(o.OrderState));
+            if (filters.States != null)
+            {
+                query = query.Where(o => filters.States.Contains(o.OrderState));
+            }
 
             if (filters.From.HasValue)
             {
@@ -74,23 +74,6 @@ namespace GreenProject.Backend.Core.Logic
             }
 
             return query;
-        }
-
-        private IEnumerable<OrderState> GetRequestedStates(OrderFilters filters)
-        {
-            if (filters.IncludeCanceled)
-            {
-                yield return OrderState.Canceled;
-            }
-            if (!filters.IgnoreCompleted)
-            {
-                yield return OrderState.Completed;
-            }
-            if (!filters.IgnorePending)
-            {
-                yield return OrderState.Pending;
-                yield return OrderState.Shipping;
-            }
         }
 
         public async Task ChangeOrderState(int orderId, OrderState newState)
