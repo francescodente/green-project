@@ -99,6 +99,9 @@ namespace GreenProject.Backend.Core.Logic
                 .Orders
                 .Include(o => o.Details)
                     .ThenInclude(d => d.Item)
+                .Include(o => o.Address)
+                    .ThenInclude(a => a.Zone)
+                .Include(o => o.User)
                 .SingleOptionalAsync(o => o.OrderId == orderId)
                 .Map(o => o.OrElseThrow(() => NotFoundException.OrderWithId(orderId)));
 
