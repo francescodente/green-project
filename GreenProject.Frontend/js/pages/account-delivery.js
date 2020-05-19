@@ -21,7 +21,7 @@ if (dateFrom == null || dateTo == null) {
     dateTo = todayString;
 }
 if (selectedStates.length == 0) {
-    selectedStates = ["Pending", "Shipping"];
+    selectedStates = [0, 2];
 }
 if (pageNumber == null) pageNumber = 0;
 
@@ -47,6 +47,11 @@ if (dateTo == pastTo) {
 } else {
     $("[value='" + dateFrom + "|" + dateTo + "']").click();
 }
+
+// Select current states
+selectedStates.forEach(state => {
+    $("[name='order-state'][value='" + state + "']").attr("checked", true);
+});
 
 // Fill zip codes select
 $("#select-zipcode").setSelectEnabled(false);
@@ -80,11 +85,6 @@ APIUtils.getOrUpdateZones()
     }
 })
 .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
-
-// Select current states
-selectedStates.forEach(state => {
-    $("[name='order-state'][value='" + state + "']").attr("checked", true);
-});
 
 // Get orders
 $("#modal-loading").showModal();

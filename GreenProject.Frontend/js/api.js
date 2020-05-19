@@ -195,12 +195,6 @@ class APIClass {
     }
 
     getOrders(dateFrom, dateTo, zipCodes, states, pageNumber = 0, pageSize = 30) {
-        /*console.log(dateFrom);
-        console.log(dateTo);
-        console.log(zipCodes);
-        console.log(states);
-        console.log(pageNumber);
-        console.log(pageSize);*/
         let searchParams = new URLSearchParams();
         searchParams.append("From", dateFrom);
         searchParams.append("To", dateTo);
@@ -212,9 +206,9 @@ class APIClass {
         zipCodes.forEach(zipCode => {
             searchParams.append("ZipCodes", zipCode);
         });
-        /*states.forEach(state => {
-            searchParams.append("OrderStates", state);
-        });*/
+        states.forEach(state => {
+            searchParams.append("States", state);
+        });
         return this.get("orders?" + searchParams.toString());
     }
 

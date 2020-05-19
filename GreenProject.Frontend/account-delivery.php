@@ -58,19 +58,19 @@
                         <p class="text-sec-dark text-small mb-2">Stato dell'ordine</p>
                         <div class="chip-container d-flex flex-wrap mb-2">
                             <div>
-                                <input id="state-canceled" type="checkbox" class="chip-checkbox" name="order-state" value="Canceled"/>
+                                <input id="state-canceled" type="checkbox" class="chip-checkbox" name="order-state" value="1"/>
                                 <label for="state-canceled" class="chip ripple px-3">Cancellato</label>
                             </div>
                             <div>
-                                <input id="state-pending" type="checkbox" class="chip-checkbox" name="order-state" value="Pending"/>
+                                <input id="state-pending" type="checkbox" class="chip-checkbox" name="order-state" value="0"/>
                                 <label for="state-pending" class="chip ripple px-3">In attesa</label>
                             </div>
                             <div>
-                                <input id="state-shipped" type="checkbox" class="chip-checkbox" name="order-state" value="Shipping"/>
+                                <input id="state-shipped" type="checkbox" class="chip-checkbox" name="order-state" value="2"/>
                                 <label for="state-shipped" class="chip ripple px-3">Spedito</label>
                             </div>
                             <div>
-                                <input id="state-completed" type="checkbox" class="chip-checkbox" name="order-state" value="Completed"/>
+                                <input id="state-completed" type="checkbox" class="chip-checkbox" name="order-state" value="3"/>
                                 <label for="state-completed" class="chip ripple px-3">Completato</label>
                             </div>
                         </div>
