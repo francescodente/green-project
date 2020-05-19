@@ -57,7 +57,11 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.UnitMultiplier, o => o.MapFrom(src => ((Product)src.Item).UnitMultiplier))
                     .ForMember(dst => dst.Name, o => o.MapFrom(src => src.Item.Name))
                     .ForMember(dst => dst.Description, o => o.MapFrom(src => src.Item.Description))
-                    .ForMember(dst => dst.Capacity, o => o.MapFrom(src => ((Crate)src.Item).Capacity))
+                    .ForMember(dst => dst.Capacity, o =>
+                    {
+                        o.PreCondition(o => o.Item is Crate);
+                        o.MapFrom(src => ((Crate)src.Item).Capacity);
+                    })
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Item.Image.Path));
             }
         }
