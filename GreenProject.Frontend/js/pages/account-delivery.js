@@ -1,23 +1,52 @@
+const PAGE_SIZE = 12;
+
 var orders = [];
 var zipCodes;
+var states = OrderStates.map(state => state.name);
 
+// Extract search params
 var url = new URL(window.location.href);
-var deliveryDate = url.searchParams.get("DeliveryDate");
-var selectedZipCodes = url.searchParams.getAll("ZipCode");
+var baseUrl = url.href.split('?')[0];
+var dateFrom = url.searchParams.get("From");
+var dateTo = url.searchParams.get("To");
+var selectedZipCodes = url.searchParams.getAll("ZipCodes");
+var selectedStates = url.searchParams.getAll("States");
+var pageNumber = 0;
+var lastPage = 0;
+
+var today = moment();
+if (dateFrom == null || dateTo == null) {
+    let todayString = today.format("YYYY-MM-DD");
+    dateFrom = todayString;
+    dateTo = todayString;
+}
+if (selectedStates.length == 0) {
+    selectedStates = ["Pending", "Shipping"];
+}
+if (pageNumber == null) pageNumber = 0;
+
+var scrollHandler = function() { checkScroll() }
 
 // Add date to chips
-var today = moment();
+let pastFrom = "1970-01-01";
+let pastTo = moment(today).subtract(1, "d").format("YYYY-MM-DD");
+$("#date-past").val(pastFrom + "|" + pastTo);
 for (let i = 0; i < 5; i++) {
     let date = moment(today).add(i, "d");
+    let dateVal = date.format("YYYY-MM-DD");
     let chipRadio = $("#date-" + i);
-    chipRadio.attr("value", date.format("YYYY-MM-DD"));
+    chipRadio.val(dateVal + "|" + dateVal);
     if (i > 1) {
         let chipLabel = $("[for=date-" + i + "]");
         chipLabel.html(date.format("D MMM"));
     }
 }
 // Select the current date chip
-$("[value='" + deliveryDate + "']").click();
+if (dateTo == pastTo) {
+    $("#date-past").click();
+} else {
+    $("[value='" + dateFrom + "|" + dateTo + "']").click();
+}
 
 // Fill zip codes select
 $("#select-zipcode").setSelectEnabled(false);
@@ -52,20 +81,27 @@ APIUtils.getOrUpdateZones()
 })
 .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
 
+// Select current states
+selectedStates.forEach(state => {
+    $("[name='order-state'][value='" + state + "']").attr("checked", true);
+});
+
 // Get orders
 $("#modal-loading").showModal();
-API.getOrders(deliveryDate, [])
+API.getOrders(dateFrom, dateTo, selectedZipCodes, selectedStates, pageNumber, PAGE_SIZE)
 .then(function(data) {
-    console.log(data);
     if (data.results.length == 0) {
         $(".orders-no-results").removeClass("d-none");
     } else {
+        lastPage = data.pageCount - 1;
         // Create product objects
         data.results.forEach((json) => {
             let order = new Order(json)
             orders.push(order);
             $(".order-list").append(order.html.delivery);
         });
+        // Add scroll listener to load more content
+        $(window).scroll(scrollHandler);
     }
 })
 .catch(function(jqXHR) {
@@ -76,15 +112,62 @@ API.getOrders(deliveryDate, [])
 
 // Apply filters
 $(".apply-filters").click(function() {
-    let newUrl = new URL(url.href.split('?')[0]);
-    let newDeliveryDate = $("[name='delivery-date']:checked").val();
-    let newZipCodes = $("[name='select-zipcode']:checked").map(function() {
-        return $(this).val();
-    }).get();
-    if (newZipCodes.length == zipCodes.length){
+    let newUrl = new URL(baseUrl);
+    let dates = $("[name='delivery-date']:checked").val().split("|");
+    let newZipCodes = $("[name='select-zipcode']:checked").getInputValues();
+    if (newZipCodes.length == zipCodes.length) {
         newZipCodes = [];
     }
-    newUrl.searchParams.append("DeliveryDate", newDeliveryDate);
-    newZipCodes.forEach(zipCode => newUrl.searchParams.append("ZipCode", zipCode));
+    let newStates = $("[name='order-state']:checked").getInputValues();
+    newUrl.searchParams.append("From", dates[0]);
+    newUrl.searchParams.append("To", dates[1]);
+    newZipCodes.forEach(zipCode => newUrl.searchParams.append("ZipCodes", zipCode));
+    newStates.forEach(state => newUrl.searchParams.append("States", state));
     window.location.href = newUrl.href;
 });
+
+// Collapse button text management
+$(".btn-collapse").click(function() {
+    $(this).find("span").html($(this).attr("aria-expanded") == "true" ? "Mostra filtri" : "Nascondi filtri");
+});
+
+// Always keep a state checkbox selected
+$("[name=order-state]").change(function(event) {
+    if ($("[name=order-state]:checked").length == 0) this.checked = true;
+});
+
+// Load more orders on scroll
+function checkScroll() {
+    if ($(window).scrollTop() + $(window).height() != $(document).height()) {
+        return;
+    }
+    if (pageNumber < lastPage) {
+        pageNumber++;
+        $(window).off("scroll", scrollHandler);
+        $(".orders-loader").show();
+        console.log("load more");
+        API.getOrders(dateFrom, dateTo, selectedZipCodes, selectedStates, pageNumber, PAGE_SIZE)
+        .then(function(data) {
+            if (data.results.length == 0) {
+                return;
+            } else {
+                lastPage = data.pageCount - 1;
+                // Create product objects
+                data.results.forEach((json) => {
+                    let order = new Order(json)
+                    orders.push(order);
+                    $(".order-list").append(order.html.delivery);
+                });
+                // Add scroll listener to load more content
+                $(window).scroll(scrollHandler);
+            }
+        })
+        .catch(function(jqXHR) {
+            $(".orders-error").removeClass("d-none");
+            new ErrorModal(jqXHR).show();
+        })
+        .finally(function(data) { $(".orders-loader").hide() });
+    } else {
+        $(".no-more-results").removeClass("d-none");
+    }
+}

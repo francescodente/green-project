@@ -106,6 +106,13 @@ jQuery.fn.extend({
             this.find(".text-input").addClass("disabled");
             this.find("input").prop("disabled", true);
         }
+    },
+
+    // From a selector, get input values into an array
+    getInputValues: function() {
+        return this.map(function() {
+            return $(this).val();
+        }).get();
     }
 
 });

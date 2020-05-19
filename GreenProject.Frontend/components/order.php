@@ -38,7 +38,8 @@
                         <i class="mdi dark mdi-chevron-down"></i>
                     </button>
                 </div>
-                <div id="order-details-OID" class="collapse mt-3 mx-2 flex-grow-1">
+                <div id="order-details-OID" class="collapse px-2 flex-grow-1">
+                    <div class="pt-3"></div>
                     <div class="d-flex align-items-center mb-1">
                         <i class="mdi small dark mdi-calendar-clock mr-2"></i>
                         <h6 class="h-variant text-sec-dark m-0">Consegna</h6>

@@ -194,14 +194,26 @@ class APIClass {
         return this.get("customers/" + userId + "/orders?" + searchParams.toString());
     }
 
-    getOrders(deliveryDate, zipCodes, inculdeCanceled = false, ignoreCompleted = true, ignorePending = false) {
+    getOrders(dateFrom, dateTo, zipCodes, states, pageNumber = 0, pageSize = 30) {
+        /*console.log(dateFrom);
+        console.log(dateTo);
+        console.log(zipCodes);
+        console.log(states);
+        console.log(pageNumber);
+        console.log(pageSize);*/
         let searchParams = new URLSearchParams();
-        searchParams.append("DeliveryDate", deliveryDate);
-        searchParams.append("InculdeCanceled", inculdeCanceled);
-        searchParams.append("IgnoreCompleted", ignoreCompleted);
-        searchParams.append("IgnorePending", ignorePending);
-        /*zipCodes.forEach(zipCode => {
-            searchParams.append("ZipCode", zipCode);
+        searchParams.append("From", dateFrom);
+        searchParams.append("To", dateTo);
+        searchParams.append("PageNumber", pageNumber);
+        searchParams.append("PageSize", pageSize);
+        searchParams.append("InculdeCanceled", false);
+        searchParams.append("IgnoreCompleted", true);
+        searchParams.append("IgnorePending", false);
+        zipCodes.forEach(zipCode => {
+            searchParams.append("ZipCodes", zipCode);
+        });
+        /*states.forEach(state => {
+            searchParams.append("OrderStates", state);
         });*/
         return this.get("orders?" + searchParams.toString());
     }

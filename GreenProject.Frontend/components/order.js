@@ -135,16 +135,11 @@ class Order extends Entity {
     }
 
     setState(modal, orderState) {
-        console.log("advanceState");
         modal.find(".loader").show();
         modal.find(".modal-bottom .btn").prop("disabled", true);
-        Utils.wait(2000, true)
-        .then(function() {
-            console.log("success");
-            location.reload();
-        })
+        API.changeOrderState(this.orderId, orderState)
+        .then(function() { location.reload() })
         .catch(function() {
-            console.log("failure");
             modal.find(".loader").hide();
             modal.find(".modal-bottom .btn").prop("disabled", false);
             new ErrorModal({}).show();
