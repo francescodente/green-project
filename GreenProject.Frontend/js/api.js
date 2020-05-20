@@ -315,7 +315,7 @@ class APIClass {
         return this.del("customers/" + userId + "/weeklyorder/details/" + orderDetailId);
     }
 
-    addProductToWeeklyCrate(userId, orderDetailId, productId, quantity) {
+    addProductToCrate(userId, orderDetailId, productId, quantity) {
         let data = {
             productId: productId,
             quantity: quantity
@@ -323,7 +323,7 @@ class APIClass {
         return this.post("customers/" + userId + "/weeklyorder/crates/" + orderDetailId + "/subproducts", data);
     }
 
-    editWeeklyCrateProductQuantity(userId, orderDetailId, productId, quantity) {
+    editProductCrateQuantity(userId, orderDetailId, productId, quantity) {
         let data = {
             productId: productId,
             quantity: quantity
@@ -331,7 +331,7 @@ class APIClass {
         return this.put("customers/" + userId + "/weeklyorder/crates/" + orderDetailId + "/subproducts", data);
     }
 
-    removeProductFromWeeklyCrate(userId, orderDetailId, productId) {
+    removeProductFromCrate(userId, orderDetailId, productId) {
         return this.del("customers/" + userId + "/weeklyorder/crates/" + orderDetailId + "/subproducts/" + productId);
     }
 

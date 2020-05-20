@@ -8,7 +8,7 @@
         <h5 class="product-name mb-0"></h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
-            <button class="show-quantity-modal btn icon ripple" data-tooltip="tooltip" title="Aggiungi al carrello">
+            <button class="show-quantity-modal btn icon ripple" data-action="add" data-tooltip="tooltip" title="Aggiungi al carrello">
                 <i class="mdi dark mdi-cart-plus"></i>
             </button>
         </div>
@@ -33,8 +33,8 @@
             </div>
             <div class="card-footer">
                 <div class="d-flex flex-column m-0">
-                    <button class="show-quantity-modal btn accent ripple">Aggiungi al carrello</button>
-                    <button class="req-subscription show-extra-quantity-modal btn outline ripple mt-2">Aggiungi all'ordine settimanale</button>
+                    <button class="show-quantity-modal btn accent ripple" data-action="add">Aggiungi al carrello</button>
+                    <button class="req-subscription show-extra-quantity-modal btn outline ripple mt-2" data-action="add">Aggiungi all'ordine settimanale</button>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="add-to-cart btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
+                <button class="confirm-quantity btn accent ripple" style="width: 160px;">Ok</button>
             </div>
         </div>
     </div>
@@ -87,13 +87,13 @@
                         <button class="dec btn icon ripple" tabindex="-1"><i class="mdi dark mdi-menu-down"></i></button>
                     </div>
                 </div>
-                <p class="text-center m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
+                <p class="text-center m-0"><span class="crate-multiplier"></span> Kg</p>
                 <div class="loader text-center mt-3">
                     <?php include("loader.php"); ?>
                 </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="add-to-crate btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
+                <button class="confirm-quantity btn accent ripple" style="width: 160px;">Ok</button>
             </div>
         </div>
     </div>
@@ -122,7 +122,7 @@
                 </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="add-to-extras btn accent ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
+                <button class="confirm-quantity btn accent ripple" style="width: 160px;">Ok</button>
             </div>
         </div>
     </div>
@@ -198,7 +198,7 @@
         </td>
         <td class="nowrap actions">
             <div class="d-flex justify-content-end">
-                <button type="button" class="show-quantity-modal btn icon ripple mr-2" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
+                <button type="button" class="show-quantity-modal btn icon ripple mr-2" data-action="edit" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
                     <i class="mdi dark mdi-pencil"></i>
                 </button>
                 <button type="button" class="show-remove-modal btn icon ripple" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">
@@ -248,12 +248,12 @@
         <td>
             <p class="product-name m-0">Product name</p>
             <p class="text-sec-dark m-0">
-                <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
+                <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span></span>
             </p>
         </td>
         <td class="nowrap actions">
             <div class="d-flex justify-content-end">
-                <button type="button" class="show-crate-quantity-modal btn icon ripple mr-2" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
+                <button type="button" class="show-crate-quantity-modal btn icon ripple mr-2" data-action="edit" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
                     <i class="mdi dark mdi-pencil"></i>
                 </button>
                 <button type="button" class="show-crate-remove-modal btn icon ripple" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">
@@ -268,7 +268,7 @@
 <table class="d-none">
     <tr data-template-name="ProductCompatibleWithCrateEntry" class="d-none">
         <td class="p-0">
-            <button class="show-crate-quantity-modal btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
+            <button class="show-crate-quantity-modal btn add-product ripple" data-action="add" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
                 <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
                 <span class="product-name font-weight-normal"></span>
             </button>
@@ -280,7 +280,7 @@
 <table class="d-none">
     <tr data-template-name="StarredProductEntry" class="d-none">
         <td class="p-0">
-            <button class="show-extra-quantity-modal btn add-product ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
+            <button class="show-extra-quantity-modal btn add-product ripple" data-action="add" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
                 <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
                 <span class="product-name font-weight-normal mr-auto"></span>
                 <span class="font-weight-normal text-sec-dark mr-3"><span class="multiplier font-weight-normal"></span> <span class="unit font-weight-normal"></span> - <span class="price font-weight-normal"></span></span>
@@ -305,7 +305,7 @@
         </td>
         <td class="nowrap actions">
             <div class="d-flex justify-content-end">
-                <button type="button" class="show-extra-quantity-modal btn icon ripple mr-2" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
+                <button type="button" class="show-extra-quantity-modal btn icon ripple mr-2" data-action="edit" data-tooltip="tooltip" data-boundary="window" title="Modifica quantità">
                     <i class="mdi dark mdi-pencil"></i>
                 </button>
                 <button type="button" class="show-extra-remove-modal btn icon ripple" data-tooltip="tooltip" data-boundary="window" title="Rimuovi">

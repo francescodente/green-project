@@ -17,6 +17,12 @@ Storage.prototype.setObjectProperty = function(objectKey, key, value) {
     this.setObject(objectKey, object)
 };
 
+/************************\
+|   LOCATION EXTENSION   |
+\************************/
+
+location.filename = location.pathname.split("/").pop();
+
 /***********************\
 |   JQUERY EXTENSIONS   |
 \***********************/

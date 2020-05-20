@@ -11,7 +11,7 @@ class WeeklyCrate extends Entity {
         let crateQuantity = 0;
         for (let i = 0; i < this.products.length; i++) {
             crateQuantity += this.products[i].quantity;
-            this.products[i] = new Product(this.products[i].product, this.products[i].quantity / 2);
+            this.products[i] = new Product(this.products[i].product, this.products[i].quantity / 2, this.products[i].maximum);
             this.products[i].weeklyCrateId = this.orderDetailId;
         }
 
