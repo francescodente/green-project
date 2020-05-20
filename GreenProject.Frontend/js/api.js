@@ -25,6 +25,9 @@ class APIClass {
                     "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
+                xhrFields: {
+                    withCredentials: true
+                },
                 method: method,
                 url: url,
                 data: data

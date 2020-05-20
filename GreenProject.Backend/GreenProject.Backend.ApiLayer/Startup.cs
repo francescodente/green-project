@@ -1,10 +1,15 @@
 ﻿using GreenProject.Backend.ApiLayer.DependencyInjection;
+using GreenProject.Backend.DataAccess.Sql;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GreenProject.Backend.ApiLayer
@@ -28,7 +33,20 @@ namespace GreenProject.Backend.ApiLayer
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (!env.IsDevelopment())
+            {
+                using (IServiceScope serviceScope = app.ApplicationServices
+                .GetRequiredService<IServiceScopeFactory>()
+                .CreateScope())
+                {
+                    using (GreenProjectContext context = serviceScope.ServiceProvider.GetService<GreenProjectContext>())
+                    {
+                        context.Database.Migrate();
+                    }
+                }
+            }
+
+            if (env.IsDevelopment() || env.IsEnvironment("Test"))
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -38,7 +56,19 @@ namespace GreenProject.Backend.ApiLayer
                 app.UseHttpsRedirection();
             }
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCookiePolicy(new CookiePolicyOptions
+            {
+                HttpOnly = HttpOnlyPolicy.None,
+                Secure = CookieSecurePolicy.SameAsRequest,
+                MinimumSameSitePolicy = SameSiteMode.None
+            });
+
+            GlobalSettings settings = this.Configuration.GetSection(nameof(GlobalSettings)).Get<GlobalSettings>();
+            app.UseCors(x => x
+                .SetIsOriginAllowed(settings.AllowedOrigins.Contains)
+                .AllowCredentials()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
 
             app.UseSwagger(c =>
             {
