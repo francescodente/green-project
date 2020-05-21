@@ -20,7 +20,11 @@
         </section>
         <section id="management-content" class="container py-4">
             <div id="management-products" class="row">
-                <div id="management-content-col" class="col-12">
+
+                <div id="management-tabs-col" class="d-none d-lg-block col-lg-3">
+                    <?php include("management-tabs.php"); ?>
+                </div>
+                <div id="management-content-col" class="col-12 col-lg-9">
 
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <a href="management-product-edit.php" class="btn outline ripple ripple-accent">

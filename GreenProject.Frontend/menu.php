@@ -69,7 +69,7 @@ $page = basename($_SERVER['PHP_SELF']);
                     <a href="management-products.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-sprout"></i><span class="text-dark">Gestione catalogo</span>
                     </a>
-                    <a href="management-summaries.php" class="dropdown-item menu-item">
+                    <a href="management-reports.php" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-file-delimited-outline"></i><span class="text-dark">File di riepilogo</span>
                     </a>
                 </div>
@@ -167,7 +167,7 @@ $page = basename($_SERVER['PHP_SELF']);
                 <i class="mdi mdi-sprout"></i>
                 <span>Gestione catalogo</span>
             </a>
-            <a href="management-summaries.php" class="menu-item">
+            <a href="management-reports.php" class="menu-item">
                 <i class="mdi mdi-file-delimited-outline"></i>
                 <span>File di riepilogo</span>
             </a>

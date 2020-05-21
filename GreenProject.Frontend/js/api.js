@@ -251,6 +251,24 @@ class APIClass {
 
     }
 
+    // Reports
+
+    getOrdersReport(date) {
+
+    }
+
+    getProductsReport(date) {
+
+    }
+
+    getSupplierOrderReport(date) {
+
+    }
+
+    getRevenueReport(date) {
+
+    }
+
     // Roles
 
     setPersonRole(userId, data) {
