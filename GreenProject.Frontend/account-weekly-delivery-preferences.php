@@ -19,6 +19,13 @@
             <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
         </section>
         <section id="account-content" class="container py-4">
+
+            <div class="weekly-delivery-not-subscribed empty-state m-5 d-none">
+                <img src="images/empty.png" alt="Utente non abbonato"/>
+                <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Non sei abbonato al nostro servizio di consegna settimanale.</h6>
+                <p class="text-center text-dis-dark m-0">Visualizza le nostre <a href="products.php?Categories=1">cassette</a> e scegli quelle che fanno per te!<br/>Dopo averne selezionata almeno una, torna a questa pagina per decidere quali prodotti inserirvi.</p>
+            </div>
+
             <div id="user-weekly-delivery" class="row">
 
                 <div id="account-tabs-col" class="d-none d-lg-block col-lg-3">

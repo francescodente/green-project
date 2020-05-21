@@ -4,9 +4,12 @@ var deliveryInfo;
 var addresses;
 var starredProducts = [];
 
-$(document).ready(function() {
+// Get weekly order
+if (!localStorage.getObject("userData").isSubscribed) {
+    $("#user-weekly-delivery").addClass("d-none");
+    $(".weekly-delivery-not-subscribed").removeClass("d-none");
+} else {
 
-    // Get weekly order
     $("#modal-loading").showModal();
     API.getWeeklyOrder(localStorage.getObject("authData").userId)
     .then(function(data) {
@@ -136,11 +139,22 @@ $(document).ready(function() {
     }
 
     // Skip weekly delivery
-    $(".btn.skip-delivery").click(function() {
+    $(".skip-delivery").click(function() {
         $("#modal-loading").showModal();
         API.skipWeeklyOrder(localStorage.getObject("authData").userId)
         .then(function(data) { location.reload() })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
 
-});
+    // Delete subscription
+    $(".delete-subscription").click(function() {
+        $("#modal-loading").showModal();
+        API.unsubscribe(localStorage.getObject("authData").userId)
+        .then(function(data) {
+            localStorage.setObjectProperty("userData", "isSubscribed", false);
+            location.reload()
+        })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    });
+
+}
