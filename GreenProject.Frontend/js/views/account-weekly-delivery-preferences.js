@@ -6,7 +6,7 @@ var starredProducts = [];
 
 // Get weekly order
 if (!localStorage.getObject("userData").isSubscribed) {
-    $("#user-weekly-delivery").addClass("d-none");
+    $(".user-weekly-delivery").addClass("d-none");
     $(".weekly-delivery-not-subscribed").removeClass("d-none");
 } else {
 

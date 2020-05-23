@@ -158,8 +158,8 @@
             <span>Gestione</span>
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
-        <div id="/admin-submenu" class="submenu req-login">
-            <a href="management/products" class="menu-item">
+        <div id="admin-submenu" class="submenu req-login">
+            <a href="/management/products" class="menu-item">
                 <i class="mdi mdi-sprout"></i>
                 <span>Gestione catalogo</span>
             </a>

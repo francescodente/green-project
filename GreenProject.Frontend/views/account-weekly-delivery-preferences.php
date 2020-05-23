@@ -10,18 +10,21 @@
     </section>
     <section id="account-content" class="container py-4">
 
-        <div class="weekly-delivery-not-subscribed empty-state m-5 d-none">
-            <img src="/images/empty.png" alt="Utente non abbonato"/>
-            <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Non sei abbonato al nostro servizio di consegna settimanale.</h6>
-            <p class="text-center text-dis-dark m-0">Visualizza le nostre <a href="/products?Categories=1">cassette</a> e scegli quelle che fanno per te!<br/>Dopo averne selezionata almeno una, torna a questa pagina per decidere quali prodotti inserirvi.</p>
-        </div>
-
-        <div id="user-weekly-delivery" class="row">
+        <div class="row">
 
             <div id="account-tabs-col" class="d-none d-lg-block col-lg-3">
                 <?php include("account-tabs.php"); ?>
             </div>
-            <div id="account-content-col" class="col-12 col-lg-9">
+
+            <div class="weekly-delivery-not-subscribed col-12 col-lg-9 d-none">
+                <div class="empty-state m-5">
+                    <img src="/images/empty.png" alt="Utente non abbonato"/>
+                    <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Non sei abbonato al nostro servizio di consegna settimanale.</h6>
+                    <p class="text-center text-dis-dark m-0">Visualizza le nostre <a href="/products?Categories=1">cassette</a> e scegli quelle che fanno per te!<br/>Dopo averne selezionata almeno una, torna a questa pagina per decidere quali prodotti inserirvi.</p>
+                </div>
+            </div>
+
+            <div id="account-content-col" class="user-weekly-delivery col-12 col-lg-9">
 
                 <div class="alert alert-accent" role="alert">
                     <p class="summary-preferences text-dis-dark m-0">

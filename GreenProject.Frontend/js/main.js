@@ -19,7 +19,8 @@ function highlightMenuItem() {
     } else {
         // Can highlight menu item based on current window
         var url = location.href;
-        var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
+        //var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
+        var currentPage = window.location.pathname;
         $(".menu-item").removeClass("selected");
         $(".menu-item[href='" + currentPage + "']").addClass("selected");
     }
