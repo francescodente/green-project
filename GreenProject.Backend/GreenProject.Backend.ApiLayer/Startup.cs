@@ -33,24 +33,11 @@ namespace GreenProject.Backend.ApiLayer
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (!env.IsDevelopment())
-            {
-                using (IServiceScope serviceScope = app.ApplicationServices
-                .GetRequiredService<IServiceScopeFactory>()
-                .CreateScope())
-                {
-                    using (GreenProjectContext context = serviceScope.ServiceProvider.GetService<GreenProjectContext>())
-                    {
-                        context.Database.Migrate();
-                    }
-                }
-            }
-
-            if (env.IsDevelopment() || env.IsEnvironment("Test"))
+            if (env.IsDevelopment() || env.IsStaging())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            else if (env.IsProduction())
             {
                 app.UseHsts();
                 app.UseHttpsRedirection();
