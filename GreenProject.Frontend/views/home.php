@@ -43,7 +43,7 @@
             </div>
 
             <div id="categories-loader" class="loader col-12 text-center my-5">
-                <?php include("loader.php"); ?>
+                <?php include("views/loader.php"); ?>
             </div>
 
             <div class="col-12">

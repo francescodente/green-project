@@ -1,5 +1,5 @@
 <div id="order-preferences-loader" class="loader text-center my-5">
-    <?php include("loader.php"); ?>
+    <?php include("views/loader.php"); ?>
 </div>
 
 <div class="order-preferences-content">

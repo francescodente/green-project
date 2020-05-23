@@ -109,7 +109,7 @@
                 </div>
 
                 <div class="orders-loader loader text-center mt-5 mb-4">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
 
                 <p class="no-more-results text-dis-dark text-center mb-2 d-none">Non sono presenti altri ordini.</p>

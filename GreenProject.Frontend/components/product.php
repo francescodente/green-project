@@ -60,7 +60,7 @@
                 </div>
                 <p class="text-center m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
                 <div class="loader text-center mt-3">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">

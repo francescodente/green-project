@@ -96,6 +96,7 @@ class Order extends Entity {
 
             // Add event listeners
             $(order.html[k]).find(".show-client-modal").click(function(event) {
+                event.preventDefault();
                 event.stopPropagation();
                 order.showClientModal();
             });
@@ -122,7 +123,6 @@ class Order extends Entity {
     }
 
     showClientModal() {
-        console.log("showClientModal");
         this.html.clientInfoModal.showModal();
     }
 

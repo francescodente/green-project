@@ -168,7 +168,7 @@
             <div class="modal-body p-0">
 
                 <div id="starred-products-loader" class="loader text-center my-5">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
 
                 <div class="starred-products product-group-table products table-wrapper table-responsive">

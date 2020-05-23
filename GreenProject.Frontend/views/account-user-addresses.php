@@ -54,4 +54,6 @@
 
 </main>
 
+<?php include("modal-new-address.php"); ?>
+
 <script defer src="/js/views/account-user-addresses.js"></script>

@@ -26,7 +26,7 @@
                 <p id="generic-login-error" class="error-message text-center text-small text-error-dark my-3" style="display: none;">Si è verificato un errore.</p>
 
                 <div id="login-loader" class="loader text-center my-3">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
 
                 <div class="d-flex justify-content-between align-items-center">
@@ -93,7 +93,7 @@
                 <p id="generic-sign-up-error" class="error-message text-small text-error-dark my-3" style="display: none;">Si è verificato un errore.</p>
 
                 <div id="sign-up-loader" class="loader text-center my-3">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
 
                 <div class="text-center">

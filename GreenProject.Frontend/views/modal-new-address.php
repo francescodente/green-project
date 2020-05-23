@@ -13,7 +13,7 @@
 
                 <div class="row justify-content-center">
                     <div id="address-form-loader" class="loader text-center my-3">
-                        <?php include("loader.php"); ?>
+                        <?php include("views/loader.php"); ?>
                     </div>
                 </div>
 

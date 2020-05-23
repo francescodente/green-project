@@ -42,7 +42,7 @@
                 <p id="pwd-change-error-auth-failed" class="error-message text-small text-error-dark my-3" style="display: none;">Password errata.</p>
 
                 <div id="change-pwd-loader" class="loader text-center my-3">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
 
                 <div class="text-center">
