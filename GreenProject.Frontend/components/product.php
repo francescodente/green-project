@@ -1,7 +1,7 @@
 <!-- PRODUCT ITEM -->
 <div data-template-name="ProductCard" data-class="card product-card mb-4" class="d-none">
     <a href="#" class="product-modal-link fixed-ratio fr-1-1 img-hover-zoom">
-        <img class="product-image card-bg" src="images/default_product.png"/>
+        <img class="product-image card-bg" src="/images/default_product.png"/>
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
     <div class="card-body">
@@ -20,7 +20,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="card-header-image fixed-ratio fr-4-3">
-                <img class="product-image card-bg" src="images/default_product.png"/>
+                <img class="product-image card-bg" src="/images/default_product.png"/>
                 <div class="image-shade-top"></div>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi light mdi-close"></i></button>
             </div>
@@ -187,7 +187,7 @@
     <tr data-template-name="ProductCartEntry" class="d-none">
         <td class="nowrap">
             <a href="#" class="product-modal-link">
-                <img class="product-image img-fluid" src="images/default_product.png"/>
+                <img class="product-image img-fluid" src="/images/default_product.png"/>
             </a>
         </td>
         <td>
@@ -212,7 +212,7 @@
 <!-- ORDER ENTRY -->
 <div data-template-name="ProductOrderEntry" data-class="product d-flex align-items-center" class="d-none">
     <a href="#" class="product-modal-link">
-        <img class="product-image" src="images/default_product.png"/>
+        <img class="product-image" src="/images/default_product.png"/>
     </a>
     <div class="d-flex flex-column w-100">
         <p class="product-name m-0"></p>
@@ -227,7 +227,7 @@
 <table class="d-none">
     <tr data-template-name="ProductDeliveryEntry" class="d-none">
         <td class="nowrap">
-            <img class="product-image img-fluid" src="images/default_product.png" alt="Immagine del prodotto"/>
+            <img class="product-image img-fluid" src="/images/default_product.png" alt="Immagine del prodotto"/>
         </td>
         <td style="padding-right: 12px;">
             <p class="product-name m-0"></p>
@@ -243,7 +243,7 @@
 <table class="d-none">
     <tr data-template-name="ProductInCrateEntry" class="d-none">
         <td class="nowrap">
-            <img class="product-image img-fluid" src="images/default_product.png"/>
+            <img class="product-image img-fluid" src="/images/default_product.png"/>
         </td>
         <td>
             <p class="product-name m-0">Product name</p>
@@ -269,7 +269,7 @@
     <tr data-template-name="ProductCompatibleWithCrateEntry" class="d-none">
         <td class="p-0">
             <button class="show-crate-quantity-modal btn add-product ripple" data-action="add" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
-                <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
+                <img class="product-image img-fluid mr-3" src="/images/default_product.png"/>
                 <span class="product-name font-weight-normal"></span>
             </button>
         </td>
@@ -281,7 +281,7 @@
     <tr data-template-name="StarredProductEntry" class="d-none">
         <td class="p-0">
             <button class="show-extra-quantity-modal btn add-product ripple" data-action="add" data-dismiss="modal" data-toggle="modal" data-target="#modal-product-add">
-                <img class="product-image img-fluid mr-3" src="images/default_product.png"/>
+                <img class="product-image img-fluid mr-3" src="/images/default_product.png"/>
                 <span class="product-name font-weight-normal mr-auto"></span>
                 <span class="font-weight-normal text-sec-dark mr-3"><span class="multiplier font-weight-normal"></span> <span class="unit font-weight-normal"></span> - <span class="price font-weight-normal"></span></span>
             </button>
@@ -294,7 +294,7 @@
     <tr data-template-name="ExtraProductEntry" class="d-none">
         <td class="nowrap">
             <a href="#" class="product-modal-link">
-                <img class="product-image img-fluid" src="images/default_product.png"/>
+                <img class="product-image img-fluid" src="/images/default_product.png"/>
             </a>
         </td>
         <td>

@@ -2,7 +2,7 @@
 <div data-template-name="AddressCard" data-class="address-item address-card p-2" class="d-none">
     <div class="d-flex flex-column">
         <div class="d-flex align-items-center">
-            <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+            <div class="thumb flex-shrink-0" style="background-image: url('/images/map-thumb.png');">
                 <i class="mdi mdi-map-marker"></i>
             </div>
             <p class="address-string mb-0"></p>
@@ -40,7 +40,7 @@
     <input type="radio" class="rich-radio" name="delivery-address"/>
     <label class="address-item d-flex flex-column p-2">
         <div class="d-flex align-items-center">
-            <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+            <div class="thumb flex-shrink-0" style="background-image: url('/images/map-thumb.png');">
                 <i class="mdi mdi-map-marker"></i>
             </div>
             <p class="address-string mb-0"></p>
@@ -62,7 +62,7 @@
 <button data-template-name="AddressButton" data-class="address-item address-card btn ripple p-2" class="d-none">
     <div class="d-flex flex-column">
         <div class="d-flex align-items-center">
-            <div class="thumb flex-shrink-0" style="background-image: url('images/map-thumb.png');">
+            <div class="thumb flex-shrink-0" style="background-image: url('/images/map-thumb.png');">
                 <i class="mdi mdi-map-marker"></i>
             </div>
             <p class="address-string mb-0"></p>

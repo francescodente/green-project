@@ -6,7 +6,7 @@
             <br/>
             <h3 class="text-light">Anagrafica prodotti</h3>
         </div>
-        <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/account.jpg"></div>
     </section>
     <section id="management-content" class="container py-4">
         <div id="management-products" class="row">
@@ -17,7 +17,7 @@
             <div id="management-content-col" class="col-12 col-lg-9">
 
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <a href="management/products/edit" class="btn outline ripple ripple-accent">
+                    <a href="/management/products/edit" class="btn outline ripple ripple-accent">
                         <i class="mdi accent mdi-plus"></i>
                         <span class="text-accent">Nuovo prodotto</span>
                     </a>
@@ -33,7 +33,7 @@
                                 <tr>
                                     <td class="nowrap">
                                         <div class="position-relative">
-                                            <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                            <img class="product-image img-fluid" src="/images/example_product.jpg"/>
                                             <div class="disabled-shade"></div>
                                         </div>
                                     </td>
@@ -49,7 +49,7 @@
                                                 <i class="mdi dark mdi-dots-vertical"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                <a href="management-product-edit.php" class="dropdown-item">Modifica</a>
+                                                <a href="/management/products/edit" class="dropdown-item">Modifica</a>
                                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-disable">Disabilita</a>
                                                 <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-delete">Elimina</a>
                                             </div>
@@ -63,7 +63,7 @@
                             <tr>
                                 <td class="nowrap">
                                     <div class="position-relative">
-                                        <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                        <img class="product-image img-fluid" src="/images/example_product.jpg"/>
                                         <div class="disabled-shade"></div>
                                     </div>
                                 </td>
@@ -80,7 +80,7 @@
                                             <i class="mdi dark mdi-dots-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="management-product-edit.php" class="dropdown-item">Modifica</a>
+                                            <a href="/management/products/edit" class="dropdown-item">Modifica</a>
                                             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-disable">Disabilita</a>
                                             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-delete">Elimina</a>
                                         </div>
@@ -91,7 +91,7 @@
                             <tr class="product-disabled">
                                 <td class="nowrap">
                                     <div class="position-relative">
-                                        <img class="product-image img-fluid" src="images/example_product.jpg"/>
+                                        <img class="product-image img-fluid" src="/images/example_product.jpg"/>
                                         <div class="disabled-shade"></div>
                                     </div>
                                 </td>
@@ -107,7 +107,7 @@
                                             <i class="mdi dark mdi-dots-vertical"></i>
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="management-product-edit.php" class="dropdown-item">Modifica</a>
+                                            <a href="/management/products/edit" class="dropdown-item">Modifica</a>
                                             <a href="#" class="dropdown-item" data-toggle="toast" data-target="#toast-product-enabled">Abilita</a>
                                             <a href="#" class="dropdown-item" data-toggle="modal" data-target="#modal-product-delete">Elimina</a>
                                         </div>

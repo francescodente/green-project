@@ -47,7 +47,7 @@
         <div class="pt-4"></div>
 
         <div class="addresses-no-results empty-state m-5 d-none">
-            <img src="images/empty.png" alt="Nessun indirizzo"/>
+            <img src="/images/empty.png" alt="Nessun indirizzo"/>
             <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun indirizzo</h6>
             <p class="text-center text-dis-dark m-0">
                 In questa sezione sono elencati i tuoi indirizzi.
@@ -65,7 +65,7 @@
         <div class="address-list"></div>
 
         <div class="d-flex justify-content-end">
-            <a href="account/addresses" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;">
+            <a href="/account/addresses" class="btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;">
                 <span class="text-sec-dark">Gestisci</span>
                 <i class="mdi dark mdi-map-marker"></i>
             </a>
@@ -101,4 +101,4 @@
     </div>
 </div>
 
-<script defer src="js/views/order-preferences.js"></script>
+<script defer src="/js/views/order-preferences.js"></script>

@@ -1,7 +1,7 @@
 <!-- CRATE ITEM -->
 <div data-template-name="CrateCard" data-class="card product-card mb-4" class="d-none">
     <a href="#" class="crate-modal-link fixed-ratio fr-1-1 img-hover-zoom">
-        <img class="crate-image card-bg" src="images/default_product.png"/>
+        <img class="crate-image card-bg" src="/images/default_product.png"/>
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
     <div class="card-body">
@@ -20,7 +20,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="card-header-image fixed-ratio fr-4-3">
-                <img class="crate-image card-bg" src="images/default_product.png"/>
+                <img class="crate-image card-bg" src="/images/default_product.png"/>
                 <div class="image-shade-top"></div>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi light mdi-close"></i></button>
             </div>
@@ -42,7 +42,7 @@
 <table class="d-none">
     <tr data-template-name="CrateWeeklyEntry" data-class="area-collapse bg-primary-dark" data-toggle="collapse" data-target="#collapse-ODID" class="d-none">
         <th class="nowrap">
-            <img class="crate-image img-fluid" src="images/default_product.png"/>
+            <img class="crate-image img-fluid" src="/images/default_product.png"/>
         </th>
         <th>
             <p class="crate-name text-sec-dark m-0"></p>
@@ -69,7 +69,7 @@
 <!-- ORDER ENTRY -->
 <div data-template-name="CrateOrderEntry" data-class="product d-flex align-items-center" class="d-none">
     <a href="#" class="crate-modal-link">
-        <img class="crate-image" src="images/default_product.png"/>
+        <img class="crate-image" src="/images/default_product.png"/>
     </a>
     <div class="d-flex flex-column w-100">
         <p class="crate-name m-0"></p>
@@ -84,7 +84,7 @@
 <table class="d-none">
     <tr data-template-name="CrateDeliveryEntry" class="d-none">
         <td class="nowrap">
-            <img class="crate-image img-fluid" src="images/default_product.png" alt="Immagine del prodotto"/>
+            <img class="crate-image img-fluid" src="/images/default_product.png" alt="Immagine del prodotto"/>
         </td>
         <td style="padding-right: 12px;">
             <p class="crate-name m-0"></p>

@@ -6,14 +6,14 @@
             <br/>
             <h3 class="text-light">Consegna settimanale</h3>
         </div>
-        <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/account.jpg"></div>
     </section>
     <section id="account-content" class="container py-4">
 
         <div class="weekly-delivery-not-subscribed empty-state m-5 d-none">
-            <img src="images/empty.png" alt="Utente non abbonato"/>
+            <img src="/images/empty.png" alt="Utente non abbonato"/>
             <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Non sei abbonato al nostro servizio di consegna settimanale.</h6>
-            <p class="text-center text-dis-dark m-0">Visualizza le nostre <a href="products?Categories=1">cassette</a> e scegli quelle che fanno per te!<br/>Dopo averne selezionata almeno una, torna a questa pagina per decidere quali prodotti inserirvi.</p>
+            <p class="text-center text-dis-dark m-0">Visualizza le nostre <a href="/products?Categories=1">cassette</a> e scegli quelle che fanno per te!<br/>Dopo averne selezionata almeno una, torna a questa pagina per decidere quali prodotti inserirvi.</p>
         </div>
 
         <div id="user-weekly-delivery" class="row">
@@ -180,4 +180,4 @@
 
 <?php include("modal-new-address.php"); ?>
 
-<script defer src="js/views/account-weekly-delivery-preferences.js"></script>
+<script defer src="/js/views/account-weekly-delivery-preferences.js"></script>

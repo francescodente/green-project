@@ -181,13 +181,6 @@
             </div>
             <div class="modal-body">
                 <h4 class="client-name text-center mb-3"></h4>
-                <!-- <div class="d-flex align-items-center mb-2">
-                    <i class="mdi dark mdi-email mr-3"></i>
-                    <span>
-                        <span class="text-sec-dark" style="font-size: 14px;">Email</span><br/>
-                        <a href="mailto:info@fruitracers.com" target="_top">mail@domain.com</a>
-                    </span>
-                </div> -->
                 <div class="d-flex align-items-center mb-2">
                     <i class="mdi dark mdi-phone mr-3"></i>
                     <span>

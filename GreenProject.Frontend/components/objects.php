@@ -10,13 +10,13 @@
     ?>
 </div>
 
-<script src="components/entity.js"></script>
-<script src="components/purchasable.js"></script>
-<script src="components/product.js"></script>
-<script src="components/crate.js"></script>
-<script src="components/category.js"></script>
-<script src="components/address.js"></script>
-<script src="components/info-modals.js"></script>
-<script src="components/order-states.js"></script>
-<script src="components/order.js"></script>
-<script src="components/weekly-crate.js"></script>
+<script src="/components/entity.js"></script>
+<script src="/components/purchasable.js"></script>
+<script src="/components/product.js"></script>
+<script src="/components/crate.js"></script>
+<script src="/components/category.js"></script>
+<script src="/components/address.js"></script>
+<script src="/components/info-modals.js"></script>
+<script src="/components/order-states.js"></script>
+<script src="/components/order.js"></script>
+<script src="/components/weekly-crate.js"></script>

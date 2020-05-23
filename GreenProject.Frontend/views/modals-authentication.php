@@ -84,7 +84,7 @@
 
                 <!-- PRIVACY CONSENT -->
                 <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1" required/>
-                <label for="privacy-consent" class="my-2">Ho letto <a href="privacy-terms.php" target="_blank">privacy e termini</a></label><br/>
+                <label for="privacy-consent" class="my-2">Ho letto <a href="/privacy-terms" target="_blank">privacy e termini</a></label><br/>
 
                 <!-- MARKETING CONSENT -->
                 <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
@@ -137,4 +137,4 @@
     </div>
 </div>
 
-<script defer src="js/views/modals-authentication.js"></script>
+<script defer src="/js/views/modals-authentication.js"></script>

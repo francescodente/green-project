@@ -4,7 +4,7 @@
         <div class="container text-center">
             <h1 class="text-light">PRIVACY E TERMINI D'USO</h1>
         </div>
-        <div class="parallax shade" data-parallax-image="images/privacy-terms.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/privacy-terms.jpg"></div>
     </section>
     <section id="privacy-content" class="container py-4">
         <div class="row">

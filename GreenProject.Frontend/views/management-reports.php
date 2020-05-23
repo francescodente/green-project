@@ -6,7 +6,7 @@
             <br/>
             <h3 class="text-light">File di riepilogo</h3>
         </div>
-        <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/account.jpg"></div>
     </section>
     <section id="management-content" class="container py-4">
         <div id="management-reports" class="row">

@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         // Redirect to index if current page requires login
         if ($(".content").hasClass("req-login")) {
-            window.location.href = "home";
+            window.location.href = "/home";
         }
 
         // User is not logged in
@@ -20,7 +20,7 @@ $(document).ready(function() {
         if (!authData.roles.includes("Administrator")) {
             // Redirect to index if current page requires missing admin rights
             if ($(".content").hasClass("req-admin")) {
-                window.location.href = "home";
+                window.location.href = "/home";
             }
             $(".req-admin").remove();
         }

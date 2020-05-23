@@ -6,7 +6,7 @@
             <br/>
             <h3 class="text-light">Consegne</h3>
         </div>
-        <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/account.jpg"></div>
     </section>
     <section id="account-content" class="container py-4">
         <div id="account-delivery" class="row">
@@ -93,7 +93,7 @@
                 <div class="order-list">
 
                     <div class="orders-no-results empty-state m-5 d-none">
-                        <img src="images/empty.png" alt="Nessun ordine"/>
+                        <img src="/images/empty.png" alt="Nessun ordine"/>
                         <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun ordine</h6>
                         <p class="text-center text-dis-dark m-0">La ricerca non ha restituito alcun risultato.</p>
                     </div>
@@ -120,4 +120,4 @@
 
 </main>
 
-<script defer src="js/views/account-delivery.js"></script>
+<script defer src="/js/views/account-delivery.js"></script>

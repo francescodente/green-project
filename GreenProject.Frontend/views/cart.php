@@ -4,14 +4,14 @@
         <div class="container text-center">
             <h1 class="text-light">CARRELLO</h1>
         </div>
-        <div class="parallax shade" data-parallax-image="images/cart.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/cart.jpg"></div>
     </section>
     <section id="cart-content" class="container py-4">
 
         <div class="cart-empty empty-state m-5 d-none">
-            <img src="images/empty.png" alt="Carrello vuoto"/>
+            <img src="/images/empty.png" alt="Carrello vuoto"/>
             <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Il carrello è vuoto</h6>
-            <p class="text-center text-dis-dark m-0">Visualizza il nostro <a href="home#products_">catalogo</a> e comincia con gli acquisti!</p>
+            <p class="text-center text-dis-dark m-0">Visualizza il nostro <a href="/home#products_">catalogo</a> e comincia con gli acquisti!</p>
         </div>
 
         <div class="cart-not-empty row">
@@ -92,7 +92,7 @@
                 <i class="modal-top-icon mdi mdi-information-outline"></i>
             </div>
             <div class="modal-body">
-                <p class="m-0">Completa la registrazione inserendo i tuoi <a href="account/user-data">dati personali</a> per procedere con gli acquisti.</p>
+                <p class="m-0">Completa la registrazione inserendo i tuoi <a href="/account/user-data">dati personali</a> per procedere con gli acquisti.</p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="btn outline ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
@@ -126,11 +126,11 @@
             </div>
             <div class="modal-body">
                 <h4>Il tuo ordine è stato registrato!</h4>
-                <p class="mb-2">Abbiamo preso in carico il tuo ordine.<br/>Puoi controllarne lo stato alla sezione <a href="account/orders">Ordini</a> del tuo account.</p>
+                <p class="mb-2">Abbiamo preso in carico il tuo ordine.<br/>Puoi controllarne lo stato alla sezione <a href="/account/orders">Ordini</a> del tuo account.</p>
                 <p class="m-0">Grazie per aver scelto Green Project!</p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <a href="home" class="btn outline ripple" style="width: 160px;">Chiudi</a>
+                <a href="/home" class="btn outline ripple" style="width: 160px;">Chiudi</a>
             </div>
         </div>
     </div>
@@ -138,4 +138,4 @@
 
 <?php include("modal-new-address.php"); ?>
 
-<script defer src="js/views/cart.js"></script>
+<script defer src="/js/views/cart.js"></script>

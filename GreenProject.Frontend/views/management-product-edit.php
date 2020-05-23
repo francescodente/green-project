@@ -6,7 +6,7 @@
             <br/>
             <h3 class="text-light">Anagrafica prodotto</h3>
         </div>
-        <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/account.jpg"></div>
     </section>
     <section id="management-content" class="container py-4">
 
@@ -17,7 +17,7 @@
 
                 <!-- Image -->
                 <div class="edit-product-img mx-auto mb-4" style="border: 1px solid rgba(0, 0, 0, 0.08);">
-                    <img class="card-bg" src="images/default_product.png" alt="Immagine del prodotto"/>
+                    <img class="card-bg" src="/images/default_product.png" alt="Immagine del prodotto"/>
                     <div>
                         <input id="product-image" type="file" name="product-image"/>
                         <label for="product-image" class="ripple">
@@ -209,7 +209,7 @@
                 <div class="divider dark my-4"></div>
 
                 <div class="d-flex justify-content-between">
-                    <a href="management/products" class="btn outline ripple flex-grow-1 flex-md-grow-0 mr-2" style="width: 160px;">
+                    <a href="/management/products" class="btn outline ripple flex-grow-1 flex-md-grow-0 mr-2" style="width: 160px;">
                         <i class="mdi dark mdi-arrow-left"></i>
                         <span class="text-sec-dark">Annulla</span>
                     </a>

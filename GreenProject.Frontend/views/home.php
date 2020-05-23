@@ -1,7 +1,7 @@
 <main class="content">
 
     <div class="fallback-wallpaper-parent">
-        <div class="fallback-wallpaper parallax-shade" style="background-image: url('images/home.jpg')"></div>
+        <div class="fallback-wallpaper parallax-shade" style="background-image: url('/images/home.jpg')"></div>
     </div>
 
     <section id="home" class="parallax-container d-flex justify-content-center align-items-center" data-section="landing">
@@ -9,7 +9,7 @@
 
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6 mb-5 mb-md-0">
-                    <a href="home"><img class="img-fluid" src="images/logo/greenproject_logo_light.png" alt="Logo Green Project"></a>
+                    <a href="home"><img class="img-fluid" src="/images/logo/greenproject_logo_light.png" alt="Logo Green Project"></a>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
         <div class="bottom-content mb-4">
             <button class="btn round outline light ripple req-logout" data-toggle="modal" data-target="#modal-login">Accedi o registrati</button>
         </div>
-        <div class="parallax shade" data-parallax-image="images/home.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/home.jpg"></div>
     </section>
 
     <section id="products" class="container pt-4" data-section="products">
@@ -63,12 +63,12 @@
         <div class="text-center">
             <h1 class="text-light">CHI SIAMO</h1>
         </div>
-        <div class="parallax shade" data-parallax-image="images/about.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/about.jpg"></div>
     </section>
     <section id="about-content" class="container pt-5 pb-4" data-section="about">
         <div class="row">
             <div class="col-12 col-md-6 d-flex justofy-content-center align-items-center mb-4">
-                <a href="home"><img class="img-fluid" src="images/logo/greenproject_logo_caption.png" alt="Logo Green Project"/></a>
+                <a href="home"><img class="img-fluid" src="/images/logo/greenproject_logo_caption.png" alt="Logo Green Project"/></a>
             </div>
             <div class="col-12 col-md-6 d-flex flex-column justify-content-center mb-4">
                 <p>Green Project SS.</p>
@@ -88,7 +88,7 @@
         <div class="text-center">
             <h1 class="text-light">CONTATTI</h1>
         </div>
-        <div class="parallax shade" data-parallax-image="images/contacts.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/contacts.jpg"></div>
     </section>
     <section id="contacts-content" class="container py-4" data-section="contacts">
         <div class="row">
@@ -108,7 +108,7 @@
             <div class="col-12 col-md-4">
                 <div class="px-5 px-md-4 mb-3">
                     <div class="fixed-ratio fr-1-1">
-                        <img class="img-fluid" src="images/about/about_filippo_casali.jpg" alt="Filippo Casali"/>
+                        <img class="img-fluid" src="/images/about/about_filippo_casali.jpg" alt="Filippo Casali"/>
                     </div>
                 </div>
                 <p class="font-weight-bold text-center mb-2">Filippo Casali</p>
@@ -121,7 +121,7 @@
             <div class="col-12 col-md-4">
                 <div class="px-5 px-md-4 mb-3">
                     <div class="fixed-ratio fr-1-1">
-                        <img class="img-fluid" src="images/about/about_samuele_lombardi.jpg" alt="Samuele Lombardi"/>
+                        <img class="img-fluid" src="/images/about/about_samuele_lombardi.jpg" alt="Samuele Lombardi"/>
                     </div>
                 </div>
                 <p class="font-weight-bold text-center mb-2">Samuele Lombardi</p>
@@ -134,7 +134,7 @@
             <div class="col-12 col-md-4">
                 <div class="px-5 px-md-4 mb-3">
                     <div class="fixed-ratio fr-1-1">
-                        <img class="img-fluid" src="images/about/about_riccardo_brandolini.jpg" alt="Riccardo Brandolini"/>
+                        <img class="img-fluid" src="/images/about/about_riccardo_brandolini.jpg" alt="Riccardo Brandolini"/>
                     </div>
                 </div>
                 <p class="font-weight-bold text-center mb-2">Riccardo Brandolini</p>

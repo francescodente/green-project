@@ -6,17 +6,17 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/moment.min.js" integrity="sha256-C66CaAImteEKZPYvgng9j10J/45e9sAuZyfPYCwp4gE=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/locale/it.min.js" integrity="sha256-1eZdOmxw6+0vJZqhjId77ptpga7b1U+oA17eikVRqks=" crossorigin="anonymous"></script>
-        <script src="js/universal-parallax.js"></script>
-        <script src="js/ripple.js"></script>
-        <script src="js/components.js"></script>
-        <script src="js/ui.js"></script>
-        <script src="js/menu.js"></script>
-        <script src="js/main.js"></script>
-        <script src="js/api.js"></script>
-        <script src="js/api-utils.js"></script>
-        <script src="js/utils.js"></script>
-        <script src="js/cookies.js"></script>
-        <script src="js/authentication-guard.js"></script>
+        <script src="/js/universal-parallax.js"></script>
+        <script src="/js/ripple.js"></script>
+        <script src="/js/components.js"></script>
+        <script src="/js/ui.js"></script>
+        <script src="/js/menu.js"></script>
+        <script src="/js/main.js"></script>
+        <script src="/js/api.js"></script>
+        <script src="/js/api-utils.js"></script>
+        <script src="/js/utils.js"></script>
+        <script src="/js/cookies.js"></script>
+        <script src="/js/authentication-guard.js"></script>
     </div>
 
     <?php

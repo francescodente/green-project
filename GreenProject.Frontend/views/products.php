@@ -4,7 +4,7 @@
         <div class="container text-center">
             <h1 class="text-light">PRODOTTI</h1>
         </div>
-        <div class="parallax shade" data-parallax-image="images/products.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/products.jpg"></div>
     </section>
     <section id="products-content" class="container py-4">
         <div class="row">
@@ -85,7 +85,7 @@
             <div class="modal-body">
                 <p class="info-text m-0">
                     Hai aggiunto una cassetta alla tua consegna settimanale!<br/>
-                    Passa alla sezione <a href="account-weekly-delivery-preferences.php">Cassette</a> per selezionarne il contenuto.
+                    Passa alla sezione <a href="/account/subscription">Cassette</a> per selezionarne il contenuto.
                 </p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
@@ -95,4 +95,4 @@
     </div>
 </div>
 
-<script defer src="js/views/products.js"></script>
+<script defer src="/js/views/products.js"></script>

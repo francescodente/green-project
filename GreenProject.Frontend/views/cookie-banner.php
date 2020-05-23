@@ -8,4 +8,4 @@
         </div>
     </div>
 </div>
-<script defer src="js/views/cookie-banner.js"></script>
+<script defer src="/js/views/cookie-banner.js"></script>

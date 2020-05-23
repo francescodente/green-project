@@ -6,7 +6,7 @@
             <br/>
             <h3 class="text-light">I miei dati</h3>
         </div>
-        <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/account.jpg"></div>
     </section>
     <section id="account-content" class="container py-4">
         <div id="user-data" class="row">
@@ -144,6 +144,6 @@
     </div>
 </div>
 
-<script defer src="js/validators/CFValidator.js"></script>
-<script defer src="js/validators/PIValidator.js"></script>
-<script defer src="js/views/account-user-data.js"></script>
+<script defer src="/js/validators/CFValidator.js"></script>
+<script defer src="/js/validators/PIValidator.js"></script>
+<script defer src="/js/views/account-user-data.js"></script>

@@ -6,7 +6,7 @@
             <br/>
             <h3 class="text-light">Indirizzi</h3>
         </div>
-        <div class="parallax shade" data-parallax-image="images/account.jpg"></div>
+        <div class="parallax shade" data-parallax-image="/images/account.jpg"></div>
     </section>
     <section id="account-content" class="container py-4">
         <div id="user-addresses" class="row">
@@ -19,7 +19,7 @@
 
                 <div class="col-12">
                     <div class="addresses-no-results empty-state m-5 d-none">
-                        <img src="images/empty.png" alt="Nessun indirizzo"/>
+                        <img src="/images/empty.png" alt="Nessun indirizzo"/>
                         <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun indirizzo</h6>
                         <p class="text-center text-dis-dark m-0">
                             In questa pagina sono elencati i tuoi indirizzi.
@@ -54,4 +54,4 @@
 
 </main>
 
-<script defer src="js/views/account-user-addresses.js"></script>
+<script defer src="/js/views/account-user-addresses.js"></script>

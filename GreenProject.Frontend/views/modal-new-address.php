@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-top d-flex justify-content-center">
-                <div class="address-thumb" style="background-image: url('images/map-thumb.png');">
+                <div class="address-thumb" style="background-image: url('/images/map-thumb.png');">
                     <i class="mdi large mdi-map-marker"></i>
                 </div>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
@@ -98,4 +98,4 @@
     </div>
 </form>
 
-<script defer src="js/views/modal-new-address.js"></script>
+<script defer src="/js/views/modal-new-address.js"></script>
