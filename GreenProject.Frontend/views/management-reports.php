@@ -22,11 +22,22 @@
                         <i class="mdi dark mdi-chevron-down"></i>
                     </button>
                 </div>
-                <div id="reports-1" class="collapse show">
-                    <p class="pt-3 m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </div>
+                <form id="reports-1" class="collapse show">
+                    <div class="pt-3"></div>
+                    <h6>Data</h6>
+                    <div class="text-input mb-3">
+                        <input type="text" name="date" maxlength="10" required/>
+                        <label></label>
+                        <span>gg/mm/aaaa</span>
+                        <span class="error">Data non valida</span>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn accent ripple">
+                            <span class="text-light">Genera report</span>
+                            <i class="mdi mdi-download"></i>
+                        </button>
+                    </div>
+                </form>
 
                 <div class="divider dark my-4"></div>
 
@@ -37,9 +48,20 @@
                     </button>
                 </div>
                 <div id="reports-2" class="collapse show">
-                    <p class="pt-3 m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <div class="pt-3"></div>
+                    <h6>Data</h6>
+                    <div class="text-input mb-3">
+                        <input type="text" name="date" maxlength="10" required/>
+                        <label></label>
+                        <span>gg/mm/aaaa</span>
+                        <span class="error">Data non valida</span>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn accent ripple">
+                            <span class="text-light">Genera report</span>
+                            <i class="mdi mdi-download"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="divider dark my-4"></div>
@@ -51,9 +73,20 @@
                     </button>
                 </div>
                 <div id="reports-3" class="collapse show">
-                    <p class="pt-3 m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <div class="pt-3"></div>
+                    <h6>Data</h6>
+                    <div class="text-input mb-3">
+                        <input type="text" name="date" maxlength="10" required/>
+                        <label></label>
+                        <span>gg/mm/aaaa</span>
+                        <span class="error">Data non valida</span>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn accent ripple">
+                            <span class="text-light">Genera report</span>
+                            <i class="mdi mdi-download"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="divider dark my-4"></div>
@@ -65,9 +98,20 @@
                     </button>
                 </div>
                 <div id="reports-4" class="collapse show">
-                    <p class="pt-3 m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <div class="pt-3"></div>
+                    <h6>Data</h6>
+                    <div class="text-input mb-3">
+                        <input type="text" name="date" maxlength="10" required/>
+                        <label></label>
+                        <span>gg/mm/aaaa</span>
+                        <span class="error">Data non valida</span>
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn accent ripple">
+                            <span class="text-light">Genera report</span>
+                            <i class="mdi mdi-download"></i>
+                        </button>
+                    </div>
                 </div>
 
             </div>
@@ -75,3 +119,5 @@
 
     </section>
 </main>
+
+<script defer src="/js/views/management-reports.js"></script>
