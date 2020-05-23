@@ -137,4 +137,4 @@
     </div>
 </div>
 
-<script src="js/pages/modals-authentication.js"></script>
+<script defer src="js/views/modals-authentication.js"></script>

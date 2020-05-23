@@ -98,4 +98,4 @@
     </div>
 </form>
 
-<script src="js/pages/modal-new-address.js"></script>
+<script defer src="js/views/modal-new-address.js"></script>

@@ -216,7 +216,7 @@ class Product extends Purchasable {
         quantityModal.find(".confirm-quantity").attr("disabled", true);
         API.addExtraProduct(localStorage.getObject("authData").userId, this.productId, quantity)
         .then(function(data) {
-            if (location.filename == "account-weekly-delivery-preferences.php") {
+            if (location.filename == "account/subscription") {
                 location.reload();
             } else {
                 quantityModal.modal("hide");

@@ -7,8 +7,8 @@ $(document).ready(function() {
         // User is not logged in
 
         // Redirect to index if current page requires login
-        if ($("body").hasClass("req-login")) {
-            window.location.href = "index.php";
+        if ($(".content").hasClass("req-login")) {
+            window.location.href = "home";
         }
 
         // User is not logged in
@@ -19,8 +19,8 @@ $(document).ready(function() {
 
         if (!authData.roles.includes("Administrator")) {
             // Redirect to index if current page requires missing admin rights
-            if ($("body").hasClass("req-admin")) {
-                window.location.href = "index.php";
+            if ($(".content").hasClass("req-admin")) {
+                window.location.href = "home";
             }
             $(".req-admin").remove();
         }

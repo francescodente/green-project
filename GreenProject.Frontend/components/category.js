@@ -11,7 +11,7 @@ class Category extends Entity {
         subCategories.forEach(category => {
             searchParams.append("Categories", category);
         });
-        let productsUrl = "products.php?" + searchParams.toString();
+        let productsUrl = "products?" + searchParams.toString();
         let imageUrl = API.basePath + this.imageUrl;
 
         let category = this;

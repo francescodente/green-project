@@ -54,4 +54,4 @@
     </div>
 </div>
 
-<script src="js/pages/modal-pwd-change.js"></script>
+<script defer src="js/views/modal-pwd-change.js"></script>

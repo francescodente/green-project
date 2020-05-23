@@ -21,9 +21,9 @@
 
     <?php
     include("components/objects.php");
-    include("modals-authentication.php");
-    include("modal-pwd-change.php");
-    include("cookie-banner.php");
+    include("views/modals-authentication.php");
+    include("views/modal-pwd-change.php");
+    include("views/cookie-banner.php");
     ?>
 
     <div id="sizer">
@@ -36,4 +36,4 @@
 
 </div>
 
-<?php include("loading-modal.php"); ?>
+<?php include("views/loading-modal.php"); ?>
