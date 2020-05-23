@@ -1,8 +1,8 @@
-const cookieConsentName = "cookieConsent";
+const cookieConsentName = "cookie_consent";
 const cookieConsentValue = "on";
 const cookieConsentDays = 365;
 
-if (Cookies.checkCookie("cookieConsent")) {
+if (Cookies.checkCookie(cookieConsentName)) {
     $("#alert-cookie").alert("close");
 }
 
