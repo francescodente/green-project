@@ -193,7 +193,7 @@ class Product extends Purchasable {
         let quantity = quantityModal.find("[name='quantity']").val();
         quantityModal.find(".loader").show();
         quantityModal.find(".confirm-quantity").attr("disabled", true);
-        API.addProductToCrate(localStorage.getObject("authData").userId, this.weeklyCrateId, this.productId, quantity)
+        APIUtils.addProductToCrate(this.weeklyCrateId, this, quantity)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
@@ -204,7 +204,7 @@ class Product extends Purchasable {
         let quantity = quantityModal.find("[name='quantity']").val();
         quantityModal.find(".loader").show();
         quantityModal.find(".confirm-quantity").attr("disabled", true);
-        API.editProductCrateQuantity(localStorage.getObject("authData").userId, this.weeklyCrateId, this.productId, quantity)
+        APIUtils.editProductCrateQuantity(this.weeklyCrateId, this.productId, quantity)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
@@ -215,9 +215,9 @@ class Product extends Purchasable {
         let quantity = quantityModal.find("[name='quantity']").val();
         quantityModal.find(".loader").show();
         quantityModal.find(".confirm-quantity").attr("disabled", true);
-        API.addExtraProduct(localStorage.getObject("authData").userId, this.productId, quantity)
+        APIUtils.addExtraProduct(this, quantity)
         .then(function(data) {
-            if (location.filename == "account/subscription") {
+            if (location.pathname == "/account/subscription") {
                 location.reload();
             } else {
                 quantityModal.modal("hide");
@@ -234,7 +234,7 @@ class Product extends Purchasable {
         let quantity = quantityModal.find("[name='quantity']").val();
         quantityModal.find(".loader").show();
         quantityModal.find(".confirm-quantity").attr("disabled", true);
-        API.editExtraProductQuantity(localStorage.getObject("authData").userId, this.orderDetailId, quantity)
+        APIUtils.editExtraProductQuantity(this.orderDetailId, quantity)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
@@ -248,14 +248,14 @@ class Product extends Purchasable {
 
     removeFromCrate() {
         $("#modal-loading").showModal();
-        API.removeProductFromCrate(localStorage.getObject("authData").userId, this.weeklyCrateId, this.productId)
+        APIUtils.removeProductFromCrate(this.weeklyCrateId, this.productId)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }
 
     removeFromExtras() {
         $("#modal-loading").showModal();
-        API.removeFromWeeklyOrder(localStorage.getObject("authData").userId, this.orderDetailId)
+        APIUtils.removeFromWeeklyOrder(this.orderDetailId)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }

@@ -131,7 +131,7 @@ class APIUtilsClass {
         };
         API.subscribe(localStorage.getObject("authData").userId, data)
         .then(function(data) {
-            // TODO send all locally stored items
+            // TODO send all locally stored items, then set isLocallySubscribed to false
         })
     }
 
@@ -139,7 +139,7 @@ class APIUtilsClass {
         return API.unsubscribe(localStorage.getObject("authData").userId);
     }
 
-    setWeeklyDeliveryInfo(addressId, notes) {
+    editSubscription(addressId, notes) {
         let data = {
             addressId: addressId,
             notes: notes
@@ -226,7 +226,7 @@ class APIUtilsClass {
         // Update quantity if product is already present
         weeklyOrder.extraProducts.forEach(extraProduct => {
             if (extraProduct.itemId == product.productId) {
-                extraProduct.quantity += quantity;
+                extraProduct.quantity = parseInt(extraProduct.quantity) + parseInt(quantity);
                 productDetail = extraProduct;
             }
         });
@@ -251,6 +251,25 @@ class APIUtilsClass {
         return Promise.resolve(productDetail);
     }
 
+    editExtraProductQuantity(productId, quantity) {
+        let userData = localStorage.getObject("userData");
+        if (userData.isSubscribed) {
+            return API.editExtraProductQuantity(userData.userId, productId, quantity);
+        }
+        let weeklyOrder = localStorage.getObject("weeklyOrder");
+        let productDetail;
+        // Update quantity
+        weeklyOrder.extraProducts.forEach(extraProduct => {
+            if (extraProduct.itemId == productId) {
+                extraProduct.quantity = quantity;
+                productDetail = extraProduct;
+            }
+        });
+        weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
+        localStorage.setObject("weeklyOrder", weeklyOrder);
+        return Promise.resolve(productDetail);
+    }
+
     removeFromWeeklyOrder(orderDetailId) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
@@ -264,26 +283,7 @@ class APIUtilsClass {
         return Promise.resolve(null);
     }
 
-    editExtraProductQuantity(product, quantity) {
-        let userData = localStorage.getObject("userData");
-        if (userData.isSubscribed) {
-            return API.editExtraProductQuantity(userData.userId, product.productId, quantity);
-        }
-        let weeklyOrder = localStorage.getObject("weeklyOrder");
-        let productDetail;
-        // Update quantity
-        weeklyOrder.extraProducts.forEach(extraProduct => {
-            if (extraProduct.itemId == product.productId) {
-                extraProduct.quantity = quantity;
-                productDetail = extraProduct;
-            }
-        });
-        weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
-        localStorage.setObject("weeklyOrder", weeklyOrder);
-        return Promise.resolve(productDetail);
-    }
-
-    addProductToWeeklyCrate(orderDetailId, product, quantity) {
+    addProductToCrate(orderDetailId, product, quantity) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
             return API.addProductToCrate(userData.userId, orderDetailId, product.productId, quantity);
@@ -294,7 +294,7 @@ class APIUtilsClass {
         // Update quantity if product is already present
         crate.products.forEach(crateProduct => {
             if (crateProduct.product.productId == product.productId) {
-                crateProduct.quantity += quantity;
+                crateProduct.quantity = parseInt(crateProduct.quantity) + parseInt(quantity);
                 productDetail = crateProduct;
             }
         });
@@ -323,20 +323,7 @@ class APIUtilsClass {
         return Promise.resolve(productDetail);
     }
 
-    removeProductFromWeeklyCrate(orderDetailId, productId) {
-        let userData = localStorage.getObject("userData");
-        if (userData.isSubscribed) {
-            return API.removeProductFromCrate(userData.userId, orderDetailId, productId);
-        }
-        let weeklyOrder = localStorage.getObject("weeklyOrder");
-        let crate = weeklyOrder.crates.filter(crate => crate.orderDetailId == orderDetailId)[0];
-        crate.products = crate.products.filter(product => product.product.productId != productId);
-        weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
-        localStorage.setObject("weeklyOrder", weeklyOrder);
-        return Promise.resolve(null);
-    }
-
-    editWeeklyCrateProductQuantity(orderDetailId, productId, quantity) {
+    editProductCrateQuantity(orderDetailId, productId, quantity) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
             return API.editProductCrateQuantity(userData.userId, orderDetailId, productId, quantity);
@@ -354,6 +341,19 @@ class APIUtilsClass {
         weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
         localStorage.setObject("weeklyOrder", weeklyOrder);
         return Promise.resolve(productDetail);
+    }
+
+    removeProductFromCrate(orderDetailId, productId) {
+        let userData = localStorage.getObject("userData");
+        if (userData.isSubscribed) {
+            return API.removeProductFromCrate(userData.userId, orderDetailId, productId);
+        }
+        let weeklyOrder = localStorage.getObject("weeklyOrder");
+        let crate = weeklyOrder.crates.filter(crate => crate.orderDetailId == orderDetailId)[0];
+        crate.products = crate.products.filter(product => product.product.productId != productId);
+        weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
+        localStorage.setObject("weeklyOrder", weeklyOrder);
+        return Promise.resolve(null);
     }
 
 }

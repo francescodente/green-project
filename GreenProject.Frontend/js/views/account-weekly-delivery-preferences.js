@@ -5,66 +5,76 @@ var addresses;
 var starredProducts = [];
 
 // Get weekly order
-if (!localStorage.getObject("userData").isSubscribed) {
+let userData = localStorage.getObject("userData");
+if (!userData.isSubscribed && !userData.isLocallySubscribed) {
     $(".user-weekly-delivery").addClass("d-none");
     $(".weekly-delivery-not-subscribed").removeClass("d-none");
 } else {
 
     $("#modal-loading").showModal();
-    API.getWeeklyOrder(localStorage.getObject("authData").userId)
+
+    APIUtils.getWeeklyOrder(localStorage.getObject("authData").userId)
     .then(function(data) {
 
-        if (data.crates.length == 0 && data.extraProducts.length == 0) {
-            // TODO handle no products in weekly order
-        } else {
+        if (data.crates.length == 0) {
+            $(".no-weekly-crates").show();
+        }
 
+        console.log(data);
+
+        // Setup summary
+        $(".crate-count").html(data.crates.length + " cassette");
+        if (data.extraProducts.length) {
+            $(".extra-products-text").removeClass("d-none");
+            $(".product-count").html(data.extraProducts.length);
+            if (data.extraProducts.length == 1) {
+                $(".extra-product-count-text").html("prodotto extra");
+            }
+        }
+        $(".product-count").html(data.extraProducts.length);
+
+        // Set prices
+        $(".subtotal").html(Utils.formatCurrency(data.prices.subtotal));
+        $(".iva").html(Utils.formatCurrency(data.prices.iva));
+        $(".shipping").html(Utils.formatCurrency(data.prices.shippingCost));
+        $(".total").html(Utils.formatCurrency(data.prices.total));
+
+        // Create crates and products
+        data.crates.forEach(json => {
+            let weeklyCrate = new WeeklyCrate(json);
+            weeklyCrates.push(weeklyCrate);
+            weeklyCrate.html.main.appendTo(".weekly-crates");
+        });
+        for (let i = data.extraProducts.length - 1; i >= 0; i--) {
+            let extraProduct = new Product(data.extraProducts[i], data.extraProducts[i].quantity);
+            weeklyExtras.push(extraProduct);
+            extraProduct.html.extraEntry.prependTo(".weekly-extras>tbody");
+        }
+
+        if (userData.isSubscribed) {
+            $("#locally-subscribed-alert").remove();
+            $(".confirm-subscription").remove();
+
+            // Setup delivery info
             data.deliveryInfo.address = new Address(data.deliveryInfo.address);
             deliveryInfo = data.deliveryInfo;
-            console.log(data);
-
-            // Setup summary
-            $(".crate-count").html(data.crates.length + " cassette");
-            if (data.extraProducts.length) {
-                $(".extra-products-text").removeClass("d-none");
-                $(".product-count").html(data.extraProducts.length);
-                if (data.extraProducts.length == 1) {
-                    $(".extra-product-count-text").html("prodotto extra");
-                }
-            }
-            $(".product-count").html(data.extraProducts.length);
             $(".delivery-date").html(Utils.formatDate(deliveryInfo.deliveryDate));
             $(".delivery-address").html(deliveryInfo.address.addressString);
-
-            // Set prices
-            $(".subtotal").html(Utils.formatCurrency(data.prices.subtotal));
-            $(".iva").html(Utils.formatCurrency(data.prices.iva));
-            $(".shipping").html(Utils.formatCurrency(data.prices.shippingCost));
-            $(".total").html(Utils.formatCurrency(data.prices.total));
-
-            // Create crates and products
-            data.crates.forEach(json => {
-                let weeklyCrate = new WeeklyCrate(json);
-                weeklyCrates.push(weeklyCrate);
-                weeklyCrate.html.main.appendTo(".weekly-crates");
-            });
-            for (let i = data.extraProducts.length - 1; i >= 0; i--) {
-                let extraProduct = new Product(data.extraProducts[i], data.extraProducts[i].quantity);
-                weeklyExtras.push(extraProduct);
-                extraProduct.html.extraEntry.prependTo(".weekly-extras>tbody");
-            }
-
             prepareAddresses();
             $("#notes").val(deliveryInfo.notes);
-
-            // Show weekly delivery items from order-preferences.php
-            $(".req-weekly-delivery").removeClass("d-none");
         }
+        if (userData.isLocallySubscribed) {
+            $("#subscribed-alert").remove();
+            $("#subscription-options").remove();
+            $("#save-notes").remove();
+        }
+
+        // Show weekly delivery items from order-preferences.php
+        $(".req-weekly-delivery").removeClass("d-none");
+
+        $("#modal-loading").fadeModal();
     })
-    .catch(function(jqXHR) {
-        console.log(jqXHR);
-        new ErrorModal(jqXHR).show();
-    })
-    .finally(function(data) { $("#modal-loading").fadeModal() });
+    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
 
     // Get starred products
     $("#starred-products-loader").show();
@@ -83,7 +93,6 @@ if (!localStorage.getObject("userData").isSubscribed) {
         }
     })
     .catch(function(jqXHR) {
-        console.log(jqXHR);
         new ErrorModal(jqXHR).show();
     })
     .finally(function(data) {
@@ -155,6 +164,37 @@ if (!localStorage.getObject("userData").isSubscribed) {
             location.reload()
         })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    });
+
+    // Subscription confirm
+    $(".confirm-subscription").click(function() {
+        console.log("confirm-subscription");
+        // Check if and address is selected
+        selectedAddress = $("[name='delivery-address']:checked");
+        if (!selectedAddress.length) {
+            $("#missing-address-modal").showModal();
+            return;
+        }
+        if (!localStorage.getObject("authData").roles.includes("Person")) {
+            $("#missing-role-modal").showModal();
+            return;
+        }
+        selectedAddress = addresses.filter(address => address.addressId == selectedAddress.val())[0];
+        let zipCode = selectedAddress.zipCode;
+        // Get expected delivery date
+        $("#modal-loading").showModal();
+        API.getZoneSchedule(zipCode)
+        .then(function(data) {
+            $("#expected-date-modal .expected-date").html(Utils.formatDate(data));
+            $("#expected-date-modal .submit-order").html("Abbonati");
+            $("#expected-date-modal").showModal();
+        })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    });
+
+    // Subscription creation
+    $(".submit-order").click(function() {
+        console.log("submit-order");
     });
 
 }

@@ -26,9 +26,16 @@
 
             <div id="account-content-col" class="user-weekly-delivery col-12 col-lg-9">
 
-                <div class="alert alert-accent" role="alert">
+                <div id="subscribed-alert" class="alert alert-accent" role="alert">
                     <p class="summary-preferences text-dis-dark m-0">
                         La prossima consegna include <span class="crate-count"></span><span class="extra-products-text d-none" style="font-weight: normal;"> e <span class="product-count"></span> <span class="extra-product-count-text">prodotti extra</span></span>, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
+                    </p>
+                </div>
+
+                <div id="locally-subscribed-alert" class="alert alert-accent" role="alert">
+                    <p class="summary-preferences text-dis-dark m-0">
+                        Scegli i prodotti da includere nel tuo abbonamento settimanale!<br/>
+                        Quando hai finito, seleziona modalità di pagamento e indirizzo di consegna, quindi abbonati cliccando sull'apposito tasto a fondo pagina.
                     </p>
                 </div>
 
@@ -37,7 +44,24 @@
                     Di seguito sono riportate le cassette alle quali sei abbonato.<br/>Riceverai questi prodotti ogni settimana a casa tua!
                 </p>
 
-                <div class="weekly-crates"></div>
+                <div class="weekly-crates">
+                    <div class="product-group-table products table-wrapper table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td colspan="4" class="p-0">
+                                        <a href="/products?Categories=1" class="btn add-product ripple">
+                                            <div class="add-product-icon mr-3">
+                                                <i class="mdi dark mdi-plus"></i>
+                                            </div>
+                                            <span class="text-sec-dark">Aggiungi una cassetta</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                 <h4 class="mt-4 bb-2">Altri prodotti</h4>
                 <p class="text-sec-dark mb-4">
@@ -92,27 +116,33 @@
                 <div class="divider dark my-4"></div>
 
                 <!-- SUBSCRIPTION OPTIONS -->
-                <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false">
-                    <h4 class="m-0">Opzioni abbonamento</h4>
-                    <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
-                        <i class="mdi dark mdi-chevron-down"></i>
-                    </button>
+                <div id="subscription-options">
+                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false">
+                        <h4 class="m-0">Opzioni abbonamento</h4>
+                        <button type="button" class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#weekly-order-skip" aria-expanded="false" data-tooltip="tooltip" title="Mostra">
+                            <i class="mdi dark mdi-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div id="weekly-order-skip" class="collapse">
+                        <div class="pt-4"></div>
+
+                        <h5>Salta una consegna</h5>
+                        <p class="text-sec-dark mb-2">
+                            Sei in vacanza? Nessun problema! Puoi saltare la prossima consegna cliccando il tasto sottostante.
+                        </p>
+                        <button class="btn accent ripple mb-4" data-toggle="modal" data-target="#modal-skip-delivery">Salta una consegna</button>
+
+                        <h5>Cancella abbonamento</h5>
+                        <p class="text-sec-dark mb-2">
+                            Se vuoi annullare la prossima consegna e disdire l'abbonamento settimanale clicca il tasto sottostante.<br/> Speriamo di rivederti presto!
+                        </p>
+                        <button class="btn accent ripple" data-toggle="modal" data-target="#modal-delete-subscription">Cancella abbonamento</button>
+
+                    </div>
                 </div>
-                <div id="weekly-order-skip" class="collapse">
-                    <div class="pt-4"></div>
 
-                    <h5>Salta una consegna</h5>
-                    <p class="text-sec-dark mb-2">
-                        Sei in vacanza? Nessun problema! Puoi saltare la prossima consegna cliccando il tasto sottostante.
-                    </p>
-                    <button class="btn accent ripple mb-4" data-toggle="modal" data-target="#modal-skip-delivery">Salta una consegna</button>
-
-                    <h5>Cancella abbonamento</h5>
-                    <p class="text-sec-dark mb-2">
-                        Se vuoi annullare la prossima consegna e disdire l'abbonamento settimanale clicca il tasto sottostante.<br/> Speriamo di rivederti presto!
-                    </p>
-                    <button class="btn accent ripple" data-toggle="modal" data-target="#modal-delete-subscription">Cancella abbonamento</button>
-
+                <div class="text-center">
+                    <button class="confirm-subscription btn accent ripple px-5">Abbonati</button>
                 </div>
 
             </div>

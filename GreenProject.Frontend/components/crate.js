@@ -68,10 +68,9 @@ class Crate extends Purchasable {
         }
         console.log("add to preferences " + this.crateId);
         $("#modal-loading").showModal();
-        API.addWeeklyCrate(authData.userId, this.crateId)
+        APIUtils.addWeeklyCrate(this)
         .then(function(data) { console.log(data); $("#crate-added-modal").showModal() })
-        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() })
-        .finally(function(data) { $("#modal-loading").fadeModal(); });
+        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() });
     }
 
     showRemoveModal() {
@@ -80,7 +79,7 @@ class Crate extends Purchasable {
 
     removeFromPreferences() {
         console.log("remove from preferences " + this.crateId);
-        API.removeFromWeeklyOrder(localStorage.getObject("authData").userId, this.orderDetailId)
+        APIUtils.removeFromWeeklyOrder(this.orderDetailId)
         .then(function(data) { location.reload(); })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     }

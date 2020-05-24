@@ -61,7 +61,7 @@ $(".confirm-cart").click(function() {
 });
 
 // Cart submission
-$(".submit-cart").click(function() {
+$(".submit-order").click(function() {
     $("#modal-loading").showModal();
     API.confirmCart(localStorage.getObject("authData").userId, {
         addressId: selectedAddress.addressId,

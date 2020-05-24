@@ -69,55 +69,6 @@
 
 </main>
 
-<div id="missing-address-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="width: 360px;">
-            <div class="modal-top text-center">
-                <i class="modal-top-icon mdi mdi-information-outline"></i>
-            </div>
-            <div class="modal-body">
-                <p class="m-0">Seleziona un indirizzo di consegna per procedere con la creazione dell'ordine.</p>
-            </div>
-            <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="btn outline ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="missing-role-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="width: 360px;">
-            <div class="modal-top text-center">
-                <i class="modal-top-icon mdi mdi-information-outline"></i>
-            </div>
-            <div class="modal-body">
-                <p class="m-0">Completa la registrazione inserendo i tuoi <a href="/account/user-data">dati personali</a> per procedere con gli acquisti.</p>
-            </div>
-            <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <button class="btn outline ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="expected-date-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="width: 360px;">
-            <div class="modal-top text-center">
-                <i class="modal-top-icon mdi mdi-calendar"></i>
-            </div>
-            <div class="modal-body">
-                <p class="m-0">La data di consegna prevista per il tuo ordine è il giorno <span class="expected-date font-weight-bold"></span>.<br/>Proseguire?</p>
-            </div>
-            <div class="modal-bottom bg-primary d-flex">
-                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="flex-basis: 100px;">Annulla</button>
-                <button class="submit-cart btn accent ripple flex-grow-1" style="flex-basis: 100px;">Acquista</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div id="order-placed-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 360px;">
