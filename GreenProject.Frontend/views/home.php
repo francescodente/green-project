@@ -14,8 +14,15 @@
             </div>
 
             <div class="row mt-5">
-                <div class="col-12 text-center">
-                    <div class="d-none d-md-block">
+                <div class="col-12 text-light d-flex justify-content-center align-items-center">
+                    <i class="mdi light mdi-excavator mr-4" style="height: 96px; font-size: 96px; line-height: 96px;"></i>
+                    <div>
+                        <h1>Stiamo lavorando per voi!</h1>
+                        <p class="text-large m-0">
+                            Questo sito è in fase di sviluppo, pertanto ne è sconsigliato l'utilizzo.<br/>
+                        </p>
+                    </div>
+                    <!-- <div class="d-none d-md-block">
                         <h2 class="font-weight-bold text-light mb-4">ESCLUSIVA! Cassette settimanali personalizzabili</h2>
                         <p class="lead text-light">Componi la tua cassetta settimanale con frutta e verdura fresca, di stagione e a KM 0.</p>
                         <p class="lead font-weight-bold text-light mb-5">Tutte le settimane a casa tua.</p>
@@ -24,7 +31,7 @@
                         <h4 class="font-weight-bold text-light mb-4">ESCLUSIVA!<br/>Cassette settimanali personalizzabili</h4>
                         <p class="lead text-light mb-5">Tutte le settimane a casa tua.</p>
                     </div>
-                    <a href="/products?Categories=1" class="btn accent ripple px-4">Scegli il tuo formato</a>
+                    <a href="/products?Categories=1" class="btn accent ripple px-4">Scegli il tuo formato</a> -->
                 </div>
             </div>
 

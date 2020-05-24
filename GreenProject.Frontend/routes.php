@@ -72,4 +72,6 @@ switch ($request) {
         $page = "views/404.php";
         break;
 }
+
+$title = "Sito in lavorazione";
 ?>
