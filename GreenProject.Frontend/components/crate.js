@@ -4,6 +4,7 @@ class Crate extends Purchasable {
         super(json);
         this.occupiedSlots = occupiedSlots;
         this.orderDetailId = orderDetailId;
+        if (this.itemId != null) this.crateId = this.itemId;
 
         // Add templates
         this.html.main = Entity.getTemplate("CrateCard");

@@ -5,6 +5,7 @@ class Product extends Purchasable {
         this.quantity = quantity;
         this.crateSlots = quantity * 2;
         this.maxQuantity = maxQuantity;
+        if (this.itemId != null) this.productId = this.itemId;
 
         // Add templates
         this.html.main = Entity.getTemplate("ProductCard");
