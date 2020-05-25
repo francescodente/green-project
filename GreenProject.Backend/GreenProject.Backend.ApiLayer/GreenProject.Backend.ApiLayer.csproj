@@ -6,21 +6,8 @@
     <UserSecretsId>41b26655-7a2e-4933-9e8f-6fd8ecae9940</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
-    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="MailTemplates\AccountConfirmation.cshtml" />
-    <None Include="MailTemplates\OrderCanceled.cshtml" />
-    <None Include="MailTemplates\OrderCompleted.cshtml" />
-    <None Include="MailTemplates\OrderShipped.cshtml" />
-    <None Include="MailTemplates\OrderSummary.cshtml" />
-    <None Include="MailTemplates\PasswordRecovery.cshtml" />
-    <None Include="MailTemplates\PasswordRecoveryAlt.cshtml" />
-    <None Include="MailTemplates\SubscriptionCanceled.cshtml" />
-    <None Include="MailTemplates\SubscriptionMade.cshtml" />
-    <None Include="MailTemplates\SubscriptionReminder.cshtml" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CsvHelper" Version="15.0.5" />
@@ -48,50 +35,36 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="MailTemplates\AccountConfirmation.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\Common\Footer.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\Common\Header.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\Common\MailLayout.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\OrderCanceled.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\OrderCompleted.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\OrderShipped.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\OrderSummary.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\OrderView.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\PasswordRecovery.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\PasswordRecoveryAlt.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\SubscriptionCanceled.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\SubscriptionMade.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Update="MailTemplates\SubscriptionReminder.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Update="wwwroot\uploads\**">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
 
-  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+  <ItemGroup>
+    <None Remove=".htaccess" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include=".htaccess">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Nuova cartella\**" />
+    <Content Remove="wwwroot\Nuova cartella\**" />
+    <EmbeddedResource Remove="wwwroot\Nuova cartella\**" />
+    <None Remove="MailTemplates\**" />
+    <None Remove="wwwroot\Nuova cartella\**" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Content Update="MailTemplates\**">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 
 </Project>
