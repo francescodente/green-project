@@ -1,5 +1,4 @@
 ﻿using GreenProject.Backend.ApiLayer.DependencyInjection;
-using GreenProject.Backend.DataAccess.Sql;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -9,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace GreenProject.Backend.ApiLayer
@@ -72,7 +70,7 @@ namespace GreenProject.Backend.ApiLayer
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

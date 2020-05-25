@@ -1,15 +1,12 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using GreenProject.Backend.Contracts.Reports;
-using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Utils.Csv
 {
@@ -24,10 +21,10 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
 
         private byte[] CreateReportContent(Action<CsvWriter> writeAction)
         {
-            using (MemoryStream stream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(stream, Encoding.GetEncoding(_settings.Encoding)))
+            using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream, Encoding.GetEncoding(_settings.Encoding)))
             {
-                using (CsvWriter csv = new CsvWriter(writer, CultureInfo.GetCultureInfo(_settings.CultureInfo)))
+                using (var csv = new CsvWriter(writer, CultureInfo.GetCultureInfo(_settings.CultureInfo)))
                 {
                     csv.Configuration.Delimiter = _settings.Delimiter;
                     writeAction(csv);

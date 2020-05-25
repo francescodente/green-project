@@ -1,11 +1,7 @@
 ﻿using FluentValidation.Internal;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Validation
 {
@@ -20,8 +16,11 @@ namespace GreenProject.Backend.ApiLayer.Validation
         {
             if (expression != null)
             {
-                PropertyChain chain = PropertyChain.FromExpression(expression);
-                if (chain.Count > 0) return chain.ToString();
+                var chain = PropertyChain.FromExpression(expression);
+                if (chain.Count > 0)
+                {
+                    return chain.ToString();
+                }
             }
 
             if (memberInfo != null)

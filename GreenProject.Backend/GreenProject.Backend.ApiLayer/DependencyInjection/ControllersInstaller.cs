@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-using FluentValidation.Internal;
 using GreenProject.Backend.ApiLayer.Converter;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Validation;

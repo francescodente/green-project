@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using GreenProject.Backend.ApiLayer.Filters;
+﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Core.Services;
-using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {

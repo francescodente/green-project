@@ -52,11 +52,11 @@ namespace GreenProject.Backend.ApiLayer.Filters
 
         private string GenerateKeyFromRequest(HttpRequest request)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             sb.Append(request.Path);
 
-            foreach (var (key, value) in request.Query.OrderBy(x => x.Key))
+            foreach ((string key, Microsoft.Extensions.Primitives.StringValues value) in request.Query.OrderBy(x => x.Key))
             {
                 sb.Append($"|{key}={value}");
             }

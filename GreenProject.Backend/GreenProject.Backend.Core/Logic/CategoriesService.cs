@@ -1,13 +1,12 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using GreenProject.Backend.Contracts.Categories;
-using Microsoft.EntityFrameworkCore;
+﻿using GreenProject.Backend.Contracts.Categories;
+using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
-using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Entities;
-using AutoMapper.QueryableExtensions;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic
 {

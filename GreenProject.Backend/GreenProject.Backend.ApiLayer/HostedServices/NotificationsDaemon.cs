@@ -1,14 +1,7 @@
 ﻿using GreenProject.Backend.Core.Services;
-using GreenProject.Backend.Core.Utils.Notifications;
-using GreenProject.Backend.Core.Utils.Session;
-using GreenProject.Backend.Entities;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

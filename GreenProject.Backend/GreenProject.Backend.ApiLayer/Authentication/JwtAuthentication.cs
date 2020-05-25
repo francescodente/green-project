@@ -69,10 +69,10 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         {
             SecurityTokenDescriptor tokenDescriptor = GenerateTokenDescriptor(user);
 
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
 
-            RefreshToken refreshToken = new RefreshToken
+            var refreshToken = new RefreshToken
             {
                 AccessTokenId = token.Id,
                 User = user,
@@ -83,7 +83,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
             SetRefreshTokenCookie(refreshToken);
 
-            AuthenticationResult result = new AuthenticationResult
+            var result = new AuthenticationResult
             {
                 Token = tokenHandler.WriteToken(token),
                 RefreshToken = refreshToken.Token,
@@ -95,7 +95,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         private void SetRefreshTokenCookie(RefreshToken refreshToken)
         {
-            CookieOptions cookieOptions = new CookieOptions
+            var cookieOptions = new CookieOptions
             {
                 HttpOnly = _settings.CookieSettings.HttpOnly,
                 Secure = _settings.CookieSettings.Secure,
@@ -114,7 +114,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         {
             byte[] key = Encoding.ASCII.GetBytes(_settings.SecretKey);
             IEnumerable<Claim> claims = CreateClaimsList(user);
-            SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
                 NotBefore = _dateTime.Now,
@@ -149,7 +149,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         public string GenerateRandomPassword()
         {
             string chars = _settings.PasswordGeneration.AllowedCharacters;
-            RandomNumberGenerator crypto = RandomNumberGenerator.Create();
+            var crypto = RandomNumberGenerator.Create();
 
             byte[] data = new byte[_settings.PasswordGeneration.Length];
             crypto.GetBytes(data);
@@ -169,7 +169,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         private IOptional<ClaimsPrincipal> GetPrincipalFromToken(string accessToken)
         {
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
 
             try
             {

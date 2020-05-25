@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GreenProject.Backend.ApiLayer.Routes;
+﻿using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Support;
 using GreenProject.Backend.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {

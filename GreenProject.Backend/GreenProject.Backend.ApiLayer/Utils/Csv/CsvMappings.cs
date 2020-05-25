@@ -3,11 +3,8 @@ using GreenProject.Backend.Contracts.Reports;
 using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Utils.Csv
 {
@@ -94,7 +91,7 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
         public class DailyRevenueModelMap : OrderedClassMap<DailyRevenueModel>
         {
             private const string KeyFormat = "Total{0}Percent";
-            
+
             public DailyRevenueModelMap(CsvReportSettings settings, IEnumerable<int> ivaValues, IFormatProvider valueFormat)
                 : base(settings)
             {
@@ -105,7 +102,7 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
                         .Name(settings.HeaderNames[string.Format(KeyFormat, iva)])
                         .ConvertUsing(r => ((DailyRevenueModel)r).IvaValues.GetValueAsOptional(iva / 100m).OrElse(0).ToString(valueFormat));
                 });
-                
+
             }
         }
     }

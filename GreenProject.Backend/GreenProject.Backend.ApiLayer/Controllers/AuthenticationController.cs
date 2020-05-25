@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using GreenProject.Backend.ApiLayer.Filters;
+﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {

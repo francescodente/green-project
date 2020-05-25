@@ -1,5 +1,4 @@
 ﻿using GreenProject.Backend.ApiLayer.Authentication;
-using GreenProject.Backend.Core.Utils;
 using GreenProject.Backend.Core.Utils.Authentication;
 using GreenProject.Backend.Core.Utils.PasswordHashing;
 using GreenProject.Backend.Infrastructure.PasswordHashing;
@@ -28,7 +27,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
             services.AddSingleton(authSettings);
 
             byte[] key = Encoding.ASCII.GetBytes(authSettings.SecretKey);
-            TokenValidationParameters validationParameters = new TokenValidationParameters
+            var validationParameters = new TokenValidationParameters
             {
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuerSigningKey = true,

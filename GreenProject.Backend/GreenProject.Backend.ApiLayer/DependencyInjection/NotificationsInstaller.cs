@@ -1,6 +1,4 @@
 ﻿using FluentEmail.Core;
-using FluentEmail.Core.Interfaces;
-using FluentEmail.MailKitSmtp;
 using GreenProject.Backend.ApiLayer.HostedServices;
 using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Infrastructure.Notifications;
@@ -10,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RazorLight;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 

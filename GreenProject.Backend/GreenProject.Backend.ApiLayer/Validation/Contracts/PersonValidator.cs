@@ -3,7 +3,6 @@ using GreenProject.Backend.Contracts.Errors;
 using GreenProject.Backend.Contracts.Users.Roles;
 using GreenProject.Backend.Core.Utils.Time;
 using GreenProject.Backend.DataAccess.Sql.Model;
-using System;
 
 namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 {

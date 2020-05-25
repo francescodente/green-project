@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using GreenProject.Backend.Infrastructure.Mapping;
+﻿using GreenProject.Backend.Infrastructure.Mapping;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
