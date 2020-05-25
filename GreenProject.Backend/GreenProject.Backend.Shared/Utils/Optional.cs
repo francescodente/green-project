@@ -28,7 +28,7 @@ namespace GreenProject.Backend.Shared.Utils
 
             public LoadedOptional(T value)
             {
-                this.Value = value;
+                Value = value;
             }
 
             public bool IsAbsent()

@@ -16,10 +16,10 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 throw new ArgumentNullException(nameof(env));
             }
 
-            services.AddScoped(provider => this.CreateImageStorage(provider, config));
+            services.AddScoped(CreateImageStorage);
         }
 
-        private IImageStorage CreateImageStorage(IServiceProvider provider, IConfiguration config)
+        private IImageStorage CreateImageStorage(IServiceProvider provider)
         {
             string basePath = provider.GetRequiredService<IWebHostEnvironment>().WebRootPath;
             ImageUploadSettings settings = provider.GetRequiredService<ImageUploadSettings>();

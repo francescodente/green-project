@@ -11,7 +11,7 @@ namespace GreenProject.Backend.ApiLayer.Validation
 {
     public static class PropertyNameResolvers
     {
-        public static string CamelCase(Type type, MemberInfo memberInfo, LambdaExpression expression)
+        public static string CamelCase(MemberInfo memberInfo, LambdaExpression expression)
         {
             return ToCamelCase(DefaultPropertyNameResolver(memberInfo, expression));
         }

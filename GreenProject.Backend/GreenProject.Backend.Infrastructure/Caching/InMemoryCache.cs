@@ -10,16 +10,16 @@ namespace GreenProject.Backend.Infrastructure.Caching
 {
     public class InMemoryCache : ICacheService
     {
-        private readonly IMemoryCache cache;
+        private readonly IMemoryCache _cache;
 
         public InMemoryCache(IMemoryCache cache)
         {
-            this.cache = cache;
+            _cache = cache;
         }
 
         public Task<IOptional<T>> RetrieveValue<T>(string key)
         {
-            if (this.cache.TryGetValue(key, out T value))
+            if (_cache.TryGetValue(key, out T value))
             {
                 return Task.FromResult(Optional.Of(value));
             }
@@ -34,7 +34,7 @@ namespace GreenProject.Backend.Infrastructure.Caching
                 AbsoluteExpirationRelativeToNow = lifetime,
                 Size = 1
             };
-            this.cache.Set(key, value, options);
+            _cache.Set(key, value, options);
 
             return Task.CompletedTask;
         }

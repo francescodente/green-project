@@ -13,7 +13,7 @@ namespace GreenProject.Backend.Entities.Utils
 
         public Money(decimal value)
         {
-            this.Value = decimal.Round(value, Decimals);
+            Value = decimal.Round(value, Decimals);
         }
 
         public static implicit operator decimal(Money money)
@@ -53,24 +53,24 @@ namespace GreenProject.Backend.Entities.Utils
 
         public override string ToString()
         {
-            return this.Value.ToString("0,00");
+            return Value.ToString("0,00");
         }
 
         public string ToString(IFormatProvider format)
         {
-            return this.Value.ToString(format);
+            return Value.ToString(format);
         }
 
         public int CompareTo(Money other)
         {
-            return this.Value.CompareTo(other.Value);
+            return Value.CompareTo(other.Value);
         }
 
         public int CompareTo(object obj)
         {
-            if (obj is Money)
+            if (obj is Money money)
             {
-                return this.CompareTo((Money)obj);
+                return CompareTo(money);
             }
             throw new ArgumentException(nameof(obj));
         }

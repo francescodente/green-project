@@ -17,11 +17,11 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class OrdersController : ControllerBase
     {
-        private readonly IOrdersService ordersService;
+        private readonly IOrdersService _ordersService;
 
         public OrdersController(IOrdersService ordersService)
         {
-            this.ordersService = ordersService;
+            _ordersService = ordersService;
         }
 
         [HttpGet("customers/{customerId}/orders")]
@@ -29,21 +29,21 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [OwnerOrAdminOnly(PropertyName = "customerId")]
         public async Task<IActionResult> GetCustomerOrders([FromRoute] int customerId, [FromQuery] OrderFilters filters, [FromQuery] PaginationFilter pagination)
         {
-            return Ok(await this.ordersService.GetCustomerOrders(customerId, filters, pagination));
+            return Ok(await _ordersService.GetCustomerOrders(customerId, filters, pagination));
         }
 
         [HttpGet("orders")]
         [RequireLogin(RoleType.Administrator, RoleType.DeliveryMan)]
         public async Task<IActionResult> GetSupplierOrders([FromQuery] OrderFilters filters, [FromQuery] PaginationFilter pagination)
         {
-            return Ok(await this.ordersService.GetSupplierOrders(filters, pagination));
+            return Ok(await _ordersService.GetSupplierOrders(filters, pagination));
         }
 
         [HttpPut("orders/{orderId}/state")]
         [RequireLogin(RoleType.Administrator, RoleType.DeliveryMan)]
         public async Task<IActionResult> ChangeOrderState([FromRoute] int orderId, [FromBody] OrderState newState)
         {
-            await this.ordersService.ChangeOrderState(orderId, newState);
+            await _ordersService.ChangeOrderState(orderId, newState);
             return NoContent();
         }
     }

@@ -21,17 +21,17 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task DeleteUser(int userId)
         {
-            User userEntity = await this.RequireUserById(userId);
+            User userEntity = await RequireUserById(userId);
             userEntity.IsDeleted = true;
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public async Task<UserDto.Output> GetUserData(int userId)
         {
-            User userEntity = await this.RequireUserById(userId, r => r
+            User userEntity = await RequireUserById(userId, r => r
                 .IncludingAddresses()
                 .IncludingRoles());
-            return this.Mapper.Map<UserDto.Output>(userEntity);
+            return Mapper.Map<UserDto.Output>(userEntity);
         }
     }
 }

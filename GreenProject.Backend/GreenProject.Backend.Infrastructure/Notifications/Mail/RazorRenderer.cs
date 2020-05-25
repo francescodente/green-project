@@ -11,11 +11,11 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
 {
     public class RazorRenderer : ITemplateRenderer
     {
-		private readonly IRazorLightEngine engine;
+		private readonly IRazorLightEngine _engine;
 
 		public RazorRenderer(string path)
 		{
-			engine = new RazorLightEngineBuilder()
+			_engine = new RazorLightEngineBuilder()
 				.UseFileSystemProject(path)
 				.UseMemoryCachingProvider()
 				.Build();
@@ -23,7 +23,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
 
 		public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
 		{
-			string result = await engine.CompileRenderStringAsync(template, template, model, new System.Dynamic.ExpandoObject());
+			string result = await _engine.CompileRenderStringAsync(template, template, model, new System.Dynamic.ExpandoObject());
 			return result;
 		}
 

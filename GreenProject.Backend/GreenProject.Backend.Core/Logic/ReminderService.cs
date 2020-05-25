@@ -22,8 +22,8 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task CheckSubscriptionReminders(TimeSpan anticipationTime)
         {
-            DateTime limit = this.DateTime.Now + anticipationTime;
-            IEnumerable<Order> ordersToBeNotified = await this.Data
+            DateTime limit = DateTime.Now + anticipationTime;
+            IEnumerable<Order> ordersToBeNotified = await Data
                 .Orders
                 .Where(o => o.IsSubscription)
                 .Where(o => !o.WasReminded)
@@ -38,13 +38,13 @@ namespace GreenProject.Backend.Core.Logic
                         .ThenInclude(i => i.Image)
                 .ToArrayAsync();
 
-            await Task.WhenAll(ordersToBeNotified.Select(this.SendReminder));
-            await this.Data.SaveChangesAsync();
+            await Task.WhenAll(ordersToBeNotified.Select(SendReminder));
+            await Data.SaveChangesAsync();
         }
 
         private Task SendReminder(Order order)
         {
-            return this.Notifications.SubscriptionReminder(order)
+            return Notifications.SubscriptionReminder(order)
                 .Then(() => order.WasReminded = true);
         }
     }

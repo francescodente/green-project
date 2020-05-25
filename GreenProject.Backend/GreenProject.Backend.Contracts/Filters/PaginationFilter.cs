@@ -8,28 +8,28 @@ namespace GreenProject.Backend.Contracts.Filters
         public const int DefaultPageSize = 30;
         public const int DefaultPageNumber = 0;
 
-        private int pageSize;
+        private int _pageSize;
 
         public int PageNumber { get; set; }
 
         public int PageSize
         {
-            get => this.pageSize;
-            set => this.pageSize = Math.Min(MaxPageSize, value);
+            get => _pageSize;
+            set => _pageSize = Math.Min(MaxPageSize, value);
         }
 
         public PaginationFilter()
         {
-            this.PageNumber = DefaultPageNumber;
-            this.PageSize = DefaultPageSize;
+            PageNumber = DefaultPageNumber;
+            PageSize = DefaultPageSize;
         }
 
         public PaginationFilter NextPage()
         {
             return new PaginationFilter
             {
-                PageSize = this.PageSize,
-                PageNumber = this.PageNumber + 1
+                PageSize = PageSize,
+                PageNumber = PageNumber + 1
             };
         }
 
@@ -37,8 +37,8 @@ namespace GreenProject.Backend.Contracts.Filters
         {
             return new PaginationFilter
             {
-                PageSize = this.PageSize,
-                PageNumber = this.PageNumber - 1
+                PageSize = PageSize,
+                PageNumber = PageNumber - 1
             };
         }
     }

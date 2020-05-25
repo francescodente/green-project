@@ -15,25 +15,24 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
     {
         public abstract class OrderedClassMap<T> : ClassMap<T>
         {
-            private readonly CsvReportSettings settings;
+            private readonly CsvReportSettings _settings;
 
             public OrderedClassMap(CsvReportSettings settings)
             {
-                this.settings = settings;
+                _settings = settings;
             }
 
             public MemberMap<T, TProperty> AddPropertyMap<TProperty>(Expression<Func<T, TProperty>> property)
             {
-                return Map(property).Name(this.settings.HeaderNames[this.GetPropertyName(property)]);
+                return Map(property).Name(_settings.HeaderNames[GetPropertyName(property)]);
             }
 
             private string GetPropertyName<TProperty>(Expression<Func<T, TProperty>> property)
             {
                 MemberExpression memberExpression;
 
-                if (property.Body is UnaryExpression)
+                if (property.Body is UnaryExpression unaryExpression)
                 {
-                    UnaryExpression unaryExpression = (UnaryExpression)property.Body;
                     memberExpression = (MemberExpression)unaryExpression.Operand;
                 }
                 else

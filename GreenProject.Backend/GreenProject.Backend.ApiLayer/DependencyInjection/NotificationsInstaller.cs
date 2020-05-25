@@ -29,15 +29,16 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                     .Build());
 
             services
-                .AddSingleton(this.CreateNotificationsService)
+                .AddSingleton(CreateNotificationsService)
                 .AddHostedService<NotificationsDaemon>();
         }
 
         private INotificationsService CreateNotificationsService(IServiceProvider provider)
         {
-            ICollection<INotificationsService> subServices = new List<INotificationsService>();
-
-            subServices.Add(this.CreateMailNotificationsService(provider));
+            ICollection<INotificationsService> subServices = new List<INotificationsService>
+            {
+                CreateMailNotificationsService(provider)
+            };
 
             return new CompositeNotificationsService(subServices);
         }

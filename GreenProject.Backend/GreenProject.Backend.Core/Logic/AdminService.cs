@@ -17,13 +17,13 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task SetUserEnabledState(int userId, bool enabled)
         {
-            User user = await this.Data
+            User user = await Data
                 .ActiveUsers()
                 .SingleOptionalAsync(s => s.UserId == userId)
                 .Map(s => s.OrElseThrow(() => NotFoundException.UserWithId(userId)));
 
             user.IsEnabled = enabled;
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
     }
 }

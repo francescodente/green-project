@@ -7,11 +7,11 @@ namespace GreenProject.Backend.Core.Exceptions
 {
     public class InvalidQuantityException : DomainException
     {
-        private readonly string quantityProperty;
+        private readonly string _quantityProperty;
 
         public InvalidQuantityException(string quantityProperty = "quantity")
         {
-            this.quantityProperty = quantityProperty;
+            _quantityProperty = quantityProperty;
         }
 
         public override string MainErrorCode => throw new NotImplementedException();
@@ -27,7 +27,7 @@ namespace GreenProject.Backend.Core.Exceptions
             {
                 Code = ErrorCodes.Orders.InvalidQuantity,
                 Message = "The given quantity is not valid",
-                Property = this.quantityProperty
+                Property = _quantityProperty
             };
         }
     }

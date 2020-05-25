@@ -15,17 +15,17 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class ImagesController : ControllerBase
     {
-        private readonly IImagesService imagesService;
+        private readonly IImagesService _imagesService;
 
         public ImagesController(IImagesService imagesService)
         {
-            this.imagesService = imagesService;
+            _imagesService = imagesService;
         }
 
         [HttpPut("items/{itemId}/images/main")]
         public async Task<IActionResult> AssignItemImage([FromRoute] int itemId, IFormFile imageFile)
         {
-            await this.imagesService
+            await _imagesService
                 .PurchasableImage(itemId)
                 .Then(img => imageFile.CopyToAsync(img));
             return NoContent();
@@ -34,7 +34,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [HttpPut("categories/{categoryId}/images/main")]
         public async Task<IActionResult> AssignCategoryImage([FromRoute] int categoryId, IFormFile imageFile)
         {
-            await this.imagesService
+            await _imagesService
                 .CategoryImage(categoryId)
                 .Then(img => imageFile.CopyToAsync(img));
             return NoContent();
@@ -43,14 +43,14 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [HttpDelete("items/{itemId}/images/main")]
         public async Task<IActionResult> DeleteItemImage([FromRoute] int itemId)
         {
-            await this.imagesService.PurchasableImage(itemId).Then(img => img.Delete());
+            await _imagesService.PurchasableImage(itemId).Then(img => img.Delete());
             return NoContent();
         }
 
         [HttpDelete("categories/{categoryId}/images/main")]
         public async Task<IActionResult> DeleteCategoryImage([FromRoute] int categoryId)
         {
-            await this.imagesService.CategoryImage(categoryId).Then(img => img.Delete());
+            await _imagesService.CategoryImage(categoryId).Then(img => img.Delete());
             return NoContent();
         }
     }

@@ -8,7 +8,7 @@ namespace GreenProject.Backend.Core.EntitiesExtensions
 {
     public static class CartItemExtensions
     {
-        public static OrderDetail CreateOrderDetail(this CartItem item, CustomerType customerType)
+        public static OrderDetail CreateOrderDetail(this CartItem item)
         {
             return new OrderDetail
             {

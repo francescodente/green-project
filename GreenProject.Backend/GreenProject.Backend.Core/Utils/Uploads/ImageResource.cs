@@ -9,11 +9,11 @@ namespace GreenProject.Backend.Core.Utils.Uploads
 {
     public class ImageResource : IImageResource
     {
-        private readonly IImageStorage storage;
-        private readonly Action<IImageStoringOptions> storingOptions;
-        private readonly Func<Image> imageSupplier;
-        private readonly Action<Image> imageSetter;
-        private readonly IDataSession data;
+        private readonly IImageStorage _storage;
+        private readonly Action<IImageStoringOptions> _storingOptions;
+        private readonly Func<Image> _imageSupplier;
+        private readonly Action<Image> _imageSetter;
+        private readonly IDataSession _data;
 
         public ImageResource(
             IImageStorage storage,
@@ -22,40 +22,40 @@ namespace GreenProject.Backend.Core.Utils.Uploads
             Action<Image> imageSetter,
             IDataSession data)
         {
-            this.imageSupplier = imageSupplier;
-            this.imageSetter = imageSetter;
-            this.storage = storage;
-            this.storingOptions = storingOptions;
-            this.data = data;
+            _imageSupplier = imageSupplier;
+            _imageSetter = imageSetter;
+            _storage = storage;
+            _storingOptions = storingOptions;
+            _data = data;
         }
 
         public async Task Delete()
         {
-            Image currentImage = this.imageSupplier();
+            Image currentImage = _imageSupplier();
             if (currentImage == null)
             {
                 throw NotFoundException.Image();
             }
-            await storage.DeleteImageAtPath(currentImage.Path);
-            this.data.Images.Remove(currentImage);
-            await this.data.SaveChangesAsync();
+            await _storage.DeleteImageAtPath(currentImage.Path);
+            _data.Images.Remove(currentImage);
+            await _data.SaveChangesAsync();
         }
 
         public async Task Store(Stream imageStream)
         {
-            Image currentImage = this.imageSupplier();
+            Image currentImage = _imageSupplier();
             if (currentImage != null)
             {
-                await storage.DeleteImageAtPath(currentImage.Path);
+                await _storage.DeleteImageAtPath(currentImage.Path);
             }
-            string newPath = await storage.StoreImage(imageStream, this.storingOptions);
+            string newPath = await _storage.StoreImage(imageStream, _storingOptions);
             if (currentImage == null)
             {
                 currentImage = new Image();
-                this.imageSetter(currentImage);
+                _imageSetter(currentImage);
             }
             currentImage.Path = newPath;
-            await this.data.SaveChangesAsync();
+            await _data.SaveChangesAsync();
         }
     }
 }

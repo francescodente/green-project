@@ -7,31 +7,33 @@ namespace GreenProject.Backend.Infrastructure.Pricing
 {
     public class DefaultPriceCalculator : IPricingService
     {
-        private readonly PricingSettings settings;
+        private readonly PricingSettings _settings;
 
         public DefaultPriceCalculator(PricingSettings settings)
         {
-            this.settings = settings;
+            _settings = settings;
         }
 
         public OrderPrices CalculatePrices(Order order)
         {
-            OrderPrices prices = new OrderPrices();
+            OrderPrices prices = new OrderPrices
+            {
+                Subtotal = order
+                    .Details
+                    .Select(d => d.Price * d.Quantity)
+                    .Sum(d => d.Value),
 
-            prices.Subtotal = order
-                .Details
-                .Select(d => d.Price * d.Quantity)
-                .Sum(d => d.Value);
+                Iva = order
+                    .Details
+                    .Select(d => d.Price * d.Quantity * d.Item.IvaPercentage)
+                    .Sum(d => d.Value),
 
-            prices.Iva = order
-                .Details
-                .Select(d => d.Price * d.Quantity * d.Item.IvaPercentage)
-                .Sum(d => d.Value);
+                ShippingCost = order.Address.Zone.ShippingSurcharge
+            };
 
-            prices.ShippingCost = order.Address.Zone.ShippingSurcharge;
             if (order.Details.Any(d => d.Item is Product))
             {
-                prices.ShippingCost += this.settings.ShippingCost;
+                prices.ShippingCost += _settings.ShippingCost;
             }
 
             return prices;
@@ -39,19 +41,20 @@ namespace GreenProject.Backend.Infrastructure.Pricing
 
         public OrderPrices CalculatePrices(CartDto cart)
         {
-            OrderPrices prices = new OrderPrices();
+            OrderPrices prices = new OrderPrices
+            {
+                Subtotal = cart
+                    .CartItems
+                    .Select(i => i.Product.Price * i.Quantity)
+                    .Sum(m => m.Value),
 
-            prices.Subtotal = cart
-                .CartItems
-                .Select(i => i.Product.Price * i.Quantity)
-                .Sum(m => m.Value);
+                Iva = cart
+                    .CartItems
+                    .Select(i => i.Product.Price * i.Quantity * i.Product.IvaPercentage)
+                    .Sum(d => d.Value),
 
-            prices.Iva = cart
-                .CartItems
-                .Select(i => i.Product.Price * i.Quantity * i.Product.IvaPercentage)
-                .Sum(d => d.Value);
-
-            prices.ShippingCost = cart.CartItems.Any() ? this.settings.ShippingCost : 0;
+                ShippingCost = cart.CartItems.Any() ? _settings.ShippingCost : 0
+            };
 
             return prices;
         }

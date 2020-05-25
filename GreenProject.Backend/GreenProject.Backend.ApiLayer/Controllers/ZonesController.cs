@@ -14,24 +14,24 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class ZonesController : ControllerBase
     {
-        private readonly IZonesService zonesService;
+        private readonly IZonesService _zonesService;
 
         public ZonesController(IZonesService zonesService)
         {
-            this.zonesService = zonesService;
+            _zonesService = zonesService;
         }
 
         [HttpGet]
         [KeepInCacheFor(60)]
         public async Task<IActionResult> GetSupportedZones()
         {
-            return Ok(await this.zonesService.GetSupportedZones());
+            return Ok(await _zonesService.GetSupportedZones());
         }
 
         [HttpGet("{zipCode}/schedule")]
         public async Task<IActionResult> GetNextAvailableSchedule([FromRoute] string zipCode)
         {
-            return Ok(await this.zonesService.GetNextAvailableSchedule(zipCode));
+            return Ok(await _zonesService.GetNextAvailableSchedule(zipCode));
         }
     }
 }

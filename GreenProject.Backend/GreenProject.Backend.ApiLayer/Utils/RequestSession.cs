@@ -19,11 +19,11 @@ namespace GreenProject.Backend.ApiLayer.Utils
                               IMapper mapper,
                               INotificationsService notifications)
         {
-            this.Data = data;
-            this.User = user;
-            this.DateTime = dateTime;
-            this.Mapper = mapper;
-            this.Notifications = notifications;
+            Data = data;
+            User = user;
+            DateTime = dateTime;
+            Mapper = mapper;
+            Notifications = notifications;
         }
     }
 }

@@ -27,7 +27,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
 
             ValidationResult result = context.HttpContext.Items[ValidationResultKey] as ValidationResult;
 
-            context.Result = new BadRequestObjectResult(this.CreateErrorResponse(result));
+            context.Result = new BadRequestObjectResult(CreateErrorResponse(result));
         }
 
         private ErrorResponseDto CreateErrorResponse(ValidationResult result)
@@ -36,7 +36,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
             {
                 return new ErrorResponseDto
                 {
-                    GlobalErrors = this.GetDefaultGlobalError(),
+                    GlobalErrors = GetDefaultGlobalError(),
                     PropertyErrors = Enumerable.Empty<PropertyErrorDto>()
                 };
             }

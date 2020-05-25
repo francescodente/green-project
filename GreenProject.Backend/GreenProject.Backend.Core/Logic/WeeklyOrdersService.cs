@@ -20,21 +20,21 @@ namespace GreenProject.Backend.Core.Logic
 {
     public class WeeklyOrdersService : AbstractService, IWeeklyOrdersService
     {
-        private readonly IPricingService pricing;
-        private readonly IOrderScheduler scheduler;
-        private readonly OrdersSettings settings;
+        private readonly IPricingService _pricing;
+        private readonly IOrderScheduler _scheduler;
+        private readonly OrdersSettings _settings;
 
         public WeeklyOrdersService(IRequestSession request, IPricingService pricing, IOrderScheduler scheduler, OrdersSettings settings)
             : base(request)
         {
-            this.pricing = pricing;
-            this.scheduler = scheduler;
-            this.settings = settings;
+            _pricing = pricing;
+            _scheduler = scheduler;
+            _settings = settings;
         }
 
         private Task<bool> IsSubscribed(int userId)
         {
-            return this.Data
+            return Data
                 .ActiveUsers()
                 .Where(u => u.UserId == userId)
                 .Select(u => new { u.IsSubscribed })
@@ -44,7 +44,7 @@ namespace GreenProject.Backend.Core.Logic
 
         private async Task RequireSubscription(int userId)
         {
-            if (!await this.IsSubscribed(userId))
+            if (!await IsSubscribed(userId))
             {
                 throw new NotSubscribedException();
             }
@@ -52,7 +52,7 @@ namespace GreenProject.Backend.Core.Logic
 
         private IQueryable<Order> FilterFirstSubscriptionOrder(int userId)
         {
-            return this.Data
+            return Data
                 .Orders
                 .Where(o => o.UserId == userId)
                 .Where(o => o.IsSubscription)
@@ -63,8 +63,8 @@ namespace GreenProject.Backend.Core.Logic
 
         private Task<Order> FindUnlockedSubscriptionOrder(int userId, QueryWrapper<Order> wrapper = null)
         {
-            return this.FilterFirstSubscriptionOrder(userId)
-                .UnlockedOnly(this.DateTime, this.settings)
+            return FilterFirstSubscriptionOrder(userId)
+                .UnlockedOnly(DateTime, _settings)
                 .WrapIfPresent(wrapper)
                 .SingleOptionalAsync()
                 .Map(o => o.OrElseThrow(() => new OrderLockedException()));
@@ -72,9 +72,9 @@ namespace GreenProject.Backend.Core.Logic
 
         private async Task UpdateDetailsForWeeklyOrder(int userId, Func<Order, Task> updateAction)
         {
-            await this.RequireSubscription(userId);
+            await RequireSubscription(userId);
 
-            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q
+            Order order = await FindUnlockedSubscriptionOrder(userId, q => q
                 .Include(o => o.Details)
                     .ThenInclude(d => d.Item)
                 .Include(o => o.Address)
@@ -82,14 +82,14 @@ namespace GreenProject.Backend.Core.Logic
 
             await updateAction(order);
 
-            this.pricing.AssignPricesToOrder(order);
+            _pricing.AssignPricesToOrder(order);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public async Task<WeeklyOrderDto> Subscribe(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
-            User user = await this.RequireUserById(userId, q => q
+            User user = await RequireUserById(userId, q => q
                 .Include(u => u.Addresses)
                     .ThenInclude(a => a.Zone));
 
@@ -107,25 +107,25 @@ namespace GreenProject.Backend.Core.Logic
             {
                 UserId = userId,
                 Address = address,
-                DeliveryDate = await this.scheduler.FindNextAvailableDate(this.DateTime.Today.AddDays(1), address.ZipCode),
+                DeliveryDate = await _scheduler.FindNextAvailableDate(DateTime.Today.AddDays(1), address.ZipCode),
                 IsSubscription = true,
-                Timestamp = this.DateTime.Now,
+                Timestamp = DateTime.Now,
                 OrderState = OrderState.Pending,
                 Notes = deliveryInfo.Notes
             };
-            this.pricing.AssignPricesToOrder(order);
+            _pricing.AssignPricesToOrder(order);
 
-            this.Data.Orders.Add(order);
-            await this.Data.SaveChangesAsync();
+            Data.Orders.Add(order);
+            await Data.SaveChangesAsync();
 
-            this.Notifications.UserSubscribed(user).FireAndForget();
+            Notifications.UserSubscribed(user).FireAndForget();
 
-            return this.Mapper.Map<WeeklyOrderDto>(order);
+            return Mapper.Map<WeeklyOrderDto>(order);
         }
 
         public async Task Unsubscribe(int userId)
         {
-            User user = await this.RequireUserById(userId);
+            User user = await RequireUserById(userId);
 
             if (!user.IsSubscribed)
             {
@@ -134,30 +134,30 @@ namespace GreenProject.Backend.Core.Logic
 
             user.IsSubscribed = false;
 
-            await this.FilterFirstSubscriptionOrder(userId)
-                .UnlockedOnly(this.DateTime, this.settings)
+            await FilterFirstSubscriptionOrder(userId)
+                .UnlockedOnly(DateTime, _settings)
                 .SingleOptionalAsync()
                 .Then(o => o.IfPresent(order => order.OrderState = OrderState.Canceled));
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
 
-            this.Notifications.UserUnsubscribed(user).FireAndForget();
+            Notifications.UserUnsubscribed(user).FireAndForget();
         }
 
         public async Task<WeeklyOrderDto> GetWeeklyOrderData(int userId)
         {
-            await this.RequireSubscription(userId);
+            await RequireSubscription(userId);
 
-            return await this.FilterFirstSubscriptionOrder(userId)
-                .ProjectTo<WeeklyOrderDto>(this.Mapper.ConfigurationProvider)
+            return await FilterFirstSubscriptionOrder(userId)
+                .ProjectTo<WeeklyOrderDto>(Mapper.ConfigurationProvider)
                 .SingleAsync();
         }
 
         public Task AddCrate(int userId, int crateId)
         {
-            return this.UpdateDetailsForWeeklyOrder(userId, async order =>
+            return UpdateDetailsForWeeklyOrder(userId, async order =>
             {
-                Crate crate = await this.Data
+                Crate crate = await Data
                     .Crates
                     .Where(c => c.ItemId == crateId)
                     .SingleOptionalAsync()
@@ -175,9 +175,9 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task AddExtraProduct(int userId, QuantifiedProductDto.Input product)
         {
-            return this.UpdateDetailsForWeeklyOrder(userId, async order =>
+            return UpdateDetailsForWeeklyOrder(userId, async order =>
             {
-                Product productEntity = await this.Data
+                Product productEntity = await Data
                     .Products
                     .Where(c => c.ItemId == product.ProductId)
                     .SingleOptionalAsync()
@@ -197,7 +197,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task UpdateExtraProduct(int userId, QuantifiedProductDto.Input product)
         {
-            return this.UpdateDetailsForWeeklyOrder(userId, order =>
+            return UpdateDetailsForWeeklyOrder(userId, order =>
             {
                 order.Details
                     .Where(d => d.Item is Product)
@@ -211,7 +211,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task RemoveItem(int userId, int orderDetailId)
         {
-            return this.UpdateDetailsForWeeklyOrder(userId, order =>
+            return UpdateDetailsForWeeklyOrder(userId, order =>
             {
                 OrderDetail detail = order.Details
                     .SingleOptional(d => d.OrderDetailId == orderDetailId)
@@ -225,7 +225,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task AddProductToCrate(int userId, int orderDetailId, QuantifiedProductDto.Input insertion)
         {
-            return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
+            return UpdateCrateSubProduct(userId, orderDetailId, detail =>
             {
                 detail.AddSubProduct(insertion.ProductId, insertion.Quantity);
             });
@@ -233,7 +233,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task RemoveProductFromCrate(int userId, int orderDetailId, int productId)
         {
-            return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
+            return UpdateCrateSubProduct(userId, orderDetailId, detail =>
             {
                 detail.DeleteSubProduct(productId);
             });
@@ -241,7 +241,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task UpdateProductInCrate(int userId, int orderDetailId, QuantifiedProductDto.Input update)
         {
-            return this.UpdateCrateSubProduct(userId, orderDetailId, detail =>
+            return UpdateCrateSubProduct(userId, orderDetailId, detail =>
             {
                 detail.UpdateSubProductQuantity(update.ProductId, update.Quantity);
             });
@@ -249,15 +249,15 @@ namespace GreenProject.Backend.Core.Logic
 
         private async Task UpdateCrateSubProduct(int userId, int orderDetailId, Action<OrderDetail> detailAction)
         {
-            await this.RequireSubscription(userId);
+            await RequireSubscription(userId);
 
-            int orderId = await this.FilterFirstSubscriptionOrder(userId)
-                .UnlockedOnly(this.DateTime, this.settings)
+            int orderId = await FilterFirstSubscriptionOrder(userId)
+                .UnlockedOnly(DateTime, _settings)
                 .Select(o => new { o.OrderId })
                 .SingleOptionalAsync()
                 .Map(o => o.OrElseThrow(() => new OrderLockedException()).OrderId);
 
-            OrderDetail detail = await this.Data
+            OrderDetail detail = await Data
                 .OrderDetails
                 .Where(d => d.Item is Crate)
                 .Include(d => d.Item)
@@ -274,24 +274,24 @@ namespace GreenProject.Backend.Core.Logic
 
             detailAction(detail);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public async Task SkipWeeks(int userId, int weeks)
         {
-            await this.RequireSubscription(userId);
+            await RequireSubscription(userId);
 
-            Order order = await this.FindUnlockedSubscriptionOrder(userId);
+            Order order = await FindUnlockedSubscriptionOrder(userId);
 
             order.DeliveryDate += TimeSpan.FromDays(7 * weeks);
             order.WasReminded = false;
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public async Task UpdateDeliveryInfo(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
-            User user = await this.RequireUserById(userId, q => q
+            User user = await RequireUserById(userId, q => q
                .Include(u => u.Addresses)
                     .ThenInclude(a => a.Zone));
 
@@ -305,17 +305,17 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
                 .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
 
-            Order order = await this.FindUnlockedSubscriptionOrder(userId, q => q
+            Order order = await FindUnlockedSubscriptionOrder(userId, q => q
                 .Include(o => o.Details)
                     .ThenInclude(d => d.Item));
 
-            order.DeliveryDate = await this.scheduler.FindNextAvailableDate(order.DeliveryDate, address.ZipCode);
+            order.DeliveryDate = await _scheduler.FindNextAvailableDate(order.DeliveryDate, address.ZipCode);
             order.Address = address;
             order.Notes = deliveryInfo.Notes;
 
-            this.pricing.AssignPricesToOrder(order);
+            _pricing.AssignPricesToOrder(order);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
     }
 }

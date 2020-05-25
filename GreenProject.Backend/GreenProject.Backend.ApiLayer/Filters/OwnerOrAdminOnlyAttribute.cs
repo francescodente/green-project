@@ -22,7 +22,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
                 return;
             }
 
-            if (context.RouteData.Values.TryGetValue(this.PropertyName, out object value))
+            if (context.RouteData.Values.TryGetValue(PropertyName, out object value))
             {
                 int userIdParam = int.Parse(value.ToString());
                 if (!session.IsLoggedIn || session.UserId != userIdParam)

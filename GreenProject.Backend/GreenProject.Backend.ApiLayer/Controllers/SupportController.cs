@@ -14,17 +14,17 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class SupportController : ControllerBase
     {
-        private readonly ISupportService supportService;
+        private readonly ISupportService _supportService;
 
         public SupportController(ISupportService supportService)
         {
-            this.supportService = supportService;
+            _supportService = supportService;
         }
 
         [HttpPost]
         public async Task<IActionResult> SendSupportEmail([FromBody] SupportRequestDto request)
         {
-            await this.supportService.SendSupportEmail(request);
+            await _supportService.SendSupportEmail(request);
             return NoContent();
         }
     }

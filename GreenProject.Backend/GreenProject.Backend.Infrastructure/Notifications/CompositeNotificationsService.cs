@@ -10,61 +10,61 @@ namespace GreenProject.Backend.Infrastructure.Notifications
 {
     public class CompositeNotificationsService : INotificationsService
     {
-        private readonly IEnumerable<INotificationsService> services;
+        private readonly IEnumerable<INotificationsService> _services;
 
         public CompositeNotificationsService(IEnumerable<INotificationsService> services)
         {
-            this.services = services;
+            _services = services;
         }
 
         private Task DelegateRequest(Func<INotificationsService, Task> notification)
         {
-            return Task.WhenAll(this.services.Select(notification));
+            return Task.WhenAll(_services.Select(notification));
         }
 
         public Task AccountConfirmation(User user, string token)
         {
-            return this.DelegateRequest(s => s.AccountConfirmation(user, token));
+            return DelegateRequest(s => s.AccountConfirmation(user, token));
         }
 
         public Task OrderAccepted(Order order)
         {
-            return this.DelegateRequest(s => s.OrderAccepted(order));
+            return DelegateRequest(s => s.OrderAccepted(order));
         }
 
         public Task OrderStateChanged(Order order, OrderState oldState)
         {
-            return this.DelegateRequest(s => s.OrderStateChanged(order, oldState));
+            return DelegateRequest(s => s.OrderStateChanged(order, oldState));
         }
 
         public Task UserSubscribed(User user)
         {
-            return this.DelegateRequest(s => s.UserSubscribed(user));
+            return DelegateRequest(s => s.UserSubscribed(user));
         }
 
         public Task UserUnsubscribed(User user)
         {
-            return this.DelegateRequest(s => s.UserUnsubscribed(user));
+            return DelegateRequest(s => s.UserUnsubscribed(user));
         }
 
         public Task SubscriptionReminder(Order order)
         {
-            return this.DelegateRequest(s => s.SubscriptionReminder(order));
+            return DelegateRequest(s => s.SubscriptionReminder(order));
         }
 
         public Task SupportRequested(string senderEmail, string subject, string body)
         {
-            return this.DelegateRequest(s => s.SupportRequested(senderEmail, subject, body));
+            return DelegateRequest(s => s.SupportRequested(senderEmail, subject, body));
         }
 
         public Task PasswordRecovery(User user, string token)
         {
-            return this.DelegateRequest(s => s.PasswordRecovery(user, token));
+            return DelegateRequest(s => s.PasswordRecovery(user, token));
         }
 
         public Task PasswordRecoveryAlt(string email)
         {
-            return this.DelegateRequest(s => s.PasswordRecoveryAlt(email));
+            return DelegateRequest(s => s.PasswordRecoveryAlt(email));
         }
     }
 }

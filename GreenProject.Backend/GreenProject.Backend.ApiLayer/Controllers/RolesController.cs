@@ -12,32 +12,32 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
-        private readonly IRolesService rolesService;
+        private readonly IRolesService _rolesService;
 
         public RolesController(IRolesService rolesService)
         {
-            this.rolesService = rolesService;
+            _rolesService = rolesService;
         }
 
         [HttpPut("person")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> AssignPersonRole([FromRoute] int userId, [FromBody] PersonDto person)
         {
-            return Ok(await this.rolesService.AssignPersonRole(userId, person));
+            return Ok(await _rolesService.AssignPersonRole(userId, person));
         }
 
         [HttpPut("customerbusiness")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> AssingCustomerBusinessRole([FromRoute] int userId, [FromBody] CustomerBusinessDto customerBusiness)
         {
-            return Ok(await this.rolesService.AssignCustomerBusinessRole(userId, customerBusiness));
+            return Ok(await _rolesService.AssignCustomerBusinessRole(userId, customerBusiness));
         }
 
         [HttpDelete("person")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> RemovePersonRole([FromRoute] int userId)
         {
-            await this.rolesService.RemovePersonRole(userId);
+            await _rolesService.RemovePersonRole(userId);
             return NoContent();
         }
 
@@ -45,7 +45,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [OwnerOrAdminOnly]
         public async Task<IActionResult> RemoveCustomerBusinessRole([FromRoute] int userId)
         {
-            await this.rolesService.RemoveCustomerBusinessRole(userId);
+            await _rolesService.RemoveCustomerBusinessRole(userId);
             return NoContent();
         }
     }

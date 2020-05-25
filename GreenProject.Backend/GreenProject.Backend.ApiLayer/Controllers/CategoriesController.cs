@@ -12,25 +12,25 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
-        private readonly ICategoriesService categoriesService;
+        private readonly ICategoriesService _categoriesService;
 
         public CategoriesController(ICategoriesService categoriesService)
         {
-            this.categoriesService = categoriesService;
+            _categoriesService = categoriesService;
         }
 
         [HttpGet]
         [KeepInCacheFor(60)]
         public async Task<IActionResult> GetCategoryTree()
         {
-            return Ok(await this.categoriesService.GetCategoryTree());
+            return Ok(await _categoriesService.GetCategoryTree());
         }
 
         [HttpPost]
         [RequireLogin(RoleType.Administrator)]
         public async Task<IActionResult> AddCategory([FromBody] CategoryDto.Input category)
         {
-            return Ok(await this.categoriesService.AddCategory(category));
+            return Ok(await _categoriesService.AddCategory(category));
         }
     }
 }

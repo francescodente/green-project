@@ -19,13 +19,13 @@ namespace GreenProject.Backend.Core.Utils.Uploads
 
         public Size(int width, int height)
         {
-            this.Width = width;
-            this.Height = height;
+            Width = width;
+            Height = height;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}{2}{1}", this.Width, this.Height, Separator);
+            return string.Format("{0}{2}{1}", Width, Height, Separator);
         }
 
         public static IOptional<Size> TryParse(string sizeString)

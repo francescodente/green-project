@@ -12,11 +12,11 @@ namespace GreenProject.Backend.ApiLayer.Filters
 {
     public class RequireLoginAttribute : Attribute, IAuthorizationFilter
     {
-        private readonly IEnumerable<string> roles;
+        private readonly IEnumerable<string> _roles;
 
         public RequireLoginAttribute(params RoleType[] roles)
         {
-            this.roles = roles.Select(r => r.ToString());
+            _roles = roles.Select(r => r.ToString());
         }
 
         public void OnAuthorization(AuthorizationFilterContext context)
@@ -27,7 +27,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
                 context.Result = new UnauthorizedResult();
                 return;
             }
-            if (!this.roles.Any() || this.roles.Any(user.IsInRole))
+            if (!_roles.Any() || _roles.Any(user.IsInRole))
             {
                 return;
             }

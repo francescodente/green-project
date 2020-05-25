@@ -10,18 +10,18 @@ namespace GreenProject.Backend.Infrastructure.Uploads
 {
     public class LocalImageStorage : IImageStorage
     {
-        private readonly string basePath;
-        private readonly string defaultExtension;
+        private readonly string _basePath;
+        private readonly string _defaultExtension;
 
         public LocalImageStorage(string basePath, string defaultExtension)
         {
-            this.basePath = basePath;
-            this.defaultExtension = defaultExtension;
+            _basePath = basePath;
+            _defaultExtension = defaultExtension;
         }
 
         public Task DeleteImageAtPath(string path)
         {
-            string completePath = this.GetCompletePath(path);
+            string completePath = GetCompletePath(path);
             if (File.Exists(completePath))
             {
                 File.Delete(completePath);
@@ -31,14 +31,16 @@ namespace GreenProject.Backend.Infrastructure.Uploads
 
         public Task<string> StoreImage(Stream imageStream, Action<IImageStoringOptions> options = null)
         {
-            LocalImageStoringOptions storingOptions = new LocalImageStoringOptions();
-            storingOptions.Extension = this.defaultExtension;
+            LocalImageStoringOptions storingOptions = new LocalImageStoringOptions
+            {
+                Extension = _defaultExtension
+            };
             options?.Invoke(storingOptions);
 
             string relativePath = Path.Combine(
-                (storingOptions.Directory ?? ""),
+                storingOptions.Directory ?? "",
                 (storingOptions.Name ?? Guid.NewGuid().ToString()) + storingOptions.Extension);
-            string completePath = this.GetCompletePath(relativePath);
+            string completePath = GetCompletePath(relativePath);
 
             string dir = Path.GetDirectoryName(completePath);
             if (!Directory.Exists(dir))
@@ -59,7 +61,7 @@ namespace GreenProject.Backend.Infrastructure.Uploads
 
         private string GetCompletePath(string relativePath)
         {
-            return Path.Combine(this.basePath, relativePath);
+            return Path.Combine(_basePath, relativePath);
         }
 
         private class LocalImageStoringOptions : IImageStoringOptions
@@ -77,25 +79,25 @@ namespace GreenProject.Backend.Infrastructure.Uploads
                     Position = AnchorPositionMode.Center,
                     Mode = ResizeMode.Crop
                 };
-                this.ImageModifier += x => x.Resize(options);
+                ImageModifier += x => x.Resize(options);
                 return this;
             }
 
             public IImageStoringOptions SetDirectory(string directory)
             {
-                this.Directory = directory;
+                Directory = directory;
                 return this;
             }
 
             public IImageStoringOptions SetFormat(ImageFormat format)
             {
-                this.Extension = format.GetExtension();
+                Extension = format.GetExtension();
                 return this;
             }
 
             public IImageStoringOptions SetName(string name)
             {
-                this.Name = name;
+                Name = name;
                 return this;
             }
         }

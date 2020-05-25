@@ -16,31 +16,29 @@ namespace GreenProject.Backend.ApiLayer.HostedServices
 {
     public class NotificationsDaemon : IHostedService, IDisposable
     {
-        private Timer timer;
-        private readonly IServiceScopeFactory scopeFactory;
-        private readonly NotificationsDaemonSettings settings;
-        private readonly ILogger logger;
+        private Timer _timer;
+        private readonly IServiceScopeFactory _scopeFactory;
+        private readonly NotificationsDaemonSettings _settings;
 
-        public NotificationsDaemon(IServiceScopeFactory scopeFactory, NotificationsDaemonSettings settings, ILogger<NotificationsDaemon> logger)
+        public NotificationsDaemon(IServiceScopeFactory scopeFactory, NotificationsDaemonSettings settings)
         {
-            this.scopeFactory = scopeFactory;
-            this.settings = settings;
-            this.logger = logger;
+            _scopeFactory = scopeFactory;
+            _settings = settings;
         }
 
         public void Dispose()
         {
-            if (this.settings.IsEnabled)
+            if (_settings.IsEnabled)
             {
-                this.timer.Dispose();
+                _timer.Dispose();
             }
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            if (this.settings.IsEnabled)
+            if (_settings.IsEnabled)
             {
-                this.timer = new Timer(_ => this.OnTick(), null, this.settings.InitialDelay, this.settings.Period);
+                _timer = new Timer(_ => OnTick(), null, _settings.InitialDelay, _settings.Period);
             }
 
             return Task.CompletedTask;
@@ -48,9 +46,9 @@ namespace GreenProject.Backend.ApiLayer.HostedServices
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            if (this.settings.IsEnabled)
+            if (_settings.IsEnabled)
             {
-                this.timer.Change(Timeout.Infinite, 0);
+                _timer.Change(Timeout.Infinite, 0);
             }
 
             return Task.CompletedTask;
@@ -58,11 +56,11 @@ namespace GreenProject.Backend.ApiLayer.HostedServices
 
         private async void OnTick()
         {
-            using (IServiceScope scope = this.scopeFactory.CreateScope())
+            using (IServiceScope scope = _scopeFactory.CreateScope())
             {
                 IReminderService reminderService = scope.ServiceProvider.GetRequiredService<IReminderService>();
 
-                await reminderService.CheckSubscriptionReminders(this.settings.SubscriptionReminderTime);
+                await reminderService.CheckSubscriptionReminders(_settings.SubscriptionReminderTime);
             }
         }
     }

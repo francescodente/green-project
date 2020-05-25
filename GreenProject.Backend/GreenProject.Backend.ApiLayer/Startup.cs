@@ -18,8 +18,8 @@ namespace GreenProject.Backend.ApiLayer
     {
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            this.Configuration = configuration;
-            this.Environment = environment;
+            Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,7 +28,7 @@ namespace GreenProject.Backend.ApiLayer
         public void ConfigureServices(IServiceCollection services)
         {
             ReflectionUtils.InstancesOfSubtypes<IServiceInstaller>(typeof(Startup).Assembly)
-                .ForEach(installer => installer.InstallServices(services, this.Configuration, this.Environment));
+                .ForEach(installer => installer.InstallServices(services, Configuration, Environment));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,7 +50,7 @@ namespace GreenProject.Backend.ApiLayer
                 MinimumSameSitePolicy = SameSiteMode.None
             });
 
-            GlobalSettings settings = this.Configuration.GetSection(nameof(GlobalSettings)).Get<GlobalSettings>();
+            GlobalSettings settings = Configuration.GetSection(nameof(GlobalSettings)).Get<GlobalSettings>();
             app.UseCors(x => x
                 .SetIsOriginAllowed(settings.AllowedOrigins.Contains)
                 .AllowCredentials()

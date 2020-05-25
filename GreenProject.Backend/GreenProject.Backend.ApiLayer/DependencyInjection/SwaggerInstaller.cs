@@ -42,7 +42,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                         new List<string>()
                     }
                 });
-                c.CustomSchemaIds(this.GetFullNameWithoutNamespace);
+                c.CustomSchemaIds(GetFullNameWithoutNamespace);
             });
         }
 
@@ -53,7 +53,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 return type.Name;
             }
 
-            return $"{this.GetFullNameWithoutNamespace(type.DeclaringType)}.{type.Name}";
+            return $"{GetFullNameWithoutNamespace(type.DeclaringType)}.{type.Name}";
         }
     }
 }

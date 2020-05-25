@@ -16,7 +16,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task SendSupportEmail(SupportRequestDto request)
         {
-            return this.Notifications.SupportRequested(request.SenderEmail, request.Subject, request.Body);
+            return Notifications.SupportRequested(request.SenderEmail, request.Subject, request.Body);
         }
     }
 }

@@ -21,13 +21,13 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         private const int HashLength = 128;
         private const string RefreshTokenCookieName = "refresh_token";
 
-        private readonly IHashCalculator hashCalculator;
-        private readonly ISaltGenerator saltGenerator;
-        private readonly IStringEncoding encoding;
-        private readonly IHttpContextAccessor httpContextAccessor;
-        private readonly IDateTime dateTime;
-        private readonly AuthenticationSettings settings;
-        private readonly TokenValidationParameters refreshValidation;
+        private readonly IHashCalculator _hashCalculator;
+        private readonly ISaltGenerator _saltGenerator;
+        private readonly IStringEncoding _encoding;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IDateTime _dateTime;
+        private readonly AuthenticationSettings _settings;
+        private readonly TokenValidationParameters _refreshValidation;
 
         public JwtAuthentication(IDateTime dateTime,
                                  IHashCalculator hashCalculator,
@@ -37,37 +37,37 @@ namespace GreenProject.Backend.ApiLayer.Authentication
                                  AuthenticationSettings settings,
                                  TokenValidationParameters tokenValidationParameters)
         {
-            this.dateTime = dateTime;
-            this.hashCalculator = hashCalculator;
-            this.saltGenerator = saltGenerator;
-            this.encoding = encoding;
-            this.httpContextAccessor = httpContextAccessor;
-            this.settings = settings;
-            this.refreshValidation = tokenValidationParameters.Clone();
-            this.refreshValidation.ValidateLifetime = false;
+            _dateTime = dateTime;
+            _hashCalculator = hashCalculator;
+            _saltGenerator = saltGenerator;
+            _encoding = encoding;
+            _httpContextAccessor = httpContextAccessor;
+            _settings = settings;
+            _refreshValidation = tokenValidationParameters.Clone();
+            _refreshValidation.ValidateLifetime = false;
         }
 
         public void AssignPassword(User user, string password)
         {
-            byte[] salt = this.saltGenerator.NewSalt(HashLength);
-            byte[] passwordHash = this.hashCalculator.Hash(password, salt, HashLength);
+            byte[] salt = _saltGenerator.NewSalt(HashLength);
+            byte[] passwordHash = _hashCalculator.Hash(password, salt, HashLength);
 
-            user.Password = this.encoding.BytesToString(passwordHash);
-            user.Salt = this.encoding.BytesToString(salt);
+            user.Password = _encoding.BytesToString(passwordHash);
+            user.Salt = _encoding.BytesToString(salt);
         }
 
         public bool IsPasswordCorrect(User user, string password)
         {
-            byte[] salt = this.encoding.StringToBytes(user.Salt);
-            byte[] expectedHash = this.encoding.StringToBytes(user.Password);
-            byte[] actualHash = this.hashCalculator.Hash(password, salt, HashLength);
+            byte[] salt = _encoding.StringToBytes(user.Salt);
+            byte[] expectedHash = _encoding.StringToBytes(user.Password);
+            byte[] actualHash = _hashCalculator.Hash(password, salt, HashLength);
 
             return expectedHash.SequenceEqual(actualHash);
         }
 
         public (AuthenticationResult, RefreshToken) OnUserAuthenticated(User user)
         {
-            SecurityTokenDescriptor tokenDescriptor = this.GenerateTokenDescriptor(user);
+            SecurityTokenDescriptor tokenDescriptor = GenerateTokenDescriptor(user);
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
@@ -77,11 +77,11 @@ namespace GreenProject.Backend.ApiLayer.Authentication
                 AccessTokenId = token.Id,
                 User = user,
                 Token = Guid.NewGuid().ToString(),
-                CreationDate = this.dateTime.Now,
-                Expiration = this.dateTime.Now.Add(this.settings.RefreshTokenDuration)
+                CreationDate = _dateTime.Now,
+                Expiration = _dateTime.Now.Add(_settings.RefreshTokenDuration)
             };
 
-            this.SetRefreshTokenCookie(refreshToken);
+            SetRefreshTokenCookie(refreshToken);
 
             AuthenticationResult result = new AuthenticationResult
             {
@@ -97,13 +97,13 @@ namespace GreenProject.Backend.ApiLayer.Authentication
         {
             CookieOptions cookieOptions = new CookieOptions
             {
-                HttpOnly = this.settings.CookieSettings.HttpOnly,
-                Secure = this.settings.CookieSettings.Secure,
-                Path = this.settings.CookieSettings.Path,
-                MaxAge = this.settings.RefreshTokenDuration
+                HttpOnly = _settings.CookieSettings.HttpOnly,
+                Secure = _settings.CookieSettings.Secure,
+                Path = _settings.CookieSettings.Path,
+                MaxAge = _settings.RefreshTokenDuration
             };
 
-            this.httpContextAccessor
+            _httpContextAccessor
                 .HttpContext
                 .Response
                 .Cookies
@@ -112,13 +112,13 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         private SecurityTokenDescriptor GenerateTokenDescriptor(User user)
         {
-            byte[] key = Encoding.ASCII.GetBytes(this.settings.SecretKey);
+            byte[] key = Encoding.ASCII.GetBytes(_settings.SecretKey);
             IEnumerable<Claim> claims = CreateClaimsList(user);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                NotBefore = this.dateTime.Now,
-                Expires = this.dateTime.Now.Add(this.settings.TokenDuration),
+                NotBefore = _dateTime.Now,
+                Expires = _dateTime.Now.Add(_settings.TokenDuration),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             return tokenDescriptor;
@@ -139,7 +139,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         public IOptional<string> FindCurrentRefreshToken()
         {
-            if (this.httpContextAccessor.HttpContext.Request.Cookies.TryGetValue(RefreshTokenCookieName, out string refreshToken))
+            if (_httpContextAccessor.HttpContext.Request.Cookies.TryGetValue(RefreshTokenCookieName, out string refreshToken))
             {
                 return Optional.Of(refreshToken);
             }
@@ -148,10 +148,10 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         public string GenerateRandomPassword()
         {
-            string chars = this.settings.PasswordGeneration.AllowedCharacters;
+            string chars = _settings.PasswordGeneration.AllowedCharacters;
             RandomNumberGenerator crypto = RandomNumberGenerator.Create();
 
-            byte[] data = new byte[this.settings.PasswordGeneration.Length];
+            byte[] data = new byte[_settings.PasswordGeneration.Length];
             crypto.GetBytes(data);
 
             return data
@@ -162,7 +162,7 @@ namespace GreenProject.Backend.ApiLayer.Authentication
 
         public bool CanBeRefreshed(string accessToken, RefreshToken refreshToken)
         {
-            return this.GetPrincipalFromToken(accessToken)
+            return GetPrincipalFromToken(accessToken)
                 .Filter(p => refreshToken.AccessTokenId == p.FindFirstValue(JwtRegisteredClaimNames.Jti))
                 .IsPresent();
         }
@@ -175,10 +175,10 @@ namespace GreenProject.Backend.ApiLayer.Authentication
             {
                 ClaimsPrincipal principal = tokenHandler.ValidateToken(
                     accessToken,
-                    refreshValidation,
+                    _refreshValidation,
                     out SecurityToken validatedToken);
 
-                if (!this.IsJwtWithValidSecurityAlgorithm(validatedToken))
+                if (!IsJwtWithValidSecurityAlgorithm(validatedToken))
                 {
                     return Optional.Empty<ClaimsPrincipal>();
                 }
@@ -208,8 +208,8 @@ namespace GreenProject.Backend.ApiLayer.Authentication
             return new ConfirmationToken
             {
                 Token = Guid.NewGuid().ToString(),
-                CreationDate = this.dateTime.Now,
-                Expiration = this.dateTime.Now.Add(this.settings.ConfirmationTokenDuration)
+                CreationDate = _dateTime.Now,
+                Expiration = _dateTime.Now.Add(_settings.ConfirmationTokenDuration)
             };
         }
 
@@ -218,8 +218,8 @@ namespace GreenProject.Backend.ApiLayer.Authentication
             return new PasswordRecoveryToken
             {
                 Token = Guid.NewGuid().ToString(),
-                CreationDate = this.dateTime.Now,
-                Expiration = this.dateTime.Now.Add(this.settings.PasswordRecoveryTokenDuration)
+                CreationDate = _dateTime.Now,
+                Expiration = _dateTime.Now.Add(_settings.PasswordRecoveryTokenDuration)
             };
         }
     }
