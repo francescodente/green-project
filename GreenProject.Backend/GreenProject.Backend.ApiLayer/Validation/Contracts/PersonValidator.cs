@@ -19,7 +19,7 @@ namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 
             RuleFor(x => x.LastName)
                 .ShouldNotBeEmpty()
-                .ShouldHaveMinLength(PersonModel.LastNameSize);
+                .ShouldHaveMaxLength(PersonModel.LastNameSize);
 
             RuleFor(x => x.DateOfBirth)
                 .LessThan(dateTime.Now).WithErrorCode(ErrorCodes.Common.ValueOutOfRange)
