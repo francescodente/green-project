@@ -1,5 +1,4 @@
 ﻿using GreenProject.Backend.Contracts.Zones;
-using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
@@ -39,7 +38,11 @@ namespace GreenProject.Backend.Core.Logic
                     Cities = provinceZones.GroupBy(x => x.City, (city, cityZones) => new CityDto
                     {
                         CityName = city,
-                        ZipCodes = cityZones.Select(y => y.ZipCode)
+                        ZipCodes = cityZones.Select(y => new ZipCodeDto
+                        {
+                            ZipCode = y.ZipCode,
+                            ShippingSurcharge = y.ShippingSurcharge
+                        })
                     })
                 });
         }
