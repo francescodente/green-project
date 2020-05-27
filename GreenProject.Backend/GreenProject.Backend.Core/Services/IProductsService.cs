@@ -15,5 +15,7 @@ namespace GreenProject.Backend.Core.Services
         Task<ProductDto.Output> UpdateProduct(int productId, ProductDto.Update product);
 
         Task DeleteProduct(int productId);
+
+        Task<IEnumerable<CompatibilityDto.OutputWithCrate>> GetCompatibleCrates(int productId);
     }
 }

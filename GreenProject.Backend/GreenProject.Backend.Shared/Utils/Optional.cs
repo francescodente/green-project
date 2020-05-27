@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Shared.Utils
@@ -28,7 +26,7 @@ namespace GreenProject.Backend.Shared.Utils
 
             public LoadedOptional(T value)
             {
-                this.Value = value;
+                Value = value;
             }
 
             public bool IsAbsent()

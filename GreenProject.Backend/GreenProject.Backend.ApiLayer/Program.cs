@@ -17,6 +17,7 @@ namespace GreenProject.Backend.ApiLayer
                 .ConfigureAppConfiguration(config =>
                 {
                     config.AddEnvironmentVariables("GREENPROJECT_");
+                    config.AddJsonFile($"credentials.json", true);
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

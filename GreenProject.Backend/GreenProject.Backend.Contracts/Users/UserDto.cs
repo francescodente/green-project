@@ -1,8 +1,6 @@
 ﻿using GreenProject.Backend.Contracts.Users.Roles;
 using GreenProject.Backend.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Contracts.Users
 {

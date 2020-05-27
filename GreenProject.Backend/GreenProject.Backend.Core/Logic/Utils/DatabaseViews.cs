@@ -1,9 +1,6 @@
 ﻿using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GreenProject.Backend.Core.Logic.Utils
 {

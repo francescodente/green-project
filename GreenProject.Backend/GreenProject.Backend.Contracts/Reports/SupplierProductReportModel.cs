@@ -1,6 +1,4 @@
-﻿using GreenProject.Backend.Entities;
-
-namespace GreenProject.Backend.Contracts.Reports
+﻿namespace GreenProject.Backend.Contracts.Reports
 {
     public class SupplierProductReportModel
     {

@@ -1,8 +1,8 @@
-﻿using System.Threading.Tasks;
-using GreenProject.Backend.ApiLayer.Filters;
+﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
@@ -11,25 +11,25 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [RequireLogin]
     public class UsersController : ControllerBase
     {
-        private readonly IUsersService usersService;
+        private readonly IUsersService _usersService;
 
         public UsersController(IUsersService usersService)
         {
-            this.usersService = usersService;
+            _usersService = usersService;
         }
 
         [HttpGet("{userId}")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> GetUserData([FromRoute] int userId)
         {
-            return Ok(await this.usersService.GetUserData(userId));
+            return Ok(await _usersService.GetUserData(userId));
         }
 
         [HttpDelete("{userId}")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteUser([FromRoute] int userId)
         {
-            await this.usersService.DeleteUser(userId);
+            await _usersService.DeleteUser(userId);
             return NoContent();
         }
     }

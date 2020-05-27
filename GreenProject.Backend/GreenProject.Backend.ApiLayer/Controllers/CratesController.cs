@@ -13,48 +13,46 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class CratesController : ControllerBase
     {
-        private readonly ICratesService cratesService;
+        private readonly ICratesService _cratesService;
 
         public CratesController(ICratesService cratesService)
         {
-            this.cratesService = cratesService;
+            _cratesService = cratesService;
         }
 
         [HttpGet]
         [KeepInCacheFor(20)]
         public async Task<IActionResult> GetCrates([FromQuery] PaginationFilter pagination, [FromQuery] PurchasableFilters filters)
         {
-            return Ok(await this.cratesService.GetCrates(pagination, filters));
+            return Ok(await _cratesService.GetCrates(pagination, filters));
         }
 
         [HttpPost]
         [RequireLogin(RoleType.Administrator)]
         public async Task<IActionResult> InsertCrate([FromBody] CrateDto.Input crate)
         {
-            return Ok(await this.cratesService.InsertCrate(crate));
+            return Ok(await _cratesService.InsertCrate(crate));
         }
 
         [HttpPut("{crateId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOrAdminOnly]
         public async Task<IActionResult> UpdateCrate([FromRoute] int crateId, [FromBody] CrateDto.Input crate)
         {
-            return Ok(await this.cratesService.UpdateCrate(crateId, crate));
+            return Ok(await _cratesService.UpdateCrate(crateId, crate));
         }
 
         [HttpDelete("{crateId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteCrate([FromRoute] int crateId)
         {
-            await this.cratesService.DeleteCrate(crateId);
+            await _cratesService.DeleteCrate(crateId);
             return NoContent();
         }
 
         [HttpGet("{crateId}/compatibilities")]
         public async Task<IActionResult> GetCrateCompatibilities([FromRoute] int crateId)
         {
-            return Ok(await this.cratesService.GetCompatibleProducts(crateId));
+            return Ok(await _cratesService.GetCompatibleProducts(crateId));
         }
     }
 }

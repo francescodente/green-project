@@ -1,10 +1,9 @@
-﻿using System.Threading.Tasks;
-using GreenProject.Backend.ApiLayer.Filters;
+﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Addresses;
 using GreenProject.Backend.Core.Services;
-using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
@@ -13,32 +12,32 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [RequireLogin]
     public class AddressesController : ControllerBase
     {
-        private readonly IAddressesService addressesService;
+        private readonly IAddressesService _addressesService;
 
         public AddressesController(IAddressesService addressesService)
         {
-            this.addressesService = addressesService;
+            _addressesService = addressesService;
         }
 
         [HttpGet]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> GetAddresses([FromRoute] int userId)
         {
-            return Ok(await this.addressesService.GetAddresses(userId));
+            return Ok(await _addressesService.GetAddresses(userId));
         }
 
         [HttpPost]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> InsertAddress([FromRoute] int userId, [FromBody] AddressDto.Input address)
         {
-            return Ok(await this.addressesService.AddAddress(userId, address));
+            return Ok(await _addressesService.AddAddress(userId, address));
         }
 
         [HttpDelete("{addressId}")]
         [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteAddress([FromRoute] int userId, [FromRoute] int addressId)
         {
-            await this.addressesService.DeleteAddress(userId, addressId);
+            await _addressesService.DeleteAddress(userId, addressId);
             return NoContent();
         }
 
@@ -46,7 +45,7 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [OwnerOrAdminOnly]
         public async Task<IActionResult> SetDefaultAddress([FromRoute] int userId, [FromBody] int addressId)
         {
-            await this.addressesService.SetDefaultAddress(userId, addressId);
+            await _addressesService.SetDefaultAddress(userId, addressId);
             return NoContent();
         }
     }

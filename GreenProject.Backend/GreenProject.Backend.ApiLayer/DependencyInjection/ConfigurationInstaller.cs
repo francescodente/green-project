@@ -16,20 +16,20 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
     {
         public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
-            this.InstallConfiguration<PasswordValidationSettings>(services, config);
-            this.InstallConfiguration<MailSettings>(services, config);
-            this.InstallConfiguration<ImageUploadSettings>(services, config);
-            this.InstallConfiguration<PricingSettings>(services, config);
-            this.InstallConfiguration<NotificationsDaemonSettings>(services, config);
-            this.InstallConfiguration<OrdersSettings>(services, config);
-            this.InstallConfiguration<CsvSettings>(services, config);
-            this.InstallConfiguration<CacheSettings>(services, config);
+            InstallConfiguration<PasswordValidationSettings>(services, config);
+            InstallConfiguration<MailSettings>(services, config);
+            InstallConfiguration<ImageUploadSettings>(services, config);
+            InstallConfiguration<PricingSettings>(services, config);
+            InstallConfiguration<NotificationsDaemonSettings>(services, config);
+            InstallConfiguration<OrdersSettings>(services, config);
+            InstallConfiguration<CsvSettings>(services, config);
+            InstallConfiguration<CacheSettings>(services, config);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config)
             where T : class
         {
-            this.InstallConfiguration<T>(services, config, typeof(T).Name);
+            InstallConfiguration<T>(services, config, typeof(T).Name);
         }
 
         private void InstallConfiguration<T>(IServiceCollection services, IConfiguration config, string sectionName)

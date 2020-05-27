@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GreenProject.Backend.Contracts.Errors
+﻿namespace GreenProject.Backend.Contracts.Errors
 {
     public static class ErrorCodes
     {

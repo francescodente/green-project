@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GreenProject.Backend.ApiLayer.Filters;
+﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
@@ -16,17 +12,17 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [RequireLogin(RoleType.Administrator)]
     public class AdminController : ControllerBase
     {
-        private readonly IAdminService adminService;
+        private readonly IAdminService _adminService;
 
         public AdminController(IAdminService adminService)
         {
-            this.adminService = adminService;
+            _adminService = adminService;
         }
 
         [HttpPut("users/{userId}/enable")]
         public async Task<IActionResult> SetUserEnabledState([FromRoute] int userId, [FromBody] bool enabled)
         {
-            await this.adminService.SetUserEnabledState(userId, enabled);
+            await _adminService.SetUserEnabledState(userId, enabled);
             return NoContent();
         }
     }

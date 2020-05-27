@@ -6,7 +6,6 @@ using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,7 +24,7 @@ namespace GreenProject.Backend.Core.Logic
 
         protected Task<T> Require(int itemId, QueryWrapper<T> queryWrapper = null)
         {
-            return this.GetDefaultQuery()
+            return GetDefaultQuery()
                 .Where(i => !i.IsDeleted)
                 .WrapIfPresent(queryWrapper)
                 .SingleOptionalAsync(p => p.ItemId == itemId)
@@ -34,7 +33,7 @@ namespace GreenProject.Backend.Core.Logic
 
         protected Task<PagedCollection<TOutput>> GetPaged<TOutput>(PaginationFilter pagination, PurchasableFilters filters)
         {
-            IQueryable<T> items = this.GetDefaultQuery()
+            IQueryable<T> items = GetDefaultQuery()
                 .VisibleToCustomers();
 
             if (filters.Categories != null && filters.Categories.Any())
@@ -48,41 +47,41 @@ namespace GreenProject.Backend.Core.Logic
             }
 
             return items
-                .ProjectTo<TOutput>(this.Mapper.ConfigurationProvider)
+                .ProjectTo<TOutput>(Mapper.ConfigurationProvider)
                 .ToPagedCollection(pagination);
         }
 
         protected async Task<TOutput> Insert<TOutput>(Action<T> initializer)
         {
-            T entity = new T
+            var entity = new T
             {
                 IsEnabled = true,
                 IsDeleted = false
             };
             initializer(entity);
-            this.Data.PurchasableItems.Add(entity);
-            await this.Data.SaveChangesAsync();
-            return this.Mapper.Map<TOutput>(entity);
+            Data.PurchasableItems.Add(entity);
+            await Data.SaveChangesAsync();
+            return Mapper.Map<TOutput>(entity);
         }
 
         protected async Task<TOutput> Update<TOutput>(int itemId, Action<T> updater, QueryWrapper<T> queryWrapper = null)
         {
-            T entity = await this.Require(itemId, queryWrapper);
+            T entity = await Require(itemId, queryWrapper);
 
             updater(entity);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
 
-            return this.Mapper.Map<TOutput>(entity);
+            return Mapper.Map<TOutput>(entity);
         }
 
         protected async Task Delete(int itemId)
         {
-            T item = await this.Require(itemId);
+            T item = await Require(itemId);
 
             item.IsDeleted = true;
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
     }
 }

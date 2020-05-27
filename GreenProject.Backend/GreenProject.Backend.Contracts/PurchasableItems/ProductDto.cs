@@ -1,8 +1,6 @@
 ﻿using GreenProject.Backend.Entities;
 using GreenProject.Backend.Entities.Utils;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Contracts.PurchasableItems
 {
@@ -33,7 +31,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public decimal IvaPercentage { get; set; }
             public bool IsStarred { get; set; }
             public int CategoryId { get; set; }
-            public IEnumerable<CompatibilityDto.Input> CompatibleCrates { get; set; }
+            public IEnumerable<CompatibilityDto.InputWithCrate> CompatibleCrates { get; set; }
         }
 
         public class Update
@@ -44,7 +42,7 @@ namespace GreenProject.Backend.Contracts.PurchasableItems
             public decimal IvaPercentage { get; set; }
             public bool IsStarred { get; set; }
             public int CategoryId { get; set; }
-            public IEnumerable<CompatibilityDto.Input> CompatibleCrates { get; set; }
+            public IEnumerable<CompatibilityDto.InputWithCrate> CompatibleCrates { get; set; }
         }
     }
 }

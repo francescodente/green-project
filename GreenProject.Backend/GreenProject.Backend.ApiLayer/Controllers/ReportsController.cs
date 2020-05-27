@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CsvHelper;
-using CsvHelper.Configuration;
-using GreenProject.Backend.ApiLayer.Filters;
+﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.ApiLayer.Utils.Csv;
 using GreenProject.Backend.Contracts.Reports;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
@@ -25,13 +18,13 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     {
         private const string CsvMimeType = "text/csv";
 
-        private readonly IReportsService reportsService;
-        private readonly ICsvFactory csvFactory;
+        private readonly IReportsService _reportsService;
+        private readonly ICsvFactory _csvFactory;
 
         public ReportsController(IReportsService reportsService, ICsvFactory csvFactory)
         {
-            this.reportsService = reportsService;
-            this.csvFactory = csvFactory;
+            _reportsService = reportsService;
+            _csvFactory = csvFactory;
         }
 
         [HttpGet("orders")]
@@ -39,10 +32,10 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         {
             DateTime targetDate = date ?? DateTime.Today;
 
-            IEnumerable<OrderReportModel> records = await this.reportsService
+            IEnumerable<OrderReportModel> records = await _reportsService
                 .GetDailyOrdersReport(targetDate);
 
-            return CsvFile(this.csvFactory.DailyOrders(records, targetDate));
+            return CsvFile(_csvFactory.DailyOrders(records, targetDate));
         }
 
         [HttpGet("products")]
@@ -50,10 +43,10 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         {
             DateTime targetDate = date ?? DateTime.Today;
 
-            IEnumerable<ProductReportModel> records = await this.reportsService
+            IEnumerable<ProductReportModel> records = await _reportsService
                 .GetDailyRequestedProductsReport(targetDate);
 
-            return CsvFile(this.csvFactory.DailyProducts(records, targetDate));
+            return CsvFile(_csvFactory.DailyProducts(records, targetDate));
         }
 
         [HttpGet("supplierorder")]
@@ -61,10 +54,10 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         {
             DateTime targetDate = date ?? DateTime.Today;
 
-            IEnumerable<SupplierProductReportModel> records = await this.reportsService
+            IEnumerable<SupplierProductReportModel> records = await _reportsService
                 .GetDailySupplierReport(targetDate, categories);
 
-            return CsvFile(this.csvFactory.SupplierOrder(records, targetDate));
+            return CsvFile(_csvFactory.SupplierOrder(records, targetDate));
         }
 
         [HttpGet("revenue")]
@@ -72,10 +65,10 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         {
             DateTime targetDate = date ?? DateTime.Today;
 
-            IEnumerable<DailyRevenueModel> records = await this.reportsService
+            IEnumerable<DailyRevenueModel> records = await _reportsService
                 .GetRevenueReport(targetDate);
 
-            return CsvFile(this.csvFactory.Revenue(records, targetDate));
+            return CsvFile(_csvFactory.Revenue(records, targetDate));
         }
 
         private IActionResult CsvFile(CsvReport report)

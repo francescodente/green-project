@@ -1,15 +1,12 @@
 ﻿using GreenProject.Backend.ApiLayer.DependencyInjection;
-using GreenProject.Backend.DataAccess.Sql;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace GreenProject.Backend.ApiLayer
@@ -18,8 +15,8 @@ namespace GreenProject.Backend.ApiLayer
     {
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            this.Configuration = configuration;
-            this.Environment = environment;
+            Configuration = configuration;
+            Environment = environment;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,7 +25,7 @@ namespace GreenProject.Backend.ApiLayer
         public void ConfigureServices(IServiceCollection services)
         {
             ReflectionUtils.InstancesOfSubtypes<IServiceInstaller>(typeof(Startup).Assembly)
-                .ForEach(installer => installer.InstallServices(services, this.Configuration, this.Environment));
+                .ForEach(installer => installer.InstallServices(services, Configuration, Environment));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -50,9 +47,10 @@ namespace GreenProject.Backend.ApiLayer
                 MinimumSameSitePolicy = SameSiteMode.None
             });
 
-            GlobalSettings settings = this.Configuration.GetSection(nameof(GlobalSettings)).Get<GlobalSettings>();
+            GlobalSettings settings = Configuration.GetSection(nameof(GlobalSettings)).Get<GlobalSettings>();
             app.UseCors(x => x
-                .SetIsOriginAllowed(settings.AllowedOrigins.Contains)
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .WithOrigins((settings?.AllowedOrigins ?? Enumerable.Empty<string>()).ToArray())
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
@@ -72,7 +70,7 @@ namespace GreenProject.Backend.ApiLayer
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

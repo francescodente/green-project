@@ -1,7 +1,6 @@
 ﻿using GreenProject.Backend.Contracts.Errors;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Core.Exceptions
 {
@@ -24,8 +23,8 @@ namespace GreenProject.Backend.Core.Exceptions
         {
             return new ErrorResponseDto
             {
-                PropertyErrors = this.GetPropertyErrors(),
-                GlobalErrors = this.GetGlobalErrors()
+                PropertyErrors = GetPropertyErrors(),
+                GlobalErrors = GetGlobalErrors()
             };
         }
 
@@ -38,8 +37,8 @@ namespace GreenProject.Backend.Core.Exceptions
         {
             yield return new GlobalErrorDto
             {
-                Code = this.MainErrorCode,
-                Message = this.Message
+                Code = MainErrorCode,
+                Message = Message
             };
         }
     }

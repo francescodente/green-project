@@ -1,5 +1,4 @@
 ﻿using GreenProject.Backend.Core.Exceptions;
-using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using System;
@@ -10,11 +9,11 @@ namespace GreenProject.Backend.Core.EntitiesExtensions
 {
     public static class OrdersExtensions
     {
-        private static IDictionary<OrderState, ISet<OrderState>> validStateTransitions;
+        private static readonly IDictionary<OrderState, ISet<OrderState>> ValidStateTransitions;
 
         static OrdersExtensions()
         {
-            validStateTransitions = new Dictionary<OrderState, ISet<OrderState>>
+            ValidStateTransitions = new Dictionary<OrderState, ISet<OrderState>>
             {
                 { OrderState.Pending, new HashSet<OrderState> { OrderState.Shipping, OrderState.Canceled } },
                 { OrderState.Shipping, new HashSet<OrderState> { OrderState.Completed } },
@@ -25,7 +24,7 @@ namespace GreenProject.Backend.Core.EntitiesExtensions
 
         public static void ChangeState(this Order order, OrderState newState)
         {
-            if (!validStateTransitions[order.OrderState].Contains(newState))
+            if (!ValidStateTransitions[order.OrderState].Contains(newState))
             {
                 throw new InvalidStateChangeException(order.OrderState, newState);
             }
@@ -35,7 +34,7 @@ namespace GreenProject.Backend.Core.EntitiesExtensions
 
         public static OrderDetail CreateCopy(this OrderDetail detail)
         {
-            OrderDetail copy = new OrderDetail
+            var copy = new OrderDetail
             {
                 ItemId = detail.ItemId,
                 Quantity = detail.Quantity,

@@ -2,9 +2,6 @@
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Core.Logic.Utils
 {

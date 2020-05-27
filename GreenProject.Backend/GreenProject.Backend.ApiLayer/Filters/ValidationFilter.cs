@@ -1,11 +1,9 @@
 ﻿using FluentValidation.Results;
 using GreenProject.Backend.Contracts.Errors;
-using GreenProject.Backend.Shared.Utils;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Filters
 {
@@ -15,7 +13,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            
+
         }
 
         public void OnActionExecuting(ActionExecutingContext context)
@@ -25,9 +23,9 @@ namespace GreenProject.Backend.ApiLayer.Filters
                 return;
             }
 
-            ValidationResult result = context.HttpContext.Items[ValidationResultKey] as ValidationResult;
+            var result = context.HttpContext.Items[ValidationResultKey] as ValidationResult;
 
-            context.Result = new BadRequestObjectResult(this.CreateErrorResponse(result));
+            context.Result = new BadRequestObjectResult(CreateErrorResponse(result));
         }
 
         private ErrorResponseDto CreateErrorResponse(ValidationResult result)
@@ -36,7 +34,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
             {
                 return new ErrorResponseDto
                 {
-                    GlobalErrors = this.GetDefaultGlobalError(),
+                    GlobalErrors = GetDefaultGlobalError(),
                     PropertyErrors = Enumerable.Empty<PropertyErrorDto>()
                 };
             }

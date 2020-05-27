@@ -1,17 +1,16 @@
 ﻿using GreenProject.Backend.Contracts.Errors;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Core.Exceptions
 {
     public class EmailAlreadyInUseException : DomainException
     {
-        private readonly string emailProperty;
+        private readonly string _emailProperty;
 
         public EmailAlreadyInUseException(string emailProperty = "email")
         {
-            this.emailProperty = emailProperty;
+            _emailProperty = emailProperty;
         }
 
         public override string MainErrorCode => throw new NotImplementedException();
@@ -27,7 +26,7 @@ namespace GreenProject.Backend.Core.Exceptions
             {
                 Code = ErrorCodes.Common.DuplicateField,
                 Message = "The given email is already in use",
-                Property = this.emailProperty
+                Property = _emailProperty
             };
         }
     }

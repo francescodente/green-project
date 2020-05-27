@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GreenProject.Backend.ApiLayer.Routes;
+﻿using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Support;
 using GreenProject.Backend.Core.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Controllers
 {
@@ -14,17 +10,17 @@ namespace GreenProject.Backend.ApiLayer.Controllers
     [ApiController]
     public class SupportController : ControllerBase
     {
-        private readonly ISupportService supportService;
+        private readonly ISupportService _supportService;
 
         public SupportController(ISupportService supportService)
         {
-            this.supportService = supportService;
+            _supportService = supportService;
         }
 
         [HttpPost]
         public async Task<IActionResult> SendSupportEmail([FromBody] SupportRequestDto request)
         {
-            await this.supportService.SendSupportEmail(request);
+            await _supportService.SendSupportEmail(request);
             return NoContent();
         }
     }

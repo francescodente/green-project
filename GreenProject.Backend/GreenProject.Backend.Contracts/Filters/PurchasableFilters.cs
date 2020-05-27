@@ -1,5 +1,4 @@
-﻿using GreenProject.Backend.Contracts.PurchasableItems;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace GreenProject.Backend.Contracts.Filters
 {

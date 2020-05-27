@@ -1,6 +1,4 @@
 ﻿using FluentEmail.Core;
-using FluentEmail.Core.Interfaces;
-using FluentEmail.MailKitSmtp;
 using GreenProject.Backend.ApiLayer.HostedServices;
 using GreenProject.Backend.Core.Utils.Notifications;
 using GreenProject.Backend.Infrastructure.Notifications;
@@ -10,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RazorLight;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
@@ -29,15 +26,16 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                     .Build());
 
             services
-                .AddSingleton(this.CreateNotificationsService)
+                .AddSingleton(CreateNotificationsService)
                 .AddHostedService<NotificationsDaemon>();
         }
 
         private INotificationsService CreateNotificationsService(IServiceProvider provider)
         {
-            ICollection<INotificationsService> subServices = new List<INotificationsService>();
-
-            subServices.Add(this.CreateMailNotificationsService(provider));
+            ICollection<INotificationsService> subServices = new List<INotificationsService>
+            {
+                CreateMailNotificationsService(provider)
+            };
 
             return new CompositeNotificationsService(subServices);
         }

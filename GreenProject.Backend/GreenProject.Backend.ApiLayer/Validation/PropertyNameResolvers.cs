@@ -1,17 +1,13 @@
 ﻿using FluentValidation.Internal;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Validation
 {
     public static class PropertyNameResolvers
     {
-        public static string CamelCase(Type type, MemberInfo memberInfo, LambdaExpression expression)
+        public static string CamelCase(MemberInfo memberInfo, LambdaExpression expression)
         {
             return ToCamelCase(DefaultPropertyNameResolver(memberInfo, expression));
         }
@@ -20,8 +16,11 @@ namespace GreenProject.Backend.ApiLayer.Validation
         {
             if (expression != null)
             {
-                PropertyChain chain = PropertyChain.FromExpression(expression);
-                if (chain.Count > 0) return chain.ToString();
+                var chain = PropertyChain.FromExpression(expression);
+                if (chain.Count > 0)
+                {
+                    return chain.ToString();
+                }
             }
 
             if (memberInfo != null)

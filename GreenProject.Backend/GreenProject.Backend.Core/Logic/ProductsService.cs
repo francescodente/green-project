@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper.QueryableExtensions;
 using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Contracts.PurchasableItems;
@@ -10,6 +8,9 @@ using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic
 {
@@ -22,17 +23,17 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task<PagedCollection<ProductDto.Output>> GetProducts(PaginationFilter pagination, PurchasableFilters filters)
         {
-            return this.GetPaged<ProductDto.Output>(pagination, filters);
+            return GetPaged<ProductDto.Output>(pagination, filters);
         }
 
         public Task DeleteProduct(int productId)
         {
-            return this.Delete(productId);
+            return Delete(productId);
         }
 
         public Task<ProductDto.Output> InsertProduct(ProductDto.Insertion product)
         {
-            return this.Insert<ProductDto.Output>(productEntity =>
+            return Insert<ProductDto.Output>(productEntity =>
             {
                 productEntity.Name = product.Name;
                 productEntity.Description = product.Description;
@@ -44,11 +45,11 @@ namespace GreenProject.Backend.Core.Logic
                 productEntity.IvaPercentage = product.IvaPercentage;
                 productEntity.IsStarred = product.IsStarred;
 
-                this.AddCompatibleCrates(productEntity, product.CompatibleCrates);
+                AddCompatibleCrates(productEntity, product.CompatibleCrates);
             });
         }
 
-        private void AddCompatibleCrates(Product productEntity, IEnumerable<CompatibilityDto.Input> compatibilities)
+        private void AddCompatibleCrates(Product productEntity, IEnumerable<CompatibilityDto.InputWithCrate> compatibilities)
         {
             compatibilities.Select(c => new CrateCompatibility
             {
@@ -60,7 +61,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task<ProductDto.Output> UpdateProduct(int productId, ProductDto.Update product)
         {
-            return this.Update<ProductDto.Output>(productId, productEntity =>
+            return Update<ProductDto.Output>(productId, productEntity =>
             {
                 productEntity.Name = product.Name;
                 productEntity.Description = product.Description;
@@ -72,14 +73,23 @@ namespace GreenProject.Backend.Core.Logic
                 if (product.CompatibleCrates != null)
                 {
                     productEntity.Compatibilities.Clear();
-                    this.AddCompatibleCrates(productEntity, product.CompatibleCrates);
+                    AddCompatibleCrates(productEntity, product.CompatibleCrates);
                 }
             }, q => q.Include(p => p.Compatibilities));
         }
 
         protected override IQueryable<Product> GetDefaultQuery()
         {
-            return this.Data.ActiveProducts();
+            return Data.ActiveProducts();
+        }
+
+        public async Task<IEnumerable<CompatibilityDto.OutputWithCrate>> GetCompatibleCrates(int productId)
+        {
+            return await Data
+                .CrateCompatibilities
+                .Where(c => c.ProductId == productId)
+                .ProjectTo<CompatibilityDto.OutputWithCrate>(Mapper.ConfigurationProvider)
+                .ToArrayAsync();
         }
     }
 }

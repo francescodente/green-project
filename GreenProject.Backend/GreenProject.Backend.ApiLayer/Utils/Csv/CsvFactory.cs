@@ -1,35 +1,32 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using GreenProject.Backend.Contracts.Reports;
-using GreenProject.Backend.Shared.Utils;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Utils.Csv
 {
     public class CsvFactory : ICsvFactory
     {
-        private readonly CsvSettings settings;
+        private readonly CsvSettings _settings;
 
         public CsvFactory(CsvSettings settings)
         {
-            this.settings = settings;
+            _settings = settings;
         }
 
         private byte[] CreateReportContent(Action<CsvWriter> writeAction)
         {
-            using (MemoryStream stream = new MemoryStream())
-            using (StreamWriter writer = new StreamWriter(stream, Encoding.GetEncoding(this.settings.Encoding)))
+            using (var stream = new MemoryStream())
+            using (var writer = new StreamWriter(stream, Encoding.GetEncoding(_settings.Encoding)))
             {
-                using (CsvWriter csv = new CsvWriter(writer, CultureInfo.GetCultureInfo(this.settings.CultureInfo)))
+                using (var csv = new CsvWriter(writer, CultureInfo.GetCultureInfo(_settings.CultureInfo)))
                 {
-                    csv.Configuration.Delimiter = this.settings.Delimiter;
+                    csv.Configuration.Delimiter = _settings.Delimiter;
                     writeAction(csv);
                 }
 
@@ -39,7 +36,7 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
 
         private byte[] CreateReportContentFromClassMap<T>(IEnumerable<T> records, ClassMap classMap)
         {
-            return this.CreateReportContent(csv =>
+            return CreateReportContent(csv =>
             {
                 csv.Configuration.RegisterClassMap(classMap);
                 csv.WriteRecords(records);
@@ -48,12 +45,12 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
 
         public CsvReport DailyOrders(IEnumerable<OrderReportModel> records, DateTime date)
         {
-            ClassMap map = new CsvMappings.OrderReportModelMap(this.settings.DailyOrders);
+            ClassMap map = new CsvMappings.OrderReportModelMap(_settings.DailyOrders);
 
             return new CsvReport
             {
-                FileName = string.Format(this.settings.DailyOrders.FileName, date),
-                Content = this.CreateReportContentFromClassMap(records, map)
+                FileName = string.Format(_settings.DailyOrders.FileName, date),
+                Content = CreateReportContentFromClassMap(records, map)
             };
         }
 
@@ -65,39 +62,39 @@ namespace GreenProject.Backend.ApiLayer.Utils.Csv
                 .OrderBy(s => s);
 
             ClassMap map = new CsvMappings.ProductReportModelMap(
-                this.settings.DailyProducts,
+                _settings.DailyProducts,
                 productNames,
-                CultureInfo.GetCultureInfo(this.settings.CultureInfo));
+                CultureInfo.GetCultureInfo(_settings.CultureInfo));
 
             return new CsvReport
             {
-                FileName = string.Format(this.settings.DailyProducts.FileName, date),
-                Content = this.CreateReportContentFromClassMap(records, map)
+                FileName = string.Format(_settings.DailyProducts.FileName, date),
+                Content = CreateReportContentFromClassMap(records, map)
             };
         }
 
         public CsvReport SupplierOrder(IEnumerable<SupplierProductReportModel> records, DateTime date)
         {
-            ClassMap map = new CsvMappings.SupplierProductReportModelMap(this.settings.SupplierOrder);
+            ClassMap map = new CsvMappings.SupplierProductReportModelMap(_settings.SupplierOrder);
 
             return new CsvReport
             {
-                FileName = string.Format(this.settings.SupplierOrder.FileName, date),
-                Content = this.CreateReportContentFromClassMap(records, map)
+                FileName = string.Format(_settings.SupplierOrder.FileName, date),
+                Content = CreateReportContentFromClassMap(records, map)
             };
         }
 
         public CsvReport Revenue(IEnumerable<DailyRevenueModel> records, DateTime date)
         {
             ClassMap map = new CsvMappings.DailyRevenueModelMap(
-                this.settings.Revenue,
-                this.settings.SupportedIvaValues,
-                CultureInfo.GetCultureInfo(this.settings.CultureInfo));
+                _settings.Revenue,
+                _settings.SupportedIvaValues,
+                CultureInfo.GetCultureInfo(_settings.CultureInfo));
 
             return new CsvReport
             {
-                FileName = string.Format(this.settings.Revenue.FileName, date),
-                Content = this.CreateReportContentFromClassMap(records, map)
+                FileName = string.Format(_settings.Revenue.FileName, date),
+                Content = CreateReportContentFromClassMap(records, map)
             };
         }
     }

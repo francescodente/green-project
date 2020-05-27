@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-using FluentValidation.Internal;
 using GreenProject.Backend.ApiLayer.Converter;
 using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Validation;
@@ -31,7 +30,8 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 })
                 .AddFluentValidation(options =>
                 {
-                    ValidatorOptions.PropertyNameResolver = PropertyNameResolvers.CamelCase;
+                    ValidatorOptions.PropertyNameResolver = (type, memberInfo, expr) =>
+                        PropertyNameResolvers.CamelCase(memberInfo, expr);
                     options.RegisterValidatorsFromAssemblyContaining<Startup>();
                     options.ImplicitlyValidateChildProperties = true;
                 })

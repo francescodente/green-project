@@ -14,11 +14,11 @@ namespace GreenProject.Backend.ApiLayer.Filters
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public class KeepInCacheForAttribute : Attribute, IAsyncActionFilter
     {
-        private readonly int lifetimeInMinutes;
+        private readonly int _lifetimeInMinutes;
 
         public KeepInCacheForAttribute(int lifetimeInMinutes)
         {
-            this.lifetimeInMinutes = lifetimeInMinutes;
+            _lifetimeInMinutes = lifetimeInMinutes;
         }
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
@@ -33,7 +33,7 @@ namespace GreenProject.Backend.ApiLayer.Filters
 
             ICacheService cacheService = context.HttpContext.RequestServices.GetRequiredService<ICacheService>();
 
-            string key = this.GenerateKeyFromRequest(context.HttpContext.Request);
+            string key = GenerateKeyFromRequest(context.HttpContext.Request);
             IOptional<object> cacheHit = await cacheService.RetrieveValue<object>(key);
 
             if (cacheHit.IsPresent())
@@ -46,17 +46,17 @@ namespace GreenProject.Backend.ApiLayer.Filters
 
             if (actionResult.Result is OkObjectResult okObjectResult)
             {
-                await cacheService.StoreValue(key, okObjectResult.Value, TimeSpan.FromMinutes(this.lifetimeInMinutes));
+                await cacheService.StoreValue(key, okObjectResult.Value, TimeSpan.FromMinutes(_lifetimeInMinutes));
             }
         }
 
         private string GenerateKeyFromRequest(HttpRequest request)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
             sb.Append(request.Path);
 
-            foreach (var (key, value) in request.Query.OrderBy(x => x.Key))
+            foreach ((string key, Microsoft.Extensions.Primitives.StringValues value) in request.Query.OrderBy(x => x.Key))
             {
                 sb.Append($"|{key}={value}");
             }

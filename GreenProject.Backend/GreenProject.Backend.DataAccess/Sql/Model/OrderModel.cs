@@ -1,7 +1,7 @@
-﻿using System;
-using GreenProject.Backend.Entities;
+﻿using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace GreenProject.Backend.DataAccess.Sql.Model
 {

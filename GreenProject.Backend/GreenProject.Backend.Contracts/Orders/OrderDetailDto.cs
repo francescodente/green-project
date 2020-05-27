@@ -1,5 +1,4 @@
-﻿using GreenProject.Backend.Contracts.PurchasableItems;
-using GreenProject.Backend.Entities;
+﻿using GreenProject.Backend.Entities;
 using GreenProject.Backend.Entities.Utils;
 
 namespace GreenProject.Backend.Contracts.Orders

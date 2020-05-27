@@ -22,19 +22,19 @@ namespace GreenProject.Backend.Core.Logic
 
         private Task<User> RequireUserWithAddresses(int userId)
         {
-            return this.RequireUserById(userId, q => q.IncludingAddresses());
+            return RequireUserById(userId, q => q.IncludingAddresses());
         }
 
         public async Task<AddressDto.Output> AddAddress(int userId, AddressDto.Input address)
         {
-            User user = await this.RequireUserWithAddresses(userId);
+            User user = await RequireUserWithAddresses(userId);
 
-            Zone zone = await this.Data
+            Zone zone = await Data
                 .Zones
                 .SingleOptionalAsync(z => z.ZipCode == address.ZipCode)
                 .Map(z => z.OrElseThrow(() => NotFoundException.ZoneWithZipCode(address.ZipCode)));
 
-            Address addressEntity = new Address
+            var addressEntity = new Address
             {
                 Street = address.Street,
                 HouseNumber = address.HouseNumber,
@@ -45,14 +45,14 @@ namespace GreenProject.Backend.Core.Logic
 
             user.AddAddress(addressEntity);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
 
-            return this.Mapper.Map<AddressDto.Output>(addressEntity);
+            return Mapper.Map<AddressDto.Output>(addressEntity);
         }
 
         public async Task DeleteAddress(int userId, int addressId)
         {
-            User user = await this.RequireUserWithAddresses(userId);
+            User user = await RequireUserWithAddresses(userId);
             Address address = user
                 .Addresses
                 .SingleOptional(a => a.AddressId == addressId)
@@ -60,28 +60,28 @@ namespace GreenProject.Backend.Core.Logic
 
             user.DeleteAddress(address);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public Task<AddressCollectionDto> GetAddresses(int userId)
         {
-            return this.Data
+            return Data
                 .ActiveUsers()
                 .Where(u => u.UserId == userId)
-                .ProjectTo<AddressCollectionDto>(this.Mapper.ConfigurationProvider)
+                .ProjectTo<AddressCollectionDto>(Mapper.ConfigurationProvider)
                 .SingleOptionalAsync()
                 .Map(a => a.OrElseThrow(() => NotFoundException.UserWithId(userId)));
         }
 
         public async Task SetDefaultAddress(int userId, int addressId)
         {
-            User user = await this.RequireUserWithAddresses(userId);
+            User user = await RequireUserWithAddresses(userId);
             if (!user.Addresses.Any(a => a.AddressId == addressId))
             {
                 throw NotFoundException.AddressWithId(addressId);
             }
             user.DefaultAddressId = addressId;
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
     }
 }

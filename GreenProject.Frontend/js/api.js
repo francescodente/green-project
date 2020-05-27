@@ -6,8 +6,8 @@ class APIClass {
         }
         APIClass.API = this;
 
-        this.protocol = "http://"
-        this.serverAddress = "localhost:5000";
+        this.protocol = location.protocol + "//";
+        this.serverAddress = "api." + location.host;
         this.apiVer = "v1";
         this.basePath = this.protocol + this.serverAddress + "/";
         this.apiPath = this.basePath + "api/" + this.apiVer + "/";

@@ -9,9 +9,7 @@ using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic
@@ -19,17 +17,17 @@ namespace GreenProject.Backend.Core.Logic
     public class ReportsService : AbstractService, IReportsService
     {
         private const decimal KilogramsPerSlot = 0.5m;
-        private readonly PricingSettings pricingSettings;
+        private readonly PricingSettings _pricingSettings;
 
         public ReportsService(IRequestSession request, PricingSettings pricingSettings)
             : base(request)
         {
-            this.pricingSettings = pricingSettings;
+            _pricingSettings = pricingSettings;
         }
 
         public async Task<IEnumerable<OrderReportModel>> GetDailyOrdersReport(DateTime date)
         {
-            return await this.Data
+            return await Data
                 .Orders
                 .Where(o => o.DeliveryDate == date)
                 .Where(o => o.OrderState != OrderState.Canceled)
@@ -47,19 +45,19 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<IEnumerable<ProductReportModel>> GetDailyRequestedProductsReport(DateTime date)
         {
-           IEnumerable<Order> orders = await this.Data
-                .Orders
-                .Where(o => o.OrderState != OrderState.Canceled)
-                .Where(o => o.DeliveryDate == date)
-                .Include(o => o.Details)
-                    .ThenInclude(d => d.Item)
-                .Include(o => o.Details)
-                    .ThenInclude(d => d.SubProducts)
-                        .ThenInclude(s => s.Product)
-                .OrderByDescending(o => o.IsSubscription)
-                .ToArrayAsync();
+            IEnumerable<Order> orders = await Data
+                 .Orders
+                 .Where(o => o.OrderState != OrderState.Canceled)
+                 .Where(o => o.DeliveryDate == date)
+                 .Include(o => o.Details)
+                     .ThenInclude(d => d.Item)
+                 .Include(o => o.Details)
+                     .ThenInclude(d => d.SubProducts)
+                         .ThenInclude(s => s.Product)
+                 .OrderByDescending(o => o.IsSubscription)
+                 .ToArrayAsync();
 
-            IEnumerable<ProductReportModel> models = orders.SelectMany(this.CreateOrderSections);
+            IEnumerable<ProductReportModel> models = orders.SelectMany(CreateOrderSections);
 
             return models;
         }
@@ -74,7 +72,7 @@ namespace GreenProject.Backend.Core.Logic
                     OrderNumber = $"{order.OrderNumber} ({i + 1})",
                     ProductQuantities = detail
                         .SubProducts
-                        .ToDictionary(s => this.GetProductHeaderString(s.Product), this.GetActualCrateQuantityInMainUnit),
+                        .ToDictionary(s => GetProductHeaderString(s.Product), GetActualCrateQuantityInMainUnit),
                     Weight = (detail.Item as Crate).Capacity * KilogramsPerSlot
                 })
                 .ToList();
@@ -87,7 +85,7 @@ namespace GreenProject.Backend.Core.Logic
                     ProductQuantities = order
                         .Details
                         .Where(d => d.Item is Product)
-                        .ToDictionary(d => this.GetProductHeaderString(d.Item as Product), this.GetActualDetailQuantityInMainUnit),
+                        .ToDictionary(d => GetProductHeaderString(d.Item as Product), GetActualDetailQuantityInMainUnit),
                     Weight = null
                 });
             }
@@ -117,7 +115,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<IEnumerable<SupplierProductReportModel>> GetDailySupplierReport(DateTime date, IEnumerable<int> categories)
         {
-            var products = await this.Data
+            var products = await Data
                 .Products
                 .Where(p => categories.Contains(p.CategoryId))
                 .Select(p => new
@@ -148,7 +146,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<IEnumerable<DailyRevenueModel>> GetRevenueReport(DateTime date)
         {
-            IEnumerable<Order> orders = await this.Data
+            IEnumerable<Order> orders = await Data
                 .Orders
                 .Where(o => o.OrderState == OrderState.Completed)
                 .Where(o => o.DeliveryDate.Year == date.Year && o.DeliveryDate.Month == date.Month)
@@ -156,19 +154,19 @@ namespace GreenProject.Backend.Core.Logic
                     .ThenInclude(d => d.Item)
                 .ToArrayAsync();
 
-            DateTime startOfMonth = new DateTime(date.Year, date.Month, 1);
+            var startOfMonth = new DateTime(date.Year, date.Month, 1);
 
             return EnumerableUtils.EnumerateDates(startOfMonth)
                 .Take(System.DateTime.DaysInMonth(date.Year, date.Month))
-                .GroupJoin(orders, d => d, o => o.DeliveryDate, this.CreateDailyRevenueModel);
+                .GroupJoin(orders, d => d, o => o.DeliveryDate, CreateDailyRevenueModel);
         }
 
         private DailyRevenueModel CreateDailyRevenueModel(DateTime date, IEnumerable<Order> orders)
         {
-            DailyRevenueModel record = new DailyRevenueModel { Date = date };
+            var record = new DailyRevenueModel { Date = date };
 
             orders
-                .Peek(o => record.IvaValues.Merge(this.pricingSettings.ShippingIvaPercentage, o.ShippingCost, (a, b) => a + b))
+                .Peek(o => record.IvaValues.Merge(_pricingSettings.ShippingIvaPercentage, o.ShippingCost, (a, b) => a + b))
                 .SelectMany(o => o.Details)
                 .ForEach(d =>
                 {

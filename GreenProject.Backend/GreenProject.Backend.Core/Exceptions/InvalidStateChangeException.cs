@@ -1,8 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Errors;
 using GreenProject.Backend.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Core.Exceptions
 {

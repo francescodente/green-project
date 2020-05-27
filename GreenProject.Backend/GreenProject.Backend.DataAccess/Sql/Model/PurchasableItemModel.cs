@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GreenProject.Backend.Entities;
+﻿using GreenProject.Backend.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -17,7 +14,7 @@ namespace GreenProject.Backend.DataAccess.Sql.Model
         public void Configure(EntityTypeBuilder<PurchasableItem> entity)
         {
             entity.HasKey(e => e.ItemId);
-            
+
             entity.Property(e => e.Description).HasMaxLength(DescriptionSize);
 
             entity.Property(e => e.Name)

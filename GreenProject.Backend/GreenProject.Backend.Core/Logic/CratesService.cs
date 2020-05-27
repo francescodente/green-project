@@ -6,7 +6,6 @@ using GreenProject.Backend.Core.Logic.Utils;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
-using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +24,12 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task<PagedCollection<CrateDto.Output>> GetCrates(PaginationFilter pagination, PurchasableFilters filters)
         {
-            return this.GetPaged<CrateDto.Output>(pagination, filters);
+            return GetPaged<CrateDto.Output>(pagination, filters);
         }
 
         public Task<CrateDto.Output> InsertCrate(CrateDto.Input crate)
         {
-            return this.Insert<CrateDto.Output>(crateEntity =>
+            return Insert<CrateDto.Output>(crateEntity =>
             {
                 crateEntity.Name = crate.Name;
                 crateEntity.Description = crate.Description;
@@ -44,12 +43,12 @@ namespace GreenProject.Backend.Core.Logic
 
         public Task DeleteCrate(int crateId)
         {
-            return this.Delete(crateId);
+            return Delete(crateId);
         }
 
         public Task<CrateDto.Output> UpdateCrate(int crateId, CrateDto.Input crate)
         {
-            return this.Update<CrateDto.Output>(crateId, crateEntity =>
+            return Update<CrateDto.Output>(crateId, crateEntity =>
             {
                 crateEntity.Name = crate.Name;
                 crateEntity.Description = crate.Description;
@@ -62,15 +61,15 @@ namespace GreenProject.Backend.Core.Logic
 
         protected override IQueryable<Crate> GetDefaultQuery()
         {
-            return this.Data.ActiveCrates();
+            return Data.ActiveCrates();
         }
 
-        public async Task<IEnumerable<CompatibilityDto.Output>> GetCompatibleProducts(int crateId)
+        public async Task<IEnumerable<CompatibilityDto.OutputWithProduct>> GetCompatibleProducts(int crateId)
         {
-            return await this.Data
+            return await Data
                 .CrateCompatibilities
                 .Where(c => c.CrateId == crateId)
-                .ProjectTo<CompatibilityDto.Output>(this.Mapper.ConfigurationProvider)
+                .ProjectTo<CompatibilityDto.OutputWithProduct>(Mapper.ConfigurationProvider)
                 .ToArrayAsync();
         }
     }

@@ -19,31 +19,31 @@ namespace GreenProject.Backend.Core.Logic
 {
     public class CartService : AbstractService, ICartService
     {
-        private readonly IPricingService pricing;
-        private readonly IOrderScheduler scheduler;
-        private readonly OrdersSettings settings;
+        private readonly IPricingService _pricing;
+        private readonly IOrderScheduler _scheduler;
+        private readonly OrdersSettings _settings;
 
         public CartService(IRequestSession request, IPricingService pricing, IOrderScheduler scheduler, OrdersSettings settings)
             : base(request)
         {
-            this.pricing = pricing;
-            this.scheduler = scheduler;
-            this.settings = settings;
+            _pricing = pricing;
+            _scheduler = scheduler;
+            _settings = settings;
         }
 
         private Task<User> RequireUserWithCart(int userId)
         {
-            return this.RequireUserById(userId, q => q.IncludingCart());
+            return RequireUserById(userId, q => q.IncludingCart());
         }
 
         private Task<User> RequireUserWithCartAndCustomerRoles(int userId)
         {
-            return this.RequireUserById(userId, q => q.IncludingCart().IncludingCustomerRoles());
+            return RequireUserById(userId, q => q.IncludingCart().IncludingCustomerRoles());
         }
 
         public async Task<OrderDto> ConfirmCart(int userId, DeliveryInfoDto.Input deliveryInfo)
         {
-            User user = await this.RequireUserById(userId, q => q
+            User user = await RequireUserById(userId, q => q
                 .IncludingCart()
                 .IncludingCustomerRoles()
                 .Include(u => u.Addresses)
@@ -59,82 +59,82 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
                 .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
 
-            DateTime scheduleDate = await this.scheduler
-                .FindNextAvailableDate(this.DateTime.Today.AddDays(this.settings.LockTimeSpanInDays), address.ZipCode);
-            
-            Order order = new Order
+            DateTime scheduleDate = await _scheduler
+                .FindNextAvailableDate(DateTime.Today.AddDays(_settings.LockTimeSpanInDays), address.ZipCode);
+
+            var order = new Order
             {
                 Address = address,
                 DeliveryDate = scheduleDate,
                 IsSubscription = false,
                 Notes = deliveryInfo.Notes,
                 OrderState = OrderState.Pending,
-                Timestamp = this.DateTime.Now
+                Timestamp = DateTime.Now
             };
 
             CustomerType customerType = user.GetCustomerType().Value;
-            user.CartItems.Select(c => c.CreateOrderDetail(customerType)).ForEach(order.Details.Add);
+            user.CartItems.Select(c => c.CreateOrderDetail()).ForEach(order.Details.Add);
             user.CartItems.Clear();
 
-            this.pricing.AssignPricesToOrder(order);
+            _pricing.AssignPricesToOrder(order);
             user.Orders.Add(order);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
 
-            this.Notifications.OrderAccepted(order).FireAndForget();
+            Notifications.OrderAccepted(order).FireAndForget();
 
-            return this.Mapper.Map<OrderDto>(order);
+            return Mapper.Map<OrderDto>(order);
         }
 
         public async Task<CartDto> GetCartDetails(int userId)
         {
-            CartDto output = await this.Data
+            CartDto output = await Data
                 .ActiveUsers()
                 .Where(u => u.UserId == userId)
-                .ProjectTo<CartDto>(this.Mapper.ConfigurationProvider)
+                .ProjectTo<CartDto>(Mapper.ConfigurationProvider)
                 .SingleOptionalAsync()
                 .Map(c => c.OrElseThrow(() => NotFoundException.UserWithId(userId)));
 
-            this.pricing.AssignPricesToCart(output);
+            _pricing.AssignPricesToCart(output);
 
             return output;
         }
 
         public async Task InsertCartItem(int userId, QuantifiedProductDto.Input item)
         {
-            Product product = await this.Data
+            Product product = await Data
                 .VisibleProducts()
                 .SingleOptionalAsync(p => p.ItemId == item.ProductId)
                 .Map(op => op.OrElseThrow(() => NotFoundException.PurchasableItemWithId(item.ProductId)));
 
-            User user = await this.RequireUserWithCartAndCustomerRoles(userId);
+            User user = await RequireUserWithCartAndCustomerRoles(userId);
 
             user.AddProductToCart(product, item.Quantity);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public async Task UpdateCartItem(int userId, QuantifiedProductDto.Input item)
         {
-            User user = await this.RequireUserWithCart(userId);
+            User user = await RequireUserWithCart(userId);
 
             user.UpdateCartItemQuantity(item.ProductId, item.Quantity);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public async Task DeleteCartItem(int userId, int productId)
         {
-            User user = await this.RequireUserWithCart(userId);
+            User user = await RequireUserWithCart(userId);
 
             user.RemoveProductFromCart(productId);
 
-            await this.Data.SaveChangesAsync();
+            await Data.SaveChangesAsync();
         }
 
         public Task<int> GetCartSize(int userId)
         {
-            return this.Data
+            return Data
                 .ActiveUsers()
                 .Where(u => u.UserId == userId)
                 .Select(u => new { Size = u.CartItems.Count() })

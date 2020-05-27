@@ -2,11 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
@@ -42,7 +39,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                         new List<string>()
                     }
                 });
-                c.CustomSchemaIds(this.GetFullNameWithoutNamespace);
+                c.CustomSchemaIds(GetFullNameWithoutNamespace);
             });
         }
 
@@ -53,7 +50,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
                 return type.Name;
             }
 
-            return $"{this.GetFullNameWithoutNamespace(type.DeclaringType)}.{type.Name}";
+            return $"{GetFullNameWithoutNamespace(type.DeclaringType)}.{type.Name}";
         }
     }
 }

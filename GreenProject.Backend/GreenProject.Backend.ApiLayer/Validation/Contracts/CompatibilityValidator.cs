@@ -1,13 +1,9 @@
 ﻿using FluentValidation;
 using GreenProject.Backend.Contracts.PurchasableItems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 {
-    public class CompatibilityValidator : AbstractValidator<CompatibilityDto.Input>
+    public class CompatibilityValidator : AbstractValidator<CompatibilityDto.InputWithCrate>
     {
         public CompatibilityValidator()
         {

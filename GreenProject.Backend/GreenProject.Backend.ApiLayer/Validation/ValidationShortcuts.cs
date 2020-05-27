@@ -1,11 +1,7 @@
 ﻿using FluentValidation;
 using GreenProject.Backend.ApiLayer.Validation.Configuration;
 using GreenProject.Backend.Contracts.Errors;
-using GreenProject.Backend.Entities.Utils;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Validation
 {

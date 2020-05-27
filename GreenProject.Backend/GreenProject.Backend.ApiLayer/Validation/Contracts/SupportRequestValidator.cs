@@ -1,9 +1,5 @@
 ﻿using FluentValidation;
 using GreenProject.Backend.Contracts.Support;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.ApiLayer.Validation.Contracts
 {

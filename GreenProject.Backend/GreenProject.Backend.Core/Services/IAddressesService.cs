@@ -1,6 +1,4 @@
 ﻿using GreenProject.Backend.Contracts.Addresses;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Services

@@ -1,8 +1,6 @@
 ﻿using GreenProject.Backend.Contracts.Reports;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Services

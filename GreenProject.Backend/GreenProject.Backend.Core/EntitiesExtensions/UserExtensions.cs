@@ -1,7 +1,6 @@
 ﻿using GreenProject.Backend.Core.Exceptions;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 

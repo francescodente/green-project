@@ -1,21 +1,18 @@
 ﻿using GreenProject.Backend.Contracts.Errors;
 using GreenProject.Backend.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Core.Exceptions
 {
     public class NotFoundException : DomainException
     {
-        public override string MainErrorCode => resourceName == null ? ErrorCodes.Common.NotFound : ErrorCodes.Common.ResourceNotFound(resourceName);
+        public override string MainErrorCode => _resourceName == null ? ErrorCodes.Common.NotFound : ErrorCodes.Common.ResourceNotFound(_resourceName);
 
-        private string resourceName;
+        private readonly string _resourceName;
 
         private NotFoundException(string message, string resourceName)
             : base(message)
         {
-            this.resourceName = resourceName;
+            _resourceName = resourceName;
         }
 
         public static NotFoundException WithMessage(string message, string resourceName = null)
