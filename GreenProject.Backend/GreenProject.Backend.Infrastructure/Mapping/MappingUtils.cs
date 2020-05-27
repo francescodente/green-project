@@ -88,7 +88,9 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                     .ForMember(dst => dst.CrateId, o => o.MapFrom(src => src.ItemId))
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Image.Path));
 
-                CreateMap<CrateCompatibility, CompatibilityDto.Output>();
+                CreateMap<CrateCompatibility, CompatibilityDto.OutputWithProduct>();
+
+                CreateMap<CrateCompatibility, CompatibilityDto.OutputWithCrate>();
             }
         }
 

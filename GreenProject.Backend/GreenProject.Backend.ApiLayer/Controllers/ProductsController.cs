@@ -36,7 +36,6 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("{productId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOrAdminOnly]
         public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductDto.Update product)
         {
             return Ok(await _productsService.UpdateProduct(productId, product));
@@ -44,11 +43,16 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpDelete("{productId}")]
         [RequireLogin(RoleType.Administrator)]
-        [OwnerOrAdminOnly]
         public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
             await _productsService.DeleteProduct(productId);
             return NoContent();
+        }
+
+        [HttpGet("{productId}/compatibilities")]
+        public async Task<IActionResult> GetProductCompatibilities([FromRoute] int productId)
+        {
+            return Ok(await _productsService.GetCompatibleCrates(productId));
         }
     }
 }

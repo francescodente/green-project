@@ -1,6 +1,7 @@
 ﻿using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Contracts.PurchasableItems;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Services
@@ -14,5 +15,7 @@ namespace GreenProject.Backend.Core.Services
         Task<ProductDto.Output> UpdateProduct(int productId, ProductDto.Update product);
 
         Task DeleteProduct(int productId);
+
+        Task<IEnumerable<CompatibilityDto.OutputWithCrate>> GetCompatibleCrates(int productId);
     }
 }

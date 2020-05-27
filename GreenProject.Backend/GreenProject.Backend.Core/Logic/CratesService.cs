@@ -64,12 +64,12 @@ namespace GreenProject.Backend.Core.Logic
             return Data.ActiveCrates();
         }
 
-        public async Task<IEnumerable<CompatibilityDto.Output>> GetCompatibleProducts(int crateId)
+        public async Task<IEnumerable<CompatibilityDto.OutputWithProduct>> GetCompatibleProducts(int crateId)
         {
             return await Data
                 .CrateCompatibilities
                 .Where(c => c.CrateId == crateId)
-                .ProjectTo<CompatibilityDto.Output>(Mapper.ConfigurationProvider)
+                .ProjectTo<CompatibilityDto.OutputWithProduct>(Mapper.ConfigurationProvider)
                 .ToArrayAsync();
         }
     }

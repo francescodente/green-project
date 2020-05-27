@@ -1,4 +1,5 @@
-﻿using GreenProject.Backend.Contracts.Filters;
+﻿using AutoMapper.QueryableExtensions;
+using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Pagination;
 using GreenProject.Backend.Contracts.PurchasableItems;
 using GreenProject.Backend.Core.Logic.Utils;
@@ -48,7 +49,7 @@ namespace GreenProject.Backend.Core.Logic
             });
         }
 
-        private void AddCompatibleCrates(Product productEntity, IEnumerable<CompatibilityDto.Input> compatibilities)
+        private void AddCompatibleCrates(Product productEntity, IEnumerable<CompatibilityDto.InputWithCrate> compatibilities)
         {
             compatibilities.Select(c => new CrateCompatibility
             {
@@ -80,6 +81,15 @@ namespace GreenProject.Backend.Core.Logic
         protected override IQueryable<Product> GetDefaultQuery()
         {
             return Data.ActiveProducts();
+        }
+
+        public async Task<IEnumerable<CompatibilityDto.OutputWithCrate>> GetCompatibleCrates(int productId)
+        {
+            return await Data
+                .CrateCompatibilities
+                .Where(c => c.ProductId == productId)
+                .ProjectTo<CompatibilityDto.OutputWithCrate>(Mapper.ConfigurationProvider)
+                .ToArrayAsync();
         }
     }
 }
