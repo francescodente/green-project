@@ -58,15 +58,13 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         [HttpPost("crates")]
         public async Task<IActionResult> AddCrateToWeeklyOrder([FromRoute] int userId, [FromBody] int crateId)
         {
-            await _weeklyOrdersService.AddCrate(userId, crateId);
-            return NoContent();
+            return Ok(await _weeklyOrdersService.AddCrate(userId, crateId));
         }
 
         [HttpPost("extras")]
         public async Task<IActionResult> AddExtraProductToWeeklyOrder([FromRoute] int userId, [FromBody] QuantifiedProductDto.Input product)
         {
-            await _weeklyOrdersService.AddExtraProduct(userId, product);
-            return NoContent();
+            return Ok(await _weeklyOrdersService.AddExtraProduct(userId, product));
         }
 
         [HttpPut("extras")]

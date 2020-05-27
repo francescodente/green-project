@@ -13,9 +13,9 @@ namespace GreenProject.Backend.Core.Services
 
         Task<WeeklyOrderDto> GetWeeklyOrderData(int userId);
 
-        Task AddCrate(int userId, int crateId);
+        Task<OrderDetailDto> AddCrate(int userId, int crateId);
 
-        Task AddExtraProduct(int userId, QuantifiedProductDto.Input product);
+        Task<OrderDetailDto> AddExtraProduct(int userId, QuantifiedProductDto.Input product);
 
         Task UpdateExtraProduct(int userId, QuantifiedProductDto.Input product);
 

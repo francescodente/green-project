@@ -70,7 +70,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Map(o => o.OrElseThrow(() => new OrderLockedException()));
         }
 
-        private async Task UpdateDetailsForWeeklyOrder(int userId, Func<Order, Task> updateAction)
+        private async Task UpdateDetailsForWeeklyOrder(int userId, Action<Order> updateAction)
         {
             await RequireSubscription(userId);
 
@@ -80,7 +80,7 @@ namespace GreenProject.Backend.Core.Logic
                 .Include(o => o.Address)
                     .ThenInclude(a => a.Zone));
 
-            await updateAction(order);
+            updateAction(order);
 
             _pricing.AssignPricesToOrder(order);
 
@@ -153,46 +153,51 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleAsync();
         }
 
-        public Task AddCrate(int userId, int crateId)
+        public async Task<OrderDetailDto> AddCrate(int userId, int crateId)
         {
-            return UpdateDetailsForWeeklyOrder(userId, async order =>
-            {
-                Crate crate = await Data
-                    .Crates
-                    .Where(c => c.ItemId == crateId)
-                    .SingleOptionalAsync()
-                    .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)));
+            Crate crate = await Data
+                .Crates
+                .Where(c => c.ItemId == crateId)
+                .SingleOptionalAsync()
+                .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)));
 
-                order.Details.Add(new OrderDetail
-                {
-                    Item = crate,
-                    Quantity = 1,
-                    Price = crate.Price,
-                    RemainingSlots = crate.Capacity
-                });
-            });
+            var detail = new OrderDetail
+            {
+                Item = crate,
+                Quantity = 1,
+                Price = crate.Price,
+                RemainingSlots = crate.Capacity
+            };
+
+            await UpdateDetailsForWeeklyOrder(userId, order => order.Details.Add(detail));
+
+            return Mapper.Map<OrderDetailDto>(detail);
         }
 
-        public Task AddExtraProduct(int userId, QuantifiedProductDto.Input product)
+        public async Task<OrderDetailDto> AddExtraProduct(int userId, QuantifiedProductDto.Input product)
         {
-            return UpdateDetailsForWeeklyOrder(userId, async order =>
-            {
-                Product productEntity = await Data
+            Product productEntity = await Data
                     .Products
                     .Where(c => c.ItemId == product.ProductId)
                     .SingleOptionalAsync()
                     .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId)));
 
+            var detail = new OrderDetail
+            {
+                Item = productEntity,
+                Quantity = product.Quantity,
+                Price = productEntity.Price
+            };
+
+            await UpdateDetailsForWeeklyOrder(userId, order =>
+            {
                 order.Details
                     .SingleOptional(d => d.ItemId == product.ProductId)
                     .IfPresent(d => d.Quantity += product.Quantity)
-                    .IfAbsent(() => order.Details.Add(new OrderDetail
-                    {
-                        Item = productEntity,
-                        Quantity = product.Quantity,
-                        Price = productEntity.Price
-                    }));
+                    .IfAbsent(() => order.Details.Add(detail));
             });
+
+            return Mapper.Map<OrderDetailDto>(detail);
         }
 
         public Task UpdateExtraProduct(int userId, QuantifiedProductDto.Input product)
@@ -204,8 +209,6 @@ namespace GreenProject.Backend.Core.Logic
                     .SingleOptional(d => d.ItemId == product.ProductId)
                     .IfPresent(d => d.Quantity = product.Quantity)
                     .OrElseThrow(() => NotFoundException.PurchasableItemWithId(product.ProductId));
-
-                return Task.CompletedTask;
             });
         }
 
@@ -218,8 +221,6 @@ namespace GreenProject.Backend.Core.Logic
                     .OrElseThrow(() => NotFoundException.OrderDetailWithId(orderDetailId));
 
                 order.Details.Remove(detail);
-
-                return Task.CompletedTask;
             });
         }
 
