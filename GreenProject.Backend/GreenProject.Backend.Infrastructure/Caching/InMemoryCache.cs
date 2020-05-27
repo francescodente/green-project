@@ -2,8 +2,6 @@
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.Extensions.Caching.Memory;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Infrastructure.Caching
@@ -29,7 +27,7 @@ namespace GreenProject.Backend.Infrastructure.Caching
 
         public Task StoreValue<T>(string key, T value, TimeSpan lifetime)
         {
-            MemoryCacheEntryOptions options = new MemoryCacheEntryOptions
+            var options = new MemoryCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = lifetime,
                 Size = 1

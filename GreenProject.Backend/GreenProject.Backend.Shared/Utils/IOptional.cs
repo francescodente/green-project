@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GreenProject.Backend.Shared.Utils
+﻿namespace GreenProject.Backend.Shared.Utils
 {
     public interface IOptional<out T>
     {

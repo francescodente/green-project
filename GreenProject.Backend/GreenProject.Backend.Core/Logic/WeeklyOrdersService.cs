@@ -103,7 +103,7 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptional(a => a.AddressId == deliveryInfo.AddressId)
                 .OrElseThrow(() => NotFoundException.AddressWithId(deliveryInfo.AddressId));
 
-            Order order = new Order
+            var order = new Order
             {
                 UserId = userId,
                 Address = address,

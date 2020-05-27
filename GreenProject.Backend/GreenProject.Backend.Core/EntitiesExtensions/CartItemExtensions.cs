@@ -1,8 +1,4 @@
 ﻿using GreenProject.Backend.Entities;
-using GreenProject.Backend.Shared.Utils;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Core.EntitiesExtensions
 {

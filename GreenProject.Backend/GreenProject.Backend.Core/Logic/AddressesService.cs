@@ -34,7 +34,7 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleOptionalAsync(z => z.ZipCode == address.ZipCode)
                 .Map(z => z.OrElseThrow(() => NotFoundException.ZoneWithZipCode(address.ZipCode)));
 
-            Address addressEntity = new Address
+            var addressEntity = new Address
             {
                 Street = address.Street,
                 HouseNumber = address.HouseNumber,

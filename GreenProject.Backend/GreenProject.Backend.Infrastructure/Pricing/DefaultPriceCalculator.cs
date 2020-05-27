@@ -16,7 +16,7 @@ namespace GreenProject.Backend.Infrastructure.Pricing
 
         public OrderPrices CalculatePrices(Order order)
         {
-            OrderPrices prices = new OrderPrices
+            var prices = new OrderPrices
             {
                 Subtotal = order
                     .Details
@@ -41,7 +41,7 @@ namespace GreenProject.Backend.Infrastructure.Pricing
 
         public OrderPrices CalculatePrices(CartDto cart)
         {
-            OrderPrices prices = new OrderPrices
+            var prices = new OrderPrices
             {
                 Subtotal = cart
                     .CartItems

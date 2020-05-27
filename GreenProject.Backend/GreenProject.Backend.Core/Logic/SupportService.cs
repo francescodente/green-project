@@ -11,7 +11,7 @@ namespace GreenProject.Backend.Core.Logic
         public SupportService(IRequestSession request)
             : base(request)
         {
-            
+
         }
 
         public Task SendSupportEmail(SupportRequestDto request)

@@ -1,5 +1,4 @@
 ﻿using GreenProject.Backend.Contracts.Users;
-using GreenProject.Backend.Contracts.Users.Roles;
 
 namespace GreenProject.Backend.Contracts.Authentication
 {

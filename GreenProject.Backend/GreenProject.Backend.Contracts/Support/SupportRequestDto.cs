@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GreenProject.Backend.Contracts.Support
+﻿namespace GreenProject.Backend.Contracts.Support
 {
     public class SupportRequestDto
     {

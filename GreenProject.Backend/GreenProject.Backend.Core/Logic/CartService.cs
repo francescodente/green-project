@@ -61,7 +61,7 @@ namespace GreenProject.Backend.Core.Logic
 
             DateTime scheduleDate = await _scheduler
                 .FindNextAvailableDate(DateTime.Today.AddDays(_settings.LockTimeSpanInDays), address.ZipCode);
-            
+
             var order = new Order
             {
                 Address = address,

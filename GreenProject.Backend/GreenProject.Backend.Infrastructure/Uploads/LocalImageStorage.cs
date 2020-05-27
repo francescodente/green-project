@@ -1,6 +1,5 @@
 ﻿using GreenProject.Backend.Core.Utils.Uploads;
 using SixLabors.ImageSharp;
-using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Processing;
 using System;
 using System.IO;
@@ -31,7 +30,7 @@ namespace GreenProject.Backend.Infrastructure.Uploads
 
         public Task<string> StoreImage(Stream imageStream, Action<IImageStoringOptions> options = null)
         {
-            LocalImageStoringOptions storingOptions = new LocalImageStoringOptions
+            var storingOptions = new LocalImageStoringOptions
             {
                 Extension = _defaultExtension
             };
@@ -47,7 +46,7 @@ namespace GreenProject.Backend.Infrastructure.Uploads
             {
                 Directory.CreateDirectory(dir);
             }
-            using (Image image = Image.Load(imageStream))
+            using (var image = Image.Load(imageStream))
             {
                 if (storingOptions.ImageModifier != null)
                 {
@@ -73,7 +72,7 @@ namespace GreenProject.Backend.Infrastructure.Uploads
 
             public IImageStoringOptions Resize(Size targetSize)
             {
-                ResizeOptions options = new ResizeOptions
+                var options = new ResizeOptions
                 {
                     Size = new SixLabors.Primitives.Size(targetSize.Width, targetSize.Height),
                     Position = AnchorPositionMode.Center,

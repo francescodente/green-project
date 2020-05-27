@@ -1,8 +1,5 @@
-﻿using GreenProject.Backend.Contracts.Authentication;
-using GreenProject.Backend.Core.Utils.Time;
-using GreenProject.Backend.Entities;
+﻿using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
-using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Utils.Authentication
 {

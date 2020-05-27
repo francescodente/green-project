@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GreenProject.Backend.Core.Utils.Uploads
+﻿namespace GreenProject.Backend.Core.Utils.Uploads
 {
     public class ImageTypeUploadSettings
     {

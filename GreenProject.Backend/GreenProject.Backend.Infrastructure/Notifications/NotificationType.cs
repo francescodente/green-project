@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GreenProject.Backend.Infrastructure.Notifications
+﻿namespace GreenProject.Backend.Infrastructure.Notifications
 {
     public enum NotificationType
     {

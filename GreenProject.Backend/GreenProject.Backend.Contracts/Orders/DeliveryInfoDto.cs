@@ -1,7 +1,5 @@
 ﻿using GreenProject.Backend.Contracts.Addresses;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GreenProject.Backend.Contracts.Orders
 {

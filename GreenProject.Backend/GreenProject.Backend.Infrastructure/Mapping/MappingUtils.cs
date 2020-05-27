@@ -17,7 +17,7 @@ namespace GreenProject.Backend.Infrastructure.Mapping
     {
         public static IMapper CreateDefaultMapper()
         {
-            MapperConfiguration config = new MapperConfiguration(c =>
+            var config = new MapperConfiguration(c =>
             {
                 c.AddProfile<AddressMapping>();
                 c.AddProfile<CartMapping>();

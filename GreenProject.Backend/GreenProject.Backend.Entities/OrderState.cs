@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace GreenProject.Backend.Entities
+﻿namespace GreenProject.Backend.Entities
 {
     public enum OrderState
     {

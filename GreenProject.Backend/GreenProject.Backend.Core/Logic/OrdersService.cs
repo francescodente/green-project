@@ -12,7 +12,6 @@ using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -115,7 +114,7 @@ namespace GreenProject.Backend.Core.Logic
                 order.DeliveryDate.AddDays(_settings.WeeklyOrderRenewTimeInDays),
                 address.ZipCode);
 
-            Order newOrder = new Order
+            var newOrder = new Order
             {
                 UserId = order.UserId,
                 DeliveryDate = scheduleDate,

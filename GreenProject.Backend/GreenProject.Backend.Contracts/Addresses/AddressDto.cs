@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GreenProject.Backend.Contracts.Addresses
+﻿namespace GreenProject.Backend.Contracts.Addresses
 {
     public static class AddressDto
     {

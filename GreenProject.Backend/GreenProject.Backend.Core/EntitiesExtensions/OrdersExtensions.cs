@@ -1,5 +1,4 @@
 ﻿using GreenProject.Backend.Core.Exceptions;
-using GreenProject.Backend.Core.Utils.Pricing;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using System;
@@ -35,7 +34,7 @@ namespace GreenProject.Backend.Core.EntitiesExtensions
 
         public static OrderDetail CreateCopy(this OrderDetail detail)
         {
-            OrderDetail copy = new OrderDetail
+            var copy = new OrderDetail
             {
                 ItemId = detail.ItemId,
                 Quantity = detail.Quantity,

@@ -5,8 +5,6 @@ using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Core.Utils.Time;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
-using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic.Utils

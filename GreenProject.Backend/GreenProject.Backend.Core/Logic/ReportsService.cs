@@ -9,9 +9,7 @@ using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic
@@ -47,17 +45,17 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task<IEnumerable<ProductReportModel>> GetDailyRequestedProductsReport(DateTime date)
         {
-           IEnumerable<Order> orders = await Data
-                .Orders
-                .Where(o => o.OrderState != OrderState.Canceled)
-                .Where(o => o.DeliveryDate == date)
-                .Include(o => o.Details)
-                    .ThenInclude(d => d.Item)
-                .Include(o => o.Details)
-                    .ThenInclude(d => d.SubProducts)
-                        .ThenInclude(s => s.Product)
-                .OrderByDescending(o => o.IsSubscription)
-                .ToArrayAsync();
+            IEnumerable<Order> orders = await Data
+                 .Orders
+                 .Where(o => o.OrderState != OrderState.Canceled)
+                 .Where(o => o.DeliveryDate == date)
+                 .Include(o => o.Details)
+                     .ThenInclude(d => d.Item)
+                 .Include(o => o.Details)
+                     .ThenInclude(d => d.SubProducts)
+                         .ThenInclude(s => s.Product)
+                 .OrderByDescending(o => o.IsSubscription)
+                 .ToArrayAsync();
 
             IEnumerable<ProductReportModel> models = orders.SelectMany(CreateOrderSections);
 
@@ -156,7 +154,7 @@ namespace GreenProject.Backend.Core.Logic
                     .ThenInclude(d => d.Item)
                 .ToArrayAsync();
 
-            DateTime startOfMonth = new DateTime(date.Year, date.Month, 1);
+            var startOfMonth = new DateTime(date.Year, date.Month, 1);
 
             return EnumerableUtils.EnumerateDates(startOfMonth)
                 .Take(System.DateTime.DaysInMonth(date.Year, date.Month))
@@ -165,7 +163,7 @@ namespace GreenProject.Backend.Core.Logic
 
         private DailyRevenueModel CreateDailyRevenueModel(DateTime date, IEnumerable<Order> orders)
         {
-            DailyRevenueModel record = new DailyRevenueModel { Date = date };
+            var record = new DailyRevenueModel { Date = date };
 
             orders
                 .Peek(o => record.IvaValues.Merge(_pricingSettings.ShippingIvaPercentage, o.ShippingCost, (a, b) => a + b))

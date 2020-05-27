@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GreenProject.Backend.Contracts.Authentication;
+﻿using GreenProject.Backend.Contracts.Authentication;
 using GreenProject.Backend.Contracts.Users;
 using GreenProject.Backend.Core.EntitiesExtensions;
 using GreenProject.Backend.Core.Exceptions;
@@ -12,6 +9,9 @@ using GreenProject.Backend.Core.Utils.Session;
 using GreenProject.Backend.Entities;
 using GreenProject.Backend.Shared.Utils;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Logic
 {
@@ -131,7 +131,7 @@ namespace GreenProject.Backend.Core.Logic
 
         private AuthenticationResultDto GenerateAuthenticationResult(User user)
         {
-            var (result, refreshToken) = _handler.OnUserAuthenticated(user);
+            (AuthenticationResult result, RefreshToken refreshToken) = _handler.OnUserAuthenticated(user);
             Data.RefreshTokens.Add(refreshToken);
             return new AuthenticationResultDto
             {
