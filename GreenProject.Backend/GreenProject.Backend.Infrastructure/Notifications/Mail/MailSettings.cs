@@ -1,7 +1,4 @@
-﻿using GreenProject.Backend.Infrastructure.Notifications.Mail;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace GreenProject.Backend.Infrastructure.Notifications.Mail
 {
@@ -9,6 +6,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
     {
         public string Host { get; set; }
         public int Port { get; set; }
+        public bool UseSsl { get; set; }
         public string WebRoot { get; set; }
         public string MailLayoutKey { get; set; }
         public string CultureInfo { get; set; }

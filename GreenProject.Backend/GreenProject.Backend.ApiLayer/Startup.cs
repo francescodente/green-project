@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -50,7 +49,8 @@ namespace GreenProject.Backend.ApiLayer
 
             GlobalSettings settings = Configuration.GetSection(nameof(GlobalSettings)).Get<GlobalSettings>();
             app.UseCors(x => x
-                .SetIsOriginAllowed(settings.AllowedOrigins.Contains)
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .WithOrigins((settings?.AllowedOrigins ?? Enumerable.Empty<string>()).ToArray())
                 .AllowCredentials()
                 .AllowAnyMethod()
                 .AllowAnyHeader());

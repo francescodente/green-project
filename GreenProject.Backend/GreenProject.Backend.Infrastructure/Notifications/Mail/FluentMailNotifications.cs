@@ -35,9 +35,9 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
             {
                 Server = _settings.Host,
                 Port = _settings.Port,
+                UseSsl = _settings.UseSsl,
                 Password = addressInfo.Password,
                 User = addressInfo.Address,
-                UseSsl = true,
                 RequiresAuthentication = true
             });
 
@@ -69,7 +69,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
             var model = new { User = user, Token = token };
 
             return SendNotification(NotificationType.AccountConfirmation, model, user.Email);
-                
+
         }
 
         public Task OrderAccepted(Order order)
@@ -124,7 +124,7 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
                 Body = body
             };
 
-            string recipient = _settings.EmailAddresses[MailContext.Support].Address;
+            string recipient = _settings.EmailAddresses[MailContext.Administrators].Address;
 
             return SendNotification(NotificationType.SupportRequest, model, recipient);
         }
