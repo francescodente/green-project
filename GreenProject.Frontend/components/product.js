@@ -130,9 +130,7 @@ class Product extends Purchasable {
         // Set confirm method
         quantityModal.find(".confirm-quantity").attr("data-method", action == "add" ? "addToCrate" : "editCrateQuantity");
         quantityModal.find("[name='quantity']").val(action == "add" ? 1 : this.crateSlots);
-        if (this.maxQuantity != null) {
-            quantityModal.find("[name='quantity']").attr("max", this.maxQuantity);
-        }
+        quantityModal.find("[name='quantity']").attr("max", this.maxQuantity < this.parentCrateFreeSlots ? this.maxQuantity : this.parentCrateFreeSlots);
         this.reactToQuantityChange(quantityModal);
         quantityModal.showModal();
     }

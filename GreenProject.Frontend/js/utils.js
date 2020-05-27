@@ -22,6 +22,7 @@ Storage.prototype.setObjectProperty = function(objectKey, key, value) {
 \************************/
 
 location.filename = location.pathname.split("/").pop();
+location.searchParams = new URL(location).searchParams;
 
 /***********************\
 |   JQUERY EXTENSIONS   |

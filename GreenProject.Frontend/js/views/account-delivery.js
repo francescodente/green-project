@@ -5,12 +5,11 @@ var zipCodes;
 var states = OrderStates.map(state => state.name);
 
 // Extract search params
-var url = new URL(window.location.href);
-var baseUrl = url.href.split('?')[0];
-var dateFrom = url.searchParams.get("From");
-var dateTo = url.searchParams.get("To");
-var selectedZipCodes = url.searchParams.getAll("ZipCodes");
-var selectedStates = url.searchParams.getAll("States");
+var baseUrl = location.href.split('?')[0];
+var dateFrom = location.searchParams.get("From");
+var dateTo = location.searchParams.get("To");
+var selectedZipCodes = location.searchParams.getAll("ZipCodes");
+var selectedStates = location.searchParams.getAll("States");
 var pageNumber = 0;
 var lastPage = 0;
 

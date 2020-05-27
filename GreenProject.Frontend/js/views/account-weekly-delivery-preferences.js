@@ -82,14 +82,22 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
     API.getProducts(null, 0, 30, true)
     .then(function(data) {
         if (data.results.length == 0) {
-
+            $(".starred-products").hide();
+            $(".starred-products-no-results").removeClass("d-none");
         } else {
             // Create product objects
+            let weeklyExtraIds = weeklyExtras.map(weeklyExtra => weeklyExtra.productId);
             data.results.forEach(json => {
                 let product = new Product(json);
-                starredProducts.push(product);
-                product.html.starredEntry.appendTo(".starred-products tbody");
+                if(!weeklyExtraIds.includes(product.productId)) {
+                    starredProducts.push(product);
+                    product.html.starredEntry.appendTo(".starred-products tbody");
+                }
             });
+            if (starredProducts.length == 0) {
+                $(".starred-products").addClass("d-none");
+                $(".starred-products-no-results").removeClass("d-none");
+            }
         }
     })
     .catch(function(jqXHR) {
@@ -166,9 +174,23 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
 
-    // Subscription confirm
-    $(".confirm-subscription").click(function() {
+    // Subscription creation
+    $(".confirm-subscription").click(function(event) {
         console.log("confirm-subscription");
+        // Check that the order contains at least one crate
+        if (weeklyCrates.length == 0) {
+            $("#missing-crate-modal").showModal();
+            return;
+        }
+        // Warn the user if some crates have available slots
+        if (!$(event.target).hasClass("skip-full-crate-check")) {
+            for (let weeklyCrate of weeklyCrates) {
+                if (weeklyCrate.crateDescription.occupiedSlots < weeklyCrate.crateDescription.capacity) {
+                    $("#non-full-crate-modal").showModal();
+                    return;
+                }
+            }
+        }
         // Check if and address is selected
         selectedAddress = $("[name='delivery-address']:checked");
         if (!selectedAddress.length) {
@@ -186,15 +208,21 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         API.getZoneSchedule(zipCode)
         .then(function(data) {
             $("#expected-date-modal .expected-date").html(Utils.formatDate(data));
-            $("#expected-date-modal .submit-order").html("Abbonati");
+            $("#expected-date-modal .delivery-address").html(selectedAddress.addressString);
+            $("#expected-date-modal .notes").html($("#notes").val() == "" ? "-" : $("#notes").val());
             $("#expected-date-modal").showModal();
         })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
 
-    // Subscription creation
     $(".submit-order").click(function() {
         console.log("submit-order");
+        $("#modal-loading").showModal();
+        APIUtils.subscribe(selectedAddress.addressId, $("#notes").val())
+        .then(function(data) {
+            $("#subscription-successful-modal").showModal();
+        })
+        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
 
 }

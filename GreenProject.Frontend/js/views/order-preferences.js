@@ -6,8 +6,7 @@ var addressesPromise = new Promise(function(resolve, reject){
 
 $(document).ready(function() {
 
-    let page = new URL(window.location.href).pathname;
-    page = page.substring(page.lastIndexOf("/") + 1);
+    let page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
 
     // Show addresses
     $("#order-preferences-loader").show();

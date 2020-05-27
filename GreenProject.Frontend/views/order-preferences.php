@@ -137,14 +137,43 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="width: 360px;">
             <div class="modal-top text-center">
-                <i class="modal-top-icon mdi mdi-calendar"></i>
+                <i class="modal-top-icon mdi mdi-format-list-bulleted"></i>
             </div>
             <div class="modal-body">
-                <p class="m-0">La data di consegna prevista per il tuo ordine è il giorno <span class="expected-date font-weight-bold"></span>.<br/>Proseguire?</p>
+                <h4 class="mb-3">Riepilogo dati ordine</h4>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="mdi dark mdi-calendar mr-3"></i>
+                    <span>
+                        <span class="text-sec-dark" style="font-size: 14px;">Data di consegna prevista</span><br/>
+                        <span class="expected-date"></span>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="mdi dark mdi-credit-card mr-3"></i>
+                    <span>
+                        <span class="text-sec-dark" style="font-size: 14px;">Modalità di pagamento</span><br/>
+                        <span class="payment-method">Alla consegna</span>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                    <i class="mdi dark mdi-map-marker mr-3"></i>
+                    <span>
+                        <span class="text-sec-dark" style="font-size: 14px;">Indirizzo</span><br/>
+                        <span class="delivery-address"></span>
+                    </span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <i class="mdi dark mdi-text mr-3"></i>
+                    <span>
+                        <span class="text-sec-dark" style="font-size: 14px;">Note</span><br/>
+                        <span class="notes"></span>
+                    </span>
+                </div>
+                <p class="m-0">Proseguire?</p>
             </div>
             <div class="modal-bottom bg-primary d-flex">
                 <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="flex-basis: 100px;">Annulla</button>
-                <button class="submit-order btn accent ripple flex-grow-1" style="flex-basis: 100px;">Acquista</button>
+                <button class="submit-order btn accent ripple flex-grow-1" style="flex-basis: 100px;">Avanti</button>
             </div>
         </div>
     </div>

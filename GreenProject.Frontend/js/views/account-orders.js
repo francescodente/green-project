@@ -6,8 +6,7 @@ $(document).ready(function() {
 
     // Get orders
     $("#modal-loading").showModal();
-    let url = new URL(window.location.href);
-    let pageNumber = url.searchParams.get("PageNumber");
+    let pageNumber = location.searchParams.get("PageNumber");
     if (pageNumber == null) pageNumber = 0;
     API.getCustomerOrders(localStorage.getObject("authData").userId, pageNumber, PAGE_SIZE)
     .then(function(data) {

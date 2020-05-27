@@ -2,7 +2,7 @@ class Crate extends Purchasable {
 
     constructor(json, occupiedSlots, orderDetailId) {
         super(json);
-        this.occupiedSlots = occupiedSlots;
+        this.occupiedSlots = parseInt(occupiedSlots);
         this.orderDetailId = orderDetailId;
         if (this.itemId != null) this.crateId = this.itemId;
 

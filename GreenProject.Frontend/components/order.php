@@ -137,7 +137,7 @@
             <div class="modal-body">
                 <p class="m-0">Contrassegnare questo ordine come <strong>spedito</strong>?<br/>Il cliente sarà notificato del cambio di stato.</p>
                 <div class="loader text-center mt-3">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
@@ -158,7 +158,7 @@
             <div class="modal-body">
                 <p class="m-0">Contrassegnare questo ordine come <strong>completato</strong>?</p>
                 <div class="loader text-center mt-3">
-                    <?php include("loader.php"); ?>
+                    <?php include("views/loader.php"); ?>
                 </div>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">

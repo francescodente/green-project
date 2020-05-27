@@ -7,16 +7,19 @@ class WeeklyCrate extends Entity {
         this.html.main = Entity.getTemplate("WeeklyCrateTable");
         this.html.addProductModal = Entity.getTemplate("WeeklyCrateAddProductModal");
 
-        // Create product entries
+        // Create crate entry
         let crateQuantity = 0;
+        if (this.products.length) {
+            crateQuantity = this.products.map(product => product.quantity).reduce((tot, q) => tot + q);
+        }
+        this.crateDescription = new Crate(this.crateDescription, crateQuantity, this.orderDetailId);
+
+        // Create product entries
         for (let i = 0; i < this.products.length; i++) {
-            crateQuantity += this.products[i].quantity;
             this.products[i] = new Product(this.products[i].product, this.products[i].quantity / 2, this.products[i].maximum);
             this.products[i].weeklyCrateId = this.orderDetailId;
+            this.products[i].parentCrateFreeSlots = this.crateDescription.capacity - this.crateDescription.occupiedSlots;
         }
-
-        // Create crate entry
-        this.crateDescription = new Crate(this.crateDescription, crateQuantity, this.orderDetailId);
 
         let weeklyCrate = this;
 
@@ -51,17 +54,24 @@ class WeeklyCrate extends Entity {
         API.getCrateCompatibilities(weeklyCrate.crateDescription.crateId)
         .then(function(data) {
             weeklyCrate.compatibleProducts = [];
+            let crateProductIds = weeklyCrate.products.map(product => product.productId);
             data.forEach(json => {
                 let product = new Product(json.product, 1, json.maximum);
                 product.weeklyCrateId = weeklyCrate.orderDetailId;
-                weeklyCrate.compatibleProducts.push(product);
-                product.html.compatibleWithCrateEntry.appendTo($(weeklyCrate.html.addProductModal).find(".compatible-products tbody"));
+                if (!crateProductIds.includes(product.productId)) {
+                    weeklyCrate.compatibleProducts.push(product);
+                    product.html.compatibleWithCrateEntry.appendTo($(weeklyCrate.html.addProductModal).find(".compatible-products tbody"));
+                }
             });
+            if (weeklyCrate.compatibleProducts.length == 0) {
+                $(weeklyCrate.html.addProductModal).find(".compatible-products-no-results").removeClass("d-none");
+            } else {
+                $(weeklyCrate.html.addProductModal).find(".compatible-products").show();
+            }
         })
         .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() })
         .finally(function(data) {
             $(weeklyCrate.html.addProductModal).find(".compatible-products-loader").removeClass("d-block");
-            $(weeklyCrate.html.addProductModal).find(".compatible-products").show();
         });
     }
 

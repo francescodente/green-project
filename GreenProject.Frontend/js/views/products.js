@@ -19,10 +19,9 @@ var products = [];
 
 // Get products
 $("#modal-loading").showModal();
-let url = new URL(window.location.href);
-let pageNumber = url.searchParams.get("PageNumber");
+let categories = location.searchParams.getAll("Categories");
+let pageNumber = location.searchParams.get("PageNumber");
 if (pageNumber == null) pageNumber = 0;
-let categories = url.searchParams.getAll("Categories");
 let isCrate = categories[0] == 1;
 API.getProducts(categories, pageNumber, PAGE_SIZE)
 .then(function(data) {

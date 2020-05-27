@@ -124,15 +124,40 @@ class APIUtilsClass {
 
     // Weekly orders
 
-    subscribe(addressId, notes) {
+    async subscribe(addressId, notes) {
+        let userId = localStorage.getObject("authData").userId;
         let data = {
             addressId: addressId,
             notes: notes
         };
-        API.subscribe(localStorage.getObject("authData").userId, data)
-        .then(function(data) {
-            // TODO send all locally stored items, then set isLocallySubscribed to false
-        })
+        let weeklyOrder = localStorage.getObject("weeklyOrder");
+        console.log(weeklyOrder);
+        // Subscribe
+        await API.subscribe(userId, data);
+        console.log("subscribed. adding crates");
+        // Add crates
+        for (let crate of weeklyOrder.crates) {
+            let data = await API.addWeeklyCrate(userId, crate.crateDescription.crateId);
+            console.log(crate);
+            // Add crate products
+            for (let product of crate.products) {
+                await API.addProductToCrate(userId, data.orderDetailId, product.product.productId, product.quantity);
+                console.log(product);
+            }
+        }
+        // Add extra products
+        console.log("crates added. adding extras");
+        for (let product of weeklyOrder.extraProducts) {
+            await API.addExtraProduct(userId, product.itemId, product.quantity);
+            console.log(product);
+        }
+        // Set isLocallySubscribed to false, set isSubscribed to true, delete weeklyOrder
+        let userData = localStorage.getObject("userData");
+        userData.isSubscribed = true;
+        userData.isLocallySubscribed = false;
+        localStorage.setObject("userData", userData);
+        localStorage.removeItem("weeklyOrder");
+        console.log("done");
     }
 
     unsubscribe() {
@@ -173,6 +198,25 @@ class APIUtilsClass {
     }
 
     updateWeeklyOrderPrices(weeklyOrder) {
+        const defaultShippingFee = 3.9;
+        let zoneShippingFee = 0; // TODO get shipping fee from address
+        let subtotal = 0;
+        let iva = 0;
+        weeklyOrder.crates.forEach(crate => {
+            subtotal += crate.crateDescription.price;
+            iva += crate.crateDescription.price * crate.crateDescription.ivaPercentage;
+            console.log(iva);
+        });
+        weeklyOrder.extraProducts.forEach(product => {
+            subtotal += product.price * product.quantity;
+            iva += product.price * product.quantity * product.ivaPercentage;
+            console.log(iva);
+        });
+        let shippingCost = zoneShippingFee + (weeklyOrder.extraProducts.length > 0 ? defaultShippingFee : 0);
+        weeklyOrder.prices.subtotal = subtotal;
+        weeklyOrder.prices.iva = iva;
+        weeklyOrder.prices.shippingCost = shippingCost;
+        weeklyOrder.prices.total = subtotal + iva + shippingCost;
         return weeklyOrder;
     }
 
@@ -242,7 +286,8 @@ class APIUtilsClass {
                 capacity: null,
                 price: product.price,
                 unitName: product.unitName,
-                unitMultiplier: product.unitMultiplier
+                unitMultiplier: product.unitMultiplier,
+                ivaPercentage: product.ivaPercentage
             };
             weeklyOrder.extraProducts.push(productDetail);
         }
@@ -318,7 +363,6 @@ class APIUtilsClass {
             }
             crate.products.push(productDetail);
         }
-        weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
         localStorage.setObject("weeklyOrder", weeklyOrder);
         return Promise.resolve(productDetail);
     }
@@ -338,7 +382,6 @@ class APIUtilsClass {
                 productDetail = crateProduct;
             }
         });
-        weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
         localStorage.setObject("weeklyOrder", weeklyOrder);
         return Promise.resolve(productDetail);
     }
@@ -351,7 +394,6 @@ class APIUtilsClass {
         let weeklyOrder = localStorage.getObject("weeklyOrder");
         let crate = weeklyOrder.crates.filter(crate => crate.orderDetailId == orderDetailId)[0];
         crate.products = crate.products.filter(product => product.product.productId != productId);
-        weeklyOrder = this.updateWeeklyOrderPrices(weeklyOrder);
         localStorage.setObject("weeklyOrder", weeklyOrder);
         return Promise.resolve(null);
     }

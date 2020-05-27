@@ -55,6 +55,8 @@ $(".confirm-cart").click(function() {
     API.getZoneSchedule(zipCode)
     .then(function(data) {
         $("#expected-date-modal .expected-date").html(Utils.formatDate(data));
+        $("#expected-date-modal .delivery-address").html(selectedAddress.addressString);
+        $("#expected-date-modal .notes").html($("#notes").val() == "" ? "-" : $("#notes").val());
         $("#expected-date-modal").showModal();
     })
     .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });

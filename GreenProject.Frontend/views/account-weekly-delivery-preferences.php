@@ -45,7 +45,7 @@
                 </p>
 
                 <div class="weekly-crates">
-                    <div class="product-group-table products table-wrapper table-responsive">
+                    <div class="no-weekly-crates product-group-table products table-wrapper table-responsive" style="display: none;">
                         <table class="table">
                             <tbody>
                                 <tr>
@@ -188,7 +188,7 @@
 
 <div id="modal-weekly-product-add" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-        <div class="modal-content" style="width: 500px;">
+        <div class="modal-content" style="width: 500px; min-height: 500px;">
             <div class="modal-top">
                 <h5 class="m-0">Seleziona un prodotto</h5>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi">
@@ -201,11 +201,72 @@
                     <?php include("views/loader.php"); ?>
                 </div>
 
+                <div class="starred-products-no-results empty-state my-5 d-none">
+                    <img src="/images/empty.png" alt="Nessun prodotto"/>
+                    <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Nessun prodotto</h6>
+                    <p class="text-center text-dis-dark m-0">
+                        Sembra che tutti i prodotti in elenco siano già nel tuo ordine 😮
+                    </p>
+                </div>
+
                 <div class="starred-products product-group-table products table-wrapper table-responsive">
                     <table class="table">
                         <tbody></tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="missing-crate-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-information-outline"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Inserisci almeno una cassetta per procedere con la creazione dell'ordine.</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="btn outline ripple" data-dismiss="modal" style="width: 160px;">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="non-full-crate-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-information-outline"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">C'è ancora spazio in alcune delle cassette nel tuo ordine.<br/>Vuoi procedere comunque?</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex">
+                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="flex-basis: 100px;">No</button>
+                <button class="confirm-subscription skip-full-crate-check btn accent ripple flex-grow-1" style="flex-basis: 100px;">Sì</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="subscription-successful-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-bookmark-check"></i>
+            </div>
+            <div class="modal-body">
+                <h4>Congratulazioni, ti sei abbonato al nostro servizio di consegna settimanale!</h4>
+                <p class="mb-2">
+                    Pui visitare questa pagina ogni settimana per modificare il contenuto del tuo ordine.
+                </p>
+                <p class="m-0">Grazie per aver scelto Green Project!</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <a href="/home" class="btn outline ripple" style="width: 160px;">Chiudi</a>
             </div>
         </div>
     </div>

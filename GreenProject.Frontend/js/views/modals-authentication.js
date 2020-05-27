@@ -6,9 +6,8 @@ function prepForValidation(form) {
 }
 
 function removeGetModal() {
-    let url = new URL(window.location.href);
-    url.searchParams.delete("showmod");
-    history.replaceState({}, "", url.href);
+    location.searchParams.delete("showmod");
+    history.replaceState({}, "", location.href);
 }
 
 $(document).ready(function() {
