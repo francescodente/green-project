@@ -12,7 +12,7 @@ class Category extends Entity {
             searchParams.append("Categories", category);
         });
         let productsUrl = "/products?" + searchParams.toString();
-        let imageUrl = API.basePath + this.imageUrl;
+        let imageUrl = "/images/uploads/" + this.imageUrl;
 
         let category = this;
         for (let k in category.html) {

@@ -31,7 +31,7 @@ class Product extends Purchasable {
         this.formattedPrice = Utils.formatCurrency(this.price * this.quantity);
 
         let product = this;
-        let imageUrl = API.basePath + this.imageUrl;
+        let imageUrl = "/images/uploads/" + this.imageUrl;
         let userData = localStorage.getObject("userData");
         let isSubscribed = userData == null ? false : userData.isSubscribed;
 
