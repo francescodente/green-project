@@ -13,7 +13,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
 
     $("#modal-loading").showModal();
 
-    APIUtils.getWeeklyOrder(localStorage.getObject("authData").userId)
+    APIUtils.getWeeklyOrder()
     .then(function(data) {
 
         if (data.crates.length == 0) {
@@ -121,7 +121,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
             });
         });
         // Remove selected address from address list
-        addresses.filter(address => address.addressId == deliveryInfo.address.addressId)[0]
+        addresses.find(address => address.addressId == deliveryInfo.address.addressId)
                  .html.button.remove();
         // Properly add back selected address
         deliveryInfo.address.html.button.addClass("default");

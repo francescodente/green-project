@@ -65,13 +65,14 @@ class APIUtilsClass {
                 resolve(userData);
                 return;
             }
+            let isLocallySubscribed = userData == null ? false : userData.isLocallySubscribed;
             API.getUserInfo(authData.userId)
             .then(function(data) {
                 data.expiration = now;
                 localStorage.setObject("userData", {
                     expiration: data.expiration,
                     isSubscribed: data.isSubscribed,
-                    isLocallySubscribed: false,
+                    isLocallySubscribed: isLocallySubscribed,
                     marketingConsent: data.marketingConsent,
                     shouldChangePassword: data.shouldChangePassword
                 });
@@ -221,9 +222,10 @@ class APIUtilsClass {
     }
 
     getWeeklyOrder() {
+        let authData = localStorage.getObject("authData");
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.getWeeklyOrder(userData.userId);
+            return API.getWeeklyOrder(authData.userId);
         }
         if (userData.isLocallySubscribed) {
             return Promise.resolve(localStorage.getObject("weeklyOrder"));

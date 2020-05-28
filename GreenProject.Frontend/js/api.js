@@ -7,7 +7,7 @@ class APIClass {
         APIClass.API = this;
 
         this.protocol = location.protocol + "//";
-        this.serverAddress = "api." + location.host;
+        this.serverAddress = location.hostname == "localhost" ? "localhost:5000" : "api." + location.host;
         this.apiVer = "v1";
         this.basePath = this.protocol + this.serverAddress + "/";
         this.apiPath = this.basePath + "api/" + this.apiVer + "/";

@@ -4,15 +4,16 @@ function getProvinces() {
 
 function getCities(provinceName) {
     return zones.children.filter(zone => zone.provinceName == provinceName)
-        .map(zone => zone.cities)[0]
+        .flatMap(zone => zone.cities)
         .map(city => city.cityName);
 }
 
 function getZipCodes(provinceName, cityName) {
     return zones.children.filter(zone => zone.provinceName == provinceName)
-        .map(zone => zone.cities)[0]
+        .flatMap(zone => zone.cities)
         .filter(city => city.cityName == cityName)
-        .map(city => city.zipCodes)[0];
+        .flatMap(city => city.zipCodes)
+        .map(zipCode => zipCode.zipCode);
 }
 
 // Get zones

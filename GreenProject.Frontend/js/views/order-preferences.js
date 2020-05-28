@@ -6,8 +6,6 @@ var addressesPromise = new Promise(function(resolve, reject){
 
 $(document).ready(function() {
 
-    let page = location.pathname.substring(location.pathname.lastIndexOf("/") + 1);
-
     // Show addresses
     $("#order-preferences-loader").show();
     $(".order-preferences-content").hide();
@@ -20,7 +18,7 @@ $(document).ready(function() {
                 json.isDefaultAddress = json.addressId == data.defaultAddressId;
                 let address = new Address(json);
                 addresses.push(address);
-                if (page == "account/subscription") {
+                if (location.pathname == "/account/subscription") {
                     $(".address-list").append(address.html.button);
                 } else if (address.isDefaultAddress) {
                     $(".address-list").prepend(address.html.richRadio);

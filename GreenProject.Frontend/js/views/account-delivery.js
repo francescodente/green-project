@@ -64,8 +64,8 @@ APIUtils.getOrUpdateZones()
         .flatMap(city => {
             let zipCodes = [];
             city.zipCodes.forEach(zipCode => zipCodes.push({
-                key: zipCode,
-                value: zipCode + " - " + city.cityName
+                key: zipCode.zipCode,
+                value: zipCode.zipCode + " - " + city.cityName
             }));
             return zipCodes;
         });

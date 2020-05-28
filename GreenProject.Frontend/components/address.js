@@ -15,7 +15,7 @@ class Address extends Entity {
         let zones = localStorage.getObject("zones").children;
         zones.forEach(province => {
             province.cities.forEach(city => {
-                city.zipCodes.forEach(zipCode => {
+                city.zipCodes.map(zipCode => zipCode.zipCode).forEach(zipCode => {
                     if (zipCode == this.zipCode) {
                         this.city = city.cityName;
                         this.province = province.provinceName;
