@@ -54,11 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\Nuova cartella\**" />
-    <Content Remove="wwwroot\Nuova cartella\**" />
-    <EmbeddedResource Remove="wwwroot\Nuova cartella\**" />
     <None Remove="MailTemplates\**" />
-    <None Remove="wwwroot\Nuova cartella\**" />
   </ItemGroup>
   
   <ItemGroup>
