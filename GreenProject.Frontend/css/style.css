@@ -92,6 +92,19 @@
     opacity: 0.9;
 }
 
+.footer button.btn.accent.newsletter-submit {
+    position: absolute;
+    top: 7px;
+    right: 1px;
+    padding: 8px 16px;
+    box-shadow: none!important;
+    border-radius: 0 4px 4px 0;
+}
+
+.footer .text-input input, .footer .text-input label {
+    background-color: var(--col-primary-dark);
+}
+
 /****************************\
 |   ANCHOR FOR HASH TARGET   |
 \****************************/
