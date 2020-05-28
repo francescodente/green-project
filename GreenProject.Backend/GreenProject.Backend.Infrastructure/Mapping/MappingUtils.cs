@@ -53,13 +53,21 @@ namespace GreenProject.Backend.Infrastructure.Mapping
                 CreateMap<Order, OrderPricesDto>();
 
                 CreateMap<OrderDetail, OrderDetailDto>()
-                    .ForMember(dst => dst.UnitName, o => o.MapFrom(src => ((Product)src.Item).UnitName))
-                    .ForMember(dst => dst.UnitMultiplier, o => o.MapFrom(src => ((Product)src.Item).UnitMultiplier))
                     .ForMember(dst => dst.Name, o => o.MapFrom(src => src.Item.Name))
                     .ForMember(dst => dst.Description, o => o.MapFrom(src => src.Item.Description))
+                    .ForMember(dst => dst.UnitName, o =>
+                    {
+                        o.PreCondition(src => src.Item is Product);
+                        o.MapFrom(src => ((Product)src.Item).UnitName);
+                    })
+                    .ForMember(dst => dst.UnitMultiplier, o =>
+                    {
+                        o.PreCondition(src => src.Item is Product);
+                        o.MapFrom(src => ((Product)src.Item).UnitMultiplier);
+                    })
                     .ForMember(dst => dst.Capacity, o =>
                     {
-                        o.PreCondition(o => o.Item is Crate);
+                        o.PreCondition(src => src.Item is Crate);
                         o.MapFrom(src => ((Crate)src.Item).Capacity);
                     })
                     .ForMember(dst => dst.ImageUrl, o => o.MapFrom(src => src.Item.Image.Path));

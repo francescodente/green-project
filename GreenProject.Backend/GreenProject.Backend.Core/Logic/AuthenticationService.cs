@@ -85,7 +85,8 @@ namespace GreenProject.Backend.Core.Logic
             return new User
             {
                 Email = userInput.Email,
-                MarketingConsent = userInput.MarketingConsent
+                MarketingConsent = userInput.MarketingConsent,
+                IsEnabled = true
             };
         }
 
