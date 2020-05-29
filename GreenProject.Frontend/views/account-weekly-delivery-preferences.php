@@ -266,7 +266,7 @@
                 <p class="m-0">Grazie per aver scelto Green Project!</p>
             </div>
             <div class="modal-bottom bg-primary d-flex justify-content-center">
-                <a href="/home" class="btn outline ripple" style="width: 160px;">Chiudi</a>
+                <a href="/account/subscription" class="btn outline ripple" style="width: 160px;">Chiudi</a>
             </div>
         </div>
     </div>

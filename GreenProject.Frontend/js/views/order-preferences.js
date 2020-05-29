@@ -14,16 +14,21 @@ $(document).ready(function() {
         if (data.addresses.length == 0) {
             $(".addresses-no-results").removeClass("d-none");
         } else {
+            // Use address button for subscribed users; address radio otherwise
+            let addressItem;
+            if (APIUtils.isSubscribed() && location.pathname == "/account/subscription") {
+                addressItem = "button";
+            } else {
+                addressItem = "richRadio";
+            }
             data.addresses.forEach(json => {
                 json.isDefaultAddress = json.addressId == data.defaultAddressId;
                 let address = new Address(json);
                 addresses.push(address);
-                if (location.pathname == "/account/subscription") {
-                    $(".address-list").append(address.html.button);
-                } else if (address.isDefaultAddress) {
-                    $(".address-list").prepend(address.html.richRadio);
+                if (address.isDefaultAddress) {
+                    $(".address-list").prepend(address.html[addressItem]);
                 } else {
-                    $(".address-list").append(address.html.richRadio);
+                    $(".address-list").append(address.html[addressItem]);
                 }
             });
             deferreds[0].resolve(addresses);

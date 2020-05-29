@@ -175,9 +175,8 @@
     align-items: center;
 }
 
-#user-weekly-delivery .summary-preferences span {
+.user-weekly-delivery .summary-preferences span {
     font-weight: bold;
-    color: var(--col-text-sec-dark);
 }
 
 #modal-product-add .table-wrapper {

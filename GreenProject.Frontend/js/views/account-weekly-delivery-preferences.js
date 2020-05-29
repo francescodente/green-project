@@ -137,7 +137,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
     $("#save-notes").click(function() {
         console.log("save notes");
         $("#modal-loading").showModal();
-        APIUtils.setWeeklyDeliveryInfo(deliveryInfo.address.addressId, $("#notes").val())
+        APIUtils.editSubscription(deliveryInfo.address.addressId, $("#notes").val())
         .then(function(data) { location.reload() })
         .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
     });
@@ -146,7 +146,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
     function saveAddress(address, setDefault) {
         $("#modal-loading").showModal();
         let promises = [];
-        promises.push(APIUtils.setWeeklyDeliveryInfo(address.addressId, $("#notes").val()));
+        promises.push(APIUtils.editSubscription(address.addressId, $("#notes").val()));
         if (setDefault) {
             promises.push(API.setDefaultAddress(localStorage.getObject("authData").userId, address.addressId));
         }

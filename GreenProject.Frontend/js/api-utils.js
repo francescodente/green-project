@@ -192,6 +192,18 @@ class APIUtilsClass {
         localStorage.setObjectProperty("userData", "isLocallySubscribed", true);
     }
 
+    isSubscribed() {
+        let userData = localStorage.getObject("userData");
+        if (userData == null) return false;
+        return userData.isSubscribed;
+    }
+
+    isLocallySubscribed() {
+        let userData = localStorage.getObject("userData");
+        if (userData == null) return false;
+        return userData.isLocallySubscribed;
+    }
+
     getNextOrderDetailId(weeklyOrder) {
         let orderDetailId = weeklyOrder.nextOrderDetailId;
         weeklyOrder.nextOrderDetailId++;
