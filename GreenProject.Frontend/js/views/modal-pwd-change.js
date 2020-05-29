@@ -45,7 +45,7 @@ $("#form-pwd-change").submit(function(event) {
 
     API.changePsw(oldPwd, newPwd)
     .then(function(data) {
-        new InfoModal("La password è stata cambiata con successo.").show();
+        InfoModal.show("La password è stata cambiata con successo.");
         $("#form-pwd-change")[0].reset();
     })
     .catch(function(jqXHR) {
@@ -58,7 +58,7 @@ $("#form-pwd-change").submit(function(event) {
                 return;
             }
         }
-        new ErrorModal(jqXHR).show();
+        ErrorModal.show(jqXHR);
     })
     .finally(function(data) {
         $("#change-pwd-loader").hide();

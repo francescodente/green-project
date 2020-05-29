@@ -83,7 +83,7 @@ APIUtils.getOrUpdateZones()
         $("[data-toggle-all='select-zipcode']").attr("checked", true);
     }
 })
-.catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+.catch(function(jqXHR) { ErrorModal.show(jqXHR) });
 
 // Get orders
 $("#modal-loading").showModal();
@@ -105,7 +105,7 @@ API.getOrders(dateFrom, dateTo, selectedZipCodes, selectedStates, pageNumber, PA
 })
 .catch(function(jqXHR) {
     $(".orders-error").removeClass("d-none");
-    new ErrorModal(jqXHR).show();
+    ErrorModal.show(jqXHR);
 })
 .finally(function(data) { $("#modal-loading").fadeModal() });
 
@@ -163,7 +163,7 @@ function checkScroll() {
         })
         .catch(function(jqXHR) {
             $(".orders-error").removeClass("d-none");
-            new ErrorModal(jqXHR).show();
+            ErrorModal.show(jqXHR);
         })
         .finally(function(data) { $(".orders-loader").hide() });
     } else {

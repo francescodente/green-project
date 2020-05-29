@@ -113,7 +113,7 @@ class Product extends Purchasable {
     showQuantityModal(action) {
         console.log("show cart quantity modal");
         if (localStorage.getObject("authData") === null) {
-            new InfoModal("Devi essere registrato e aver effettuato l'accesso per aggiungere prodotti al carrello.").show();
+            InfoModal.show("Devi essere registrato e aver effettuato l'accesso per aggiungere prodotti al carrello.");
             return;
         }
         let quantityModal = this.html.quantityModal;
@@ -166,12 +166,12 @@ class Product extends Purchasable {
         API.addToCart(localStorage.getObject("authData").userId, this.productId, quantity)
         .then(function(data) {
             APIUtils.updateCartBadge()
-            .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+            .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
             quantityModal.modal("hide");
             quantityModal.find(".loader").hide();
             quantityModal.find(".confirm-quantity").attr("disabled", false);
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     editCartQuantity() {
@@ -182,7 +182,7 @@ class Product extends Purchasable {
         quantityModal.find(".confirm-quantity").attr("disabled", true);
         API.editCartQuantity(localStorage.getObject("authData").userId, this.productId, quantity)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     addToCrate() {
@@ -193,7 +193,7 @@ class Product extends Purchasable {
         quantityModal.find(".confirm-quantity").attr("disabled", true);
         APIUtils.addProductToCrate(this.weeklyCrateId, this, quantity)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     editCrateQuantity() {
@@ -204,7 +204,7 @@ class Product extends Purchasable {
         quantityModal.find(".confirm-quantity").attr("disabled", true);
         APIUtils.editProductCrateQuantity(this.weeklyCrateId, this.productId, quantity)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     addToExtras() {
@@ -223,7 +223,7 @@ class Product extends Purchasable {
                 quantityModal.find(".confirm-quantity").attr("disabled", false);
             }
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     editExtraQuantity() {
@@ -234,28 +234,28 @@ class Product extends Purchasable {
         quantityModal.find(".confirm-quantity").attr("disabled", true);
         APIUtils.editExtraProductQuantity(this.orderDetailId, quantity)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     removeFromCart() {
         $("#modal-loading").showModal();
         API.removeFromCart(localStorage.getObject("authData").userId, this.productId)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     removeFromCrate() {
         $("#modal-loading").showModal();
         APIUtils.removeProductFromCrate(this.weeklyCrateId, this.productId)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     removeFromExtras() {
         $("#modal-loading").showModal();
         APIUtils.removeFromWeeklyOrder(this.orderDetailId)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
 }

@@ -29,7 +29,7 @@ $(document).ready(function() {
         })
         .catch(function(jqXHR) {
             if (jqXHR.responseJSON == null) {
-                new ErrorModal(jqXHR).show();
+                ErrorModal.show(jqXHR);
                 return;
             }
             let errCode = jqXHR.responseJSON.globalErrors[0].code;

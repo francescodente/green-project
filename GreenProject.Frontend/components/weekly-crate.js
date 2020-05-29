@@ -69,7 +69,7 @@ class WeeklyCrate extends Entity {
                 $(weeklyCrate.html.addProductModal).find(".compatible-products").show();
             }
         })
-        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() })
+        .catch(function(jqXHR) { console.log(jqXHR); ErrorModal.show(jqXHR) })
         .finally(function(data) {
             $(weeklyCrate.html.addProductModal).find(".compatible-products-loader").removeClass("d-block");
         });

@@ -28,7 +28,7 @@ APIUtils.getOrUpdateZones()
     $("#select-city").setSelectEnabled(false);
     $("#select-zipcode").setSelectEnabled(false);
 })
-.catch(function(jqXHR) { new ErrorModal(jqXHR).show() })
+.catch(function(jqXHR) { ErrorModal.show(jqXHR) })
 .finally(function(data) {
     $("#address-form-loader").hide();
     $(".form-fields").show();
@@ -81,5 +81,5 @@ $("body").on("submit", "#modal-new-address", function(event) {
         "zipCode": $("[name='select-zipcode']:checked").val()
     })
     .then(function(data) { location.reload() })
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
 });

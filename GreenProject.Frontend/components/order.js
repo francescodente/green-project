@@ -142,7 +142,7 @@ class Order extends Entity {
         .catch(function() {
             modal.find(".loader").hide();
             modal.find(".modal-bottom .btn").prop("disabled", false);
-            new ErrorModal({}).show();
+            ErrorModal.show({});
         });
     }
 

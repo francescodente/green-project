@@ -82,7 +82,7 @@ class Address extends Entity {
         .then(function(data) { location.reload() })
         .catch(function(jqXHR) {
             $("#modal-loading").fadeModal();
-            new ErrorModal(jqXHR).show();
+            ErrorModal.show(jqXHR);
         });
     }
 
@@ -92,7 +92,7 @@ class Address extends Entity {
         .then(function(data) { location.reload() })
         .catch(function(jqXHR) {
             $("#modal-loading").fadeModal();
-            new ErrorModal(jqXHR).show();
+            ErrorModal.show(jqXHR);
         });
     }
 

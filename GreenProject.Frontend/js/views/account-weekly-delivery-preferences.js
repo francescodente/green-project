@@ -74,7 +74,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
 
         $("#modal-loading").fadeModal();
     })
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
 
     // Get starred products
     $("#starred-products-loader").show();
@@ -101,7 +101,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         }
     })
     .catch(function(jqXHR) {
-        new ErrorModal(jqXHR).show();
+        ErrorModal.show(jqXHR);
     })
     .finally(function(data) {
         $("#starred-products-loader").hide();
@@ -139,7 +139,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         $("#modal-loading").showModal();
         APIUtils.editSubscription(deliveryInfo.address.addressId, $("#notes").val())
         .then(function(data) { location.reload() })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     });
 
     // Save address (also optionally make it default)
@@ -152,7 +152,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         }
         Promise.all(promises)
         .then(function(data) { location.reload() })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
     // Skip weekly delivery
@@ -160,7 +160,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         $("#modal-loading").showModal();
         API.skipWeeklyOrder(localStorage.getObject("authData").userId)
         .then(function(data) { location.reload() })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     });
 
     // Delete subscription
@@ -171,7 +171,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
             localStorage.setObjectProperty("userData", "isSubscribed", false);
             location.reload()
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     });
 
     // Subscription creation
@@ -212,7 +212,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
             $("#expected-date-modal .notes").html($("#notes").val() == "" ? "-" : $("#notes").val());
             $("#expected-date-modal").showModal();
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     });
 
     $(".submit-order").click(function() {
@@ -222,7 +222,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         .then(function(data) {
             $("#subscription-successful-modal").showModal();
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     });
 
 }

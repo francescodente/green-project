@@ -1,61 +1,45 @@
-class Modal extends Entity {
+class ErrorModalClass {
 
-    constructor(json) {
-        super(json);
+    constructor() {
+        this.html = {};
     }
 
-    show() {
+    show(json, message) {
+        this.html.main = Entity.getTemplate("ErrorModal");
+        this.json = json;
+        this.message = message;
+        if (json != null) {
+            console.log(json);
+            this.html.main.find(".status").html(json.status);
+            this.html.main.find(".status-text").html(json.statusText != null ? json.statusText : json.title);
+            if (json.responseJSON != null) {
+                let propertyErrors = this.responseJSON.propertyErrors.map(err => err.code + " [" + err.property + "]");
+                let globalErrors = this.responseJSON.globalErrors.map(err => err.code);
+                let errCodes = propertyErrors.concat(globalErrors).join("<br/>");
+                this.html.main.find(".err-codes").html(errCodes);
+            }
+        }
+        if (message != null) {
+            this.html.main.find(".generic-text").html(message);
+        }
         this.html.main.showModal();
     }
-}
-
-class ErrorModal extends Modal {
-
-    constructor(json, message) {
-        super(json);
-        this.html.main = Entity.getTemplate("ErrorModal");
-
-        console.log(json);
-
-        if (json.responseJSON != null) {
-            let propertyErrors = this.responseJSON.propertyErrors.map(err => err.code + " [" + err.property + "]");
-            let globalErrors = this.responseJSON.globalErrors.map(err => err.code);
-            this.errCodes = propertyErrors.concat(globalErrors).join("<br/>");
-        }
-
-        let error = this;
-        for (let k in error.html) {
-
-            // Replace values in templates
-            if (message != null) {
-                $(error.html[k]).find(".generic-text").html(message);
-            }
-            if ("status" in error) {
-                $(error.html[k]).find(".status").html(error.status);
-                $(error.html[k]).find(".status-text").html(error.statusText);
-            }
-            if ("errCodes" in error) {
-                $(error.html[k]).find(".err-codes").html(error.errCodes);
-            }
-        }
-    }
 
 }
 
-class InfoModal extends Modal {
+class InfoModalClass {
 
     constructor(message) {
-        super(null);
+        this.html = {};
+    }
+
+    show(message) {
         this.html.main = Entity.getTemplate("InfoModal");
-
-        let info = this;
-        for (let k in info.html) {
-
-            // Replace values in templates
-            if (message != null) {
-                $(info.html[k]).find(".info-text").html(message);
-            }
-        }
+        this.html.main.find(".info-text").html(message);
+        this.html.main.showModal();
     }
 
 }
+
+var ErrorModal = new ErrorModalClass();
+var InfoModal = new InfoModalClass();

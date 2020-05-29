@@ -33,7 +33,7 @@ API.getCart(localStorage.getObject("authData").userId)
         $(".total").html(Utils.formatCurrency(data.prices.total));
     }
 })
-.catch(function(jqXHR) { new ErrorModal(jqXHR).show() })
+.catch(function(jqXHR) { ErrorModal.show(jqXHR) })
 .finally(function(data) { $("#modal-loading").fadeModal() });
 
 // Cart confirm
@@ -59,7 +59,7 @@ $(".confirm-cart").click(function() {
         $("#expected-date-modal .notes").html($("#notes").val() == "" ? "-" : $("#notes").val());
         $("#expected-date-modal").showModal();
     })
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
 });
 
 // Cart submission
@@ -74,5 +74,5 @@ $(".submit-order").click(function() {
         $(".cart-empty").removeClass("d-none");
         $("#order-placed-modal").showModal();
     })
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+    .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
 });

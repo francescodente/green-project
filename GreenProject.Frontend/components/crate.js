@@ -63,14 +63,14 @@ class Crate extends Purchasable {
     addToPreferences() {
         let authData = localStorage.getObject("authData");
         if (authData === null) {
-            new InfoModal("Devi essere registrato e aver effettuato l'accesso per abbonarti a una cassetta settimanale.").show();
+            InfoModal.show("Devi essere registrato e aver effettuato l'accesso per abbonarti a una cassetta settimanale.");
             return;
         }
         console.log("add to preferences " + this.crateId);
         $("#modal-loading").showModal();
         APIUtils.addWeeklyCrate(this)
         .then(function(data) { console.log(data); $("#crate-added-modal").showModal() })
-        .catch(function(jqXHR) { console.log(jqXHR); new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { console.log(jqXHR); ErrorModal.show(jqXHR) });
     }
 
     showRemoveModal() {
@@ -81,7 +81,7 @@ class Crate extends Purchasable {
         console.log("remove from preferences " + this.crateId);
         APIUtils.removeFromWeeklyOrder(this.orderDetailId)
         .then(function(data) { location.reload(); })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show() });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
     }
 
 }

@@ -45,7 +45,7 @@ $(document).ready(function() {
     $("#modal-loading").showModal();
     APIUtils.getOrUpdateCurrentUserInfo(true)
     .then(function(data) { fillFormFields(data); })
-    .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); })
+    .catch(function(jqXHR) { ErrorModal.show(jqXHR); })
     .finally(function(data) { $("#modal-loading").fadeModal() });
 
     // Edit form click
@@ -104,7 +104,7 @@ $(document).ready(function() {
             localStorage.removeItem("userData");
             location.reload();
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR); });
     });
 
     // Delete personal data
@@ -115,7 +115,7 @@ $(document).ready(function() {
             localStorage.removeItem("userData");
             location.reload();
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR); });
     });
 
 });
