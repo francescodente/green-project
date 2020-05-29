@@ -172,6 +172,19 @@ class UtilsClass {
         }, ms));
     }
 
+    // Prepare form for validation: disable submit button, remove existing error messages
+    prepForValidation(form) {
+        form.find("[type='submit']").prop("disabled", true);
+        form.find("input").removeClass("error");
+        form.find(".error-message").hide();
+    }
+
+    // Remove showmod parameter from current URL
+    removeGetModal() {
+        location.searchParams.delete("showmod");
+        history.replaceState({}, "", location.href);
+    }
+
 }
 
 var Utils = Object.freeze(new UtilsClass());
