@@ -32,6 +32,7 @@ jQuery.fn.extend({
 
     // Properly hide any modals before showing the given one
     showModal: function() {
+        if ($(this).hasClass("show")) return;
         $(".modal.show").on("hidden.bs.modal", function() {
             $("body").addClass("modal-no-scroll");
         }).modal("hide");
