@@ -16,14 +16,16 @@ $("#form-sign-up").submit(function(event) {
     API.signup({
         user: {
             email: $("#sign-up-email").val(),
-            marketingConsent: $("#marketing-consent").is(":checked")
+            marketingConsent: true
         },
         password: password
     })
     .then(function(data) {
-        console.log("done");
-        console.log(data);
+        localStorage.setObject("tempEmail", {
+            email: data.email
+        });
         Utils.removeGetModal();
+        $("#modal-account-activation").showModal();
     })
     .catch(function(jqXHR) {
         if (jqXHR.responseJSON.propertyErrors.length &&

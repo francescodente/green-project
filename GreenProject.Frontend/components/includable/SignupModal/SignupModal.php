@@ -33,11 +33,7 @@
 
                 <!-- PRIVACY CONSENT -->
                 <input id="privacy-consent" type="checkbox" class="checkbox" name="privacy-consent" value="1" required/>
-                <label for="privacy-consent" class="my-2">Ho letto <a href="/privacy-terms" target="_blank">privacy e termini</a></label><br/>
-
-                <!-- MARKETING CONSENT -->
-                <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
-                <label for="marketing-consent" class="my-2">Vorrei ricevere informazioni di marketing</label><br/>
+                <label for="privacy-consent" class="my-2">Ho letto <a href="/privacy-terms" target="_blank">privacy e termini d'uso</a></label><br/>
 
                 <p id="generic-sign-up-error" class="error-message text-small text-error-dark my-3" style="display: none;">Si è verificato un errore.</p>
 
