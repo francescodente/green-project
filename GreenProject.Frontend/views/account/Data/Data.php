@@ -32,9 +32,6 @@
                     <h6>E-mail</h6>
                     <div class="text-input mb-3">
                         <input id="email" type="email" name="email" value="" disabled/>
-                        <button type="button" class="edit-field btn icon ripple" data-tooltip="tooltip" title="Modifica">
-                            <i class="mdi dark mdi-pencil"></i>
-                        </button>
                     </div>
 
                     <h6>Password</h6>
@@ -139,6 +136,23 @@
             <div class="modal-bottom bg-primary d-flex justify-content-center">
                 <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Annulla</button>
                 <button id="delete-user-data-personal" class="btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Elimina</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="modal-marketing-consent-delete" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-delete-empty"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Disattivando la ricezione di informazioni di marketing, non saremo più in grado di inviarti newsletter e codici sconto!<br/>Vuoi procedere comunque?</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="btn outline ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">No</button>
+                <button id="delete-marketing-consent" class="btn accent ripple flex-grow-1" data-dismiss="modal" style="width: 100px;">Sì</button>
             </div>
         </div>
     </div>
