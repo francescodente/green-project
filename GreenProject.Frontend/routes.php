@@ -24,6 +24,10 @@ switch ($request) {
         $title = "Privacy e termini d'uso";
         $page = "views/PrivacyTerms/PrivacyTerms.php";
         break;
+    case "/password-recovery":
+        $title = "Recupero password";
+        $page = "views/PasswordRecovery/PasswordRecovery.php";
+        break;
 
     // Account specific routes
     case "/cart":
