@@ -93,11 +93,19 @@ namespace GreenProject.Backend.Core.Logic
         public async Task<AuthenticationResultDto> Authenticate(CredentialsDto credentials)
         {
             User user = await Data
-                .EnabledUsers()
+                .ActiveUsers()
+                .Where(u => u.IsEnabled)
                 .IncludingRoles()
                 .SingleOptionalAsync(u => u.Email == credentials.Email)
                 .Map(u => u.OrElseThrow(() => new LoginFailedException()));
+
             EnsurePasswordIsCorrect(user, credentials.Password);
+
+            if (!user.IsConfirmed)
+            {
+                throw new NotConfirmedException();
+            }
+
             AuthenticationResultDto result = GenerateAuthenticationResult(user);
             await Data.SaveChangesAsync();
             return result;

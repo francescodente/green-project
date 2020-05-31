@@ -39,6 +39,8 @@
             public static readonly string RefreshFailed = $"{AuthBase}.RefreshFailed";
 
             public static readonly string ConfirmationFailed = $"{AuthBase}.ConfirmationFailed";
+
+            public static readonly string NotConfirmed = $"{AuthBase}.NotConfirmed";
         }
 
         public static class Cart
