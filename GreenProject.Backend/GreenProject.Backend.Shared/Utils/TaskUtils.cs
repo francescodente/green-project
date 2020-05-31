@@ -37,9 +37,9 @@ namespace GreenProject.Backend.Shared.Utils
             return await taskContinuation(await task);
         }
 
-        public static async void FireAndForget(this Task task)
+        public static void FireAndForget(this Task task)
         {
-            await task;
+            task.FireAndForget<Exception>(e => { });
         }
 
         public static async void FireAndForget<TException>(this Task task, Action<TException> exceptionHandler)
