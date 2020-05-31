@@ -1,6 +1,7 @@
 ﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Filters;
+using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -36,9 +37,9 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("orders/{orderId}/state")]
         [RequireLogin(RoleType.Administrator, RoleType.DeliveryMan)]
-        public async Task<IActionResult> ChangeOrderState([FromRoute] int orderId, [FromBody] OrderState newState)
+        public async Task<IActionResult> ChangeOrderState([FromRoute] int orderId, [FromBody] ChangeOrderStateDto request)
         {
-            await _ordersService.ChangeOrderState(orderId, newState);
+            await _ordersService.ChangeOrderState(orderId, request);
             return NoContent();
         }
     }

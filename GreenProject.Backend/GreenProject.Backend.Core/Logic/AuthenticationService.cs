@@ -54,11 +54,11 @@ namespace GreenProject.Backend.Core.Logic
             return Mapper.Map<UserDto.Output>(userEntity);
         }
 
-        public async Task ReactivateConfirmation(string email)
+        public async Task ReactivateConfirmation(ReactivateConfirmationDto request)
         {
             var userData = await Data
                 .Users
-                .Where(u => u.Email == email)
+                .Where(u => u.Email == request.Email)
                 .Where(u => !u.IsConfirmed)
                 .Select(u => new
                 {
@@ -66,7 +66,7 @@ namespace GreenProject.Backend.Core.Logic
                     Tokens = u.Tokens.OfType<ConfirmationToken>().Where(t => !t.IsInvalid)
                 })
                 .SingleOptionalAsync()
-                .Map(u => u.OrElseThrow(() => NotFoundException.UserWithEmail(email)));
+                .Map(u => u.OrElseThrow(() => NotFoundException.UserWithEmail(request.Email)));
 
             userData.Tokens.ForEach(t => t.IsInvalid = true);
 

@@ -153,20 +153,20 @@ namespace GreenProject.Backend.Core.Logic
                 .SingleAsync();
         }
 
-        public async Task<OrderDetailDto> AddCrate(int userId, int crateId)
+        public async Task<OrderDetailDto> AddCrate(int userId, CrateInsertionDto crate)
         {
-            Crate crate = await Data
+            Crate crateEntity = await Data
                 .Crates
-                .Where(c => c.ItemId == crateId)
+                .Where(c => c.ItemId == crate.CrateId)
                 .SingleOptionalAsync()
-                .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crateId)));
+                .Map(p => p.OrElseThrow(() => NotFoundException.PurchasableItemWithId(crate.CrateId)));
 
             var detail = new OrderDetail
             {
-                Item = crate,
+                Item = crateEntity,
                 Quantity = 1,
-                Price = crate.Price,
-                RemainingSlots = crate.Capacity
+                Price = crateEntity.Price,
+                RemainingSlots = crateEntity.Capacity
             };
 
             await UpdateDetailsForWeeklyOrder(userId, order => order.Details.Add(detail));

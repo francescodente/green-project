@@ -1,7 +1,6 @@
 ﻿using GreenProject.Backend.Contracts.Filters;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.Pagination;
-using GreenProject.Backend.Entities;
 using System.Threading.Tasks;
 
 namespace GreenProject.Backend.Core.Services
@@ -12,6 +11,6 @@ namespace GreenProject.Backend.Core.Services
 
         Task<PagedCollection<OrderDto>> GetSupplierOrders(OrderFilters filters, PaginationFilter pagination);
 
-        Task ChangeOrderState(int orderId, OrderState newState);
+        Task ChangeOrderState(int orderId, ChangeOrderStateDto request);
     }
 }

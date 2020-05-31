@@ -11,6 +11,6 @@ namespace GreenProject.Backend.Core.Services
 
         Task DeleteAddress(int userId, int addressId);
 
-        Task SetDefaultAddress(int userId, int addressId);
+        Task SetDefaultAddress(int userId, DefaultAddressDto address);
     }
 }

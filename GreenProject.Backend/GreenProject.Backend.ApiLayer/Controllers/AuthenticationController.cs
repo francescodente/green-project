@@ -55,9 +55,9 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPost("reactivate")]
-        public async Task<IActionResult> ReactivateConfirmation([FromBody] string email)
+        public async Task<IActionResult> ReactivateConfirmation([FromBody] ReactivateConfirmationDto request)
         {
-            await _authenticationService.ReactivateConfirmation(email);
+            await _authenticationService.ReactivateConfirmation(request);
             return NoContent();
         }
 

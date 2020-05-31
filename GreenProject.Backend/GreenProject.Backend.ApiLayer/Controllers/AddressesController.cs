@@ -43,9 +43,9 @@ namespace GreenProject.Backend.ApiLayer.Controllers
 
         [HttpPut("default")]
         [OwnerOrAdminOnly]
-        public async Task<IActionResult> SetDefaultAddress([FromRoute] int userId, [FromBody] int addressId)
+        public async Task<IActionResult> SetDefaultAddress([FromRoute] int userId, [FromBody] DefaultAddressDto address)
         {
-            await _addressesService.SetDefaultAddress(userId, addressId);
+            await _addressesService.SetDefaultAddress(userId, address);
             return NoContent();
         }
     }

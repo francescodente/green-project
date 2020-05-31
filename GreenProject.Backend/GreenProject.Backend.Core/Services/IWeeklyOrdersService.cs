@@ -13,7 +13,7 @@ namespace GreenProject.Backend.Core.Services
 
         Task<WeeklyOrderDto> GetWeeklyOrderData(int userId);
 
-        Task<OrderDetailDto> AddCrate(int userId, int crateId);
+        Task<OrderDetailDto> AddCrate(int userId, CrateInsertionDto crate);
 
         Task<OrderDetailDto> AddExtraProduct(int userId, QuantifiedProductDto.Input product);
 

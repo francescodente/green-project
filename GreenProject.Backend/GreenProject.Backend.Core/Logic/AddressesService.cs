@@ -73,14 +73,14 @@ namespace GreenProject.Backend.Core.Logic
                 .Map(a => a.OrElseThrow(() => NotFoundException.UserWithId(userId)));
         }
 
-        public async Task SetDefaultAddress(int userId, int addressId)
+        public async Task SetDefaultAddress(int userId, DefaultAddressDto address)
         {
             User user = await RequireUserWithAddresses(userId);
-            if (!user.Addresses.Any(a => a.AddressId == addressId))
+            if (!user.Addresses.Any(a => a.AddressId == address.AddressId))
             {
-                throw NotFoundException.AddressWithId(addressId);
+                throw NotFoundException.AddressWithId(address.AddressId);
             }
-            user.DefaultAddressId = addressId;
+            user.DefaultAddressId = address.AddressId;
             await Data.SaveChangesAsync();
         }
     }

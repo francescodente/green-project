@@ -1,5 +1,6 @@
 ﻿using GreenProject.Backend.ApiLayer.Filters;
 using GreenProject.Backend.ApiLayer.Routes;
+using GreenProject.Backend.Contracts.Admin;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -20,9 +21,9 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPut("users/{userId}/enable")]
-        public async Task<IActionResult> SetUserEnabledState([FromRoute] int userId, [FromBody] bool enabled)
+        public async Task<IActionResult> SetUserEnabledState([FromRoute] int userId, [FromBody] EnabledStateDto enabledState)
         {
-            await _adminService.SetUserEnabledState(userId, enabled);
+            await _adminService.SetUserEnabledState(userId, enabledState);
             return NoContent();
         }
     }

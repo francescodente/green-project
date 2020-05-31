@@ -2,6 +2,7 @@
 using GreenProject.Backend.ApiLayer.Routes;
 using GreenProject.Backend.Contracts.Orders;
 using GreenProject.Backend.Contracts.PurchasableItems;
+using GreenProject.Backend.Contracts.WeeklyOrders;
 using GreenProject.Backend.Core.Services;
 using GreenProject.Backend.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -56,9 +57,9 @@ namespace GreenProject.Backend.ApiLayer.Controllers
         }
 
         [HttpPost("crates")]
-        public async Task<IActionResult> AddCrateToWeeklyOrder([FromRoute] int userId, [FromBody] int crateId)
+        public async Task<IActionResult> AddCrateToWeeklyOrder([FromRoute] int userId, [FromBody] CrateInsertionDto crate)
         {
-            return Ok(await _weeklyOrdersService.AddCrate(userId, crateId));
+            return Ok(await _weeklyOrdersService.AddCrate(userId, crate));
         }
 
         [HttpPost("extras")]
