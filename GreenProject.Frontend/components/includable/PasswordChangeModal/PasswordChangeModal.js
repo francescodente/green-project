@@ -1,18 +1,10 @@
-// Prepares form for validation: removes previous errors, disables submit button
-function prepForValidation(form) {
-    form.find("[type='submit']").prop("disabled", true);
-    form.find("input").removeClass("error");
-    form.find(".error-message").hide();
-}
-
 function invalidForm(form) {
     form.find("[type='submit']").prop("disabled", false);
 }
 
-// LOGIN
 $("#form-pwd-change").submit(function(event) {
     event.preventDefault();
-    prepForValidation($(this));
+    Utils.prepForValidation($(this));
 
     let oldPwd = $("#old-password").val();
     let newPwd = $("#new-password").val();
@@ -49,7 +41,6 @@ $("#form-pwd-change").submit(function(event) {
         $("#form-pwd-change")[0].reset();
     })
     .catch(function(jqXHR) {
-        console.log(jqXHR);
         if (jqXHR.responseJSON && jqXHR.responseJSON.globalErrors.length) {
             let errCode = jqXHR.responseJSON.globalErrors[0].code;
             if (errCode == "Err.Auth.LoginFailed") {

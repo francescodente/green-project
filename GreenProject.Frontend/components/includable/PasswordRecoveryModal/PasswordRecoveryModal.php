@@ -6,25 +6,29 @@
                 <i class="modal-top-icon mdi mdi-key-variant"></i>
                 <button class="modal-close btn icon dark ripple" data-dismiss="modal" data-tooltip="tooltip" title="Chiudi"><i class="mdi dark mdi-close"></i></button>
             </div>
-            <form id="form-pwd-recovery" class="modal-body">
+            <form id="form-pwd-recovery-modal" class="modal-body">
 
                 <h4 class="text-center my-3">Recupero password</h4>
 
-                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br/>Riceverai una e-mail contenente una password provvisoria; per cambiarla, accedi alla sezione <b>I miei dati</b> del tuo account.</p>
+                <p>Inserisci l'indirizzo e-mail associato al tuo account.<br/>Riceverai una e-mail contenente un link per reimpostare la password.</p>
 
                 <!-- E-MAIL -->
                 <div class="text-input">
-                    <input id="recovery-email" type="email" name="email" placeholder=" "/>
+                    <input id="recovery-email" type="email" name="email" placeholder=" " required/>
                     <label for="recovery-email">E-mail</label>
                 </div>
 
-                <span class="text-small text-error-dark mb-2 d-none">Error message</span>
+                <div id="pwd-recovery-modal-loader" class="loader text-center mt-3">
+                    <?php include("components/includable/Loader.php"); ?>
+                </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btn accent ripple mt-3">Invia</button>
+                    <button type="submit" class="send-pwd-recovery btn accent ripple mt-3">Invia</button>
                 </div>
 
             </form>
         </div>
     </div>
 </div>
+
+<script defer src="/components/includable/PasswordRecoveryModal/PasswordRecoveryModal.js"></script>

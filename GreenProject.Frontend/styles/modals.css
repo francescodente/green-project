@@ -5,6 +5,7 @@
 #modal-login .modal-content,
 #modal-sign-up .modal-content,
 #modal-pwd-recovery .modal-content,
+#modal-account-activation .modal-content,
 #modal-pwd-change .modal-content {
     width: 360px;
 }
@@ -12,6 +13,7 @@
 #modal-login [type="submit"],
 #modal-sign-up [type="submit"],
 #modal-pwd-recovery [type="submit"],
+#modal-account-activation .btn.accent,
 #modal-pwd-change [type="submit"] {
     width: 200px;
 }

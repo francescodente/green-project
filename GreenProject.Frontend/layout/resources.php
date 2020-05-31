@@ -24,6 +24,7 @@
     include("components/includable/LoginModal/LoginModal.php");
     include("components/includable/SignupModal/SignupModal.php");
     include("components/includable/PasswordRecoveryModal/PasswordRecoveryModal.php");
+    include("components/includable/AccountActivationModal/AccountActivationModal.php");
     include("components/includable/CookieBanner/CookieBanner.php");
     ?>
 
