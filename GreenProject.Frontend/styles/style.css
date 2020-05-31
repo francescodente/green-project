@@ -1,0 +1,337 @@
+:root {
+    --col-accent: #9CBF22!important;
+    --col-accent-dark: #9CBF22!important;
+
+    --font-heading: 'Work Sans', sans-serif!important;
+    --font-normal: 'Work Sans', sans-serif!important;
+}
+
+.fallback-wallpaper-parent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    z-index: -200;
+}
+
+.fallback-wallpaper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.alert-accent {
+    border: 1px solid var(--col-accent);
+    background-color: rgba(156, 191, 34, 0.4);
+}
+
+.sticky-top {
+    z-index: 80;
+}
+
+.card .cover {
+    pointer-events: none;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.card .img-hover-zoom:hover>.cover {
+    opacity: 1;
+}
+
+.loader {
+    display: none;
+}
+
+/************\
+|   FOOTER   |
+\************/
+
+.footer .btn.facebook .mdi, .footer .btn.instagram .mdi {
+    transition: color 0.2s ease-in-out;
+}
+
+.footer .btn.facebook:hover {
+    background-color: rgba(25, 118, 210, 0.12);
+}
+
+.footer .btn.facebook:hover .mdi {
+    color: #1976D2;
+    opacity: 0.9;
+}
+
+.footer .btn.instagram:hover {
+    background-color: rgba(236, 64, 122, 0.12);
+}
+
+.footer .btn.instagram:hover .mdi {
+    color: #EC407A;
+    opacity: 0.9;
+}
+
+.footer .btn.youtube:hover {
+    background-color: rgba(255, 0, 0, 0.12);
+}
+
+.footer .btn.youtube:hover .mdi {
+    color: #FF0000;
+    opacity: 0.9;
+}
+
+.footer button.btn.accent.newsletter-submit {
+    position: absolute;
+    top: 7px;
+    right: 1px;
+    padding: 8px 16px;
+    box-shadow: none!important;
+    border-radius: 0 4px 4px 0;
+}
+
+.footer .text-input input, .footer .text-input label {
+    background-color: var(--col-primary-dark);
+}
+
+/****************************\
+|   ANCHOR FOR HASH TARGET   |
+\****************************/
+
+.anchor {
+    display: block;
+    visibility: hidden;
+    position: relative;
+    top: -72px;
+}
+
+#general.anchor, #personal.anchor, #addresses.anchor {
+    top: -96px;
+}
+
+/********************\
+|   ORDER STATUSES   |
+\********************/
+
+.order-pending {
+    color: #FFA000;
+}
+
+.order-shipped {
+    color: #0277BD;
+}
+
+.order-ok {
+    color: #43A047;
+}
+
+.order-canceled {
+    color: var(--col-text-sec-dark);
+}
+
+/**************\
+|   PRODUCTS   |
+\**************/
+
+@media (max-width: 991px) {
+    #products-content .sticky-top {
+        position: initial!important;
+    }
+}
+
+/******************\
+|   PRODUCT CARD   |
+\******************/
+
+.product-disabled .disabled-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.product-disabled .product-name {
+    color: var(--col-text-sec-dark);
+}
+
+.product-disabled .product-price {
+    color: var(--col-text-dis-dark);
+}
+
+/******************\
+|   COOKIE ALERT   |
+\******************/
+
+#alert-cookie {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#alert-cookie .alert-content {
+    max-width: 1110px;
+    margin: 0;
+    z-index: 90;
+    background-color: var(--col-primary-dark);
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.12), 0 -1px 2px rgba(0,0,0,0.24);
+}
+
+#alert-cookie .content {
+    padding: 12px 12px 12px 16px;
+}
+
+#alert-cookie .actions {
+    padding-right: 6px;
+}
+
+/* SM, XS */
+@media (max-width: 767px) {
+    #alert-cookie .alert-content {
+        border-radius: 0!important;
+    }
+}
+
+/*******************************************\
+|   ADDRESS MANAGEMENT AND PAYMENT METHOD   |
+\*******************************************/
+
+.address-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.address-item, .payment-item {
+    border-radius: 4px;
+    border: 2px solid transparent;
+    margin-bottom: 8px;
+}
+
+.address-item.default {
+    border: 2px solid var(--col-accent);
+}
+
+.address-item .thumb,
+.address-thumb,
+.payment-item .thumb {
+    background-size: cover;
+    height: 48px;
+    width: 48px;
+    border-radius: 4px;
+    margin-right: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+.address-item .thumb {
+    border: 2px solid #EEE;
+}
+
+.address-item .thumb .mdi, .address-thumb .mdi {
+    color: #707070;
+}
+
+.address-item .address-owner-info span {
+    font-size: 14px;
+}
+
+.address-item.btn {
+    width: 100%;
+}
+
+.address-item.btn * {
+    font-weight: normal;
+}
+
+.address-item.btn:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/***********************\
+|   EDIT FIELD BUTTON   |
+\***********************/
+
+.text-input .edit-field,
+.text-area .edit-field,
+#user-data [type="password"] + .btn {
+    position: absolute;
+    right: 3px;
+    top: 9px;
+}
+
+/***********************\
+|   EDIT PRODUCT PAGE   |
+\***********************/
+
+.edit-product-img {
+    position: relative;
+    height: 256px;
+    width: 256px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.edit-product-img div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.edit-product-img:hover div {
+    opacity: 1;
+}
+
+.edit-product-img [type="file"] {
+    position: absolute;
+    height: 0;
+    width: 0;
+}
+
+.edit-product-img label {
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/**********\
+|   CART   |
+\**********/
+
+#cart-content .product-summary>.product-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    margin-right: 8px;
+}

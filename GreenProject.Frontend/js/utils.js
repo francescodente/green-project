@@ -22,6 +22,7 @@ Storage.prototype.setObjectProperty = function(objectKey, key, value) {
 \************************/
 
 location.filename = location.pathname.split("/").pop();
+location.searchParams = new URL(location).searchParams;
 
 /***********************\
 |   JQUERY EXTENSIONS   |
@@ -31,6 +32,7 @@ jQuery.fn.extend({
 
     // Properly hide any modals before showing the given one
     showModal: function() {
+        if ($(this).hasClass("show")) return;
         $(".modal.show").on("hidden.bs.modal", function() {
             $("body").addClass("modal-no-scroll");
         }).modal("hide");
@@ -168,6 +170,19 @@ class UtilsClass {
             else
                 reject();
         }, ms));
+    }
+
+    // Prepare form for validation: disable submit button, remove existing error messages
+    prepForValidation(form) {
+        form.find("[type='submit']").prop("disabled", true);
+        form.find("input").removeClass("error");
+        form.find(".error-message").hide();
+    }
+
+    // Remove showmod parameter from current URL
+    removeGetModal() {
+        location.searchParams.delete("showmod");
+        history.replaceState({}, "", location.href);
     }
 
 }

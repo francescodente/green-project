@@ -30,12 +30,10 @@ $(document).ready(function() {
 
     // Menu item click handling
     $(document).on("click", ".menu-item:not([data-toggle])", function (event) {
-        var url = location.href;
-        var currentPage = url.substring(url.lastIndexOf('/') + 1).split("#")[0];
         var href = $(this).attr("href").split("#");
         var targetPage = href[0];
         var hash = href[1];
-        if (currentPage == targetPage && hash != null) {
+        if (location.pathname == targetPage && hash != null) {
             event.preventDefault();
             toggleMenu(false);
             scrollToItem("#" + hash);

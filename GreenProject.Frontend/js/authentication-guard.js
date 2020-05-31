@@ -39,10 +39,10 @@ $(document).ready(function() {
                 $("#modal-pwd-change").showModal();
             }
         })
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR); });
 
         APIUtils.updateCartBadge()
-        .catch(function(jqXHR) { new ErrorModal(jqXHR).show(); });
+        .catch(function(jqXHR) { ErrorModal.show(jqXHR); });
 
     }
 
