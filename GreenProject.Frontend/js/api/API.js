@@ -104,6 +104,29 @@ class APIClass {
         localStorage.clear();
     }
 
+    sendActivation(email) {
+        return this.post("auth/reactivate", email);
+    }
+
+    activate(token) {
+        return this.post("auth/confirm", {
+            token: token
+        });
+    }
+
+    passwordRecovery(email) {
+        return this.post("auth/passwordrecovery", {
+            email: email
+        });
+    }
+
+    passwordRecoveryAccept(token, newPassword) {
+        return this.post("auth/passwordrecovery/accept", {
+            token: token,
+            newPassword: newPassword
+        });
+    }
+
     // Cart
 
     getCart(userId) {

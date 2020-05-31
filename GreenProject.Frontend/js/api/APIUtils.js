@@ -70,6 +70,7 @@ class APIUtilsClass {
             .then(function(data) {
                 data.expiration = now;
                 localStorage.setObject("userData", {
+                    email: data.email,
                     expiration: data.expiration,
                     isSubscribed: data.isSubscribed,
                     isLocallySubscribed: isLocallySubscribed,
