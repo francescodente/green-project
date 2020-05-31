@@ -23,7 +23,7 @@
         @{
             PurchasableItem item = order.Details.Select(d => d.Item).First();
         }
-        <td><img src="@ViewBag.WebRoot/@(item.Image?.Path ?? "/images/MailTemplates/default_product.png")" height="96" width="96" alt="Immagine del prodotto" /></td>
+        <td><img src="@ViewBag.WebRoot/@(item.Image?.Path ?? "/images/mail/default_product.png")" height="96" width="96" alt="Immagine del prodotto" /></td>
         <td>
             <strong>@item.Name</strong>
 

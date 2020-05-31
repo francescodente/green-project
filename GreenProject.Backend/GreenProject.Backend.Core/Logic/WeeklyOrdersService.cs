@@ -125,7 +125,7 @@ namespace GreenProject.Backend.Core.Logic
 
         public async Task Unsubscribe(int userId)
         {
-            User user = await RequireUserById(userId);
+            User user = await RequireUserById(userId, q => q.Include(u => u.Person));
 
             if (!user.IsSubscribed)
             {
