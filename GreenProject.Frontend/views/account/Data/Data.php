@@ -42,79 +42,87 @@
                         </button>
                     </div>
 
-                    <h6>Consensi</h6>
-                    <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
-                    <label for="marketing-consent">Consenso alla ricezione di informazioni di marketing</label><br/>
+                    <div class="req-norole">
+
+                        <h6>Consensi</h6>
+                        <input id="marketing-consent" type="checkbox" class="checkbox" name="marketing-consent" value="1"/>
+                        <label for="marketing-consent">Consenso alla ricezione di informazioni di marketing</label><br/>
+
+                    </div>
 
                 </div>
 
                 <div class="divider dark my-4"></div>
 
-                <!-- PERSONAL -->
-                <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true">
-                    <h4 class="m-0">Dati personali</h4>
-                    <span id="personal" class="anchor"></span>
-                    <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true" data-tooltip="tooltip" title="Nascondi">
-                        <i class="mdi dark mdi-chevron-down"></i>
-                    </button>
+                <div class="req-norole">
+
+                    <!-- PERSONAL -->
+                    <div class="area-collapse d-flex justify-content-between align-items-center" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true">
+                        <h4 class="m-0">Dati personali</h4>
+                        <span id="personal" class="anchor"></span>
+                        <button class="btn-collapse btn icon ripple" data-toggle="collapse" data-target="#form-user-data-personal" aria-expanded="true" data-tooltip="tooltip" title="Nascondi">
+                            <i class="mdi dark mdi-chevron-down"></i>
+                        </button>
+                    </div>
+
+                    <form id="form-user-data-personal" class="collapse show">
+                        <div class="pt-3"></div>
+
+                        <h6>Codice fiscale o P. IVA *</h6>
+                        <div class="text-input mb-3">
+                            <input id="code" type="text" name="code" disabled required/>
+                            <span class="error">Formato non valido</span>
+                        </div>
+
+                        <h6>Nome *</h6>
+                        <div class="text-input mb-3">
+                            <input id="first-name" type="text" name="first-name" disabled required/>
+                        </div>
+
+                        <h6>Cognome *</h6>
+                        <div class="text-input mb-3">
+                            <input id="last-name" type="text" name="last-name" disabled required/>
+                        </div>
+
+                        <h6>Data di nascita</h6>
+                        <div class="text-input mb-3">
+                            <input id="birth-date" type="text" name="birth-date" maxlength="10" disabled/>
+                            <label></label>
+                            <span>gg/mm/aaaa</span>
+                            <span class="error">Data non valida</span>
+                        </div>
+
+                        <h6>Sesso</h6>
+                        <input id="r1" type="radio" class="radio" name="gender" value="Male" disabled/>
+                        <label for="r1">Maschio</label><br/>
+                        <input id="r2" type="radio" class="radio" name="gender" value="Female" disabled/>
+                        <label for="r2">Femmina</label><br/>
+                        <input id="r3" type="radio" class="radio" name="gender" value="Other" disabled/>
+                        <label for="r3" class="mb-2">Altro</label>
+
+                        <div class="user-data-form-options justify-content-end mt-3" style="display: flex;">
+                            <button type="button" class="delete-form btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-person-role-delete">
+                                <span class="text-sec-dark">Cancella</span><i class="mdi dark mdi-delete"></i>
+                            </button>
+                            <button type="button" class="edit-form btn accent ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;">
+                                <span class="text-light">Modifica</span><i class="mdi light mdi-pencil"></i>
+                            </button>
+                        </div>
+
+                        <div class="user-data-form-controls justify-content-end mt-3 d-none" style="display: flex;">
+                            <button type="button" class="cancel-form-edits btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;">
+                                <span class="text-sec-dark">Annulla</span><i class="mdi dark mdi-arrow-left"></i>
+                            </button>
+                            <button type="submit" class="save-form btn accent ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;">
+                                <span class="text-light">Salva</span><i class="mdi light mdi-content-save"></i>
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="divider dark my-4"></div>
+
                 </div>
-
-                <form id="form-user-data-personal" class="collapse show">
-                    <div class="pt-3"></div>
-
-                    <h6>Codice fiscale o P. IVA *</h6>
-                    <div class="text-input mb-3">
-                        <input id="code" type="text" name="code" disabled required/>
-                        <span class="error">Formato non valido</span>
-                    </div>
-
-                    <h6>Nome *</h6>
-                    <div class="text-input mb-3">
-                        <input id="first-name" type="text" name="first-name" disabled required/>
-                    </div>
-
-                    <h6>Cognome *</h6>
-                    <div class="text-input mb-3">
-                        <input id="last-name" type="text" name="last-name" disabled required/>
-                    </div>
-
-                    <h6>Data di nascita</h6>
-                    <div class="text-input mb-3">
-                        <input id="birth-date" type="text" name="birth-date" maxlength="10" disabled/>
-                        <label></label>
-                        <span>gg/mm/aaaa</span>
-                        <span class="error">Data non valida</span>
-                    </div>
-
-                    <h6>Sesso</h6>
-                    <input id="r1" type="radio" class="radio" name="gender" value="Male" disabled/>
-                    <label for="r1">Maschio</label><br/>
-                    <input id="r2" type="radio" class="radio" name="gender" value="Female" disabled/>
-                    <label for="r2">Femmina</label><br/>
-                    <input id="r3" type="radio" class="radio" name="gender" value="Other" disabled/>
-                    <label for="r3" class="mb-2">Altro</label>
-
-                    <div class="user-data-form-options justify-content-end mt-3" style="display: flex;">
-                        <button type="button" class="delete-form btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-person-role-delete">
-                            <span class="text-sec-dark">Cancella</span><i class="mdi dark mdi-delete"></i>
-                        </button>
-                        <button type="button" class="edit-form btn accent ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;">
-                            <span class="text-light">Modifica</span><i class="mdi light mdi-pencil"></i>
-                        </button>
-                    </div>
-
-                    <div class="user-data-form-controls justify-content-end mt-3 d-none" style="display: flex;">
-                        <button type="button" class="cancel-form-edits btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;">
-                            <span class="text-sec-dark">Annulla</span><i class="mdi dark mdi-arrow-left"></i>
-                        </button>
-                        <button type="submit" class="save-form btn accent ripple flex-grow-1 flex-md-grow-0"  style="flex-basis: 120px;">
-                            <span class="text-light">Salva</span><i class="mdi light mdi-content-save"></i>
-                        </button>
-                    </div>
-
-                </form>
-
-                <div class="divider dark my-4"></div>
 
                 <p class="text-sec-dark">I campi contrassegnati da * sono necessari per effettuare acquisti.</p>
 

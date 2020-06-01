@@ -6,6 +6,10 @@
     --font-normal: 'Work Sans', sans-serif!important;
 }
 
+.req-login, .req-logout, .req-person, .req-admin, .req-delivery, .req-norole {
+    display: none!important;
+}
+
 .fallback-wallpaper-parent {
     position: absolute;
     top: 0;

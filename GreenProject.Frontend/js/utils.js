@@ -121,6 +121,10 @@ jQuery.fn.extend({
         return this.map(function() {
             return $(this).val();
         }).get();
+    },
+
+    classes: function() {
+        return $(this).attr("class").split(/\s+/);
     }
 
 });

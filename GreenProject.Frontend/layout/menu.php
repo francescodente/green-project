@@ -26,7 +26,7 @@
 
             <button class="btn-login btn icon ripple req-logout" data-tooltip="tooltip" title="Accedi" data-toggle="modal" data-target="#modal-login"><i class="mdi dark mdi-login-variant"></i></button>
 
-            <div style="position: relative;" class="req-login">
+            <div style="position: relative;" class="req-norole">
                 <a href="/cart" class="btn icon ripple" data-tooltip="tooltip" title="Carrello"><i class="mdi dark mdi-cart"></i></a>
                 <span class="cart-badge badge"></span>
             </div>
@@ -39,16 +39,16 @@
                     <a href="/account/user-data" class="dropdown-item menu-item">
                         <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
                     </a>
-                    <a href="/account/addresses" class="dropdown-item menu-item">
+                    <a href="/account/addresses" class="dropdown-item menu-item req-norole">
                         <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>
                     </a>
-                    <a href="/account/subscription" class="dropdown-item menu-item">
+                    <a href="/account/subscription" class="dropdown-item menu-item req-norole">
                         <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassette</span>
                     </a>
-                    <a href="/account/orders" class="dropdown-item menu-item">
+                    <a href="/account/orders" class="dropdown-item menu-item req-norole">
                         <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
                     </a>
-                    <a href="/account/delivery" class="dropdown-item menu-item">
+                    <a href="/account/delivery" class="dropdown-item menu-item req-delivery">
                         <i class="mdi dark mdi-truck-delivery"></i><span class="text-dark">Consegne</span>
                     </a>
                     <a href="#" class="btn-logout dropdown-item">
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="dropdown d-none d-lg-block req-login req-admin">
+            <div class="dropdown d-none d-lg-block req-admin">
                 <button id="dropdown-admin" class="btn icon ripple" data-tooltip="tooltip" data-trigger="hover" title="Gestione" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi dark mdi-pound-box"></i>
                 </button>
@@ -131,34 +131,34 @@
             <a href="/account/user-data" class="menu-item">
                 <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
             </a>
-            <a href="/account/addresses" class="menu-item">
+            <a href="/account/addresses" class="menu-item req-norole">
                 <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>
             </a>
-            <a href="/account/subscription" class="menu-item">
+            <a href="/account/subscription" class="menu-item req-norole">
                 <i class="mdi dark mdi-inbox-multiple"></i><span class="text-dark">Cassette</span>
             </a>
-            <a href="/account/orders" class="menu-item">
+            <a href="/account/orders" class="menu-item req-norole">
                 <i class="mdi dark mdi-book-open"></i><span class="text-dark">Ordini</span>
             </a>
-            <a href="/account/delivery" class="menu-item">
+            <a href="/account/delivery" class="menu-item req-delivery">
                 <i class="mdi dark mdi-truck-delivery"></i><span class="text-dark">Consegne</span>
             </a>
             <a href="#" class="btn-logout menu-item">
                 <i class="mdi dark mdi-logout-variant"></i><span>Esci</span>
             </a>
         </div>
-        <a href="/cart" class="menu-item ripple req-login">
+        <a href="/cart" class="menu-item ripple req-norole">
             <i class="mdi mdi-cart"></i>
             <span>Carrello</span>
             <span class="cart-badge badge"></span>
         </a>
 
-        <button class="menu-item ripple req-login req-admin" data-toggle="submenu" data-target="#admin-submenu">
+        <button class="menu-item ripple req-admin" data-toggle="submenu" data-target="#admin-submenu">
             <i class="mdi mdi-pound-box"></i>
             <span>Gestione</span>
             <i class="mdi expand dark mdi-chevron-down"></i>
         </button>
-        <div id="admin-submenu" class="submenu req-login">
+        <div id="admin-submenu" class="submenu req-admin">
             <a href="/management/products" class="menu-item">
                 <i class="mdi mdi-sprout"></i>
                 <span>Gestione catalogo</span>

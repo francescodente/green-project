@@ -1,4 +1,4 @@
-<main class="content req-login req-admin">
+<main class="content req-admin">
 
     <section id="management" class="parallax-container header d-flex justify-content-center align-items-center">
         <div class="container text-center">
