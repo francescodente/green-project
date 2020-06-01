@@ -16,7 +16,21 @@ APIUtils.getOrUpdateCategories()
 });
 
 // Can provide a modal ID via GET to show it
-let modalId = location.searchParams.get("showmod")
+let modalId = location.searchParams.get("showmod");
 if (modalId != null) {
     $("#" + modalId).showModal();
+}
+
+// Check for the presence of an activation token
+let activationToken = location.searchParams.get("token");
+if (activationToken != null) {
+    $("#modal-loading").showModal();
+    API.activate(activationToken)
+    .then(function(data) {
+        let url = new URL(location.href);
+        url.searchParams.delete("token");
+        history.replaceState({}, "", url);
+        $("#account-activation-successful-modal").showModal();
+    })
+    .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
 }

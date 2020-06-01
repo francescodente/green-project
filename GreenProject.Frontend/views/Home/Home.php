@@ -161,4 +161,20 @@
 
 </main>
 
+<div id="account-activation-successful-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-information-outline"></i>
+            </div>
+            <div class="modal-body">
+                <p class="m-0">Il tuo account è stato attivato correttamente.</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <button class="btn accent ripple" data-dismiss="modal" data-toggle="modal" data-target="#modal-login" style="width: 160px;">Accedi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script defer src="/views/Home/Home.js"></script>

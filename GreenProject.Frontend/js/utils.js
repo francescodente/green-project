@@ -181,8 +181,9 @@ class UtilsClass {
 
     // Remove showmod parameter from current URL
     removeGetModal() {
-        location.searchParams.delete("showmod");
-        history.replaceState({}, "", location.href);
+        let url = new URL(location.href);
+        url.searchParams.delete("showmod");
+        history.replaceState({}, "", url.href);
     }
 
 }
