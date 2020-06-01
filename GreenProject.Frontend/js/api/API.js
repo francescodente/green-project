@@ -74,7 +74,8 @@ class APIClass {
     }
 
     setDefaultAddress(userId, addressId) {
-        return this.put("customers/" + userId + "/addresses/default", addressId);
+        let data = { addressId: addressId };
+        return this.put("customers/" + userId + "/addresses/default", data);
     }
 
     // Authentication
@@ -90,10 +91,11 @@ class APIClass {
     }
 
     changePsw(oldPsw, newPsw) {
-        return this.post("auth/changepsw", {
+        let data = {
             oldPassword: oldPsw,
             newPassword: newPsw
-        });
+        }
+        return this.post("auth/changepsw", data);
     }
 
     signup(data) {
@@ -105,26 +107,26 @@ class APIClass {
     }
 
     sendActivation(email) {
-        return this.post("auth/reactivate", email);
+        let data = { email: email };
+        return this.post("auth/reactivate", data);
     }
 
     activate(token) {
-        return this.post("auth/confirm", {
-            token: token
-        });
+        let data = { token: token };
+        return this.post("auth/confirm", data);
     }
 
     passwordRecovery(email) {
-        return this.post("auth/passwordrecovery", {
-            email: email
-        });
+        let data = { email: email };
+        return this.post("auth/passwordrecovery", data);
     }
 
     passwordRecoveryAccept(token, newPassword) {
-        return this.post("auth/passwordrecovery/accept", {
+        let data = {
             token: token,
             newPassword: newPassword
-        });
+        };
+        return this.post("auth/passwordrecovery/accept", data);
     }
 
     // Cart
@@ -239,7 +241,8 @@ class APIClass {
     }
 
     changeOrderState(orderId, orderState) {
-        return this.put("orders/" + orderId + "/state", orderState);
+        let data = { newState: orderState };
+        return this.put("orders/" + orderId + "/state", data);
     }
 
     // Products
@@ -336,7 +339,8 @@ class APIClass {
     }
 
     addWeeklyCrate(userId, crateId) {
-        return this.post("customers/" + userId + "/weeklyorder/crates", crateId);
+        let data = { crateId: crateId };
+        return this.post("customers/" + userId + "/weeklyorder/crates", data);
     }
 
     addExtraProduct(userId, productId, quantity) {
