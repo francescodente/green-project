@@ -37,7 +37,7 @@
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-account">
                     <a href="/account/user-data" class="dropdown-item menu-item">
-                        <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
+                        <i class="mdi dark mdi-account"></i><span class="text-dark">I miei dati</span>
                     </a>
                     <a href="/account/addresses" class="dropdown-item menu-item req-norole">
                         <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>
@@ -129,7 +129,7 @@
         </button>
         <div id="account-submenu" class="submenu req-login">
             <a href="/account/user-data" class="menu-item">
-                <i class="mdi dark mdi-card-text"></i><span class="text-dark">I miei dati</span>
+                <i class="mdi dark mdi-account"></i><span class="text-dark">I miei dati</span>
             </a>
             <a href="/account/addresses" class="menu-item req-norole">
                 <i class="mdi dark mdi-map-marker"></i><span class="text-dark">Indirizzi</span>

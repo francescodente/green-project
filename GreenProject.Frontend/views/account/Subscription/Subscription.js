@@ -20,18 +20,12 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
             $(".no-weekly-crates").show();
         }
 
-        console.log(data);
-
         // Setup summary
-        $(".crate-count").html(data.crates.length + " cassette");
+        $(".crate-count").html(data.crates.length + (data.crates.length == 1 ? " cassetta" : " cassette"));
         if (data.extraProducts.length) {
-            $(".extra-products-text").removeClass("d-none");
-            $(".product-count").html(data.extraProducts.length);
-            if (data.extraProducts.length == 1) {
-                $(".extra-product-count-text").html("prodotto extra");
-            }
+            $(".product-count").html(data.extraProducts.length + (data.extraProducts.length == 1 ? " prodotto extra" : " prodotti extra"));
+            $(".alert-and").removeClass("d-none");
         }
-        $(".product-count").html(data.extraProducts.length);
 
         // Set prices
         $(".subtotal").html(Utils.formatCurrency(data.prices.subtotal));

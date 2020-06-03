@@ -26,13 +26,13 @@
 
             <div id="account-content-col" class="user-weekly-delivery col-12 col-lg-9">
 
-                <div id="subscribed-alert" class="alert alert-accent" role="alert">
+                <div id="subscribed-alert" class="alert alert-accent mb-3" role="alert">
                     <p class="summary-preferences text-dis-dark m-0">
-                        La prossima consegna include <span class="crate-count"></span><span class="extra-products-text d-none" style="font-weight: normal;"> e <span class="product-count"></span> <span class="extra-product-count-text">prodotti extra</span></span>, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
+                        La prossima consegna include <span class="crate-count"></span><span class="alert-and font-weight-normal d-none"> e </span><span class="product-count"></span>, per un totale di <span class="total"></span>.<br/>Sarà effettuata in data <span class="delivery-date"></span> all'indirizzo <span class="delivery-address"></span> con modalità di pagamento <span class="payment-method">alla consegna</span>.<br/>Ti ricordiamo che è possibile modificare le preferenze del tuo ordine settimanale solo fino a <span>24 ore</span> prima del giorno di consegna prestabilito.
                     </p>
                 </div>
 
-                <div id="locally-subscribed-alert" class="alert alert-accent" role="alert">
+                <div id="locally-subscribed-alert" class="alert alert-accent mb-3" role="alert">
                     <p class="summary-preferences text-dis-dark m-0">
                         Scegli i prodotti da includere nel tuo abbonamento settimanale!<br/>
                         Quando hai finito, seleziona modalità di pagamento e indirizzo di consegna, quindi abbonati cliccando sull'apposito tasto a fondo pagina.

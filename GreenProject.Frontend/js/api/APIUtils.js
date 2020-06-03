@@ -249,7 +249,7 @@ class APIUtilsClass {
     addWeeklyCrate(crate) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.addWeeklyCrate(userData.userId, crate.crateId);
+            return API.addWeeklyCrate(localStorage.getObject("authData").userId, crate.crateId);
         }
         this.locallySubscribe();
         let weeklyOrder = localStorage.getObject("weeklyOrder");
@@ -277,7 +277,7 @@ class APIUtilsClass {
     addExtraProduct(product, quantity) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.addExtraProduct(userData.userId, product.productId, quantity);
+            return API.addExtraProduct(localStorage.getObject("authData").userId, product.productId, quantity);
         }
         this.locallySubscribe();
         let weeklyOrder = localStorage.getObject("weeklyOrder");
@@ -314,7 +314,7 @@ class APIUtilsClass {
     editExtraProductQuantity(productId, quantity) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.editExtraProductQuantity(userData.userId, productId, quantity);
+            return API.editExtraProductQuantity(localStorage.getObject("authData").userId, productId, quantity);
         }
         let weeklyOrder = localStorage.getObject("weeklyOrder");
         let productDetail;
@@ -333,7 +333,7 @@ class APIUtilsClass {
     removeFromWeeklyOrder(orderDetailId) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.removeFromWeeklyOrder(userData.userId, orderDetailId);
+            return API.removeFromWeeklyOrder(localStorage.getObject("authData").userId, orderDetailId);
         }
         let weeklyOrder = localStorage.getObject("weeklyOrder");
         weeklyOrder.crates = weeklyOrder.crates.filter(crate => crate.orderDetailId != orderDetailId);
@@ -346,7 +346,7 @@ class APIUtilsClass {
     addProductToCrate(orderDetailId, product, quantity) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.addProductToCrate(userData.userId, orderDetailId, product.productId, quantity);
+            return API.addProductToCrate(localStorage.getObject("authData").userId, orderDetailId, product.productId, quantity);
         }
         let weeklyOrder = localStorage.getObject("weeklyOrder");
         let crate = weeklyOrder.crates.filter(crate => crate.orderDetailId == orderDetailId)[0];
@@ -385,7 +385,7 @@ class APIUtilsClass {
     editProductCrateQuantity(orderDetailId, productId, quantity) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.editProductCrateQuantity(userData.userId, orderDetailId, productId, quantity);
+            return API.editProductCrateQuantity(localStorage.getObject("authData").userId, orderDetailId, productId, quantity);
         }
         let weeklyOrder = localStorage.getObject("weeklyOrder");
         let crate = weeklyOrder.crates.filter(crate => crate.orderDetailId == orderDetailId)[0];
@@ -404,7 +404,7 @@ class APIUtilsClass {
     removeProductFromCrate(orderDetailId, productId) {
         let userData = localStorage.getObject("userData");
         if (userData.isSubscribed) {
-            return API.removeProductFromCrate(userData.userId, orderDetailId, productId);
+            return API.removeProductFromCrate(localStorage.getObject("authData").userId, orderDetailId, productId);
         }
         let weeklyOrder = localStorage.getObject("weeklyOrder");
         let crate = weeklyOrder.crates.filter(crate => crate.orderDetailId == orderDetailId)[0];

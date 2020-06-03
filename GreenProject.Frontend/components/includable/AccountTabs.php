@@ -1,6 +1,6 @@
 <div class="sticky-top" style="top: 64px;">
     <a id="user-data-tab" href="/account/user-data" class="account-tab <?php echo $request == '/account/user-data' ? 'selected' : '' ?>">
-        <i class="mdi dark mdi-card-text"></i>
+        <i class="mdi dark mdi-account"></i>
         <span>I miei dati</span>
         <i class="mdi dark mdi-chevron-right"></i>
     </a>
