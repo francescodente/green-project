@@ -65,6 +65,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
 
         // Show weekly delivery items from order-preferences.php
         $(".req-weekly-delivery").removeClass("d-none");
+        loadCollapseStates();
 
         $("#modal-loading").fadeModal();
     })
