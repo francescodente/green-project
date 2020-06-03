@@ -280,19 +280,19 @@ class APIClass {
     // Reports
 
     getOrdersReport(date) {
-
+        return this.get("reports/orders?date=" + date);
     }
 
     getProductsReport(date) {
-
+        return this.get("reports/products?date=" + date);
     }
 
     getSupplierOrderReport(date) {
-
+        return this.get("reports/supplierorder?date=" + date);
     }
 
     getRevenueReport(date) {
-
+        return this.get("reports/revenue?date=" + date);
     }
 
     // Roles

@@ -32,8 +32,6 @@ $(document).ready(function() {
         // Create list of restricted-access components to keep
         let allowedItemClasses = authData.roles.flatMap(role => roles[role]);
         let deniedItemClasses = roleClasses.filter(e => !allowedItemClasses.includes(e));
-        console.log(allowedItemClasses);
-        console.log(deniedItemClasses);
 
         // Redirect to homepage if access to the current page is denied
         $(".content").classes().forEach(itemClass => {
@@ -47,14 +45,6 @@ $(document).ready(function() {
         deniedItemClasses.forEach(itemClass => $("." + itemClass).remove());
         $(".req-login").removeClass("req-login");
         $(".req-logout").remove();
-
-        /*if (!authData.roles.includes("Administrator")) {
-            // Redirect to index if current page requires missing admin rights
-            if ($(".content").hasClass("req-admin")) {
-                window.location.href = "/home";
-            }
-            $(".req-admin").remove();
-        }*/
 
         APIUtils.getOrUpdateCurrentUserInfo()
         .then(function(data) {

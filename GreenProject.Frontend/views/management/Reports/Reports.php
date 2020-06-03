@@ -22,7 +22,7 @@
                         <i class="mdi dark mdi-chevron-down"></i>
                     </button>
                 </div>
-                <form id="reports-1" class="collapse show">
+                <form id="report-orders" class="report-form collapse show">
                     <div class="pt-3"></div>
                     <h6>Data</h6>
                     <div class="text-input mb-3">
@@ -47,7 +47,7 @@
                         <i class="mdi dark mdi-chevron-down"></i>
                     </button>
                 </div>
-                <div id="reports-2" class="collapse show">
+                <form id="report-products" class="report-form collapse show">
                     <div class="pt-3"></div>
                     <h6>Data</h6>
                     <div class="text-input mb-3">
@@ -62,7 +62,7 @@
                             <i class="mdi mdi-download"></i>
                         </button>
                     </div>
-                </div>
+                </form>
 
                 <div class="divider dark my-4"></div>
 
@@ -72,7 +72,7 @@
                         <i class="mdi dark mdi-chevron-down"></i>
                     </button>
                 </div>
-                <div id="reports-3" class="collapse show">
+                <form id="report-supplier-order" class="report-form collapse show">
                     <div class="pt-3"></div>
                     <h6>Data</h6>
                     <div class="text-input mb-3">
@@ -87,7 +87,7 @@
                             <i class="mdi mdi-download"></i>
                         </button>
                     </div>
-                </div>
+                </form>
 
                 <div class="divider dark my-4"></div>
 
@@ -97,7 +97,7 @@
                         <i class="mdi dark mdi-chevron-down"></i>
                     </button>
                 </div>
-                <div id="reports-4" class="collapse show">
+                <form id="report-revenue" class="report-form collapse show">
                     <div class="pt-3"></div>
                     <h6>Data</h6>
                     <div class="text-input mb-3">
@@ -112,7 +112,7 @@
                             <i class="mdi mdi-download"></i>
                         </button>
                     </div>
-                </div>
+                </form>
 
             </div>
         </div>

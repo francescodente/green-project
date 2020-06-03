@@ -190,6 +190,17 @@ class UtilsClass {
         history.replaceState({}, "", url.href);
     }
 
+    // Create, click and destroy a link to download the given content
+    download(fileName, fileType, fileContent) {
+        var element = document.createElement("a");
+        element.setAttribute("href", "data:" + fileType + ";charset=utf-8," + encodeURIComponent(fileContent));
+        element.setAttribute("download", fileName);
+        element.style.display = "none";
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+    }
+
 }
 
 var Utils = Object.freeze(new UtilsClass());

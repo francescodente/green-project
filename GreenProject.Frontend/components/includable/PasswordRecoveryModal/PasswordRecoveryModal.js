@@ -3,7 +3,7 @@ $("#form-pwd-recovery-modal").submit(function(e) {
     let email = $(this).find("#recovery-email").val();
     $("#pwd-recovery-modal-loader").show();
     $(".send-pwd-recovery").prop("disabled", true);
-    Utils.wait(1000)
+    API.passwordRecovery(email)
     .then(function(data) {
         InfoModal.show("Controlla la tua posta. Ti abbiamo inviato un messaggio con un link per reimpostare la password del tuo account.");
     })
