@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div id="results-col" class="col-12 container">
-                <div class="product-list row" data-children-class="col-6 col-md-4 col-lg-3">
+                <div class="product-list row" data-children-class="col-6 col-md-4 col-lg-3 d-flex">
                     <!-- <div class="col-12 d-flex justify-content-between align-items-center mb-4">
                         <button class="toggle-filters btn transparent ripple ripple-accent">
                             <i class="mdi dark mdi-filter"></i>

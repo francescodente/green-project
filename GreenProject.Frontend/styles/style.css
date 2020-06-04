@@ -6,6 +6,10 @@
     --font-normal: 'Work Sans', sans-serif!important;
 }
 
+.d-flex, .d-inline-flex {
+    min-width: 0px;
+}
+
 .req-login, .req-logout, .req-person, .req-admin, .req-delivery, .req-norole {
     display: none!important;
 }
@@ -124,9 +128,9 @@
     top: -96px;
 }
 
-/********************\
-|   ORDER STATUSES   |
-\********************/
+/******************\
+|   ORDER STATES   |
+\******************/
 
 .order-pending {
     color: #FFA000;
@@ -157,6 +161,10 @@
 /******************\
 |   PRODUCT CARD   |
 \******************/
+
+.product-card {
+    width: 100%;
+}
 
 .product-disabled .disabled-shade {
     position: absolute;

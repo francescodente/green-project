@@ -274,5 +274,5 @@
 
 <?php include("components/includable/NewAddressModal/NewAddressModal.php"); ?>
 
-<script defer src="/views/account/Subscription/Subscription.js"></script>
 <script defer src="/js/collapse-state-keeper.js"></script>
+<script defer src="/views/account/Subscription/Subscription.js"></script>

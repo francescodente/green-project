@@ -4,8 +4,8 @@
         <img class="crate-image card-bg" src="/images/default_product.png"/>
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
-    <div class="card-body">
-        <h5 class="crate-name mb-0"></h5>
+    <div class="card-body d-flex flex-column">
+        <h5 class="crate-name mb-0 flex-grow-1"></h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="capacity"></span> Kg - <span class="price"></span></span>
             <button class="subscribe btn icon ripple req-norole" data-tooltip="tooltip" title="Abbonati">

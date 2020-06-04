@@ -2,7 +2,7 @@
     <div class="container">
 
         <div class="top-bar-left">
-            <button class="menu-toggle btn icon ripple d-lg-none" data-tooltip="tooltip" data-trigger="hover" title="Menu"><i class="mdi dark mdi-menu"></i></button>
+            <button class="menu-toggle btn icon ripple d-lg-none" title="Menu"><i class="mdi dark mdi-menu"></i></button>
             <a href="/home" class="top-bar-logo"><img src="/images/logo/greenproject_logo_small.png" alt="Logo Green Project"></a>
             <a href="/home" class="top-bar-logo light"><img src="/images/logo/greenproject_logo_light_small.png" alt="Logo Green Project"></a>
         </div>
@@ -95,7 +95,7 @@
 
         <div class="menu-header bg-primary-dark">
             <a href="/home"><img src="/images/logo/greenproject_logo_small.png" alt="Logo Green Project"></a>
-            <button class="menu-toggle btn icon ripple" data-tooltip="tooltip" data-trigger="hover" title="Nascondi"><i class="mdi dark mdi-arrow-left"></i></button>
+            <button class="menu-toggle btn icon ripple" title="Nascondi"><i class="mdi dark mdi-arrow-left"></i></button>
         </div>
 
         <a href="/home#landing" class="menu-item ripple">

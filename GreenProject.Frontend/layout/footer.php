@@ -4,8 +4,8 @@
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <h6 class="text-sec-dark text-center">Ricevi un buono sconto del 10%!</h6>
                 <div class="text-input">
-                    <input id="email" type="email" placeholder=" "/>
-                    <label for="email">Indirizzo email</label>
+                    <input id="newsletter-email" type="email" placeholder=" "/>
+                    <label for="newsletter-email">Indirizzo email</label>
                     <button class="newsletter-submit btn accent ripple">Iscriviti</button>
                 </div>
             </div>

@@ -103,6 +103,7 @@ jQuery.fn.extend({
             }
             dropdownMenu.append(input, label);
         });
+        this.find(".select-item-template").remove();
     },
 
     // Enable or disable a dropdown select item

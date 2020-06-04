@@ -70,7 +70,6 @@ APIUtils.getOrUpdateZones()
             return zipCodes;
         });
     $("#select-zipcode").fillSelect(zipCodes);
-    $("#select-zipcode .select-item-template").remove();
     $("#select-zipcode").setSelectEnabled(true);
     // Select current zip codes
     if (selectedZipCodes.length) {

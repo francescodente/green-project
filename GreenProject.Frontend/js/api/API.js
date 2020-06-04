@@ -287,8 +287,14 @@ class APIClass {
         return this.get("reports/products?date=" + date);
     }
 
-    getSupplierOrderReport(date) {
-        return this.get("reports/supplierorder?date=" + date);
+    getSupplierOrderReport(date, categories = []) {
+        console.log(categories);
+        let searchParams = new URLSearchParams();
+        searchParams.append("date", date);
+        categories.forEach(category => {
+            searchParams.append("Categories", category);
+        });
+        return this.get("reports/supplierorder?" + searchParams.toString());
     }
 
     getRevenueReport(date) {
