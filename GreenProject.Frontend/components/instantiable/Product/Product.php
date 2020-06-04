@@ -8,7 +8,7 @@
         <h5 class="product-name mb-0"></h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
-            <button class="show-quantity-modal btn icon ripple" data-action="add" data-tooltip="tooltip" title="Aggiungi al carrello">
+            <button class="show-quantity-modal btn icon ripple req-norole" data-action="add" data-tooltip="tooltip" title="Aggiungi al carrello">
                 <i class="mdi dark mdi-cart-plus"></i>
             </button>
         </div>
@@ -31,7 +31,7 @@
                     <p class="m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
                 </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer req-norole">
                 <div class="d-flex flex-column m-0">
                     <button class="show-quantity-modal btn accent ripple" data-action="add">Aggiungi al carrello</button>
                     <button class="req-subscription show-extra-quantity-modal btn outline ripple mt-2" data-action="add">Aggiungi all'ordine settimanale</button>
