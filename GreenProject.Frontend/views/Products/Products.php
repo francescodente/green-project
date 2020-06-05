@@ -3,18 +3,24 @@
     <section id="products" class="parallax-container header d-flex justify-content-center align-items-center">
         <div class="container text-center">
             <h1 class="text-light">PRODOTTI</h1>
+            <br/>
+            <h3 class="category-name text-light"></h3>
         </div>
         <div class="parallax shade" data-parallax-image="/images/products.jpg"></div>
     </section>
     <section id="products-content" class="container py-4">
         <div class="row">
-            <div id="filters-col" class="col-12 col-lg-3 d-none">
-                <div class="product-filters sticky-top" style="top: 72px;">
-                    <!-- <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle-all="categories"/>
-                    <label for="c1" class="mt-2">Category</label><br/>
+            <!-- <div id="filters-col" class="col-12 col-lg-3 d-none">
+                <div class="product-filters sticky-top pt-2" style="top: 72px;">
+                    <input id="c1" type="checkbox" class="checkbox toggle-all" data-toggle-all="categories"/>
+                    <label for="c1">Category</label><br/>
                     <div class="pl-4">
                         <input id="sc1" type="checkbox" class="checkbox" name="categories" value="sc1" checked/>
                         <label for="sc1">Subcategory 1</label><br/>
+                        <div class="pl-4">
+                            <input id="sc5" type="checkbox" class="checkbox" name="categories" value="sc5" checked/>
+                            <label for="sc5">Subcategory 5</label><br/>
+                        </div>
                         <input id="sc2" type="checkbox" class="checkbox" name="categories" value="sc2" checked/>
                         <label for="sc2">Subcategory 2</label><br/>
                         <input id="sc3" type="checkbox" class="checkbox" name="categories" value="sc3" checked/>
@@ -23,9 +29,9 @@
                         <label for="sc4">Subcategory 4</label><br/>
                     </div>
                     <br/>
-                    <button class="apply-filter btn accent ripple w-100 mb-4">Applica</button> -->
+                    <button class="apply-filter btn accent ripple w-100 mb-4">Applica</button>
                 </div>
-            </div>
+            </div> -->
             <div id="results-col" class="col-12 container">
                 <div class="product-list row" data-children-class="col-6 col-md-4 col-lg-3 d-flex">
                     <!-- <div class="col-12 d-flex justify-content-between align-items-center mb-4">
@@ -33,7 +39,6 @@
                             <i class="mdi dark mdi-filter"></i>
                             <span class="text-sec-dark">Filtra</span>
                         </button>
-                        <span></span>
                         <p class="text-dis-dark m-0"><span class="products-count">0</span> risultati</p>
                     </div> -->
 
@@ -58,19 +63,21 @@
                     </div>
 
                 </div>
+
+                <div class="divider dark mb-4"></div>
+
+                <div class="d-flex justify-content-center">
+                    <ul id="products-pagination" class="pagination">
+                        <li><a href="#" class="page-prev btn icon ripple" data-tooltip="tooltip" title="Pagina precedente">
+                            <i class="mdi dark mdi-chevron-left"></i>
+                        </a></li>
+                        <div class="pages d-flex align-items-center"><li class="d-none"><a href="#">1</a></li></div>
+                        <li><a href="#" class="page-next btn icon ripple" data-tooltip="tooltip" title="Pagina successiva">
+                            <i class="mdi dark mdi-chevron-right"></i>
+                        </a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="divider dark mb-4"></div>
-        <div class="row justify-content-center">
-            <ul id="products-pagination" class="pagination">
-                <li><a href="#" class="page-prev btn icon ripple" data-tooltip="tooltip" title="Pagina precedente">
-                    <i class="mdi dark mdi-chevron-left"></i>
-                </a></li>
-                <div class="pages d-flex align-items-center"><li class="d-none"><a href="#">1</a></li></div>
-                <li><a href="#" class="page-next btn icon ripple" data-tooltip="tooltip" title="Pagina successiva">
-                    <i class="mdi dark mdi-chevron-right"></i>
-                </a></li>
-            </ul>
         </div>
     </section>
 

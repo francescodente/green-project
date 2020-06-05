@@ -6,12 +6,12 @@ class Category extends Entity {
         this.html.main = Entity.getTemplate("CategoryCard");
 
         // Build products link
-        let subCategories = Category.getLeaves(this).map(c => c.categoryId);
+        //let subCategories = Category.getLeaves(this).map(c => c.categoryId);
         let searchParams = new URLSearchParams();
-        subCategories.forEach(category => {
+        /*subCategories.forEach(category => {
             searchParams.append("Categories", category);
-        });
-        let productsUrl = "/products?" + searchParams.toString();
+        });*/
+        let productsUrl = "/products?Category=" + this.categoryId;
         let imageUrl = "/images/uploads/" + this.imageUrl;
 
         let category = this;
@@ -31,7 +31,7 @@ class Category extends Entity {
         }
     }
 
-    // Given a category, returns the names of all the subcategories with no children
+    // Given a category, returns all its subcategories with no children
     static getLeaves(category) {
         let children = [];
         if (category.children.length == 0) {

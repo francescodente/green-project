@@ -7,7 +7,7 @@ $(document).ready(function() {
     // Checkbox toggle all state management
     function checkboxToggleCheck(checkboxName) {
         var toggleAll = $(".checkbox[data-toggle-all='" + checkboxName + "']");
-        switch($("[name='" + checkboxName + "']").not(":checked").length) {
+        switch($("[name='" + checkboxName + "'], ." + checkboxName).not(":checked").length) {
             case 0:
                 // All checked -> check
                 toggleAll.prop("checked", true);

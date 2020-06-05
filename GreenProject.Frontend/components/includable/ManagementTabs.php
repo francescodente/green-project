@@ -4,7 +4,7 @@
         title="Gestione catalogo"
     >
         <i class="mdi dark mdi-sprout mr-3"></i>
-        <span class="text-truncate">Gestione catalogo</span>
+        <span class="flex-grow-1 text-truncate">Gestione catalogo</span>
         <i class="mdi dark mdi-chevron-right ml-3"></i>
     </a>
     <a id="management-reports-tab" href="/management/reports"
@@ -12,7 +12,7 @@
         title="File di riepilogo"
     >
         <i class="mdi dark mdi-file-delimited-outline mr-3"></i>
-        <span class="text-truncate">File di riepilogo</span>
+        <span class="flex-grow-1 text-truncate">File di riepilogo</span>
         <i class="mdi dark mdi-chevron-right ml-3"></i>
     </a>
 </div>

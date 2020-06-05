@@ -18,7 +18,50 @@ var products = [];
 });*/
 
 // Get products
-$("#modal-loading").showModal();
+async function loadProducts() {
+    $("#modal-loading").showModal();
+    let categoryId = location.searchParams.get("Category");
+    let pageNumber = location.searchParams.get("PageNumber");
+    if (pageNumber == null) pageNumber = 0;
+    let isCrate = categoryId == 1;
+    try {
+        let categories;
+        if (isCrate) {
+            categories = [1];
+            $(".category-name").html("Cassette settimanali");
+        } else {
+            let selectedCategory = (await APIUtils.getOrUpdateCategories()).children
+                .find(category => category.categoryId == categoryId);
+            $(".category-name").html(selectedCategory.name);
+            categories = Category.getLeaves(selectedCategory)
+                .map(category => category.categoryId);
+        }
+        let data = await API.getProducts(categories, pageNumber, PAGE_SIZE);
+        if (data.results.length == 0) {
+            $(".search-no-results").removeClass("d-none");
+        } else {
+            // Create product objects
+            data.results.forEach((json) => {
+                if (isCrate) {
+                    products.push(new Crate(json));
+                } else {
+                    products.push(new Product(json));
+                }
+            });
+            $(".product-list").fillRow(products.map(product => product.html.main));
+            $(".products-count").text(products.length);
+        }
+        // Handle pagination
+        $("#products-pagination").fillPagination(data.pageNumber, data.pageCount);
+        $("#modal-loading").fadeModal();
+    } catch(jqXHR) {
+        $(".search-error").removeClass("d-none");
+        ErrorModal.show(jqXHR);
+    }
+}
+loadProducts();
+
+/*$("#modal-loading").showModal();
 let categories = location.searchParams.getAll("Categories");
 let pageNumber = location.searchParams.get("PageNumber");
 if (pageNumber == null) pageNumber = 0;
@@ -45,4 +88,4 @@ API.getProducts(categories, pageNumber, PAGE_SIZE)
 .catch(function(jqXHR) {
     $(".search-error").removeClass("d-none");
 })
-.finally(function(data) { $("#modal-loading").fadeModal() });
+.finally(function(data) { $("#modal-loading").fadeModal() });*/
