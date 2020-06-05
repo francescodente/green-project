@@ -6,7 +6,7 @@ class Category extends Entity {
         this.html.main = Entity.getTemplate("CategoryCard");
 
         // Build products link
-        let subCategories = Category.getCategoryLeaves(this).map(c => c.categoryId);
+        let subCategories = Category.getLeaves(this).map(c => c.categoryId);
         let searchParams = new URLSearchParams();
         subCategories.forEach(category => {
             searchParams.append("Categories", category);
@@ -32,13 +32,13 @@ class Category extends Entity {
     }
 
     // Given a category, returns the names of all the subcategories with no children
-    static getCategoryLeaves(category) {
+    static getLeaves(category) {
         let children = [];
         if (category.children.length == 0) {
             children.push(category);
         } else {
             category.children.forEach(child => {
-                children = children.concat(Category.getCategoryLeaves(child));
+                children = children.concat(Category.getLeaves(child));
             });
         }
         return children;

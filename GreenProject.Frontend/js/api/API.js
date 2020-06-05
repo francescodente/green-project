@@ -288,7 +288,6 @@ class APIClass {
     }
 
     getSupplierOrderReport(date, categories = []) {
-        console.log(categories);
         let searchParams = new URLSearchParams();
         searchParams.append("date", date);
         categories.forEach(category => {

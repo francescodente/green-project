@@ -1,3 +1,5 @@
+var categories;
+
 $("[name='date']").val(moment().add(1, "d").format("DD/MM/YYYY"));
 $("[name='month']").val(moment().format("MM/YYYY"));
 
@@ -24,13 +26,14 @@ function awaitAndDownloadReport(reportPromise, fileName) {
 // Fill categories select
 APIUtils.getOrUpdateCategories()
 .then(function(data) {
-    let categories = data.children.map(category => {
+    categories = data.children;
+    let inputCategories = data.children.map(category => {
         return {
             key: category.categoryId,
             value: category.name
         };
     });
-    $("#select-categories").fillSelect(categories);
+    $("#select-categories").fillSelect(inputCategories);
     $("[name='select-categories']").attr("checked", true);
     $("[data-toggle-all='select-categories']").attr("checked", true);
 })
@@ -75,8 +78,13 @@ $("#report-supplier-order").submit(function(e) {
         dateInput.addClass("error");
         return;
     }
-    let categories = $("[name='select-categories']:checked").getInputValues();
-    let reportPromise = API.getSupplierOrderReport(date, categories);
+    let selectedCategories = $("[name='select-categories']:checked").getInputValues();
+    // Get leaves categories from selected first-level categories
+    let categoryIds = categories
+        .filter(category => selectedCategories.includes(category.categoryId.toString()))
+        .flatMap(category => Category.getLeaves(category))
+        .map(category => category.categoryId);
+    let reportPromise = API.getSupplierOrderReport(date, categoryIds);
     let fileName = "fornitore_" + date + ".csv";
     awaitAndDownloadReport(reportPromise, fileName);
 });
