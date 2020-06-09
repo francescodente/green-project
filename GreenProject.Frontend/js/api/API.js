@@ -7,9 +7,10 @@ class APIClass {
         APIClass.API = this;
 
         this.protocol = location.protocol + "//";
-        this.serverAddress = location.hostname == "localhost" ? "localhost:5000" : "api." + location.host;
+        this.apiAddress = location.hostname == "localhost" ? "localhost:5000" : "api." + location.host;
+        this.uploadsAddress = location.hostname == "localhost" ? "/uploads/images/" : "uploads." + location.host + "/images/";
         this.apiVer = "v1";
-        this.basePath = this.protocol + this.serverAddress + "/";
+        this.basePath = this.protocol + this.apiAddress + "/";
         this.apiPath = this.basePath + "api/" + this.apiVer + "/";
 
         this.isTokenRefreshing = false;
