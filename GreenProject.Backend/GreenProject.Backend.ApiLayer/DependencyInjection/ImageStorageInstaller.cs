@@ -10,7 +10,7 @@ namespace GreenProject.Backend.ApiLayer.DependencyInjection
 {
     public class ImageStorageInstaller : IServiceInstaller
     {
-        private const string SubDirectory = "images/uploads";
+        private const string SubDirectory = "images";
 
         public void InstallServices(IServiceCollection services, IConfiguration config, IWebHostEnvironment env)
         {
