@@ -49,7 +49,7 @@ namespace GreenProject.Backend.Core.Logic
 
             Notifications
                 .AccountConfirmation(userEntity, token.Token)
-                .FireAndForget<Exception>(e => Console.WriteLine(e.Message));
+                .FireAndForget();
 
             return Mapper.Map<UserDto.Output>(userEntity);
         }
@@ -202,11 +202,11 @@ namespace GreenProject.Backend.Core.Logic
 
                 await Data.SaveChangesAsync();
 
-                Notifications.PasswordRecovery(user, token.Token).FireAndForget<Exception>(e => Console.WriteLine(e.Message));
+                Notifications.PasswordRecovery(user, token.Token).FireAndForget();
             }
             else
             {
-                Notifications.PasswordRecoveryAlt(request.Email).FireAndForget<Exception>(e => Console.WriteLine(e.Message));
+                Notifications.PasswordRecoveryAlt(request.Email).FireAndForget();
             }
         }
 
@@ -232,7 +232,6 @@ namespace GreenProject.Backend.Core.Logic
 
             T validatedToken = token
                 .Filter(IsTokenValid)
-                .Filter(t => !t.User.IsConfirmed)
                 .OrElseThrow(() => new ConfirmationFailedException());
 
             validatedToken.IsUsed = true;
