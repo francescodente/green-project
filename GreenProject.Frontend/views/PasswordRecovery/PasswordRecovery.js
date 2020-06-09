@@ -12,25 +12,24 @@ $("#form-pwd-recovery").submit(function(event) {
         $(".submit-pwd-recovery").prop("disabled", false);
         return;
     }
-    /*if (newPwd.length < 8) {
+    if (newPwd.length < 8) {
         $("#new-password").addClass("error")
         $("#confirm-new-password").addClass("error");
         $("#pwd-recovery-error-not-compliant").show();
+        $(".submit-pwd-recovery").prop("disabled", false);
         return;
-    }*/
+    }
 
     $("#modal-loading").showModal();
 
-    return;
-
-    API.changePsw(oldPwd, newPwd)
+    API.passwordRecoveryAccept(location.searchParams.get("token"), newPwd)
     .then(function(data) {
         $("#modal-password-recovery-success").showModal();
-        $("#form-pwd-change")[0].reset();
+        $("#new-password").val("");
+        $("#confirm-new-password").val("");
     })
     .catch(function(jqXHR) { ErrorModal.show(jqXHR) })
     .finally(function(data) {
-        $("#change-pwd-loader").hide();
-        $("#submit-change-password").prop("disabled", false);
+        $(".submit-pwd-recovery").prop("disabled", false);
     });
 });
