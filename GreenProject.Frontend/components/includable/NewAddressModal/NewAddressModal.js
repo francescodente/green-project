@@ -36,6 +36,7 @@ APIUtils.getOrUpdateZones()
 
 // Province selected
 $("body").on("change", "[name='select-province']", function() {
+    console.log("province change");
     let cities = getCities(this.value).map(c => { return { key: c, value: c }; });
     $("#select-city").fillSelect(cities);
     $("#select-zipcode").fillSelect([]);
@@ -45,6 +46,7 @@ $("body").on("change", "[name='select-province']", function() {
 
 // City selected
 $("body").on("change", "[name='select-city']", function() {
+    console.log("city change");
     let province = $("[name='select-province']:checked").val();
     let zipCodes = getZipCodes(province, this.value).map(z => { return { key: z, value: z }; });
     $("#select-zipcode").fillSelect(zipCodes);
