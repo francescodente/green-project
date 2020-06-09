@@ -69,7 +69,6 @@ namespace GreenProject.Backend.Infrastructure.Notifications.Mail
             var model = new { User = user, Token = token };
 
             return SendNotification(NotificationType.AccountConfirmation, model, user.Email);
-
         }
 
         public Task OrderAccepted(Order order)
