@@ -49,7 +49,7 @@ namespace GreenProject.Backend.Core.Logic
 
             Notifications
                 .AccountConfirmation(userEntity, token.Token)
-                .FireAndForget();
+                .FireAndForget<Exception>(e => Console.WriteLine(e.Message));
 
             return Mapper.Map<UserDto.Output>(userEntity);
         }
@@ -202,11 +202,11 @@ namespace GreenProject.Backend.Core.Logic
 
                 await Data.SaveChangesAsync();
 
-                Notifications.PasswordRecovery(user, token.Token).FireAndForget();
+                Notifications.PasswordRecovery(user, token.Token).FireAndForget<Exception>(e => Console.WriteLine(e.Message));
             }
             else
             {
-                Notifications.PasswordRecoveryAlt(request.Email).FireAndForget();
+                Notifications.PasswordRecoveryAlt(request.Email).FireAndForget<Exception>(e => Console.WriteLine(e.Message));
             }
         }
 
