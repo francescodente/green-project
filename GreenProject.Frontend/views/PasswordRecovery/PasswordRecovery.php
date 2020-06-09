@@ -38,4 +38,20 @@
 
 </main>
 
+<div id="modal-password-recovery-success" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="width: 360px;">
+            <div class="modal-top text-center">
+                <i class="modal-top-icon mdi mdi-information-outline"></i>
+            </div>
+            <div class="modal-body">
+                <p class="info-text m-0">La password è stata cambiata con successo.</p>
+            </div>
+            <div class="modal-bottom bg-primary d-flex justify-content-center">
+                <a href="/home" class="btn outline ripple" style="width: 160px;">Chiudi</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script defer src="/views/PasswordRecovery/PasswordRecovery.js"></script>

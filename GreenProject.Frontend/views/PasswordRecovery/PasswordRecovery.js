@@ -25,7 +25,7 @@ $("#form-pwd-recovery").submit(function(event) {
 
     API.changePsw(oldPwd, newPwd)
     .then(function(data) {
-        InfoModal.show("La password è stata cambiata con successo.");
+        $("#modal-password-recovery-success").showModal();
         $("#form-pwd-change")[0].reset();
     })
     .catch(function(jqXHR) { ErrorModal.show(jqXHR) })

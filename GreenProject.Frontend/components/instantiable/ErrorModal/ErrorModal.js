@@ -2,9 +2,12 @@ class ErrorModalClass {
 
     constructor() {
         this.html = {};
+        this.visible = false;
     }
 
     show(json, message) {
+        if (this.visible) return;
+        this.visible = true;
         this.html.main = Entity.getTemplate("ErrorModal");
         this.json = json;
         this.message = message;
@@ -22,6 +25,10 @@ class ErrorModalClass {
         if (message != null) {
             this.html.main.find(".generic-text").html(message);
         }
+        let modal = this;
+        this.html.main.on("hidden.bs.modal", function () {
+            modal.visible = false;
+        });
         this.html.main.showModal();
     }
 

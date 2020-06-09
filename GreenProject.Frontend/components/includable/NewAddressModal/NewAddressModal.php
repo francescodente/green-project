@@ -9,7 +9,9 @@
             </div>
             <div class="modal-body container">
 
-                <h4 class="text-center mt-3 mb-2">Nuovo indirizzo</h4>
+                <h4 class="text-center mt-3 my-3">Nuovo indirizzo</h4>
+
+                <p class="text-sec-dark mb-2">Non vedi la tua zona? <a href="/home#contacts" target="_blank">Contattaci</a> per farcelo sapere!</p>
 
                 <div class="row justify-content-center">
                     <div id="address-form-loader" class="loader text-center my-3">

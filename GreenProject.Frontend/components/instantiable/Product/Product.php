@@ -4,11 +4,11 @@
         <img class="product-image card-bg" src="/images/default_product.png"/>
         <div class="cover"><button class="btn round outline light">Visualizza</button></div>
     </a>
-    <div class="card-body">
-        <h5 class="product-name mb-0"></h5>
+    <div class="card-body d-flex flex-column">
+        <h5 class="product-name mb-0 flex-grow-1"></h5>
         <div class="d-flex justify-content-between align-items-center pt-2">
             <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></span>
-            <button class="show-quantity-modal btn icon ripple" data-action="add" data-tooltip="tooltip" title="Aggiungi al carrello">
+            <button class="show-quantity-modal btn icon ripple req-norole" data-action="add" data-tooltip="tooltip" title="Aggiungi al carrello">
                 <i class="mdi dark mdi-cart-plus"></i>
             </button>
         </div>
@@ -31,7 +31,7 @@
                     <p class="m-0"><span class="multiplier"></span> <span class="unit"></span> - <span class="price"></span></p>
                 </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer req-norole">
                 <div class="d-flex flex-column m-0">
                     <button class="show-quantity-modal btn accent ripple" data-action="add">Aggiungi al carrello</button>
                     <button class="req-subscription show-extra-quantity-modal btn outline ripple mt-2" data-action="add">Aggiungi all'ordine settimanale</button>
@@ -214,8 +214,8 @@
     <a href="#" class="product-modal-link">
         <img class="product-image" src="/images/default_product.png"/>
     </a>
-    <div class="d-flex flex-column w-100">
-        <p class="product-name m-0"></p>
+    <div class="d-flex flex-column flex-grow-1">
+        <p class="product-name text-truncate m-0"></p>
         <div class="d-flex justify-content-between">
             <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span></span>
             <span class="price text-sec-dark"></span>

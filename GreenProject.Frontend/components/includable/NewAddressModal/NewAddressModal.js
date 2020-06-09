@@ -52,7 +52,7 @@ $("body").on("change", "[name='select-city']", function() {
 });
 
 // Check if submit button can be enabled
-$("body").on("change", "#modal-new-address input", function() {
+$("body").on("change paste keyup", "#modal-new-address input", function() {
     let phoneLength = $("#address-telephone").val().length;
     if ($("[name='select-province']:checked").length &&
         $("[name='select-city']:checked").length &&
@@ -68,18 +68,30 @@ $("body").on("change", "#modal-new-address input", function() {
 });
 
 // Form submission
-$("body").on("submit", "#modal-new-address", function(event) {
-    event.preventDefault();
+$("#modal-new-address").keypress(function(e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        submitAddress();
+    }
+});
+$("body").on("submit", "#modal-new-address", function(e) {
+    e.preventDefault();
+    submitAddress();
+});
+function submitAddress() {
+    if ($(".submit-address").attr("disabled")) return;
     $("#address-form-loader").show();
     $(".form-fields").hide();
     $(".submit-address").attr("disabled", true);
-    API.createAddress(localStorage.getObject("authData").userId, {
+    let promise = API.createAddress(localStorage.getObject("authData").userId, {
         "street": $("#street").val(),
         "houseNumber": $("#house-number").val(),
         "name": $("#address-name").val(),
         "telephone": $("#address-telephone").val(),
         "zipCode": $("[name='select-zipcode']:checked").val()
     })
+    $(".submit-address").attr("disabled", true);
+    promise
     .then(function(data) { location.reload() })
     .catch(function(jqXHR) { ErrorModal.show(jqXHR) });
-});
+}
