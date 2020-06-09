@@ -15,7 +15,7 @@ class Crate extends Purchasable {
         this.html.removeModal = Entity.getTemplate("CrateRemoveModal");
 
         let crate = this;
-        let imageUrl = "/images/uploads/" + this.imageUrl;
+        let imageUrl = API.uploadsAddress + this.imageUrl;
         let price = Utils.formatCurrency(this.price);
         let capacity = Utils.formatDecimal(this.capacity / 2, "auto");
         if (occupiedSlots != null) {
