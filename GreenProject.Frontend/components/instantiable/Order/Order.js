@@ -27,8 +27,8 @@ class Order extends Entity {
         address.addressString = address.street + " " + address.houseNumber + ", " + address.zipCode + " " + address.city + " (" + address.province + ")";
         address.googleMapsLink = Utils.createGoogleMapsLink(address.addressString);
         // Format date fields
-        this.deliveryInfo.formattedDeliveryDate = Utils.formatDate(this.deliveryInfo.deliveryDate);
-        this.formattedTimestamp = Utils.formatDate(this.timestamp);
+        this.deliveryInfo.formattedDeliveryDate = moment(this.deliveryInfo.deliveryDate).format("DD/MM/YYYY");
+        this.formattedTimestamp = moment(this.timestamp).format("D MMM YYYY");
         // Format cost summary fields
         for (let k in this.prices) {
             let formattedK = "formatted" + k[0].toUpperCase() + k.slice(1);

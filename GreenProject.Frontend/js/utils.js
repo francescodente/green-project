@@ -155,14 +155,6 @@ class UtilsClass {
         return this.formatDecimal(value, 2) + "€";
     }
 
-    // Format the given date from YYYY*MM*DD to DD/MM/YYYY
-    formatDate(dateString) {
-        let dd = dateString.substring(8, 10);
-        let mm  = dateString.substring(5, 7);
-        let yyyy = dateString.substring(0, 4);
-        return dd + "/" + mm + "/" + yyyy;
-    }
-
     createGoogleMapsLink(addressString) {
         return "https://www.google.it/maps?q=" + encodeURIComponent(addressString);
     }

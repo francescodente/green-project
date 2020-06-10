@@ -7,7 +7,7 @@ function fillFormFields(userData) {
         $("#first-name").val(person.firstName);
         $("#last-name").val(person.lastName);
         if (person.dateOfBirth != null) {
-            $("#birth-date").val(Utils.formatDate(person.dateOfBirth));
+            $("#birth-date").val(moment(person.dateOfBirth).format("DD/MM/YYYY"));
         }
         $("[name=gender][value=" + person.gender + "]").prop("checked", true);
     } else {
@@ -20,23 +20,12 @@ function fillFormFields(userData) {
     $("input").removeClass("error");
 }
 
-function validateDateOfBirth(date) {
-    let pattern = /^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
-    if (date == null || date == "" || !pattern.test(date)) {
+function validateDateOfBirth(dateString) {
+    let date = moment(dateString, "DD/MM/YYYY");
+    if (!date.isValid || date.isAfter(moment())) {
         return false;
     }
-    let dd = date.substring(0, 2);
-    let mm = date.substring(3, 5);
-    let yyyy  = date.substring(6, 10);
-    let dateString = yyyy + "-" + mm + "-" + dd;
-    let dateObject = new Date(dateString);
-    let dateObjectString = ("0" + dateObject.getDate()).slice(-2) + "/"
-                   + ("0" + (dateObject.getMonth()+1)).slice(-2) + "/"
-                   + dateObject.getFullYear();
-    if (date != dateObjectString || dateObject.getTime() > new Date().getTime()) {
-        return false;
-    }
-    return dateString;
+    return date.format("YYYY-MM-DD");
 }
 
 // Get user data

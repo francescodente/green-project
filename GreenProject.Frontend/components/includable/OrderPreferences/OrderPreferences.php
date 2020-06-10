@@ -145,7 +145,7 @@
                     <i class="mdi dark mdi-calendar mr-3"></i>
                     <span>
                         <span class="text-sec-dark" style="font-size: 14px;">Data di consegna prevista</span><br/>
-                        <span class="expected-date"></span>
+                        <span class="expected-date" style="text-transform: capitalize;"></span>
                     </span>
                 </div>
                 <div class="d-flex align-items-center mb-2">

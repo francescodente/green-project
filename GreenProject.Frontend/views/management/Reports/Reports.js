@@ -3,15 +3,12 @@ var categories;
 $("[name='date']").val(moment().add(1, "d").format("DD/MM/YYYY"));
 $("[name='month']").val(moment().format("MM/YYYY"));
 
-function formatDate(dateString) {
+function validateDate(dateString) {
     if (dateString.length == 7) {
         dateString = "01/" + dateString;
     }
     let date = moment(dateString, "DD/MM/YYYY");
-    if (date.isValid()) {
-        return date.format("YYYY-MM-DD");
-    }
-    return null;
+    return date.isValid() ? date.format("YYYY-MM-DD") : null;
 }
 
 function awaitAndDownloadReport(reportPromise, fileName) {
@@ -43,7 +40,7 @@ APIUtils.getOrUpdateCategories()
 $("#report-orders").submit(function(e) {
     e.preventDefault();
     let dateInput = $(this).find("[name='date']");
-    let date = formatDate(dateInput.val());
+    let date = validateDate(dateInput.val());
     if (date == null) {
         dateInput.addClass("error");
         return;
@@ -58,7 +55,7 @@ $("#report-orders").submit(function(e) {
 $("#report-products").submit(function(e) {
     e.preventDefault();
     let dateInput = $(this).find("[name='date']");
-    let date = formatDate(dateInput.val());
+    let date = validateDate(dateInput.val());
     if (date == null) {
         dateInput.addClass("error");
         return;
@@ -73,7 +70,7 @@ $("#report-products").submit(function(e) {
 $("#report-supplier-order").submit(function(e) {
     e.preventDefault();
     let dateInput = $(this).find("[name='date']");
-    let date = formatDate(dateInput.val());
+    let date = validateDate(dateInput.val());
     if (date == null) {
         dateInput.addClass("error");
         return;
@@ -93,7 +90,7 @@ $("#report-supplier-order").submit(function(e) {
 $("#report-revenue").submit(function(e) {
     e.preventDefault();
     let dateInput = $(this).find("[name='month']");
-    let date = formatDate(dateInput.val());
+    let date = validateDate(dateInput.val());
     if (date == null) {
         dateInput.addClass("error");
         return;

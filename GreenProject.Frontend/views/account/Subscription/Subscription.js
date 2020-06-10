@@ -52,7 +52,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
             // Setup delivery info
             data.deliveryInfo.address = new Address(data.deliveryInfo.address);
             deliveryInfo = data.deliveryInfo;
-            $(".delivery-date").html(Utils.formatDate(deliveryInfo.deliveryDate));
+            $(".delivery-date").html(moment(deliveryInfo.deliveryDate).format("DD/MM/YYYY"));
             $(".delivery-address").html(deliveryInfo.address.addressString);
             prepareAddresses();
             $("#notes").val(deliveryInfo.notes);
@@ -202,7 +202,7 @@ if (!userData.isSubscribed && !userData.isLocallySubscribed) {
         $("#modal-loading").showModal();
         API.getZoneSchedule(zipCode)
         .then(function(data) {
-            $("#expected-date-modal .expected-date").html(Utils.formatDate(data));
+            $("#expected-date-modal .expected-date").html(moment(data).format("dddd DD MMM"));
             $("#expected-date-modal .delivery-address").html(selectedAddress.addressString);
             $("#expected-date-modal .notes").html($("#notes").val() == "" ? "-" : $("#notes").val());
             $("#expected-date-modal").showModal();

@@ -20,7 +20,7 @@ class APIUtilsClass {
 
     async getOrRefreshAuth() {
         if (API.isTokenRefreshing) {
-            //console.log("token is refreshing...");
+            console.log("token is refreshing...");
             return API.tokenPromise;
         }
         let authData = localStorage.getObject("authData");
@@ -28,21 +28,21 @@ class APIUtilsClass {
             //console.log("authData null");
             return null;
         }
-        if (Date.now() < Date.parse(authData.expiration)) {
+        if (moment(authData.expiration).isAfter(moment())) {
             //console.log("token ok");
             return authData;
         }
-        //console.log("token expired");
+        console.log("token expired");
         API.isTokenRefreshing = true;
         API.tokenPromise = API.refreshToken(authData.token);
         try {
             authData = await API.tokenPromise;
             localStorage.setObject("authData", authData);
-            //console.log("token refreshed");
+            console.log("token refreshed");
             return authData;
         } catch (e) {
-            //console.log("token refresh failed -> logout");
-            API.logout();
+            console.log("token refresh failed -> logout");
+            //API.logout();
             return null;
         } finally {
             API.isTokenRefreshing = false;
@@ -58,8 +58,8 @@ class APIUtilsClass {
                 return;
             }
             let userData = localStorage.getObject("userData");
-            let now = Date.now();
-            let expired = userData == null ? true : parseInt((now - userData.expiration) / 60000) < UPDATE_INTERVAL_MINUTES;
+            let now = moment();
+            let expired = userData == null || moment(userData.expiration).isBefore(now) ? true : false;
             if (!fullResponse && !expired) {
                 resolve(userData);
                 return;
@@ -67,7 +67,7 @@ class APIUtilsClass {
             let isLocallySubscribed = userData == null ? false : userData.isLocallySubscribed;
             API.getUserInfo(authData.userId)
             .then(function(data) {
-                data.expiration = now;
+                data.expiration = now.add(UPDATE_INTERVAL_MINUTES, "m").format();
                 localStorage.setObject("userData", {
                     email: data.email,
                     expiration: data.expiration,
@@ -85,15 +85,15 @@ class APIUtilsClass {
     getOrUpdateCategories() {
         const UPDATE_INTERVAL_MINUTES = 30;
         return new Promise(function(resolve, reject) {
-            let now = Date.now();
+            let now = moment();
             let categories = localStorage.getObject("categories");
-            if (categories != null && parseInt((now - categories.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
+            if (categories != null && moment(categories.expiration).isAfter(now)) {
                 resolve(categories);
                 return;
             }
             API.getCategories()
             .then(function(data) {
-                data.expiration = now;
+                data.expiration = now.add(UPDATE_INTERVAL_MINUTES, "m").format();
                 localStorage.setObject("categories", data);
                 resolve(data);
             })
@@ -104,9 +104,9 @@ class APIUtilsClass {
     getOrUpdateZones() {
         const UPDATE_INTERVAL_MINUTES = 60;
         return new Promise(function(resolve, reject) {
-            let now = Date.now();
+            let now = moment();
             let zones = localStorage.getObject("zones");
-            if (zones != null && parseInt((now - zones.expiration) / 60000) < UPDATE_INTERVAL_MINUTES) {
+            if (zones != null && moment(zones.expiration).isAfter(now)) {
                 resolve(zones);
                 return;
             }
@@ -114,7 +114,7 @@ class APIUtilsClass {
             .then(function(data) {
                 zones = {
                     children: data,
-                    expiration: now
+                    expiration: now.add(UPDATE_INTERVAL_MINUTES, "m").format()
                 };
                 localStorage.setObject("zones", zones);
                 resolve(zones);
