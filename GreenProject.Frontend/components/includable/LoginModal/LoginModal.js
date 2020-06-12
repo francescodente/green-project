@@ -19,7 +19,7 @@ $("#form-login").submit(function(event) {
             ErrorModal.show(jqXHR);
             return;
         }
-        let errCode = jqXHR.responseJSON.globalErrors[0].code;
+        let errCode = (jqXHR.responseJSON.globalErrors.concat(jqXHR.responseJSON.propertyErrors))[0].code;
         if (errCode == "Err.Auth.NotConfirmed") {
             localStorage.setObject("tempEmail", { email: email });
             $("#modal-account-activation .email").html(email);

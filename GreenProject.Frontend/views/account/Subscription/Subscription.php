@@ -20,7 +20,7 @@
                 <div class="empty-state m-5">
                     <img src="/images/empty.png" alt="Utente non abbonato"/>
                     <h6 class="text-center text-sec-dark font-weight-bold mt-3 mb-2">Non sei abbonato al nostro servizio di consegna settimanale.</h6>
-                    <p class="text-center text-dis-dark m-0">Visualizza le nostre <a href="/products?Categories=1">cassette</a> e scegli quelle che fanno per te!<br/>Dopo averne selezionata almeno una, torna a questa pagina per decidere quali prodotti inserirvi.</p>
+                    <p class="text-center text-dis-dark m-0">Visualizza le nostre <a href="/products?Category=1">cassette</a> e scegli quelle che fanno per te!<br/>Dopo averne selezionata almeno una, torna a questa pagina per decidere quali prodotti inserirvi.</p>
                 </div>
             </div>
 

@@ -1,6 +1,6 @@
 class Product extends Purchasable {
 
-    constructor(json, quantity = 1, maxQuantity = null) {
+    constructor(json, quantity = 1, maxQuantity = Number.MAX_SAFE_INTEGER) {
         super(json);
         this.quantity = quantity;
         this.crateSlots = quantity * 2;
@@ -26,7 +26,7 @@ class Product extends Purchasable {
 
         // Save formatted fields
         this.formattedMultiplier = (this.unitMultiplier * this.quantity).toString().replace(".", ",");
-        this.formattedCrateMultiplier = (this.unitMultiplier / 2 * this.quantity).toString().replace(".", ",");
+        this.formattedCrateMultiplier = this.quantity.toString().replace(".", ",");
         this.formattedUnit = Purchasable.getFormattedUnit(this.unitName, this.quantity != 1);
         this.formattedPrice = Utils.formatCurrency(this.price * this.quantity);
 
@@ -87,20 +87,21 @@ class Product extends Purchasable {
 
     reactToQuantityChange(quantityModal) {
         let input = quantityModal.find("[name='quantity']");
-        let quantity = input.val();
+        let quantity = parseFloat(input.val());
+        let maxQuantity = parseFloat(input.attr("max")) || this.maxQuantity;
         let multiplier = 0;
         let crateMultiplier = 0;
         let price = Utils.formatCurrency(0);
-        if (quantity != null && quantity != "" && (this.maxQuantity == null || quantity <= this.maxQuantity)) {
+        if (quantity != null && quantity != "" && (maxQuantity == null || quantity <= maxQuantity)) {
             multiplier = (this.unitMultiplier * quantity).toString().replace(".", ",");
-            crateMultiplier = (this.unitMultiplier / 2 * quantity).toString().replace(".", ",");
+            crateMultiplier = (0.5 * quantity).toString().replace(".", ",");
             price = Utils.formatCurrency(this.price * quantity);
             quantityModal.find(".confirm-quantity").prop("disabled", false);
         } else {
             quantityModal.find(".confirm-quantity").prop("disabled", true);
         }
-        if (this.maxQuantity != null && quantity >= this.maxQuantity) input.parent().find(".inc").prop("disabled", true);
-        if (quantity <= 1) input.parent().find(".dec").prop("disabled", true);
+        input.parent().find(".dec").prop("disabled", quantity <= 1);
+        input.parent().find(".inc").prop("disabled", quantity >= maxQuantity);
         quantityModal.find(".multiplier").html(multiplier);
         quantityModal.find(".crate-multiplier").html(crateMultiplier);
         quantityModal.find(".price").html(price);

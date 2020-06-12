@@ -10,13 +10,13 @@ class WeeklyCrate extends Entity {
         // Create crate entry
         let crateQuantity = 0;
         if (this.products.length) {
-            crateQuantity = this.products.map(product => product.quantity).reduce((tot, q) => tot + q);
+            crateQuantity = this.products.map(product => product.quantity).reduce((tot, q) => parseFloat(tot) + parseFloat(q));
         }
         this.crateDescription = new Crate(this.crateDescription, crateQuantity, this.orderDetailId);
 
         // Create product entries
         for (let i = 0; i < this.products.length; i++) {
-            this.products[i] = new Product(this.products[i].product, this.products[i].quantity / 2, this.products[i].maximum);
+            this.products[i] = new Product(this.products[i].product, this.products[i].quantity / 2, this.products[i].maximum || Number.MAX_SAFE_INTEGER);
             this.products[i].weeklyCrateId = this.orderDetailId;
             this.products[i].parentCrateFreeSlots = this.crateDescription.capacity - this.crateDescription.occupiedSlots;
         }

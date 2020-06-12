@@ -6,11 +6,7 @@ class Category extends Entity {
         this.html.main = Entity.getTemplate("CategoryCard");
 
         // Build products link
-        //let subCategories = Category.getLeaves(this).map(c => c.categoryId);
         let searchParams = new URLSearchParams();
-        /*subCategories.forEach(category => {
-            searchParams.append("Categories", category);
-        });*/
         let productsUrl = "/products?Category=" + this.categoryId;
         let imageUrl = API.uploadsAddress + this.imageUrl;
 
@@ -41,6 +37,16 @@ class Category extends Entity {
                 children = children.concat(Category.getLeaves(child));
             });
         }
+        return children;
+    }
+
+    // Given a category, returns it along with all its subcategories
+    static getTreeList(category) {
+        let children = [];
+        children.push(category);
+        category.children.forEach(child => {
+            children = children.concat(Category.getTreeList(child));
+        });
         return children;
     }
 

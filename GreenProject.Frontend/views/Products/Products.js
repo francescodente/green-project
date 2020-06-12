@@ -33,7 +33,7 @@ async function loadProducts() {
             let selectedCategory = (await APIUtils.getOrUpdateCategories()).children
                 .find(category => category.categoryId == categoryId);
             $(".category-name").html(selectedCategory.name);
-            categories = Category.getLeaves(selectedCategory)
+            categories = Category.getTreeList(selectedCategory)
                 .map(category => category.categoryId);
         }
         let data = await API.getProducts(categories, pageNumber, PAGE_SIZE);

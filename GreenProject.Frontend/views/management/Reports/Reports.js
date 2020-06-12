@@ -79,7 +79,7 @@ $("#report-supplier-order").submit(function(e) {
     // Get leaves categories from selected first-level categories
     let categoryIds = categories
         .filter(category => selectedCategories.includes(category.categoryId.toString()))
-        .flatMap(category => Category.getLeaves(category))
+        .flatMap(category => Category.getTreeList(category))
         .map(category => category.categoryId);
     let reportPromise = API.getSupplierOrderReport(date, categoryIds);
     let fileName = "fornitore_" + date + ".csv";

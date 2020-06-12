@@ -248,7 +248,7 @@
         <td>
             <p class="product-name m-0">Product name</p>
             <p class="text-sec-dark m-0">
-                <span class="text-sec-dark"><span class="multiplier"></span> <span class="unit"></span></span>
+                <span class="text-sec-dark"><span class="crate-multiplier"></span> <span class="unit"></span></span>
             </p>
         </td>
         <td class="nowrap actions">
