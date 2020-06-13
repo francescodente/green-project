@@ -93,12 +93,14 @@
                         </div>
 
                         <h6>Sesso</h6>
-                        <input id="r1" type="radio" class="radio" name="gender" value="Male" disabled/>
-                        <label for="r1">Maschio</label><br/>
-                        <input id="r2" type="radio" class="radio" name="gender" value="Female" disabled/>
-                        <label for="r2">Femmina</label><br/>
-                        <input id="r3" type="radio" class="radio" name="gender" value="Other" disabled/>
-                        <label for="r3" class="mb-2">Altro</label>
+                        <div style="position: relative;">
+                            <input id="r1" type="radio" class="radio" name="gender" value="Male" disabled/>
+                            <label for="r1">Maschio</label><br/>
+                            <input id="r2" type="radio" class="radio" name="gender" value="Female" disabled/>
+                            <label for="r2">Femmina</label><br/>
+                            <input id="r3" type="radio" class="radio" name="gender" value="Other" disabled/>
+                            <label for="r3" class="mb-2">Altro</label>
+                        </div>
 
                         <div class="user-data-form-options justify-content-end mt-3" style="display: flex;">
                             <button type="button" class="delete-form btn outline ripple mr-2 flex-grow-1 flex-md-grow-0" style="flex-basis: 120px;" data-toggle="modal" data-target="#modal-person-role-delete">
