@@ -56,7 +56,7 @@ class WeeklyCrate extends Entity {
             weeklyCrate.compatibleProducts = [];
             let crateProductIds = weeklyCrate.products.map(product => product.productId);
             data.forEach(json => {
-                let product = new Product(json.product, 1, json.maximum);
+                let product = new Product(json.product, 1, json.maximum || Number.MAX_SAFE_INTEGER);
                 product.weeklyCrateId = weeklyCrate.orderDetailId;
                 if (!crateProductIds.includes(product.productId)) {
                     weeklyCrate.compatibleProducts.push(product);
