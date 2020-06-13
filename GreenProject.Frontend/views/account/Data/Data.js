@@ -90,6 +90,11 @@ $("#form-user-data-personal").submit(function(event) {
     $("#modal-loading").showModal();
     API.setPersonRole(localStorage.getObject("authData").userId, data)
     .then(function(data) {
+        let authData = localStorage.getObject("authData");
+        if (!authData.roles.includes("Person")) {
+            authData.roles.push("Person");
+            localStorage.setObject("authData", authData);
+        }
         localStorage.removeItem("userData");
         location.reload();
     })
@@ -101,6 +106,9 @@ $("#delete-user-data-personal").click(function() {
     $("#modal-loading").showModal();
     API.deletePersonRole(localStorage.getObject("authData").userId)
     .then(function(data) {
+        let authData = localStorage.getObject("authData");
+        authData.roles = authData.roles.filter(role => role != "Person");
+        localStorage.setObject("authData", authData);
         localStorage.removeItem("userData");
         location.reload();
     })
